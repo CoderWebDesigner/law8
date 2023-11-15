@@ -1,0 +1,42 @@
+{
+  "invoice": {
+    "addInvoice": "Add Invoice",
+    "basicData": "Basic Data",
+    "invoiceNumber": "Invoice Number",
+    "customerName": "Customer Name",
+    "currency": "Currency",
+    "date": "Date",
+    "dueDate": "Due Date",
+    "uploadLogo": "Upload Logo",
+    "totalBeforeDiscount": " Total Before Discount",
+    "taxFreeDiscount": "Tax Free Discount",
+    "valueAddedTax": "Value Added Tax",
+    "qrDescription": "The QR code is encrypted according to the requirements of the Zakat, Tax and Customs Authority for electronic invoicing",
+    "eSignature": "Electronic Signature",
+    "invoiceTotal" :"Invoice Total",
+    "addNewProduct": "Add New Product",
+    "products": "Products",
+    "productsMenu": "Products Menu",
+    "uploadElectronicSignature" : "Upload the company Electronic Signature",
+    "uploadSignature" : "Upload Signature",
+    "updateProduct": "Update Product",
+    "deleteProduct":"Deleted Product",
+    "selectProductType": "Select Product Type",
+    "service": "Service",
+    "product": "Product",
+    "taxRate": "Tax Rate",
+    "discountPercent": "Discount Percent",
+    "importTax": "Import Tax",
+    "incomeTax": "Income Tax",
+    "sendInvoice":"Send Invoice",
+    "saveInvoice": "Save Invoice",
+    "updateInvoices":"Update Invoices",
+
+    "importInvoices": {
+      "uploadExcelTemplate": "Upload Excel Template from here",
+      "downloadTemplate": "Download Template",
+      "chooseTheImportSourcePlease": "Please choose the import source.",
+      "PleaseUploadYourInvoicesFile": "Please Upload Your Invoices File"
+    }
+  }
+}

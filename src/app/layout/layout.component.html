@@ -1,0 +1,17 @@
+<div id="layout-wrapper">
+  <app-topbar (mobileMenuButtonClicked)="onToggleMobileMenu()"> </app-topbar>
+
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <div class="page-content">
+      <!-- content -->
+      <ng-container>
+        <router-outlet></router-outlet>
+      </ng-container>
+      <ng-template #elseTemplate_noOrg>
+        <app-select-org-message></app-select-org-message>
+      </ng-template>
+    </div>
+  </div>
+</div>

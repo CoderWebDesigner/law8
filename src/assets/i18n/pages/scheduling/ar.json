@@ -1,0 +1,14 @@
+{
+  "scheduling": {
+    "addSchedule": "اضافة جدول زمني",
+    "scheduling": "الجدولة الزمنية",
+    "update":"تعديل الجدول الزمنى",
+
+    "orgCode": "كود المؤسسة",
+    "orgName": "اسم المؤسسة",
+    "pickDay": "حدد يوم من أيام الأسبوع",
+    "movementType": "نوع الحركة",
+    "scheduleDetails": "تفاصيل الجدول",
+    "saveSchedule": "حفظ الجدول"
+  }
+}

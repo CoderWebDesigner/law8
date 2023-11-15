@@ -1,0 +1,51 @@
+@import "src/assets/scss/helpers/_variables.scss";
+@import "src/assets/scss/helpers/_mixins.scss";
+@import "src/assets/scss/helpers/_functions.scss";
+
+:host ::ng-deep {
+  .sub-card {
+    .p-card .p-card-title {
+      border-bottom: none;
+    }
+
+    .card-actions {
+      padding: 0;
+    }
+  }
+
+  .p-card {
+    border: none;
+    box-shadow: none;
+    .p-card-body {
+      padding: toRem(24);
+    }
+
+    .p-card-title {
+      font-size: toRem(20);
+      font-weight: $fw-bold;
+      line-height: normal;
+      text-transform: capitalize;
+      // border-bottom: 1px solid #DDDDE1;
+      padding-bottom: toRem(12);
+    }
+
+    .p-card-title .borderBottom {
+      border-bottom: 1px solid #dddde1;
+      padding-bottom: toRem(24);
+      margin-bottom: 0;
+    }
+
+    .sub-title {
+      font-size: toRem(18);
+      border: none;
+    }
+
+    .p-card-content {
+      padding: 0;
+    }
+  }
+
+  .card-actions:not(:empty) {
+    padding: toRem(16) 0;
+  }
+}

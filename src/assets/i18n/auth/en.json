@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "login":"Sign In",
+    "welcomeBack": "Welcome Back!",
+    "username": "Username",
+    "password": "Password",
+    "rememberMe": "Remember Me",
+    "forgetPassword": "Forget Password",
+    "toSignInPleaseEnterYourUsernameAndPassword":"To login, please enter your username and password",
+    "userNamePlaceholder": "Please Enter Your Username",
+    "passwordPlaceholder": "Please Enter Your Password",
+    "logout":"Logout"
+
+  }
+}

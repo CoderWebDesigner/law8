@@ -1,0 +1,14 @@
+@import 'src/assets/scss/helpers/_variables.scss';
+
+:host ::ng-deep ngx-dropzone {
+    display: flex;
+    align-items: center;
+    background: #ECEFEC;
+    cursor: pointer;
+    color: #3E3E3E;
+    border: 1px solid $primaryColor;
+    border-radius: 5px;
+    font-size: 1rem;
+    overflow-x: auto;
+}
+  

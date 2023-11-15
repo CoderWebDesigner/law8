@@ -1,0 +1,42 @@
+<!-- <div class="mb-3">
+  <ngx-dropzone
+  (change)="onSelect($event)"
+  [compress]="true"
+  accept="image/jpeg,image/jpg,image/png,image"
+  [maxFileSize]="500000"
+  [multiple]="false"
+>
+  <ngx-dropzone-label>
+    <div class="d-flex align-items-center justify-content-center position-relative">
+      <img
+        class="logo-lg"
+        width="100px"
+        height="100px"
+        [ngStyle]="fileAsBase64 ? { 'border-radius': '50%' } : null"
+        [src]="fileAsBase64 || props['defaultIcon']|| formControl?.value ||'assets/images/photo.png' "
+      />
+
+      <div class="iconPosition" (click)="onRemove($event)" *ngIf="fileAsBase64 ||formControl?.value">
+        <i class="fat-cross text-danger"></i>
+      </div>
+    </div>
+
+    <div class="title my-2" *ngIf="props['title']">
+      {{ props["title"] | translate }}
+    </div>
+    <div class="subTitle mb-3" *ngIf="props['subTitle']">
+      {{ props["subTitle"] | translate }}
+    </div>
+
+    <p-button styleClass="p-button-outlined p-button-outlined-primary bg-transparent">
+      <i class="fs-4 fat-upload"></i>
+      <span class="font-bold ms-2">{{
+        props["btnLabel"] | translate
+      }}</span></p-button
+    >
+  </ngx-dropzone-label>
+</ngx-dropzone>
+
+</div>
+
+ -->

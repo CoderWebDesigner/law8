@@ -1,0 +1,19 @@
+{
+  "common": {
+  
+  },
+  "btn": {
+   "save":"Save"
+  },
+  "messages": {
+    "createdSuccessfully": "Created successfully",
+    "updateSuccessfully": "Update successfully",
+    "deletedSuccessfully": "Deleted successfully",
+    "internalServerError": "Internal Server Error!"
+  },
+  "validation": {
+    "required": "This field is required!",
+    "url": "The URL should be valid!",
+    "email": "Please enter valid email"
+  }
+}

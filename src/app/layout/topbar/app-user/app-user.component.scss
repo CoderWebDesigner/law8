@@ -1,0 +1,27 @@
+@import "src/assets/scss/helpers/_variables.scss";
+
+.status-container {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  padding: 2.001px 2px 1.999px 2px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 64px;
+  background: $white;
+}
+.status-circle {
+  position: absolute;
+  background-color: #56ca00;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fat-arrow{
+    transform: rotate(179deg);
+    font-size: .5rem;
+}
+

@@ -1,0 +1,17 @@
+{
+  "reports": {
+    "totalInvoices": "اجمالي الفواتير",
+    "totalSuccessfulInvoices": "اجمالي الفواتير المرسلة بنجاح",
+    "totalInvoicesPending": "اجمالي الفواتير المعلقة",
+    "totalInvoicesInProgress": "اجمالي الفواتير قيد التنفيذ",
+    "totalAmountSent": "اجمالي المبلغ المرسل",
+    "numCompanies": "عدد المؤسسات",
+    "numUsers": "عدد المستخدمين",
+    "thisWeek": "هذا الاسبوع",
+    "lastWeek": "الاسبوع الماضي",
+    "allInvoices": "كل الفواتير",
+    "successful": "الناجحة",
+    "pending": "المعلقة",
+    "inProgress": "قيد التنفيذ"
+  }
+}

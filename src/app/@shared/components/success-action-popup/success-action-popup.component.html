@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center flex-column align-items-center">
+  <div class="icon rounded-circle">
+    <i class="fat-check"></i>
+  </div>
+  <h4 class="mt-5 text-center">
+    {{ _dynamicDialogConfig.data?.message }}
+  </h4>
+
+  <p-button
+    styleClass="p-button-primary px-5 mt-3"
+    *ngIf="_dynamicDialogConfig.data?.buttonTxt"
+    (click)="_dynamicDialogConfig.data?.onClick()"
+    [label]="_dynamicDialogConfig.data?.buttonTxt"
+  >
+  </p-button>
+</div>

@@ -1,0 +1,18 @@
+<textarea
+  [rows]="5"
+  [cols]="5"
+  pInputTextarea
+  [formControl]="_dynamicDialogConfig?.data?.formControlFromDialog"
+></textarea>
+
+<div class="d-flex justify-content-end">
+  <p-button
+    class="mt-3"
+    styleClass="p-button-primary "
+    type="submit"
+    (click)="_dynamicDialogRef.close()"
+  >
+    {{ "btn.save" | translate }}
+  </p-button>
+
+</div>

@@ -1,0 +1,138 @@
+// Variables
+@use "sass:math";
+
+
+
+$left: left;
+$right: right;
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$main-font:  'Poppins','Noto Kufi Arabic', sans-serif ;
+$fontFamily:$main-font !default;
+// Font Weight
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: bold;
+
+$body-bg: #f4f5fa;
+$body-color: #272727;
+$body-text-align: null;
+
+//colors
+$white:#ffffff;
+$primaryColor: #1c3263 ;
+$primaryButtonHoverBg:#1e6391;
+
+$titleColor: #44454E;
+
+$primaryBackgroundDarker: #E9E8EC;
+$successButtonBg: #B5DFD7;
+$successButtonTextColor:$primaryColor;
+$secondaryButtonBg:#56526A;
+
+$greenSuccess: #519C66;
+$redDanger: #CC5F5F;
+$redDangerBackground: #f2cdcd;
+$lightInfoBg:#F1F7FB;
+
+$primaryLightColor: #BFDBFE;
+$primaryDarkColor: #2563eb;
+$primaryDarkerColor: #1d4ed8;
+$primaryGreyColor: #E6E7E8;
+$primaryWhiteRedColor: #fef9f9;
+$primaryTextColor: $white;
+$highlightBg: #eff6ff;
+$highlightTextColor: $primaryDarkerColor;
+$highlightFocusBg: rgba($primaryColor, .24);
+$dangerButtonBg:rgba(245, 126, 119, 0.10) !default;
+$dangerButtonTextColor: #D94841 !default;
+
+$buttonBg:$primaryColor;
+
+$gray-100: #f8f9fa;
+$gray-200: #eff2f7;
+$gray-300: #f6f6f6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #74788d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:#000;
+$labelColor: #4B4B4B;
+$labelSize: 1rem;
+$lavenderGray:#f3f3f5;
+$stepsItemTextColor : #565555;
+
+// Sidebar
+$sidebar-bg: $white;
+$sidebar-menu-item-color: #545a6d;
+$sidebar-menu-sub-item-color: $white;
+$sidebar-menu-item-icon-color: #7f8387;
+$sidebar-menu-item-hover-color: $white;
+$sidebar-menu-item-active-color: $white;
+$sidebar-width: 300px;
+$sidebar-collapsed-width: 70px;
+$sidebar-width-sm: 160px;
+
+// Topbar - Deafult Light
+$header-height: 60px;
+$header-bg: $white;
+$header-item-color: #555b6d;
+
+// Topbar Search
+$topbar-search-bg: #f3f3f9;
+
+// Footer
+$footer-height: 60px;
+
+// Display
+$display-none: none;
+$display-block: block;
+
+// Boxed layout width
+$boxed-layout-width: 1300px;
+$boxed-body-bg: #ebebf4;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+
+$box-shadow-sm:               0 .125rem .25rem rgba($black, .075);
+$box-shadow:                  0 0.75rem 1.5rem rgba(18,38,63,.03);
+$box-shadow-lg:               0 1rem 3rem rgba($black, .175);
+$box-shadow-inset:            inset 0 1px 2px rgba($black, .075);
+
+
+
+//table
+
+$tableHeaderCellFontWeight:$fw-medium;
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075);
+$box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075);
+
+
+$scaleLG:1 !default;
+
+$stepsItemBg: transparent;
+
+
+// Topbar - Deafult Light
+$topbar-height: 60px;
+// $topbar-bg: #D5DFD3;
+$topbar-item-color: #555b6d;
+$topbar-search-bg: #f3f3f9;
+
+
+$tagDangerBg: rgba(255, 4, 4, 0.10);
+$tagDangerColor: #D62C2C;
+
+$tagSuccessBg: rgba(47, 105, 33, 0.10);
+
+$tagInfoBg: rgba(30, 120, 226, 0.10);;
+$tagInfoColor: #1E78E2;

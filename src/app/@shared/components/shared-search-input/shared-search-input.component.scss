@@ -1,0 +1,15 @@
+@import "src/assets/scss/helpers/_mixins.scss";
+
+:host ::ng-deep {
+  .p-field {
+    margin: 0 !important;
+  }
+  input {
+    min-width: 250px;
+    color: #A9B1A7;
+    background-color: #ECEFEC;
+  }
+  .fat{
+    font-size: 1.5rem;
+  }
+}

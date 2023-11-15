@@ -1,0 +1,125 @@
+<div class="position-relative">
+
+<p-table
+  [columns]="columns"
+  [value]="data"
+  [tableStyle]="{ 'min-width': '80rem' }"
+  [loading]="isLoading"
+  [lazy]="false"
+  [(selection)]="selected || defaultSelected"
+  [dataKey]="dataKey"
+  (onRowSelect)="onSelectionChange($event)"
+>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th
+        *ngIf="withCheckbox || withRadioButton"
+        style="width: 5rem"
+      >
+        <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
+      </th>
+      <ng-container *ngFor="let col of columns">
+        <th [pSortableColumn]="col.field" [style.width]="'200px'">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </ng-container>
+
+
+      <!-- ANCHOR Actions Column -->
+      <th *ngIf="tableConfig.actions?.length || actionsTemplateRef">
+        {{ "common.actions" | translate }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-rowData
+    let-columns="columns"
+    let-expanded="expanded"
+  >
+    <tr>
+      <td *ngIf="withRadioButton">
+        <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+      </td>
+      <td *ngIf="withCheckbox">
+        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+      </td>
+      <td *ngFor="let col of columns">
+        <ng-container
+          *ngIf="!col?.isStatus && !col.isDate && !col?.isAction && !col?.withIcon">
+          {{ rowData[col.field] }}
+        </ng-container>
+
+        <ng-container *ngIf="col?.isStatus">
+          <div
+            class="tag"
+            [ngClass]="getTagClass(rowData[col.field])"
+          >
+            {{ 'tags.'+ rowData[col.field]  | translate}}
+          </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="col?.isDate">
+          {{ rowData[col.field] | date : "M/d/yyyy" }}
+        </ng-container>
+
+        <ng-container *ngIf="col?.withIcon">
+          <img [src]="'./assets/images/'+rowData[col.field]+'.png'" alt="">
+        </ng-container>
+
+      </td>
+
+      <td
+        *ngIf="tableConfig?.actions?.length || actionsTemplateRef"
+        style="white-space: nowrap"
+      >
+        <div class="d-flex align-items-center">
+          <ng-container *ngFor="let action of tableConfig?.actions">
+            <p-button
+              [styleClass]="'p-button-text p-0 me-3 d-flex' + (action.type === 'delete' ? ' p-button-danger':'')"
+              type="button"
+              (onClick)="onTableAction
+              (action, rowData)"
+              [pTooltip]=" action.tooltipText ||action.title ||('btn.' + action.type | translate)"
+              tooltipPosition="top"
+              [styeClass]=" action.type === 'delete'? 'p-button-danger':''"
+            >
+                <i class="fs-4" [ngClass]="['fat-' + action?.type]"></i>
+            </p-button>
+          </ng-container>
+
+          <ng-container
+            *ngIf="actionsTemplateRef"
+            [ngTemplateOutlet]="actionsTemplateRef"
+            [ngTemplateOutletContext]="{ $implicit: rowData }"
+          >
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+<ng-template pTemplate="emptymessage" let-columns>
+  <tr>
+    <td [attr.colspan]="columns.length">
+       No records found
+    </td>
+  </tr>
+</ng-template>
+</p-table>
+<div dir="ltr">
+  <p-paginator
+  (onPageChange)="pageChanged($event)"
+  [first]="(filterOptions?.pageNo) * filterOptions?.pageSize"
+  [rows]="filterOptions?.pageSize"
+  [totalRecords]="!paginationClient ? totalRecords : data?.length"
+  [rowsPerPageOptions]="PAGE_SIZE_OPTION"
+  [showCurrentPageReport]="true"
+  [currentPageReportTemplate]="currentPageReportTemplate"
+  dropdownAppendTo="body"
+  [pageLinkSize]="5"
+></p-paginator>
+</div>
+
+</div>

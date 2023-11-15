@@ -1,0 +1,11 @@
+<div class="w-100 " [ngClass]="{'p-input-icon-left': props['icon'] }">
+    <i *ngIf="props['icon']" [class]="props['icon']"></i>
+    <input
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    pInputText
+    [class]="props['class']"
+    [readOnly]="props['readOnly']"
+    [type]="props['type']"
+  />
+</div>

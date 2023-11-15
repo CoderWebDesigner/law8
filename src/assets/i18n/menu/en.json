@@ -1,0 +1,11 @@
+{
+    "menu":{
+        "dashboard":"Dashboard",
+        "clients":{
+          "title":"Clients",
+          "clientIntack":"Client Intack",
+          "clientAdd":"Client Add",
+          "clientList":"Client List"
+        }
+    }
+}

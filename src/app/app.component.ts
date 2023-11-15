@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { LanguageService } from './@core/services/language.service';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'law8';
+  _languageService = inject(LanguageService);
+
+  constructor(){
+    this._languageService.initLang()
+  }
 }

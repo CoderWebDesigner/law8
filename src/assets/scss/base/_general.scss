@@ -1,0 +1,98 @@
+// .line-title {
+//   font-size: toRem(18);
+//   font-weight: 700;
+//   color: #9b9b9b;
+//   font-weight: $fw-bold;
+//   width: 100%;
+//   position: relative;
+
+//   &:after {
+//     display: inline-block;
+//     height: 1px;
+//     content: " ";
+//     background-color: #9B9B9B;
+//     position: absolute;
+//     width: calc(100% - 160px);
+//     top: 50%;
+//     transform: translate(0, -50%);
+//   }
+// }
+
+
+
+// .fat-bg {
+//   content: '';
+//   width: 15px;
+//   height: 15px;
+//   display: block;
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   background-position: center;
+// }
+
+@include fat-icon('fat-en', 'us.jpg');
+@include fat-icon('fat-ar', 'ar.png');
+
+
+// .p-menu .p-menuitem>.p-menuitem-content .p-menuitem-link .p-menuitem-icon {
+//   margin-#{$right}: 0.5rem;
+// }
+
+
+// p-paginator {
+//   direction: ltr;
+// }
+
+
+// .f-primary {
+//   color: $primaryColor;
+// }
+
+// .p-steps ul {
+//   @include media-breakpoint-down(md) {
+//     flex-direction: row;
+//   }
+
+//   @include media-breakpoint-down(sm) {
+//     flex-direction: column;
+//   }
+// }
+
+
+// .status-container {
+//   #{$left}: 0;
+// }
+
+// .p-paginator {
+//   padding: 1rem 0;
+//   .p-paginator-current {
+//     @include media-breakpoint-down(sm) {
+//       min-width: 2rem;
+//       height: 2rem;
+//     }
+//   }
+
+//   .p-paginator-first,
+//   .p-paginator-prev,
+//   .p-paginator-next,
+//   .p-paginator-last {
+//     @include media-breakpoint-down(sm) {
+//       min-width: 2rem;
+//       height: 2rem;
+//     }
+//   }
+
+//   .p-icon {
+//     @include media-breakpoint-down(sm) {
+//       width: .8rem;
+//       height: .8rem;
+//     }
+
+
+// }
+// }
+
+// .toast-top-right {
+//   #{$right}: 12px!important;
+//   #{$left}: unset!important;
+// }

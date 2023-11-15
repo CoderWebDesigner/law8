@@ -1,0 +1,42 @@
+@import "src/assets/scss/helpers/_variables.scss";
+@import "src/assets/scss/helpers/_functions.scss";
+@import "src/assets/scss/helpers/_mixins.scss";
+
+::ng-deep {
+  i {
+    font-size: toRem(18);
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    // background: $topbar-bg;
+    text-wrap: nowrap;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-wrap: nowrap;
+    &.child-td {
+      padding: 0 !important;
+      th {
+        background-color: #dddde1;
+      }
+    }
+  }
+
+  .p-checkbox .p-checkbox-box {
+    border: 2px solid $primaryColor;
+  }
+
+  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+    background-color: $primaryColor;
+    border: 1px solid $primaryColor;
+  }
+
+  .fat-update,
+  .fat-vertical-ellipsis{
+    color: $primaryColor;
+  }
+
+  .p-datatable .p-sortable-column:focus{
+    box-shadow: none;
+  }
+}

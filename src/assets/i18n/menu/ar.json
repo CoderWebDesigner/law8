@@ -1,0 +1,11 @@
+{
+    "menu":{
+        "dashboard":"الرئيسية",
+        "clients":{
+          "title":"العملاء",
+          "clientIntack":"تناول العميل",
+          "clientAdd":"اضافة عميل",
+          "clientList":"قائمة العملاء"
+        }
+    }
+}

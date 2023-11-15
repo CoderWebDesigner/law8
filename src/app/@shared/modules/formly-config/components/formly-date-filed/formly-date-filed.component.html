@@ -1,0 +1,13 @@
+<p-calendar
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [showIcon]="true"
+  dataType="string"
+  dateFormat="dd.mm.yy"
+  appendTo="body"
+  [timeOnly]="props['timeOnly'] || false"
+  [selectionMode]="props['selectionMode'] || 'single'"
+  [showTime]="props['showTime']"
+  hourFormat="12"
+  [icon]="props['icon'] || 'fat-calendar'"
+></p-calendar>

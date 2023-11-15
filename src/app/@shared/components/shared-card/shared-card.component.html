@@ -1,0 +1,24 @@
+<p-card [style]="getCustomStyle()" [ngClass]="[
+    withTitleDivider ? 'borderBottom' : '', isSubCard ? 'sub-card' : '']">
+
+  <ng-template pTemplate="title">
+    <div class="d-flex justify-content-sm-between  flex-sm-row flex-column">
+      <div *ngIf="title" [class]="{ 'sub-title': isSubTitle }">
+        {{ title }}
+      </div>
+      <div class="header-actions" >
+        <ng-content select="[headerActions]"></ng-content>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <div class="card-actions">
+
+    <ng-content select="[actions]"></ng-content>
+
+  </div>
+
+  <ng-content select="[body]"></ng-content>
+</p-card>
+

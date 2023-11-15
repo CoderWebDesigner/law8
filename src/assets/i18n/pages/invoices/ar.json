@@ -1,0 +1,41 @@
+{
+  "invoice": {
+    "addInvoice": "إنشاء فاتورة",
+    "basicData": "البيانات الأساسية",
+    "invoiceNumber": "رقم الفاتورة",
+    "customerName": "اسم العميل",
+    "currency": "العملة",
+    "date": "التاريخ",
+    "dueDate": "تاريخ الإستحقاق",
+    "uploadLogo": "تحميل الشعار الخاص بالمؤسسة",
+    "totalBeforeDiscount": "المجموع قبل الخصم",
+    "taxFreeDiscount": "خصم خالي من الضريبة",
+    "valueAddedTax": "اجمالي ضريبة القيمة المضافة",
+    "qrDescription": "رمز الإستجابة السريعة مشفّر بحسب متطلبات هيئة الزكاة والضريبة والجمارك للفوترة الإلكترونية",
+    "invoiceTotal" :"اجمالي الفاتورة",
+    "eSignature": "الامضاء الإلكتروني",
+    "addNewProduct": "إضافة منتج جديد",
+    "products": "المنتجات",
+    "productsMenu": "قائمة المنتجات",
+    "uploadElectronicSignature" : " تحميل الامضاء الالكتروني الخاص بالمؤسسة",
+    "uploadSignature" : "تحميل الامضاء",
+    "updateProduct": "تعديل المنتج",
+    "deleteProduct":"حذف المنتج",
+    "selectProductType": "حدد نوع المنتج",
+    "service": "خدمة",
+    "product": "منتج",
+    "taxRate": "المعدل الضريبي",
+    "discountPercent": "نسبة الخصم",
+    "importTax": "ضريبة الاستيراد",
+    "incomeTax": "ضريبة الدخل",
+    "sendInvoice":"إرسال الفاتورة",
+    "saveInvoice": "حفظ الفاتورة",
+    "updateInvoices":"تعديل فاتورة",
+    "importInvoices": {
+      "uploadExcelTemplate": "قم بتحميل النموذج اكسيل من هنا",
+      "downloadTemplate": "تحميل النموذج",
+      "chooseTheImportSourcePlease": "من فضلك اختر مصدر الاستيراد",
+      "PleaseUploadYourInvoicesFile": "من فضلك قم بتحميل ملف فواتيرك"
+    }
+  }
+}

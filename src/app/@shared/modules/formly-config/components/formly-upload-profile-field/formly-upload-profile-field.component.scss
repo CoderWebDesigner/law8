@@ -1,0 +1,38 @@
+@import "src/assets/scss/helpers/_variables.scss";
+@import "src/assets/scss/helpers/_functions.scss";
+@import "src/assets/scss/helpers/_mixins.scss";
+
+:host ::ng-deep {
+  ngx-dropzone {
+    height: auto;
+    border: 0;
+    // background-color: $topbar-bg;
+    width: toRem(400);
+  }
+  .title {
+    font-size: toRem(16);
+    color: #3E3E3E;
+  }
+
+  .subTitle {
+    font-size: toRem(14);
+    color: #9B9B9B;
+  }
+
+  .iconPosition {
+    position: absolute;
+    bottom: -4px;
+    right: 66px;
+    cursor: pointer;
+    background: $white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.42);
+    i{
+      font-size: 0.8rem;
+    }
+  }
+}
+

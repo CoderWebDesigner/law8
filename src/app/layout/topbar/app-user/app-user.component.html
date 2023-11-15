@@ -1,0 +1,12 @@
+<p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+<button pButton type="button" (click)="menu.toggle($event)" class="p-button-text header-item mx-2" style="display: flex; align-items: center; position: relative;">
+    <div style="position: relative;">
+      <img [src]="'./assets/images/user.png'" alt="user" width="40px" class="me-2">
+      <div class="status-container" >
+        <div class="status-circle"></div>
+      </div>
+    </div>
+    <span class="mx-2 d-none d-sm-block">{{_authService?.user?.userName}}</span>
+    <i class="fat-arrow"></i>
+  </button>
+  

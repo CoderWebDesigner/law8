@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Part One: Image -->
+    <div class="col-lg-6 d-none d-lg-block g-0">
+      <div class="logo">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-md-9 mx-auto">
+            <h2 class="text-white">{{ "auth.welcomeBack" | translate }}</h2>
+            <h1 class="text-white">
+              {{
+                "auth.toSignInPleaseEnterYourUsernameAndPassword" | translate
+              }}
+            </h1>
+            <!-- <div class="inner-logo">
+          <img src="assets/images/logo.png" class="img-fluid" />
+        </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part Two: Form -->
+    <div class="col-lg-6 col-sm-12">
+      <!-- <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+
+          <img src="assets/images/logo.png" class="img-fluid w-25"/>
+        </div>
+      </div> -->
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-9 mx-auto">
+          <div class="login-content">
+            <div class="text-center">
+              <div class="small-Logo"></div>
+              <h2 class="welcoming">{{ "auth.login" | translate }}</h2>
+            </div>
+
+            <form
+              class="mt-2 p-lg-2"
+              [formGroup]="formly"
+              (ngSubmit)="onSubmit()"
+            >
+              <formly-form
+                [form]="formly"
+                [fields]="formlyFields"
+                [model]="formlyModel"
+              ></formly-form>
+              <div class="mt-4">
+                <p-button
+                  [loading]="isSubmit"
+                  class="w-100"
+                  styleClass="p-button-primary d-block w-100 py-3"
+                  type="submit"
+                  label="{{ 'auth.login' | translate }}"
+                ></p-button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

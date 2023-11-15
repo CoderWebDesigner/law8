@@ -1,0 +1,39 @@
+//
+// _layouts.scss
+//
+html{
+  font-size: 14px;
+}
+body{
+  font-family: $main-font;
+  background-color: $body-bg;
+  position: relative;
+}
+
+.main-content {
+  @include media-breakpoint-up(xl) {
+    margin-#{$left}: $sidebar-width;
+  }
+  overflow: hidden;
+  padding-top: $header-height;
+  @include media-breakpoint-down(xl) {
+    margin-#{$right}: 0 !important;
+  }
+  .content {
+    padding: 0 15px 10px 15px;
+    margin-top: $header-height;
+  }
+}
+
+
+
+.vertical-collapsed {
+  .main-content {
+    margin-#{$left}: $sidebar-collapsed-width;
+  }
+}
+
+.page-content {
+  padding: 1rem;
+  padding-bottom: 1rem;
+}

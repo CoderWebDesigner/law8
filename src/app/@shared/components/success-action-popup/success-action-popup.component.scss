@@ -1,0 +1,24 @@
+@import 'src/assets/scss/helpers/_variables.scss';
+@import 'src/assets/scss/helpers/_functions.scss';
+
+:host ::ng-deep {
+    .icon {
+        width: 100px;
+        height: 100px;
+        background-color: $primaryColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            color: $white;
+            font-size: 2rem;
+        }
+    }
+
+    h4 {
+        color: #333333;
+        font-size: toRem(18);
+        font-weight: 600;
+    }
+}

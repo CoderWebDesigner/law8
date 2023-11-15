@@ -1,0 +1,22 @@
+@import 'src/assets/scss/helpers/_variables.scss';
+
+:host ::ng-deep {
+    .xng-breadcrumb-root {
+        padding: 10px 20px;
+        border-top: 1px solid #F1F3F9;
+        background-color: $white;
+        .xng-breadcrumb-trail,
+        .xng-breadcrumb-link {
+            color: #8B8D97;
+            font-size: .8rem;
+            font-weight: $fw-semibold;
+        }
+        .xng-breadcrumb-link {
+            color: $primaryColor;
+        }
+    }
+    .xng-breadcrumb-separator {
+        margin: 0 !important;
+    }
+
+}

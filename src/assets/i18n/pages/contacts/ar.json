@@ -1,0 +1,14 @@
+{
+  "contact": {
+    "manageContact": "ادارة الإتصال",
+    "addContact": "اضافة إتصال",
+    "update": "تعديل إتصال",
+    "add": "إضافة إتصال",
+    "systemCode": "كود النظام",
+    "systemType": "نوع النظام",
+    "movementType": "نوع الحركة",
+    "url": "الرابط",
+    "urlDescription": "وصف الرابط",
+    "contactPointData": "بيانات نقطة الاتصال"
+  }
+}

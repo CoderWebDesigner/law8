@@ -1,0 +1,87 @@
+.p-inputtext,
+.p-dropdown,
+.p-multiselect,
+.p-treeselect,
+.p-calendar,
+.p-password,
+.iti {
+  width: 100%;
+}
+
+form label {
+  font-size: $labelSize;
+  color: $labelColor;
+  font-weight: $fw-medium;
+  margin-bottom: 0.3rem;
+}
+
+.p-field {
+  @extend .mb-3;
+}
+
+label .ng-star-inserted {
+  @extend .p-error;
+}
+
+.p-calendar-w-btn {
+  .p-datepicker-trigger {
+    border-top-#{$left}-radius: 0;
+    border-bottom-#{$left}-radius: 0;
+  
+    border-top-#{$right}-radius: 6px !important;
+    border-bottom-#{$right}-radius: 6px !important;
+    padding: 0;
+    font-size: 1.2rem;
+  }
+  .p-inputtext {
+    border-top-#{$right}-radius: 0;
+    border-bottom-#{$right}-radius: 0;
+    border-top-#{$left}-radius: 6px!important;
+    border-bottom-#{$left}-radius: 6px!important;
+  }
+}
+
+.radio-h {
+  .p-field {
+    display: flex;
+  }
+
+  label {
+    margin-bottom: 0;
+    margin-#{$right}: 0.5rem;
+  }
+}
+
+
+[dir=rtl]{
+  .iti__flag-container{
+    left: 0!important;
+    right: auto!important;
+  }
+  
+  .iti--allow-dropdown input, 
+  .iti--allow-dropdown input[type=tel]{
+    padding-right: 6px;
+    padding-left: 52px;
+  }
+  .iti__arrow {
+    margin-left: 6px;
+    margin-right: 0;
+  }
+}
+
+.p-dropdown .p-dropdown-clear-icon{
+  #{$left}: unset;
+  #{$right}: $inputGroupAddOnMinWidth;
+}
+
+.p-input-icon-right > .p-icon-wrapper, .p-input-icon-right > i:last-of-type{
+  #{$right}: 0.75rem!important;
+  #{$left}: unset!important;
+}
+
+.p-input-icon-right > .p-inputtext {
+  padding-#{$right}: 2.5rem!important;
+  padding-#{$left}: 0.75rem;
+
+}

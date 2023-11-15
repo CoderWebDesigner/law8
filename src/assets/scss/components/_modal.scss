@@ -1,0 +1,40 @@
+@import "../helpers/variables";
+@import "./../components/buttons";
+
+.p-dialog {
+  border-radius: 10px;
+  box-shadow: none;
+  .p-dialog-header {
+    border-bottom: 1px solid #fff;
+    .p-dialog-title {
+      font-size: toRem(20);
+      font-weight: $fw-medium;
+      text-transform: capitalize;
+      color: #3E3E3E;
+    }
+  }
+
+  &-content {
+    margin-bottom: 3rem;
+    position: relative;
+    .fixed-footer{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border:1px solid #ddd;
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  &-footer {
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+}
+
+.p-component-overlay-enter {
+  animation: unset;
+}

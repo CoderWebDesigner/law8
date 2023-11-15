@@ -1,0 +1,9 @@
+@import "src/assets/scss/helpers/_variables.scss";
+@import "src/assets/scss/helpers/_mixins.scss";
+@import "src/assets/scss/helpers/_functions.scss";
+
+:host ::ng-deep {
+  input {
+    height: 40px;
+  }
+}

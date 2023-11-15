@@ -1,0 +1,11 @@
+<p-selectButton
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [options]="props['options']"
+  [multiple]="props['multiple']"
+  (onOptionClick)="onOptionClick($event)"
+>
+  <ng-template let-option pTemplate="item">
+    <span>{{ option.label }}</span>
+  </ng-template>
+</p-selectButton>

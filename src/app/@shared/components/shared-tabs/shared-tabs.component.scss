@@ -1,0 +1,46 @@
+@import "src/assets/scss/helpers/_variables.scss";
+@import "src/assets/scss/helpers/_functions.scss";
+
+:host ::ng-deep {
+  .p-tabmenu {
+    .p-tabmenu-nav {
+      all: unset;
+      .p-tabmenuitem .p-menuitem-link,
+      .p-tabmenuitem.p-highlight .p-menuitem-link,
+      .p-tabmenuitem:not(.p-highlight):not(.p-disabled):hover .p-menuitem-link,
+      .p-tabmenuitem .p-menuitem-link:not(.p-disabled):focus {
+        all: unset;
+      }
+    }
+    .p-tabmenu-nav {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .p-tabmenuitem .p-menuitem-link {
+      padding: 0.5rem 1rem !important;
+      cursor: pointer !important;
+      font-weight: $fw-semibold !important;
+      font-size: 1rem !important;
+
+      &:hover {
+        @extend .tab-active;
+      }
+    }
+
+    .p-tabmenuitem.p-highlight {
+      @extend .tab-active;
+    }
+
+    .p-menuitem-link-active {
+      @extend .tab-active;
+    }
+  }
+
+  .tab-active {
+    background: $primaryColor !important;
+    border-radius: 20px !important;
+    color: white !important;
+    font-weight: $fw-semibold !important;
+  }
+}

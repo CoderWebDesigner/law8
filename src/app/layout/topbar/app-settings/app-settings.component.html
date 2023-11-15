@@ -1,0 +1,14 @@
+
+<!-- 
+<button pButton type="button" (click)="dropdown.show($event)" class="p-button-text header-item p-2">
+    
+</button> -->
+
+<p-dropdown styleClass="dropdown-0 header-item px-2" #dropdown [options]="items" >
+     <ng-template pTemplate="selectedItem">
+        <i inlineSVG="./assets/images/icons/setting.svg"  ></i>
+    </ng-template>
+    <ng-template let-item pTemplate="item">
+       
+    </ng-template>
+</p-dropdown>

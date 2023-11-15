@@ -1,0 +1,14 @@
+:host ::ng-deep {
+    .p-dropdown {
+        display: flex;
+        align-items: center;
+
+        .p-dropdown-trigger {
+            display: none;
+        }
+
+        .p-dropdown-label {
+            all: unset;
+        }
+    }
+}

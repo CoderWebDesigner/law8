@@ -1,0 +1,26 @@
+.tag {
+  font-size: toRem(14);
+  border-radius: 4px;
+  text-align: center;
+  display: inline-block;
+  min-width: 100px;
+  height: 26px;
+  line-height: 26px;
+  &-danger {
+    background-color: $tagDangerBg;
+    color: $tagDangerColor;
+  }
+
+  &-success {
+    background: $tagSuccessBg;
+    color: $primaryColor;
+  }
+
+  &-info {
+    color: $tagInfoColor;
+    background: $tagInfoBg
+  }
+
+
+}
+

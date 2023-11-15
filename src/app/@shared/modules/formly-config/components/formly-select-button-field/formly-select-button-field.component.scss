@@ -1,0 +1,19 @@
+// .day {
+//   display: flex;
+//   height: 26px;
+//   padding: 0px 6px;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 4px;
+//   border: 1px solid #bfbfbf;
+//   cursor: pointer;
+
+//   &.selected {
+//     background-color: #e6e6e6;
+//     font-weight: bold;
+//   }
+// }
+
+:host ::ng-deep {
+ 
+}

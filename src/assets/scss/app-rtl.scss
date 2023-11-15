@@ -1,0 +1,36 @@
+
+
+@import "helpers/variables";
+@import "helpers/rtl-variables";
+@import "helpers/mixins";
+@import "helpers/functions";
+
+//Core files
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "./node_modules/bootstrap/scss/mixins.scss";
+@import "./node_modules/bootstrap/dist/css/bootstrap.rtl";
+@import "primeng/resources/primeng";
+@import "./vendor/primeng-sass/themes/lara/lara-light/blue/theme";
+@import "./node_modules/primeicons/primeicons";
+
+@import "base/reset";
+@import "base/typography";
+@import "base/general";
+
+
+// Layout
+@import "layout/layout";
+@import "layout/sidebar";
+@import "layout/topbar";
+
+
+//icon
+// @import "./vendor/icons/fatoora-icon";
+//plugin
+
+// comp
+@import "components/buttons";
+@import "components/tag";
+@import "components/forms";
+// @import "./components//modal";

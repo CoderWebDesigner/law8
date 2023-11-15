@@ -1,0 +1,27 @@
+<p-dropdown
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [options]="props['options']"
+  [showClear]="props['showClear'] || true"
+  [filter]="true"
+  [placeholder]="props['placeholder']"
+  appendTo="body"
+  [autoDisplayFirst]="false"
+  [dropdownIcon]="props['dropdownIcon']"
+>
+<ng-template let-selected pTemplate="selectedItem" >
+  <div class="flex align-items-center gap-2" >
+    <img height="26" *ngIf="selected.img" [src]="'./assets/images/'+ selected.value+ '.png'" [alt]="selected.value">
+    <span *ngIf="selected.label">{{selected.label}}</span>
+  </div>
+</ng-template>
+  <ng-template let-option pTemplate="item">
+    <div class="d-flex align-items-center gap-2">
+      <i *ngIf="option['icon']" [class]="option['icon']"></i>
+      <img height="26" *ngIf="option['img']" [src]="'./assets/images/'+option['img']+ '.png'" [alt]="option['img']">
+      <div>{{ option.label }}</div>
+    </div>
+  </ng-template>
+  
+</p-dropdown>
+

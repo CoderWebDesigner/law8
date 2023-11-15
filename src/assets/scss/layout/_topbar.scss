@@ -1,0 +1,53 @@
+//
+// _header.scss
+//
+#page-topbar {
+  position: fixed;
+  top: 0;
+  #{$right}: 0;
+  #{$left}: $sidebar-width;
+  z-index: 1002;
+  background-color: $white;
+
+  @include media-breakpoint-down(xl) {
+      #{$left}: 0;
+
+  }
+}
+.vertical-collapsed {
+  #page-topbar {
+      #{$left}: $sidebar-collapsed-width;
+  }
+}
+.navbar-header {
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  height: $header-height;
+}
+
+
+.header-item {
+  height: $header-height;
+  box-shadow: none !important;
+  border: 0;
+  border-radius: 0px;
+  color: $header-item-color;
+  background-color: transparent;
+  svg path {
+      stroke: $primaryColor;
+  }
+
+}
+
+.header-profile-user {
+  height: 36px;
+  width: 36px;
+  background-color: $gray-300;
+  padding: 3px;
+}
+
+
+

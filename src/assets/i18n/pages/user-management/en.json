@@ -1,0 +1,13 @@
+{
+  "userManagement": {
+    "addUser": "Add User",
+    "updateUser": "Update User",
+    "userName": "Username",
+    "company": "Company",
+    "phone": "Phone",
+    "saveUser": "Save User",
+    "basicDataService": "Basic Data Service",
+    "uploadLogo":"Upload Profile Picture",
+    "blockUser":"Block User"
+  }
+}

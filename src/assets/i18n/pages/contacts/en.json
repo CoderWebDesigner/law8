@@ -1,0 +1,14 @@
+{
+  "contact": {
+    "manageContacts": "Manage Contacts",
+    "addContact": "Add Contact",
+    "update": "Update Contact",
+    "add": "Add Contact",
+    "systemCode": "System Code",
+    "systemType": "System Type",
+    "movementType": "Movement Type",
+    "url": "URL",
+    "urlDescription": "URL Description",
+    "contactPointData": "Contact Point Data"
+  }
+}

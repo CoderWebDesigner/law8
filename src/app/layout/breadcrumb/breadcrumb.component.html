@@ -1,0 +1,13 @@
+
+      <xng-breadcrumb [separator]="separatorTemplate"   [preserveFragment]="false">
+        <ng-container  *xngBreadcrumbItem="let breadcrumb; let info = info; let first = first">
+          <i *ngIf="first" class="icon-primary" inlineSVG="assets/images/icons/home.svg"></i>
+          <i *ngIf="first" class="mx-2">/</i>
+          {{ breadcrumb | translate}}
+        </ng-container>
+      </xng-breadcrumb>
+  
+      <ng-template #separatorTemplate>
+        <i class="mx-2"> / </i>
+      </ng-template>
+  
