@@ -1,6 +1,6 @@
-import { API_Service1 } from "./api-service1";
+import { Auth_API } from "./auth";
 
 export const API_Config = {
-    ...API_Service1
+    ...Auth_API
 
 }

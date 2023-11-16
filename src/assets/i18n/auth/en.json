@@ -9,7 +9,21 @@
     "toSignInPleaseEnterYourUsernameAndPassword":"To login, please enter your username and password",
     "userNamePlaceholder": "Please Enter Your Username",
     "passwordPlaceholder": "Please Enter Your Password",
-    "logout":"Logout"
+    "logout":"Logout",
+    "resetPassword":"Reset Password",
+    "resetPasswordInThreeSteps":"Give following information & reset password in 3 steps only",
+    "userIdAndEmail":"User Id & Email",
+    "verify":"Verify",
+    "newPassword":"New Password",
+    "userId":"User Id",
+    "userIdPlaceholder":"Please Enter Your User Id",
+    "email":"Email",
+    "emailPlaceholder":"Please Enter Your Email",
+    "verfiyOtp":"Verify OTP",
+    "twoStepsVerifiy":"Two-Step Verification",
+    "enterVerificationCode":"Enter the verification code we sent to your email",
+    "confirmPassword":"Confirm Password"
+
 
   }
 }

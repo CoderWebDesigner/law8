@@ -7,7 +7,7 @@ import { FormlyPrimeNGModule } from '@ngx-formly/primeng';
 import { arabicLettersValidator, emailValidator, englishLettersValidator, passwordValidator, urlValidator } from './custom-validation';
 import { formlyValidationConfig } from './validation-messages';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { FormlyInputFiledComponent } from './components/formly-input-filed/formly-input-filed.component';
+import { FormlyInputFieldComponent } from './components/formly-input-field/formly-input-field.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormlySelectFiledComponent } from './components/formly-select-filed/formly-select-filed.component';
 import { DropdownModule } from 'primeng/dropdown';
@@ -16,34 +16,34 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormlyRadioButtonFiledComponent } from './components/formly-radio-button-filed/formly-radio-button-filed.component';
 import { FormlyTextareaFiledComponent } from './components/formly-textarea-filed/formly-textarea-filed.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { FormlyDateFiledComponent } from './components/formly-date-filed/formly-date-filed.component';
-import { FormlyButtonFiledComponent } from './components/formly-button-filed/formly-button-filed.component';
+import { FormlyDateFieldComponent } from './components/formly-date-field/formly-date-field.component';
+import { FormlyButtonFieldComponent } from './components/formly-button-field/formly-button-field.component';
 import { FormlySelectButtonFieldComponent } from './components/formly-select-button-field/formly-select-button-field.component';
 import { FormlyPhoneFiledComponent } from './components/formly-phone-filed/formly-phone-filed.component';
-import { FormlyOtpFiledComponent } from './components/formly-otp-filed/formly-otp-filed.component';
-import { FormlyFileFiledComponent } from './components/formly-file-filed/formly-file-filed.component';
+import { FormlyOtpFieldComponent } from './components/formly-otp-field/formly-otp-field.component';
+// import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
 // import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 // import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { FormlyPasswordFiledComponent } from './components/formly-password-filed/formly-password-filed.component';
+import { FormlyPasswordFieldComponent } from './components/formly-password-field/formly-password-field.component';
 import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   declarations: [
-    FormlyInputFiledComponent,
+    FormlyInputFieldComponent,
     FormlySelectFiledComponent,
     FormlyRadioButtonFiledComponent,
     FormlyTextareaFiledComponent,
-    FormlyDateFiledComponent,
-    FormlyButtonFiledComponent,
+    FormlyDateFieldComponent,
+    FormlyButtonFieldComponent,
     FormlySelectButtonFieldComponent,
     FormlyUploadProfileFieldComponent,
     FormlyUploadProfileFieldComponent,
     FormlyPhoneFiledComponent,
-    FormlyFileFiledComponent,
-    FormlyOtpFiledComponent,
-    FormlyPasswordFiledComponent,
+    // FormlyFileFieldComponent,
+    FormlyOtpFieldComponent,
+    FormlyPasswordFieldComponent,
 
   ],
   imports: [
@@ -58,18 +58,18 @@ import { PasswordModule } from 'primeng/password';
         { name: 'url', validation: urlValidator },
       ],
       types: [
-        { name: 'input', component: FormlyInputFiledComponent },
+        { name: 'input', component: FormlyInputFieldComponent },
         { name: 'select', component: FormlySelectFiledComponent },
         { name: 'radio', component: FormlyRadioButtonFiledComponent },
         { name: 'textarea', component: FormlyTextareaFiledComponent },
-        { name: 'date', component: FormlyDateFiledComponent, extends: 'input' },
-        { name: 'button', component: FormlyButtonFiledComponent },
+        { name: 'date', component: FormlyDateFieldComponent, extends: 'input' },
+        { name: 'button', component: FormlyButtonFieldComponent },
         { name: 'select-button', component: FormlySelectButtonFieldComponent, extends: 'input' },
         // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
         { name: 'phone', component: FormlyPhoneFiledComponent, extends: 'input' },
         // { name: 'file', component: FormlyFileFiledComponent , extends: 'input'},
-        { name: 'otp', component: FormlyOtpFiledComponent,extends: 'input'},
-        { name: 'password', component: FormlyPasswordFiledComponent,extends: 'input'}
+        { name: 'otp', component: FormlyOtpFieldComponent,extends: 'input'},
+        { name: 'password', component: FormlyPasswordFieldComponent,extends: 'input'}
 
       ]
     }),

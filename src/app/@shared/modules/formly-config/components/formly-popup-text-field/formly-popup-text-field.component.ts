@@ -1,5 +1,5 @@
 import { PopupTextAreaComponent } from './popup-text-area/popup-text-area.component';
-import { FormlyInputFiledComponent } from './../formly-input-filed/formly-input-filed.component';
+import { FormlyInputFieldComponent } from '@shared/modules/formly-config/components/formly-input-field/formly-input-field.component';
 import { MODAL_WIDTH } from '@core/utilities/defines';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';

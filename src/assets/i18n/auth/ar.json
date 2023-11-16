@@ -9,6 +9,17 @@
     "toSignInPleaseEnterYourUsernameAndPassword":"لتسجيل الدخول الرجاء إدخال اسم المستخدم وكلمة المرور",
     "userNamePlaceholder": "من فضلك قم بإدخال اسم المستخدم",
     "passwordPlaceholder": "من فضلك قم بإدخال كلمة المرور",
-    "logout":"تسجيل خروج"
+    "logout":"تسجيل خروج",
+    "resetPassword":"إعادة تعيين كلمة المرور",
+    "resetPasswordInThreeSteps":"قدم المعلومات التالية وإعادة تعيين كلمة المرور في 3 خطوات فقط",
+    "userIdAndEmail":"رقم العميل & البريد الالكتروني",
+    "verify":"تاكيد",
+    "newPassword":"كلمة المرور الجديدة",
+    "userId":"معرف المستخدم",
+    "email":"بريد إلكتروني",
+    "verfiyOtp":"تحقق من OTP",
+    "twoStepsVerifiy":"التحقق من خطوتين",
+    "enterVerificationCode":"أدخل رمز التحقق الذي أرسلناه إلى بريدك الإلكتروني",
+    "confirmPassword":"تأكيد كلمة المرور"
   }
 }

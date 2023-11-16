@@ -1,2 +1,38 @@
 
-<router-outlet></router-outlet>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Part One: Image -->
+    <div class="col-lg-6 d-none d-lg-block g-0">
+      <div class="logo">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-md-9 mx-auto">
+            <div class="logo-light mb-3">
+              <img src="assets/images/logo-light.png" alt="" class="img-fluid w-25">
+            </div>
+            <h2 class="text-white mb-3">{{ "auth.welcomeBack" | translate }}</h2>
+            <h1 class="text-white">
+              {{
+                "auth.toSignInPleaseEnterYourUsernameAndPassword" | translate
+              }}
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part Two: Form -->
+    <div class="col-lg-6 col-sm-12">
+      <!-- <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+
+          <img src="assets/images/logo.png" class="img-fluid w-25"/>
+        </div>
+      </div> -->
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-9 mx-auto">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

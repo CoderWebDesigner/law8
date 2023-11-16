@@ -1,0 +1,63 @@
+@mixin active {
+  .p-steps-number {
+      color: $white !important;
+      background-color: $primaryColor !important;
+  }
+
+  .p-steps-title {
+      font-weight: $fw-medium !important;
+      color: $primaryColor;
+
+  }
+}
+
+@mixin step-styles {
+  min-width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  background-color: #C6C5CD;
+  color: $white;
+}
+
+.p-steps {
+  .p-steps-item {
+      &.p-highlight {
+          @include active;
+      }
+
+      &:before {
+          border-color: 2px solid #C6C5CD;
+      }
+
+      &.visited {
+          opacity: 1;
+
+          .p-menuitem-link {
+              @include active;
+          }
+      }
+
+      .p-menuitem-link {
+          .p-steps-number {
+              @include step-styles;
+          }
+
+
+      }
+  }
+
+  .p-steps-item:before {
+      border-top: 3px solid #dee2e6;
+  }
+
+  ul li {
+      &:first-of-type:before {
+          left: 50%;
+      }
+
+      &:last-of-type:before {
+          left: -50%;
+      }
+  }
+
+}

@@ -1,0 +1,26 @@
+@import "src/assets/scss/helpers/_variables.scss";
+@import "src/assets/scss/helpers/_functions.scss";
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "./node_modules/bootstrap/scss/mixins.scss";
+
+:host ::ng-deep {
+  .otp-input.custom-otp-input {
+    width:3rem;
+    height: 3rem;
+    color: $primaryColor;
+    border: 1px solid #D0D5DD;
+    border-radius: 8px;
+    font-size: 2rem;
+    font-weight: $fw-medium;
+     outline: 0;
+     margin: 0 8px;
+    &:focus-visible{
+      border-color: $primaryColor;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 3rem !important;
+      height: 3rem !important;
+    }
+  }
+}

@@ -1,1 +1,20 @@
 // Reset/normalize
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: unset;
+}
+
+.p-component,
+.p-inputtext {
+    font-family: $main-font;
+}
+
+.p-component-overlay-enter {
+    animation: none
+}
+

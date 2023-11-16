@@ -28,9 +28,10 @@
 //icon
 // @import "./vendor/icons/fatoora-icon";
 //plugin
-
+@import "ngx-toastr/toastr";
 // comp
 @import "components/buttons";
 @import "components/tag";
 @import "components/forms";
+@import "components/steps";
 // @import "./components//modal";

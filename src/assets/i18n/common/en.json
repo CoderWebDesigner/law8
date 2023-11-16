@@ -1,9 +1,13 @@
 {
   "common": {
-  
+    "weak":"Weak",
+    "medium": "Medium",
+    "strong":"strong"
   },
   "btn": {
-   "save":"Save"
+   "save":"Save",
+   "submit":"Submit",
+   "send":"Send"
   },
   "messages": {
     "createdSuccessfully": "Created successfully",
@@ -14,6 +18,11 @@
   "validation": {
     "required": "This field is required!",
     "url": "The URL should be valid!",
-    "email": "Please enter valid email"
+    "email": "Please enter valid email",
+    "phone":"Please enter a valid phone number",
+    "password": "Password should contain at least one lower character, one upper character, one digit character, one special character and length from 8-16 characters",
+    "passwordNotMatching":"Password not matching!",
+    "englishLetters": "Please enter only english letters!" ,
+    "arabicLetters": "Please enter only arabic letters!"
   }
 }
