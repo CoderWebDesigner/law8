@@ -10,10 +10,14 @@
    "send":"Send"
   },
   "messages": {
+    "signInSuccessfully":"Sign In Successfully",
+    "signInError":"Error In Sign In",
     "createdSuccessfully": "Created successfully",
     "updateSuccessfully": "Update successfully",
     "deletedSuccessfully": "Deleted successfully",
-    "internalServerError": "Internal Server Error!"
+    "internalServerError": "Internal Server Error!",
+    "userIdOrEmailWrong":"Entered UserId or Email Wrong Please Try Again !",
+    "invalidOTP":"Invalid OTP"
   },
   "validation": {
     "required": "This field is required!",

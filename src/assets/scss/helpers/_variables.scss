@@ -38,8 +38,8 @@ $redDangerBackground: #f2cdcd;
 $lightInfoBg:#F1F7FB;
 
 $primaryLightColor: #BFDBFE;
-$primaryDarkColor: #2563eb;
-$primaryDarkerColor: #1d4ed8;
+$primaryDarkColor: rgba($primaryColor,0.8);
+$primaryDarkerColor: rgba($primaryColor,0.8);
 $primaryGreyColor: #E6E7E8;
 $primaryWhiteRedColor: #fef9f9;
 $primaryTextColor: $white;

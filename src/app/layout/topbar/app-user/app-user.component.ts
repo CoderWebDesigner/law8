@@ -16,7 +16,7 @@ export class AppUserComponent {
 
   items: MenuItem[] = [
     {
-      label: this._authService?.user?.username,
+      label: this._authService?.user?.UserName,
       icon:'fat'
     },
     {

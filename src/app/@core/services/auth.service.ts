@@ -47,15 +47,15 @@ export class AuthService {
 
   logout() {
     this._storageService.clearStorage()
-    this._router.navigate(['login'])
+    this._router.navigate(['/auth/login'])
   }
 
   hasToken(): boolean {
-    return localStorage.getItem('token') ? true : false
+    return localStorage.getItem('user') ? true : false
   }
 
   getToken() {
-    return localStorage.getItem('token')
+    return this._storageService.getStorage('user');
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-user-id-step-one',
@@ -8,6 +10,7 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 })
 export class UserIdStepOneComponent extends FormBaseClass implements OnInit {
   @Output() onChange = new EventEmitter<number>()
+  apiURL = API_Config.auth
   ngOnInit() {
     this.initForm();
   }
@@ -40,20 +43,27 @@ export class UserIdStepOneComponent extends FormBaseClass implements OnInit {
 
 
   onSubmit() {
-    this.onChange.emit(1)
-    // this.isSubmit = true;
-    // if (this.formly.invalid) {
-    //   this._toastrNotifiService.displaySuccessMessage('Successfully Logged in');
-    //   return;
-    // }
-    // this._toastrNotifiService.displaySuccessMessage('Successfully Logged in');
-    // this._router.navigate(['/auth/otp'])
-    // // if (this.checkRole()) {
-    // //   this.isSubmit = false
-    // //   this._storageService.setStorage('token', "token");
-    // //   this._storageService.setStorage('role', this.role);
-    // //   this._router.navigate(['/'])
-    // // }
+
+    if (this.formly.valid) {
+      this.isSubmit = true;
+      this._apiService.get(`${this.apiURL.getVerificationCode}?email=${this.formlyModel.email}&userId=${this.formlyModel.userId}`).pipe(
+        finalize(() => this.isSubmit = false),
+        this.takeUntilDestroy()
+      ).subscribe({
+        next: (res: any) => {
+          if (res?.IsSucess) {
+            this.onChange.emit(1)
+          }else{
+            this._toastrNotifiService.displayErrorToastr(this._languageService.getTransValue('messages.userIdOrEmailWrong'));
+          }
+        },
+        error: err => {
+          this._toastrNotifiService.displayErrorToastr(this._languageService.getTransValue('messages.signInError'));
+        }
+      })
+    } else {
+      return;
+    }
 
   }
 

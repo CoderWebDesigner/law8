@@ -15,8 +15,6 @@ export class FormlyOtpFieldComponent extends FieldType<FieldTypeConfig> implemen
   }
 
   ngAfterViewInit(): void {
-    console.log(this.ngOtpInput);
     if(this.formControl?.value) this.ngOtpInput.setValue(this.formControl?.value);
-
   }
 }
