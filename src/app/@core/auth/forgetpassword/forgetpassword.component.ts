@@ -22,6 +22,16 @@ export class ForgetpasswordComponent {
     }
   ];
   setActiveIndex(index:number){
-    this.activeIndex = index
+    this.activeIndex = index;
+    this.items[this.activeIndex - 1].styleClass = 'visited';
+    // Remove visited Class from steps more OR equal activeStep
+    this.items.map((step,index)=>{
+      if(this.activeIndex<=index){
+        delete step.styleClass
+      }
+    })
+  }
+  onStepChanged(newStep: number) {
+
   }
 }

@@ -27,7 +27,7 @@ label .ng-star-inserted {
   .p-datepicker-trigger {
     border-top-#{$left}-radius: 0;
     border-bottom-#{$left}-radius: 0;
-  
+
     border-top-#{$right}-radius: 6px !important;
     border-bottom-#{$right}-radius: 6px !important;
     padding: 0;
@@ -58,8 +58,8 @@ label .ng-star-inserted {
     left: 0!important;
     right: auto!important;
   }
-  
-  .iti--allow-dropdown input, 
+
+  .iti--allow-dropdown input,
   .iti--allow-dropdown input[type=tel]{
     padding-right: 6px;
     padding-left: 52px;
@@ -75,13 +75,17 @@ label .ng-star-inserted {
   #{$right}: $inputGroupAddOnMinWidth;
 }
 
-.p-input-icon-right > .p-icon-wrapper, .p-input-icon-right > i:last-of-type{
-  #{$right}: 0.75rem!important;
-  #{$left}: unset!important;
-}
+// .p-input-icon-right > .p-icon-wrapper, .p-input-icon-right > i:last-of-type{
+//   #{$right}: 0.75rem!important;
+//   #{$left}: unset!important;
+// }
 
-.p-input-icon-right > .p-inputtext {
-  padding-#{$right}: 2.5rem!important;
-  padding-#{$left}: 0.75rem;
+// .p-input-icon-right > .p-inputtext {
+//   padding-#{$right}: 2.5rem!important;
+//   padding-#{$left}: 0.75rem;
 
+// }
+
+.p-checkbox-label{
+  margin-#{$left}: 0.5rem;
 }
