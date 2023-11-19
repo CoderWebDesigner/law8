@@ -1,4 +1,4 @@
-<div class="w-100 " [ngClass]="{'p-input-icon-left': props['icon'] }">
+<div class="w-100 " [ngClass]="{'p-input-icon-left':lang=='en'?props['icon']:'','p-input-icon-right': lang=='ar'?props['icon']:'' }">
     <i *ngIf="props['icon']" [class]="props['icon']"></i>
     <input
     [formControl]="formControl"

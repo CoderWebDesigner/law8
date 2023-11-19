@@ -17,6 +17,8 @@
     "newPassword":"كلمة المرور الجديدة",
     "userId":"معرف المستخدم",
     "email":"بريد إلكتروني",
+    "userIdPlaceholder":"الرجاء إدخال معرف المستخدم الخاص بك",
+    "emailPlaceholder":"رجاءا أدخل بريدك الإلكتروني",
     "verfiyOtp":"تحقق من OTP",
     "twoStepsVerifiy":"التحقق من خطوتين",
     "enterVerificationCode":"أدخل رمز التحقق الذي أرسلناه إلى بريدك الإلكتروني",

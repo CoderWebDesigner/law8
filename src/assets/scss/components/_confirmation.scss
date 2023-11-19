@@ -1,0 +1,19 @@
+@import "./../helpers/variables";
+.confirm {
+}
+.confirm-delete {
+  //   padding: 65px 18.91px 18.91px 18.91px !important;
+  button:where(.swal2-close):hover {
+    color: green;
+  }
+  .swal2-icon-show {
+    background-color: $primaryWhiteRedColor;
+  }
+  .swal2-title {
+    background-color: $primaryWhiteRedColor;
+  }
+  .swal2-html-container {
+    background-color: $primaryWhiteRedColor;
+    margin: 0px;
+  }
+}

@@ -1,12 +1,14 @@
+
+
 @mixin active {
   .p-steps-number {
-      color: $white !important;
-      background-color: $primaryColor !important;
+    color: $white !important;
+    background-color: $primaryColor !important;
   }
 
   .p-steps-title {
-      font-weight: $fw-medium !important;
-      color: $primaryColor;
+    font-weight: $fw-medium !important;
+    color: $primaryColor;
 
   }
 }
@@ -20,44 +22,64 @@
 }
 
 .p-steps {
+  ul{
+    @include media-breakpoint-down(xs) {
+      flex-direction: row
+    }
+  }
+
   .p-steps-item {
-      &.p-highlight {
-          @include active;
+    &.p-highlight {
+      @include active;
+      @include media-breakpoint-down(xs) {
+        .p-steps-title{
+          display: block;
+        }
       }
+    }
 
-      &:before {
-          border-color: 2px solid #C6C5CD;
-      }
+    &.visited {
+      opacity: 1;
 
-      &.visited {
-          opacity: 1;
-
-          .p-menuitem-link {
-              @include active;
-          }
+      &::before {
+        border-color: $primaryColor;
       }
 
       .p-menuitem-link {
-          .p-steps-number {
-              @include step-styles;
-          }
-
-
+        @include active;
       }
+    }
+
+    .p-menuitem-link {
+      .p-steps-number {
+        @include step-styles;
+      }
+
+
+    }
   }
 
   .p-steps-item:before {
-      border-top: 3px solid #dee2e6;
+    border-top: 3px solid #dee2e6;
+    z-index: 1;
+    #{$left}: 50%;
+    width: 95%;
   }
 
   ul li {
-      &:first-of-type:before {
-          left: 50%;
+    @include media-breakpoint-down(xs) {
+      .p-steps-title{
+        display: none;
       }
+    }
 
-      &:last-of-type:before {
-          left: -50%;
-      }
+    &:first-of-type:before {
+      #{$left}: 50%;
+    }
+
+    &:last-of-type:before {
+      #{$left}: -50%;
+    }
   }
 
 }

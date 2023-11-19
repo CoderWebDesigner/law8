@@ -1,0 +1,14 @@
+.p-accordion-content {
+    border-bottom-#{$left}-radius: 10px;
+    border-bottom-#{$right}-radius: 10px;
+  }
+
+  .rtl {
+    .p-accordion-toggle-icon-end {
+      rotate: -180deg;
+      
+      .p-accordion-tab-active & {
+        rotate: 0deg;
+      }
+    }
+  }
