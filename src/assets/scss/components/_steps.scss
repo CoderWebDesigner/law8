@@ -1,5 +1,3 @@
-
-
 @mixin active {
   .p-steps-number {
     color: $white !important;
@@ -22,20 +20,29 @@
 }
 
 .p-steps {
-  ul{
+  ul {
     @include media-breakpoint-down(xs) {
       flex-direction: row
     }
   }
 
   .p-steps-item {
+    .p-steps-title {
+      display: block;
+      @include media-breakpoint-down(md) {
+        display: none;
+      }
+
+    }
+
     &.p-highlight {
       @include active;
-      @include media-breakpoint-down(xs) {
-        .p-steps-title{
+      @include media-breakpoint-down(md) {
+        .p-steps-title {
           display: block;
         }
       }
+
     }
 
     &.visited {
@@ -67,11 +74,8 @@
   }
 
   ul li {
-    @include media-breakpoint-down(xs) {
-      .p-steps-title{
-        display: none;
-      }
-    }
+
+
 
     &:first-of-type:before {
       #{$left}: 50%;
