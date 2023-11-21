@@ -1,5 +1,6 @@
 {
   "common": {
+    "actions": "Actions",
     "weak":"Weak",
     "medium": "Medium",
     "strong":"strong"
@@ -17,7 +18,8 @@
     "deletedSuccessfully": "Deleted successfully",
     "internalServerError": "Internal Server Error!",
     "userIdOrEmailWrong":"Entered UserId or Email Wrong Please Try Again !",
-    "invalidOTP":"Invalid OTP"
+    "invalidOTP":"Invalid OTP",
+    "dataMessage": "Total"
   },
   "validation": {
     "required": "This field is required!",

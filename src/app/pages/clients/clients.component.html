@@ -1,0 +1,10 @@
+<shared-card [title]="'client.title' | translate">
+  <shared-table
+    body
+    [apiUrls]="apiUrls"
+    [columnsLocalized]="columnsLocalized"
+    [additionalTableConfig]="additionalTableConfig"
+    [paginationClient]="true"
+    [filterBy]="_authService.user.UserId"
+  ></shared-table>
+</shared-card>

@@ -1,5 +1,6 @@
 {
   "common": {
+    "actions": "الإجراءات",
     "weak": "ضعيف",
     "medium": "متوسط",
     "strong": "قوي"
@@ -16,7 +17,8 @@
     "deletedSuccessfully": "تم الحذف بنجاح",
     "internalServerError": "خطأ داخلي في الخادم!",
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
-    "invalidOTP": "OTP غير صالح"
+    "invalidOTP": "OTP غير صالح",
+    "dataMessage": "المجموع الكلى"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",

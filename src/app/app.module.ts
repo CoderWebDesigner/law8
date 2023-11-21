@@ -15,6 +15,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/auth/',
     './assets/i18n/common/',
     './assets/i18n/menu/',
+    './assets/i18n/pages/client/',
   ]);
 }
 @NgModule({

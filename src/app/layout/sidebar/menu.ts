@@ -29,7 +29,7 @@ export const MENU: MenuItem[] = [
           {
               id: 3,
               label: 'menu.clients.clientList',
-              link: '/organizations/add',
+              link: '/clients',
               parentId:2
 
           }
