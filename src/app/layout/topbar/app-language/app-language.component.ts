@@ -1,50 +1,37 @@
 import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { Language } from './language.model';
 import { LanguageService } from '@core/services';
-import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-app-language',
   templateUrl: './app-language.component.html',
   styleUrls: ['./app-language.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppLanguageComponent implements OnInit {
+
   activeLang: Language | undefined;
 
-  listLang: any[] = [
-    {
-      label: 'English',
-      flag: 'assets/images/icons/us.jpg',
-      icon: 'fat-bg fat-en',
-      code: 'en',
-      command:()=>{
-        this.setActiveLang('en')
-      }
-    },
-    {
-      label: 'العربية',
-      flag: 'assets/images/icons/ar.png',
-      icon: 'fat-bg fat-ar',
-      code: 'ar',
-      command:()=>{
-        this.setActiveLang('ar')
-      }
-    },
+  listLang: Language[] = [
+    { text: 'English', flag: 'assets/images/icons/us.jpg', code: 'en' },
+    { text: 'العربية', flag: 'assets/images/icons/ar.png', code: 'ar' },
+    { text: 'हिंदी', flag: 'assets/images/icons/in.jpg', code: 'in' },
   ];
 
-  _languageService = inject(LanguageService);
+  _languageService = inject(LanguageService)
 
   ngOnInit(): void {
-    this.activeLang = this.listLang.find(
-      (lang) => lang?.code === this._languageService.getSelectedLanguage()
-    );
+
+    this.activeLang = this.listLang.find(lang => lang?.code === this._languageService.getSelectedLanguage())
     if (!this.activeLang) {
-      this.activeLang = this.listLang[0];
-      this.setActiveLang(this.activeLang?.code);
+      this.activeLang = this.listLang[0]
+      this.setActiveLang(this.activeLang)
     }
   }
 
-  setActiveLang(lang:string) {
-    this._languageService.setLanguage(lang);
+  setActiveLang(e?: any) {
+    let lang = e?.value
+    this._languageService.setLanguage(lang?.code)
   }
+
 }

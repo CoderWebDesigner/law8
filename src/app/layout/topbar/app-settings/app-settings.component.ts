@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
+import { InlineSVGModule } from 'ng-inline-svg-2';
 import { MenuItem } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { MenuModule } from 'primeng/menu';
@@ -12,7 +13,8 @@ import { MenuModule } from 'primeng/menu';
   imports: [
     MenuModule,
     SharedModule,
-    DropdownModule
+    DropdownModule,
+    InlineSVGModule
   ]
 })
 export class AppSettingsComponent {

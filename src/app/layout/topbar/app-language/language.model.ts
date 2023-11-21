@@ -1,5 +1,5 @@
 export interface Language {
-    label: string;
+    text: string;
     flag: string;
     code: string;
   }

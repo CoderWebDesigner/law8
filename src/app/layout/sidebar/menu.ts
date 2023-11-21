@@ -5,13 +5,13 @@ export const MENU: MenuItem[] = [
     {
         id: 1,
         label: 'menu.dashboard',
-        icon: 'fat-org',
+        icon: 'dashboard.svg',
 
     },
     {
         id: 2,
         label: 'menu.clients.title',
-        icon: 'fat-bar-chart',
+        icon: 'client.svg',
         subItems:[
           {
               id: 1,
@@ -29,7 +29,7 @@ export const MENU: MenuItem[] = [
           {
               id: 3,
               label: 'menu.clients.clientList',
-              link: '/organizations/add',
+              link: '/clients',
               parentId:2
 
           }

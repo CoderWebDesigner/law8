@@ -2,7 +2,8 @@
   "common": {
     "weak": "ضعيف",
     "medium": "متوسط",
-    "strong": "قوي"
+    "strong": "قوي",
+    "profile":"الملف الشخصى"
   },
   "btn": {
     "submit": "تاكيد",
