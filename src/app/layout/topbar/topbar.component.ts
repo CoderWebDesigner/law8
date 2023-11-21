@@ -1,8 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Inject, inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { AuthService, LanguageService } from '@core/services';
-import { DialogService } from 'primeng/dynamicdialog';
-import { SuccessActionPopupComponent } from '@shared/components/success-action-popup/success-action-popup.component';
 
 @Component({
   selector: 'app-topbar',
@@ -14,23 +11,26 @@ import { SuccessActionPopupComponent } from '@shared/components/success-action-p
  * Topbar component
  */
 export class TopbarComponent implements OnInit {
-  @Output() mobileMenuButtonClicked = new EventEmitter();
 
-  element: any;
+  element:any;
+ 
+  constructor(
+    @Inject(DOCUMENT) private document: any
+    ) {
+  }
+
+
   openMobileMenu!: boolean;
 
-  _authService = inject(AuthService);
-
-  defaultOrg: string;
-
-  constructor(@Inject(DOCUMENT) private document: any) { }
+  @Output() mobileMenuButtonClicked = new EventEmitter();
 
   ngOnInit() {
     this.openMobileMenu = false;
     this.element = document.documentElement;
-
   }
 
+
+ 
 
   /**
    * Toggle the menu bar when having mobile screen

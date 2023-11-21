@@ -1,12 +1,16 @@
-<p-menu #menu [model]="listLang" [popup]="true" appendTo="body"></p-menu>
-<button pButton type="button" (click)="menu.toggle($event)" class="p-button-text header-item mx-2" style="display: flex; align-items: center; position: relative;">
-    <div style="position: relative;">
-      <img [src]="activeLang?.flag" [class]="'flag flag-' + activeLang.code.toLowerCase()" style="width: 18px"/>
-      <div class="stutes-container" >
-        <div class="status-circle"></div>
-      </div>
-    </div>
-    <span class="mx-2">{{ activeLang.label }}</span>
-    <i class="fat-arrow"></i>
-  </button>
-  
+<div class="app-lang">
+    <p-dropdown styleClass="dropdown-0" [options]="listLang" [ngModel]="activeLang"  optionLabel="text" (onChange)="setActiveLang($event)" >
+        <ng-template pTemplate="selectedItem">
+            <div class="d-flex align-items-center gap-2" *ngIf="activeLang">
+                <img [src]="activeLang?.flag" [class]="'flag flag-' + activeLang.code.toLowerCase()" style="width: 18px"/>
+                <div>{{ activeLang.text }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-lang pTemplate="item">
+            <div class="d-flex align-items-center gap-2">
+                <img [src]="lang?.flag" style="width: 18px"/>
+                <div>{{ lang.text }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+</div>

@@ -6,7 +6,7 @@ import { DEFAULT_LANGUAGE } from '@core/utilities/defines';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
-  languages: string[] = ['en', 'ar'];
+  languages: string[] = ['en', 'ar','in'];
 
   _storageService = inject(StorageService);
   _translateService = inject(TranslateService);
@@ -46,8 +46,8 @@ export class LanguageService {
   changeDirection(lang: string) {
     const htmlTag = window.document.getElementsByTagName("html")[0] as HTMLHtmlElement;
     const bodyTag = window.document.getElementsByTagName("body")[0];
-    htmlTag.dir = lang === "en" ? "ltr" : "rtl";
-    bodyTag.className = lang === "en" ? "ltr" : "rtl";
+    htmlTag.dir = lang === "ar" ? "rtl" : "ltr";
+    bodyTag.className = lang === "ar" ? "rtl" : "ltr";
     htmlTag.lang = lang;
   }
 
@@ -56,7 +56,7 @@ export class LanguageService {
     const head = window.document.getElementsByTagName("head")[0];
     const link = window.document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = lang === "en" ? "app.css" : "app-rtl.css";
+    link.href = lang === "ar" ? "app-rtl.css" : "app.css";
     head.appendChild(link)
   }
 

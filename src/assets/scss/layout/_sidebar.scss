@@ -28,9 +28,11 @@ body.sidebar-enable {
 
   // Logo
   .logo {
-    width: 190px;
-    height: 85px;
-    margin: auto;
+    line-height: 134px;
+    width: $sidebar-width;
+    height: 134px;
+    text-align: center;
+
     .logo-sm {
       padding: .5rem;
       display: none;
@@ -62,7 +64,7 @@ body.sidebar-enable {
       display: block;
       float: $right;
       transition: transform .2s;
-      background: url(../../../assets//images/icons/arrow.svg);
+      background: url(../../../assets//images/icons//arrow.svg);
       width: 14px;
       height: 14px;
       background-repeat: no-repeat;

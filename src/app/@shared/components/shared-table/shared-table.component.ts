@@ -193,12 +193,12 @@ export class SharedTableComponent implements OnInit,OnChanges {
       },
     });
     ref.onClose.subscribe(res =>{
-      
+
        if(res){
         let path = `${this.apiUrls.delete}/${rowData[this.additionalTableConfig.id]}`
 
         this._apiService['delete'](path).pipe(this.takeUntilDestroy()).subscribe((res: ApiRes) => {
-          
+
           if (res && !res.error) {
             let text= this._languageService.getTransValue('messages.deletedSuccessfully')
 
@@ -223,10 +223,10 @@ export class SharedTableComponent implements OnInit,OnChanges {
         'tag-danger': DANGER_TAGS.includes(value) ,
       }
   }
-   
+
   ngOnChanges(changes: SimpleChanges): void {
   }
-  
+
   ngOnDestroy(): void {
     if (this.unsubscribeAll) {
       this.unsubscribeAll.next(true);

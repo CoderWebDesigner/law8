@@ -21,17 +21,14 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('sideMenu') sideMenu: ElementRef | undefined;
 
   @Input() isCondensed = false;
-  // firstItemId: number = 1;
   menu: any;
   data: any;
   menuItems:any[] = [];
 
    _authService = inject(AuthService);
 
-   parentRoute!:string;
-
-   isHovered = false;
-   
+   parentRoute:string;
+   isHovered:boolean = false;
   constructor( private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
@@ -51,7 +48,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     this._activateMenuDropdown();
   }
 
-  toggleMenu(event:any) {
+  toggleMenu(event) {
     event.currentTarget.nextElementSibling.classList.toggle('mm-show');
   }
 
@@ -70,7 +67,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
         const currentPosition:any = document.getElementsByClassName("mm-active")[0]['offsetTop'];
         if (currentPosition > 500)
         if(this.scrollRef.SimpleBar !== null)
-          this.scrollRef.SimpleBar.getScrollElement().scrollTop =currentPosition + 300;
+          this.scrollRef.SimpleBar.getScrollElement().scrollTop =
+            currentPosition + 300;
       }
     }, 300);
   }
@@ -143,7 +141,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    */
   initialize(): void {
     this.parentRoute = `/`
-      this.menuItems = MENU;
+    this.menuItems = MENU;
+
   }
 
   /**
@@ -153,9 +152,4 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
   }
-
-  logout() {
-    this._authService.logout();
-  }
-
 }
