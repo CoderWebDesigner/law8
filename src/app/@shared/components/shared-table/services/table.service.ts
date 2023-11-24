@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TableService {
+export class SharedTableService {
   search$ = new Subject<string>()
   constructor() { }
 }

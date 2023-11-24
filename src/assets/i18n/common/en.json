@@ -4,7 +4,8 @@
     "weak":"Weak",
     "medium": "Medium",
     "strong":"strong",
-    "profile":"Profile"
+    "profile":"Profile",
+    "search": "Search"
   },
   "btn": {
    "save":"Save",

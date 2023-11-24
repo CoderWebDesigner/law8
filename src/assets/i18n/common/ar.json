@@ -4,7 +4,8 @@
     "weak": "ضعيف",
     "medium": "متوسط",
     "strong": "قوي",
-    "profile":"الملف الشخصى"
+    "profile":"الملف الشخصى",
+    "search": "بحث"
   },
   "btn": {
     "submit": "تاكيد",

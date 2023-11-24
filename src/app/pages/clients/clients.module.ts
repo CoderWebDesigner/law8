@@ -8,6 +8,7 @@ import { SharedTableComponent } from '@shared/components/shared-table/shared-tab
 import { SharedModule } from '@shared/shared.module';
 import { DetailsComponent } from './components/details/details.component';
 import { ClientIntakeComponent } from './components/client-intake/client-intake.component';
+import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ClientIntakeComponent } from './components/client-intake/client-intake.
     ClientsRoutingModule,
     SharedCardComponent,
     SharedTableComponent,
+    SharedSearchInputComponent,
     SharedModule
   ]
 })

@@ -15,7 +15,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { TableAction, TableConfig } from './models/table-config.model';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -29,6 +29,7 @@ import { LanguageService, ToasterService } from '@core/services';
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { SharedTableService } from './services/table.service';
 
 @Component({
   selector: 'shared-table',
@@ -73,6 +74,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
 
   @Output() onRowSelect: any = new EventEmitter();
 
+  @ViewChild('dt') dt: Table;
   isLoading: boolean = false;
   columns = [];
   totalRecords: number = 0;
@@ -81,6 +83,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
   currentPageReportTemplate: string = '';
   tableConfig?: TableConfig = { isSearch: true };
   selected: any
+  // filterText:string;
 
   private unsubscribeAll: Subject<boolean>;
 
@@ -90,10 +93,10 @@ export class SharedTableComponent implements OnInit, OnChanges {
   _router = inject(Router);
   _languageService = inject(LanguageService);
   _toastrNotifiService = inject(ToasterService)
+  _sharedTableService = inject(SharedTableService)
 
 
   @Input() callBack: any;
-  @ViewChild('dt', { static: false }) dt: ElementRef;
   ngOnInit(): void {
     this.initTable();
   }
@@ -121,7 +124,8 @@ export class SharedTableComponent implements OnInit, OnChanges {
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
-    this.getData()
+    this.getData();
+    this.onSearch()
   }
 
   getData() {
@@ -229,6 +233,14 @@ export class SharedTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
   }
 
+  onSearch(){
+    this._sharedTableService.search$.subscribe({
+      next:(res:any)=>{
+        console.log('text',res)
+        this.dt.filterGlobal(res,'contains')
+      }
+    })
+  }
   ngOnDestroy(): void {
     if (this.unsubscribeAll) {
       this.unsubscribeAll.next(true);
