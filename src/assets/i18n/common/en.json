@@ -3,7 +3,8 @@
     "actions": "Actions",
     "weak":"Weak",
     "medium": "Medium",
-    "strong":"strong"
+    "strong":"strong",
+    "profile":"Profile"
   },
   "btn": {
    "save":"Save",

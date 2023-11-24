@@ -5,13 +5,13 @@ export const MENU: MenuItem[] = [
     {
         id: 1,
         label: 'menu.dashboard',
-        icon: 'fat-org',
+        icon: 'dashboard.svg',
 
     },
     {
         id: 2,
         label: 'menu.clients.title',
-        icon: 'fat-bar-chart',
+        icon: 'client.svg',
         subItems:[
           {
               id: 1,
