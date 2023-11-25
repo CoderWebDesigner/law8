@@ -3,7 +3,7 @@ export const Clients_API = {
       "get":"/GetClientList/?ui=",
       "getByCode": "/GetClientDetails/?client=",
       "create":"/CreateCustomer",
-      "createIntake":"CreateClientIntake"
+      "createIntake":"/CreateClientIntake"
   }
 
 }

@@ -10,7 +10,8 @@
   },
   "btn": {
     "submit": "تاكيد",
-    "send": "ارسال"
+    "send": "ارسال",
+    "close":"يغلق"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -21,7 +22,9 @@
     "internalServerError": "خطأ داخلي في الخادم!",
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
     "invalidOTP": "OTP غير صالح",
-    "dataMessage": "المجموع الكلى"
+    "dataMessage": "المجموع الكلى",
+    "error":"خطأ!",
+    "success":"نجاح!"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",

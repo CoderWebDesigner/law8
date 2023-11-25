@@ -11,7 +11,8 @@
   "btn": {
    "save":"Save",
    "submit":"Submit",
-   "send":"Send"
+   "send":"Send",
+   "close":"Close"
   },
   "messages": {
     "signInSuccessfully":"Sign In Successfully",
@@ -22,7 +23,9 @@
     "internalServerError": "Internal Server Error!",
     "userIdOrEmailWrong":"Entered UserId or Email Wrong Please Try Again !",
     "invalidOTP":"Invalid OTP",
-    "dataMessage": "Total"
+    "dataMessage": "Total",
+    "error":"Error!",
+    "success":"Success!"
   },
   "validation": {
     "required": "This field is required!",

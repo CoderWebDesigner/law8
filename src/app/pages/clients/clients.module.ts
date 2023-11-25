@@ -15,6 +15,7 @@ import { ClientDetailsAddressComponent } from './components/client-details/compo
 import { ClientDetailsDocumentsComponent } from './components/client-details/components/client-details-documents/client-details-documents.component';
 import { ClientDetailsContactsComponent } from './components/client-details/components/client-details-contacts/client-details-contacts.component';
 import { ClientDetailsRelatedMattersComponent } from './components/client-details/components/client-details-related-matters/client-details-related-matters.component';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ClientDetailsRelatedMattersComponent } from './components/client-detail
     SharedTableComponent,
     SharedSearchInputComponent,
     SharedModule,
-    TabViewModule
+    TabViewModule,
+    FormlyConfigModule
   ]
 })
 export class ClientsModule { }
