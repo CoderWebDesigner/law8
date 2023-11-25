@@ -6,6 +6,7 @@
   min-width: 100px;
   height: 26px;
   line-height: 26px;
+  padding: 0px 10px;
   &-danger {
     background-color: $tagDangerBg;
     color: $tagDangerColor;
@@ -19,6 +20,10 @@
   &-info {
     color: $tagInfoColor;
     background: $tagInfoBg
+  }
+  &-warning {
+    color:  $tagWarningColor;
+    background: $tagWarningBg;
   }
 
 

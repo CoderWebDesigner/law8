@@ -1,5 +1,14 @@
 {
   "client":{
-    "title":"Clients"
+    "title":"Clients",
+    "clientDetails":"Client Details",
+    "address":"Address",
+    "contacts":"Contacts",
+    "documents":"Documents",
+    "relatedMatters":"Related Matters",
+    "clientCode":"Client Code",
+    "clientName":"Client Name",
+    "clientFName":"Client First Name",
+    "groupCode":"Group Code"
   }
 }

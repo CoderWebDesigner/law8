@@ -5,7 +5,8 @@
     "medium": "متوسط",
     "strong": "قوي",
     "profile":"الملف الشخصى",
-    "search": "بحث"
+    "search": "بحث",
+    "noData":"لاتوجد بيانات"
   },
   "btn": {
     "submit": "تاكيد",
@@ -31,5 +32,17 @@
     "passwordNotMatching": "كلمة المرور غير متطابقة!",
     "englishLetters": "يجب أن يحتوي هذا الحقل على أحرف إنجليزية فقط!",
     "arabicLetters": "يجب أن يحتوي هذا الحقل على أحرف عربية فقط!"
+  },
+  "tags":{
+    "Added":"تم الإضافة",
+    "UNDER PROCESS":"تحت العملية",
+    "NEW CASE":"حالة جديدة",
+    "FOR COURT REGISTRATION":"لتسجيل المحكمة",
+    "Active":"نشط",
+    "Inactive":"غير نشط",
+    "Sended":"تم الارسال",
+    "PENDING":"معلق",
+    "Failed":"فشل فى الإرسال",
+    "DONE":"مكتمل"
   }
 }

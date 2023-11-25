@@ -15,19 +15,6 @@
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
   >
-    <ng-template pTemplate="caption">
-      <div class="flex d-none">
-        <span class="p-input-icon-left ml-auto">
-          <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            (input)="dt.filterGlobal($event.target.value, 'contains')"
-            placeholder="Search keyword"
-          />
-        </span>
-      </div>
-    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngIf="withCheckbox || withRadioButton" style="width: 5rem">
@@ -75,7 +62,7 @@
           </ng-container>
 
           <ng-container *ngIf="col?.isDate">
-            {{ rowData[col.field] | date : "M/d/yyyy" }}
+            {{ rowData[col.field] | date : 'mediumDate' }}
           </ng-container>
 
           <ng-container *ngIf="col?.withIcon">
@@ -107,7 +94,7 @@
                 tooltipPosition="top"
                 [styeClass]="action.type === 'delete' ? 'p-button-danger' : ''"
               >
-                <i class="fs-4" [ngClass]="['pi pi-' + action?.type]"></i>
+                <i class="fs-4" [ngClass]="['pi pi-' + action?.icon]"></i>
               </p-button>
             </ng-container>
 

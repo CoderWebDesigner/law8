@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { LanguageService, ToasterService } from '@core/services';
-// import { DANGER_TAGS, INFO_TAGS, SUCCESS_TAGS } from '@core/utilities/defines/tags-types';
+import { DANGER_TAGS, INFO_TAGS, PROCESS_TAGS, SUCCESS_TAGS } from '@core/utilities/defines/tags-types';
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
 import { InputTextModule } from 'primeng/inputtext';
@@ -70,9 +70,11 @@ export class SharedTableComponent implements OnInit, OnChanges {
   @Input() isPaginator: boolean = true;
   @Input() withRadioButton: boolean = false;
   @Input() withCheckbox: boolean = false;
+  @Input() withPlaceholder:boolean
   @Input() defaultSelected: any;
 
   @Output() onRowSelect: any = new EventEmitter();
+
 
   @ViewChild('dt') dt: Table;
   isLoading: boolean = false;
@@ -141,9 +143,12 @@ export class SharedTableComponent implements OnInit, OnChanges {
           this.totalRecords = res.length
           this.getTableMessages()
           if (this.callBack) this.callBack()
+
         });
     }
-
+    if(this.mapData){
+      this.data = this.mapData(this.data);
+    }
   }
   getTableMessages(): void {
     const pageCount = this.totalRecords ? this.totalRecords : this.data?.length;
@@ -222,13 +227,14 @@ export class SharedTableComponent implements OnInit, OnChanges {
     this.onRowSelect.emit(event);
   }
 
-  // getTagClass(value:string){
-  //     return {
-  //       'tag-success': SUCCESS_TAGS.includes(value) ,
-  //       'tag-info': INFO_TAGS.includes(value) ,
-  //       'tag-danger': DANGER_TAGS.includes(value) ,
-  //     }
-  // }
+  getTagClass(value:string){
+      return {
+        'tag-success': SUCCESS_TAGS.includes(value) ,
+        'tag-info': INFO_TAGS.includes(value) ,
+        'tag-danger': DANGER_TAGS.includes(value) ,
+        'tag-warning': PROCESS_TAGS.includes(value) ,
+      }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
   }

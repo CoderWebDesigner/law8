@@ -1,0 +1,34 @@
+<section class="client-details">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <shared-card [borderRadius]="20">
+          <div body>
+            <!-- <div class="client-img mb-4">
+              <img src="/assets/images/user.png" [alt]="client?.CardName" class="img-fluid w-50" >
+            </div> -->
+            <small class="text-secondary">{{'client.clientCode'|translate}}</small>
+            <p class="fw-bold">{{client?.CardCode}}</p>
+            <small class="text-secondary">{{'client.clientName'|translate}}</small>
+            <p class="fw-bold">{{client?.CardName}}</p>
+            <small class="text-secondary">{{'client.clientFName'|translate}}</small>
+            <p class="fw-bold">{{client?.CardFName}}</p>
+            <small class="text-secondary">{{'client.groupCode'|translate}}</small>
+            <p class="fw-bold">{{client?.GroupCode}}</p>
+          </div>
+        </shared-card>
+      </div>
+      <div class="col-md-9">
+        <shared-card [borderRadius]="20">
+          <p-tabView body>
+            <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
+                <app-client-details-address [data]="client?.lstAddress" *ngIf="i==0"></app-client-details-address>
+                <app-client-details-contacts [data]="client?.lstContactPerson" *ngIf="i==1"></app-client-details-contacts>
+                <app-client-details-related-matters [data]="client?.lstMatter" *ngIf="i==2"></app-client-details-related-matters>
+            </p-tabPanel>
+        </p-tabView>
+        </shared-card>
+      </div>
+    </div>
+  </div>
+</section>

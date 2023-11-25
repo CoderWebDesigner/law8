@@ -23,18 +23,14 @@ export class ClientsComponent {
   };
 
   additionalTableConfig: TableConfig = {
-    id: 'userId',
+    id: 'CardCode',
     actions: [
       {
-        type: 'update',
-        title: this._languageService.getTransValue('userManagement.updateUser'),
+        title: this._languageService.getTransValue('client.clientDetails'),
         targetType: 'path',
-        target: '/user-management/update/',
+        target: '/clients/view/',
+        icon:'eye'
       },
-      // {
-      //   type: 'delete',
-      //   title: this._languageService.getTransValue('btn.delete'),
-      // },
     ],
   };
 }

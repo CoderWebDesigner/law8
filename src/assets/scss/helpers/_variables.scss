@@ -134,5 +134,8 @@ $tagDangerColor: #D62C2C;
 
 $tagSuccessBg: rgba(47, 105, 33, 0.10);
 
-$tagInfoBg: rgba(30, 120, 226, 0.10);;
 $tagInfoColor: #1E78E2;
+$tagInfoBg: rgba($tagInfoColor, 0.10);
+
+$tagWarningColor: #F59E0B;
+$tagWarningBg: rgba($tagWarningColor, 0.10);

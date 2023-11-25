@@ -1,5 +1,14 @@
 {
   "client":{
-    "title":"العملاء"
+    "title":"العملاء",
+    "clientDetails":"تفاصيل العميل",
+    "address":"عنوان",
+    "contacts":"جهات الاتصال",
+    "documents":"وثائق",
+    "relatedMatters":"المسائل ذات الصلة",
+    "clientCode":"رمز العميل",
+    "clientName":"اسم العميل",
+    "clientFName":"الاسم الأول للعميل",
+    "groupCode":"رمز المجموعة"
   }
 }
