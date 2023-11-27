@@ -30,9 +30,11 @@
 
 //plugin
 @import "ngx-toastr/toastr";
+@import "./node_modules/intl-tel-input/build/css/intlTelInput.min";
 // comp
 @import "components/buttons";
 @import "components/tag";
 @import "components/forms";
 @import "components/steps";
+@import "components/tabview";
 // @import "./components//modal";

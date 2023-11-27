@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SharedTableComponent } from '@shared/components/fatora-table/shared-table.component';
+import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
 
 describe('SharedTableComponent', () => {
   let component: SharedTableComponent;

@@ -1,0 +1,24 @@
+<!-- <div dir="ltr"> -->
+  <ngx-intl-tel-input
+  [preferredCountries]="[CountryISO.UnitedArabEmirates]"
+  [enableAutoCountrySelect]="false"
+  [enablePlaceholder]="true"
+  [searchCountryFlag]="true"
+  [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+  [selectFirstCountry]="false"
+  [selectedCountryISO]="CountryISO.UnitedArabEmirates"
+  [maxLength]="15"
+  [phoneValidation]="true"
+  inputId="myInput"
+  autocomplete="off"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+></ngx-intl-tel-input>
+<small
+  class="p-error ng-star-inserted"
+  *ngIf="formControl.value && !formControl.valid && formControl.touched"
+>
+  {{ "validation.phone" | translate }}
+</small>
+
+<!-- </div> -->

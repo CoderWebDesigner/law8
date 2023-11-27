@@ -13,11 +13,13 @@ import { SharedActionsComponent } from './components/shared-actions/shared-actio
 import { LanguageBindPipe } from './pipes/lang-bind.pipe';
 import { SuccessActionPopupComponent } from './components/success-action-popup/success-action-popup.component';
 import { RouterModule } from '@angular/router';
+import { SharedNoDataComponent } from './components/shared-no-data/shared-no-data.component';
 
 const components: any = [
   SharedActionsComponent,
   LanguageBindPipe,
   SuccessActionPopupComponent,
+  SharedNoDataComponent
 ];
 
 // const components: any = [];

@@ -10,10 +10,12 @@ import {
   TemplateRef,
   inject,
   Output,
-  EventEmitter
+  EventEmitter,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
-import { MODAL_WIDTH, PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
-import { TableModule } from 'primeng/table';
+import { PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
+import { Table, TableModule } from 'primeng/table';
 import { TableAction, TableConfig } from './models/table-config.model';
 import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -22,12 +24,12 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
-import { LanguageService } from '@core/services';
-import { DANGER_TAGS, INFO_TAGS, SUCCESS_TAGS } from '@core/utilities/defines/tags-types';
+import { LanguageService, ToasterService } from '@core/services';
+import { DANGER_TAGS, INFO_TAGS, PROCESS_TAGS, SUCCESS_TAGS } from '@core/utilities/defines/tags-types';
 import { PaginatorModule } from 'primeng/paginator';
-import { ToastrNotifiService } from '@core/services/toastr-notifi.service';
-import { ApiRes } from '@core/models/apiRes-model';
 import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { SharedTableService } from './services/table.service';
 
 @Component({
   selector: 'shared-table',
@@ -41,19 +43,21 @@ import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-
     SharedModule,
     TooltipModule,
     FormsModule,
-    PaginatorModule
+    PaginatorModule,
+    InputTextModule
   ],
   providers: [DialogService],
 })
-export class SharedTableComponent implements OnInit,OnChanges {
+export class SharedTableComponent implements OnInit, OnChanges {
 
-  @Input() filterOptions?: any = { pageSize: PAGESIZE, pageNo: 0};
+  @Input() filterOptions?: any = { pageSize: PAGESIZE, pageNo: 0 };
 
   @Input() additionalTableConfig?: TableConfig;
   @Input() columnsLocalized;
   @Input() data: any = [];
   @Input() apiUrls;
-  @Input() getDataMethod? = 'get';
+  @Input() getDataMethod?= 'get';
+  @Input() filterBy: string
 
   @ContentChild('actions', { static: false })
   actionsTemplateRef: TemplateRef<any>;
@@ -66,18 +70,22 @@ export class SharedTableComponent implements OnInit,OnChanges {
   @Input() isPaginator: boolean = true;
   @Input() withRadioButton: boolean = false;
   @Input() withCheckbox: boolean = false;
+  @Input() withPlaceholder:boolean
   @Input() defaultSelected: any;
 
   @Output() onRowSelect: any = new EventEmitter();
 
+
+  @ViewChild('dt') dt: Table;
   isLoading: boolean = false;
   columns = [];
   totalRecords: number = 0;
-  first:number = 0;
+  first: number = 0;
   PAGE_SIZE_OPTION = PAGE_SIZE_OPTION;
   currentPageReportTemplate: string = '';
-  tableConfig?: TableConfig = {isSearch: true};
-  selected:any
+  tableConfig?: TableConfig = { isSearch: true };
+  selected: any
+  // filterText:string;
 
   private unsubscribeAll: Subject<boolean>;
 
@@ -86,11 +94,11 @@ export class SharedTableComponent implements OnInit,OnChanges {
   _dialogService = inject(DialogService);
   _router = inject(Router);
   _languageService = inject(LanguageService);
-  _toastrNotifiService = inject(ToastrNotifiService)
+  _toastrNotifiService = inject(ToasterService)
+  _sharedTableService = inject(SharedTableService)
 
 
-  @Input() callBack:any;
-
+  @Input() callBack: any;
   ngOnInit(): void {
     this.initTable();
   }
@@ -118,26 +126,29 @@ export class SharedTableComponent implements OnInit,OnChanges {
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
-    this.getData()
+    this.getData();
+    this.onSearch()
   }
 
   getData() {
+
     if (this.apiUrls?.get) {
-    this.isLoading = true;
-      this._apiService[this.getDataMethod](this.apiUrls.get, this.filterOptions)
+      this.isLoading = true;
+      this._apiService[this.getDataMethod](`${this.apiUrls.get}${this.filterBy}`, this.filterOptions)
         .pipe(
           finalize(() => this.isLoading = false),
           this.takeUntilDestroy()
-        ).subscribe((res:ApiRes) => {
-           if(!res?.error){
-            this.data = res.data.content;
-            this.totalRecords = res?.data?.totalElements
-            this.getTableMessages()
-            if(this.callBack)this.callBack()
-           }
+        ).subscribe((res: any) => {
+          this.data = res;
+          this.totalRecords = res.length
+          this.getTableMessages()
+          if (this.callBack) this.callBack()
+
         });
     }
-
+    if(this.mapData){
+      this.data = this.mapData(this.data);
+    }
   }
   getTableMessages(): void {
     const pageCount = this.totalRecords ? this.totalRecords : this.data?.length;
@@ -147,7 +158,7 @@ export class SharedTableComponent implements OnInit,OnChanges {
   pageChanged(e?) {
     if (e) {
       this.filterOptions.pageSize = Number(e.rows);
-      this.filterOptions.pageNo = e.first / e.rows ;
+      this.filterOptions.pageNo = e.first / e.rows;
       this.first = e?.first
     }
     this.getData()
@@ -185,30 +196,30 @@ export class SharedTableComponent implements OnInit,OnChanges {
   }
 
   onDelete(action: TableAction, rowData: any) {
-    const ref =  this._dialogService.open(SharedConfirmDialogComponent, {
+    const ref = this._dialogService.open(SharedConfirmDialogComponent, {
       width: '30%',
       data: {
         title: this._languageService.getTransValue('btn.delete'),
         isDelete: true,
       },
     });
-    ref.onClose.subscribe(res =>{
+    ref.onClose.subscribe(res => {
 
-       if(res){
+      if (res) {
         let path = `${this.apiUrls.delete}/${rowData[this.additionalTableConfig.id]}`
 
-        this._apiService['delete'](path).pipe(this.takeUntilDestroy()).subscribe((res: ApiRes) => {
+        this._apiService['delete'](path).pipe(this.takeUntilDestroy()).subscribe((res: any) => {
 
           if (res && !res.error) {
-            let text= this._languageService.getTransValue('messages.deletedSuccessfully')
+            let text = this._languageService.getTransValue('messages.deletedSuccessfully')
 
-            this._toastrNotifiService.displaySuccess(text);
+            this._toastrNotifiService.displaySuccessMessage(text);
 
             this.getData()
           }
 
         });
-       }
+      }
     })
   }
 
@@ -221,12 +232,21 @@ export class SharedTableComponent implements OnInit,OnChanges {
         'tag-success': SUCCESS_TAGS.includes(value) ,
         'tag-info': INFO_TAGS.includes(value) ,
         'tag-danger': DANGER_TAGS.includes(value) ,
+        'tag-warning': PROCESS_TAGS.includes(value) ,
       }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
+  onSearch(){
+    this._sharedTableService.search$.subscribe({
+      next:(res:any)=>{
+        console.log('text',res)
+        this.dt.filterGlobal(res,'contains')
+      }
+    })
+  }
   ngOnDestroy(): void {
     if (this.unsubscribeAll) {
       this.unsubscribeAll.next(true);

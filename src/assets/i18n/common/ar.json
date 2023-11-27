@@ -1,13 +1,17 @@
 {
   "common": {
+    "actions": "الإجراءات",
     "weak": "ضعيف",
     "medium": "متوسط",
     "strong": "قوي",
-    "profile":"الملف الشخصى"
+    "profile":"الملف الشخصى",
+    "search": "بحث",
+    "noDataAdded":"لا يوجد بيانات مضافة"
   },
   "btn": {
     "submit": "تاكيد",
-    "send": "ارسال"
+    "send": "ارسال",
+    "close":"يغلق"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -17,7 +21,10 @@
     "deletedSuccessfully": "تم الحذف بنجاح",
     "internalServerError": "خطأ داخلي في الخادم!",
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
-    "invalidOTP": "OTP غير صالح"
+    "invalidOTP": "OTP غير صالح",
+    "dataMessage": "المجموع الكلى",
+    "error":"خطأ!",
+    "success":"نجاح!"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",
@@ -28,5 +35,17 @@
     "passwordNotMatching": "كلمة المرور غير متطابقة!",
     "englishLetters": "يجب أن يحتوي هذا الحقل على أحرف إنجليزية فقط!",
     "arabicLetters": "يجب أن يحتوي هذا الحقل على أحرف عربية فقط!"
+  },
+  "tags":{
+    "Added":"تم الإضافة",
+    "UNDER PROCESS":"تحت العملية",
+    "NEW CASE":"حالة جديدة",
+    "FOR COURT REGISTRATION":"لتسجيل المحكمة",
+    "Active":"نشط",
+    "Inactive":"غير نشط",
+    "Sended":"تم الارسال",
+    "PENDING":"معلق",
+    "Failed":"فشل فى الإرسال",
+    "DONE":"مكتمل"
   }
 }

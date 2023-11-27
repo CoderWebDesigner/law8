@@ -16,13 +16,13 @@ export const MENU: MenuItem[] = [
           {
               id: 1,
               label: 'menu.clients.clientIntack',
-              link: '/organizations/list',
+              link: '/clients/intake',
               parentId: 2
           },
           {
               id: 2,
               label: 'menu.clients.clientAdd',
-              link: '/organizations/add',
+              link: '/clients/add',
               parentId:2
 
           },

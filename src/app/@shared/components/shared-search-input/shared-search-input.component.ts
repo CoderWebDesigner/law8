@@ -1,6 +1,7 @@
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { SharedTableService } from '../shared-table/services/table.service';
 
 @Component({
   selector: 'shared-search-input',
@@ -15,6 +16,7 @@ export class SharedSearchInputComponent
 {
   @Input() searchKey: string;
 
+  _tableService = inject(SharedTableService)
   ngOnInit(): void {
     this.initForm();
   }
@@ -22,11 +24,11 @@ export class SharedSearchInputComponent
   override initForm(): void {
     this.formlyFields = [
       {
-        key: this.searchKey,
+        key: 'search',
         type: 'input',
         props: {
           placeholder: this._languageService.getTransValue('common.search'),
-          icon: 'fat fat-search',
+          icon: 'pi pi-search',
           class: 'p-inputtext-sm',
         },
       },
@@ -36,6 +38,6 @@ export class SharedSearchInputComponent
   }
 
   override onSubmit(): void {
-    console.log(this.formlyModel);
+    this._tableService.search$.next(this.formlyModel.search)
   }
 }

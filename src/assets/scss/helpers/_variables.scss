@@ -73,7 +73,7 @@ $sidebar-menu-sub-item-color: $white;
 $sidebar-menu-item-icon-color: #7f8387;
 $sidebar-menu-item-hover-color: $white;
 $sidebar-menu-item-active-color: $white;
-$sidebar-width: 300px;
+$sidebar-width: 260px;
 $sidebar-collapsed-width: 70px;
 $sidebar-width-sm: 160px;
 
@@ -134,5 +134,8 @@ $tagDangerColor: #D62C2C;
 
 $tagSuccessBg: rgba(47, 105, 33, 0.10);
 
-$tagInfoBg: rgba(30, 120, 226, 0.10);;
 $tagInfoColor: #1E78E2;
+$tagInfoBg: rgba($tagInfoColor, 0.10);
+
+$tagWarningColor: #F59E0B;
+$tagWarningBg: rgba($tagWarningColor, 0.10);

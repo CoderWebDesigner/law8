@@ -1,14 +1,18 @@
 {
   "common": {
+    "actions": "Actions",
     "weak":"Weak",
     "medium": "Medium",
     "strong":"strong",
-    "profile":"Profile"
+    "profile":"Profile",
+    "search": "Search",
+    "noDataAdded":"There is no added data"
   },
   "btn": {
    "save":"Save",
    "submit":"Submit",
-   "send":"Send"
+   "send":"Send",
+   "close":"Close"
   },
   "messages": {
     "signInSuccessfully":"Sign In Successfully",
@@ -18,7 +22,10 @@
     "deletedSuccessfully": "Deleted successfully",
     "internalServerError": "Internal Server Error!",
     "userIdOrEmailWrong":"Entered UserId or Email Wrong Please Try Again !",
-    "invalidOTP":"Invalid OTP"
+    "invalidOTP":"Invalid OTP",
+    "dataMessage": "Total",
+    "error":"Error!",
+    "success":"Success!"
   },
   "validation": {
     "required": "This field is required!",
@@ -29,5 +36,17 @@
     "passwordNotMatching":"Password not matching!",
     "englishLetters": "Please enter only english letters!" ,
     "arabicLetters": "Please enter only arabic letters!"
+  },
+  "tags":{
+    "Added":"Added",
+    "UNDER PROCESS":"UNDER PROCESS",
+    "NEW CASE":"NEW CASE",
+    "FOR COURT REGISTRATION":"FOR COURT REGISTRATION",
+    "Active":"Active",
+    "Inactive":"Inactive",
+    "Sended":"Sended",
+    "PENDING":"Pending",
+    "Failed":"Failed",
+    "DONE":"Done"
   }
 }
