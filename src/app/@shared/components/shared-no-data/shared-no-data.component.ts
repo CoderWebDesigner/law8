@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shared-no-data',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./shared-no-data.component.scss']
 })
 export class SharedNoDataComponent {
-
+  @Input() btnText:string;
+  @Input() btnAction:() => void
+  fireAction(){
+    this.btnAction()
+  }
 }

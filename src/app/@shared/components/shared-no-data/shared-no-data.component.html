@@ -1,6 +1,7 @@
 <section class="text-center">
   <div class="no-data-img mb-4">
-    <img src="/assets/images/no-data.png" alt="" class="img-fluid w-50">
+    <img src="/assets/images/empty.png" alt="" />
   </div>
-  <h3 class="fw-bold">{{'common.noData'|translate}}</h3>
+  <h3 class="fw-bold mb-4">{{ "common.noDataAdded" | translate }}</h3>
+  <ng-content select="[button]"></ng-content>
 </section>

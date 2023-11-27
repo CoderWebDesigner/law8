@@ -89,3 +89,25 @@ label .ng-star-inserted {
 .p-checkbox-label{
   margin-#{$left}: 0.5rem;
 }
+
+.p-dropdown .p-dropdown-clear-icon{
+  #{$left}: unset;
+  #{$right}: $inputGroupAddOnMinWidth;
+}
+.p-dropdown-panel .p-dropdown-header .p-dropdown-filter {
+  padding-#{$right}: 1.75rem;
+  margin-#{$right}: -1.75rem ;
+  padding-#{$left}: 1.75rem;
+  margin-#{$left}: unset;
+}
+.p-dropdown-panel .p-dropdown-header .p-dropdown-filter-icon{
+  #{$right}: 0.75rem;
+  #{$left}:unset
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+  white-space: normal;
+}
+.p-input-icon-right > .p-icon-wrapper, .p-input-icon-right > i:last-of-type{
+  #{$right}: 0.75rem;
+  #{$left}:unset
+}

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { SuccessActionPopupComponent } from '@shared/components/success-action-popup/success-action-popup.component';
 import { finalize } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -52,69 +51,7 @@ export class ClientIntakeComponent extends FormBaseClass implements OnInit {
               ],
               required: true,
             },
-          },
-          // {
-          //   className: 'col-md-6',
-          //   key: 'systemCode',
-          //   type: 'input',
-          //   props: {
-          //     label: this._languageService.getTransValue('contact.systemCode'),
-          //     required: true,
-          //   },
-          // },
-          // {
-          //   className: 'col-md-6',
-          //   key: 'systemType',
-          //   type: 'select',
-          //   props: {
-          //     label: this._languageService.getTransValue('contact.systemType'),
-          //     options: [
-          //       { img: 'SAP', value: 'SAP' },
-          //       { img: 'ORACLE', value: 'ORACLE' },
-          //       { img: 'DYN365', value: 'DY365' },
-          //       { img: 'EXCEL', value: 'EXCEL' },
-          //     ],
-          //     required: true,
-          //   },
-          // },
-          // {
-          //   className: 'col-md-6',
-          //   key: 'methodType',
-          //   type: 'select',
-          //   props: {
-          //     label: this._languageService.getTransValue(
-          //       'contact.movementType'
-          //     ),
-          //     options: MOVEMENT_TYPES?.map((v) => ({
-          //       ...v,
-          //       label: this._languageService.getTransValue(v?.label),
-          //     })),
-          //     required: true,
-          //   },
-          // },
-          // {
-          //   className: 'col-md-6',
-          //   key: 'url',
-          //   type: 'input',
-          //   props: {
-          //     label: this._languageService.getTransValue('contact.url'),
-          //     required: true,
-          //   },
-          //   validators: {
-          //     validation: ['url'],
-          //   },
-          // },
-          // {
-          //   className: 'col-md-6',
-          //   key: 'urlDescription',
-          //   type: 'input',
-          //   props: {
-          //     label: this._languageService.getTransValue(
-          //       'contact.urlDescription'
-          //     ),
-          //     required: false,
-          //   },
-          // },
+          }
         ],
       },
       {

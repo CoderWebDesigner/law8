@@ -19,7 +19,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormlyDateFieldComponent } from './components/formly-date-field/formly-date-field.component';
 import { FormlyButtonFieldComponent } from './components/formly-button-field/formly-button-field.component';
 import { FormlySelectButtonFieldComponent } from './components/formly-select-button-field/formly-select-button-field.component';
-import { FormlyPhoneFiledComponent } from './components/formly-phone-filed/formly-phone-filed.component';
+import { FormlyPhoneFieldComponent } from './components/formly-phone-field/formly-phone-field.component';
 import { FormlyOtpFieldComponent } from './components/formly-otp-field/formly-otp-field.component';
 // import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
 // import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
@@ -28,6 +28,7 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormlyPasswordFieldComponent } from './components/formly-password-field/formly-password-field.component';
 import { PasswordModule } from 'primeng/password';
+import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { PasswordModule } from 'primeng/password';
     FormlySelectButtonFieldComponent,
     FormlyUploadProfileFieldComponent,
     FormlyUploadProfileFieldComponent,
-    FormlyPhoneFiledComponent,
+    FormlyPhoneFieldComponent,
     // FormlyFileFieldComponent,
     FormlyOtpFieldComponent,
     FormlyPasswordFieldComponent,
@@ -65,9 +66,9 @@ import { PasswordModule } from 'primeng/password';
         { name: 'date', component: FormlyDateFieldComponent, extends: 'input' },
         { name: 'button', component: FormlyButtonFieldComponent },
         { name: 'select-button', component: FormlySelectButtonFieldComponent, extends: 'input' },
-        // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
-        { name: 'phone', component: FormlyPhoneFiledComponent, extends: 'input' },
+        { name: 'phone', component: FormlyPhoneFieldComponent, extends: 'input' },
         // { name: 'file', component: FormlyFileFiledComponent , extends: 'input'},
+        // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
         { name: 'otp', component: FormlyOtpFieldComponent,extends: 'input'},
         { name: 'password', component: FormlyPasswordFieldComponent,extends: 'input'}
 
@@ -83,7 +84,7 @@ import { PasswordModule } from 'primeng/password';
     InputTextareaModule,
     CalendarModule,
     // NgxDropzoneModule,
-    // NgxIntlTelInputModule,
+    NgxIntlTelInputModule,
     NgOtpInputModule,
     SelectButtonModule,
     PasswordModule

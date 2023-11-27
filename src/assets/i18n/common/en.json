@@ -6,7 +6,7 @@
     "strong":"strong",
     "profile":"Profile",
     "search": "Search",
-    "noData":"No Data Found"
+    "noDataAdded":"There is no added data"
   },
   "btn": {
    "save":"Save",

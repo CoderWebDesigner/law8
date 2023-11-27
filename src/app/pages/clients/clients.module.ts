@@ -16,7 +16,12 @@ import { ClientDetailsDocumentsComponent } from './components/client-details/com
 import { ClientDetailsContactsComponent } from './components/client-details/components/client-details-contacts/client-details-contacts.component';
 import { ClientDetailsRelatedMattersComponent } from './components/client-details/components/client-details-related-matters/client-details-related-matters.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-
+import { ClientAddCompanyAddressComponent } from './components/client-add/components/client-add-company-address/client-add-company-address.component';
+import { AddressEditorComponent } from './components/client-add/components/address-editor/address-editor.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ClientAddBillingAddressComponent } from './components/client-add/components/client-add-billing-address/client-add-billing-address.component';
+import { ClientAddContactsComponent } from './components/client-add/components/client-add-contacts/client-add-contacts.component';
+import { ContactEditorComponent } from './components/client-add/components/contact-editor/contact-editor.component';
 @NgModule({
   declarations: [
     ClientsComponent,
@@ -26,7 +31,12 @@ import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.
     ClientDetailsAddressComponent,
     ClientDetailsDocumentsComponent,
     ClientDetailsContactsComponent,
-    ClientDetailsRelatedMattersComponent
+    ClientDetailsRelatedMattersComponent,
+    ClientAddCompanyAddressComponent,
+    AddressEditorComponent,
+    ClientAddBillingAddressComponent,
+    ClientAddContactsComponent,
+    ContactEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +46,8 @@ import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.
     SharedSearchInputComponent,
     SharedModule,
     TabViewModule,
-    FormlyConfigModule
-  ]
+    FormlyConfigModule,
+    DynamicDialogModule
+  ],
 })
 export class ClientsModule { }
