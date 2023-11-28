@@ -1,24 +1,29 @@
 <section class="client-details">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-12 mb-4">
         <shared-card [borderRadius]="20">
-          <div body>
-            <!-- <div class="client-img mb-4">
-              <img src="/assets/images/user.png" [alt]="client?.CardName" class="img-fluid w-50" >
-            </div> -->
-            <small class="text-secondary">{{'client.clientCode'|translate}}</small>
-            <p class="fw-bold">{{client?.CardCode}}</p>
-            <small class="text-secondary">{{'client.clientName'|translate}}</small>
-            <p class="fw-bold">{{client?.CardName}}</p>
-            <small class="text-secondary">{{'client.clientFName'|translate}}</small>
+          <div body  class="row">
+            <div class="col-md-6">
+              <small class="text-secondary">{{'client.clientCode'|translate}}</small>
+              <p class="fw-bold">{{client?.CardCode}}</p>
+            </div>
+            <div class="col-md-6">
+              <small class="text-secondary">{{'client.clientName'|translate}}</small>
+              <p class="fw-bold">{{client?.CardName}}</p>
+            </div>
+            <div class="col-md-6">
+              <small class="text-secondary">{{'client.clientFName'|translate}}</small>
             <p class="fw-bold">{{client?.CardFName}}</p>
-            <small class="text-secondary">{{'client.groupCode'|translate}}</small>
-            <p class="fw-bold">{{client?.GroupCode}}</p>
+            </div>
+            <div class="col-md-6">
+              <small class="text-secondary">{{'client.groupCode'|translate}}</small>
+              <p class="fw-bold">{{client?.GroupCode}}</p>
+            </div>
           </div>
         </shared-card>
       </div>
-      <div class="col-md-9">
+      <div class="col-12">
         <shared-card [borderRadius]="20">
           <p-tabView body>
             <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
