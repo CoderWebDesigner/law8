@@ -1,5 +1,13 @@
 {
-    "dashboard":{
-    
-    }
+  "dashboard": {
+    "pastHearingSessions": "الجلسات الماضية",
+    "upcomingHearingSessions": "الجلسات القادمة",
+    "activities": "المواعيد",
+    "clients": "العملاء",
+    "newClients": "العملاء الجدد",
+    "activeMatter":"القضايا / المواضيع",
+    "newMatter":"القضايا / المواضيع الجديدة",
+    "closedMatter":"القضايا / المواضيع المغلقة",
+    "importantMatter":"القضايا / المواضيع المهمة"
+  }
 }

@@ -1,0 +1,66 @@
+@import "/src/assets/scss/helpers/variables";
+
+%active {
+  background: $primaryColor;
+
+  i {
+    fill: $white !important
+  }
+
+  p {
+    color: $white
+  }
+}
+
+:host ::ng-deep {
+
+  .p-card {
+    box-shadow: none;
+    border-radius: 12px;
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+
+    &-title {
+      font-size: 1rem;
+      font-weight: 500
+    }
+    &-body{
+      padding: 0;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+
+    }
+    i{
+      fill:$primaryColor
+    }
+
+    p {
+      &:first-of-type {
+        color: rgb(207, 208, 212)
+      }
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      line-height: 60px;
+      background-color: rgb(226 226 226 / 48%);
+
+    }
+
+    &:hover {
+      @extend %active;
+    }
+
+  }
+
+  .active {
+    @extend %active;
+  }
+
+
+}

@@ -1,0 +1,13 @@
+{
+  "dashboard": {
+    "pastHearingSessions": "Audiences precedentes",
+    "upcomingHearingSessions": "Prochaines audiences",
+    "activities": "Rendez-vous",
+    "clients": "Clients",
+    "newClients": "Nouveaux clients",
+    "activeMatter":"Dossiers / Affaires",
+    "newMatter":"Nouveaux dossiers",
+    "closedMatter":"Dossiers clos",
+    "importantMatter":"Dossiers importants"
+  }
+}

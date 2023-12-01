@@ -1,0 +1,21 @@
+<p-card [styleClass]="styleClass">
+  <ng-template pTemplate="content">
+    <!-- Title section -->
+    <div class="row">
+      <div class="col-4 align-self-center text-center d-flex justify-content-center">
+        <div class="icon">
+          <i [inlineSVG]="config?.icon"></i>
+        </div>
+        <!-- Icon  -->
+
+      </div>
+       <!-- Content section -->
+      <div class="col-8 py-3">
+        <p class="mb-4">{{ config?.label }}</p>
+        <p class="font-weight-bolder h1">
+          {{ config?.data | number}}
+        </p>
+      </div>
+    </div>
+  </ng-template>
+</p-card>

@@ -21,7 +21,7 @@
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field">
+          <th [pSortableColumn]="col.field" [style.max-width]="'200px'">
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>

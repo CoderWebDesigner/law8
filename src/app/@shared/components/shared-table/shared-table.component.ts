@@ -77,7 +77,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
 
 
   @ViewChild('dt') dt: Table;
-  isLoading: boolean = false;
+  @Input() isLoading: boolean = false;
   columns = [];
   totalRecords: number = 0;
   first: number = 0;
@@ -100,7 +100,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
 
   @Input() callBack: any;
   ngOnInit(): void {
-    this.initTable();
+    // this.initTable();
   }
 
   private getCurrentPageReportTemplate(): void {
@@ -114,6 +114,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
   }
 
   private getColumns(columnsLocalized) {
+    console.log(columnsLocalized)
     switch (this._languageService.getSelectedLanguage()) {
       case 'en':
         return columnsLocalized?.en ? columnsLocalized.en : columnsLocalized;
@@ -237,6 +238,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.initTable();
   }
 
   onSearch(){

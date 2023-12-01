@@ -1,1 +1,21 @@
-Dashboard
+<!-- First row -->
+<div class="row mb-4">
+  <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let item of items">
+    <app-metric-card [config]="item" [styleClass]="selectedCard===item?'active':''" (click)="setActiveCard(item)"></app-metric-card>
+  </div>
+</div>
+<div class="row" *ngIf="selectedCard">
+  <div class="col-12">
+    <shared-card [title]="cardTitle | translate" [borderRadius]="20">
+      <shared-search-input headerActions></shared-search-input>
+      <shared-table
+        body
+        [data]="data"
+        [columnsLocalized]="columnsLocalized"
+        [paginationClient]="true"
+        [isLoading]="isLoading"
+      ></shared-table>
+    </shared-card>
+  </div>
+</div>
+

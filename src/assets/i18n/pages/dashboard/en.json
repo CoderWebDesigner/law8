@@ -1,0 +1,13 @@
+{
+  "dashboard": {
+    "pastHearingSessions": "Past Hearing Sessions",
+    "upcomingHearingSessions": "Upcoming Hearing Sessions",
+    "activities": "Activities",
+    "clients": "Clients",
+    "newClients": "New Clients",
+    "activeMatter":"Active Matter",
+    "newMatter":"New Matter",
+    "closedMatter":"Closed Matter",
+    "importantMatter":"Important Matter"
+  }
+}
