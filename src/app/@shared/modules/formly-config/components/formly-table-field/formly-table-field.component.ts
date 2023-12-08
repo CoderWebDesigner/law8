@@ -3,11 +3,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FieldArrayType, FieldType } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-formly-table-filed',
-  templateUrl: './formly-table-filed.component.html',
-  styleUrls: ['./formly-table-filed.component.scss'],
+  selector: 'app-formly-table-field',
+  templateUrl: './formly-table-field.component.html',
+  styleUrls: ['./formly-table-field.component.scss'],
 })
-export class FormlyTableFiledComponent extends FieldType {
+export class FormlyTableFieldComponent extends FieldType {
   _translateService = inject(TranslateService);
   columns;
 

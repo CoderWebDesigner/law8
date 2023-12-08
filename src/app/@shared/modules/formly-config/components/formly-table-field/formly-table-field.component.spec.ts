@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormlyTableFiledComponent } from './formly-table-filed.component';
+import { FormlyTableFieldComponent } from './formly-table-field.component';
 
-describe('FormlyTableFiledComponent', () => {
-  let component: FormlyTableFiledComponent;
-  let fixture: ComponentFixture<FormlyTableFiledComponent>;
+describe('FormlyTableFieldComponent', () => {
+  let component: FormlyTableFieldComponent;
+  let fixture: ComponentFixture<FormlyTableFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormlyTableFiledComponent ]
+      declarations: [ FormlyTableFieldComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormlyTableFiledComponent);
+    fixture = TestBed.createComponent(FormlyTableFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

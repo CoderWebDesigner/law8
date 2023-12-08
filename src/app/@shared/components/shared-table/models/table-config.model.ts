@@ -1,5 +1,6 @@
 export interface TableConfig  {
     isSearch?: boolean;
+    isEditable?: boolean;
     searchKey?: string;
     anotherFilter?: boolean; //used to add custom filter
     actions?: TableAction [],
@@ -19,5 +20,5 @@ export interface TableAction {
     title?: string;
     queryParams?:any;
     tooltipText?: string;
-    
+
 }

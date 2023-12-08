@@ -1,0 +1,10 @@
+<shared-card [title]="'timesheet.title' | translate" [borderRadius]="20">
+  <shared-search-input headerActions></shared-search-input>
+  <shared-table
+    body
+    [apiUrls]="apiUrls"
+    [columnsLocalized]="columnsLocalized"
+    [paginationClient]="true"
+    [filterBy]="_authService.user.UserId"
+  ></shared-table>
+</shared-card>

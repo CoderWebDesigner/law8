@@ -35,6 +35,26 @@ export const MENU: MenuItem[] = [
           }
       ]
     },
+    {
+        id: 3,
+        label: 'menu.timesheet.title',
+        icon: 'trace.svg',
+        subItems:[
+          {
+              id: 1,
+              label: 'menu.timesheet.title',
+              link: '/timesheet',
+              parentId: 3
+          },
+          {
+              id: 2,
+              label: 'menu.timesheet.timesheetAdd',
+              link: '/timesheet/add',
+              parentId:3
+
+          }
+      ]
+    },
 
 
 

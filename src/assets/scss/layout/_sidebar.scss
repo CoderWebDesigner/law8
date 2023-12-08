@@ -84,6 +84,10 @@ body.sidebar-enable {
           transition: all .4s;
           padding: 1rem 1.5rem;
           margin-bottom: .5rem;
+          svg{
+            width: 2rem;
+            height: 2rem;
+          }
           i {
             display: inline-block;
             min-width: 2rem;

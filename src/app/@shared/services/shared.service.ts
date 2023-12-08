@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
   private unSubscribeAll:Subject<boolean>;
+  timerWorking$= new BehaviorSubject<boolean>(false);
   constructor() { }
   takeUntilDistroy(){
     if(!this.unSubscribeAll) this.unSubscribeAll = new Subject<boolean>();

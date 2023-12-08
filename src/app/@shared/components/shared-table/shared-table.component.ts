@@ -12,7 +12,8 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef
+  ElementRef,
+  OnDestroy
 } from '@angular/core';
 import { PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
 import { Table, TableModule } from 'primeng/table';
@@ -30,6 +31,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { SharedTableService } from './services/table.service';
+import { SharedService } from '@shared/services/shared.service';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'shared-table',
@@ -44,11 +47,11 @@ import { SharedTableService } from './services/table.service';
     TooltipModule,
     FormsModule,
     PaginatorModule,
-    InputTextModule
+    InputTextModule,
   ],
   providers: [DialogService],
 })
-export class SharedTableComponent implements OnInit, OnChanges {
+export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
 
   @Input() filterOptions?: any = { pageSize: PAGESIZE, pageNo: 0 };
 
@@ -72,7 +75,6 @@ export class SharedTableComponent implements OnInit, OnChanges {
   @Input() withCheckbox: boolean = false;
   @Input() withPlaceholder:boolean
   @Input() defaultSelected: any;
-
   @Output() onRowSelect: any = new EventEmitter();
 
 
@@ -87,8 +89,6 @@ export class SharedTableComponent implements OnInit, OnChanges {
   selected: any
   // filterText:string;
 
-  private unsubscribeAll: Subject<boolean>;
-
 
   _apiService = inject(ApiService);
   _dialogService = inject(DialogService);
@@ -96,6 +96,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
   _languageService = inject(LanguageService);
   _toastrNotifiService = inject(ToasterService)
   _sharedTableService = inject(SharedTableService)
+  _sharedService = inject(SharedService)
 
 
   @Input() callBack: any;
@@ -114,7 +115,6 @@ export class SharedTableComponent implements OnInit, OnChanges {
   }
 
   private getColumns(columnsLocalized) {
-    console.log(columnsLocalized)
     switch (this._languageService.getSelectedLanguage()) {
       case 'en':
         return columnsLocalized?.en ? columnsLocalized.en : columnsLocalized;
@@ -127,22 +127,35 @@ export class SharedTableComponent implements OnInit, OnChanges {
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
+
     this.getData();
     this.onSearch()
-  }
+    this.handleDate()
 
+  }
+  handleDate(){
+    let dateColumns = this.columns.filter(obj=>obj?.isDate==true)
+    dateColumns.forEach(obj=>{
+      this.data.forEach(data=>{
+        if(obj['field']){
+          data[obj['field']]=new Date(parseInt(data[obj['field']].match(/\d+/)[0], 10))
+        }
+      })
+    })
+  }
   getData() {
 
     if (this.apiUrls?.get) {
       this.isLoading = true;
-      this._apiService[this.getDataMethod](`${this.apiUrls.get}${this.filterBy}`, this.filterOptions)
+      this._apiService[this.getDataMethod](`${this.apiUrls.get}${this.filterBy}`) //, this.filterOptions
         .pipe(
           finalize(() => this.isLoading = false),
-          this.takeUntilDestroy()
+          this._sharedService.takeUntilDistroy()
         ).subscribe((res: any) => {
           this.data = res;
           this.totalRecords = res.length
           this.getTableMessages()
+          this.handleDate()
           if (this.callBack) this.callBack()
 
         });
@@ -165,11 +178,6 @@ export class SharedTableComponent implements OnInit, OnChanges {
     this.getData()
   }
 
-  private takeUntilDestroy = () => {
-    if (!this.unsubscribeAll) this.unsubscribeAll = new Subject<boolean>();
-    return takeUntil(this.unsubscribeAll);
-  };
-
   onTableAction(action: TableAction, rowData: any) {
     if (action?.type !== 'delete') {
 
@@ -186,7 +194,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
             url: this.apiUrls.update
           },
         });
-        dialogRef.onClose.subscribe((result: any) => {
+        dialogRef.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
           if (result) this.getData();
         });
       }
@@ -194,6 +202,11 @@ export class SharedTableComponent implements OnInit, OnChanges {
       this.onDelete(action, rowData)
     }
 
+  }
+  onEdit(event){
+    console.log('Row Edited:', event);
+
+ console.log(this.data)
   }
 
   onDelete(action: TableAction, rowData: any) {
@@ -204,12 +217,12 @@ export class SharedTableComponent implements OnInit, OnChanges {
         isDelete: true,
       },
     });
-    ref.onClose.subscribe(res => {
+    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe(res => {
 
       if (res) {
         let path = `${this.apiUrls.delete}/${rowData[this.additionalTableConfig.id]}`
 
-        this._apiService['delete'](path).pipe(this.takeUntilDestroy()).subscribe((res: any) => {
+        this._apiService['delete'](path).pipe(this._sharedService.takeUntilDistroy()).subscribe((res: any) => {
 
           if (res && !res.error) {
             let text = this._languageService.getTransValue('messages.deletedSuccessfully')
@@ -242,7 +255,7 @@ export class SharedTableComponent implements OnInit, OnChanges {
   }
 
   onSearch(){
-    this._sharedTableService.search$.subscribe({
+    this._sharedTableService.search$.pipe(this._sharedService.takeUntilDistroy()).subscribe({
       next:(res:any)=>{
         console.log('text',res)
         this.dt.filterGlobal(res,'contains')
@@ -250,9 +263,6 @@ export class SharedTableComponent implements OnInit, OnChanges {
     })
   }
   ngOnDestroy(): void {
-    if (this.unsubscribeAll) {
-      this.unsubscribeAll.next(true);
-      this.unsubscribeAll.complete();
-    }
+    this._sharedService.destroy()
   }
 }

@@ -4,7 +4,9 @@ export const General_API = {
       "getClientGroups":"/GetCustomerGrps",
       "getCountries":"/GetCountryList",
       "getParties":"/GetBPpartiesList",
-      "getStatesByCountry":"/GetStatesList/?cc="
+      "getStatesByCountry":"/GetStatesList/?cc=",
+      "getLawyers":"/GetSPList",
+      "getRecentMatters":"/GetRecentMatters/?empCode="
   }
 
 }

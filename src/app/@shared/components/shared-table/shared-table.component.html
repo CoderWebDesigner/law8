@@ -5,15 +5,18 @@
     [value]="data"
     [tableStyle]="{ 'min-width': '80rem' }"
     [loading]="isLoading"
+    [scrollable]="true"
     [lazy]="false"
     [(selection)]="selected || defaultSelected"
     [dataKey]="dataKey"
     [paginator]="paginationClient"
     [rows]="filterOptions?.pageSize"
     [showCurrentPageReport]="true"
+    [editMode]="'row'"
     [currentPageReportTemplate]="currentPageReportTemplate"
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
+    (onEditComplete)="onEdit($event)"
   >
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -21,7 +24,7 @@
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field" [style.max-width]="'200px'">
+          <th [pSortableColumn]="col.field" [style.width]="'200px'">
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
@@ -39,13 +42,20 @@
       let-columns="columns"
       let-expanded="expanded"
     >
-      <tr>
+      <tr [pEditableRow]="rowData">
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>
         <td *ngIf="withCheckbox">
           <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
         </td>
+        <ng-container *ngIf="isEditable">
+          <td *ngFor="let field of fields">
+            <formly-form
+              [fields]="field"
+            ></formly-form>
+          </td>
+        </ng-container>
         <td *ngFor="let col of columns">
           <ng-container
             *ngIf="
@@ -62,7 +72,7 @@
           </ng-container>
 
           <ng-container *ngIf="col?.isDate">
-            {{ rowData[col.field] | date : 'mediumDate' }}
+            {{ rowData[col.field] | date : "mediumDate" }}
           </ng-container>
 
           <ng-container *ngIf="col?.withIcon">
@@ -105,6 +115,12 @@
             >
             </ng-container>
           </div>
+        </td>
+      </tr>
+      <tr *ngIf="isEditable">
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.isSelect"> </ng-container>
+          <ng-container *ngIf="col.isStopwatch"> </ng-container>
         </td>
       </tr>
     </ng-template>

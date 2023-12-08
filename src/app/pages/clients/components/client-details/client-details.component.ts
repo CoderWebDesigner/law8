@@ -51,10 +51,6 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
             ...v,
             name:`${v.FirstName} ${v.MiddleName} ${v.LastName}`,
           }))
-          this.client.lstMatter= this.client.lstMatter.map((v)=>({
-            ...v,
-            Opened:new Date(parseInt(v.Opened.match(/\d+/)[0], 10)),
-          }))
 
         }
       })

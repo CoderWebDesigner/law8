@@ -6,6 +6,10 @@
           "clientIntack":"Client Intack",
           "clientAdd":"Client Add",
           "clientList":"Client List"
+        },
+        "timesheet":{
+          "title":"TimeSheet",
+          "timesheetAdd":"TimeSheet Add"
         }
     }
 }

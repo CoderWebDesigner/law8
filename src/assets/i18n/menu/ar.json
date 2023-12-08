@@ -6,6 +6,10 @@
           "clientIntack":"تناول العميل",
           "clientAdd":"اضافة عميل",
           "clientList":"قائمة العملاء"
+        },
+        "timesheet":{
+          "title":"سجل الوقت",
+          "timesheetAdd":"اضافة سجل الوقت"
         }
     }
 }

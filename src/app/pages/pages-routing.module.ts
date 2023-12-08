@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'clients',
     loadChildren: () => import('./clients/clients.module').then((m) => m.ClientsModule)
   },
+  {
+    path: 'timesheet',
+    loadChildren: () => import('./timesheet/timesheet.module').then((m) => m.TimesheetModule)
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

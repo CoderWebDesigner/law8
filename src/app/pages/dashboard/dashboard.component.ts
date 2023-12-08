@@ -24,10 +24,7 @@ export class DashboardComponent implements OnInit,OnDestroy{
   apiUrls= API_Config.dashboard;
   selectedCard:any;
   cardTitle:string;
-  columnsLocalized = {
-    // en: Clients_Columns_EN,
-    // ar:  Clients_Columns_AR,
-  };
+  columnsLocalized = {};
 
   items=[
     {
@@ -208,10 +205,6 @@ export class DashboardComponent implements OnInit,OnDestroy{
     ).subscribe({
       next:(res:any[])=>{
         this.data=res
-        this.data= this.data.map((v)=>({
-          ...v,
-          Opened:new Date(parseInt(v.Opened.match(/\d+/)[0], 10)),
-        }))
       }
     })
   }

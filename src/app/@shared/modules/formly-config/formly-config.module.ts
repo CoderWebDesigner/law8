@@ -24,11 +24,13 @@ import { FormlyOtpFieldComponent } from './components/formly-otp-field/formly-ot
 // import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
 // import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 // import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
-import { NgOtpInputModule } from  'ng-otp-input';
+import { NgOtpInputModule } from 'ng-otp-input';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormlyPasswordFieldComponent } from './components/formly-password-field/formly-password-field.component';
 import { PasswordModule } from 'primeng/password';
 import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
+import { FormlyTableFieldComponent } from './components/formly-table-field/formly-table-field.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
     // FormlyFileFieldComponent,
     FormlyOtpFieldComponent,
     FormlyPasswordFieldComponent,
-
+    FormlyTableFieldComponent
   ],
   imports: [
     CommonModule,
@@ -69,8 +71,9 @@ import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
         { name: 'phone', component: FormlyPhoneFieldComponent, extends: 'input' },
         // { name: 'file', component: FormlyFileFiledComponent , extends: 'input'},
         // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
-        { name: 'otp', component: FormlyOtpFieldComponent,extends: 'input'},
-        { name: 'password', component: FormlyPasswordFieldComponent,extends: 'input'}
+        { name: 'otp', component: FormlyOtpFieldComponent, extends: 'input' },
+        { name: 'password', component: FormlyPasswordFieldComponent, extends: 'input' },
+        { name: 'table', component: FormlyTableFieldComponent, extends: 'input' }
 
       ]
     }),
@@ -87,7 +90,8 @@ import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
     NgxIntlTelInputModule,
     NgOtpInputModule,
     SelectButtonModule,
-    PasswordModule
+    PasswordModule,
+    TableModule
   ],
   exports: [
     ReactiveFormsModule,
