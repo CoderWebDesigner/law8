@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Address_Columns_AR, Address_Columns_EN } from './address-columns.config';
+import { Address_Columns_AR, Address_Columns_EN, Address_Columns_FR } from './address-columns.config';
 
 @Component({
   selector: 'app-client-details-address',
@@ -11,5 +11,6 @@ export class ClientDetailsAddressComponent{
   columnsLocalized = {
     en: Address_Columns_EN,
     ar:  Address_Columns_AR,
+    fr:  Address_Columns_FR,
   };
 }

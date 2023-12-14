@@ -6,7 +6,7 @@ import { DEFAULT_LANGUAGE } from '@core/utilities/defines';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
-  languages: string[] = ['en', 'ar','in'];
+  languages: string[] = ['en', 'ar','fr'];
 
   _storageService = inject(StorageService);
   _translateService = inject(TranslateService);

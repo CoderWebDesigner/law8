@@ -3,7 +3,8 @@ export const SUCCESS_TAGS =[
   "Sended",
   "Active",
   "DONE",
-  "NEW CASE"
+  "NEW CASE",
+  "Low"
 ]
 
 export const INFO_TAGS =[
@@ -13,12 +14,14 @@ export const INFO_TAGS =[
 ]
 
 export const PROCESS_TAGS=[
-  "UNDER PROCESS"
+  "UNDER PROCESS",
+  "Normal"
 ]
 
 
 export const DANGER_TAGS =[
   "PENDING",
   "Inactive",
-  "Failed"
+  "Failed",
+  "High"
 ]

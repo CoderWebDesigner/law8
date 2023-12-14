@@ -4,7 +4,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
 import { ClientService } from '@shared/services/client.service';
 import { SharedService } from '@shared/services/shared.service';
-import { CompanyAddress_Columns_AR, CompanyAddress_Columns_EN } from './company-address-columns.config';
+import { CompanyAddress_Columns_AR, CompanyAddress_Columns_EN, CompanyAddress_Columns_FR } from './company-address-columns.config';
 
 @Component({
   selector: 'app-client-add-company-address',
@@ -23,6 +23,7 @@ export class ClientAddCompanyAddressComponent implements OnInit, OnDestroy {
   columnsLocalized = {
     en: CompanyAddress_Columns_EN,
     ar: CompanyAddress_Columns_AR,
+    fr: CompanyAddress_Columns_FR,
   };
   ngOnInit(): void {
     this.getCompanyAddress()

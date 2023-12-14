@@ -11,6 +11,7 @@ import { SharedTableComponent } from '@shared/components/shared-table/shared-tab
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { SharedModule } from '@shared/shared.module';
+import { ButtonModule } from 'primeng/button';
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +33,8 @@ const routes: Routes = [
     SharedTableComponent,
     SharedCardComponent,
     SharedSearchInputComponent,
-    SharedModule
+    SharedModule,
+    ButtonModule
   ]
 })
 export class DashboardModule { }

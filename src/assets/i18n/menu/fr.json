@@ -1,0 +1,15 @@
+{
+  "menu":{
+      "dashboard":"Tableau de bord",
+      "clients":{
+        "title":"Clients",
+        "clientIntack":"Acceuil Client",
+        "clientAdd":"Ajouter Client",
+        "clientList":"Listes Des Clients"
+      },
+      "timesheet":{
+        "title":"Compteur horaire",
+        "timesheetAdd":"TimeSheet Add"
+      }
+  }
+}

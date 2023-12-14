@@ -14,6 +14,7 @@ export const Activity_Columns_EN = [
   {
     header: "Description",
     field: 'Note',
+    isLargeText:true
   },
   {
     isDate:true,
@@ -31,7 +32,46 @@ export const Activity_Columns_EN = [
   {
     header: "Priority",
     field: 'Priority',
+    isStatus:true
   }
+];
+
+export const Activity_Columns_FR = [
+  {
+    header: "Numéro d'activité",
+    field: 'ActivityId',
+  },
+  {
+    header: "Matière",
+    field: 'MatterCode',
+  },
+  {
+    header: "Action",
+    field: 'Action',
+  },
+  {
+    header: "Description",
+    field: 'Note',
+    isLargeText:true
+  },
+  {
+    isDate:true,
+    header: "Date",
+    field: 'StartDate',
+  },
+  {
+    header: "Heure de début",
+    field: 'StartTime',
+  },
+  {
+    header: "Numéro de dossier judiciaire",
+    field: 'CaseNo',
+  },
+  {
+    header: "Priorité",
+    field: 'Priority',
+    isStatus:true
+  },
 ];
 
 export const Activity_Columns_AR = [
@@ -50,6 +90,7 @@ export const Activity_Columns_AR = [
   {
     header: "وصف",
     field: 'Note',
+    isLargeText:true
   },
   {
     isDate:true,
@@ -67,5 +108,6 @@ export const Activity_Columns_AR = [
   {
     header: "أولوية",
     field: 'Priority',
+    isStatus:true
   }
 ];

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { AuthService, LanguageService } from '@core/services';
-import { Clients_Columns_AR, Clients_Columns_EN } from './clients-columns.config';
+import { Clients_Columns_AR, Clients_Columns_EN, Clients_Columns_FR } from './clients-columns.config';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
@@ -20,6 +20,7 @@ export class ClientsComponent {
   columnsLocalized = {
     en: Clients_Columns_EN,
     ar:  Clients_Columns_AR,
+    fr:  Clients_Columns_FR,
   };
 
   additionalTableConfig: TableConfig = {

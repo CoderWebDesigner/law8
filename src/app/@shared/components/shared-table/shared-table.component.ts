@@ -33,6 +33,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SharedTableService } from './services/table.service';
 import { SharedService } from '@shared/services/shared.service';
 import { DropdownModule } from 'primeng/dropdown';
+import { MoreInfoComponent } from './components/more-info/more-info.component';
 
 @Component({
   selector: 'shared-table',
@@ -60,7 +61,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   @Input() data: any = [];
   @Input() apiUrls;
   @Input() getDataMethod?= 'get';
-  @Input() filterBy: string
+  @Input() filterBy: string;
 
   @ContentChild('actions', { static: false })
   actionsTemplateRef: TemplateRef<any>;
@@ -87,7 +88,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   currentPageReportTemplate: string = '';
   tableConfig?: TableConfig = { isSearch: true };
   selected: any
-  // filterText:string;
+
 
 
   _apiService = inject(ApiService);
@@ -118,6 +119,8 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     switch (this._languageService.getSelectedLanguage()) {
       case 'en':
         return columnsLocalized?.en ? columnsLocalized.en : columnsLocalized;
+      case 'fr':
+        return columnsLocalized?.fr ? columnsLocalized.fr : columnsLocalized;
       default:
         return columnsLocalized?.ar ? columnsLocalized.ar : columnsLocalized;
     }
@@ -135,10 +138,11 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   }
   handleDate(){
     let dateColumns = this.columns.filter(obj=>obj?.isDate==true)
+    console.log(dateColumns)
     dateColumns.forEach(obj=>{
       this.data.forEach(data=>{
         if(obj['field']){
-          data[obj['field']]=new Date(parseInt(data[obj['field']].match(/\d+/)[0], 10))
+          data[obj['field']]=new Date(parseInt(obj['field']?.match(/\d+/)[0], 10))
         }
       })
     })
@@ -260,6 +264,13 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
         console.log('text',res)
         this.dt.filterGlobal(res,'contains')
       }
+    })
+  }
+  showMore(title:string,value:string){
+    this._dialogService.open(MoreInfoComponent,{
+      header:title,
+      data:value,
+      width:"50%"
     })
   }
   ngOnDestroy(): void {

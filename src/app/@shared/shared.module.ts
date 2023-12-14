@@ -14,6 +14,7 @@ import { LanguageBindPipe } from './pipes/lang-bind.pipe';
 import { SuccessActionPopupComponent } from './components/success-action-popup/success-action-popup.component';
 import { RouterModule } from '@angular/router';
 import { SharedNoDataComponent } from './components/shared-no-data/shared-no-data.component';
+import { MoreInfoComponent } from './components/shared-table/components/more-info/more-info.component';
 
 const components: any = [
   SharedActionsComponent,
@@ -27,7 +28,7 @@ const components: any = [
 const modules = [TranslateModule, ButtonModule, SkeletonModule, RouterModule];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, MoreInfoComponent],
   imports: [CommonModule, ...modules],
   exports: [...components, ...modules],
   providers: [

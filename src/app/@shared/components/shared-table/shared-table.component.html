@@ -3,20 +3,18 @@
     #dt
     [columns]="columns"
     [value]="data"
-    [tableStyle]="{ 'min-width': '80rem' }"
     [loading]="isLoading"
-    [scrollable]="true"
     [lazy]="false"
+    [resizableColumns]="true"
+    [tableStyle]="{ 'min-width': '100%' }"
     [(selection)]="selected || defaultSelected"
     [dataKey]="dataKey"
     [paginator]="paginationClient"
     [rows]="filterOptions?.pageSize"
     [showCurrentPageReport]="true"
-    [editMode]="'row'"
     [currentPageReportTemplate]="currentPageReportTemplate"
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
-    (onEditComplete)="onEdit($event)"
   >
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -24,7 +22,7 @@
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field" [style.width]="'200px'">
+          <th [pSortableColumn]="col.field" style="min-width: 200px" *ngIf="!col.isExpand">
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
@@ -42,7 +40,7 @@
       let-columns="columns"
       let-expanded="expanded"
     >
-      <tr [pEditableRow]="rowData">
+      <tr>
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>
@@ -51,15 +49,13 @@
         </td>
         <ng-container *ngIf="isEditable">
           <td *ngFor="let field of fields">
-            <formly-form
-              [fields]="field"
-            ></formly-form>
+            <formly-form [fields]="field"></formly-form>
           </td>
         </ng-container>
         <td *ngFor="let col of columns">
           <ng-container
             *ngIf="
-              !col?.isStatus && !col.isDate && !col?.isAction && !col?.withIcon
+              !col?.isStatus && !col.isDate && !col?.isAction && !col?.withIcon && !col.isLargeText
             "
           >
             {{ rowData[col.field] }}
@@ -70,7 +66,6 @@
               {{ "tags." + rowData[col.field] | translate }}
             </div>
           </ng-container>
-
           <ng-container *ngIf="col?.isDate">
             {{ rowData[col.field] | date : "mediumDate" }}
           </ng-container>
@@ -80,6 +75,17 @@
               [src]="'./assets/images/' + rowData[col.field] + '.png'"
               alt=""
             />
+          </ng-container>
+          <ng-container *ngIf="col?.isLargeText">
+            <ng-container *ngIf="rowData[col['field']] && rowData[col['field']].length>20">
+              {{rowData[col.field] | slice:0:20}}
+              <p-button icon="pi pi-ellipsis-h" styleClass="p-button-icon-only p-button-info p-0 p-button-text" (onClick)="showMore(col?.field,rowData[col['field']])"></p-button>
+            </ng-container>
+            <ng-container *ngIf="rowData[col['field']]?.length<20">
+              {{rowData[col.field]}}
+            </ng-container>
+
+
           </ng-container>
         </td>
 
@@ -117,13 +123,8 @@
           </div>
         </td>
       </tr>
-      <tr *ngIf="isEditable">
-        <td *ngFor="let col of columns">
-          <ng-container *ngIf="col.isSelect"> </ng-container>
-          <ng-container *ngIf="col.isStopwatch"> </ng-container>
-        </td>
-      </tr>
     </ng-template>
+
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
         <td [attr.colspan]="columns.length">No records found</td>

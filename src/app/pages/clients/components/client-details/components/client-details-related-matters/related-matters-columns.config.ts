@@ -6,6 +6,7 @@ export const RelatedMatter_Columns_EN = [
   {
     header: 'Description',
     field: 'Description',
+    isLargeText:true
   },
   {
     header: 'Court Number',
@@ -26,6 +27,35 @@ export const RelatedMatter_Columns_EN = [
     field: 'Status',
   },
 ];
+export const RelatedMatter_Columns_FR = [
+  {
+    header: 'code',
+    field: 'MatterCode',
+  },
+  {
+    header: 'description',
+    field: 'Description',
+    isLargeText:true
+  },
+  {
+    header: 'Numéro de cour',
+    field: 'CourtNumber',
+  },
+  {
+    header: 'Scène',
+    field: 'MtrSage',
+  },
+  {
+    isDate:true,
+    header: 'Ouverte',
+    field: 'Opened',
+  },
+  {
+    isStatus:true,
+    header: 'Statut',
+    field: 'Status',
+  },
+];
 
 export const RelatedMatter_Columns_AR = [
   {
@@ -35,6 +65,7 @@ export const RelatedMatter_Columns_AR = [
   {
     header: 'وصف',
     field: 'Description',
+    isLargeText:true
   },
   {
     header: 'رقم المحكمة',

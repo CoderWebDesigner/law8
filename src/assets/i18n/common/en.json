@@ -6,7 +6,8 @@
     "strong":"strong",
     "profile":"Profile",
     "search": "Search",
-    "noDataAdded":"There is no added data"
+    "noDataAdded":"There is no added data",
+    "more":"More"
   },
   "btn": {
    "save":"Save",
@@ -47,6 +48,9 @@
     "Sended":"Sended",
     "PENDING":"Pending",
     "Failed":"Failed",
-    "DONE":"Done"
+    "DONE":"Done",
+    "Low":"Low",
+    "Normal":"Normal",
+    "High":"High"
   }
 }

@@ -4,7 +4,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
 import { ClientService } from '@shared/services/client.service';
 import { SharedService } from '@shared/services/shared.service';
-import { BillingAddress_Columns_AR, BillingAddress_Columns_EN } from './billing-address-columns.config';
+import { BillingAddress_Columns_AR, BillingAddress_Columns_EN, BillingAddress_Columns_FR } from './billing-address-columns.config';
 
 @Component({
   selector: 'app-client-add-billing-address',
@@ -22,6 +22,7 @@ export class ClientAddBillingAddressComponent implements OnInit, OnDestroy {
   columnsLocalized = {
     en: BillingAddress_Columns_EN,
     ar: BillingAddress_Columns_AR,
+    fr:BillingAddress_Columns_FR
   };
   ngOnInit(): void {
     this.getCompanyAddress()

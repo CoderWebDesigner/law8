@@ -15,7 +15,7 @@ export class AppLanguageComponent implements OnInit {
   listLang: Language[] = [
     { text: 'English', flag: 'assets/images/icons/us.jpg', code: 'en' },
     { text: 'العربية', flag: 'assets/images/icons/ar.png', code: 'ar' },
-    { text: 'हिंदी', flag: 'assets/images/icons/in.jpg', code: 'in' },
+    { text: 'Français', flag: 'assets/images/icons/fr.png', code: 'fr' },
   ];
 
   _languageService = inject(LanguageService)

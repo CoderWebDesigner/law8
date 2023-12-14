@@ -27,7 +27,7 @@
             translate}}</span>
         </a>
 
-        <a [routerLink]="parentRoute + item.link" *ngIf="!hasItems(item)" class="side-nav-link-ref" routerLinkActive="active">
+        <a [routerLink]="parentRoute + item.link" *ngIf="!hasItems(item)" class="side-nav-link-ref" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <i  *ngIf="item.icon" [inlineSVG]="'./assets/images/icons/'+item.icon"></i>
           <span> {{ item.label | translate }}</span>
           <span class="badge rounded-pill bg-{{item.badge.variant}} float-end" *ngIf="item.badge">{{item.badge.text |
@@ -37,7 +37,7 @@
         <ul *ngIf="hasItems(item)" class="sub-menu" aria-expanded="false">
           <li *ngFor="let subitem of item.subItems">
             <a [routerLink]="parentRoute + subitem.link" *ngIf="!hasItems(subitem)" class="side-nav-link-ref"
-              [attr.data-parent]="subitem.parentId" routerLinkActive="active">
+              [attr.data-parent]="subitem.parentId" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
               {{ subitem.label | translate}}
             </a>
             <a *ngIf="hasItems(subitem)" class="side-nav-link-a-ref has-arrow" href="javascript:void(0);"
@@ -47,7 +47,7 @@
             <ul *ngIf="hasItems(subitem)" class="sub-menu mm-collapse" aria-expanded="false">
               <li *ngFor="let subSubitem of subitem.subItems">
                 <a [attr.data-parent]="subSubitem.parentId" [routerLink]="parentRoute + subSubitem.link" routerLinkActive="active"
-                  class="side-nav-link-ref">
+                  class="side-nav-link-ref" [routerLinkActiveOptions]="{exact: true}">
                   {{ subSubitem.label | translate }}
                 </a>
               </li>

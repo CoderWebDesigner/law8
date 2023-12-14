@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
-import { Timesheet_Editor_Columns_AR, Timesheet_Editor_Columns_EN } from './timesheet-editor-columns.config';
+import { Timesheet_Editor_Columns_AR, Timesheet_Editor_Columns_EN, Timesheet_Editor_Columns_FR } from './timesheet-editor-columns.config';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
@@ -20,7 +20,8 @@ export class TimesheetEditorComponent implements OnInit {
 
   columnsLocalized = {
     ar: Timesheet_Editor_Columns_AR,
-    en: Timesheet_Editor_Columns_EN
+    en: Timesheet_Editor_Columns_EN,
+    fr: Timesheet_Editor_Columns_FR,
   }
   _languageService = inject(LanguageService)
   additionalTableConfig: TableConfig={

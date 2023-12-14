@@ -13,6 +13,20 @@ export const Clients_Columns_EN = [
   }
 ];
 
+export const Clients_Columns_FR = [
+  {
+    header: 'Code de carte',
+    field: 'CardCode',
+  },
+  {
+    header: 'Nom de la carte',
+    field: 'CardName',
+  },
+  {
+    header: 'Provision',
+    field: 'CustBalance',
+  }
+];
 export const Clients_Columns_AR = [
   {
     header: 'الكود',

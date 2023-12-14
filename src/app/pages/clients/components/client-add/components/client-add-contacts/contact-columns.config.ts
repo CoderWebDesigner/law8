@@ -42,9 +42,56 @@ export const Contact_Columns_EN = [
   {
     header: 'Remarks',
     field: 'Remarks',
+    isLargeText:true
   },
 ];
-
+export const Contact_Columns_FR = [
+  {
+    header: 'Prénom',
+    field: 'FirstName',
+  },
+  {
+    header: 'Deuxième prénom',
+    field: 'MiddleName',
+  },
+  {
+    header: 'Nom de famille',
+    field: 'LastName',
+  },
+  {
+    header: 'Des soirées',
+    field: 'party',
+  },
+  {
+    header: 'position',
+    field: 'Position',
+  },
+  {
+    header: 'Adresse',
+    field: 'Address',
+  },
+  {
+    header: 'E-mail',
+    field: 'Email',
+  },
+  {
+    header: 'Téléphone',
+    field: 'TelNo1',
+  },
+  {
+    header: 'mobile',
+    field: 'MobileNo',
+  },
+  {
+    header: 'fax',
+    field: 'Fax',
+  },
+  {
+    header: 'Remarques',
+    field: 'Remarks',
+    isLargeText:true
+  },
+];
 export const Contact_Columns_AR = [
   {
     header: 'الاسم الأول',
@@ -89,5 +136,6 @@ export const Contact_Columns_AR = [
   {
     header: 'ملاحظات',
     field: 'Remarks',
+    isLargeText:true
   },
 ];

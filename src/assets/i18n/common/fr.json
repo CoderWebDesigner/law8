@@ -1,0 +1,56 @@
+{
+  "common": {
+    "actions": "actions",
+    "weak":"Faible",
+    "medium": "Moyen",
+    "strong":"forte",
+    "profile":"Profil",
+    "search": "Recherche",
+    "noDataAdded":"Il n'y a pas de données ajoutées",
+    "more":"Plus"
+  },
+  "btn": {
+   "save":"Sauvegarder",
+   "submit":"Soumettre",
+   "send":"Envoyer",
+   "close":"Fermer"
+  },
+  "messages": {
+    "signInSuccessfully":"Connectez-vous avec succès",
+    "signInError":"Erreur de connexion",
+    "createdSuccessfully": "Créé avec succès",
+    "updateSuccessfully": "Mettre à jour avec succès",
+    "deletedSuccessfully": "Supprimé avec succès",
+    "internalServerError": "Erreur interne du serveur!",
+    "userIdOrEmailWrong":"Entré à l'utilisateur ou à l'e-mail mal, veuillez réessayer!",
+    "invalidOTP":"OTP non valide",
+    "dataMessage": "Totale",
+    "error":"Erreur!",
+    "success":"Succès!"
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire!",
+    "url": "L'URL doit être valide!",
+    "email": "Veuillez saisir un e-mail validel",
+    "phone":"s'il vous plaît entrer un numéro de téléphone valide",
+    "password": "Le mot de passe doit contenir au moins un caractère inférieur, un caractère supérieur, un caractère à un chiffre, un caractère spécial et une longueur de 8 à 16 caractères ",
+    "passwordNotMatching":"Mot de passe ne correspond pas!",
+    "englishLetters": "Veuillez entrer uniquement des lettres anglaises!" ,
+    "arabicLetters": "Veuillez entrer uniquement les lettres arabes!"
+  },
+  "tags":{
+    "Added":"Ajoutée",
+    "UNDER PROCESS":"EN COURS DE TRAITEMENT",
+    "NEW CASE":"NOUVEAU CAS",
+    "FOR COURT REGISTRATION":"Pour l'enregistrement des tribunaux",
+    "Active":"active",
+    "Inactive":"inactive",
+    "Sended":"Envoyée",
+    "PENDING":"En attente",
+    "Failed":"Échoué",
+    "DONE":"Fait",
+    "Low":"Faible",
+    "Normal":"Normale",
+    "High":"Haut"
+  }
+}

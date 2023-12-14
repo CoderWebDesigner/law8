@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Contact_Columns_AR, Contact_Columns_EN } from './contacts-columns.config';
+import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contacts-columns.config';
 
 @Component({
   selector: 'app-client-details-contacts',
@@ -11,6 +11,7 @@ export class ClientDetailsContactsComponent{
   columnsLocalized = {
     en: Contact_Columns_EN,
     ar:  Contact_Columns_AR,
+    fr:Contact_Columns_FR,
   };
- 
+
 }

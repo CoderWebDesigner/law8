@@ -118,11 +118,11 @@ body.sidebar-enable {
               border-radius: 0 !important;
 
               &:hover {
-                @include bg-opacity(#60A1CB, .3)
+                @include bg-opacity(#007AB9, .3)
               }
 
               &.active {
-                background-color: #60A1CB;
+                background-color: #007AB9;
                 color: $white;
                 padding-#{$left}: 1rem;
               }

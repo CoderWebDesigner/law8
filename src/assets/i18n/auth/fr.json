@@ -1,0 +1,29 @@
+{
+  "auth": {
+    "login":"Se connecter",
+    "welcomeBack": "Content de te revoir!",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "rememberMe": "Souviens-toi de moi",
+    "forgetPassword": "Mot de passe oublié",
+    "toSignInPleaseEnterYourUsernameAndPassword":"Pour vous connecter, veuillez saisir votre nom d'utilisateur et votre mot de passe",
+    "userNamePlaceholder": "S'il vous plaît entrez votre nom d'utilisateur",
+    "passwordPlaceholder": "S'il vous plait entrez votre mot de passe",
+    "logout":"Se déconnecter",
+    "resetPassword":"réinitialiser le mot de passe",
+    "resetPasswordInThreeSteps":"Donnez le mot de passe des informations suivantes et réinitialisez en 3 étapes uniquement",
+    "userIdAndEmail":"ID utilisateur et e-mail",
+    "verify":"Vérifier",
+    "newPassword":"nouveau mot de passe",
+    "userId":"ID de l'utilisateur",
+    "userIdPlaceholder":"Veuillez saisir votre ID utilisateur",
+    "email":"E-mail",
+    "emailPlaceholder":"Veuillez saisir votre e-mail",
+    "verfiyOtp":"Vérifiez OTP",
+    "twoStepsVerifiy":"Vérification en deux étapes",
+    "enterVerificationCode":"Entrez le code de vérification que nous avons envoyé à votre e-mail",
+    "confirmPassword":"Confirmez le mot de passe"
+
+
+  }
+}

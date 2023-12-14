@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { AuthService, LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
-import { Timesheet_Columns_AR, Timesheet_Columns_EN } from './timesheet-columns.config';
+import { Timesheet_Columns_AR, Timesheet_Columns_EN, Timesheet_Columns_FR } from './timesheet-columns.config';
 
 @Component({
   selector: 'app-timesheet',
@@ -19,6 +19,7 @@ export class TimesheetComponent {
 
   columnsLocalized = {
     en: Timesheet_Columns_EN,
+    fr: Timesheet_Columns_FR,
     ar:  Timesheet_Columns_AR,
   };
 

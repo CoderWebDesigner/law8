@@ -28,6 +28,36 @@ export const CompanyAddress_Columns_EN = [
     field: 'PoBox',
   },
 ];
+export const CompanyAddress_Columns_FR = [
+  {
+    header: 'Adresse 1',
+    field: 'Address2',
+  },
+  {
+    header: 'Adresse 2',
+    field: 'Address3',
+  },
+  {
+    header: 'Numéro de rue',
+    field: 'Street',
+  },
+  {
+    header: 'Ville',
+    field: 'City',
+  },
+  {
+    header: 'Pays',
+    field: 'country',
+  },
+  {
+    header: 'État',
+    field: 'state',
+  },
+  {
+    header: 'Code postal',
+    field: 'PoBox',
+  },
+];
 
 export const CompanyAddress_Columns_AR = [
   {

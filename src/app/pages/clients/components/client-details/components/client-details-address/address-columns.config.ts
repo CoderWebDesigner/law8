@@ -17,6 +17,24 @@ export const Address_Columns_EN = [
   }
 ];
 
+export const Address_Columns_FR = [
+  {
+    header: 'adresse de facturation',
+    field: 'billingAddress',
+  },
+  {
+    header: 'adresse de livraison',
+    field: 'shippingAddress',
+  },
+  {
+    header: 'Téléphone',
+    field: 'Phone1',
+  },
+  {
+    header: 'E-mail',
+    field: 'Email',
+  }
+];
 export const Address_Columns_AR = [
   {
     header: 'عنوان وصول الفواتير',

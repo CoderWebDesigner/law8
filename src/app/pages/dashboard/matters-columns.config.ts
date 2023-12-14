@@ -42,6 +42,50 @@ export const Matters_Columns_EN = [
   },
 ];
 
+export const Matters_Columns_FR = [
+  {
+    header: 'code',
+    field: 'MatterCode',
+  },
+  {
+    header: 'description',
+    field: 'MatterName',
+  },
+  {
+    header: 'Ouverte',
+    field: 'Opened',
+    isDate:true
+  },
+  {
+    header: 'Type MTR',
+    field: 'MtrType',
+  },
+  {
+    header: "Catégorie MTR",
+    field: 'MtrCategory',
+  },
+  {
+    header: "Domaine de pratique",
+    field: 'PractArea',
+  },
+  {
+    header: "Cliente",
+    field: 'ClientName',
+  },
+  {
+    header: "Affaire du tribunal no",
+    field: 'CourtNumber',
+  },
+  {
+    header: "Parent MTR",
+    field: 'ParentMtrCode',
+  },
+  {
+    header: "Statut",
+    field: 'Status',
+  },
+];
+
 export const Matters_Columns_AR = [
   {
     header: 'شفرة',
