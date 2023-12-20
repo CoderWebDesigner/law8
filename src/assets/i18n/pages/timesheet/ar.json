@@ -1,5 +1,6 @@
 {
   "timesheet":{
-    "title":"سجل الوقت"
+    "title":"سجل الوقت",
+    "addTimeSheet":"إضافة سجل الوقت"
   }
 }

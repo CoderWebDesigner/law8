@@ -1,5 +1,6 @@
 {
   "timesheet":{
-    "title":"Timesheet"
+    "title":"Timesheet",
+    "addTimeSheet":"Add Timesheet"
   }
 }

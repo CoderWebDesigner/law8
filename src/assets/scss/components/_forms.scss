@@ -111,3 +111,12 @@ label .ng-star-inserted {
   #{$right}: 0.75rem;
   #{$left}:unset
 }
+
+.form-table{
+  input[readonly]{
+    all:unset;
+    &:focus{
+      box-shadow: none;
+    }
+  }
+}

@@ -8,5 +8,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 })
 export class FormlyTextareaFiledComponent extends FieldType <FieldTypeConfig>{
 
-
+  input(e){
+    if(this.props['input']) this.props['input'](e)
+  }
 }

@@ -31,7 +31,8 @@ import { PasswordModule } from 'primeng/password';
 import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 import { FormlyTableFieldComponent } from './components/formly-table-field/formly-table-field.component';
 import { TableModule } from 'primeng/table';
-
+import { FormlyTimerFieldComponent } from './components/formly-timer-field/formly-timer-field.component';
+import { InputMaskModule } from 'primeng/inputmask';
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
@@ -47,7 +48,8 @@ import { TableModule } from 'primeng/table';
     // FormlyFileFieldComponent,
     FormlyOtpFieldComponent,
     FormlyPasswordFieldComponent,
-    FormlyTableFieldComponent
+    FormlyTableFieldComponent,
+    FormlyTimerFieldComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,8 @@ import { TableModule } from 'primeng/table';
         // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
         { name: 'otp', component: FormlyOtpFieldComponent, extends: 'input' },
         { name: 'password', component: FormlyPasswordFieldComponent, extends: 'input' },
-        { name: 'table', component: FormlyTableFieldComponent, extends: 'input' }
+        { name: 'table', component: FormlyTableFieldComponent },
+        { name: 'timer', component: FormlyTimerFieldComponent },
 
       ]
     }),
@@ -91,7 +94,8 @@ import { TableModule } from 'primeng/table';
     NgOtpInputModule,
     SelectButtonModule,
     PasswordModule,
-    TableModule
+    TableModule,
+    InputMaskModule
   ],
   exports: [
     ReactiveFormsModule,

@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 export class FormlyButtonFieldComponent extends FieldType<FieldTypeConfig> {
   onClick(){
     if(this.props["onClick"]){
-      this.props['onClick']()
+      this.props['onClick'](this.field)
     }
   }
 }
