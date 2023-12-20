@@ -19,6 +19,7 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
   placeholderObject = new TimeSheet(new Date())
   selectedIndex!: string;
   selectedMatter: any;
+  incrementValue:number=0.1
   columnsLocalized = {
     ar: Timesheet_Editor_Columns_AR,
     en: Timesheet_Editor_Columns_EN,
@@ -141,21 +142,8 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
               hooks: {
                 onInit: (field: FormlyFieldConfig) => {
                   field.form.get('Timer').valueChanges.subscribe({
-                    next: res => {
-                      // let secondToHours = res / 3600
-                      let secondToHours = res / 3600
-                      let value = 0.1;
-                      if (secondToHours % 6 == 0) {
-                        value += 0.1
-                      }
-                      console.log(value)
-                      // let ratioOfHours = (secondToHours%10)
-                      // if(ratioOfHours==0){
-                      //   ratio
-                      // }
-                      // console.log(ratioOfHours)
-                      // console.log(this.formly)
-                      // this.formly.value.data[0].get('Hours')?.setValue(res/10)
+                    next: seconds => {
+                      field.formControl.setValue(this.calculateValueInSeconds(seconds))
                     }
                   })
                 }
@@ -243,5 +231,18 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
     if (!this.data.some(obj => obj.Explanation == "" && obj.Matter == "")) this.data.push({ ...this.placeholderObject })
     this.formlyModel = { data: this.data }
     console.log(this.data)
+  }
+  calculateValueInSeconds(seconds) {
+    // Convert seconds to hours
+    const min = seconds / 60;
+
+    // Calculate the value for every 6 minutes
+    // var valueIncrement = 0.1;
+    console.log(min%2==0)
+    if(min%2==0){
+      this.incrementValue+=0.1
+    }
+
+    return this.incrementValue;
   }
 }
