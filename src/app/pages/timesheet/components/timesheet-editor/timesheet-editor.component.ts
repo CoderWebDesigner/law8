@@ -233,16 +233,9 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
     console.log(this.data)
   }
   calculateValueInSeconds(seconds) {
-    // Convert seconds to hours
-    const min = seconds / 60;
-
-    // Calculate the value for every 6 minutes
-    // var valueIncrement = 0.1;
-    console.log(min%2==0)
-    if(min%2==0){
-      this.incrementValue+=0.1
-    }
-
+    // Convert seconds to Minutes
+    const secondsToMinutes = seconds / 60;
+    if(secondsToMinutes%2==0) this.incrementValue+=0.1
     return this.incrementValue;
   }
 }
