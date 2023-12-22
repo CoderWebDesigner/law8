@@ -1,5 +1,31 @@
 {
   "matters":{
-    "title":"القضايا / المواضيع"
+    "title":"القضايا / المواضيع",
+    "addMatter":"إضافة قضية / موضوع",
+    "matterCode":"رقم القضية",
+    "matterType":"نوع القضية",
+    "parentMatterCode":"رقم القضية الاساسية",
+    "matterCategory":"فئة القضية",
+    "requestType":"نوع الطلب",
+    "description":"الوصف",
+    "opened":"تاريخ فتح القضية",
+    "jurisdicion":"نطاق القضية",
+    "juricature":"الجهة القضائية",
+    "stage":"Stage",
+    "matterStatus":"Matter Status",
+    "practiceArea":"Practice Area",
+    "courtNumber":"Court Number",
+    "matterSummary":"Matter Summay",
+    "paymentTerms":"Payment Terms",
+    "defaultTask":"Default Task",
+    "defaultRate":"Default Rate",
+    "amount":"Amount",
+    "rateAmount":"Rate Amount",
+    "referralType":"Referral Type",
+    "clientIntroducing":"Client Introducing",
+    "matterIntroducingLawyer":"Matter Introducing Lawyer",
+    "responsibleLaywer":"Responsible Laywer",
+    "assignedLaywer":"Assigned Laywer",
+    "otherStaff":"Other Staff"
   }
 }

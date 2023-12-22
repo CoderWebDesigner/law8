@@ -56,6 +56,26 @@ export const MENU: MenuItem[] = [
           }
       ]
     },
+    {
+        id: 4,
+        label: 'menu.matters.title',
+        icon: 'judgement.svg',
+        subItems:[
+          {
+              id: 1,
+              label: 'menu.matters.matterList',
+              link: '/matters',
+              parentId: 4
+          },
+          {
+              id: 2,
+              label: 'menu.matters.matterAdd',
+              link: '/matters/add',
+              parentId:4
+
+          }
+      ]
+    },
 
 
 

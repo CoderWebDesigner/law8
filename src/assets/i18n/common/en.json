@@ -7,13 +7,21 @@
     "profile":"Profile",
     "search": "Search",
     "noDataAdded":"There is no added data",
-    "more":"More"
+    "more":"More",
+    "clientCode":"Client Code",
+    "clientName":"Client Name",
+    "address":"Address",
+   "contacts":"Contacts",
+   "general":"General"
   },
   "btn": {
    "save":"Save",
    "submit":"Submit",
    "send":"Send",
-   "close":"Close"
+   "close":"Close",
+   "yes":"Yes",
+   "no":"No"
+
   },
   "messages": {
     "signInSuccessfully":"Sign In Successfully",
@@ -26,7 +34,8 @@
     "invalidOTP":"Invalid OTP",
     "dataMessage": "Total",
     "error":"Error!",
-    "success":"Success!"
+    "success":"Success!",
+    "sureDelete":"Are you sure you want to delete?"
   },
   "validation": {
     "required": "This field is required!",

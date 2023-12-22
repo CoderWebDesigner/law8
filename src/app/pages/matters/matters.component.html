@@ -1,0 +1,10 @@
+<shared-card [title]="'matters.title' | translate" [borderRadius]="20">
+  <shared-search-input headerActions></shared-search-input>
+  <shared-table
+    body
+    [columnsLocalized]="columnsLocalized"
+    [paginationClient]="true"
+    [data]="data"
+    (onRowSelect)="onRowSelected($event)"
+  ></shared-table>
+</shared-card>

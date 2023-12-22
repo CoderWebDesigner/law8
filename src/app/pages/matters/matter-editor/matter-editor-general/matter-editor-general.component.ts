@@ -1,0 +1,182 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBaseClass } from '@core/classes/form-base.class';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+
+@Component({
+  selector: 'app-matter-editor-general',
+  templateUrl: './matter-editor-general.component.html',
+  styleUrls: ['./matter-editor-general.component.scss']
+})
+export class MatterEditorGeneralComponent extends FormBaseClass implements OnInit{
+  ngOnInit(): void {
+    this.initForm()
+  }
+  override initForm(): void {
+    // "defaultTask":"Default Task",
+  // "defaultRate":"Default Rate",
+  // "amount":"Amount",
+  // "rateAmount":"Rate Amount",
+  // "referralType":"Referral Type",
+  // "clientIntroducing":"Client Introducing",
+  // "matterIntroducingLawyer":"Matter Introducing Lawyer",
+  // "responsibleLaywer":"Responsible Laywer",
+  // "assignedLaywer":"Assigned Laywer",
+  // "otherStaff":"Other Staff"
+    this.formlyFields=[
+      {
+        fieldGroupClassName:'row',
+        fieldGroup:[
+          {
+            type:'select',
+            key:'defaultTask',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.defaultTask'),
+              options:[
+                {label:'Billable',value:'Billable'},
+                {label:'Non-Billable',value:'Non-Billable'},
+                {label:'No Charge',value:'No Charge'},
+              ]
+            }
+          },
+          {
+            type:'radio',
+            key:'type',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.defaultTask'),
+              options:[
+                {label:'Default Rate',value:'Default Rate'},
+                {label:'Amount',value:'Amount'},
+              ]
+            }
+          },
+          {
+            type:'select',
+            key:'defaultRate',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.defaultRate'),
+              options:[
+                {label:'A',value:'A'},
+                {label:'B',value:'B'},
+                {label:'C',value:'C'},
+              ]
+            } ,
+            expressions: {
+              hide:(field: FormlyFieldConfig) => {
+                return field.model?.type != 'Default Rate' ||!field.model?.type;
+              }
+             },
+          },
+          {
+            type:'input',
+            key:'rateAmount',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.rateAmount'),
+              options:[
+                {label:'A',value:'A'},
+                {label:'B',value:'B'},
+                {label:'C',value:'C'},
+              ]
+            } ,
+            expressions: {
+              hide:(field: FormlyFieldConfig) => {
+                return field.model?.type != 'Amount' ||!field.model?.type;
+              }
+             },
+          },
+          {
+            type:'select',
+            key:'referralType',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.referralType'),
+              options:[
+                {label:'Email',value:'Email'},
+                {label:'phone',value:'phone'},
+                {label:'Web',value:'Web'},
+                {label:'Employee',value:'Employee'},
+              ]
+            }
+          },
+          {
+            type:'select',
+            key:'clientIntroducing',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.clientIntroducing'),
+              options:[
+                {label:'Laywer 1',value:'Laywer 1'},
+                {label:'Laywer 2',value:'Laywer 2'},
+                {label:'Laywer 3',value:'Laywer 3'},
+                {label:'Laywer 4',value:'Laywer 4'},
+              ]
+            }
+          },
+          {
+            type:'select',
+            key:'matterIntroducingLawyer',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.matterIntroducingLawyer'),
+              options:[
+                {label:'Laywer 1',value:'Laywer 1'},
+                {label:'Laywer 2',value:'Laywer 2'},
+                {label:'Laywer 3',value:'Laywer 3'},
+                {label:'Laywer 4',value:'Laywer 4'},
+              ]
+            }
+          },
+          {
+            type:'select',
+            key:'responsibleLaywer',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.responsibleLaywer'),
+              options:[
+                {label:'Laywer 1',value:'Laywer 1'},
+                {label:'Laywer 2',value:'Laywer 2'},
+                {label:'Laywer 3',value:'Laywer 3'},
+                {label:'Laywer 4',value:'Laywer 4'},
+              ]
+            }
+          },
+          {
+            type:'multi-select',
+            key:'assignedLaywer',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.assignedLaywer'),
+              options:[
+                {label:'Laywer 1',value:'Laywer 1'},
+                {label:'Laywer 2',value:'Laywer 2'},
+                {label:'Laywer 3',value:'Laywer 3'},
+                {label:'Laywer 4',value:'Laywer 4'},
+              ]
+            }
+          },
+          {
+            type:'multi-select',
+            key:'otherStaff',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.otherStaff'),
+              options:[
+                {label:'Laywer 1',value:'Laywer 1'},
+                {label:'Laywer 2',value:'Laywer 2'},
+                {label:'Laywer 3',value:'Laywer 3'},
+                {label:'Laywer 4',value:'Laywer 4'},
+              ]
+            }
+          },
+        ]
+      }
+    ]
+  }
+  override onSubmit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+}

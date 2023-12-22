@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Timesheet_Editor_Columns_AR, Timesheet_Editor_Columns_EN, Timesheet_Editor_Columns_FR } from './timesheet-editor-columns.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyService } from '@shared/modules/formly-config/services/formly.service';
@@ -6,15 +6,19 @@ import { TimeSheet } from '@core/models';
 import { MattersComponent } from '../matters/matters.component';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { TimesheetService } from '@shared/services/timesheet.service';
+import { SharedService } from '@shared/services/shared.service';
+import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-timesheet-editor',
   templateUrl: './timesheet-editor.component.html',
   styleUrls: ['./timesheet-editor.component.scss']
 })
-export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
+export class TimesheetEditorComponent extends FormBaseClass implements OnInit,OnDestroy {
   _formlyService = inject(FormlyService)
   _timeSheetService = inject(TimesheetService)
+  _sharedService = inject(SharedService)
   cdRef = inject(ChangeDetectorRef);
   placeholderObject = new TimeSheet(new Date())
   selectedIndex!: string;
@@ -89,7 +93,10 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
                 onChange: (e, field) => {
                   if (e.value == 'All Matters') {
                     this._DialogService.open(MattersComponent, {
-                      width: '70%'
+                      width: '70%',
+                      data:{
+                        selectRow:true
+                      }
                     })
                   }
                   this.addNewRow()
@@ -134,14 +141,18 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
             {
               key: 'Hours',
               type: 'input',
+
               props: {
                 type: 'number',
                 step: 0.1,
                 required: true,
+                class:"w-50"
               },
               hooks: {
                 onInit: (field: FormlyFieldConfig) => {
-                  field.form.get('Timer').valueChanges.subscribe({
+                  field.form.get('Timer').valueChanges.pipe(
+                    this._sharedService.takeUntilDistroy()
+                  ).subscribe({
                     next: seconds => {
                       field.formControl.setValue(this.calculateValueInSeconds(seconds))
                     }
@@ -152,9 +163,11 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
             {
               key: 'Rate',
               type: 'input',
+
               props: {
                 type: 'number',
-                required: true
+                required: true,
+                class:"w-50"
               }
             },
             {
@@ -193,7 +206,18 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
                     class: 'text-danger bg-transparent border-0 p-2',
                     icon: 'pi pi-trash',
                     onClick: (field) => {
-                      this._formlyService.removeRow$.next(field.parent.parent.index)
+                      Swal.fire({
+                        showDenyButton: true,
+                        text: this._languageService.getTransValue('messages.sureDelete'),
+                        confirmButtonText: this._languageService.getTransValue('btn.yes'),
+                        denyButtonText:  this._languageService.getTransValue('btn.no'),
+                        icon:'question',
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                           this._formlyService.removeRow$.next(field.parent.parent.index)
+                        }
+                      });
+
                     }
                   }
                 }
@@ -205,7 +229,9 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
       }
     ]
 
-    this._timeSheetService.selectedMatter$.subscribe({
+    this._timeSheetService.selectedMatter$.pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
       next: res => {
         this.selectedMatter = res
         console.log(this._authService.user.UserName)
@@ -237,5 +263,8 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit {
     const secondsToMinutes = seconds / 60;
     if(secondsToMinutes%2==0) this.incrementValue+=0.1
     return this.incrementValue;
+  }
+  override ngOnDestroy(): void {
+    this._sharedService.destroy()
   }
 }

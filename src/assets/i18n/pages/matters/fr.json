@@ -1,5 +1,30 @@
 {
   "matters":{
-    "title":"Dossiers / Affaires"
+    "title":"Dossiers / Affaires",
+    "addMatter":"Add Matter",
+    "matterCode":"Code Dossiers",
+    "requestType":"Request Type",
+    "matterType":"Matter Type",
+    "parentMatterCode":"Parent Matter Code",
+    "matterCategory":"Matter Category",
+    "description":"Description",
+    "opened":"Opened",
+    "jurisdicion":"Jurisdicion",
+    "stage":"Stage",
+    "matterStatus":"Matter Status",
+    "practiceArea":"Practice Area",
+    "courtNumber":"Court Number",
+    "matterSummary":"Matter Summay",
+    "paymentTerms":"Payment Terms",
+    "defaultTask":"Default Task",
+    "defaultRate":"Default Rate",
+    "amount":"Amount",
+    "rateAmount":"Rate Amount",
+    "referralType":"Referral Type",
+    "clientIntroducing":"Client Introducing",
+    "matterIntroducingLawyer":"Matter Introducing Lawyer",
+    "responsibleLaywer":"Responsible Laywer",
+    "assignedLaywer":"Assigned Laywer",
+    "otherStaff":"Other Staff"
   }
 }

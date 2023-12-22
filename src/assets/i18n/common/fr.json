@@ -7,13 +7,20 @@
     "profile":"Profil",
     "search": "Recherche",
     "noDataAdded":"Il n'y a pas de données ajoutées",
-    "more":"Plus"
+    "more":"Plus",
+    "clientCode":"Code Client",
+    "clientName":"Nom client",
+    "address":"Adresse",
+    "contacts":"Contact",
+    "general":"Données"
   },
   "btn": {
    "save":"Sauvegarder",
    "submit":"Soumettre",
    "send":"Envoyer",
-   "close":"Fermer"
+   "close":"Fermer",
+   "yes":"Oui",
+   "no":"Non"
   },
   "messages": {
     "signInSuccessfully":"Connectez-vous avec succès",
@@ -26,7 +33,8 @@
     "invalidOTP":"OTP non valide",
     "dataMessage": "Totale",
     "error":"Erreur!",
-    "success":"Succès!"
+    "success":"Succès!",
+    "sureDelete":"Etes-vous sûr que vous voulez supprimer?"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

@@ -15,9 +15,10 @@
     [currentPageReportTemplate]="currentPageReportTemplate"
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
+    selectionMode="single"
   >
     <ng-template pTemplate="header" let-columns>
-      <tr>
+      <tr >
         <th *ngIf="withCheckbox || withRadioButton" style="width: 5rem">
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
@@ -40,7 +41,7 @@
       let-columns="columns"
       let-expanded="expanded"
     >
-      <tr>
+      <tr [pSelectableRow]="rowData">
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>

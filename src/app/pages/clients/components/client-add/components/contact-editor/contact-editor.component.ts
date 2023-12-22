@@ -81,7 +81,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
             key: 'Address',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.address'),
+              label: this._languageService.getTransValue('common.address'),
               placeholder: this._languageService.getTransValue('client.addressPlaceholder'),
               required: true,
             },

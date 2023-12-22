@@ -1,0 +1,25 @@
+<shared-card [borderRadius]="20" [title]="'matters.addMatter' | translate">
+  <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+    <formly-form
+      [form]="formly"
+      [fields]="formlyFields"
+      [model]="formlyModel"
+    ></formly-form>
+    <p-tabView body>
+      <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
+          <app-matter-editor-general *ngIf="i==0"></app-matter-editor-general>
+          <app-matter-editor-address *ngIf="i==1"></app-matter-editor-address>
+          <app-matter-editor-contracts *ngIf="i==2"></app-matter-editor-contracts>
+          <app-matter-editor-payment-terms *ngIf="i==3"></app-matter-editor-payment-terms>
+      </p-tabPanel>
+    </p-tabView>
+    <div class="mt-4 text-end">
+      <p-button
+        [loading]="isSubmit"
+        styleClass="p-button-primary d-block py-3"
+        type="submit"
+        label="{{ 'btn.submit' | translate }}"
+      ></p-button>
+    </div>
+  </form>
+</shared-card>

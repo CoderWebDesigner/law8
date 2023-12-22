@@ -1,11 +1,12 @@
-<div class="d-flex">
-  <div class="align-self-center">
+<div class="d-flex flex-column timer">
+  <div class="bg-white pt-2 pb-4 rounded text-center timer-box">
     <span
+    class="fs-3"
     [ngClass]="{'text-warning':!start&&seconds==0,'text-success':start,'text-danger':!start&&time!=0}"
     >{{(hours>9)?hours:'0'+hours}}:{{(minutes>9)?minutes:'0'+minutes }}:{{(seconds>9)?seconds:'0'+seconds}}</span>
   </div>
-  <div class="d-flex">
-    <p-button icon="pi pi-play" *ngIf="!start" (onClick)="play()" styleClass="mx-2 bg-success border-success"></p-button>
-    <p-button icon="pi pi-stop" *ngIf="start" (onClick)="stop()" styleClass="mx-2 bg-danger border-danger"></p-button>
+  <div class="text-center timer-btns">
+    <p-button icon="pi pi-play" *ngIf="!start" (onClick)="play()" styleClass="bg-white text-success border-success px-5 py-1"></p-button>
+    <p-button icon="pi pi-stop" *ngIf="start" (onClick)="stop()" styleClass="bg-white text-danger border-danger px-5 py-1"></p-button>
   </div>
 </div>

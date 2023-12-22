@@ -32,7 +32,8 @@ import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 import { FormlyTableFieldComponent } from './components/formly-table-field/formly-table-field.component';
 import { TableModule } from 'primeng/table';
 import { FormlyTimerFieldComponent } from './components/formly-timer-field/formly-timer-field.component';
-import { InputMaskModule } from 'primeng/inputmask';
+import { FormlyMultiSelectFieldComponent } from './components/formly-multi-select-field/formly-multi-select-field.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
@@ -49,7 +50,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     FormlyOtpFieldComponent,
     FormlyPasswordFieldComponent,
     FormlyTableFieldComponent,
-    FormlyTimerFieldComponent
+    FormlyTimerFieldComponent,
+    FormlyMultiSelectFieldComponent
   ],
   imports: [
     CommonModule,
@@ -77,6 +79,7 @@ import { InputMaskModule } from 'primeng/inputmask';
         { name: 'password', component: FormlyPasswordFieldComponent, extends: 'input' },
         { name: 'table', component: FormlyTableFieldComponent },
         { name: 'timer', component: FormlyTimerFieldComponent },
+        { name: 'multi-select', component: FormlyMultiSelectFieldComponent },
 
       ]
     }),
@@ -95,7 +98,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     SelectButtonModule,
     PasswordModule,
     TableModule,
-    InputMaskModule
+    MultiSelectModule
   ],
   exports: [
     ReactiveFormsModule,
