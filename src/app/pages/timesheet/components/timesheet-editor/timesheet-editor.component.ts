@@ -204,7 +204,7 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
                   props: {
                     iconOnly: true,
                     class: 'text-danger bg-transparent border-0 p-2',
-                    icon: 'pi pi-trash',
+                    icon: 'pi pi-trash fs-4',
                     onClick: (field) => {
                       Swal.fire({
                         showDenyButton: true,
