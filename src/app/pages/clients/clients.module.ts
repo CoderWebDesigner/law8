@@ -17,7 +17,7 @@ import { ClientDetailsContactsComponent } from './components/client-details/comp
 import { ClientDetailsRelatedMattersComponent } from './components/client-details/components/client-details-related-matters/client-details-related-matters.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { ClientAddCompanyAddressComponent } from './components/client-add/components/client-add-company-address/client-add-company-address.component';
-import { AddressEditorComponent } from './components/client-add/components/address-editor/address-editor.component';
+import { ClientAddressEditorComponent } from './components/client-add/components/client-add-billing-address/client-address-editor/client-address-editor.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ClientAddBillingAddressComponent } from './components/client-add/components/client-add-billing-address/client-add-billing-address.component';
 import { ClientAddContactsComponent } from './components/client-add/components/client-add-contacts/client-add-contacts.component';
@@ -33,7 +33,7 @@ import { ContactEditorComponent } from './components/client-add/components/conta
     ClientDetailsContactsComponent,
     ClientDetailsRelatedMattersComponent,
     ClientAddCompanyAddressComponent,
-    AddressEditorComponent,
+    ClientAddressEditorComponent,
     ClientAddBillingAddressComponent,
     ClientAddContactsComponent,
     ContactEditorComponent,

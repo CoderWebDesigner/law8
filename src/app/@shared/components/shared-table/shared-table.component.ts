@@ -67,6 +67,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   actionsTemplateRef: TemplateRef<any>;
 
 
+  @Input() selectMode:string=''
   @Input() paginationClient: boolean = false;
   @Input() mapData: (args: any) => any;
 
@@ -77,7 +78,6 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   @Input() withPlaceholder:boolean
   @Input() defaultSelected: any;
   @Output() onRowSelect: any = new EventEmitter();
-
 
   @ViewChild('dt') dt: Table;
   @Input() isLoading: boolean = false;
@@ -141,7 +141,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     console.log(dateColumns)
     dateColumns.forEach(obj=>{
       this.data.forEach(data=>{
-        if(obj['field']){
+        if(obj['field']&&obj['field']?.match(/\d+/)?.length>0){
           data[obj['field']]=new Date(parseInt(obj['field']?.match(/\d+/)[0], 10))
         }
       })

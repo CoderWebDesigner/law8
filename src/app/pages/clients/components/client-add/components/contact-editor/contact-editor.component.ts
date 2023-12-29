@@ -60,7 +60,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
             key: 'PartiesObj',
             type: 'select',
             props: {
-              label: this._languageService.getTransValue('client.parties'),
+              label: this._languageService.getTransValue('common.parties'),
               placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
               options: this.lookupsData,
               required: true,
@@ -81,7 +81,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
             key: 'Address',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.address'),
+              label: this._languageService.getTransValue('common.address'),
               placeholder: this._languageService.getTransValue('client.addressPlaceholder'),
               required: true,
             },

@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'timesheet',
     loadChildren: () => import('./timesheet/timesheet.module').then((m) => m.TimesheetModule)
   },
+  {
+    path: 'matters',
+    loadChildren: () => import('./matters/matters.module').then((m) => m.MattersModule)
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

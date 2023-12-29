@@ -17,11 +17,13 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MattersComponent } from './components/matters/matters.component';
 @NgModule({
   declarations: [
     TimesheetComponent,
     TimesheetEditorComponent,
-    StopWatchComponent
+    StopWatchComponent,
+    MattersComponent
   ],
   imports: [
     CommonModule,

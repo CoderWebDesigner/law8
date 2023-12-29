@@ -4,4 +4,7 @@
   pInputTextarea
   [formControl]="formControl"
   [formlyAttributes]="field"
+  (input)="input($event)"
+  [readOnly]="props['readOnly']"
+  [class]="props['class']"
 ></textarea>

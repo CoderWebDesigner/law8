@@ -10,6 +10,11 @@
         "timesheet":{
           "title":"TimeSheet",
           "timesheetAdd":"TimeSheet Add"
+        },
+        "matters":{
+          "title":"Matters",
+          "matterList":"Matter List",
+          "matterAdd":"New Matter"
         }
     }
 }

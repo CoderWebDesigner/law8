@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiService } from "@core/api/api.service";
 import { AuthService, LanguageService, ToasterService } from "@core/services";
-import { FormlyFieldConfig } from "@ngx-formly/core";
+import { FormlyFieldConfig, FormlyFormOptions } from "@ngx-formly/core";
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { Subject, finalize, takeUntil } from "rxjs";
 @Component({
@@ -18,6 +18,7 @@ export abstract class FormBaseClass implements OnDestroy{
     formly: FormGroup = new FormGroup({});
     formlyModel:any = {};
     formlyFields: FormlyFieldConfig[] = []
+    formlyOption:FormlyFormOptions={}
 
     lookupsData: any = []
 

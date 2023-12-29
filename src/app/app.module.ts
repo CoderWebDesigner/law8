@@ -18,6 +18,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/dashboard/',
     './assets/i18n/pages/client/',
     './assets/i18n/pages/timesheet/',
+    './assets/i18n/pages/matters/',
   ]);
 }
 @NgModule({

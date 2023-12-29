@@ -7,12 +7,21 @@
     "profile":"الملف الشخصى",
     "search": "بحث",
     "noDataAdded":"لا يوجد بيانات مضافة",
-    "more":"المزيد"
+    "more":"المزيد",
+    "clientCode":"رقم العميل",
+    "clientName":"اسم العميل",
+    "address":"عنوان",
+    "contacts":"جهات الاتصال",
+    "general":"عام",
+    "parties":"Parties",
+    "relatedMatters":"قضايا ذات صلة"
   },
   "btn": {
     "submit": "تاكيد",
     "send": "ارسال",
-    "close":"يغلق"
+    "close":"يغلق",
+    "yes":"نعم",
+   "no":"لا"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -25,7 +34,8 @@
     "invalidOTP": "OTP غير صالح",
     "dataMessage": "المجموع الكلى",
     "error":"خطأ!",
-    "success":"نجاح!"
+    "success":"نجاح!",
+    "sureDelete":"هل أنت متأكد أنك تريد حذف؟"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",

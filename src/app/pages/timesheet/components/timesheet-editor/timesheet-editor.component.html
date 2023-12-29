@@ -1,91 +1,20 @@
-<p-table
-  [value]="data"
-  dataKey="id"
-  [tableStyle]="{ 'min-width': '50rem' }"
-  scrollable="true"
-  scrollWidth="1000"
->
-  <ng-template pTemplate="header">
-    <tr>
-      <ng-container *ngFor="let col of getColumns(columnsLocalized)">
-        <th [pSortableColumn]="col.field" style="width: 20%">
-          {{ col.header }}
-          <p-sortIcon [field]="col.field"></p-sortIcon>
-        </th>
-      </ng-container>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-row>
-    <tr>
-      <td>
-        <app-stop-watch [stopInterval]="row.timing" (click)="onStart(row)"></app-stop-watch>
-      </td>
-      <td>
-        <p-calendar
-          [(ngModel)]="row.code"
-          appendTo="body"
-          [baseZIndex]="1009"
-        ></p-calendar>
-      </td>
-      <td>
-        <p-dropdown
-          [(ngModel)]="row.inventoryStatu"
-          label=""
-          [options]="statuses"
-          placeholder="Any"
-        >
-        </p-dropdown>
-      </td>
-      <td>
-        {{ row.price }}
-      </td>
-      <td>
-        <p-dropdown
-          [(ngModel)]="row.inventoryStatu"
-          label=""
-          [options]="statuses"
-          placeholder="Any"
-        >
-        </p-dropdown>
-      </td>
-      <td>
-        <p-dropdown
-          [(ngModel)]="row.inventoryStatu"
-          label=""
-          [options]="statuses"
-          placeholder="Any"
-        >
-        </p-dropdown>
-      </td>
-      <td>
-        <p-inputNumber [(ngModel)]="row.inventoryStatus" mode="decimal">
-        </p-inputNumber>
-      </td>
-      <td>
-        <p-inputNumber [(ngModel)]="row.inventoryStatus" mode="decimal">
-        </p-inputNumber>
-      </td>
-      <td>
-        {{ row.inventoryStatus }}
-      </td>
-      <td>
-        <textarea
-          rows="5"
-          cols="30"
-          pInputTextarea
-          [(ngModel)]="row.price"
-          (change)="addRow()"
-        ></textarea>
-      </td>
 
-      <td>
-        <textarea
-          rows="5"
-          cols="30"
-          pInputTextarea
-          [(ngModel)]="row.price"
-        ></textarea>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+<shared-card [title]="'timesheet.addTimeSheet'|translate" borderRadius="20">
+  <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+    <formly-form
+      [form]="formly"
+      [fields]="formlyFields"
+      [model]="formlyModel"
+    ></formly-form>
+    <div class="mt-4 text-end">
+      <p-button
+        [loading]="isSubmit"
+        styleClass="p-button-primary d-block py-3"
+        type="submit"
+        label="{{ 'btn.submit' | translate }}"
+      ></p-button>
+    </div>
+  </form>
+</shared-card>
+
+

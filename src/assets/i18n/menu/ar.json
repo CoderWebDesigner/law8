@@ -10,6 +10,11 @@
         "timesheet":{
           "title":"سجل الوقت",
           "timesheetAdd":"اضافة سجل الوقت"
+        },
+        "matters":{
+          "title":"القضايا / المواضيع",
+          "matterList":"قائمة القضايا / المواضيع",
+          "mattersAdd":"قضيه / موضوع جديد"
         }
     }
 }

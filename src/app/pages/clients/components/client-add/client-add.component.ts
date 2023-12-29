@@ -16,10 +16,10 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   apiUrls = API_Config.client;
   _clientService = inject(ClientService)
   items: MenuItem[] = [
-    // { label: this._languageService.getTransValue('client.general') },
+    // { label: this._languageService.getTransValue('common.general') },
     { label: this._languageService.getTransValue('client.companyAddress') },
     { label: this._languageService.getTransValue('client.billingAddress') },
-    { label: this._languageService.getTransValue('client.contacts') },
+    { label: this._languageService.getTransValue('common.contacts') },
   ];
   companyAddress:any;
   billingAddress:any;
@@ -53,7 +53,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
             key: 'CardName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.clientName'),
+              label: this._languageService.getTransValue('common.clientName'),
               placeholder: this._languageService.getTransValue('client.clientNamePlaceholder'),
               required: true,
             },

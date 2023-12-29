@@ -15,14 +15,15 @@
     [currentPageReportTemplate]="currentPageReportTemplate"
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
+    [selectionMode]="selectMode"
   >
     <ng-template pTemplate="header" let-columns>
-      <tr>
+      <tr >
         <th *ngIf="withCheckbox || withRadioButton" style="width: 5rem">
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field" style="min-width: 200px" *ngIf="!col.isExpand">
+          <th [pSortableColumn]="col.field" [style]="col.style||{'min-width': '200px'}" *ngIf="!col.isExpand">
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
@@ -40,7 +41,7 @@
       let-columns="columns"
       let-expanded="expanded"
     >
-      <tr>
+      <tr [pSelectableRow]="rowData">
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>

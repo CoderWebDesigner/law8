@@ -1,141 +1,151 @@
-
 export const Timesheet_Editor_Columns_EN = [
   {
     header: 'Timer',
-    field: 'Timer',
+    style:''
   },
   {
     header: 'Date',
-    field: 'Date'
+    style:''
   },
   {
     header: 'Matter',
-    field: 'Matter',
+    style:''
   },
   {
     header: 'Client Name',
-    field: 'ClientName',
+    style:''
   },
   {
     header: 'Lawyer',
-    field: 'Lawyer',
+    style:''
   },
   {
     header: 'Task',
-    field: 'Task',
+    style:''
   },
   {
     header: 'Hours',
-    field: 'Hours',
+    style:{'min-width':'90px'}
   },
   {
     header: 'Rate',
-    field: 'Rate',
+    style:{'min-width':'90px'}
   },
   {
     header: 'Amount',
-    field: 'Amount',
+    style:{'min-width':'90px'}
+
   },
   {
     header: 'Explanation',
-    field: 'Explanation',
+    style:{'min-width':'400px'}
   },
   {
     header: 'Notes',
-    field: 'Notes',
+    style:{'min-width':'400px'}
   },
+  // {
+  //   header:'Actions'
+  // }
 ];
 
 export const Timesheet_Editor_Columns_FR = [
   {
-    header: 'Timer',
-    field: 'Timer',
+    header: 'Minuteur',
+    style:''
   },
   {
-    header: 'Date',
-    field: 'Date'
+    header: 'date',
+    style:''
   },
   {
-    header: 'Matter',
-    field: 'Matter',
+    header: 'Matière',
+    style:''
   },
   {
-    header: 'Client Name',
-    field: 'ClientName',
+    header: 'Nom du client',
+    style:''
   },
   {
-    header: 'Lawyer',
-    field: 'Lawyer',
+    header: 'Avocate',
+    style:''
   },
   {
-    header: 'Task',
-    field: 'Task',
+    header: 'Tâche',
+    style:''
   },
   {
-    header: 'Hours',
-    field: 'Hours',
+    header: 'Heures',
+    style:''
   },
   {
-    header: 'Rate',
-    field: 'Rate',
+    header: 'Taux',
+    style:''
   },
   {
-    header: 'Amount',
-    field: 'Amount',
+    header: 'Montante',
+    style:''
   },
   {
-    header: 'Explanation',
-    field: 'Explanation',
+    header: 'Explication',
+    style:{'min-width':'400px'}
   },
   {
-    header: 'Notes',
-    field: 'Notes',
+    header: 'Remarques',
+    style:{'min-width':'400px'}
   },
+  // {
+  //   header:'Actions'
+  // }
 ];
 
 export const Timesheet_Editor_Columns_AR = [
   {
     header: 'العداد',
-    field: 'Timer',
+    style:''
   },
   {
     header: 'التاريخ',
-    field: 'Date'
+    style:''
   },
   {
     header: 'القضايا / المواضيع',
-    field: 'Matter',
+    style:''
   },
   {
     header: 'اسم العميل',
-    field: 'ClientName',
+    style:''
   },
   {
     header: 'المحامي',
-    field: 'Lawyer',
+    style:''
   },
   {
     header: 'مهمة',
-    field: 'Task',
+    style:''
   },
   {
     header: 'ساعات',
-    field: 'Hours',
+    style:''
   },
   {
     header: 'معدل',
-    field: 'Rate',
+    style:''
   },
   {
     header: 'كمية',
-    field: 'Amount',
+    style:''
   },
   {
     header: 'توضيح',
-    field: 'Explanation',
+    style:{'min-width':'400px'}
   },
   {
     header: 'ملحوظات',
-    field: 'Notes',
+    style:{'min-width':'400px'}
   },
+  // {
+  //   header:'أجراءات'
+  // }
 ];
+

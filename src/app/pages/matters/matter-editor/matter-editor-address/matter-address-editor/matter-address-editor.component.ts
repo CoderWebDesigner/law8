@@ -1,21 +1,21 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ClientService } from '@shared/services/client.service';
+import { MatterService } from '@shared/services/matter/matter.service';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-address-editor',
-  templateUrl: './address-editor.component.html',
-  styleUrls: ['./address-editor.component.scss']
+  selector: 'app-matter-address-editor',
+  templateUrl: './matter-address-editor.component.html',
+  styleUrls: ['./matter-address-editor.component.scss']
 })
-export class AddressEditorComponent extends FormBaseClass implements OnInit {
+export class MatterAddressEditorComponent extends FormBaseClass implements OnInit{
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.client;
-  _clientService = inject(ClientService)
+  _matterService = inject(MatterService)
   _config = inject(DynamicDialogConfig)
   address: any[] = []
   ngOnInit(): void {
@@ -120,13 +120,7 @@ export class AddressEditorComponent extends FormBaseClass implements OnInit {
     if (this.formly.valid) {
       this.formlyModel = {...this.formlyModel,Address:"1701041471252"}
       this.address.push(this.formlyModel)
-      if (this._config?.data?.type == 'company') {
-        this._clientService.companyAddress$.next(this.address)
-
-      } else {
-        this._clientService.billingAddress$.next(this.address)
-      }
-
+      this._matterService.address$.next(this.address)
       this._DialogService.dialogComponentRefMap.forEach(dialog => {
         dialog.destroy();
       });
@@ -144,5 +138,4 @@ export class AddressEditorComponent extends FormBaseClass implements OnInit {
       }
     })
   }
-
 }

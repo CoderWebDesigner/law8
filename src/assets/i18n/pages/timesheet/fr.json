@@ -1,5 +1,6 @@
 {
   "timesheet":{
-    "title":"Compteur horaire"
+    "title":"Compteur horaire",
+    "addTimeSheet":"Ajouter la feuille de temps"
   }
 }

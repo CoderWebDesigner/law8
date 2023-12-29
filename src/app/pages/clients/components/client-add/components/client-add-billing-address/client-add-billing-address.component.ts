@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { AddressEditorComponent } from '../address-editor/address-editor.component';
+import { ClientAddressEditorComponent } from './client-address-editor/client-address-editor.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
 import { ClientService } from '@shared/services/client.service';
@@ -44,7 +44,7 @@ export class ClientAddBillingAddressComponent implements OnInit, OnDestroy {
     })
   }
   openDialog() {
-     this._dialogService.open(AddressEditorComponent, {
+     this._dialogService.open(ClientAddressEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('client.addBillingAddress'),
       data:{

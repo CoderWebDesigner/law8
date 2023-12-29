@@ -31,6 +31,13 @@ import { PasswordModule } from 'primeng/password';
 import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 import { FormlyTableFieldComponent } from './components/formly-table-field/formly-table-field.component';
 import { TableModule } from 'primeng/table';
+import { FormlyTimerFieldComponent } from './components/formly-timer-field/formly-timer-field.component';
+import { FormlyMultiSelectFieldComponent } from './components/formly-multi-select-field/formly-multi-select-field.component';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormlyCheckboxFieldComponent } from './components/formly-checkbox-field/formly-checkbox-field.component';
+import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -44,10 +51,13 @@ import { TableModule } from 'primeng/table';
     FormlyUploadProfileFieldComponent,
     FormlyUploadProfileFieldComponent,
     FormlyPhoneFieldComponent,
-    // FormlyFileFieldComponent,
+    FormlyFileFieldComponent,
     FormlyOtpFieldComponent,
     FormlyPasswordFieldComponent,
-    FormlyTableFieldComponent
+    FormlyTableFieldComponent,
+    FormlyTimerFieldComponent,
+    FormlyMultiSelectFieldComponent,
+    FormlyCheckboxFieldComponent
   ],
   imports: [
     CommonModule,
@@ -69,11 +79,14 @@ import { TableModule } from 'primeng/table';
         { name: 'button', component: FormlyButtonFieldComponent },
         { name: 'select-button', component: FormlySelectButtonFieldComponent, extends: 'input' },
         { name: 'phone', component: FormlyPhoneFieldComponent, extends: 'input' },
-        // { name: 'file', component: FormlyFileFiledComponent , extends: 'input'},
+        { name: 'file', component: FormlyFileFieldComponent , extends: 'input'},
         // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
         { name: 'otp', component: FormlyOtpFieldComponent, extends: 'input' },
         { name: 'password', component: FormlyPasswordFieldComponent, extends: 'input' },
-        { name: 'table', component: FormlyTableFieldComponent, extends: 'input' }
+        { name: 'table', component: FormlyTableFieldComponent },
+        { name: 'timer', component: FormlyTimerFieldComponent },
+        { name: 'multi-select', component: FormlyMultiSelectFieldComponent , extends: 'input'},
+        { name: 'checkbox', component: FormlyCheckboxFieldComponent },
 
       ]
     }),
@@ -86,17 +99,19 @@ import { TableModule } from 'primeng/table';
     RadioButtonModule,
     InputTextareaModule,
     CalendarModule,
-    // NgxDropzoneModule,
+    NgxDropzoneModule,
     NgxIntlTelInputModule,
     NgOtpInputModule,
     SelectButtonModule,
     PasswordModule,
-    TableModule
+    TableModule,
+    MultiSelectModule,
+    CheckboxModule
   ],
   exports: [
     ReactiveFormsModule,
     FormlyModule,
-    // NgxDropzoneModule
+    NgxDropzoneModule
 
   ],
   providers: [

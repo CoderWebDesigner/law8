@@ -21,14 +21,7 @@ export class StopWatchComponent implements OnInit,OnChanges{
   time: number = 0;
   @Input() stopInterval:boolean;
 
-  ngOnInit(): void {
-    // this._sharedService?.timerWorking$.subscribe({
-    //   next: (res: boolean) => {
-    //     this.start = res
-    //     console.log('start',this.start)
-    //   }
-    // })
-  }
+  ngOnInit(): void {}
   play() {
     if(!this.start){
       this.start=true

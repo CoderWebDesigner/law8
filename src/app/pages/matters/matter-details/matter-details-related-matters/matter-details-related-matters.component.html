@@ -1,0 +1,11 @@
+
+
+<shared-card [title]="'common.relatedMatters' | translate" [borderRadius]="20">
+  <shared-search-input headerActions></shared-search-input>
+  <shared-table
+    body
+    [data]="data"
+    [columnsLocalized]="columnsLocalized"
+    [paginationClient]="true"
+  ></shared-table>
+</shared-card>

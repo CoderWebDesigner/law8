@@ -111,3 +111,31 @@ label .ng-star-inserted {
   #{$right}: 0.75rem;
   #{$left}:unset
 }
+
+input[readonly],textarea[readonly]{
+  all:unset;
+  &:focus{
+    box-shadow: none;
+  }
+}
+// .form-table{
+// }
+
+.p-component{
+  &:disabled{
+    background:#eaeaea
+  }
+}
+.reset-input{
+  // all:unset;
+  border: 0;
+  .p-dropdown-trigger,.p-dropdown-clear-icon,.p-multiselect-trigger,.p-multiselect-clear-icon{
+    display: none;
+  }
+  &:focus{
+    box-shadow: none;
+  }
+}
+.p-checkbox{
+  margin: 0 10px;
+}
