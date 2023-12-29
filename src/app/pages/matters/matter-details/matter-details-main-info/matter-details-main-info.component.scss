@@ -1,0 +1,5 @@
+:host ::ng-deep {
+  input[readonly],textarea[readonly],.reset-input{
+    font-weight: bold;
+  }
+}

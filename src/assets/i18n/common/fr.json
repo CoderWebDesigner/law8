@@ -12,7 +12,9 @@
     "clientName":"Nom client",
     "address":"Adresse",
     "contacts":"Contact",
-    "general":"Données"
+    "general":"Données",
+    "parties":"Parties",
+    "relatedMatters": "Related Matters"
   },
   "btn": {
    "save":"Sauvegarder",

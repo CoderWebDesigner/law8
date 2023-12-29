@@ -15,7 +15,7 @@
     [currentPageReportTemplate]="currentPageReportTemplate"
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
-    selectionMode="single"
+    [selectionMode]="selectMode"
   >
     <ng-template pTemplate="header" let-columns>
       <tr >
@@ -23,7 +23,7 @@
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field" style="min-width: 200px" *ngIf="!col.isExpand">
+          <th [pSortableColumn]="col.field" [style]="col.style||{'min-width': '200px'}" *ngIf="!col.isExpand">
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>

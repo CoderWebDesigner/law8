@@ -6,7 +6,6 @@ import { SkeletonModule } from 'primeng/skeleton';
 import {
   DialogService,
   DynamicDialogConfig,
-  DynamicDialogModule,
   DynamicDialogRef,
 } from 'primeng/dynamicdialog';
 import { SharedActionsComponent } from './components/shared-actions/shared-actions.component';
@@ -20,7 +19,8 @@ const components: any = [
   SharedActionsComponent,
   LanguageBindPipe,
   SuccessActionPopupComponent,
-  SharedNoDataComponent
+  SharedNoDataComponent,
+  MoreInfoComponent
 ];
 
 // const components: any = [];
@@ -28,7 +28,7 @@ const components: any = [
 const modules = [TranslateModule, ButtonModule, SkeletonModule, RouterModule];
 
 @NgModule({
-  declarations: [...components, MoreInfoComponent],
+  declarations: [...components],
   imports: [CommonModule, ...modules],
   exports: [...components, ...modules],
   providers: [
@@ -38,4 +38,4 @@ const modules = [TranslateModule, ButtonModule, SkeletonModule, RouterModule];
     LanguageBindPipe,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

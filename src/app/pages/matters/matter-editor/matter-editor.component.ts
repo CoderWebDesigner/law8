@@ -218,5 +218,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit{
   override onSubmit(): void {
     throw new Error('Method not implemented.');
   }
+  getFormData(data:any){
+    console.log('data',data)
+  }
 
 }

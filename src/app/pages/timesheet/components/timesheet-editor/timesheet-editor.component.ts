@@ -9,6 +9,7 @@ import { TimesheetService } from '@shared/services/timesheet.service';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
 import Swal from 'sweetalert2';
+import { SharedMatterTableComponent } from '@shared/components/business/shared-matter-table/shared-matter-table.component';
 
 @Component({
   selector: 'app-timesheet-editor',
@@ -85,6 +86,7 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
               className: 'd-block',
               props: {
                 required: true,
+                filter:false,
                 options: [
                   { label: '00000-001', value: '00000-001' },
                   { label: '00000-002', value: '00000-002' },
@@ -92,7 +94,7 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
                 ],
                 onChange: (e, field) => {
                   if (e.value == 'All Matters') {
-                    this._DialogService.open(MattersComponent, {
+                    this._DialogService.open(SharedMatterTableComponent, {
                       width: '70%',
                       data:{
                         selectRow:true
@@ -111,6 +113,7 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
               type: 'input',
               props: {
                 readonly: true,
+                class:'custom-width'
               }
             },
             {
@@ -146,7 +149,6 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
                 type: 'number',
                 step: 0.1,
                 required: true,
-                class:"w-50"
               },
               hooks: {
                 onInit: (field: FormlyFieldConfig) => {
@@ -167,7 +169,6 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
               props: {
                 type: 'number',
                 required: true,
-                class:"w-50"
               }
             },
             {
@@ -175,6 +176,7 @@ export class TimesheetEditorComponent extends FormBaseClass implements OnInit,On
               type: 'input',
               props: {
                 readonly: true,
+                class:'w-25'
               }
             },
             {

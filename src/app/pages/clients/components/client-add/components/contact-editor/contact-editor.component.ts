@@ -60,7 +60,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
             key: 'PartiesObj',
             type: 'select',
             props: {
-              label: this._languageService.getTransValue('client.parties'),
+              label: this._languageService.getTransValue('common.parties'),
               placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
               options: this.lookupsData,
               required: true,

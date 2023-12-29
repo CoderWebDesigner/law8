@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-matter-editor-general',
@@ -8,20 +9,22 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
   styleUrls: ['./matter-editor-general.component.scss']
 })
 export class MatterEditorGeneralComponent extends FormBaseClass implements OnInit{
+  _sharedService=inject(SharedService);
+  @Output() onFormSubmit = new EventEmitter()
   ngOnInit(): void {
     this.initForm()
+    this.detectFormChange()
+  }
+  detectFormChange(){
+    this.formly.valueChanges.pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:res=>{
+        this.onSubmit()
+      }
+    })
   }
   override initForm(): void {
-    // "defaultTask":"Default Task",
-  // "defaultRate":"Default Rate",
-  // "amount":"Amount",
-  // "rateAmount":"Rate Amount",
-  // "referralType":"Referral Type",
-  // "clientIntroducing":"Client Introducing",
-  // "matterIntroducingLawyer":"Matter Introducing Lawyer",
-  // "responsibleLaywer":"Responsible Laywer",
-  // "assignedLaywer":"Assigned Laywer",
-  // "otherStaff":"Other Staff"
     this.formlyFields=[
       {
         fieldGroupClassName:'row',
@@ -175,8 +178,9 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
       }
     ]
   }
+
   override onSubmit(): void {
-    throw new Error('Method not implemented.');
+    this.onFormSubmit.emit(this.formlyModel)
   }
 
 }

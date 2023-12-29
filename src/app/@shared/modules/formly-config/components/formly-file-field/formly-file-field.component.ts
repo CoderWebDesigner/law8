@@ -3,7 +3,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-formly-file-field',
-  templateUrl:''./formly-file-field.component.html',
+  templateUrl:'./formly-file-field.component.html',
   styleUrls: ['./formly-file-field.component.scss'],
 })
 export class FormlyFileFieldComponent extends FieldType<FieldTypeConfig> {

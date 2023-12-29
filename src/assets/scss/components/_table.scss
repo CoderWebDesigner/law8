@@ -8,3 +8,8 @@
     text-align: unset;
 
 }
+.p-datatable .p-datatable-tbody > tr{
+  &:focus{
+    outline: none;
+  }
+}

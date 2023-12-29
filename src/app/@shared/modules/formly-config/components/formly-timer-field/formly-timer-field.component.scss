@@ -1,13 +1,30 @@
 @import "/src/assets/scss/helpers/variables";
-span{
-  font-size: 1.25rem;
-}
-.timer{
-  &-box{
-    border: 1px solid #d8d8d8;
+// span{
+//   font-size: 1.25rem;
+// }
+// .timer{
+//   &-box{
+//     border: 1px solid #d8d8d8;
 
+//   }
+//   &-btns{
+//     margin-top: -20px;
+//   }
+// }
+@import url('https://fonts.googleapis.com/css2?family=Stick+No+Bills&display=swap');
+.timer{
+  border: 1px solid #d8d8d8;
+  span{
+    width: 38px;
+    height: 38px;
+    box-shadow: 1px 1px 10px #ddd;
+    font-family: 'Stick No Bills', sans-serif;
   }
-  &-btns{
-    margin-top: -20px;
+}
+:host ::ng-deep {
+  button{
+    width: 38px;
+    height: 38px;
+
   }
 }

@@ -3,7 +3,7 @@
     "title":"Clients",
     "clientDetails":"Client Details",
     "documents":"Documents",
-    "relatedMatters":"Related Matters",
+
     "clientFName":"Client First Name",
     "groupCode":"Group Code",
     "addClientIntake":"Add Client Intake",
@@ -51,7 +51,6 @@
     "statePlaceholder":"Please Select State",
     "zipCode":"Zip Code",
     "zipCodePlaceholder":"Please Enter Zip Code",
-    "parties":"Parties",
     "partiesPlaceholder":"Please Select Parties",
     "position":"Position",
     "positionPlaceholder":"Please Enter Position",
