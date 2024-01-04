@@ -1,0 +1,16 @@
+<form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+  <formly-form
+    [form]="formly"
+    [fields]="formlyFields"
+    [model]="formlyModel"
+  ></formly-form>
+  <app-matter-details-invoice-sales-items [invoiceType]="formlyModel.invoiceType" *ngIf="formlyModel.invoiceType"></app-matter-details-invoice-sales-items>
+  <div class="mt-4 text-end">
+    <p-button
+      [loading]="isSubmit"
+      styleClass="p-button-primary d-block py-3"
+      type="submit"
+      label="{{ 'btn.submit' | translate }}"
+    ></p-button>
+  </div>
+</form>

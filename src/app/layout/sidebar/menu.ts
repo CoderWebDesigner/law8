@@ -76,6 +76,26 @@ export const MENU: MenuItem[] = [
           }
       ]
     },
+    {
+        id: 5,
+        label: 'menu.taskManagement.title',
+        icon: 'activity.svg',
+        subItems:[
+          {
+              id: 1,
+              label: 'menu.taskManagement.taskManagementList',
+              link: '/task-management',
+              parentId: 5
+          },
+          {
+              id: 2,
+              label: 'menu.taskManagement.taskManagementAdd',
+              link: '/task-management/add',
+              parentId:5
+
+          }
+      ]
+    },
 
 
 

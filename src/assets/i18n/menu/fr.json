@@ -15,6 +15,11 @@
         "title":"Dossiers",
         "matterList":"Liste De Dossiers",
         "mattersAdd":"Nouveau Dossier"
+      },
+      "taskManagement":{
+        "title":"Missions",
+        "taskManagementList":"Liste De Missions",
+        "taskManagementAdd":"Nouveau Mission"
       }
   }
 }

@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'matters',
     loadChildren: () => import('./matters/matters.module').then((m) => m.MattersModule)
   },
+  {
+    path: 'task-management',
+    loadChildren: () => import('./task-management/task-management.module').then((m) => m.TaskManagementModule)
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

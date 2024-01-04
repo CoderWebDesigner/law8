@@ -10,5 +10,6 @@ export class MatterService {
   parties$ = new Subject()
   documents$ = new Subject()
   activity$ = new Subject()
+  invoice$ = new Subject()
   constructor() { }
 }

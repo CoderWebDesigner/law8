@@ -34,6 +34,10 @@ import { MatterDetailsActivityComponent } from './matter-details/matter-details-
 import { MatterDetailsActivityEditorComponent } from './matter-details/matter-details-activity/matter-details-activity-editor/matter-details-activity-editor.component';
 import { MatterDetailsGeneralComponent } from './matter-details/matter-details-general/matter-details-general.component';
 import { MatterDetailsBillingSettingsComponent } from './matter-details/matter-details-billing-settings/matter-details-billing-settings.component';
+import { MatterDetailsInvoiceComponent } from './matter-details/matter-details-invoice/matter-details-invoice.component';
+import { MatterDetailsInvoiceEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-editor.component';
+import { MatterDetailsInvoiceSalesItemsComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-items.component';
+import { MatterDetailsInvoiceSalesEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-editor/matter-details-invoice-sales-editor.component';
 
 
 @NgModule({
@@ -60,7 +64,11 @@ import { MatterDetailsBillingSettingsComponent } from './matter-details/matter-d
     MatterDetailsActivityComponent,
     MatterDetailsActivityEditorComponent,
     MatterDetailsGeneralComponent,
-    MatterDetailsBillingSettingsComponent
+    MatterDetailsBillingSettingsComponent,
+    MatterDetailsInvoiceComponent,
+    MatterDetailsInvoiceEditorComponent,
+    MatterDetailsInvoiceSalesItemsComponent,
+    MatterDetailsInvoiceSalesEditorComponent
   ],
   imports: [
     CommonModule,

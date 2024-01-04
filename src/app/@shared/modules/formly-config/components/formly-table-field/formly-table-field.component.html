@@ -8,6 +8,7 @@
   selectionMode="multiple"
   (onRowSelect)="onRowSelect($event)"
   styleClass="form-table"
+  (onSort)="getSort($event)"
 >
   <ng-template pTemplate="header">
     <tr>
@@ -16,8 +17,8 @@
       </th>
       <ng-container *ngFor="let col of columns">
         <th [pSortableColumn]="col?.field" [ngStyle]="col?.style || {'min-width':'200px'}">
-          {{ col.header }}
-          <p-sortIcon [field]="col?.field"></p-sortIcon>
+          {{ col.header }} - {{col?.field}}
+          <p-sortIcon [field]="col?.field" *ngIf="col?.field"></p-sortIcon>
         </th>
       </ng-container>
       <th></th>
