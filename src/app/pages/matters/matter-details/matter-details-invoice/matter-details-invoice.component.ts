@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
-import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedService } from '@shared/services/shared.service';
 import { DialogService } from 'primeng/dynamicdialog';
-import { MatterDetailsDocumentsEditorComponent } from './matter-details-documents-editor/matter-details-documents-editor.component';
-import { Document_Columns_AR, Document_Columns_EN, Document_Columns_FR } from './document-column.config';
+import { Invoice_Columns_AR, Invoice_Columns_EN, Invoice_Columns_FR } from './invoice-columns.config';
+import { MatterService } from '@shared/services/matter/matter.service';
+import { MatterDetailsInvoiceEditorComponent } from './matter-details-invoice-editor/matter-details-invoice-editor.component';
 
 @Component({
-  selector: 'app-matter-details-documents',
-  templateUrl: './matter-details-documents.component.html',
-  styleUrls: ['./matter-details-documents.component.scss']
+  selector: 'app-matter-details-invoice',
+  templateUrl: './matter-details-invoice.component.html',
+  styleUrls: ['./matter-details-invoice.component.scss']
 })
-export class MatterDetailsDocumentsComponent implements OnInit,OnDestroy {
+export class MatterDetailsInvoiceComponent implements OnInit,OnDestroy {
   data: any[] = [];
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
@@ -19,9 +19,9 @@ export class MatterDetailsDocumentsComponent implements OnInit,OnDestroy {
   _sharedService = inject(SharedService)
 
   columnsLocalized = {
-    en: Document_Columns_EN,
-    ar: Document_Columns_AR,
-    fr: Document_Columns_FR
+    en: Invoice_Columns_EN,
+    ar: Invoice_Columns_AR,
+    fr: Invoice_Columns_FR
   };
   ngOnInit(): void {
     this.getDocuments()
@@ -37,12 +37,13 @@ export class MatterDetailsDocumentsComponent implements OnInit,OnDestroy {
     })
   }
   openDialog() {
-    this._dialogService.open(MatterDetailsDocumentsEditorComponent, {
+    this._dialogService.open(MatterDetailsInvoiceEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('matters.addDocument'),
+      header: this._languageService.getTransValue('matters.addInvoice'),
     })
   }
   ngOnDestroy(): void {
     this._sharedService.destroy()
   }
+
 }

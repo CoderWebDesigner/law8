@@ -90,6 +90,26 @@
     "branch":"Branch",
     "claimAmount":"Claim Amount",
     "notes":"Notes",
-    "frequency":"Frequency"
+    "frequency":"Frequency",
+    "matterDetails":"Matter Details",
+    "addInvoice":"Add Invoice",
+    "customerReference":"Customer Reference",
+    "contactPerson":"Contact Person",
+    "deliveryDate":"Delivery Date",
+    "totalBeforeDiscount":"Total Before Discount",
+    "tax":"Tax",
+    "total":"Total",
+    "itemCode":"Item Code",
+    "itemName":"Item Name",
+    "warehouse":"Warehouse",
+    "quantity":"Quantity",
+    "price":"Price",
+    "vat":"VAT",
+    "totalPrice":"Total Price",
+    "uom":"UOM",
+    "getItemDetail":"Get Item Detail",
+    "invoiceType":"Invoice Type",
+    "salesQuotaionLineItems":"Sales Quotaion Line Items",
+    "salesOrderLineItems":"Sales Order Line Items"
   }
 }

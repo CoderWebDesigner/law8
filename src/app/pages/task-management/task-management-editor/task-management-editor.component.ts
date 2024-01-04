@@ -1,28 +1,34 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedService } from '@shared/services/shared.service';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-matter-details-activity-editor',
-  templateUrl: './matter-details-activity-editor.component.html',
-  styleUrls: ['./matter-details-activity-editor.component.scss']
+  selector: 'app-task-management-editor',
+  templateUrl: './task-management-editor.component.html',
+  styleUrls: ['./task-management-editor.component.scss']
 })
-export class MatterDetailsActivityEditorComponent extends FormBaseClass implements OnInit, OnDestroy {
-  generalApiUrls = API_Config.general;
-  apiUrls = API_Config.client;
+export class TaskManagementEditorComponent extends FormBaseClass implements OnInit, OnDestroy {
   _matterService = inject(MatterService)
+  _sharedService = inject(SharedService)
   _config = inject(DynamicDialogConfig)
-  address: any[] = []
+  address: any[] = [];
+  id:string;
   ngOnInit(): void {
-    this.initForm()
+    this.getParam()
   }
 
+  getParam(){
+    this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
+      next:(res:string)=>{
+        this.id=res['id'];
+        this.initForm()
+      }
+    })
 
+  }
   override initForm(): void {
     this.formlyFields = [
 
@@ -33,7 +39,6 @@ export class MatterDetailsActivityEditorComponent extends FormBaseClass implemen
             type: 'input',
             key: 'matterCode',
             className: 'col-md-4',
-            defaultValue: this._config.data.matterId,
             props: {
               label: this._languageService.getTransValue('matters.matterCode'),
               disabled: true

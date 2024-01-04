@@ -15,6 +15,11 @@
           "title":"القضايا / المواضيع",
           "matterList":"قائمة القضايا / المواضيع",
           "mattersAdd":"قضيه / موضوع جديد"
+        },
+        "taskManagement":{
+          "title":"المهام",
+          "taskManagementList":"قائمة المهام",
+          "taskManagementAdd":"مهمة جديدة"
         }
     }
 }

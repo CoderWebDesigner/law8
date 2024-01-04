@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TimesheetRoutingModule } from './timesheet-routing.module';
 import { TimesheetComponent } from './timesheet.component';
-import { TimesheetEditorComponent } from './components/timesheet-editor/timesheet-editor.component';
+import { TimesheetFormlyEditorComponent } from './components/timesheet-formly-editor/timesheet-formly-editor.component';
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
@@ -18,12 +18,14 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MattersComponent } from './components/matters/matters.component';
+import { TimesheetEditorComponent } from './components/timesheet-editor/timesheet-editor.component';
 @NgModule({
   declarations: [
     TimesheetComponent,
-    TimesheetEditorComponent,
+    TimesheetFormlyEditorComponent,
     StopWatchComponent,
-    MattersComponent
+    MattersComponent,
+    TimesheetEditorComponent
   ],
   imports: [
     CommonModule,

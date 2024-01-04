@@ -37,6 +37,16 @@
           }
         }
       }
+    },
+    {
+      "label": "Create Language Jsons",
+      "type": "shell",
+      "command": "bash",
+      "args": ["create_lang.sh"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
   ]
 }

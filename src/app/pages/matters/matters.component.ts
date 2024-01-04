@@ -13,7 +13,7 @@ export class MattersComponent {
     id: 'Code',
     actions: [
       {
-        title: this._languageService.getTransValue('client.clientDetails'),
+        title: this._languageService.getTransValue('matters.matterDetails'),
         targetType: 'path',
         target: '/matters/view/',
         icon:'eye'

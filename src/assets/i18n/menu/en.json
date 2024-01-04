@@ -15,6 +15,11 @@
           "title":"Matters",
           "matterList":"Matter List",
           "matterAdd":"New Matter"
+        },
+        "taskManagement":{
+          "title":"Task Management",
+          "taskManagementList":"Task Management List",
+          "taskManagementAdd":"New Activity"
         }
     }
 }
