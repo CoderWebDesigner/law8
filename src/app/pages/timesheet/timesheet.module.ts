@@ -11,7 +11,7 @@ import { SharedModule } from '@shared/shared.module';
 import { StopWatchComponent } from './components/stop-watch/stop-watch.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { TableModule } from 'primeng/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
@@ -41,7 +41,8 @@ import { TimesheetEditorComponent } from './components/timesheet-editor/timeshee
     DropdownModule,
     CalendarModule,
     InputNumberModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ReactiveFormsModule
   ]
 })
 export class TimesheetModule { }

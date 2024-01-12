@@ -14,7 +14,8 @@
     "contacts": "Contacts",
     "general": "General",
     "parties": "Parties",
-    "relatedMatters": "Related Matters"
+    "relatedMatters": "Related Matters",
+    "dragAndDrop": "Drag and drop a file here or click"
   },
   "btn": {
     "save": "Save",

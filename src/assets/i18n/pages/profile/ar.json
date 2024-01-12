@@ -1,0 +1,27 @@
+
+{
+  "profile":{
+      "title":"الملف الشخصي",
+      "overview":"تفاصيل",
+      "setting":"الاعدادات",
+      "resetPassword":"تغيير كلمة المرور",
+      "editProfileBtn":"تعديل الملف الشخصي",
+      "progress":"نسبة اكتمال الملف الشخصي",
+      "saveBtn":"حفظ",
+      "editProfile":"تعديل الملف الشخصي",
+      "profileDetails":"تفاصيل الملف الشخصي",
+      "photo":"الصورة",
+      "username":"اسم المستخدم",
+      "role":"الوظيفة",
+      "email":"البريد الالكتروني",
+      "company":"الشركة",
+      "mobileNumber":"رقم الهاتف المحمول",
+      "uploadProfilePic": "تحميل صورة الملف الشخصي",
+      "initials":"Initials",
+      "userId":"User Id",
+      "job":"Job",
+      "department":"Department",
+      "fax":"Fax"
+
+  }
+}

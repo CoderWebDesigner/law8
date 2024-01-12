@@ -1,0 +1,17 @@
+
+
+<form [formGroup]="formly" (ngSubmit)="onSubmit()">
+  <shared-card [title]="'profile.editProfile' | translate" [withTitleDivider]="true">
+      <div headerActions>
+          <button pButton type="submit" class="mx-3">
+              {{'profile.saveBtn'|translate}}
+          </button>
+          <p-button (onClick)="onChangeActiveIndex()">
+              {{'profile.resetPassword'|translate}}
+          </p-button>
+      </div>
+
+      <formly-form body [form]="formly" [fields]="formlyFields" [model]="formlyModel"></formly-form>
+
+  </shared-card>
+</form>

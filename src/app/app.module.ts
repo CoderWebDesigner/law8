@@ -20,6 +20,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/timesheet/',
     './assets/i18n/pages/matters/',
     './assets/i18n/pages/task-management/',
+    './assets/i18n/pages/profile/',
   ]);
 }
 @NgModule({

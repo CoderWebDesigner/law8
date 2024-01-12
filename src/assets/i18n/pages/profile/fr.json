@@ -1,0 +1,26 @@
+
+{
+  "profile": {
+      "title":"Profile",
+      "overview": "Overview",
+      "setting": "Setting",
+      "resetPassword":"Reset Password",
+      "editProfileBtn": "Edit Profile",
+      "progress":"Profile Progress",
+      "saveBtn":"Save",
+      "editProfile":"Edit Profile",
+      "profileDetails":"Profile Details",
+      "photo":"Photo",
+      "username":"User Name",
+      "role":"Role",
+      "email":"Email",
+      "company":"Company",
+      "mobileNumber":"Mobile Number",
+      "uploadProfilePic": "Upload Profile Picture",
+      "initials":"Initials",
+      "userId":"User Id",
+      "job":"Job",
+      "department":"Department",
+      "fax":"Fax"
+  }
+}

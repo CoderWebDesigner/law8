@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'task-management',
     loadChildren: () => import('./task-management/task-management.module').then((m) => m.TaskManagementModule)
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule)
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

@@ -1,0 +1,50 @@
+
+<shared-card [title]="'profile.profileDetails' | translate">
+  <p-button headerActions styleClass="p-button-primary" type="button" (onClick)="onEditProfile()">
+      {{ "profile.editProfile" | translate }}
+  </p-button>
+  <div class="row" body>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.initials"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.initials}}</span>
+      </div>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.username"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.UserName}}</span>
+      </div>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.email"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.Email}}</span>
+      </div>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.mobileNumber"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.MobileNo}}</span>
+      </div>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.job"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.job}}</span>
+      </div>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.department"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.department}}</span>
+      </div>
+      <div class="col-lg-3 mb-4">
+          <span class="fw-semibold label">{{"profile.fax"|translate}}</span>
+      </div>
+      <div class="col-lg-9 mb-4">
+          <span class="fw-bold">{{userInfo?.fax}}</span>
+      </div>
+  </div>
+</shared-card>

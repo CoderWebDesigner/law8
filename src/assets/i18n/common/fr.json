@@ -14,7 +14,8 @@
     "contacts":"Contact",
     "general":"Données",
     "parties":"Parties",
-    "relatedMatters": "Related Matters"
+    "relatedMatters": "Related Matters",
+    "dragAndDrop": "Faites glisser et déposez un fichier ici ou cliquez"
   },
   "btn": {
    "save":"Sauvegarder",

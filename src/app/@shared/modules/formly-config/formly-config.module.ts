@@ -21,9 +21,7 @@ import { FormlyButtonFieldComponent } from './components/formly-button-field/for
 import { FormlySelectButtonFieldComponent } from './components/formly-select-button-field/formly-select-button-field.component';
 import { FormlyPhoneFieldComponent } from './components/formly-phone-field/formly-phone-field.component';
 import { FormlyOtpFieldComponent } from './components/formly-otp-field/formly-otp-field.component';
-// import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
-// import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
-// import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
+
 import { NgOtpInputModule } from 'ng-otp-input';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormlyPasswordFieldComponent } from './components/formly-password-field/formly-password-field.component';
@@ -80,7 +78,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
         { name: 'select-button', component: FormlySelectButtonFieldComponent, extends: 'input' },
         { name: 'phone', component: FormlyPhoneFieldComponent, extends: 'input' },
         { name: 'file', component: FormlyFileFieldComponent , extends: 'input'},
-        // { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
+        { name: 'attachment', component: FormlyUploadProfileFieldComponent, extends: 'input' },
         { name: 'otp', component: FormlyOtpFieldComponent, extends: 'input' },
         { name: 'password', component: FormlyPasswordFieldComponent, extends: 'input' },
         { name: 'table', component: FormlyTableFieldComponent },

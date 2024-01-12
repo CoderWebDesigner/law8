@@ -1,0 +1,39 @@
+<shared-card [borderRadius]="20" [title]="'profile.title'|translate">
+  <div body>
+      <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+              <img [src]="userInfo?.Photo || 'assets/images/user.png'" [alt]="userInfo?.UserName" class="img-fluid" width="150px">
+          </div>
+          <div class="flex-grow-1 ms-3">
+              <div class="user-info p-3">
+                  <h3>{{userInfo?.UserName}}</h3>
+                  <div class="d-flex">
+                      <span class="fw-semibold me-sm-4"><i class="fat fat-user me-2"></i> <span *ngIf="userInfo?.roles?.length>0">{{userInfo?.roles[0]?.name}}</span></span>
+                      <span class="fw-semibold"><i class="fat fat-envelope me-2"></i><span>{{userInfo?.Email}}</span></span>
+                  </div>
+                  <div class="row mt-5 justify-content-end">
+                      <div class="col-md-4">
+                          <div class="d-flex justify-content-between mb-2">
+                              <span class="fw-bold text-black-50">{{'profile.progress'|translate}}</span>
+                              <span class="fw-bold">{{calculateProfileProgress()}} %</span>
+                          </div>
+                          <p-progressBar [value]="calculateProfileProgress()" [showValue]="false" [style]="{ height: '6px' }"></p-progressBar>
+                      </div>
+                  </div>
+              </div>
+        </div>
+      </div>
+      <p-tabView  [activeIndex]="activeIndex" (onChange)="resetActiveIndex()">
+          <p-tabPanel [header]="'profile.overview'|translate">
+              <app-overview  [userInfo]="userInfo" (changeActiveIndex)="onChangeActiveIndex($event)"></app-overview>
+          </p-tabPanel>
+          <p-tabPanel [header]="'profile.setting'|translate">
+              <app-edit-profile [userInfo]="userInfo" (changeActiveIndex)="onChangeActiveIndex($event)" (onEdit)="getProfile()"></app-edit-profile>
+          </p-tabPanel>
+          <p-tabPanel [header]="'profile.resetPassword'|translate">
+              <app-reset-password [userInfo]="userInfo" (onEdit)="getProfile()"></app-reset-password>
+          </p-tabPanel>
+      </p-tabView>
+  </div>
+
+</shared-card>

@@ -1,12 +1,12 @@
 export interface User {
-  Role: string;
-  UserId: string;
-  spId: number;
-  UserName: string;
+  Role?: string;
+  UserId?: string;
+  spId?: number;
+  UserName?: string;
   ProfilePic?: any;
   ProfilePicPath?: any;
   Gender?: any;
-  IsSucess: boolean;
+  IsSucess?: boolean;
   MessageLog?: any;
   FirstName?: any;
   LastName?: any;
@@ -22,4 +22,10 @@ export interface User {
   lstShipToAddress?: any;
   lstContactPerson?: any;
   lstAttach?: any;
+  Photo?:any
+  roles?:any;
+  initials?:any;
+  job?:any;
+  department?:any;
+  fax?:any;
 }
