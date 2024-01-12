@@ -6,7 +6,8 @@ import { TimesheetEditorComponent } from './components/timesheet-editor/timeshee
 
 const routes: Routes = [
   {path:'',component:TimesheetComponent},
-  {path:'add',component:TimesheetEditorComponent}
+  {path:'add-formly',component:TimesheetFormlyEditorComponent},
+  {path:'add',component:TimesheetEditorComponent},
 ];
 
 @NgModule({
