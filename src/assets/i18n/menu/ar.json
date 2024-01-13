@@ -19,7 +19,8 @@
         "taskManagement":{
           "title":"المهام",
           "taskManagementList":"قائمة المهام",
-          "taskManagementAdd":"مهمة جديدة"
+          "taskManagementAdd":"مهمة جديدة",
+          "calender":"تقويم"
         }
     }
 }

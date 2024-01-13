@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TaskManagementComponent } from './task-management.component';
 import { TaskManagementEditorComponent } from './task-management-editor/task-management-editor.component';
+import { TaskManagementCalenderComponent } from './task-management-calender/task-management-calender.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,9 @@ const routes: Routes = [
   } ,
   {
     path:'update/:id',component:TaskManagementEditorComponent
+  } ,
+  {
+    path:'calender',component:TaskManagementCalenderComponent
   } ,
 ];
 
