@@ -1,20 +1,18 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 
 @Component({
   selector: 'app-matter-details-main-info',
   templateUrl: './matter-details-main-info.component.html',
   styleUrls: ['./matter-details-main-info.component.scss'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
-export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnInit {
+export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnInit,OnChanges {
 
-
-  _datePipe=inject(DatePipe);
-  @Input() showFields:boolean =true
+  _datePipe = inject(DatePipe);
+  @Input() readOnly: boolean
   ngOnInit(): void {
-    this.initForm()
     this.formlyModel = {
       matterNumber: '1',
       clientCode: '1',
@@ -32,37 +30,21 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
       matterCategory: 'Option 2',
       practiceArea: 'Option 3',
       courtNumber: '3',
-      matterStatus:'Option 1'
+      matterStatus: 'Option 1'
     }
     this.formlyModel.close = this.formatDate(this.formlyModel.close);
     this.formlyModel.opened = this.formatDate(this.formlyModel.opened);
     console.log(this.formlyModel)
   }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    this.initForm()
+  }
   override initForm(): void {
 
     this.formlyFields = [
       {
         fieldGroupClassName: "row",
         fieldGroup: [
-          {
-            type:'button',
-            props:{
-              onClick:()=>{
-                this.formlyModel.check=!this.formlyModel.check
-                console.log(this.formlyOption)
-                // this.formlyOption.formState.readonly=this.showFields=!this.showFields;
-                // this.showFields=!this.showFields;
-                // console.log(this.showFields)
-              }
-            }
-          },
-          // {
-          //   type:'checkbox',
-          //   key:'show',
-          //   // hide:true,
-          //   defaultValue:false
-          // },
           {
             type: 'input',
             key: 'matterNumber',
@@ -142,14 +124,14 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.matterStatus'),
-              // readonly: true,
-              options:[
-                {label:'Option 1',value:'Option 1'},
-                {label:'Option 2',value:'Option 2'},
-                {label:'Option 3',value:'Option 3'},
+              readonly: this.readOnly,
+              options: [
+                { label: 'Option 1', value: 'Option 1' },
+                { label: 'Option 2', value: 'Option 2' },
+                { label: 'Option 3', value: 'Option 3' },
               ],
               expressionProperties: {
-                'templateOptions.readonly':  (model, formState) => this.formlyModel.check
+                'templateOptions.readonly': (model, formState) =>  this.readOnly,
               }
             }
           },
@@ -159,16 +141,13 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.matterStage'),
-              // readonly: true,
-              options:[
-                {label:'Option 1',value:'Option 1'},
-                {label:'Option 2',value:'Option 2'},
-                {label:'Option 3',value:'Option 3'},
+              readonly: this.readOnly,
+              options: [
+                { label: 'Option 1', value: 'Option 1' },
+                { label: 'Option 2', value: 'Option 2' },
+                { label: 'Option 3', value: 'Option 3' },
               ]
             },
-            expressionProperties: {
-              'templateOptions.readonly':  (model, formState, field) => this.showFields
-            }
           },
           {
             type: 'select',
@@ -176,16 +155,13 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.matterCategory'),
-              readonly: true,
-              options:[
-                {label:'Option 1',value:'Option 1'},
-                {label:'Option 2',value:'Option 2'},
-                {label:'Option 3',value:'Option 3'},
+              readonly: this.readOnly,
+              options: [
+                { label: 'Option 1', value: 'Option 1' },
+                { label: 'Option 2', value: 'Option 2' },
+                { label: 'Option 3', value: 'Option 3' },
               ]
             },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
-            }
           },
           {
             type: 'input',
@@ -193,11 +169,8 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.description'),
-              readonly: true
+              readonly: this.readOnly
             },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
-            }
 
           },
           {
@@ -206,16 +179,13 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.practiceArea'),
-              readonly: true,
-              options:[
-                {label:'Option 1',value:'Option 1'},
-                {label:'Option 2',value:'Option 2'},
-                {label:'Option 3',value:'Option 3'},
+              readonly: this.readOnly,
+              options: [
+                { label: 'Option 1', value: 'Option 1' },
+                { label: 'Option 2', value: 'Option 2' },
+                { label: 'Option 3', value: 'Option 3' },
               ]
             },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
-            }
           },
           {
             type: 'input',
@@ -223,10 +193,7 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.courtNumber'),
-              readonly: true
-            },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
+              readonly: this.readOnly
             }
           },
           {
@@ -235,15 +202,12 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.jurisdiction'),
-              readonly: true,
-              options:[
-                {label:'Option 1',value:'Option 1'},
-                {label:'Option 2',value:'Option 2'},
-                {label:'Option 3',value:'Option 3'},
+              readonly: this.readOnly,
+              options: [
+                { label: 'Option 1', value: 'Option 1' },
+                { label: 'Option 2', value: 'Option 2' },
+                { label: 'Option 3', value: 'Option 3' },
               ]
-            },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
             }
           },
           {
@@ -252,15 +216,12 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.judicature'),
-              readonly: true,
-              options:[
-                {label:'Option 1',value:'Option 1'},
-                {label:'Option 2',value:'Option 2'},
-                {label:'Option 3',value:'Option 3'},
+              readonly: this.readOnly,
+              options: [
+                { label: 'Option 1', value: 'Option 1' },
+                { label: 'Option 2', value: 'Option 2' },
+                { label: 'Option 3', value: 'Option 3' },
               ]
-            },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
             }
           },
           {
@@ -269,15 +230,12 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             className: 'col-12',
             props: {
               label: this._languageService.getTransValue('matters.matterSummary'),
-              readonly: true,
-              class:'w-100',
-              rows:4
-            },
-            expressionProperties: {
-              'templateOptions.readonly': (model, formState) => this.showFields!== undefined ? this.showFields: true,
+              readonly: this.readOnly,
+              class: 'w-100',
+              rows: 4
             }
           },
-        ]
+        ],
       }
     ]
   }
