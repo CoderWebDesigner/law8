@@ -1,0 +1,39 @@
+@import "/src/assets/scss/helpers/variables";
+
+th,
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: $lavenderGray;
+  font-weight: normal;
+}
+
+td {
+  background-color: $white;
+}
+
+.sort-btn {
+  width: 100%;
+  height: 50px;
+  border: 0;
+  background: transparent;
+  text-align: start;
+  &:hover{
+
+  }
+}
+p{
+  color: $primaryColor;
+  background: #f3f3f3;
+    border: 1px solid #e3e3e3;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+.divider{
+  border-left:1px solid #ddd ;
+  border-right:1px solid #ddd ;
+}

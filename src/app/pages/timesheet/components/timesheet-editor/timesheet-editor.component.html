@@ -1,135 +1,171 @@
-<shared-card [title]="'timesheet.addTimeSheet' | translate" borderRadius="20">
-  <form [formGroup]="form" body (ngSubmit)="submit()">
-    <p-table
-      [value]="getFormArray.controls"
-      dataKey="id"
-      [tableStyle]="{ 'min-width': '50rem' }"
-      [resizableColumns]="true"
-      (onSort)="onSort($event)"
-      [(selection)]="selectedRows"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 4rem">
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-          </th>
-          <ng-container *ngFor="let col of getColumns(columnsLocalized)">
-            <th
-              *ngIf="!col.sortable"
-              [ngStyle]="col?.style || { 'min-width': '200px' }"
-            >
-              {{ col.header }}
+<shared-card
+  [title]="'timesheet.addTimeSheet' | translate"
+  borderRadius="20"
+  [style]="{ 'margin-bottom': '1.5rem' }"
+>
+  <form [formGroup]="requestForm" body (ngSubmit)="submit()">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr class="border-bottom">
+            <th>
+              <p-checkbox
+                [binary]="true"
+                [(ngModel)]="selectAllRows"
+                [ngModelOptions]="{ standalone: true }"
+                (onChange)="toggleSelectAll()"
+              ></p-checkbox>
             </th>
-            <th
-              *ngIf="col.sortable"
-              [pSortableColumn]="col.field"
-              [ngStyle]="col?.style || { 'min-width': '200px' }"
-            >
-              {{ col.header }}
-              <p-sortIcon [field]="col.field"></p-sortIcon>
-            </th>
-          </ng-container>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
-        <ng-container formArrayName="data">
-          <tr [formGroupName]="rowIndex">
-            <td>
-              <p-tableCheckbox [value]="row.value"></p-tableCheckbox>
-            </td>
-            <td>
-              <app-stop-watch
-                [stopInterval]="row.get('timing').value"
-                (onStart)="onStart($event, rowIndex)"
-                (onStop)="onStop(rowIndex)"
-              ></app-stop-watch>
-            </td>
-            <td>
-              <p-calendar
-                formControlName="date"
-                appendTo="body"
-                [baseZIndex]="1009"
-              ></p-calendar>
-            </td>
-            <td>
-              <p-dropdown
-                formControlName="matter"
-                label=""
-                [options]="matters"
-                placeholder="Any"
-                appendTo="body"
-                (onChange)="selectMatter($event, rowIndex)"
+            <ng-container *ngFor="let col of getColumns(columnsLocalized)">
+              <th
+                [ngStyle]="col?.style || { 'min-width': '200px' }"
+                [ngClass]="{ 'p-0': col.sortable }"
               >
-              </p-dropdown>
-            </td>
-            <td>
-              <input
-                type="text"
-                formControlName="clientName"
-                pInputText
-                readonly
-                class="w-75"
-              />
-            </td>
-            <td>
-              <p-dropdown
-                formControlName="laywer"
-                label=""
-                [options]="laywers"
-                placeholder="Any"
-                appendTo="body"
-              >
-              </p-dropdown>
-            </td>
-            <td>
-              <p-dropdown
-                formControlName="task"
-                label=""
-                [options]="tasks"
-                placeholder="Any"
-                appendTo="body"
-              >
-              </p-dropdown>
-            </td>
-            <td>
-              <input
-                type="number"
-                step="0.1"
-                formControlName="hours"
-                pInputText
-              />
-            </td>
-            <td>
-              <input type="number" formControlName="rate" pInputText />
-            </td>
-            <td>
-              {{ amount }}
-            </td>
-            <td>
-              <textarea
-                rows="1"
-                pInputTextarea
-                formControlName="explanation"
-                (input)="addRow()"
-              ></textarea>
-            </td>
-
-            <td>
-              <textarea
-                rows="1"
-                pInputTextarea
-                formControlName="notes"
-              ></textarea>
-            </td>
-            <td>
-              <button class="text-danger bg-transparent border-0 p-2">
-                <i class="pi pi-trash fs-4" (click)="onDeleteRow(rowIndex)"></i>
-              </button>
-            </td>
+                <ng-container *ngIf="!col.sortable; else isSort">
+                  {{ col.header }}
+                </ng-container>
+                <ng-template #isSort>
+                  <button
+                    type="button"
+                    class="sort-btn"
+                    #field
+                    (click)="onSort(col?.field, field)"
+                  >
+                    {{ col.header }}
+                    <i
+                      class="pi"
+                      [ngClass]="{
+                        'pi-sort-alt': field.sort == undefined,
+                        'pi-sort-amount-up': field.sort == 'asc',
+                        'pi-sort-amount-down': field.sort == 'desc'
+                      }"
+                    ></i>
+                  </button>
+                </ng-template>
+              </th>
+            </ng-container>
           </tr>
-        </ng-container>
-      </ng-template>
-    </p-table>
+        </thead>
+        <tbody>
+          <ng-container formArrayName="data">
+            <ng-container
+              *ngFor="let row of getFormArray.controls; let rowIndex = index"
+            >
+              <tr [formGroupName]="rowIndex">
+                <td class="align-middle">
+                  <p-checkbox
+                    [binary]="true"
+                    formControlName="selected"
+                  ></p-checkbox>
+                </td>
+                <td>
+                  <app-stop-watch
+                    [stopInterval]="row.get('timing').value"
+                    (onStart)="onStart($event, rowIndex)"
+                    (onStop)="onStop(rowIndex)"
+                  ></app-stop-watch>
+                </td>
+                <td>
+                  <p-calendar
+                    formControlName="date"
+                    appendTo="body"
+                    [baseZIndex]="1009"
+                  ></p-calendar>
+                  <div
+                    [appErrorMessages]="getFormArray.controls[rowIndex].date"
+                    class="mt-3"
+                  ></div>
+                </td>
+                <td>
+                  <p-dropdown
+                    formControlName="matter"
+                    label=""
+                    [options]="matters"
+                    placeholder="Any"
+                    appendTo="body"
+                    (onChange)="selectMatter($event, rowIndex)"
+                  >
+                  </p-dropdown>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    formControlName="clientName"
+                    pInputText
+                    readonly
+                    class="w-75"
+                  />
+                </td>
+                <td>
+                  <p-dropdown
+                    formControlName="laywer"
+                    label=""
+                    [options]="laywers"
+                    placeholder="Any"
+                    appendTo="body"
+                  >
+                  </p-dropdown>
+                </td>
+                <td>
+                  <p-dropdown
+                    formControlName="task"
+                    label=""
+                    [options]="tasks"
+                    placeholder="Any"
+                    appendTo="body"
+                  >
+                  </p-dropdown>
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    step="0.1"
+                    formControlName="hours"
+                    pInputText
+                  />
+                </td>
+                <td>
+                  <input type="number" formControlName="rate" pInputText />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    formControlName="amount"
+                    pInputText
+                    readonly
+                    class="w-75"
+                  />
+                </td>
+                <td>
+                  <textarea
+                    rows="1"
+                    pInputTextarea
+                    formControlName="explanation"
+                    (input)="addRow()"
+                  ></textarea>
+                </td>
+
+                <td>
+                  <textarea
+                    rows="1"
+                    pInputTextarea
+                    formControlName="notes"
+                  ></textarea>
+                </td>
+                <td>
+                  <button class="text-danger bg-transparent border-0 p-2">
+                    <i
+                      class="pi pi-trash fs-4"
+                      (click)="onDeleteRow(rowIndex)"
+                    ></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
     <div class="mt-4 text-end">
       <p-button
         [loading]="isSubmit"
@@ -139,4 +175,20 @@
       ></p-button>
     </div>
   </form>
+</shared-card>
+<shared-card borderRadius="20">
+  <div class="row" body>
+    <div class="col text-center">
+      <h5 class="fw-bold mb-3">{{'timesheet.billableCount'|translate}}</h5>
+      <p class="mb-0 h1">{{ billableCount }}</p>
+    </div>
+    <div class="col text-center divider">
+      <h5 class="fw-bold  mb-3">{{'timesheet.nonBillableCount'|translate}}</h5>
+      <p class="mb-0 h1">{{ nonBillableCount }}</p>
+    </div>
+    <div class="col text-center">
+      <h5 class="fw-bold mb-3">{{'timesheet.noChargeCount'|translate}}</h5>
+      <p class="mb-0 h1">{{ noChargeCount }}</p>
+    </div>
+  </div>
 </shared-card>

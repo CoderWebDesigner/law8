@@ -1,6 +1,9 @@
 {
   "timesheet":{
     "title":"Timesheet",
-    "addTimeSheet":"Add Timesheet"
+    "addTimeSheet":"Add Timesheet",
+    "billableCount": "Billable Count",
+    "nonBillableCount": "Nonbillable Count",
+    "noChargeCount": "Nocharge Count"
   }
 }

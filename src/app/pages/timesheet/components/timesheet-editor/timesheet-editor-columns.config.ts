@@ -1,7 +1,7 @@
 export const Timesheet_Editor_Columns_EN = [
   {
     header: 'Timer',
-    style:'',
+    style:{'min-width':'240px'},
     sortable:false
   },
   {
@@ -12,45 +12,45 @@ export const Timesheet_Editor_Columns_EN = [
   },
   {
     header: 'Matter',
-    field:'Matter',
+    field:'matter',
     style:'',
     sortable:true
   },
   {
     header: 'Client Name',
-    field:'ClientName',
+    field:'clientName',
     style:{'min-width':'160px'},
-    sortable:false
+    sortable:true
   },
   {
     header: 'Lawyer',
-    field:'Lawyer',
+    field:'lawyer',
     style:'',
-    sortable:false
+    sortable:true
   },
   {
     header: 'Task',
     field:'Task',
     style:'',
-    sortable:false
+    sortable:true
   },
   {
     header: 'Hours',
-    field:'Hours',
+    field:'hours',
     style:{'min-width':'90px'},
-    sortable:false
+    sortable:true
   },
   {
     header: 'Rate',
     field:'Rate',
     style:{'min-width':'90px'},
-    sortable:false
+    sortable:true
   },
   {
     header: 'Amount',
     field:'Amount',
     style:{'min-width':'90px'},
-    sortable:false
+    sortable:true
 
   },
   {
