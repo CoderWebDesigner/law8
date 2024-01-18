@@ -24,7 +24,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit{
         fieldGroupClassName:'row',
         fieldGroup:[
           {
-            type:'select',
+            type:'radio',
             key:'requestType',
             className:'col-md-4',
             props:{
