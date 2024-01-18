@@ -50,7 +50,7 @@ export const MENU: MenuItem[] = [
           {
               id: 2,
               label: 'menu.timesheet.timesheetAdd',
-              link: '/timesheet/add-formly',
+              link: '/timesheet/add',
               parentId:3
 
           }
