@@ -35,7 +35,7 @@ export class MatterDetailsActivityEditorComponent extends FormBaseClass implemen
             className: 'col-md-4',
             defaultValue: this._config.data.matterId,
             props: {
-              label: this._languageService.getTransValue('matters.matterCode'),
+              label: this._languageService.getTransValue('common.matterCode'),
               disabled: true
             }
           },

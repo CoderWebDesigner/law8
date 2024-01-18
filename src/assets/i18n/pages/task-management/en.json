@@ -1,6 +1,7 @@
 {
   "taskManagement": {
     "title": "Task Management",
-    "updateTask": "Update Task"
+    "updateTask": "Update Task",
+    "eventTitle":"Event Title"
   }
 }

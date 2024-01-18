@@ -1,0 +1,28 @@
+<div class="shadow-sm rounded-3 position-absolute filter-form">
+  <shared-card
+    [title]="'menu.taskManagement.calender' | translate"
+    [borderRadius]="20"
+  >
+    <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+      <formly-form
+        [form]="formly"
+        [fields]="formlyFields"
+        [model]="formlyModel"
+      ></formly-form>
+      <div class="mt-4 text-end d-flex justify-content-between">
+        <p-button
+          type="button"
+          styleClass="p-button-outlined d-block py-3"
+          label="{{ 'btn.cancel' | translate }}"
+          (onClick)="cancel()"
+        ></p-button>
+        <p-button
+          [loading]="isSubmit"
+          styleClass="p-button-primary d-block py-3"
+          type="submit"
+          label="{{ 'btn.filter' | translate }}"
+        ></p-button>
+      </div>
+    </form>
+  </shared-card>
+</div>

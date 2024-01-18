@@ -21,19 +21,18 @@ td {
   border: 0;
   background: transparent;
   text-align: start;
-  &:hover{
-
-  }
 }
-p{
+
+p {
   color: $primaryColor;
   background: #f3f3f3;
-    border: 1px solid #e3e3e3;
-    display: inline-block;
-    padding: 10px 30px;
-    border-radius: 10px;
+  border: 1px solid #e3e3e3;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 10px;
 }
-.divider{
-  border-left:1px solid #ddd ;
-  border-right:1px solid #ddd ;
+
+.divider {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }

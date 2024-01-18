@@ -18,6 +18,11 @@
   }
 }
 
+.filter-form{
+  width: 320px;
+  z-index: 10000;
+  #{$left}: -270px;
+}
 
 
 // .fat-bg {

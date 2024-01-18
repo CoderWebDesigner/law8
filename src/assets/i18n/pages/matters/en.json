@@ -2,7 +2,6 @@
   "matters":{
     "title":"Matters",
     "addMatter":"Add Matter",
-    "matterCode":"Matter Code",
     "matterType":"Matter Type",
     "parentMatterCode":"Parent Matter Code",
     "matterCategory":"Matter Category",
@@ -85,7 +84,7 @@
     "startDate": "Start Date",
     "endDate": "End Date",
     "duration": "Duration",
-    "priority": "Priority",
+
     "taskSelection": "Task Selection",
     "branch":"Branch",
     "claimAmount":"Claim Amount",

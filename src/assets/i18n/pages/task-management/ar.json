@@ -2,6 +2,7 @@
 {
   "taskManagement": {
     "title": "المهام",
-    "updateTask": "تعديل المهمة"
+    "updateTask": "تعديل المهمة",
+    "eventTitle":"عنوان الحدث"
   }
 }

@@ -70,7 +70,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit{
             key:'matterCode',
             className:'col-md-4',
             props:{
-              label:this._languageService.getTransValue('matters.matterCode'),
+              label:this._languageService.getTransValue('common.matterCode'),
               disabled:true
             }
           },

@@ -66,7 +66,7 @@ export class MatterDetailsInvoiceEditorComponent  extends FormBaseClass implemen
             key: 'matterCode',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('matters.matterCode'),
+              label: this._languageService.getTransValue('common.matterCode'),
               required: true,
               disabled:true
             },

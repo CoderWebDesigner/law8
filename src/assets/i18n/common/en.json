@@ -15,7 +15,11 @@
     "general": "General",
     "parties": "Parties",
     "relatedMatters": "Related Matters",
-    "dragAndDrop": "Drag and drop a file here or click"
+    "dragAndDrop": "Drag and drop a file here or click",
+    "matterCode":"Matter Code",
+    "priority": "Priority",
+    "from":"From",
+    "to":"To"
   },
   "btn": {
     "save": "Save",
@@ -23,7 +27,9 @@
     "send": "Send",
     "close": "Close",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "cancel":"Cancel",
+    "filter":"Filter"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
