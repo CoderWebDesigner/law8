@@ -192,9 +192,13 @@ export class TimesheetEditorComponent implements OnInit {
   getTableStatistics() {
     this.requestForm.get('data').valueChanges.pipe().subscribe({
       next: res => {
-        this.billableCount = this.getFormArray.controls.filter(field => field.get('task').value == 'Billable').length
-        this.nonBillableCount = this.getFormArray.controls.filter(field => field.get('task').value == 'Non-Billable').length
-        this.noChargeCount = this.getFormArray.controls.filter(field => field.get('task').value == 'No-Charge').length
+        this.billableCount = this.getFormArray.controls
+        .filter(field => field.get('task').value == 'Billable')
+        .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
+       w
+        this.noChargeCount = this.getFormArray.controls
+        .filter(field => field.get('task').value == 'No-Charge')
+        .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
       }
     })
   }
