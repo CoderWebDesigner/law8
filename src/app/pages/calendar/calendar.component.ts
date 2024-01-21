@@ -155,7 +155,8 @@ export class CalendarComponent  implements OnInit {
       width: "40%",
       data: {
         event: selectedEvent
-      }
+      },
+      dismissableMask: true,
     })
   }
   stringToColor(str) {
