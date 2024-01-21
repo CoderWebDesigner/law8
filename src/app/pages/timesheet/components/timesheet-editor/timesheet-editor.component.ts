@@ -195,7 +195,6 @@ export class TimesheetEditorComponent implements OnInit {
         this.billableCount = this.getFormArray.controls
         .filter(field => field.get('task').value == 'Billable')
         .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
-       w
         this.noChargeCount = this.getFormArray.controls
         .filter(field => field.get('task').value == 'No-Charge')
         .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
