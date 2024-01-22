@@ -6,12 +6,14 @@
       [model]="formlyModel"
     ></formly-form>
     <p-tabView body>
-      <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
-          <app-matter-editor-general *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
-          <app-matter-details-address *ngIf="i==1"></app-matter-details-address>
-          <app-matter-editor-contracts *ngIf="i==2"></app-matter-editor-contracts>
-          <app-matter-editor-payment-terms *ngIf="i==3"></app-matter-editor-payment-terms>
-      </p-tabPanel>
+      <ng-container *ngFor="let item of items;let i =index">
+        <p-tabPanel [header]="item.label" *ngIf="item.show" >
+            <app-matter-editor-general *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
+            <app-matter-details-address *ngIf="i==1"></app-matter-details-address>
+            <app-matter-editor-contracts *ngIf="i==2"></app-matter-editor-contracts>
+            <app-matter-editor-payment-terms *ngIf="i==3"></app-matter-editor-payment-terms>
+        </p-tabPanel>
+      </ng-container>
     </p-tabView>
     <div class="mt-4 text-end">
       <p-button

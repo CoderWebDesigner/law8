@@ -43,7 +43,8 @@
     "dataMessage": "Totale",
     "error":"Erreur!",
     "success":"Succès!",
-    "sureDelete":"Etes-vous sûr que vous voulez supprimer?"
+    "sureDelete":"Etes-vous sûr que vous voulez supprimer?",
+    "dropClick":"Déposez les fichiers pour télécharger ou cliquer"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

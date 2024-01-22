@@ -43,7 +43,8 @@
     "dataMessage": "Total",
     "error": "Error!",
     "success": "Success!",
-    "sureDelete": "Are you sure you want to delete?"
+    "sureDelete": "Are you sure you want to delete?",
+    "dropClick":"Drop files to upload or click"
   },
   "validation": {
     "required": "This field is required!",

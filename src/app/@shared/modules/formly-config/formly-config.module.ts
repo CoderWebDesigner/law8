@@ -35,7 +35,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormlyCheckboxFieldComponent } from './components/formly-checkbox-field/formly-checkbox-field.component';
 import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
-import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
 
 @NgModule({
   declarations: [

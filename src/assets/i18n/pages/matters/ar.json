@@ -114,6 +114,14 @@
     "getItemDetail":"Get Item Detail",
     "invoiceType":"Invoice Type",
     "salesQuotaionLineItems":"Sales Quotaion Line Items",
-    "salesOrderLineItems":"Sales Order Line Items"
+    "salesOrderLineItems":"Sales Order Line Items",
+    "instructor":"Instructor",
+    "tradmarkType":"Tradmark Type",
+    "wordMark":"Word Mark",
+    "logoMark":"Logo Mark",
+    "uploadLogoMark":"Upload Logo Mark",
+    "caseSensitive":"Case Sensitive",
+    "applicants":"Applicants",
+    "class":"Class"
   }
 }
