@@ -3,10 +3,10 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 
 @Component({
   selector: 'app-calender-filter-form',
-  templateUrl: './task-management-calender-filter-form.component.html',
-  styleUrls: ['./task-management-calender-filter-form.component.scss']
+  templateUrl: './calender-filter-form.component.html',
+  styleUrls: ['./calender-filter-form.component.scss']
 })
-export class TaskManagementCalenderFilterFormComponent extends FormBaseClass implements OnInit {
+export class CalenderFilterFormComponent extends FormBaseClass implements OnInit {
   @Output() onClose = new EventEmitter()
   @Output() onFilter = new EventEmitter()
   ngOnInit(): void {

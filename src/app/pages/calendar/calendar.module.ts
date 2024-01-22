@@ -7,19 +7,23 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { SharedModule } from '@shared/shared.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarEventDetailsComponent } from './calendar-event-details/calendar-event-details.component';
+import { CalenderFilterFormComponent } from './calender-filter-form/calender-filter-form.component';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 
 
 @NgModule({
   declarations: [
     CalendarComponent,
-    CalendarEventDetailsComponent
+    CalendarEventDetailsComponent,
+    CalenderFilterFormComponent
   ],
   imports: [
     CommonModule,
     CalendarRoutingModule,
     SharedCardComponent,
     SharedModule,
-    FullCalendarModule
+    FullCalendarModule,
+    FormlyConfigModule
   ]
 })
 export class CalendarModule { }
