@@ -44,6 +44,7 @@ export class MatterDetailsInvoiceSalesItemsComponent implements OnInit, OnDestro
         this.invoiceType == 'TOE Document' ?
           'matters.salesOrderLineItems' : 'matters.salesQuotaionLineItems'
       ),
+      dismissableMask: true,
       data: {
         invoiceType: this.invoiceType
       }

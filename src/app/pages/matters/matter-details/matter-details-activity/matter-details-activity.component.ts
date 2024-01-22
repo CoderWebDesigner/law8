@@ -50,7 +50,8 @@ export class MatterDetailsActivityComponent implements OnInit,OnDestroy {
       header: this._languageService.getTransValue('matters.addActivity'),
       data:{
         matterId:this.matterCode
-      }
+      },
+      dismissableMask: true,
     })
   }
   ngOnDestroy(): void {

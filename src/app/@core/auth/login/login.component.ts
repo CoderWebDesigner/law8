@@ -14,7 +14,7 @@ import { Login } from '@core/models';
 export class LoginComponent extends FormBaseClass implements OnInit {
   apiURL = API_Config.auth;
   _storageService = inject(StorageService)
-  loginData  = new Login()
+  loginData = new Login()
   ngOnInit() {
     this.initForm();
   }
@@ -28,7 +28,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
           label: this._languageService.getTransValue("auth.username"),
           placeholder: this._languageService.getTransValue("auth.userNamePlaceholder"),
           icon: "pi pi-user",
-          required:true
+          required: true
         }
       },
       {
@@ -39,7 +39,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
           label: this._languageService.getTransValue("auth.password"),
           placeholder: this._languageService.getTransValue("auth.passwordPlaceholder"),
           icon: "pi pi-lock",
-          required:true
+          required: true
         }
       },
       {
@@ -59,7 +59,8 @@ export class LoginComponent extends FormBaseClass implements OnInit {
               class: " p-button-text p-0",
               onClick: () => {
                 this._DialogService.open(ForgetpasswordComponent, {
-                  width: '50%'
+                  width: '50%',
+                  dismissableMask: true,
                 })
               }
             }
@@ -74,8 +75,8 @@ export class LoginComponent extends FormBaseClass implements OnInit {
 
     if (this.formly.valid) {
       this.isSubmit = true;
-      this.loginData = {...this.loginData,...this.formlyModel}
-      this._apiService.post(this.apiURL.login,this.loginData).pipe(
+      this.loginData = { ...this.loginData, ...this.formlyModel }
+      this._apiService.post(this.apiURL.login, this.loginData).pipe(
         finalize(() => this.isSubmit = false),
         this.takeUntilDestroy()
       ).subscribe({
@@ -84,7 +85,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
           this._authService.setUser(res)
           this._router.navigate(['/auth/otp'])
         },
-        error:err=>{
+        error: err => {
           this._toastrNotifiService.displayErrorToastr(this._languageService.getTransValue('messages.signInError'));
         }
       })

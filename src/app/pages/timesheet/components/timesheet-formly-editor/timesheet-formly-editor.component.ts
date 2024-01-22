@@ -110,7 +110,8 @@ export class TimesheetFormlyEditorComponent extends FormBaseClass implements OnI
                       width: '70%',
                       data: {
                         selectRow: true
-                      }
+                      },
+                      dismissableMask: true
                     })
                   }
                   this.addNewRow()

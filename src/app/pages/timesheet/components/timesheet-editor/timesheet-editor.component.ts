@@ -147,7 +147,8 @@ export class TimesheetEditorComponent implements OnInit {
         width: '70%',
         data: {
           selectRow: true
-        }
+        },
+        dismissableMask: true
       })
     }
 

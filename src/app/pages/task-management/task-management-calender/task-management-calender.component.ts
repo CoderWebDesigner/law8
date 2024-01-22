@@ -155,7 +155,8 @@ export class TaskManagementCalenderComponent implements OnInit {
       width: "40%",
       data: {
         event: selectedEvent
-      }
+      },
+      dismissableMask: true
     })
   }
   stringToColor(str) {

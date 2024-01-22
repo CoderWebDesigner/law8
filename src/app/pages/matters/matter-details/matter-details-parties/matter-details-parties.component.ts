@@ -46,6 +46,7 @@ export class MatterDetailsPartiesComponent implements OnInit {
     this._dialogService.open(MatterDetailsPartiesEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('matters.addParties'),
+      dismissableMask: true
     })
   }
   ngOnDestroy(): void {

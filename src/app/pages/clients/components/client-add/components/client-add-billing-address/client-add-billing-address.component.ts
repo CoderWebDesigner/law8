@@ -49,7 +49,8 @@ export class ClientAddBillingAddressComponent implements OnInit, OnDestroy {
       header: this._languageService.getTransValue('client.addBillingAddress'),
       data:{
         type:'billing'
-      }
+      },
+      dismissableMask: true,
     })
     // ref.onClose.pipe(
     //   this._sharedService.takeUntilDistroy()

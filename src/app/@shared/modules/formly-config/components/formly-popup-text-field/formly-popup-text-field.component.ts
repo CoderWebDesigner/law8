@@ -20,6 +20,7 @@ export class FormlyPopupTextFieldComponent extends FieldType<FieldTypeConfig> {
       data: {
         formControlFromDialog: this.formControl
       },
+      dismissableMask: true,
     });
 
     dialogRef.onClose.subscribe((result: any) => {

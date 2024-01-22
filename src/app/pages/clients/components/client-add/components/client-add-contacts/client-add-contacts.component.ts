@@ -47,7 +47,8 @@ export class ClientAddContactsComponent implements OnInit, OnDestroy {
   openDialog() {
     const ref = this._dialogService.open(ContactEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts')
+      header: this._languageService.getTransValue('client.addContacts'),
+      dismissableMask: true
     })
     ref.onClose.pipe(
       this._sharedService.takeUntilDistroy()

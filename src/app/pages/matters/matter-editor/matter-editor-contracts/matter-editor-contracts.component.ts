@@ -46,7 +46,8 @@ export class MatterEditorContractsComponent {
   openDialog() {
     const ref = this._dialogService.open(MatterEditorContractEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts')
+      header: this._languageService.getTransValue('client.addContacts'),
+      dismissableMask: true
     })
     ref.onClose.pipe(
       this._sharedService.takeUntilDistroy()

@@ -47,6 +47,7 @@ export class MatterEditorAddressComponent implements OnInit {
     this._dialogService.open(MatterAddressEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('matters.addAddress'),
+      dismissableMask: true
     })
   }
   ngOnDestroy(): void {
