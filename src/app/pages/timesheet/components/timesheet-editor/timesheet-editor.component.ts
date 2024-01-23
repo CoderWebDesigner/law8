@@ -100,7 +100,7 @@ export class TimesheetEditorComponent implements OnInit {
       if (rowIndex != index) field.get('timing').setValue(false)
     })
   }
-  addRow(fieldName:string) {
+  addRow() {
     const row = this.fb.group({
       id: [this.getFormArray.controls.length],
       selected: [false],
@@ -116,7 +116,7 @@ export class TimesheetEditorComponent implements OnInit {
       explanation: ['', [Validators.required]],
       notes: [''],
     });
-    if (this.getFormArray.controls.every((formGroup) => formGroup.get(fieldName).value !="")) {
+    if (this.getFormArray.controls.every((formGroup) => formGroup.get('matter').value !="" ||formGroup.get('explanation').value !="")) {
       this.getFormArray.push(row);
       this.cdRef.detectChanges()
     }
@@ -156,7 +156,7 @@ export class TimesheetEditorComponent implements OnInit {
     }
 
     this.getSelectedMatter(rowIndex)
-    this.addRow('matter')
+    this.addRow()
   }
   getSelectedMatter(rowIndex: number) {
     this._timeSheetService.selectedMatter$.pipe(
