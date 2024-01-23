@@ -9,12 +9,18 @@ import { SharedSearchInputComponent } from '@shared/components/shared-search-inp
 import { SharedModule } from '@shared/shared.module';
 import { TaskManagementEditorComponent } from './task-management-editor/task-management-editor.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-
+import { TaskManagementCalenderComponent } from './task-management-calender/task-management-calender.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { TaskManagementCalenderFilterFormComponent } from './components/task-management-calender-filter-form/task-management-calender-filter-form.component';
+import { TaskManagementEventDetailsComponent } from './components/task-management-event-details/task-management-event-details.component';
 
 @NgModule({
   declarations: [
     TaskManagementComponent,
-    TaskManagementEditorComponent
+    TaskManagementEditorComponent,
+    TaskManagementCalenderComponent,
+    TaskManagementCalenderFilterFormComponent,
+    TaskManagementEventDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +29,7 @@ import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.
     SharedTableComponent,
     SharedSearchInputComponent,
     SharedModule,
+    FullCalendarModule,
     FormlyConfigModule
   ]
 })

@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: '' },

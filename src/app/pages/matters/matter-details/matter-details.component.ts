@@ -12,7 +12,7 @@ export class MatterDetailsComponent implements OnInit {
   _route = inject(ActivatedRoute)
   _languageService = inject(LanguageService)
   matter: any;
-  showFields: boolean = false;
+  readOnly: boolean = true;
   items: MenuItem[] = [
     { label: this._languageService.getTransValue('common.parties') },
     { label: this._languageService.getTransValue('common.general') },
@@ -39,6 +39,6 @@ export class MatterDetailsComponent implements OnInit {
   }
 
   onToggleFields() {
-    this.showFields = !this.showFields
+    this.readOnly = !this.readOnly
   }
 }

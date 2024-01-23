@@ -18,10 +18,9 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
 
   onRemove(event) {
     event.stopPropagation();
-
     this.file = null;
     this.fileAsBase64 = null;
-    this.formControl.setValue(null);
+    this.formControl.setValue('');
   }
 
   readFileAsBase64(file: File) {

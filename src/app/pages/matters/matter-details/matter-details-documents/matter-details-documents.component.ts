@@ -40,6 +40,7 @@ export class MatterDetailsDocumentsComponent implements OnInit,OnDestroy {
     this._dialogService.open(MatterDetailsDocumentsEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('matters.addDocument'),
+      dismissableMask: true
     })
   }
   ngOnDestroy(): void {

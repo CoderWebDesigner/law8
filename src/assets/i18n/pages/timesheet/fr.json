@@ -1,6 +1,9 @@
 {
   "timesheet":{
     "title":"Compteur horaire",
-    "addTimeSheet":"Ajouter la feuille de temps"
+    "addTimeSheet":"Ajouter la feuille de temps",
+    "billableCount": "Billable Count",
+    "nonBillableCount": "Nonbillable Count",
+    "noChargeCount": "Nocharge Count"
   }
 }

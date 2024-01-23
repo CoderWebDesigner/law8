@@ -192,6 +192,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
           width: '50%',
           baseZIndex: 10000,
           header: this._languageService.getTransValue(action?.title),
+          dismissableMask: true,
           data: {
             rowData: rowData,
             action: action,
@@ -220,6 +221,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
         title: this._languageService.getTransValue('btn.delete'),
         isDelete: true,
       },
+      dismissableMask: true,
     });
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe(res => {
 
@@ -270,7 +272,8 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     this._dialogService.open(MoreInfoComponent,{
       header:title,
       data:value,
-      width:"50%"
+      width:"50%",
+      dismissableMask: true
     })
   }
   ngOnDestroy(): void {

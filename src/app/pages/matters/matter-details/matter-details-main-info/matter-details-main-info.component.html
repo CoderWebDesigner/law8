@@ -1,11 +1,11 @@
-<form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+<form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
   <formly-form
     [form]="formly"
     [fields]="formlyFields"
     [model]="formlyModel"
     [options]="formlyOption"
   ></formly-form>
-  <div class="mt-4 text-end">
+  <div class="mt-4 text-end" *ngIf="!readOnly">
     <p-button
       [loading]="isSubmit"
       styleClass="p-button-primary d-block py-3"

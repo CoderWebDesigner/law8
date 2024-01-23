@@ -40,6 +40,7 @@ export class MatterDetailsInvoiceComponent implements OnInit,OnDestroy {
     this._dialogService.open(MatterDetailsInvoiceEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('matters.addInvoice'),
+      dismissableMask: true
     })
   }
   ngOnDestroy(): void {

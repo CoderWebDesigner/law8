@@ -50,7 +50,8 @@ export class ClientAddCompanyAddressComponent implements OnInit, OnDestroy {
       header: this._languageService.getTransValue('client.addCompanyAddress'),
       data:{
         type:'company'
-      }
+      },
+      dismissableMask: true,
     })
     ref.onClose.pipe(
       this._sharedService.takeUntilDistroy()

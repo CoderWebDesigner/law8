@@ -15,7 +15,12 @@
     "general": "General",
     "parties": "Parties",
     "relatedMatters": "Related Matters",
-    "dragAndDrop": "Drag and drop a file here or click"
+    "dragAndDrop": "Drag and drop a file here or click",
+    "matterCode":"Matter Code",
+    "priority": "Priority",
+    "from":"From",
+    "to":"To",
+    "total":"Total"
   },
   "btn": {
     "save": "Save",
@@ -23,7 +28,9 @@
     "send": "Send",
     "close": "Close",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "cancel":"Cancel",
+    "filter":"Filter"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
@@ -37,7 +44,8 @@
     "dataMessage": "Total",
     "error": "Error!",
     "success": "Success!",
-    "sureDelete": "Are you sure you want to delete?"
+    "sureDelete": "Are you sure you want to delete?",
+    "dropClick":"Drop files to upload or click"
   },
   "validation": {
     "required": "This field is required!",

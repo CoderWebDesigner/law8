@@ -2,7 +2,7 @@
   "matters": {
     "title": "القضايا / المواضيع",
     "addMatter": "إضافة قضية / موضوع",
-    "matterCode": "رقم القضية",
+
     "matterType": "نوع القضية",
     "parentMatterCode": "رقم القضية الاساسية",
     "matterCategory": "فئة القضية",
@@ -89,7 +89,7 @@
     "startDate": "Start Date",
     "endDate": "End Date",
     "duration": "Duration",
-    "priority": "Priority",
+
     "taskSelection": "Task Selection",
     "branch":"Branch",
     "claimAmount":"Claim Amount",
@@ -102,7 +102,6 @@
     "deliveryDate":"Delivery Date",
     "totalBeforeDiscount":"Total Before Discount",
     "tax":"Tax",
-    "total":"Total",
     "itemCode":"Item Code",
     "itemName":"Item Name",
     "warehouse":"Warehouse",
@@ -114,6 +113,14 @@
     "getItemDetail":"Get Item Detail",
     "invoiceType":"Invoice Type",
     "salesQuotaionLineItems":"Sales Quotaion Line Items",
-    "salesOrderLineItems":"Sales Order Line Items"
+    "salesOrderLineItems":"Sales Order Line Items",
+    "instructor":"Instructor",
+    "tradmarkType":"Tradmark Type",
+    "wordMark":"Word Mark",
+    "logoMark":"Logo Mark",
+    "uploadLogoMark":"Upload Logo Mark",
+    "caseSensitive":"Case Sensitive",
+    "applicants":"Applicants",
+    "class":"Class"
   }
 }

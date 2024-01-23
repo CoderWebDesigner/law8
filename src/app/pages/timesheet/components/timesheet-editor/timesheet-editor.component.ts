@@ -14,23 +14,27 @@ import { TimesheetService } from '@shared/services/timesheet.service';
   templateUrl: './timesheet-editor.component.html',
   styleUrls: ['./timesheet-editor.component.scss']
 })
-export class TimesheetEditorComponent {
+export class TimesheetEditorComponent implements OnInit {
+
   _sharedService = inject(SharedService)
   _dialogService = inject(DialogService);
   _timeSheetService = inject(TimesheetService)
   _authService = inject(AuthService)
+  _languageService = inject(LanguageService)
   cdRef = inject(ChangeDetectorRef);
   fb = inject(FormBuilder)
   isSubmit: boolean;
+  selectAllRows: boolean;
   selectedMatter: any;
-  selectedRows: any;
+  selectedRows: any[] = [];
+  billableCount: number = 0;
+  nonBillableCount: number = 0;
+  noChargeCount: number = 0;
   columnsLocalized = {
     ar: Timesheet_Editor_Columns_AR,
     en: Timesheet_Editor_Columns_EN,
     fr: Timesheet_Editor_Columns_FR
   }
-
-  _languageService = inject(LanguageService)
   matters = [
     { label: '00000-001', value: '00000-001' },
     { label: '00000-002', value: '00000-002' },
@@ -46,27 +50,32 @@ export class TimesheetEditorComponent {
     { label: 'Lawyer 2', value: 'Lawyer 1' },
     { label: 'Ahmad Awad', value: 'Ahmad Awad' },
   ]
-  form = this.fb.group({
+  requestForm = this.fb.group({
     data: this.fb.array([
       this.fb.group({
-        id:[0],
+        id: [0],
+        selected: [false],
         timing: [false],
-        date: [new Date()],
-        matter: [],
-        clientName: [],
-        laywer: [],
-        task: [],
-        hours: [],
-        rate: [],
-        amount: [],
-        explanation: [],
+        date: [new Date(), [Validators.required]],
+        matter: ['', [Validators.required]],
+        clientName: ['', [Validators.required]],
+        laywer: ['', [Validators.required]],
+        task: ['', [Validators.required]],
+        hours: ['', [Validators.required]],
+        rate: ['', [Validators.required]],
+        amount: ['', [Validators.required]],
+        explanation: ['', [Validators.required]],
         notes: [],
       })
     ]),
   })
   address: any[] = []
-  data: any[] = [
-  ]
+  data: any[] = []
+  ngOnInit(): void {
+
+    this.getTableStatistics()
+    // this.checkAllRowsChecked()
+  }
   getColumns(columnsLocalized) {
     switch (this._languageService.getSelectedLanguage()) {
       case 'en':
@@ -79,7 +88,7 @@ export class TimesheetEditorComponent {
   }
 
   get getFormArray(): FormArray {
-    return this.form.get('data') as FormArray;
+    return this.requestForm.get('data') as FormArray;
   }
 
   onStart(seconds: number, rowIndex: number) {
@@ -93,24 +102,29 @@ export class TimesheetEditorComponent {
   }
   addRow() {
     const row = this.fb.group({
-      id:[this.getFormArray.controls.length],
+      id: [this.getFormArray.controls.length],
+      selected: [false],
       timing: [false],
-      date: [new Date()],
-      matter: [],
-      clientName: [],
-      laywer: [],
-      task: [],
-      hours: [],
-      rate: [],
-      amount: [],
-      explanation: [],
-      notes: [],
+      date: [new Date(), [Validators.required]],
+      matter: ['', [Validators.required]],
+      clientName: ['', [Validators.required]],
+      laywer: ['', [Validators.required]],
+      task: ['', [Validators.required]],
+      hours: ['', [Validators.required]],
+      rate: ['', [Validators.required]],
+      amount: ['', [Validators.required]],
+      explanation: ['', [Validators.required]],
+      notes: [''],
     });
-    if (!this.getFormArray.controls.some(field => field.get('explanation').value == null && field.get('matter').value == null)) {
+    if (this.getFormArray.controls.every((formGroup) => formGroup.get('matter').value !="" ||formGroup.get('explanation').value !="")) {
       this.getFormArray.push(row);
-      console.log(this.getFormArray)
       this.cdRef.detectChanges()
     }
+  }
+  compareObjects(obj1: any, obj2: any): boolean {
+    // Implement your logic to compare two objects
+    // For simplicity, this example assumes a shallow comparison
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
   }
   onDeleteRow(rowIndex: number): void {
     Swal.fire({
@@ -127,8 +141,8 @@ export class TimesheetEditorComponent {
 
   }
   submit() {
+    this.selectedRows = this.getFormArray.controls.filter(field => field.get('selected').value === true)
     console.log(this.selectedRows)
-    console.log(this.form.value)
   }
   selectMatter(e, rowIndex) {
     if (e.value == 'All Matters') {
@@ -136,7 +150,8 @@ export class TimesheetEditorComponent {
         width: '70%',
         data: {
           selectRow: true
-        }
+        },
+        dismissableMask: true
       })
     }
 
@@ -158,26 +173,54 @@ export class TimesheetEditorComponent {
       }
     })
   }
-  onSort(e) {
-    // this.getFormArray.controls.sort((field)=> field.get(e.))
-    // console.log(e)
-    const sortedControls = this.getFormArray.setValue(this.getFormArray.value.sort((a, b) => a[e.field] - b[e.field]));
-
-    // const sortedControls = this.getFormArray.controls.sort((a:any, b:any) =>{
-
-    //   console.log(a);
-    //   console.log(b);
-    // }
-    //   // a.get(e.field).value.localeCompare(b.get(e.field).value)
-    // );
-    console.log(sortedControls)
-
-    // Remove all controls from the form array
-    // while (this.getFormArray.length) {
-    //   this.getFormArray.removeAt(0);
-    // }
-
-    // Add the sorted controls back to the form array
-    // sortedControls.forEach((control) => this.getFormArray.push(control))
+  onSort(field: string, element: any) {
+    element.sort = (element.sort === undefined) ? 'asc' : (element.sort === 'asc') ? 'desc' : 'asc';
+    const controlsExceptLast = this.getFormArray.controls.slice(0, -1);
+    const lastELement = this.getFormArray.controls[this.getFormArray.controls.length - 1]
+    controlsExceptLast.sort((a, b) => {
+      const nameA = a.get(field)?.value;
+      const nameB = b.get(field)?.value;
+      if (isNaN(nameA) && isNaN(nameB)) {
+        return element.sort == 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+      } else {
+        return element.sort == 'asc' ? -1 : 1
+      }
+    });
+    this.getFormArray.controls = [...controlsExceptLast, lastELement]
   }
+  toggleSelectAll() {
+    this.getFormArray.controls.forEach((formGroup: FormGroup) => {
+      formGroup.get('selected').setValue(this.selectAllRows)
+    });
+  }
+  getTableStatistics() {
+    this.requestForm.get('data').valueChanges.pipe().subscribe({
+      next: res => {
+        this.billableCount = this.getFormArray.controls
+          .filter(field => field.get('task').value == 'Billable')
+          .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
+        this.noChargeCount = this.getFormArray.controls
+          .filter(field => field.get('task').value == 'No-Charge')
+          .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
+      }
+    })
+  }
+  // checkAllRowsChecked(){
+  //   this.form.get('data').valueChanges.pipe().subscribe({
+  //     next:res=>{
+  //       let countRows= this.getFormArray.controls.filter((formGroup: FormGroup) => {
+  //         return formGroup.get('selected').value === true;
+  //       }).length
+  //       this.selectAllRows = countRows === this.getFormArray.controls.length;
+  //       // let checkSelected = this.getFormArray.controls.every(field=>field.get('selected').value==true)
+  //       // if(checkSelected) this.selectAllRows = checkSelected :false
+  //     }
+  //   })
+  // }
 }
+// } if (nameA < nameB) {
+//   return -1;
+// }
+// if (nameA > nameB) {
+//   return 1;
+// }

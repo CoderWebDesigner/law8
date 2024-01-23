@@ -1,5 +1,5 @@
 <div class="mb-3">
-  <ngx-dropzone (change)="onSelect($event)">
+  <ngx-dropzone (change)="onSelect($event)" [accept]="props['accept']">
     <ngx-dropzone-label>
       <div class="mb-3">
         <i class="fat-upload f-primary" style="font-size: 5rem;"></i>
@@ -7,6 +7,9 @@
       <span style="color: #343434;">{{'messages.dropClick' | translate}}</span>
 
     </ngx-dropzone-label>
+    <!-- <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-image-preview> -->
     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
       <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
     </ngx-dropzone-preview>

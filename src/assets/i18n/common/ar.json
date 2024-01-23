@@ -4,25 +4,32 @@
     "weak": "ضعيف",
     "medium": "متوسط",
     "strong": "قوي",
-    "profile":"الملف الشخصى",
+    "profile": "الملف الشخصى",
     "search": "بحث",
-    "noDataAdded":"لا يوجد بيانات مضافة",
-    "more":"المزيد",
-    "clientCode":"رقم العميل",
-    "clientName":"اسم العميل",
-    "address":"عنوان",
-    "contacts":"جهات الاتصال",
-    "general":"عام",
-    "parties":"Parties",
-    "relatedMatters":"قضايا ذات صلة",
-    "dragAndDrop": "قوم بسحب والإفلات او قوم بضغط على"
+    "noDataAdded": "لا يوجد بيانات مضافة",
+    "more": "المزيد",
+    "clientCode": "رقم العميل",
+    "clientName": "اسم العميل",
+    "address": "عنوان",
+    "contacts": "جهات الاتصال",
+    "general": "عام",
+    "parties": "Parties",
+    "relatedMatters": "قضايا ذات صلة",
+    "dragAndDrop": "قوم بسحب والإفلات او قوم بضغط على",
+    "matterCode": "رقم القضية",
+    "priority": "أولوية",
+    "from":"من",
+    "to":"الي",
+    "total":"Total"
   },
   "btn": {
     "submit": "تاكيد",
     "send": "ارسال",
-    "close":"يغلق",
-    "yes":"نعم",
-   "no":"لا"
+    "close": "يغلق",
+    "yes": "نعم",
+    "no": "لا",
+    "cancel":"يلغي",
+    "filter":"فلتره"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -34,9 +41,10 @@
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
     "invalidOTP": "OTP غير صالح",
     "dataMessage": "المجموع الكلى",
-    "error":"خطأ!",
-    "success":"نجاح!",
-    "sureDelete":"هل أنت متأكد أنك تريد حذف؟"
+    "error": "خطأ!",
+    "success": "نجاح!",
+    "sureDelete": "هل أنت متأكد أنك تريد حذف؟",
+    "dropClick":"رفع الملفات للتحميل أو النقر فوق"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",
@@ -48,19 +56,19 @@
     "englishLetters": "يجب أن يحتوي هذا الحقل على أحرف إنجليزية فقط!",
     "arabicLetters": "يجب أن يحتوي هذا الحقل على أحرف عربية فقط!"
   },
-  "tags":{
-    "Added":"تم الإضافة",
-    "UNDER PROCESS":"تحت العملية",
-    "NEW CASE":"حالة جديدة",
-    "FOR COURT REGISTRATION":"لتسجيل المحكمة",
-    "Active":"نشط",
-    "Inactive":"غير نشط",
-    "Sended":"تم الارسال",
-    "PENDING":"معلق",
-    "Failed":"فشل فى الإرسال",
-    "DONE":"مكتمل",
-    "Low":"قليل",
-    "Normal":"طبيعي",
-    "High":"عالي"
+  "tags": {
+    "Added": "تم الإضافة",
+    "UNDER PROCESS": "تحت العملية",
+    "NEW CASE": "حالة جديدة",
+    "FOR COURT REGISTRATION": "لتسجيل المحكمة",
+    "Active": "نشط",
+    "Inactive": "غير نشط",
+    "Sended": "تم الارسال",
+    "PENDING": "معلق",
+    "Failed": "فشل فى الإرسال",
+    "DONE": "مكتمل",
+    "Low": "قليل",
+    "Normal": "طبيعي",
+    "High": "عالي"
   }
 }

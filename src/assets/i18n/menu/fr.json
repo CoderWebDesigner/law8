@@ -19,7 +19,8 @@
       "taskManagement":{
         "title":"Missions",
         "taskManagementList":"Liste De Missions",
-        "taskManagementAdd":"Nouveau Mission"
+        "taskManagementAdd":"Nouveau Mission",
+        "calender":"Calender"
       }
   }
 }

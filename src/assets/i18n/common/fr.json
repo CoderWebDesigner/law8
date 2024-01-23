@@ -15,7 +15,12 @@
     "general":"Données",
     "parties":"Parties",
     "relatedMatters": "Related Matters",
-    "dragAndDrop": "Faites glisser et déposez un fichier ici ou cliquez"
+    "dragAndDrop": "Faites glisser et déposez un fichier ici ou cliquez",
+    "matterCode":"Code Dossiers",
+    "priority": "Priority",
+    "from":"From",
+    "to":"To",
+    "total":"Total"
   },
   "btn": {
    "save":"Sauvegarder",
@@ -23,7 +28,9 @@
    "send":"Envoyer",
    "close":"Fermer",
    "yes":"Oui",
-   "no":"Non"
+   "no":"Non",
+   "cancel":"Cancel",
+   "filter":"Filter"
   },
   "messages": {
     "signInSuccessfully":"Connectez-vous avec succès",
@@ -37,7 +44,8 @@
     "dataMessage": "Totale",
     "error":"Erreur!",
     "success":"Succès!",
-    "sureDelete":"Etes-vous sûr que vous voulez supprimer?"
+    "sureDelete":"Etes-vous sûr que vous voulez supprimer?",
+    "dropClick":"Déposez les fichiers pour télécharger ou cliquer"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

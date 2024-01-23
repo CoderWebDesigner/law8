@@ -19,6 +19,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MattersComponent } from './components/matters/matters.component';
 import { TimesheetEditorComponent } from './components/timesheet-editor/timesheet-editor.component';
+import { CheckboxModule } from 'primeng/checkbox';
 @NgModule({
   declarations: [
     TimesheetComponent,
@@ -42,7 +43,8 @@ import { TimesheetEditorComponent } from './components/timesheet-editor/timeshee
     CalendarModule,
     InputNumberModule,
     InputTextareaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CheckboxModule
   ]
 })
 export class TimesheetModule { }

@@ -19,7 +19,8 @@
         "taskManagement":{
           "title":"Task Management",
           "taskManagementList":"Task Management List",
-          "taskManagementAdd":"New Activity"
+          "taskManagementAdd":"New Activity",
+          "calender":"Calender"
         }
     }
 }
