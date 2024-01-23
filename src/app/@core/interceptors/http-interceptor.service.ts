@@ -16,8 +16,8 @@ import { AuthService } from '@core/services';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
-  
-  constructor(private _authService: AuthService) {}
+
+  constructor(private _authService: AuthService) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -26,9 +26,11 @@ export class AppHttpInterceptor implements HttpInterceptor {
     HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>
   > {
 
-    const headersToAppend:any = {};
+    const headersToAppend: any = {};
 
     const token = this._authService.getToken();
+    headersToAppend['Access-Control-Allow-Origin'] = "*"
+    headersToAppend['Access-Control-Allow-Headers'] = "*"
 
     if (token) {
       if (!req.headers.get('Authorization')) {
@@ -38,8 +40,9 @@ export class AppHttpInterceptor implements HttpInterceptor {
     if (!Object.prototype.toString.call(req.body).indexOf('FormData')) {
       headersToAppend['Content-Type'] = 'application/json'
     }
-    const newRequest = req.clone({ setHeaders:headersToAppend });
+
+    const newRequest = req.clone({ setHeaders: headersToAppend });
     // eslint-disable-next-line consistent-return
-    return next.handle(newRequest).pipe(tap(() => {}));
+    return next.handle(newRequest).pipe(tap(() => { }));
   }
 }

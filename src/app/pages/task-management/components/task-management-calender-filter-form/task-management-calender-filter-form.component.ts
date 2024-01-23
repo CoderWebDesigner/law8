@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 
 @Component({
-  selector: 'app-calender-filter-form',
+  selector: 'app-task-management-calender-filter-form',
   templateUrl: './task-management-calender-filter-form.component.html',
   styleUrls: ['./task-management-calender-filter-form.component.scss']
 })

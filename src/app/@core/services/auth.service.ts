@@ -5,7 +5,7 @@ import { User } from '@core/models';
 import { USER } from '@core/utilities/defines';
 import { ApiService } from '@core/api/api.service';
 import { Router } from '@angular/router';
-
+import { jwtDecode } from "jwt-decode";
 @Injectable({
   providedIn: 'root'
 })
@@ -51,11 +51,14 @@ export class AuthService {
   }
 
   hasToken(): boolean {
-    return localStorage.getItem('user') ? true : false
+    return localStorage.getItem('token') ? true : false
   }
 
   getToken() {
-    return this._storageService.getStorage('user');
+    return this._storageService.getStorage('token');
   }
 
+  getDecodedToken(){
+    return jwtDecode(this._storageService.getStorage('token'))
+  }
 }

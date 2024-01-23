@@ -94,20 +94,14 @@ export const MENU: MenuItem[] = [
         parentId: 5
 
       },
-      // {
-      //   id: 3,
-      //   label: 'menu.taskManagement.calender',
-      //   link: '/task-management/calender',
-      //   parentId: 5
+      {
+        id: 3,
+        label: 'menu.taskManagement.calender',
+        link: '/task-management/calender',
+        parentId: 5
 
-      // }
+      }
     ]
-  },
-  {
-    id: 6,
-    label: 'menu.taskManagement.calender',
-    icon: 'calendar.svg',
-    link:'/calendar'
   },
 
 

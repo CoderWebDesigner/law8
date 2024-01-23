@@ -23,10 +23,6 @@ const routes: Routes = [
     loadChildren: () => import('./task-management/task-management.module').then((m) => m.TaskManagementModule)
   },
   {
-    path: 'calendar',
-    loadChildren: () => import('./calendar/calendar.module').then((m) => m.CalendarModule)
-  },
-  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule)
   },

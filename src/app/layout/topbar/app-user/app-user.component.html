@@ -1,6 +1,6 @@
 <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
 <button pButton type="button" (click)="menu.toggle($event)" class="p-button-text header-item">
     <img src="./assets/images/user.png" alt="user" width="30px" class="me-2">
-    {{_authService.user.UserName}}
+    {{_authService?.user?.UserName}}
     <i class="ms-2" inlineSVG="./assets/images/icons/right-arrow.svg" [setSVGAttributes]="{width:'10', height:'10'}"></i>
 </button>

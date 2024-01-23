@@ -79,6 +79,25 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             }
           },
           {
+            type:'select',
+            key:'parentMatterCode',
+            className:'col-md-4',
+            props:{
+              label:this._languageService.getTransValue('matters.parentMatterCode'),
+              options:[
+                {label:'C00001 : user 1',value:'C00001 : user 1'},
+                {label:'C00002 : user 2',value:'C00002 : user 2'},
+                {label:'C00003 : user 3',value:'C00003 : user 3'},
+              ]
+            },
+            expressions: {
+              hide:(field: FormlyFieldConfig) => {
+                return field.model?.requestType == 'New Matter' ||!field.model?.requestType;
+              }
+             },
+
+          },
+          {
             type: 'select',
             key: 'practiceArea',
             className: 'col-md-4',

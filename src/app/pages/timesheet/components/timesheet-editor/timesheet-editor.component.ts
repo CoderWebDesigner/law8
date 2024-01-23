@@ -26,16 +26,15 @@ export class TimesheetEditorComponent implements OnInit {
   isSubmit: boolean;
   selectAllRows: boolean;
   selectedMatter: any;
-  selectedRows: any[]=[];
-  billableCount: number=0;
-  nonBillableCount: number=0;
-  noChargeCount: number=0;
+  selectedRows: any[] = [];
+  billableCount: number = 0;
+  nonBillableCount: number = 0;
+  noChargeCount: number = 0;
   columnsLocalized = {
     ar: Timesheet_Editor_Columns_AR,
     en: Timesheet_Editor_Columns_EN,
     fr: Timesheet_Editor_Columns_FR
   }
-
   matters = [
     { label: '00000-001', value: '00000-001' },
     { label: '00000-002', value: '00000-002' },
@@ -101,7 +100,7 @@ export class TimesheetEditorComponent implements OnInit {
       if (rowIndex != index) field.get('timing').setValue(false)
     })
   }
-  addRow() {
+  addRow(fieldName:string) {
     const row = this.fb.group({
       id: [this.getFormArray.controls.length],
       selected: [false],
@@ -115,13 +114,17 @@ export class TimesheetEditorComponent implements OnInit {
       rate: ['', [Validators.required]],
       amount: ['', [Validators.required]],
       explanation: ['', [Validators.required]],
-      notes: [],
+      notes: [''],
     });
-    if (!this.getFormArray.controls.some(field => field.get('explanation').value == null && field.get('matter').value == null)) {
+    if (this.getFormArray.controls.every((formGroup) => formGroup.get(fieldName).value !="")) {
       this.getFormArray.push(row);
-      console.log(this.getFormArray)
       this.cdRef.detectChanges()
     }
+  }
+  compareObjects(obj1: any, obj2: any): boolean {
+    // Implement your logic to compare two objects
+    // For simplicity, this example assumes a shallow comparison
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
   }
   onDeleteRow(rowIndex: number): void {
     Swal.fire({
@@ -153,7 +156,7 @@ export class TimesheetEditorComponent implements OnInit {
     }
 
     this.getSelectedMatter(rowIndex)
-    this.addRow()
+    this.addRow('matter')
   }
   getSelectedMatter(rowIndex: number) {
     this._timeSheetService.selectedMatter$.pipe(
@@ -194,11 +197,11 @@ export class TimesheetEditorComponent implements OnInit {
     this.requestForm.get('data').valueChanges.pipe().subscribe({
       next: res => {
         this.billableCount = this.getFormArray.controls
-        .filter(field => field.get('task').value == 'Billable')
-        .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
+          .filter(field => field.get('task').value == 'Billable')
+          .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
         this.noChargeCount = this.getFormArray.controls
-        .filter(field => field.get('task').value == 'No-Charge')
-        .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
+          .filter(field => field.get('task').value == 'No-Charge')
+          .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
       }
     })
   }

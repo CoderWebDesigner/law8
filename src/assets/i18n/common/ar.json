@@ -19,7 +19,8 @@
     "matterCode": "رقم القضية",
     "priority": "أولوية",
     "from":"من",
-    "to":"الي"
+    "to":"الي",
+    "total":"Total"
   },
   "btn": {
     "submit": "تاكيد",

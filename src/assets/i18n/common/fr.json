@@ -19,7 +19,8 @@
     "matterCode":"Code Dossiers",
     "priority": "Priority",
     "from":"From",
-    "to":"To"
+    "to":"To",
+    "total":"Total"
   },
   "btn": {
    "save":"Sauvegarder",

@@ -141,7 +141,7 @@
                     rows="1"
                     pInputTextarea
                     formControlName="explanation"
-                    (input)="addRow()"
+                    (input)="addRow('explanation')"
                   ></textarea>
                 </td>
 
@@ -178,17 +178,21 @@
 </shared-card>
 <shared-card borderRadius="20">
   <div class="row" body>
-    <div class="col text-center">
-      <h5 class="fw-bold mb-3">{{'timesheet.billableCount'|translate}}</h5>
-      <p class="mb-0 h1">{{ billableCount }}</p>
+    <div class="col d-flex justify-content-between border-end border-2">
+      <h6 class="fw-bold align-middle">{{'common.total'|translate}}</h6>
+      <p class="mb-0 h5">{{ +billableCount+ +nonBillableCount+ +noChargeCount }}</p>
     </div>
-    <div class="col text-center divider">
-      <h5 class="fw-bold  mb-3">{{'timesheet.nonBillableCount'|translate}}</h5>
-      <p class="mb-0 h1">{{ nonBillableCount }}</p>
+    <div class="col d-flex justify-content-between border-end border-2">
+      <h6 class="fw-bold  align-middle">{{'timesheet.nonBillableCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ billableCount }}</p>
     </div>
-    <div class="col text-center">
-      <h5 class="fw-bold mb-3">{{'timesheet.noChargeCount'|translate}}</h5>
-      <p class="mb-0 h1">{{ noChargeCount }}</p>
+    <div class="col d-flex justify-content-between border-end border-2">
+      <h6 class="fw-bold  align-middle">{{'timesheet.nonBillableCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ nonBillableCount }}</p>
+    </div>
+    <div class="col d-flex justify-content-between">
+      <h6 class="fw-bold align-middle">{{'timesheet.noChargeCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ noChargeCount }}</p>
     </div>
   </div>
 </shared-card>
