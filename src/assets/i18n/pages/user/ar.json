@@ -1,0 +1,12 @@
+
+{
+  "users":{
+    "changePassword":"Change Password",
+    "updateUser":"Update User",
+    "updateTimeSheetDate":"Update TimeSheet Date",
+    "portalId":"Portal ID",
+    "telephone":"Telephone",
+    "addUser":"Add User",
+    "timesheetDate":"Timesheet Date"
+  }
+}

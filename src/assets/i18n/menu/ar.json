@@ -21,6 +21,11 @@
           "taskManagementList":"قائمة المهام",
           "taskManagementAdd":"مهمة جديدة",
           "calender":"تقويم"
+        },
+        "users":{
+          "title":"المستخدمين",
+          "usersList":"قائمة المستخدمين",
+          "userAdd":"مستخدم جديد"
         }
     }
 }

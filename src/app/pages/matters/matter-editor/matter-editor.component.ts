@@ -30,6 +30,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           {
             type: 'radio',
             key: 'requestType',
+            defaultValue: 'New Matter',
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.requestType'),
@@ -79,22 +80,22 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             }
           },
           {
-            type:'select',
-            key:'parentMatterCode',
-            className:'col-md-4',
-            props:{
-              label:this._languageService.getTransValue('matters.parentMatterCode'),
-              options:[
-                {label:'C00001 : user 1',value:'C00001 : user 1'},
-                {label:'C00002 : user 2',value:'C00002 : user 2'},
-                {label:'C00003 : user 3',value:'C00003 : user 3'},
+            type: 'select',
+            key: 'parentMatterCode',
+            className: 'col-md-4',
+            props: {
+              label: this._languageService.getTransValue('matters.parentMatterCode'),
+              options: [
+                { label: 'C00001 : user 1', value: 'C00001 : user 1' },
+                { label: 'C00002 : user 2', value: 'C00002 : user 2' },
+                { label: 'C00003 : user 3', value: 'C00003 : user 3' },
               ]
             },
             expressions: {
-              hide:(field: FormlyFieldConfig) => {
-                return field.model?.requestType == 'New Matter' ||!field.model?.requestType;
+              hide: (field: FormlyFieldConfig) => {
+                return field.model?.requestType == 'New Matter' || !field.model?.requestType;
               }
-             },
+            },
 
           },
           {
@@ -113,13 +114,13 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               onInit: (field: FormlyFieldConfig) => {
                 field.form.get('practiceArea').valueChanges.subscribe({
                   next: res => {
-                    if ([ 'Intelecturual Property'].includes(res)) {
+                    if (['Intelecturual Property'].includes(res)) {
                       this.items.forEach((obj) => {
-                        [1, 3, 4, 5, 7].includes(obj.id)?obj.show = true:obj.show = false
+                        [1, 3, 4, 5, 7].includes(obj.id) ? obj.show = true : obj.show = false
                       })
                     } else if (['Corporate', 'Litegation'].includes(res)) {
                       this.items.forEach((obj) => {
-                        [1, 2, 3, 6, 7].includes(obj.id)?obj.show = true:obj.show = false
+                        [1, 2, 3, 6, 7].includes(obj.id) ? obj.show = true : obj.show = false
                       })
                     }
                   }
@@ -172,195 +173,200 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             }
           },
           {
-            type: 'select',
-            key: 'instructor',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.instructor'),
-              options: [
-                { label: 'value 1', value: 'value 1' },
-                { label: 'value 2', value: 'value 2' },
-                { label: 'value 3', value: 'value 3' },
-              ]
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
-              }
-            },
+            className:'card p-2 mx-3 mb-3',
+            fieldGroupClassName: 'row',
+            fieldGroup: [
+              {
+                type: 'select',
+                key: 'instructor',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.instructor'),
+                  options: [
+                    { label: 'value 1', value: 'value 1' },
+                    { label: 'value 2', value: 'value 2' },
+                    { label: 'value 3', value: 'value 3' },
+                  ]
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return ['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
+                  }
+                },
 
-          },
-          {
-            type: 'radio',
-            key: 'tradmarkType',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.tradmarkType'),
-              placeholder: '',
-              options: [
-                { label: 'Logo', value: 'Logo' },
-                { label: 'Word', value: 'Word' },
-              ]
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
-              }
-            },
-          },
-          {
-            type: 'input',
-            key: 'wordMark',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.wordMark')
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return (
-                  (['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea) ||
-                  (field.model?.tradmarkType == 'Logo' || !field.model?.tradmarkType)
-                )
+              },
+              {
+                type: 'radio',
+                key: 'tradmarkType',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.tradmarkType'),
+                  placeholder: '',
+                  options: [
+                    { label: 'Logo', value: 'Logo' },
+                    { label: 'Word', value: 'Word' },
+                  ]
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return ['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
+                  }
+                },
+              },
+              {
+                type: 'input',
+                key: 'wordMark',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.wordMark')
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return (
+                      (['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea) ||
+                      (field.model?.tradmarkType == 'Logo' || !field.model?.tradmarkType)
+                    )
 
-              }
-            },
-          },
-          {
-            type: 'checkbox',
-            key: 'caseSensitive',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.caseSensitive'),
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return (
-                  (['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea) ||
-                  (field.model?.tradmarkType == 'Logo' || !field.model?.tradmarkType)
-                )
-              }
-            },
+                  }
+                },
+              },
+              {
+                type: 'checkbox',
+                key: 'caseSensitive',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.caseSensitive'),
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return (
+                      (['Corporate', 'Litegation'].includes(field.model?.practiceArea) || !field.model?.practiceArea) ||
+                      (field.model?.tradmarkType == 'Logo' || !field.model?.tradmarkType)
+                    )
+                  }
+                },
 
-          },
-          {
-            type: 'file',
-            key: 'logoMark',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.logoMark'),
-              accept: '.jpeg,.jpg,.png',
-              //  multiple:false
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return (
-                  (['Corporate', 'Litegation'].includes(field.model?.practiceArea) ||
-                    !field.model?.practiceArea) ||
-                  field.model?.tradmarkType == 'Word' || !field.model?.tradmarkType
-                )
-              }
-            },
-          },
+              },
+              {
+                type: 'file',
+                key: 'logoMark',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.logoMark'),
+                  accept: '.jpeg,.jpg,.png',
+                  //  multiple:false
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return (
+                      (['Corporate', 'Litegation'].includes(field.model?.practiceArea) ||
+                        !field.model?.practiceArea) ||
+                      field.model?.tradmarkType == 'Word' || !field.model?.tradmarkType
+                    )
+                  }
+                },
+              },
+              {
+                type: 'select',
+                key: 'jurisdicion',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.jurisdicion'),
+                  options: [
+                    { label: 'value 1', value: 'value 1' },
+                    { label: 'value 2', value: 'value 2' },
+                    { label: 'value 3', value: 'value 3' },
+                  ]
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return (field.model?.practiceArea == 'Intelecturual Property') || !field.model?.practiceArea;
+                  }
+                },
 
+              },
+              {
+                type: 'select',
+                key: 'judicature',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.judicature'),
+                  options: [
+                    { label: 'value 1', value: 'value 1' },
+                    { label: 'value 2', value: 'value 2' },
+                    { label: 'value 3', value: 'value 3' },
+                  ]
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return ['Intelecturual Property', 'Corporate'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
+                  }
+                },
 
-          {
-            type: 'select',
-            key: 'jurisdicion',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.jurisdicion'),
-              options: [
-                { label: 'value 1', value: 'value 1' },
-                { label: 'value 2', value: 'value 2' },
-                { label: 'value 3', value: 'value 3' },
-              ]
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return (field.model?.practiceArea == 'Intelecturual Property') || !field.model?.practiceArea;
-              }
-            },
+              },
+              {
+                type: 'select',
+                key: 'matterStatus',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.matterStatus'),
+                  options: [
+                    { label: 'value 1', value: 'value 1' },
+                    { label: 'value 2', value: 'value 2' },
+                    { label: 'value 3', value: 'value 3' },
+                  ]
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return (field.model?.practiceArea == 'Intelecturual Property') || !field.model?.practiceArea;
+                  }
+                },
 
-          },
-          {
-            type: 'select',
-            key: 'judicature',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.judicature'),
-              options: [
-                { label: 'value 1', value: 'value 1' },
-                { label: 'value 2', value: 'value 2' },
-                { label: 'value 3', value: 'value 3' },
-              ]
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ['Intelecturual Property','Corporate'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
-              }
-            },
+              },
+              {
+                type: 'select',
+                key: 'stage',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.stage'),
+                  options: [
+                    { label: 'value 1', value: 'value 1' },
+                    { label: 'value 2', value: 'value 2' },
+                    { label: 'value 3', value: 'value 3' },
+                  ]
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return ['Intelecturual Property', 'Corporate'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
+                  }
+                },
+              },
+              {
+                type: 'input',
+                key: 'courtNumber',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.courtNumber'),
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return ['Intelecturual Property', 'Corporate'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
+                  }
+                },
+              },
+              {
+                type: 'textarea',
+                key: 'notes',
+                className: 'col-12',
+                props: {
+                  label: this._languageService.getTransValue('matters.notes'),
+                  rows: 5
+                },
 
-          },
-          {
-            type: 'select',
-            key: 'matterStatus',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.matterStatus'),
-              options: [
-                { label: 'value 1', value: 'value 1' },
-                { label: 'value 2', value: 'value 2' },
-                { label: 'value 3', value: 'value 3' },
-              ]
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return (field.model?.practiceArea == 'Intelecturual Property') || !field.model?.practiceArea;
-              }
-            },
+              },
+            ]
+          }
 
-          },
-          {
-            type: 'select',
-            key: 'stage',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.stage'),
-              options: [
-                { label: 'value 1', value: 'value 1' },
-                { label: 'value 2', value: 'value 2' },
-                { label: 'value 3', value: 'value 3' },
-              ]
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ['Intelecturual Property','Corporate'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
-              }
-            },
-          },
-          {
-            type: 'input',
-            key: 'courtNumber',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.courtNumber'),
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ['Intelecturual Property','Corporate'].includes(field.model?.practiceArea) || !field.model?.practiceArea;
-              }
-            },
-          },
-          {
-            type: 'textarea',
-            key: 'notes',
-            className: 'col-12',
-            props: {
-              label: this._languageService.getTransValue('matters.notes'),
-              rows: 5
-            },
-
-          },
         ]
       }
     ]

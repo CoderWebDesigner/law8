@@ -18,12 +18,16 @@
     [selectionMode]="selectMode"
   >
     <ng-template pTemplate="header" let-columns>
-      <tr >
+      <tr>
         <th *ngIf="withCheckbox || withRadioButton" style="width: 5rem">
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field" [style]="col.style||{'min-width': '200px'}" *ngIf="!col.isExpand">
+          <th
+            [pSortableColumn]="col.field"
+            [style]="col.style || { 'min-width': '200px' }"
+            *ngIf="!col.isExpand"
+          >
             {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
@@ -56,7 +60,12 @@
         <td *ngFor="let col of columns">
           <ng-container
             *ngIf="
-              !col?.isStatus && !col.isDate && !col?.isAction && !col?.withIcon && !col.isLargeText
+              !col?.isSwitch &&
+              !col?.isStatus &&
+              !col.isDate &&
+              !col?.isAction &&
+              !col?.withIcon &&
+              !col.isLargeText
             "
           >
             {{ rowData[col.field] }}
@@ -70,6 +79,9 @@
           <ng-container *ngIf="col?.isDate">
             {{ rowData[col.field] | date : "mediumDate" }}
           </ng-container>
+          <ng-container *ngIf="col?.isSwitch">
+            <p-inputSwitch [(ngModel)]="rowData[col.field]" (onChange)="onSwitch($event)"></p-inputSwitch>
+          </ng-container>
 
           <ng-container *ngIf="col?.withIcon">
             <img
@@ -78,15 +90,19 @@
             />
           </ng-container>
           <ng-container *ngIf="col?.isLargeText">
-            <ng-container *ngIf="rowData[col['field']] && rowData[col['field']].length>20">
-              {{rowData[col.field] | slice:0:20}}
-              <p-button icon="pi pi-ellipsis-h" styleClass="p-button-icon-only p-button-info p-0 p-button-text" (onClick)="showMore(col?.field,rowData[col['field']])"></p-button>
+            <ng-container
+              *ngIf="rowData[col['field']] && rowData[col['field']].length > 20"
+            >
+              {{ rowData[col.field] | slice : 0 : 20 }}
+              <p-button
+                icon="pi pi-ellipsis-h"
+                styleClass="p-button-icon-only p-button-info p-0 p-button-text"
+                (onClick)="showMore(col?.field, rowData[col['field']])"
+              ></p-button>
             </ng-container>
-            <ng-container *ngIf="rowData[col['field']]?.length<20">
-              {{rowData[col.field]}}
+            <ng-container *ngIf="rowData[col['field']]?.length < 20">
+              {{ rowData[col.field] }}
             </ng-container>
-
-
           </ng-container>
         </td>
 

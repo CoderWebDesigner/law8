@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./task-management/task-management.module').then((m) => m.TaskManagementModule)
   },
   {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule)
   },

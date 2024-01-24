@@ -1,0 +1,17 @@
+<shared-card [borderRadius]="20" [title]="(userId?'users.updateUser':'users.addUser') | translate">
+  <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+    <formly-form
+      [form]="formly"
+      [fields]="formlyFields"
+      [model]="formlyModel"
+    ></formly-form>
+    <div class="mt-4 text-end">
+      <p-button
+        [loading]="isSubmit"
+        styleClass="p-button-primary d-block py-3"
+        type="submit"
+        label="{{ 'btn.submit' | translate }}"
+      ></p-button>
+    </div>
+  </form>
+</shared-card>

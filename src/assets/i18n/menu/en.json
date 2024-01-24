@@ -21,6 +21,11 @@
           "taskManagementList":"Task Management List",
           "taskManagementAdd":"New Activity",
           "calender":"Calender"
+        },
+        "users":{
+          "title":"Users",
+          "usersList":"Users List",
+          "userAdd":"New User"
         }
     }
 }

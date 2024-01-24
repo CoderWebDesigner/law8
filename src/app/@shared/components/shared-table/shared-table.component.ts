@@ -34,6 +34,8 @@ import { SharedTableService } from './services/table.service';
 import { SharedService } from '@shared/services/shared.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'shared-table',
@@ -49,6 +51,7 @@ import { MoreInfoComponent } from './components/more-info/more-info.component';
     FormsModule,
     PaginatorModule,
     InputTextModule,
+    InputSwitchModule
   ],
   providers: [DialogService],
 })
@@ -212,6 +215,22 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     console.log('Row Edited:', event);
 
  console.log(this.data)
+  }
+  onSwitch(e){
+    console.log(e.checked)
+    // Swal.fire({
+    //   title: "Do you want to save the changes?",
+    //   showCancelButton: true,
+    //   confirmButtonText: "Save",
+    // }).then((result) => {
+    //   /* Read more about isConfirmed, isDenied below */
+    //   if (result.isConfirmed) {
+        this._apiService.post(this.apiUrls.switch,{}).pipe(
+          finalize(()=>this.isLoading=false),
+          this._sharedService.takeUntilDistroy()
+        )
+    //   }
+    // });
   }
 
   onDelete(action: TableAction, rowData: any) {

@@ -21,7 +21,7 @@
     "lastNamePlaceholder":"Please Enter last Name",
     "introducingLawyer":"Introducing Lawyer",
     "introducingLawyerPlaceholder":"Please Select Introducing Lawyer",
-    "email":"Email",
+    
     "emailPlaceholder":"Please Enter Email",
     "subject":"Subject",
     "subjectPlaceholder":"Please Enter Subject",
@@ -56,7 +56,6 @@
     "positionPlaceholder":"Please Enter Position",
     "addressPlaceholder":"Please Enter Address",
     "phonePlaceholder":"Please Enter Phone",
-    "mobile":"Mobile",
     "mobilePlaceholder":"Please Enter Mobile",
     "fax":"Fax",
     "faxPlaceholder":"Please Enter Fax",

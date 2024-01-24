@@ -103,6 +103,26 @@ export const MENU: MenuItem[] = [
       }
     ]
   },
+  {
+    id: 6,
+    label: 'menu.users.title',
+    icon: 'client.svg',
+    subItems:[
+      {
+        id: 1,
+        label: 'menu.users.usersList',
+        link: '/users',
+        parentId: 6
+      },
+      {
+        id: 2,
+        label: 'menu.users.userAdd',
+        link: '/users/add',
+        parentId: 6
+
+      },
+    ]
+  },
 
 
 

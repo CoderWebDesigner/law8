@@ -1,0 +1,21 @@
+<shared-card [title]="'timesheet.title' | translate" [borderRadius]="20">
+  <shared-search-input headerActions></shared-search-input>
+  <shared-table
+    body
+    [data]="data"
+    [columnsLocalized]="columnsLocalized"
+    [additionalTableConfig]="additionalTableConfig"
+    [paginationClient]="true"
+  >
+    <ng-template #actions let-rowData>
+      <p-button
+        class="mx-2 p-0"
+        styleClass="p-button-text"
+        [icon]="'pi pi-key  fs-4'"
+        tooltipPosition="top"
+        [pTooltip]="'users.changePassword'| translate"
+        (onClick)="openChangePasswordModal()"
+      ></p-button>
+    </ng-template>
+  </shared-table>
+</shared-card>

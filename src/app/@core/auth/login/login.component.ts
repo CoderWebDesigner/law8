@@ -25,7 +25,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
         key: "employeeId",
         type: "input",
         props: {
-          label: this._languageService.getTransValue("auth.username"),
+          label: this._languageService.getTransValue("common.username"),
           placeholder: this._languageService.getTransValue("auth.userNamePlaceholder"),
           icon: "pi pi-user",
           required: true
@@ -36,7 +36,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
         type: "input",
         props: {
           type: "password",
-          label: this._languageService.getTransValue("auth.password"),
+          label: this._languageService.getTransValue("common.password"),
           placeholder: this._languageService.getTransValue("auth.passwordPlaceholder"),
           icon: "pi pi-lock",
           required: true
@@ -79,10 +79,9 @@ export class LoginComponent extends FormBaseClass implements OnInit {
       this.takeUntilDestroy()
     ).subscribe({
       next: (res:ApiRes) => {
-        console.log(res)
         if(res && res.Success){
-          this._storageService.setStorage('token', res.Data['token']);
-          this._storageService.setStorage('empolyeeId', res.Data['Initial']);
+          // this._storageService.setStorage('token', res.Data['token']);
+          // this._storageService.setStorage('empolyeeId', res.Data['Initial']);
           this._authService.setUser(res.Data['Name'])
           this._router.navigate(['/auth/otp'])
         }

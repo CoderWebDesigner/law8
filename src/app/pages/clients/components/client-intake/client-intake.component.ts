@@ -118,7 +118,7 @@ export class ClientIntakeComponent extends FormBaseClass implements OnInit {
             key: 'Email',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.email'),
+              label: this._languageService.getTransValue('common.email'),
               placeholder: this._languageService.getTransValue('client.emailPlaceholder'),
               required: true,
             },
