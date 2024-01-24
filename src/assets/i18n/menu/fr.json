@@ -1,26 +1,31 @@
 {
-  "menu":{
-      "dashboard":"Tableau de bord",
-      "clients":{
-        "title":"Clients",
-        "clientIntack":"Acceuil Client",
-        "clientAdd":"Ajouter Client",
-        "clientList":"Listes Des Clients"
-      },
-      "timesheet":{
-        "title":"Compteur horaire",
-        "timesheetAdd":"TimeSheet Add"
-      },
-      "matters":{
-        "title":"Dossiers",
-        "matterList":"Liste De Dossiers",
-        "mattersAdd":"Nouveau Dossier"
-      },
-      "taskManagement":{
-        "title":"Missions",
-        "taskManagementList":"Liste De Missions",
-        "taskManagementAdd":"Nouveau Mission",
-        "calender":"Calender"
-      }
+  "menu": {
+    "dashboard": "Tableau de bord",
+    "clients": {
+      "title": "Clients",
+      "clientIntack": "Acceuil Client",
+      "clientAdd": "Ajouter Client",
+      "clientList": "Listes Des Clients"
+    },
+    "timesheet": {
+      "title": "Compteur horaire",
+      "timesheetAdd": "TimeSheet Add"
+    },
+    "matters": {
+      "title": "Dossiers",
+      "matterList": "Liste De Dossiers",
+      "mattersAdd": "Nouveau Dossier"
+    },
+    "taskManagement": {
+      "title": "Missions",
+      "taskManagementList": "Liste De Missions",
+      "taskManagementAdd": "Nouveau Mission",
+      "calender": "Calender"
+    },
+    "users": {
+      "title": "Utilisatrices",
+      "usersList": "Users List",
+      "userAdd": "New User"
+    }
   }
 }

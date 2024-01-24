@@ -20,7 +20,11 @@
     "priority": "أولوية",
     "from":"من",
     "to":"الي",
-    "total":"Total"
+    "total":"Total",
+    "username": "اسم المستخدم",
+    "mobileNumber":"رقم الهاتف المحمول",
+    "email":"البريد الإكتروني",
+    "password": "كلمة المرور"
   },
   "btn": {
     "submit": "تاكيد",

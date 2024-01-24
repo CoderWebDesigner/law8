@@ -42,7 +42,7 @@ export class EditProfileComponent extends FormBaseClass implements OnChanges{
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue(
-                    'profile.email'
+                    'common.email'
                   ),
                   required: true,
                 },

@@ -20,7 +20,11 @@
     "priority": "Priority",
     "from":"From",
     "to":"To",
-    "total":"Total"
+    "total":"Total",
+    "username": "Username",
+    "mobileNumber":"Mobile Number",
+    "email":"Email",
+    "password": "Password"
   },
   "btn": {
     "save": "Save",

@@ -31,7 +31,7 @@ export class UserIdStepOneComponent extends FormBaseClass implements OnInit {
         key: "email",
         type: "input",
         props: {
-          label: this._languageService.getTransValue("auth.email"),
+          label: this._languageService.getTransValue("common.email"),
           placeholder: this._languageService.getTransValue("auth.emailPlaceholder"),
           icon: "pi pi-envelope",
           required:true,

@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 import { AuthService, StorageService } from '@core/services';
 import { finalize } from 'rxjs';
 
@@ -39,13 +40,16 @@ export class OtpComponent extends FormBaseClass implements OnInit {
       finalize(() => this.isSubmit = false),
       this.takeUntilDestroy()
     ).subscribe({
-      next: (res: any) => {
-        if (res?.IsSucess) {
+      next: (res: ApiRes) => {
+        if(res && res.Success){
+          this._storageService.setStorage('token', res.Data['token']);
+          this._storageService.setStorage('empolyeeId', res.Data['employeeId']);
           this._toastrNotifiService.displaySuccessMessage(this._languageService.getTransValue('messages.signInSuccessfully'));
           this._router.navigate(['/dashboard'])
-        } else {
-          this._toastrNotifiService.displayErrorToastr(this._languageService.getTransValue('messages.invalidOTP'));
         }
+        // } else {
+        //   this._toastrNotifiService.displayErrorToastr(this._languageService.getTransValue('messages.invalidOTP'));
+        // }
       }
     })
 

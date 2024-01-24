@@ -24,6 +24,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/matters/',
     './assets/i18n/pages/task-management/',
     './assets/i18n/pages/profile/',
+    './assets/i18n/pages/user/',
   ]);
 }
 @NgModule({
@@ -48,16 +49,16 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AppHttpInterceptor,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
 
     },
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:HttpErrorInterceptor,
-      multi:true,
-      deps:[HandleErrorService]
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+      deps: [HandleErrorService]
 
     }
   ],

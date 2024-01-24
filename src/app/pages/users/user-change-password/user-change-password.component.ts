@@ -2,16 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 
 @Component({
-  selector: 'app-new-password-step-three',
-  templateUrl: './new-password-step-three.component.html',
-  styleUrls: ['./new-password-step-three.component.scss']
+  selector: 'app-user-change-password',
+  templateUrl: './user-change-password.component.html',
+  styleUrls: ['./user-change-password.component.scss']
 })
-export class NewPasswordStepThreeComponent extends FormBaseClass implements OnInit {
-
-  ngOnInit() {
-    this.initForm();
+export class UserChangePasswordComponent extends FormBaseClass implements OnInit{
+  ngOnInit(): void {
+    this.initForm()
   }
-
   initForm() {
     this.formlyFields = [
       {
@@ -44,24 +42,8 @@ export class NewPasswordStepThreeComponent extends FormBaseClass implements OnIn
       },
     ]
   }
-
-
-  onSubmit() {
-    this.isSubmit = true;
-    if (this.formly.invalid) {
-      this._toastrNotifiService.displaySuccessMessage('Successfully Logged in');
-      return;
-    }
-    this._toastrNotifiService.displaySuccessMessage('Successfully Logged in');
-    this._router.navigate(['/auth/otp'])
-    // if (this.checkRole()) {
-    //   this.isSubmit = false
-    //   this._storageService.setStorage('token', "token");
-    //   this._storageService.setStorage('role', this.role);
-    //   this._router.navigate(['/'])
-    // }
-
+  override onSubmit(): void {
+    throw new Error('Method not implemented.');
   }
-
 
 }

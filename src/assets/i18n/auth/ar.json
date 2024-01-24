@@ -2,8 +2,8 @@
   "auth": {
     "login": "تسجيل الدخول",
     "welcomeBack": "!مرحبًا بعودتك",
-    "username": "اسم المستخدم",
-    "password": "كلمة المرور",
+
+
     "rememberMe": "ذكرنى",
     "forgetPassword": "هل نسيت كلمة السر",
     "toSignInPleaseEnterYourUsernameAndPassword":"لتسجيل الدخول الرجاء إدخال اسم المستخدم وكلمة المرور",
@@ -16,7 +16,6 @@
     "verify":"تاكيد",
     "newPassword":"كلمة المرور الجديدة",
     "userId":"معرف المستخدم",
-    "email":"بريد إلكتروني",
     "userIdPlaceholder":"الرجاء إدخال معرف المستخدم الخاص بك",
     "emailPlaceholder":"رجاءا أدخل بريدك الإلكتروني",
     "verfiyOtp":"تحقق من OTP",

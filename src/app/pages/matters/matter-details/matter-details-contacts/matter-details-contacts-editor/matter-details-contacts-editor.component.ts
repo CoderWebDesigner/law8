@@ -91,7 +91,7 @@ export class MatterDetailsContactsEditorComponent extends FormBaseClass implemen
             key: 'Email',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.email'),
+              label: this._languageService.getTransValue('common.email'),
               placeholder: this._languageService.getTransValue('client.emailPlaceholder'),
               required: true,
             },
@@ -114,7 +114,7 @@ export class MatterDetailsContactsEditorComponent extends FormBaseClass implemen
             key: 'MobileNo',
             type: 'phone',
             props: {
-              label: this._languageService.getTransValue('client.mobile'),
+              label: this._languageService.getTransValue('common.mobileNumber'),
               required: true,
             },
           },

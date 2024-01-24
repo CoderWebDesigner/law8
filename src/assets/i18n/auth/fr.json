@@ -2,8 +2,6 @@
   "auth": {
     "login":"Se connecter",
     "welcomeBack": "Content de te revoir!",
-    "username": "Nom d'utilisateur",
-    "password": "Mot de passe",
     "rememberMe": "Souviens-toi de moi",
     "forgetPassword": "Mot de passe oublié",
     "toSignInPleaseEnterYourUsernameAndPassword":"Pour vous connecter, veuillez saisir votre nom d'utilisateur et votre mot de passe",
@@ -17,7 +15,6 @@
     "newPassword":"nouveau mot de passe",
     "userId":"ID de l'utilisateur",
     "userIdPlaceholder":"Veuillez saisir votre ID utilisateur",
-    "email":"E-mail",
     "emailPlaceholder":"Veuillez saisir votre e-mail",
     "verfiyOtp":"Vérifiez OTP",
     "twoStepsVerifiy":"Vérification en deux étapes",

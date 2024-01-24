@@ -2,8 +2,6 @@
   "auth": {
     "login":"Sign In",
     "welcomeBack": "Welcome Back!",
-    "username": "Username",
-    "password": "Password",
     "rememberMe": "Remember Me",
     "forgetPassword": "Forget Password",
     "toSignInPleaseEnterYourUsernameAndPassword":"To login, please enter your username and password",
@@ -17,7 +15,6 @@
     "newPassword":"New Password",
     "userId":"User Id",
     "userIdPlaceholder":"Please Enter Your User Id",
-    "email":"Email",
     "emailPlaceholder":"Please Enter Your Email",
     "verfiyOtp":"Verify OTP",
     "twoStepsVerifiy":"Two-Step Verification",

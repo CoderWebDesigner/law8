@@ -21,7 +21,7 @@ export class ResetPasswordComponent extends FormBaseClass implements OnChanges {
         type: 'input',
         props: {
           label: this._languageService.getTransValue(
-            'profile.email'
+            'common.email'
           ),
           required: true,
           disabled:true,
@@ -34,7 +34,7 @@ export class ResetPasswordComponent extends FormBaseClass implements OnChanges {
         key: 'password',
         type: 'password',
         props: {
-          label: this._languageService.getTransValue('auth.password'),
+          label: this._languageService.getTransValue('common.password'),
           required: true
         },
         validators: {
