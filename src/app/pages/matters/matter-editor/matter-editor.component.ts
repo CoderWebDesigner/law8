@@ -101,6 +101,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           {
             type: 'select',
             key: 'practiceArea',
+            defaultValue: 'Litegation',
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.practiceArea'),
@@ -138,44 +139,45 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
 
           },
           {
-            type: 'input',
+            type: 'textarea',
             key: 'description',
-            className: 'col-md-4',
+            className: 'col-md-12',
             props: {
               label: this._languageService.getTransValue('matters.description'),
             }
 
           },
-          {
-            type: 'select',
-            key: 'matterCategory',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.matterCategory'),
-              options: [
-                { label: 'Category 1', value: 'Category 1' },
-                { label: 'Category 2', value: 'Category 2' },
-                { label: 'Category 3', value: 'Category 3' },
-              ],
-              onChange: (e) => {
-                this.formly.get('matterType').setValue(e.value)
-              }
-            }
-
-          },
-          {
-            type: 'input',
-            key: 'matterType',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('matters.matterType'),
-              disabled: true
-            }
-          },
+         
           {
             className:'card p-2 mx-3 mb-3',
             fieldGroupClassName: 'row',
             fieldGroup: [
+              {
+                type: 'select',
+                key: 'matterCategory',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.matterCategory'),
+                  options: [
+                    { label: 'Category 1', value: 'Category 1' },
+                    { label: 'Category 2', value: 'Category 2' },
+                    { label: 'Category 3', value: 'Category 3' },
+                  ],
+                  onChange: (e) => {
+                    this.formly.get('matterType').setValue(e.value)
+                  }
+                }
+    
+              },
+              {
+                type: 'input',
+                key: 'matterType',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue('matters.matterType'),
+                  disabled: true
+                }
+              },
               {
                 type: 'select',
                 key: 'instructor',
