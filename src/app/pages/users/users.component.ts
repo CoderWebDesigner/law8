@@ -19,9 +19,9 @@ export class UsersComponent {
   data:any[]=[
     {
       id:1,
-      "userId": "User Id",
-      "portalId": "Portal Id",
-      "userName": "User Name",
+      "code": "User Id",
+      "initial": "Portal Id",
+      "name": "User Name",
       "telephone": "Telephone",
       "mobile": "Mobile",
       "email": "Email",

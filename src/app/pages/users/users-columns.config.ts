@@ -1,15 +1,15 @@
 export const Users_Columns_EN = [
   {
-    header: 'User Id',
-    field: 'userId',
+    header: 'Code',
+    field: 'code',
   },
   {
-    header: 'Portal Id',
-    field: 'portalId'
+    header: 'Initial',
+    field: 'initial'
   },
   {
-    header: 'User Name',
-    field: 'userName',
+    header: 'Name',
+    field: 'name',
   },
   {
     header: 'Telephone',
@@ -41,16 +41,16 @@ export const Users_Columns_EN = [
 
 export const Users_Columns_FR = [
   {
-    header: 'User Id',
-    field: 'userId',
+    header: 'Code',
+    field: 'code',
   },
   {
-    header: 'Portal Id',
-    field: 'portalId'
+    header: 'Initial',
+    field: 'initial'
   },
   {
-    header: 'User Name',
-    field: 'userName',
+    header: 'Name',
+    field: 'name',
   },
   {
     header: 'Telephone',
@@ -81,16 +81,16 @@ export const Users_Columns_FR = [
 
 export const Users_Columns_AR = [
   {
-    header: 'User Id',
-    field: 'userId',
+    header: 'Code',
+    field: 'code',
   },
   {
-    header: 'Portal Id',
-    field: 'portalId'
+    header: 'Initial',
+    field: 'initial'
   },
   {
-    header: 'User Name',
-    field: 'userName',
+    header: 'Name',
+    field: 'name',
   },
   {
     header: 'Telephone',
