@@ -30,6 +30,7 @@ export class UsersComponent {
       "activation": true
   }
   ]
+  showFilter: boolean;
 
 
   additionalTableConfig: TableConfig = {
@@ -55,5 +56,11 @@ export class UsersComponent {
       dismissableMask: true,
       header:this._languageService.getTransValue('users.changePassword')
     })
+  }
+  toggleFilter() {
+    this.showFilter = !this.showFilter
+  }
+  onClose(event: boolean) {
+    this.showFilter = event
   }
 }
