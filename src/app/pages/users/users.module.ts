@@ -11,12 +11,14 @@ import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.
 import { UserEditorComponent } from './user-editor/user-editor.component';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { UsersTimesheetSettingComponent } from './users-timesheet-setting/users-timesheet-setting.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     UserEditorComponent,
-    UserChangePasswordComponent
+    UserChangePasswordComponent,
+    UsersTimesheetSettingComponent
   ],
   imports: [
     CommonModule,

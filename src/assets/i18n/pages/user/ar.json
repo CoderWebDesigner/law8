@@ -7,6 +7,7 @@
     "portalId":"Portal ID",
     "telephone":"Telephone",
     "addUser":"Add User",
-    "timesheetDate":"Timesheet Date"
+    "timesheetDate":"Timesheet Date",
+    "timesheetDateSetting":"Timesheet Date Setting"
   }
 }
