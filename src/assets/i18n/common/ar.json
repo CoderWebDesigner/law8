@@ -33,7 +33,8 @@
     "yes": "نعم",
     "no": "لا",
     "cancel":"يلغي",
-    "filter":"فلتره"
+    "filter":"فلتره",
+    "delete":"مسح"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",

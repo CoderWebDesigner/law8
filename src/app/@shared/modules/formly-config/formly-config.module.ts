@@ -88,7 +88,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
 
       ]
     }),
-
     FormlyPrimeNGModule,
     TranslateModule,
     InputTextModule,

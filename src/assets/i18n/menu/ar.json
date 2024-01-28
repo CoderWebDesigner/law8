@@ -26,6 +26,11 @@
           "title":"المستخدمين",
           "usersList":"قائمة المستخدمين",
           "userAdd":"مستخدم جديد"
+        },
+        "lookups":{
+          "title":"Lookups",
+          "matterCategory":"Matter Category",
+          "mainList":"Main List"
         }
     }
 }

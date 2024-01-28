@@ -34,7 +34,8 @@
    "yes":"Oui",
    "no":"Non",
    "cancel":"Cancel",
-   "filter":"Filter"
+   "filter":"Filter",
+    "delete":"Delete"
   },
   "messages": {
     "signInSuccessfully":"Connectez-vous avec succès",

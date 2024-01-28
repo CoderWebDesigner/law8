@@ -60,7 +60,11 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   @Input() filterOptions?: any = { pageSize: PAGESIZE, pageNo: 0 };
 
   @Input() additionalTableConfig?: TableConfig;
+  @Input() additionalTableConfigChildren?: TableConfig;
   @Input() columnsLocalized;
+
+  @Input() columnsLocalizedChildren;
+  columnChildren = [];
   @Input() data: any = [];
   @Input() apiUrls;
   @Input() getDataMethod?= 'get';
@@ -133,6 +137,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
+    this.columnChildren = this.getColumns(this.columnsLocalizedChildren)
 
     this.getData();
     this.onSearch()
@@ -192,14 +197,14 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
         this._router.navigate([action?.target, rowData[this.additionalTableConfig?.id]], { queryParams: action?.queryParams })
       } else {
         const dialogRef = this._dialogService.open(action.target, {
-          width: '50%',
+          width: action.width||'50%',
           baseZIndex: 10000,
           header: this._languageService.getTransValue(action?.title),
           dismissableMask: true,
           data: {
             rowData: rowData,
             action: action,
-            url: this.apiUrls.update
+            // url: this.apiUrls.update
           },
         });
         dialogRef.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {

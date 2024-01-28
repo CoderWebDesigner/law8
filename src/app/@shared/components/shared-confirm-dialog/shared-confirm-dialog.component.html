@@ -3,7 +3,7 @@
   [ngClass]="{ 'confirm-delete': _dynamicDialogConfig?.data?.isDelete }"
 >
   <div class="icon mb-3" *ngIf="_dynamicDialogConfig?.data?.isDelete">
-    <i class="fat-delete"></i>
+    <i class="pi pi-trash"></i>
   </div>
 
     <h5 class="fw-bolder mb-0">{{_dynamicDialogConfig?.data?.title}}</h5>
@@ -14,7 +14,7 @@
     <ng-template #elseTemplateDelete>
       {{_dynamicDialogConfig?.data?.message}}
     </ng-template>
-    
+
   </div>
 
   <div
@@ -26,7 +26,7 @@
       type="button"
       pButton
       [label]="'btn.yes' | translate"
-      [ngClass]="{ 'p-button-danger': _dynamicDialogConfig?.data?.isDelete }"
+      [ngClass]="{ 'p-button-danger text-white': _dynamicDialogConfig?.data?.isDelete }"
       (click)="_dynamicDialogRef.close(true)"
     ></button>
     <button

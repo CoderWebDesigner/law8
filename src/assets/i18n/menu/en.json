@@ -26,6 +26,11 @@
           "title":"Users",
           "usersList":"Users List",
           "userAdd":"New User"
+        },
+        "lookups":{
+          "title":"Lookups",
+          "matterCategory":"Matter Category",
+          "mainList":"Main List"
         }
     }
 }

@@ -1,0 +1,16 @@
+
+
+{
+  "lookups":{
+    "matterCategory":"Matter Category",
+    "addMainItem":"Add Main Item",
+    "addSubItem":"Add Sub Item",
+    "updateMainItem":"Update Main Item",
+    "updateSubItem":"Update Sub Item",
+    "nameAR":"Name AR",
+    "nameEN":"Name EN",
+    "mainCategory":"Main Category",
+    "mainList":"Main List",
+    "subList":"Sub List"
+  }
+}

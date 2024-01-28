@@ -124,6 +124,26 @@ export const MENU: MenuItem[] = [
       },
     ]
   },
+  {
+    id: 7,
+    label: 'menu.lookups.title',
+    icon: 'lookups.svg',
+    subItems:[
+      {
+        id: 1,
+        label: 'menu.lookups.matterCategory',
+        link: '/lookups/matter-category',
+        parentId: 7
+      },
+      // {
+      //   id: 2,
+      //   label: 'menu.lookups.mainList',
+      //   link: '/lookups/main-list',
+      //   parentId: 7
+
+      // },
+    ]
+  },
 
 
 

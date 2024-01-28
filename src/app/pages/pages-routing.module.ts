@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
   },
   {
+    path: 'lookups',
+    loadChildren: () => import('./lookups/lookups.module').then((m) => m.LookupsModule)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule)
   },

@@ -19,7 +19,7 @@
   >
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngIf="withCheckbox || withRadioButton" style="width: 5rem">
+        <th *ngIf="columnsLocalizedChildren || withCheckbox || withRadioButton" style="width: 5rem">
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
@@ -52,11 +52,16 @@
         <td *ngIf="withCheckbox">
           <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
         </td>
-        <ng-container *ngIf="isEditable">
-          <td *ngFor="let field of fields">
-            <formly-form [fields]="field"></formly-form>
-          </td>
-        </ng-container>
+        <td *ngIf="columnsLocalizedChildren">
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="rowData"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
+        </td>
         <td *ngFor="let col of columns">
           <ng-container
             *ngIf="
@@ -141,7 +146,23 @@
         </td>
       </tr>
     </ng-template>
-
+    <ng-template
+    pTemplate="rowexpansion"
+    let-rowData
+    *ngIf="columnsLocalizedChildren"
+  >
+    <tr>
+      <td colspan="7" class="pe-0">
+        <shared-table
+          [columnsLocalized]="columnsLocalizedChildren"
+          [additionalTableConfig]="additionalTableConfigChildren"
+          [data]="rowData['children']"
+          [isPaginator]="false"
+        >
+        </shared-table>
+      </td>
+    </tr>
+  </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
         <td [attr.colspan]="columns.length">No records found</td>

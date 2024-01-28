@@ -1,0 +1,32 @@
+<shared-card [title]="'lookups.mainList' | translate" [borderRadius]="20" [style]="{'marginBottom':'1.5rem'}">
+  <div class="d-flex" headerActions>
+    <p-button [label]="'lookups.addMainItem'|translate"  (onClick)="openItemEditor('main')" styleClass="py-2 px-4 mx-2"></p-button>
+    <shared-search-input ></shared-search-input>
+  </div>
+  <shared-table
+    body
+    [data]="data"
+    [columnsLocalized]="columnsLocalized"
+    [additionalTableConfig]="additionalTableConfig"
+    [paginationClient]="true"
+    [selectMode]="'single'"
+    (onRowSelect)="onRowSelected($event)"
+  >
+  </shared-table>
+</shared-card>
+
+
+<shared-card [title]="'lookups.subList' | translate" [borderRadius]="20" *ngIf="selectedRow">
+  <div class="d-flex" headerActions>
+    <p-button [label]="'lookups.addSubItem'|translate"  (onClick)="openItemEditor('sub')" styleClass="py-2 px-4 mx-2"></p-button>
+    <shared-search-input ></shared-search-input>
+  </div>
+  <shared-table
+    body
+    [data]="selectedRow['children']"
+    [columnsLocalized]="columnsLocalizedChildren"
+    [additionalTableConfig]="additionalTableConfigChildren"
+    [paginationClient]="true"
+  >
+  </shared-table>
+</shared-card>
