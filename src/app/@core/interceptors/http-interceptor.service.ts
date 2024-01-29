@@ -29,8 +29,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
     const headersToAppend: any = {};
 
     const token = this._authService.getToken();
-    headersToAppend['Access-Control-Allow-Origin'] = "*"
-    headersToAppend['Access-Control-Allow-Headers'] = "*"
+    // headersToAppend['Access-Control-Allow-Origin'] = "*"
+    // headersToAppend['Access-Control-Allow-Headers'] = "*"
 
     if (token) {
       if (!req.headers.get('Authorization')) {

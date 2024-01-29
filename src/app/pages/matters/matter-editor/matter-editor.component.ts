@@ -101,7 +101,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           {
             type: 'select',
             key: 'practiceArea',
-            defaultValue: 'Litegation',
+            // defaultValue: 'Litegation',
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.practiceArea'),
@@ -109,10 +109,16 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 { label: 'Intelecturual Property', value: 'Intelecturual Property' },
                 { label: 'Corporate', value: 'Corporate' },
                 { label: 'Litegation', value: 'Litegation' },
-              ]
+              ],
+              change:(e)=>{
+                console.log(e)
+              }
             },
             hooks: {
-              onInit: (field: FormlyFieldConfig) => {
+              onChanges: (field: FormlyFieldConfig) => {
+                setTimeout(() => {
+                  field.formControl.setValue('Litegation');
+                }, 0);
                 field.form.get('practiceArea').valueChanges.subscribe({
                   next: res => {
                     if (['Intelecturual Property'].includes(res)) {
@@ -147,7 +153,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             }
 
           },
-         
+
           {
             className:'card p-2 mx-3 mb-3',
             fieldGroupClassName: 'row',
@@ -167,7 +173,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     this.formly.get('matterType').setValue(e.value)
                   }
                 }
-    
+
               },
               {
                 type: 'input',
@@ -376,6 +382,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     throw new Error('Method not implemented.');
   }
+
   getFormData(data: any) {
     console.log('data', data)
   }
