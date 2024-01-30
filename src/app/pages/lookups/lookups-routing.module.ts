@@ -5,6 +5,7 @@ import { LookupsMainListComponent } from './lookups-main-list/lookups-main-list.
 
 const routes: Routes = [
   {path:'matter-category', component:LookupsMatterCaterogyComponent},
+  {path:'matter-regions', component:LookupsMatterCaterogyComponent},
   {path:'main-list', component:LookupsMainListComponent},
 ];
 

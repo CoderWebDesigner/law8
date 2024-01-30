@@ -11,12 +11,14 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { LookupsItemEditorComponent } from './components/lookups-item-editor/lookups-item-editor.component';
+import { LookupsMatterRegionsComponent } from './lookups-matter-regions/lookups-matter-regions.component';
 
 
 @NgModule({
   declarations: [
     LookupsMatterCaterogyComponent,
-    LookupsMainListComponent
+    LookupsMainListComponent,
+    LookupsMatterRegionsComponent
   ],
   imports: [
     CommonModule,

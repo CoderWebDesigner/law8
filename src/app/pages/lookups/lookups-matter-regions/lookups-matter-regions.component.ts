@@ -1,43 +1,44 @@
 import { Component, inject } from '@angular/core';
+import { LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
-import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from './matter-category-columns.config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LookupsItemEditorComponent } from '../components/lookups-item-editor/lookups-item-editor.component';
-import { LanguageService } from '@core/services';
+import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from '../lookups-matter-caterogy/matter-category-columns.config';
 
 @Component({
-  selector: 'app-lookups-matter-caterogy',
-  templateUrl: './lookups-matter-caterogy.component.html',
-  styleUrls: ['./lookups-matter-caterogy.component.scss']
+  selector: 'app-lookups-matter-regions',
+  templateUrl: './lookups-matter-regions.component.html',
+  styleUrls: ['./lookups-matter-regions.component.scss']
 })
-export class LookupsMatterCaterogyComponent {
- _dialogService = inject(DialogService)
+export class LookupsMatterRegionsComponent {
+  _dialogService = inject(DialogService)
   _languageService = inject(LanguageService)
   data: any[] = [
     {
       id:1,
-      nameAR: 'مدني',
-      nameEN: 'Civil',
+      nameEN: 'Dubai',
+      nameAR: 'دبى',
       active: true,
       children: [
         {
           id:1,
-          nameAR: 'مدني كلى',
-          nameEN: 'Civil',
+          nameEN: 'Dubai courts',
+          nameAR: 'محاكم دبى',
           active: true,
         },
         {
           id:1,
-          nameAR: 'مدني جزئي',
-          nameEN: 'Civil',
+          nameEN: 'Dubai police',
+          nameAR: 'شرطة دبى',
           active: true,
         },
       ]
     },
+    
     {
       id:2,
-      nameAR: 'تجاري',
-      nameEN: 'Commerical',
+      nameAR: 'ابوظبى',
+      nameEN: 'Abu Dhabi',
       active: true,
       children: [
         {
@@ -53,6 +54,26 @@ export class LookupsMatterCaterogyComponent {
           active: true,
         },
       ]
+    },
+    {
+      id:3,
+      nameAR: 'عجمان',
+      nameEN: 'Ajman',
+      active: true,
+      // children: [
+      //   {
+      //     id:1,
+      //     nameAR: 'عجمان 1',
+      //     nameEN: 'Civil',
+      //     active: true,
+      //   },
+      //   {
+      //     id:1,
+      //     nameAR: 'مدني جزئي',
+      //     nameEN: 'Civil',
+      //     active: true,
+      //   },
+      // ]
     },
   ];
   columnsLocalized: any = {
