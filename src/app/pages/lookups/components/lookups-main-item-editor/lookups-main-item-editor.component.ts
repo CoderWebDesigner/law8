@@ -6,9 +6,9 @@ import { SharedModule } from '@shared/shared.module';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'app-lookups-item-editor',
-  templateUrl: './lookups-item-editor.component.html',
-  styleUrls: ['./lookups-item-editor.component.scss'],
+  selector: 'app-lookups-main-item-editor',
+  templateUrl: './lookups-main-item-editor.component.html',
+  styleUrls: ['./lookups-main-item-editor.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -16,7 +16,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
     FormlyConfigModule
   ],
 })
-export class LookupsItemEditorComponent extends FormBaseClass implements OnInit {
+export class LookupsMainItemEditorComponent extends FormBaseClass implements OnInit {
   title: string;
   itemId: number;
   _dialogConfig = inject(DynamicDialogConfig)
@@ -30,15 +30,6 @@ export class LookupsItemEditorComponent extends FormBaseClass implements OnInit 
   }
   override initForm(): void {
     this.formlyFields = [
-      {
-        key:'mainItem',
-        type:'select',
-        hide:this._dialogConfig.data['type']=='main',
-        props:{
-          required:true,
-          label:this._languageService.getTransValue('lookups.mainCategory')
-        }
-      },
       {
         key: 'nameEN',
         type: 'input',

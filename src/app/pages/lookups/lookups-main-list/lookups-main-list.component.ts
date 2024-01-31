@@ -3,7 +3,8 @@ import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from '../lookups-matter-caterogy/matter-category-columns.config';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
-import { LookupsItemEditorComponent } from '../components/lookups-item-editor/lookups-item-editor.component';
+import { LookupsMainItemEditorComponent } from '@components/lookups/components/lookups-main-item-editor/lookups-main-item-editor.component';
+import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 
 @Component({
   selector: 'app-lookups-main-list',
@@ -13,22 +14,22 @@ import { LookupsItemEditorComponent } from '../components/lookups-item-editor/lo
 export class LookupsMainListComponent {
   _dialogService = inject(DialogService)
   _languageService = inject(LanguageService);
-  selectedRow:any;
+  selectedRow: any;
   data: any[] = [
     {
-      id:1,
+      id: 1,
       nameAR: 'حالة القضية',
       nameEN: 'Matter Status',
       active: true,
       children: [
         {
-          id:1,
+          id: 1,
           nameAR: 'ابتدائي',
           nameEN: 'First Instance',
           active: true,
         },
         {
-          id:1,
+          id: 1,
           nameAR: 'استئناف',
           nameEN: 'Appeall',
           active: true,
@@ -36,19 +37,19 @@ export class LookupsMainListComponent {
       ]
     },
     {
-      id:1,
+      id: 1,
       nameAR: 'درجات القضية',
       nameEN: 'Matter Stage',
       active: true,
       children: [
         {
-          id:1,
+          id: 1,
           nameAR: 'درجة القضية 1',
           nameEN: 'Matter Stage 1',
           active: true,
         },
         {
-          id:1,
+          id: 1,
           nameAR: 'درجة القضية 2',
           nameEN: 'Matter Stage 2',
           active: true,
@@ -67,49 +68,49 @@ export class LookupsMainListComponent {
     fr: Matter_Category_Columns_FR,
   }
   additionalTableConfig: TableConfig = {
-    id:'id',
-    actions:[
+    id: 'id',
+    actions: [
       {
-        type:'update',
+        type: 'update',
         title: this._languageService.getTransValue('lookups.updateMainItem'),
-        target: LookupsItemEditorComponent,
-        icon:'pencil',
-        width:'30%'
+        target: LookupsMainItemEditorComponent,
+        icon: 'pencil',
+        width: '30%'
       },
       {
-        type:'delete',
+        type: 'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon: 'trash'
       },
     ]
   }
   additionalTableConfigChildren: TableConfig = {
-    id:'id',
-    actions:[
+    id: 'id',
+    actions: [
       {
-        type:'update',
+        type: 'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsItemEditorComponent,
-        icon:'pencil',
-        width:'30%'
+        target: LookupsSubItemEditorComponent,
+        icon: 'pencil',
+        width: '30%'
       },
       {
-        type:'delete',
+        type: 'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon: 'trash'
       },
     ]
   }
-  openItemEditor(type:string){
-    this._dialogService.open(LookupsItemEditorComponent,{
-      width:'30%',
-      header:this.setDialogHeader(type),
-      data:{
-        type:type
+  openItemEditor(type: string) {
+    this._dialogService.open(type == 'main' ? LookupsMainItemEditorComponent : LookupsSubItemEditorComponent, {
+      width: '30%',
+      header: this.setDialogHeader(type),
+      data: {
+        type: type
       }
     })
   }
-  private setDialogHeader(type:string,id?:number){
+  private setDialogHeader(type: string, id?: number) {
     const isSubItem = (type === 'sub');
     const keyToUpdate = isSubItem ? 'lookups.updateSubItem' : 'lookups.updateMainItem';
     const keyToAdd = isSubItem ? 'lookups.addSubItem' : 'lookups.addMainItem';
@@ -117,7 +118,7 @@ export class LookupsMainListComponent {
       this._languageService.getTransValue(keyToUpdate) :
       this._languageService.getTransValue(keyToAdd);
   }
-  onRowSelected(event){
+  onRowSelected(event) {
     console.log(event)
     this.selectedRow = event.data
   }

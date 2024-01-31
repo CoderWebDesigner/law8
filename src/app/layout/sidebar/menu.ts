@@ -135,13 +135,20 @@ export const MENU: MenuItem[] = [
         link: '/lookups/matter-category',
         parentId: 7
       },
-      // {
-      //   id: 2,
-      //   label: 'menu.lookups.mainList',
-      //   link: '/lookups/main-list',
-      //   parentId: 7
+      {
+        id: 2,
+        label: 'menu.lookups.mainList',
+        link: '/lookups/main-list',
+        parentId: 7
 
-      // },
+      },
+      {
+        id: 3,
+        label: 'menu.lookups.matterRegions',
+        link: '/lookups/matter-regions',
+        parentId: 7
+
+      },
     ]
   },
 

@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from './matter-category-columns.config';
 import { DialogService } from 'primeng/dynamicdialog';
-import { LookupsItemEditorComponent } from '../components/lookups-item-editor/lookups-item-editor.component';
+import { LookupsMainItemEditorComponent } from '@components/lookups/components/lookups-main-item-editor/lookups-main-item-editor.component';
 import { LanguageService } from '@core/services';
+import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
@@ -71,7 +72,7 @@ export class LookupsMatterCaterogyComponent {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateMainItem'),
-        target: LookupsItemEditorComponent,
+        target: LookupsMainItemEditorComponent,
         icon:'pencil',
         width:'30%'
       },
@@ -88,7 +89,7 @@ export class LookupsMatterCaterogyComponent {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsItemEditorComponent,
+        target: LookupsSubItemEditorComponent,
         icon:'pencil',
         width:'30%'
       },
@@ -100,7 +101,7 @@ export class LookupsMatterCaterogyComponent {
     ]
   }
   openItemEditor(formType:string,categorytype:string){
-    this._dialogService.open(LookupsItemEditorComponent,{
+    this._dialogService.open(categorytype == 'main' ? LookupsMainItemEditorComponent : LookupsSubItemEditorComponent,{
       width:'30%',
       header:this.setDialogHeader(formType,categorytype),
       data:{
