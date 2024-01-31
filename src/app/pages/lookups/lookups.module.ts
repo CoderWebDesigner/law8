@@ -10,13 +10,15 @@ import { SharedTableComponent } from '@shared/components/shared-table/shared-tab
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { LookupsMatterRegionsComponent } from './lookups-matter-regions/lookups-matter-regions.component';
+import { LookupsRateTableComponent } from './lookups-rate-table/lookups-rate-table.component';
 
 
 @NgModule({
   declarations: [
     LookupsMatterCaterogyComponent,
     LookupsMainListComponent,
-    LookupsMatterRegionsComponent
+    LookupsMatterRegionsComponent,
+    LookupsRateTableComponent
   ],
   imports: [
     CommonModule,

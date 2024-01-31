@@ -1,75 +1,70 @@
 import { Component, inject } from '@angular/core';
-import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
-import { Matter_Category_Children_Columns_AR, Matter_Category_Children_Columns_EN, Matter_Category_Children_Columns_FR, Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from './matter-category-columns.config';
-import { DialogService } from 'primeng/dynamicdialog';
-import { LookupsMainItemEditorComponent } from '@components/lookups/components/lookups-main-item-editor/lookups-main-item-editor.component';
 import { LanguageService } from '@core/services';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
+import { DialogService } from 'primeng/dynamicdialog';
+import { LookupsMainItemEditorComponent } from '../components/lookups-main-item-editor/lookups-main-item-editor.component';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
+import { Matter_Rate_Columns_AR, Matter_Rate_Columns_EN, Matter_Rate_Columns_FR } from './rate-table-columns.config';
 
 @Component({
-  selector: 'app-lookups-matter-caterogy',
-  templateUrl: './lookups-matter-caterogy.component.html',
-  styleUrls: ['./lookups-matter-caterogy.component.scss']
+  selector: 'app-lookups-rate-table',
+  templateUrl: './lookups-rate-table.component.html',
+  styleUrls: ['./lookups-rate-table.component.scss']
 })
-export class LookupsMatterCaterogyComponent {
- _dialogService = inject(DialogService)
+export class LookupsRateTableComponent {
+  _dialogService = inject(DialogService)
   _languageService = inject(LanguageService)
   data: any[] = [
     {
       id:1,
-      nameAR: 'مدني',
-      nameEN: 'Civil',
-      appealPeriod: '10',
-      cassationPeriod: '5',
+      nameAR: 'شريك',
+      nameEN: 'Partner',
       active: true,
       children: [
         {
           id:1,
-          nameAR: 'مدني كلى',
-          nameEN: 'Civil',
+          nameAR: 'محام اكبر',
+          nameEN: 'Senior Associate',
           active: true,
         },
         {
           id:1,
-          nameAR: 'مدني جزئي',
-          nameEN: 'Civil',
+          nameAR: 'محام',
+          nameEN: 'Associate',
           active: true,
         },
       ]
     },
     {
       id:2,
-      nameAR: 'تجاري',
-      nameEN: 'Commerical',
-      appealPeriod: '10',
-      cassationPeriod: '5',
-
+      nameAR: 'السعر',
+      nameEN: 'ٌRate',
       active: true,
       children: [
         {
           id:1,
-          nameAR: 'تجاري كلى',
-          nameEN: 'Co mmerical 1',
+          nameAR: 'الاسم',
+          nameEN: 'Rate Name',
           active: true,
         },
         {
           id:1,
-          nameAR: 'تجاري جزئي',
-          nameEN: 'Commerical 2',
+          nameAR: 'القيمة',
+          nameEN: 'Amount',
           active: true,
         },
       ]
     },
   ];
   columnsLocalized: any = {
-    ar: Matter_Category_Columns_AR,
-    en: Matter_Category_Columns_EN,
-    fr: Matter_Category_Columns_FR,
+    ar: Matter_Rate_Columns_AR,
+    en: Matter_Rate_Columns_EN,
+    fr: Matter_Rate_Columns_FR,
   }
   columnsLocalizedChildren: any = {
-    ar: Matter_Category_Children_Columns_AR,
-    en: Matter_Category_Children_Columns_EN,
-    fr: Matter_Category_Children_Columns_FR,
+    ar: Matter_Rate_Columns_AR,
+    en: Matter_Rate_Columns_EN,
+    fr: Matter_Rate_Columns_FR,
   }
   additionalTableConfig: TableConfig = {
     id:'id',
