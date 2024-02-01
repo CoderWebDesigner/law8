@@ -31,7 +31,8 @@
           "title":"Lookups",
           "matterCategory":"Matter Category",
           "mainList":"Main List",
-          "matterRegions":"Matter Regions"
+          "matterRegions":"Matter Regions",
+          "rateTable":"جدول الاسعار"
         }
     }
 }

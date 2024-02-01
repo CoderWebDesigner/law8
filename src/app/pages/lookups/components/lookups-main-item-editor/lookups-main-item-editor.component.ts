@@ -31,6 +31,19 @@ export class LookupsMainItemEditorComponent extends FormBaseClass implements OnI
   override initForm(): void {
     this.formlyFields = [
       {
+        type: 'select',
+        key: 'Practice Area',
+        className: 'col-md-4',
+        props: {
+          label: this._languageService.getTransValue('matters.practiceArea'),
+          options: [
+            { label: 'Corporate', value: 'Corporate' },
+            { label: 'Litigation', value: 'Litigation' },
+            { label: 'instructor', value: 'instructor' },
+          ],
+      },
+    },
+      {
         key: 'nameEN',
         type: 'input',
         props: {
@@ -51,7 +64,7 @@ export class LookupsMainItemEditorComponent extends FormBaseClass implements OnI
         validators: {
           validation: ['arabicLetters'],
         }
-      },
+      },     
     ]
   }
   override onSubmit(): void {

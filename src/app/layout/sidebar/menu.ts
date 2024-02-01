@@ -149,6 +149,13 @@ export const MENU: MenuItem[] = [
         parentId: 7
 
       },
+      {
+        id: 3,
+        label: 'menu.lookups.rateTable',
+        link: '/lookups/rate',
+        parentId: 7
+
+      },
     ]
   },
 

@@ -4,7 +4,7 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
 import { DialogService } from 'primeng/dynamicdialog';
 import { LookupsMainItemEditorComponent } from '../components/lookups-main-item-editor/lookups-main-item-editor.component';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
-import { Matter_Rate_Columns_AR, Matter_Rate_Columns_EN, Matter_Rate_Columns_FR } from './rate-table-columns.config';
+import { Rate_Children_Columns_AR, Rate_Children_Columns_EN, Rate_Children_Columns_FR, Rate_Columns_AR, Rate_Columns_EN, Rate_Columns_FR } from './rate-table-columns.config';
 
 @Component({
   selector: 'app-lookups-rate-table',
@@ -23,65 +23,80 @@ export class LookupsRateTableComponent {
       children: [
         {
           id:1,
-          nameAR: 'محام اكبر',
-          nameEN: 'Senior Associate',
-          active: true,
+          rate: 'A',
+          rateName: 'A Rate',
+          amount:'1000',
         },
         {
           id:1,
-          nameAR: 'محام',
-          nameEN: 'Associate',
-          active: true,
+          rate: 'B',
+          rateName: 'B Rate',
+          amount:'1000',
         },
       ]
     },
     {
       id:2,
-      nameAR: 'السعر',
-      nameEN: 'ٌRate',
+      nameAR: 'محام اكبر',
+      nameEN: 'Senior Associate',
       active: true,
       children: [
         {
           id:1,
-          nameAR: 'الاسم',
-          nameEN: 'Rate Name',
-          active: true,
+          rate: 'A',
+          rateName: 'A Rate',
+          amount:'1500',
         },
         {
           id:1,
-          nameAR: 'القيمة',
-          nameEN: 'Amount',
-          active: true,
+          rate: 'B',
+          rateName: 'B Rate',
+          amount:'300',
+        },
+      ]
+    },
+    {
+      id:3,
+      nameAR: 'محام',
+      nameEN: 'Associate',
+      active: true,
+      children: [
+        {
+          id:1,
+          rate: 'A',
+          rateName: 'A Rate',
+          amount:'1000',
+        },
+        {
+          id:1,
+          rate: 'B',
+          rateName: 'B Rate',
+          amount:'1000',
         },
       ]
     },
   ];
   columnsLocalized: any = {
-    ar: Matter_Rate_Columns_AR,
-    en: Matter_Rate_Columns_EN,
-    fr: Matter_Rate_Columns_FR,
+    ar: Rate_Columns_AR,
+    en: Rate_Columns_EN,
+    fr: Rate_Columns_FR,
   }
   columnsLocalizedChildren: any = {
-    ar: Matter_Rate_Columns_AR,
-    en: Matter_Rate_Columns_EN,
-    fr: Matter_Rate_Columns_FR,
+    ar: Rate_Children_Columns_AR,
+    en: Rate_Children_Columns_EN,
+    fr: Rate_Children_Columns_FR,
   }
   additionalTableConfig: TableConfig = {
     id:'id',
-    // actions:[
-    //   {
-    //     type:'update',
-    //     title: this._languageService.getTransValue('lookups.updateMainItem'),
-    //     target: LookupsMainItemEditorComponent,
-    //     icon:'pencil',
-    //     width:'30%'
-    //   },
-    //   {
-    //     type:'delete',
-    //     title: this._languageService.getTransValue('btn.delete'),
-    //     icon:'trash'
-    //   },
-    // ]
+    actions:[
+      {
+        type:'update',
+        title: this._languageService.getTransValue('lookups.updateMainItem'),
+        target: LookupsMainItemEditorComponent,
+        icon:'pencil',
+        width:'30%'
+      },
+    ]
   }
   additionalTableConfigChildren: TableConfig = {
     id:'id',
@@ -92,11 +107,6 @@ export class LookupsRateTableComponent {
         target: LookupsSubItemEditorComponent,
         icon:'pencil',
         width:'30%'
-      },
-      {
-        type:'delete',
-        title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
       },
     ]
   }

@@ -3,8 +3,8 @@ import { LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LookupsMainItemEditorComponent } from '@components/lookups/components/lookups-main-item-editor/lookups-main-item-editor.component';
-import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from '../lookups-matter-caterogy/matter-category-columns.config';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
+import { Matter_Regions_Columns_AR, Matter_Regions_Columns_EN, Matter_Regions_Columns_FR } from './matter-regions-columns.config';
 
 @Component({
   selector: 'app-lookups-matter-regions',
@@ -78,14 +78,14 @@ export class LookupsMatterRegionsComponent {
     },
   ];
   columnsLocalized: any = {
-    ar: Matter_Category_Columns_AR,
-    en: Matter_Category_Columns_EN,
-    fr: Matter_Category_Columns_FR,
+    ar: Matter_Regions_Columns_AR,
+    en: Matter_Regions_Columns_EN,
+    fr: Matter_Regions_Columns_FR,
   }
   columnsLocalizedChildren: any = {
-    ar: Matter_Category_Columns_AR,
-    en: Matter_Category_Columns_EN,
-    fr: Matter_Category_Columns_FR,
+    ar: Matter_Regions_Columns_AR,
+    en: Matter_Regions_Columns_EN,
+    fr: Matter_Regions_Columns_FR,
   }
   additionalTableConfig: TableConfig = {
     id:'id',

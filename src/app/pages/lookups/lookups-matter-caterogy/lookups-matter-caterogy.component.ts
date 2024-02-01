@@ -21,6 +21,7 @@ export class LookupsMatterCaterogyComponent {
       nameEN: 'Civil',
       appealPeriod: '10',
       cassationPeriod: '5',
+      practiceArea:'Litigation',
       active: true,
       children: [
         {
@@ -43,7 +44,7 @@ export class LookupsMatterCaterogyComponent {
       nameEN: 'Commerical',
       appealPeriod: '10',
       cassationPeriod: '5',
-
+      practiceArea:'instructor',
       active: true,
       children: [
         {
@@ -73,20 +74,15 @@ export class LookupsMatterCaterogyComponent {
   }
   additionalTableConfig: TableConfig = {
     id:'id',
-    // actions:[
-    //   {
-    //     type:'update',
-    //     title: this._languageService.getTransValue('lookups.updateMainItem'),
-    //     target: LookupsMainItemEditorComponent,
-    //     icon:'pencil',
-    //     width:'30%'
-    //   },
-    //   {
-    //     type:'delete',
-    //     title: this._languageService.getTransValue('btn.delete'),
-    //     icon:'trash'
-    //   },
-    // ]
+    actions:[
+      {
+        type:'update',
+        title: this._languageService.getTransValue('lookups.updateMainItem'),
+        target: LookupsMainItemEditorComponent,
+        icon:'pencil',
+        width:'30%'
+      },
+    ]
   }
   additionalTableConfigChildren: TableConfig = {
     id:'id',
@@ -97,11 +93,6 @@ export class LookupsMatterCaterogyComponent {
         target: LookupsSubItemEditorComponent,
         icon:'pencil',
         width:'30%'
-      },
-      {
-        type:'delete',
-        title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
       },
     ]
   }

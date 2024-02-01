@@ -17,6 +17,10 @@ export const Matter_Category_Columns_AR = [
     field: 'cassationPeriod',
   },
   {
+    header: 'Practice Area',
+    field: 'practiceArea',
+  },
+  {
     header: 'Active',
     field: 'active',
     isSwitch:true
@@ -41,6 +45,10 @@ export const Matter_Category_Columns_EN = [
     field: 'cassationPeriod',
   },
   {
+    header: 'Practice Area',
+    field: 'practiceArea',
+  },
+  {
     header: 'Active',
     field: 'active',
     isSwitch:true
@@ -63,6 +71,10 @@ export const Matter_Category_Columns_FR = [
   {
     header: 'Cassation Period',
     field: 'cassationPeriod',
+  },
+  {
+    header: 'Practice Area',
+    field: 'practiceArea',
   },
   {
     header: 'Active',
