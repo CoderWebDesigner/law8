@@ -36,6 +36,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import Swal from 'sweetalert2';
+import { ApiRes } from '@core/models';
 
 @Component({
   selector: 'shared-table',
@@ -57,7 +58,7 @@ import Swal from 'sweetalert2';
 })
 export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
 
-  @Input() filterOptions?: any = { pageSize: PAGESIZE, pageNo: 0 };
+  @Input() filterOptions?: any = { pageNum: 1,pagSize: PAGESIZE,orderByDirection:'ASC' };
 
   @Input() additionalTableConfig?: TableConfig;
   @Input() additionalTableConfigChildren?: TableConfig;
@@ -109,7 +110,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
 
   @Input() callBack: any;
   ngOnInit(): void {
-    // this.initTable();
+    this.getData();
   }
 
   private getCurrentPageReportTemplate(): void {
@@ -141,33 +142,21 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
 
     this.getData();
     this.onSearch()
-    this.handleDate()
 
-  }
-  handleDate(){
-    let dateColumns = this.columns.filter(obj=>obj?.isDate==true)
-    console.log(dateColumns)
-    dateColumns.forEach(obj=>{
-      this.data.forEach(data=>{
-        if(obj['field']&&obj['field']?.match(/\d+/)?.length>0){
-          data[obj['field']]=new Date(parseInt(obj['field']?.match(/\d+/)[0], 10))
-        }
-      })
-    })
   }
   getData() {
 
     if (this.apiUrls?.get) {
       this.isLoading = true;
-      this._apiService[this.getDataMethod](`${this.apiUrls.get}${this.filterBy}`) //, this.filterOptions
+      this._apiService[this.getDataMethod](`${this.apiUrls.get}`, this.filterOptions) //, this.filterOptions
         .pipe(
           finalize(() => this.isLoading = false),
           this._sharedService.takeUntilDistroy()
-        ).subscribe((res: any) => {
-          this.data = res;
-          this.totalRecords = res.length
-          this.getTableMessages()
-          this.handleDate()
+        ).subscribe((res: ApiRes) => {
+          this.data = res.result['dataList'];
+          this.totalRecords = res.result['totalCount']
+          this.getTableMessages();
+          this.initTable()
           if (this.callBack) this.callBack()
 
         });
@@ -281,7 +270,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.initTable();
+    this.getData();
   }
 
   onSearch(){

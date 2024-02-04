@@ -24,7 +24,7 @@ export class ClientsComponent {
   };
 
   additionalTableConfig: TableConfig = {
-    id: 'CardCode',
+    id: 'id',
     actions: [
       {
         title: this._languageService.getTransValue('client.clientDetails'),

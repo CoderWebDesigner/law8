@@ -1,43 +1,43 @@
 export const Clients_Columns_EN = [
   {
     header: 'Card Code',
-    field: 'CardCode',
+    field: 'id',
   },
   {
     header: 'Card Name',
-    field: 'CardName',
+    field: 'name',
   },
   {
     header: 'Balance',
-    field: 'CustBalance',
+    field: 'balance',
   }
 ];
 
 export const Clients_Columns_FR = [
   {
     header: 'Code de carte',
-    field: 'CardCode',
+    field: 'id',
   },
   {
     header: 'Nom de la carte',
-    field: 'CardName',
+    field: 'name',
   },
   {
     header: 'Provision',
-    field: 'CustBalance',
+    field: 'balance',
   }
 ];
 export const Clients_Columns_AR = [
   {
     header: 'الكود',
-    field: 'CardCode',
+    field: 'id',
   },
   {
     header: 'الاسم',
-    field: 'CardName',
+    field: 'name',
   },
   {
     header: 'الميزانية',
-    field: 'CustBalance',
+    field: 'balance',
   },
 ];

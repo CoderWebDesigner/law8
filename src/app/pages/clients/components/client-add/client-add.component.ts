@@ -139,11 +139,8 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   override getData(): void {
     forkJoin([
       this._apiService.get(this.generalApiUrls.getClientGroups),
-      this._apiService.get(this.generalApiUrls.getCountries),
-      this._apiService.get(this.generalApiUrls.getParties),
-      // this._clientService.companyAddress$,
-      // this._clientService.billingAddress$,
-      // this._clientService.contacts$,
+      // this._apiService.get(this.generalApiUrls.getCountries),
+      // this._apiService.get(this.generalApiUrls.getParties),
     ]).pipe(
       finalize(() => this.isSubmit = false),
       this.takeUntilDestroy()

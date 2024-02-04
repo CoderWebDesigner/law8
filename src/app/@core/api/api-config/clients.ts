@@ -1,8 +1,8 @@
 export const Clients_API = {
   "client":{
-      "get":"/GetClientList/?ui=",
-      "getByCode": "/GetClientDetails/?client=",
-      "create":"/CreateCustomer",
+      "get":"Client/GetList",
+      "getById": "Client/GetById?id=",
+      "create":"Client/Create",
       "createIntake":"/CreateClientIntake"
   }
 
