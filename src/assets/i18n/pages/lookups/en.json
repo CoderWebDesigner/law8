@@ -12,7 +12,9 @@
     "mainCategory":"Main Category",
     "mainList":"Main List",
     "subList":"Sub List",
-    "rateTable":"Rate Table"
+    "rateTable":"Rate Table",
+    "appealPeriod":"Appeal Period",
+    "cassationPeriod":"Cassation Period"
 
   }
 }

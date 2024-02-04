@@ -3,7 +3,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-lookups-main-item-editor',
@@ -19,7 +18,6 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 export class LookupsMainItemEditorComponent extends FormBaseClass implements OnInit {
   title: string;
   itemId: number;
-  _dialogConfig = inject(DynamicDialogConfig)
   ngOnInit(): void {
     this.getParams()
 
@@ -30,19 +28,6 @@ export class LookupsMainItemEditorComponent extends FormBaseClass implements OnI
   }
   override initForm(): void {
     this.formlyFields = [
-      {
-        type: 'select',
-        key: 'Practice Area',
-        className: 'col-md-4',
-        props: {
-          label: this._languageService.getTransValue('matters.practiceArea'),
-          options: [
-            { label: 'Corporate', value: 'Corporate' },
-            { label: 'Litigation', value: 'Litigation' },
-            { label: 'instructor', value: 'instructor' },
-          ],
-      },
-    },
       {
         key: 'nameEN',
         type: 'input',
@@ -64,7 +49,7 @@ export class LookupsMainItemEditorComponent extends FormBaseClass implements OnI
         validators: {
           validation: ['arabicLetters'],
         }
-      },     
+      },
     ]
   }
   override onSubmit(): void {

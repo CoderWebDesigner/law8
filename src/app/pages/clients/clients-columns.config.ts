@@ -1,10 +1,10 @@
 export const Clients_Columns_EN = [
   {
-    header: 'Card Code',
+    header: 'Client Code',
     field: 'id',
   },
   {
-    header: 'Card Name',
+    header: 'Client Name',
     field: 'name',
   },
   {

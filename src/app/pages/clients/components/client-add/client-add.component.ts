@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
+import { PAGESIZE } from '@core/utilities/defines';
 import { ClientService } from '@shared/services/client.service';
 import { MenuItem } from 'primeng/api';
 import { finalize, forkJoin } from 'rxjs';
@@ -14,7 +16,8 @@ import Swal from 'sweetalert2';
 export class ClientAddComponent extends FormBaseClass implements OnInit {
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.client;
-  _clientService = inject(ClientService)
+  _clientService = inject(ClientService);
+  filterOptions?: any = { orderByDirection:'ASC' }
   items: MenuItem[] = [
     // { label: this._languageService.getTransValue('common.general') },
     { label: this._languageService.getTransValue('client.companyAddress') },
@@ -50,7 +53,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
         fieldGroup: [
           {
             className: 'col-md-4',
-            key: 'CardName',
+            key: 'name',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.clientName'),
@@ -60,18 +63,18 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
           },
           {
             className: 'col-md-4',
-            key: 'CustGrp',
+            key: 'clientGroupId',
             type: 'select',
             props: {
               label: this._languageService.getTransValue('client.clientGroup'),
               placeholder: this._languageService.getTransValue('client.clientGroupPlaceholder'),
-              options: this.lookupsData[0].map(ele => ({ label: ele.GroupName, value: ele.GroupCode })),
+              options: this.lookupsData[0].result['dataList'].map(ele => ({ label: ele.nameEn, value: ele.clntGrpNo })),
               required: true,
             },
           },
           {
             className: 'col-md-4',
-            key: 'Email',
+            key: 'email',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.email'),
@@ -138,14 +141,15 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   }
   override getData(): void {
     forkJoin([
-      this._apiService.get(this.generalApiUrls.getClientGroups),
+      this._apiService.get(this.generalApiUrls.getClientGroups,this.filterOptions),
       // this._apiService.get(this.generalApiUrls.getCountries),
       // this._apiService.get(this.generalApiUrls.getParties),
     ]).pipe(
       finalize(() => this.isSubmit = false),
       this.takeUntilDestroy()
     ).subscribe({
-      next: res => {
+      next: (res:ApiRes) => {
+        console.log(res)
         this.lookupsData = res;
         this.initForm()
       }

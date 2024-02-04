@@ -37,7 +37,7 @@ import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import Swal from 'sweetalert2';
 import { ApiRes } from '@core/models';
-
+import { SkeletonModule } from 'primeng/skeleton';
 @Component({
   selector: 'shared-table',
   templateUrl: './shared-table.component.html',
@@ -52,7 +52,8 @@ import { ApiRes } from '@core/models';
     FormsModule,
     PaginatorModule,
     InputTextModule,
-    InputSwitchModule
+    InputSwitchModule,
+    SkeletonModule
   ],
   providers: [DialogService],
 })
@@ -110,7 +111,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
 
   @Input() callBack: any;
   ngOnInit(): void {
-    this.getData();
+    this.initTable();
   }
 
   private getCurrentPageReportTemplate(): void {
@@ -140,6 +141,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     this.columns = this.getColumns(this.columnsLocalized);
     this.columnChildren = this.getColumns(this.columnsLocalizedChildren)
     this.onSearch()
+    this.getData()
 
   }
   getData() {
@@ -154,14 +156,14 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
           this.data = res.result['dataList'];
           this.totalRecords = res.result['totalCount']
           this.getTableMessages();
-          this.initTable()
+          // this.initTable()
           if (this.callBack) this.callBack()
-
+          if(this.mapData){
+            this.data = this.mapData(this.data);
+          }
         });
     }
-    if(this.mapData){
-      this.data = this.mapData(this.data);
-    }
+
   }
   getTableMessages(): void {
     const pageCount = this.totalRecords ? this.totalRecords : this.data?.length;
@@ -206,7 +208,6 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   onEdit(event){
     console.log('Row Edited:', event);
 
- console.log(this.data)
   }
   onSwitch(e){
     console.log(e.checked)
@@ -268,7 +269,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getData();
+    this.initTable();
   }
 
   onSearch(){
