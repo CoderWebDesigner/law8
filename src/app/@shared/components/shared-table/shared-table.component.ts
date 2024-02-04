@@ -139,8 +139,6 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
     this.columnChildren = this.getColumns(this.columnsLocalizedChildren)
-
-    this.getData();
     this.onSearch()
 
   }
