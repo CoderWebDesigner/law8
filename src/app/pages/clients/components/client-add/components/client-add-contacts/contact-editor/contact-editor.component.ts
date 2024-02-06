@@ -27,7 +27,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
         fieldGroup: [
           {
             className: 'col-md-6',
-            key: 'FirstName',
+            key: 'firstName',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('client.firstName'),
@@ -37,7 +37,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
           },
           {
             className: 'col-md-6',
-            key: 'MiddleName',
+            key: 'middleName',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('client.middleName'),
@@ -47,7 +47,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
           },
           {
             className: 'col-md-6',
-            key: 'LastName',
+            key: 'lastName',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('client.lastName'),
@@ -55,20 +55,20 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
               required: true,
             },
           },
-          // {
-          //   className: 'col-md-6',
-          //   key: 'PartiesObj',
-          //   type: 'select',
-          //   props: {
-          //     label: this._languageService.getTransValue('common.parties'),
-          //     placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
-          //     options: this.lookupsData,
-          //     required: true,
-          //   }
-          // },
           {
             className: 'col-md-6',
-            key: 'Position',
+            key: 'PartiesObj',
+            type: 'select',
+            props: {
+              label: this._languageService.getTransValue('common.parties'),
+              placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
+              options: this.lookupsData,
+              // required: true,
+            }
+          },
+          {
+            className: 'col-md-6',
+            key: 'position',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('client.position'),
@@ -83,12 +83,21 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('common.address'),
               placeholder: this._languageService.getTransValue('client.addressPlaceholder'),
+              // required: true,
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'mobile',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('common.mobileNumber'),
               required: true,
             },
           },
           {
             className: 'col-md-6',
-            key: 'Email',
+            key: 'email',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.email'),
@@ -101,26 +110,18 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
           },
           {
             className: 'col-md-6',
-            key: 'TelNo1',
-            type: 'input',
+            key: 'phone',
+            type: 'phone',
             props: {
               label: this._languageService.getTransValue('client.phone'),
               placeholder: this._languageService.getTransValue('client.phonePlaceholder'),
               required: true,
             },
           },
+
           {
             className: 'col-md-6',
-            key: 'MobileNo',
-            type: 'phone',
-            props: {
-              label: this._languageService.getTransValue('common.mobileNumber'),
-              required: true,
-            },
-          },
-          {
-            className: 'col-md-6',
-            key: 'Fax',
+            key: 'fax',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('client.fax'),
@@ -130,7 +131,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
           },
           {
             className: 'col-md-6',
-            key: 'Remarks',
+            key: 'remarks',
             type: 'input',
             props: {
               label: this._languageService.getTransValue('client.remarks'),
@@ -144,7 +145,9 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
   }
   override onSubmit(): void {
     if (this.formly.valid) {
-      this.formlyModel = {...this.formlyModel, MobileNo:this.formlyModel.MobileNo.internationalNumber}
+      this.formlyModel = {...this.formlyModel, phone:this.formlyModel.phone.internationalNumber}
+      delete this.formlyModel.Address
+      delete this.formlyModel.PartiesObj
       this.contacts.push(this.formlyModel)
       this._clientService.contacts$.next(this.contacts)
 

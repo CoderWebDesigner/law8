@@ -1,108 +1,130 @@
-
 export const Contact_Columns_EN = [
   {
-    header: 'Name',
-    field: 'name',
+    header: 'First Name',
+    field: 'firstName',
+  },
+  {
+    header: 'Middle Name',
+    field: 'middleName',
+  },
+  {
+    header: 'Last Name',
+    field: 'lastName',
   },
   {
     header: 'Position',
-    field: 'Position',
+    field: 'position',
   },
   {
     header: 'Address',
-    field: 'Address',
+    field: 'address',
   },
   {
     header: 'Phone',
-    field: 'TelNo1',
+    field: 'phone',
   },
   {
-    header: 'MobileNo',
-    field: 'MobileNo',
+    header: 'Mobile',
+    field: 'mobile',
   },
   {
     header: 'Email',
-    field: 'Email',
+    field: 'email',
   },
   {
     header: 'FAX',
-    field: 'Fax',
+    field: 'fax',
   },
   {
     header: 'Remarks',
-    field: 'Remarks',
+    field: 'remarks',
     isLargeText:true
   },
 ];
-
 export const Contact_Columns_FR = [
   {
-    header: 'nom',
-    field: 'name',
+    header: 'Prénom',
+    field: 'firstName',
   },
   {
-    header: 'position',
-    field: 'Position',
+    header: 'Deuxième prénom',
+    field: 'middleName',
+  },
+  {
+    header: 'Nom de famille',
+    field: 'lastName',
+  },
+  {
+    header: 'Position',
+    field: 'position',
   },
   {
     header: 'adresse',
-    field: 'Address',
+    field: 'address',
   },
   {
     header: 'téléphone',
-    field: 'TelNo1',
+    field: 'phone',
   },
   {
-    header: 'mobileno',
-    field: 'MobileNo',
+    header: 'Mobile',
+    field: 'mobile',
   },
   {
     header: 'eMail',
-    field: 'Email',
+    field: 'email',
   },
   {
     header: 'fax',
-    field: 'Fax',
+    field: 'fax',
   },
   {
     header: 'remarques',
-    field: 'Remarks',
+    field: 'remarks',
     isLargeText:true
   },
 ];
 
 export const Contact_Columns_AR = [
   {
-    header: 'اسم',
-    field: 'name',
+    header: 'الاسم الأول',
+    field: 'firstName',
+  },
+  {
+    header: 'الاسم الأوسط',
+    field: 'middleName',
+  },
+  {
+    header: 'اسم العائلة',
+    field: 'lastName',
   },
   {
     header: 'موضع',
-    field: 'Position',
+    field: 'position',
   },
   {
     header: 'عنوان',
-    field: 'Address',
+    field: 'address',
   },
   {
     header: 'هاتف',
-    field: 'TelNo1',
+    field: 'phone',
   },
   {
     header: 'رقم المحمول',
-    field: 'MobileNo',
+    field: 'mobile',
   },
   {
     header: 'بريد إلكتروني',
-    field: 'Email',
+    field: 'email',
   },
   {
     header: 'الفاكس',
-    field: 'Fax',
+    field: 'fax',
   },
   {
     header: 'ملاحظات',
-    field: 'Remarks',
+    field: 'remarks',
     isLargeText:true
   },
 ];

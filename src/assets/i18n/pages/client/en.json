@@ -69,6 +69,8 @@
     "mobile1":"Mobile 1",
     "mobile2":"Mobile2",
     "ar":"AR",
-    "en":"EN"
+    "en":"EN",
+    "clientNameAr":"Client Name AR",
+    "clientNameEn":"Client Name EN"
   }
 }

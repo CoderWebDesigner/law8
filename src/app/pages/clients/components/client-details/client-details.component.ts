@@ -24,7 +24,7 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     // { label: this._languageService.getTransValue('common.address') },
     { label: this._languageService.getTransValue('common.contacts') },
     // { label: this._languageService.getTransValue('client.documents') },
-    { label: this._languageService.getTransValue('common.relatedMatters') },
+    // { label: this._languageService.getTransValue('common.relatedMatters') },
   ];
   ngOnInit(): void {
     this.getClientParam()
