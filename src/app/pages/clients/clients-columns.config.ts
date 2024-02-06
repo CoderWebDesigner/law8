@@ -1,7 +1,7 @@
 export const Clients_Columns_EN = [
   {
     header: 'Client Code',
-    field: 'id',
+    field: 'clntNo',
   },
   {
     header: 'Client Name',
@@ -16,7 +16,7 @@ export const Clients_Columns_EN = [
 export const Clients_Columns_FR = [
   {
     header: 'Code de carte',
-    field: 'id',
+    field: 'clntNo',
   },
   {
     header: 'Nom de la carte',
@@ -30,7 +30,7 @@ export const Clients_Columns_FR = [
 export const Clients_Columns_AR = [
   {
     header: 'الكود',
-    field: 'id',
+    field: 'clntNo',
   },
   {
     header: 'الاسم',

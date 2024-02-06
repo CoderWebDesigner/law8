@@ -12,15 +12,14 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-client-add',
   templateUrl: './client-add.component.html',
-  styleUrls: ['./client-add.component.scss']
+  styleUrls: ['./client-add.component.scss'],
 })
 export class ClientAddComponent extends FormBaseClass implements OnInit {
-
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.client;
   _clientService = inject(ClientService);
   cdRef = inject(ChangeDetectorRef);
-  filterOptions?: any = { orderByDirection: 'ASC' }
+  filterOptions?: any = { orderByDirection: 'ASC' };
   language: string;
   items: MenuItem[] = [
     // { label: this._languageService.getTransValue('common.general') },
@@ -34,56 +33,59 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   showLanguageField: boolean;
   ngOnInit(): void {
     this._clientService.companyAddress$.subscribe({
-      next: res => {
-        this.companyAddress = res
-      }
-    })
+      next: (res) => {
+        this.companyAddress = res;
+      },
+    });
     this._clientService.billingAddress$.subscribe({
-      next: res => {
-        this.billingAddress = res
-      }
-    })
+      next: (res) => {
+        this.billingAddress = res;
+      },
+    });
     this._clientService.contacts$.subscribe({
-      next: res => {
-        this.contact = res
-      }
-    })
-    this.getData()
+      next: (res) => {
+        this.contact = res;
+      },
+    });
+    this.getData();
   }
   override initForm(): void {
     this.formlyFields = [
       {
-        fieldGroupClassName: "row",
+        fieldGroupClassName: 'row',
         fieldGroup: [
-
           {
             className: 'col-md-4',
-            fieldGroupClassName: " d-flex",
+            fieldGroupClassName: ' d-flex',
             fieldGroup: [
               {
                 key: this.language == 'en' ? 'nameEn' : 'nameAr',
                 type: 'input',
                 className: 'me-2',
                 props: {
-                  label: this._languageService.getTransValue('common.clientName'),
-                  placeholder: this._languageService.getTransValue('client.clientNamePlaceholder'),
+                  label:
+                    this._languageService.getTransValue('common.clientName'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.clientNamePlaceholder'
+                  ),
                   required: true,
                 },
               },
               {
                 type: 'button',
                 props: {
-                  label: this._languageService.getTransValue(this.language == 'en' ? 'client.ar' : 'client.en'),
-                  style: { 'marginTop': '22px', 'padding': '10px 20px' },
+                  label: this._languageService.getTransValue(
+                    this.language == 'en' ? 'client.ar' : 'client.en'
+                  ),
+                  style: { marginTop: '22px', padding: '10px 20px' },
                   onClick: () => {
                     this.showLanguageField = !this.showLanguageField;
-                    this.formlyFields[0].fieldGroup[1].hide = this.showLanguageField
-                  }
+                    this.formlyFields[0].fieldGroup[1].hide =
+                      this.showLanguageField;
+                  },
                 },
-
-              }
-            ]
-
+              },
+            ],
           },
           {
             className: 'col-md-4',
@@ -92,7 +94,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
             hide: !this.showLanguageField,
             props: {
               label: this._languageService.getTransValue('common.clientName'),
-              placeholder: this._languageService.getTransValue('client.clientNamePlaceholder'),
+              placeholder: this._languageService.getTransValue(
+                'client.clientNamePlaceholder'
+              ),
               required: true,
             },
           },
@@ -103,8 +107,13 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
             type: 'select',
             props: {
               label: this._languageService.getTransValue('client.clientGroup'),
-              placeholder: this._languageService.getTransValue('client.clientGroupPlaceholder'),
-              options: this.lookupsData[0].result['dataList'].map(ele => ({ label: ele.nameEn, value: ele.clntGrpNo })),
+              placeholder: this._languageService.getTransValue(
+                'client.clientGroupPlaceholder'
+              ),
+              options: this.lookupsData[0].result['dataList'].map((ele) => ({
+                label: ele.nameEn,
+                value: ele.clntGrpNo,
+              })),
               required: true,
             },
           },
@@ -146,7 +155,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
             },
           },
           {
-            className: 'card p-2 mx-3 mb-3',
+            className: 'card p-2 my-3 mb-3',
             fieldGroupClassName: 'row',
             fieldGroup: [
               {
@@ -155,7 +164,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.address1'),
-                  placeholder: this._languageService.getTransValue('client.addressPlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.addressPlaceholder'
+                  ),
                   required: true,
                 },
               },
@@ -165,7 +176,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.address2'),
-                  placeholder: this._languageService.getTransValue('client.addressPlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.addressPlaceholder'
+                  ),
                   required: true,
                 },
               },
@@ -175,7 +188,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.city'),
-                  placeholder: this._languageService.getTransValue('client.cityPlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.cityPlaceholder'
+                  ),
                   required: true,
                 },
               },
@@ -185,10 +200,12 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue('client.country'),
-                  placeholder: this._languageService.getTransValue('client.countryPlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.countryPlaceholder'
+                  ),
                   options: this.lookupsData,
                   required: true,
-                }
+                },
               },
               {
                 className: 'col-md-4',
@@ -196,23 +213,33 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue('client.state'),
-                  placeholder: this._languageService.getTransValue('client.statePlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.statePlaceholder'
+                  ),
                   // options: ,
                   required: true,
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
                     field.form.get('CountryObj').valueChanges.subscribe({
-                      next: res => {
-                        this._apiService.get(this.generalApiUrls.getStatesByCountry + res['CountryCode']).subscribe({
-                          next: res => {
-                            field.props.options = res.map(obj => ({ label: obj.CountryName, value: obj }))
-                          }
-                        })
-                      }
-                    })
-                  }
-                }
+                      next: (res) => {
+                        this._apiService
+                          .get(
+                            this.generalApiUrls.getStatesByCountry +
+                              res['CountryCode']
+                          )
+                          .subscribe({
+                            next: (res) => {
+                              field.props.options = res.map((obj) => ({
+                                label: obj.CountryName,
+                                value: obj,
+                              }));
+                            },
+                          });
+                      },
+                    });
+                  },
+                },
               },
               {
                 className: 'col-md-4',
@@ -220,14 +247,16 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.zipCode'),
-                  placeholder: this._languageService.getTransValue('client.zipCodePlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.zipCodePlaceholder'
+                  ),
                   required: true,
                 },
               },
-            ]
+            ],
           },
           {
-            className: 'card p-2 mx-3 mb-3',
+            className: 'card p-2 my-3 mb-3',
             fieldGroupClassName: 'row',
             fieldGroup: [
               {
@@ -236,7 +265,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'phone',
                 props: {
                   label: this._languageService.getTransValue('client.phone1'),
-                  placeholder: this._languageService.getTransValue('client.phonePlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.phonePlaceholder'
+                  ),
                   required: true,
                 },
               },
@@ -246,7 +277,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'phone',
                 props: {
                   label: this._languageService.getTransValue('client.phone2'),
-                  placeholder: this._languageService.getTransValue('client.phonePlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.phonePlaceholder'
+                  ),
                   required: true,
                 },
               },
@@ -256,7 +289,9 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.mobile1'),
-                  placeholder: this._languageService.getTransValue('client.mobilePlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.mobilePlaceholder'
+                  ),
                   required: true,
                 },
               },
@@ -266,9 +301,11 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.mobile2'),
-                  placeholder: this._languageService.getTransValue('client.mobilePlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.mobilePlaceholder'
+                  ),
                   required: true,
-                }
+                },
               },
               {
                 className: 'col-md-4',
@@ -276,12 +313,14 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('common.email'),
-                  placeholder: this._languageService.getTransValue('client.emailPlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.emailPlaceholder'
+                  ),
                   required: true,
                 },
                 validators: {
                   validation: ['email'],
-                }
+                },
               },
               {
                 className: 'col-md-4',
@@ -289,73 +328,86 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.fax'),
-                  placeholder: this._languageService.getTransValue('client.faxPlaceholder'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.faxPlaceholder'
+                  ),
                   required: true,
                 },
               },
-            ]
+            ],
           },
         ],
       },
-    ]
+    ];
   }
   override onSubmit(): void {
     if (this.formly.valid) {
-      this.isSubmit = true
-      console.log(this.companyAddress)
+      this.isSubmit = true;
+      console.log(this.companyAddress);
       this.formlyModel = {
         ...this.formlyModel,
         lstShipToAddr: this.companyAddress,
         lstBillToAddr: this.billingAddress,
         lstContactPer: this.contact,
-        Phone1: this.formlyModel.Phone1.internationalNumber
-      }
-      this._apiService.post(this.apiUrls.create, this.formlyModel).pipe(
-        finalize(() => this.isSubmit = false),
-        this.takeUntilDestroy()
-      ).subscribe({
-        next: (res: any) => {
-          if (res?.IsSucess) {
-
-            Swal.fire({
-              title: this._languageService.getTransValue('messages.success'),
-              text: this._languageService.getTransValue('messages.createdSuccessfully'),
-              icon: 'success',
-              allowOutsideClick: false,
-              confirmButtonText: this._languageService.getTransValue('client.goClientList')
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this._router.navigate(['/clients'])
-              }
-            });
-          } else {
-            Swal.fire({
-              title: this._languageService.getTransValue('messages.error'),
-              icon: 'error',
-              allowOutsideClick: false,
-              confirmButtonText: this._languageService.getTransValue('btn.close')
-            })
-          }
-        }
-      })
+        Phone1: this.formlyModel.Phone1.internationalNumber,
+      };
+      this._apiService
+        .post(this.apiUrls.create, this.formlyModel)
+        .pipe(
+          finalize(() => (this.isSubmit = false)),
+          this.takeUntilDestroy()
+        )
+        .subscribe({
+          next: (res: any) => {
+            if (res?.IsSucess) {
+              Swal.fire({
+                title: this._languageService.getTransValue('messages.success'),
+                text: this._languageService.getTransValue(
+                  'messages.createdSuccessfully'
+                ),
+                icon: 'success',
+                allowOutsideClick: false,
+                confirmButtonText: this._languageService.getTransValue(
+                  'client.goClientList'
+                ),
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this._router.navigate(['/clients']);
+                }
+              });
+            } else {
+              Swal.fire({
+                title: this._languageService.getTransValue('messages.error'),
+                icon: 'error',
+                allowOutsideClick: false,
+                confirmButtonText:
+                  this._languageService.getTransValue('btn.close'),
+              });
+            }
+          },
+        });
     }
   }
   override getData(): void {
     forkJoin([
-      this._apiService.get(this.generalApiUrls.getClientGroups, this.filterOptions),
+      this._apiService.get(
+        this.generalApiUrls.getClientGroups,
+        this.filterOptions
+      ),
       // this._apiService.get(this.generalApiUrls.getCountries),
       // this._apiService.get(this.generalApiUrls.getParties),
-    ]).pipe(
-      finalize(() => this.isSubmit = false),
-      this.takeUntilDestroy()
-    ).subscribe({
-      next: (res: ApiRes) => {
-        console.log(res)
-        this.lookupsData = res;
-        this.language = this._languageService.getSelectedLanguage();
-        this.initForm()
-      }
-    })
+    ])
+      .pipe(
+        finalize(() => (this.isSubmit = false)),
+        this.takeUntilDestroy()
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          console.log(res);
+          this.lookupsData = res;
+          this.language = this._languageService.getSelectedLanguage();
+          this.initForm();
+        },
+      });
   }
-
 }

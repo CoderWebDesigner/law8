@@ -11,13 +11,13 @@ import {
   HttpUserEvent,
 } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { AuthService } from '@core/services';
+import { AuthService, LanguageService } from '@core/services';
 
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService , private _languageService: LanguageService) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -31,7 +31,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
     const token = this._authService.getToken();
     // headersToAppend['Access-Control-Allow-Origin'] = "*"
     // headersToAppend['Access-Control-Allow-Headers'] = "*"
-
+    const lang = this._languageService.getSelectedLanguage();
+    if (lang) {
+      headersToAppend['lang'] = lang;
+    }
     if (token) {
       if (!req.headers.get('Authorization')) {
         headersToAppend['Authorization'] = `Bearer ${token}`

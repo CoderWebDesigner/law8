@@ -17,7 +17,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
   _config = inject(DynamicDialogConfig)
   contacts: any[] = []
   ngOnInit(): void {
-    this.getData()
+    this.initForm()
   }
 
   override initForm(): void {
@@ -55,17 +55,17 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
               required: true,
             },
           },
-          {
-            className: 'col-md-6',
-            key: 'PartiesObj',
-            type: 'select',
-            props: {
-              label: this._languageService.getTransValue('common.parties'),
-              placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
-              options: this.lookupsData,
-              required: true,
-            }
-          },
+          // {
+          //   className: 'col-md-6',
+          //   key: 'PartiesObj',
+          //   type: 'select',
+          //   props: {
+          //     label: this._languageService.getTransValue('common.parties'),
+          //     placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
+          //     options: this.lookupsData,
+          //     required: true,
+          //   }
+          // },
           {
             className: 'col-md-6',
             key: 'Position',
