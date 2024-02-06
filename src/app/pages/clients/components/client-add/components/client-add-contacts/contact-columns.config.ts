@@ -12,10 +12,6 @@ export const Contact_Columns_EN = [
     field: 'lastName',
   },
   {
-    header: 'Parties',
-    field: 'party',
-  },
-  {
     header: 'Position',
     field: 'position',
   },
@@ -59,10 +55,6 @@ export const Contact_Columns_FR = [
     field: 'lastName',
   },
   {
-    header: 'Des soirées',
-    field: 'party',
-  },
-  {
     header: 'position',
     field: 'position',
   },
@@ -104,10 +96,6 @@ export const Contact_Columns_AR = [
   {
     header: 'اسم العائلة',
     field: 'lastName',
-  },
-  {
-    header: 'حفلات',
-    field: 'party',
   },
   {
     header: 'موضع',

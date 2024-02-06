@@ -57,17 +57,6 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
           },
           {
             className: 'col-md-6',
-            key: 'PartiesObj',
-            type: 'select',
-            props: {
-              label: this._languageService.getTransValue('common.parties'),
-              placeholder: this._languageService.getTransValue('client.partiesPlaceholder'),
-              options: this.lookupsData,
-              // required: true,
-            }
-          },
-          {
-            className: 'col-md-6',
             key: 'position',
             type: 'input',
             props: {
@@ -156,17 +145,17 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
       });
     }
   }
-  override getData(): void {
-    this._apiService.get(this.generalApiUrls.getParties).pipe(
-      finalize(() => this.isSubmit = false),
-      this.takeUntilDestroy()
-    ).subscribe({
-      next: res => {
-        this.lookupsData = res;
-        this.lookupsData = this.lookupsData.map(element => ({ label: element.Name, value: element }));
-        this.initForm()
-      }
-    })
-  }
+  // override getData(): void {
+  //   this._apiService.get(this.generalApiUrls.getParties).pipe(
+  //     finalize(() => this.isSubmit = false),
+  //     this.takeUntilDestroy()
+  //   ).subscribe({
+  //     next: res => {
+  //       this.lookupsData = res;
+  //       this.lookupsData = this.lookupsData.map(element => ({ label: element.Name, value: element }));
+  //       this.initForm()
+  //     }
+  //   })
+  // }
 
 }
