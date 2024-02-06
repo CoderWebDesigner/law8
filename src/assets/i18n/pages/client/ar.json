@@ -36,9 +36,9 @@
     "addCompanyAddress":"إضافة عنوان الشركة",
     "addBillingAddress":"إضافة عنوان الفواتير",
     "addContacts":"اضف جهات اتصال",
-    "line1":"خط 1",
-    "linePlaceholder":"الرجاء إدخال العنوان",
-    "line2":"خط 2",
+    "address1":"Address 1",
+    "address2":"Address 2",
+    "addressPlaceholder":"الرجاء إدخال العنوان",
     "streetNumber":"رقم الشارع",
     "streetNumberPlaceholder":"الرجاء إدخال رقم الشارع",
     "city":"مدينة",
@@ -52,12 +52,22 @@
     "partiesPlaceholder":"الرجاء تحديد الأطراف",
     "position":"موضع",
     "positionPlaceholder":"الرجاء إدخال المنصب",
-    "addressPlaceholder":"الرجاء إدخال العنوان",
     "phonePlaceholder":"الرجاء إدخال الهاتف",
     "mobilePlaceholder":"الرجاء إدخال الهاتف المحمول",
     "fax":"الفاكس",
     "faxPlaceholder":"الرجاء إدخال الفاكس",
     "remarks":"ملاحظات",
-    "remarksPlaceholder":"الرجاء إدخال الملاحظات"
+    "remarksPlaceholder":"الرجاء إدخال الملاحظات",
+    "date":"Date",
+    "foreignName":"Foreign Name",
+    "notes":"Notes",
+    "clientIntro":"Client Intro",
+    "phone1":"Phone 1",
+    "phone2":"Phone 2",
+    "mobile1":"Mobile 1",
+    "mobile2":"Mobile2",
+    "ar":"AR",
+    "en":"EN"
+
   }
 }

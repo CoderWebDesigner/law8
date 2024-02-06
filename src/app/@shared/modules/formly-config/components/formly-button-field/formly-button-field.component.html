@@ -1,5 +1,5 @@
-  <p-button [styleClass]="props['class']" (click)="onClick()">
-    <i class="me-2" [class]="props['icon'] "></i>
+  <p-button [styleClass]="props['class']" (click)="onClick()" [style]="props['style']">
+    <i class="me-2" [class]="props['icon'] " *ngIf="props['icon']"></i>
     <span class="ml-2 font-bold">
       {{ props["label"] }}
     </span>

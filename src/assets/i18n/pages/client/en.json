@@ -21,7 +21,7 @@
     "lastNamePlaceholder":"Please Enter last Name",
     "introducingLawyer":"Introducing Lawyer",
     "introducingLawyerPlaceholder":"Please Select Introducing Lawyer",
-    
+
     "emailPlaceholder":"Please Enter Email",
     "subject":"Subject",
     "subjectPlaceholder":"Please Enter Subject",
@@ -38,9 +38,9 @@
     "addCompanyAddress":"Add Company Address",
     "addBillingAddress":"Add Billing Address",
     "addContacts":"Add Contacts",
-    "line1":"Line 1",
-    "linePlaceholder":"Please Enter Address",
-    "line2":"Line 2",
+    "address1":"Address 1",
+    "address2":"Address 2",
+    "addressPlaceholder":"Please Enter Address",
     "streetNumber":"Street Number",
     "streetNumberPlaceholder":"Please Enter Street Number",
     "city":"City",
@@ -54,12 +54,21 @@
     "partiesPlaceholder":"Please Select Parties",
     "position":"Position",
     "positionPlaceholder":"Please Enter Position",
-    "addressPlaceholder":"Please Enter Address",
     "phonePlaceholder":"Please Enter Phone",
     "mobilePlaceholder":"Please Enter Mobile",
     "fax":"Fax",
     "faxPlaceholder":"Please Enter Fax",
     "remarks":"Remarks",
-    "remarksPlaceholder":"Please Enter Remarks"
+    "remarksPlaceholder":"Please Enter Remarks",
+    "date":"Date",
+    "foreignName":"Foreign Name",
+    "notes":"Notes",
+    "clientIntro":"Client Intro",
+    "phone1":"Phone 1",
+    "phone2":"Phone 2",
+    "mobile1":"Mobile 1",
+    "mobile2":"Mobile2",
+    "ar":"AR",
+    "en":"EN"
   }
 }

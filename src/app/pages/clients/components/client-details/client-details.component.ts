@@ -21,7 +21,7 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
   clientCode: any;
   client:any;
   items: MenuItem[] = [
-    { label: this._languageService.getTransValue('common.address') },
+    // { label: this._languageService.getTransValue('common.address') },
     { label: this._languageService.getTransValue('common.contacts') },
     // { label: this._languageService.getTransValue('client.documents') },
     { label: this._languageService.getTransValue('common.relatedMatters') },

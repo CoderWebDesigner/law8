@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ContactEditorComponent } from '../contact-editor/contact-editor.component';
+import { ContactEditorComponent } from './contact-editor/contact-editor.component';
 import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contact-columns.config';
 import { SharedService } from '@shared/services/shared.service';
 import { ClientService } from '@shared/services/client.service';

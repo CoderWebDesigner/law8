@@ -21,7 +21,7 @@ import { ClientAddressEditorComponent } from './components/client-add/components
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ClientAddBillingAddressComponent } from './components/client-add/components/client-add-billing-address/client-add-billing-address.component';
 import { ClientAddContactsComponent } from './components/client-add/components/client-add-contacts/client-add-contacts.component';
-import { ContactEditorComponent } from './components/client-add/components/contact-editor/contact-editor.component';
+import { ContactEditorComponent } from './components/client-add/components/client-add-contacts/contact-editor/contact-editor.component';
 @NgModule({
   declarations: [
     ClientsComponent,
