@@ -47,7 +47,8 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
         this.contact = res;
       },
     });
-    this.initForm();
+    this.getData();
+    
   }
 
   override initForm(): void {
@@ -123,7 +124,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                 'client.clientGroupPlaceholder'
               ),
               options: this.lookupsData[0].result['dataList'].map((ele) => ({
-                label: ele.nameEn,
+                label: ele.name,
                 value: ele.clntGrpNo,
               })),
               required: true,
@@ -215,7 +216,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.countryPlaceholder'
                   ),
-                  // options: this.lookupsData,
+                   options:[{label:'value1' , value:'value1'}],
                   required: true,
                 },
               },
@@ -228,7 +229,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.statePlaceholder'
                   ),
-                  // options: ,
+                  options:[{label:'value2' , value:'value2'}],
                   required: true,
                 },
                 hooks: {
@@ -348,8 +349,8 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
         ...this.formlyModel,
         isSapIntegration: false,
         clientContacts: this.contact,
-        Phone1: this.formlyModel.Phone1.internationalNumber,
-        Phone2: this.formlyModel.Phone2.internationalNumber,
+        phone1: this.formlyModel?.phone1?.internationalNumber,
+        phone2: this.formlyModel?.phone2?.internationalNumber,
       };
       delete this.formlyModel.foreignName;
       console.log('data', this.formlyModel)

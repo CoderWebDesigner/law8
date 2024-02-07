@@ -37,8 +37,7 @@ export class ClientAddContactsComponent implements OnInit, OnDestroy {
         this.data = this.data.map(element=> {
          return{
           ...element,
-          party:element.PartiesObj.Name,
-          MobileNo:element.MobileNo.internationalNumber
+          mobile:element.mobile.internationalNumber
          }
         })
       }

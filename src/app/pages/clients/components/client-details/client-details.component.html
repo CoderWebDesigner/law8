@@ -133,17 +133,17 @@
               [header]="item.label"
               *ngFor="let item of items; let i = index"
             >
-              <app-client-details-address
+              <!-- <app-client-details-address
                 [data]="client?.lstAddress"
                 *ngIf="i == 0"
-              ></app-client-details-address>
+              ></app-client-details-address> -->
               <app-client-details-contacts
                 [data]="client?.clientContacts"
-                *ngIf="i == 1"
+                *ngIf="i == 0"
               ></app-client-details-contacts>
               <app-client-details-related-matters
                 [data]="client?.lstMatter"
-                *ngIf="i == 2"
+                *ngIf="i == 1"
               ></app-client-details-related-matters>
             </p-tabPanel>
           </p-tabView>

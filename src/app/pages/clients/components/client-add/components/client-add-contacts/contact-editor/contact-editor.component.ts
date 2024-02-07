@@ -136,7 +136,6 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
     if (this.formly.valid) {
       this.formlyModel = {...this.formlyModel, phone:this.formlyModel.phone.internationalNumber}
       delete this.formlyModel.Address
-      delete this.formlyModel.PartiesObj
       this.contacts.push(this.formlyModel)
       this._clientService.contacts$.next(this.contacts)
 
