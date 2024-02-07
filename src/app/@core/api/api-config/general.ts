@@ -2,9 +2,9 @@ export const General_API = {
   "general":{
       "getLawyer":"/GetSPList",
       "getClientGroups":"ClientGroup/GetList",
-      "getCountries":"/GetCountryList",
+      "getCountryLookup":"AppLookup/GetCountryLookup",
       "getParties":"/GetBPpartiesList",
-      "getStatesByCountry":"/GetStatesList/?cc=",
+      "getStatesByCountry":"AppLookup/GetCountryLookup",
       "getLawyers":"/GetSPList",
       "getRecentMatters":"/GetRecentMatters/?empCode="
   }

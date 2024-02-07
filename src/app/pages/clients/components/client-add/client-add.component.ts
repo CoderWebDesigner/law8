@@ -48,7 +48,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
       },
     });
     this.getData();
-    
+
   }
 
   override initForm(): void {
@@ -216,7 +216,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.countryPlaceholder'
                   ),
-                   options:[{label:'value1' , value:'value1'}],
+                   options:this.lookupsData[1].result.map(obj=>({label:obj.name,value:obj.id})),
                   required: true,
                 },
               },
@@ -238,7 +238,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                       next: (res) => {
                         this._apiService
                           .get(
-                            this.generalApiUrls.getStatesByCountry +
+                            this.generalApiUrls.getCountryLookup +
                             res['countryId']
                           )
                           .subscribe({
@@ -398,7 +398,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
         this.generalApiUrls.getClientGroups,
         this.filterOptions
       ),
-      // this._apiService.get(this.generalApiUrls.getCountries),
+      this._apiService.get(this.generalApiUrls.getCountryLookup),
       // this._apiService.get(this.generalApiUrls.getParties),
     ])
       .pipe(

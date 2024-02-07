@@ -133,7 +133,7 @@ export class ClientAddressEditorComponent extends FormBaseClass implements OnIni
     }
   }
   override getData(): void {
-    this._apiService.get(this.generalApiUrls.getCountries).pipe(
+    this._apiService.get(this.generalApiUrls.getCountryLookup).pipe(
       finalize(() => this.isSubmit = false),
       this.takeUntilDestroy()
     ).subscribe({
