@@ -2,11 +2,11 @@ export const Matter_Category_Columns_AR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Appeal Period',
@@ -23,18 +23,18 @@ export const Matter_Category_Columns_AR = [
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+    // isSwitch:true
   },
 ]
 export const Matter_Category_Columns_EN = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Appeal Period',
@@ -51,18 +51,18 @@ export const Matter_Category_Columns_EN = [
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+    // isSwitch:true
   },
 ]
 export const Matter_Category_Columns_FR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Appeal Period',
@@ -79,7 +79,7 @@ export const Matter_Category_Columns_FR = [
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+    // isSwitch:true
   },
 ]
 
@@ -88,49 +88,49 @@ export const Matter_Category_Children_Columns_AR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
 
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+    // isSwitch:true
   },
 ]
 export const Matter_Category_Children_Columns_EN = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+    // isSwitch:true
   },
 ]
 export const Matter_Category_Children_Columns_FR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
- 
+
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+    // isSwitch:true
   },
 ]

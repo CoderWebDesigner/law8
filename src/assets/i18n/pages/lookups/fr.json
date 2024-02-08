@@ -14,7 +14,8 @@
     "subList":"Sub List",
     "rateTable":"Rate Table",
     "appealPeriod":"Appeal Period",
-    "cassationPeriod":"Cassation Period"
+    "cassationPeriod":"Cassation Period",
+    "active":"Active"
 
   }
 }

@@ -36,6 +36,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormlyCheckboxFieldComponent } from './components/formly-checkbox-field/formly-checkbox-field.component';
 import { FormlyFileFieldComponent } from './components/formly-file-field/formly-file-field.component';
 import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
+import { FormlySwitchFieldComponent } from './components/formly-switch-field/formly-switch-field.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
     FormlyTableFieldComponent,
     FormlyTimerFieldComponent,
     FormlyMultiSelectFieldComponent,
-    FormlyCheckboxFieldComponent
+    FormlyCheckboxFieldComponent,
+    FormlySwitchFieldComponent
   ],
   imports: [
     CommonModule,
@@ -85,6 +88,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
         { name: 'timer', component: FormlyTimerFieldComponent },
         { name: 'multi-select', component: FormlyMultiSelectFieldComponent , extends: 'input'},
         { name: 'checkbox', component: FormlyCheckboxFieldComponent },
+        { name: 'switch', component: FormlySwitchFieldComponent },
 
       ]
     }),
@@ -103,7 +107,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
     PasswordModule,
     TableModule,
     MultiSelectModule,
-    CheckboxModule
+    CheckboxModule,
+    InputSwitchModule
   ],
   exports: [
     ReactiveFormsModule,

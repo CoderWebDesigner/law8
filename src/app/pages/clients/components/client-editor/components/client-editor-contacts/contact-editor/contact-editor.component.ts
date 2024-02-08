@@ -1,14 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { ClientService } from '@shared/services/client.service';
+import { SharedModule } from '@shared/shared.module';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs';
-
 @Component({
   selector: 'app-contact-editor',
   templateUrl: './contact-editor.component.html',
-  styleUrls: ['./contact-editor.component.scss']
+  styleUrls: ['./contact-editor.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormlyConfigModule
+  ]
 })
 export class ContactEditorComponent extends FormBaseClass implements OnInit {
   generalApiUrls = API_Config.general;
@@ -17,7 +24,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
   _config = inject(DynamicDialogConfig)
   contacts: any[] = []
   ngOnInit(): void {
-    this.initForm()
+    this.getData()
   }
 
   override initForm(): void {
@@ -63,16 +70,6 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
               label: this._languageService.getTransValue('client.position'),
               placeholder: this._languageService.getTransValue('client.positionPlaceholder'),
               required: true,
-            },
-          },
-          {
-            className: 'col-md-6',
-            key: 'Address',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('common.address'),
-              placeholder: this._languageService.getTransValue('client.addressPlaceholder'),
-              // required: true,
             },
           },
           {
@@ -133,28 +130,28 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
     ]
   }
   override onSubmit(): void {
-    if (this.formly.valid) {
-      this.formlyModel = {...this.formlyModel, phone:this.formlyModel.phone.internationalNumber}
-      delete this.formlyModel.Address
-      this.contacts.push(this.formlyModel)
-      this._clientService.contacts$.next(this.contacts)
+    if (this.formly.invalid) return
 
-      this._DialogService.dialogComponentRefMap.forEach(dialog => {
-        dialog.destroy();
-      });
+    console.log(this.formlyModel)
+    if (this._config.data) {
+      this._clientService.contacts$.subscribe({
+        next: (res: any) => {
+          let index = res.findIndex(obj => obj === this._config.data['rowData'])
+          res[index] = { ...this.formlyModel }
+        }
+      })
+    } else {
+      this.contacts.push(this.formlyModel)
     }
+    this._clientService.contacts$.next(this.contacts)
+    this._DialogService.dialogComponentRefMap.forEach(dialog => {
+      dialog.destroy();
+    });
   }
-  // override getData(): void {
-  //   this._apiService.get(this.generalApiUrls.getParties).pipe(
-  //     finalize(() => this.isSubmit = false),
-  //     this.takeUntilDestroy()
-  //   ).subscribe({
-  //     next: res => {
-  //       this.lookupsData = res;
-  //       this.lookupsData = this.lookupsData.map(element => ({ label: element.Name, value: element }));
-  //       this.initForm()
-  //     }
-  //   })
-  // }
+  override getData(): void {
+    if (this._config.data)
+      this.formlyModel = this._config.data['rowData']
+    this.initForm()
+  }
 
 }

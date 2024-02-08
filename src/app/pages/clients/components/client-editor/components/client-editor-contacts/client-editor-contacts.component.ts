@@ -1,19 +1,20 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { ContactEditorComponent } from './contact-editor/contact-editor.component';
 import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contact-columns.config';
 import { SharedService } from '@shared/services/shared.service';
 import { ClientService } from '@shared/services/client.service';
 import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
-  selector: 'app-client-add-contacts',
-  templateUrl: './client-add-contacts.component.html',
-  styleUrls: ['./client-add-contacts.component.scss']
+  selector: 'app-client-editor-contacts',
+  templateUrl: './client-editor-contacts.component.html',
+  styleUrls: ['./client-editor-contacts.component.scss']
 })
-export class ClientAddContactsComponent implements OnInit, OnDestroy {
-
-  data: any[] = [];
+export class ClientEditorContactsComponent implements OnInit, OnDestroy {
+  @Input() data: any[] = [];
+  @Input() readOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _clientService = inject(ClientService)
@@ -24,10 +25,22 @@ export class ClientAddContactsComponent implements OnInit, OnDestroy {
     ar: Contact_Columns_AR,
     fr: Contact_Columns_FR,
   };
+  additionalTableConfig: TableConfig
   ngOnInit(): void {
-    this.getCompanyAddress()
+    this.additionalTableConfig = {
+      id: 'id',
+      actions: [
+        {
+          title: this._languageService.getTransValue('client.clientDetails'),
+          target: ContactEditorComponent,
+          icon:'pencil',
+          isReadOnly:this.readOnly
+        },
+      ],
+    };
+    this.getContacts()
   }
-  getCompanyAddress() {
+  getContacts() {
     this._clientService.contacts$.pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
@@ -37,12 +50,13 @@ export class ClientAddContactsComponent implements OnInit, OnDestroy {
         this.data = this.data.map(element=> {
          return{
           ...element,
-          mobile:element.mobile.internationalNumber
+          phone:element.phone.internationalNumber
          }
         })
       }
     })
   }
+
   openDialog() {
     const ref = this._dialogService.open(ContactEditorComponent, {
       width: '50%',

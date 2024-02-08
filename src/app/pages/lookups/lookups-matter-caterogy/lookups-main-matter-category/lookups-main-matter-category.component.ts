@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-lookups-main-matter-category',
   templateUrl: './lookups-main-matter-category.component.html',
@@ -17,22 +21,20 @@ import { SharedModule } from '@shared/shared.module';
 export class LookupsMainMatterCategoryComponent extends FormBaseClass implements OnInit {
   title: string;
   itemId: number;
+  config = inject(DynamicDialogConfig)
   ngOnInit(): void {
-    this.getParams()
+    this.initForm()
 
   }
-  getParams() {
-    this.itemId = +this._route.snapshot.paramMap.get('id');
-    this.initForm()
-  }
   override initForm(): void {
+
     this.formlyFields = [
       {
         type: 'input',
         key: 'Appeal Period',
         className: 'col-md-4',
         props: {
-          type:'number',
+          type: 'number',
           label: this._languageService.getTransValue('lookups.appealPeriod'),
         },
       },
@@ -41,7 +43,7 @@ export class LookupsMainMatterCategoryComponent extends FormBaseClass implements
         key: 'Cassation Period',
         className: 'col-md-4',
         props: {
-          type:'number',
+          type: 'number',
           label: this._languageService.getTransValue('lookups.cassationPeriod'),
         },
       },
@@ -80,11 +82,37 @@ export class LookupsMainMatterCategoryComponent extends FormBaseClass implements
           validation: ['arabicLetters'],
         }
       },
+      {
+        key: 'active',
+        type: 'switch',
+        defaultValue:false,
+        props:{
+          label:this._languageService.getTransValue('lookups.active'),
+          class:'d-block'
+        }
+      }
     ]
   }
   override onSubmit(): void {
-    // (itemId?'users.updateMainItem':'users.addUser')
-    throw new Error('Method not implemented.');
+    if(this.formly.invalid) return;
+    if (this.config.data)
+      this.itemId = +this.config.data?.rowData?.id
+    const successMsgKey = (this.itemId) ? 'message.updateSuccessfully' : 'message.createdSuccessfully';
+    const requestPayload = (this.itemId) ? { ...this.formlyModel, id: this.itemId } : this.formlyModel
+    const path = (this.itemId) ? API_Config.matterCategory.update : API_Config.matterCategory.create
+
+    console.log(requestPayload)
+    this._apiService.post(path, requestPayload).pipe(
+      finalize(() => this.isSubmit = false),
+      this.takeUntilDestroy()
+    ).subscribe({
+      next: (res: ApiRes) => {
+        if (res && res.isSuccess) {
+          const text = this._languageService.getTransValue(successMsgKey)
+          this._toastrNotifiService.displaySuccessMessage(text)
+        }
+      }
+    })
   }
 
 }

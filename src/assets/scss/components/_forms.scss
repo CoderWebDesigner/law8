@@ -129,6 +129,10 @@ input[readonly],textarea[readonly]{
 .reset-input{
   // all:unset;
   border: 0;
+  background:transparent;
+  .p-dropdown-label{
+    padding-right: 0 !important;
+  }
   .p-dropdown-trigger,.p-dropdown-clear-icon,.p-multiselect-trigger,.p-multiselect-clear-icon{
     display: none;
   }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ClientAddressEditorComponent } from '@components/clients/components/client-add/components/client-add-billing-address/client-address-editor/client-address-editor.component';
+import { ClientAddressEditorComponent } from '@components/clients/components/client-editor/components/client-add-billing-address/client-address-editor/client-address-editor.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
 import { ClientService } from '@shared/services/client.service';

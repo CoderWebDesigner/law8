@@ -16,10 +16,6 @@ export const Contact_Columns_EN = [
     field: 'position',
   },
   {
-    header: 'Address',
-    field: 'Address',
-  },
-  {
     header: 'Email',
     field: 'email',
   },
@@ -59,10 +55,6 @@ export const Contact_Columns_FR = [
     field: 'position',
   },
   {
-    header: 'Adresse',
-    field: 'Address',
-  },
-  {
     header: 'E-mail',
     field: 'email',
   },
@@ -100,10 +92,6 @@ export const Contact_Columns_AR = [
   {
     header: 'موضع',
     field: 'position',
-  },
-  {
-    header: 'عنوان',
-    field: 'Address',
   },
   {
     header: 'بريد إلكتروني',

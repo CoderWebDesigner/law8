@@ -5,6 +5,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 import { LookupsMainMatterCategoryComponent } from './lookups-main-matter-category/lookups-main-matter-category.component';
+import { API_Config } from '@core/api/api-config/api.config';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
@@ -14,54 +15,8 @@ import { LookupsMainMatterCategoryComponent } from './lookups-main-matter-catego
 export class LookupsMatterCaterogyComponent {
  _dialogService = inject(DialogService)
   _languageService = inject(LanguageService)
-  data: any[] = [
-    {
-      id:1,
-      nameAR: 'مدني',
-      nameEN: 'Civil',
-      appealPeriod: '10',
-      cassationPeriod: '5',
-      practiceArea:'Litigation',
-      active: true,
-      children: [
-        {
-          id:1,
-          nameAR: 'مدني كلى',
-          nameEN: 'Civil',
-          active: true,
-        },
-        {
-          id:1,
-          nameAR: 'مدني جزئي',
-          nameEN: 'Civil',
-          active: true,
-        },
-      ]
-    },
-    {
-      id:2,
-      nameAR: 'تجاري',
-      nameEN: 'Commerical',
-      appealPeriod: '10',
-      cassationPeriod: '5',
-      practiceArea:'instructor',
-      active: true,
-      children: [
-        {
-          id:1,
-          nameAR: 'تجاري كلى',
-          nameEN: 'Co mmerical 1',
-          active: true,
-        },
-        {
-          id:1,
-          nameAR: 'تجاري جزئي',
-          nameEN: 'Commerical 2',
-          active: true,
-        },
-      ]
-    },
-  ];
+
+  apiUrl=API_Config.matterCategory
   columnsLocalized: any = {
     ar: Matter_Category_Columns_AR,
     en: Matter_Category_Columns_EN,

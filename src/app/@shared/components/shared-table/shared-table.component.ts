@@ -57,9 +57,9 @@ import { SkeletonModule } from 'primeng/skeleton';
   ],
   providers: [DialogService],
 })
-export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
+export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() filterOptions?: any = { pageNum: 1,pagSize: PAGESIZE,orderByDirection:'ASC' };
+  @Input() filterOptions?: any = { pageNum: 1, pagSize: PAGESIZE, orderByDirection: 'ASC' };
 
   @Input() additionalTableConfig?: TableConfig;
   @Input() additionalTableConfigChildren?: TableConfig;
@@ -69,14 +69,14 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   columnChildren = [];
   @Input() data: any = [];
   @Input() apiUrls;
-  @Input() getDataMethod?= 'get';
+  @Input() getDataMethod? = 'get';
   @Input() filterBy: string;
 
   @ContentChild('actions', { static: false })
   actionsTemplateRef: TemplateRef<any>;
 
 
-  @Input() selectMode:string=''
+  @Input() selectMode: string = ''
   @Input() paginationClient: boolean = false;
   @Input() mapData: (args: any) => any;
 
@@ -84,7 +84,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
   @Input() isPaginator: boolean = true;
   @Input() withRadioButton: boolean = false;
   @Input() withCheckbox: boolean = false;
-  @Input() withPlaceholder:boolean
+  @Input() withPlaceholder: boolean
   @Input() defaultSelected: any;
   @Output() onRowSelect: any = new EventEmitter();
 
@@ -141,7 +141,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     this.columns = this.getColumns(this.columnsLocalized);
     this.columnChildren = this.getColumns(this.columnsLocalizedChildren)
     this.onSearch()
-    this.getData()
+    this.getData();
 
   }
   getData() {
@@ -158,7 +158,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
           this.getTableMessages();
           // this.initTable()
           if (this.callBack) this.callBack()
-          if(this.mapData){
+          if (this.mapData) {
             this.data = this.mapData(this.data);
           }
         });
@@ -186,7 +186,7 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
         this._router.navigate([action?.target, rowData[this.additionalTableConfig?.id]], { queryParams: action?.queryParams })
       } else {
         const dialogRef = this._dialogService.open(action.target, {
-          width: action.width||'50%',
+          width: action.width || '50%',
           baseZIndex: 10000,
           header: this._languageService.getTransValue(action?.title),
           dismissableMask: true,
@@ -205,11 +205,11 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     }
 
   }
-  onEdit(event){
+  onEdit(event) {
     console.log('Row Edited:', event);
 
   }
-  onSwitch(e){
+  onSwitch(e) {
     console.log(e.checked)
     // Swal.fire({
     //   title: "Do you want to save the changes?",
@@ -218,10 +218,10 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     // }).then((result) => {
     //   /* Read more about isConfirmed, isDenied below */
     //   if (result.isConfirmed) {
-        this._apiService.post(this.apiUrls.switch,{}).pipe(
-          finalize(()=>this.isLoading=false),
-          this._sharedService.takeUntilDistroy()
-        )
+    this._apiService.post(this.apiUrls.switch, {}).pipe(
+      finalize(() => this.isLoading = false),
+      this._sharedService.takeUntilDistroy()
+    )
     //   }
     // });
   }
@@ -259,32 +259,33 @@ export class SharedTableComponent implements OnInit, OnChanges,OnDestroy {
     this.onRowSelect.emit(event);
   }
 
-  getTagClass(value:string){
-      return {
-        'tag-success': SUCCESS_TAGS.includes(value) ,
-        'tag-info': INFO_TAGS.includes(value) ,
-        'tag-danger': DANGER_TAGS.includes(value) ,
-        'tag-warning': PROCESS_TAGS.includes(value) ,
-      }
+  getTagClass(value: string) {
+    return {
+      'tag-success': SUCCESS_TAGS.includes(value),
+      'tag-info': INFO_TAGS.includes(value),
+      'tag-danger': DANGER_TAGS.includes(value),
+      'tag-warning': PROCESS_TAGS.includes(value),
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.initTable();
+
   }
 
-  onSearch(){
+  onSearch() {
     this._sharedTableService.search$.pipe(this._sharedService.takeUntilDistroy()).subscribe({
-      next:(res:any)=>{
-        console.log('text',res)
-        this.dt.filterGlobal(res,'contains')
+      next: (res: any) => {
+        console.log('text', res)
+        this.dt.filterGlobal(res, 'contains')
       }
     })
   }
-  showMore(title:string,value:string){
-    this._dialogService.open(MoreInfoComponent,{
-      header:title,
-      data:value,
-      width:"50%",
+  showMore(title: string, value: string) {
+    this._dialogService.open(MoreInfoComponent, {
+      header: title,
+      data: value,
+      width: "50%",
       dismissableMask: true
     })
   }

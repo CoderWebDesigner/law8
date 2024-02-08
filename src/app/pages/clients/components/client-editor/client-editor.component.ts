@@ -2,25 +2,24 @@ import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
-import { PAGESIZE } from '@core/utilities/defines';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ClientService } from '@shared/services/client.service';
 import { MenuItem } from 'primeng/api';
 import { finalize, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-client-add',
-  templateUrl: './client-add.component.html',
-  styleUrls: ['./client-add.component.scss'],
+  selector: 'app-client-editor',
+  templateUrl: './client-editor.component.html',
+  styleUrls: ['./client-editor.component.scss'],
 })
-export class ClientAddComponent extends FormBaseClass implements OnInit {
+export class ClientEditorComponent extends FormBaseClass implements OnInit {
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.client;
   _clientService = inject(ClientService);
   cdRef = inject(ChangeDetectorRef);
   filterOptions?: any = { orderByDirection: 'ASC' };
-
+  requestId: number;
+  readOnly: boolean =true;
   items: MenuItem[] = [
     // { label: this._languageService.getTransValue('common.general') },
     // { label: this._languageService.getTransValue('client.companyAddress') },
@@ -32,6 +31,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   contact: any;
   showLanguageField: boolean;
   ngOnInit(): void {
+
     this._clientService.companyAddress$.subscribe({
       next: (res) => {
         this.companyAddress = res;
@@ -52,6 +52,11 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   }
 
   override initForm(): void {
+    this.requestId = +this._route.snapshot.paramMap.get('id');
+    console.log(this.requestId)
+    this.showLanguageField = this.requestId?true:false;
+    this.readOnly = !!this.requestId
+    console.log(this.requestId)
     this.formlyFields = [
       {
         fieldGroupClassName: 'row',
@@ -62,7 +67,8 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
-              required: true
+              required: true,
+              readonly: this.readOnly,
             }
           },
           {
@@ -80,19 +86,21 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.clientNamePlaceholder'
                   ),
-                  required:true
+                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
                 type: 'button',
+                hide:!!this.requestId,
                 props: {
-                  label: this._languageService.getTransValue(
-                    this._languageService.getSelectedLanguage() == 'en' ? 'client.ar' : 'client.en'
-                  ),
-                  style: { marginTop: '22px', padding: '10px 20px' },
+                  style: { marginTop: '24px', padding: '7px 15px' },
+                  class: 'p-button-outlined',
+                  imgPath:this._languageService.getSelectedLanguage() == 'en' ? 'assets/images/icons/ar.png' : 'assets/images/icons/us.jpg',
+                  imgStyle:{ width: '22px', height: '22px' },
                   onClick: () => {
                     this.showLanguageField = !this.showLanguageField;
-                    this.formlyFields[0].fieldGroup[2].hide = this.showLanguageField;
+                    this.formlyFields[0].fieldGroup[2].hide = this.showLanguageField
                   },
                 },
               },
@@ -110,63 +118,52 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
               placeholder: this._languageService.getTransValue(
                 'client.clientNamePlaceholder'
               ),
+              readonly: this.readOnly,
             },
+          },
+          {
+            fieldGroupClassName:'row',
+            fieldGroup:[
+              {
+                className: 'col-md-4',
+                key: 'clientGroupId',
+                type: 'select',
+                props: {
+                  label: this._languageService.getTransValue('client.clientGroup'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.clientGroupPlaceholder'
+                  ),
+                  options: this.lookupsData[0].result['dataList'].map((ele) => ({
+                    label: ele.name,
+                    value: ele.clntGrpNo,
+                  })),
+                  // options: [
+                  //   { label: 'value 2', value: '2' }
+                  // ],
+                  readonly: this.readOnly,
+                },
+              },
+              {
+                className: 'col-md-4',
+                key: 'clientIntro',
+                type: 'input',
+                props: {
+                  label: this._languageService.getTransValue('client.clientIntro'),
+                  readonly: this.readOnly,
+                },
+              },
+              {
+                className: 'col-12',
+                key: 'notes',
+                type: 'textarea',
+                props: {
+                  label: this._languageService.getTransValue('client.notes'),
+                  readonly: this.readOnly,
+                },
+              },
+            ]
           },
 
-
-          {
-            className: 'col-md-4',
-            key: 'clientGroupId',
-            type: 'select',
-            props: {
-              label: this._languageService.getTransValue('client.clientGroup'),
-              placeholder: this._languageService.getTransValue(
-                'client.clientGroupPlaceholder'
-              ),
-              options: this.lookupsData[0].result['dataList'].map((ele) => ({
-                label: ele.name,
-                value: ele.clntGrpNo,
-              })),
-              required: true,
-            },
-          },
-          {
-            className: 'col-md-4',
-            key: 'cDate',
-            type: 'date',
-            props: {
-              label: this._languageService.getTransValue('client.date'),
-              required: true,
-            },
-          },
-
-          {
-            className: 'col-md-4',
-            key: 'foreignName',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.foreignName'),
-              // required: true,
-            },
-          },
-          {
-            className: 'col-md-4',
-            key: 'clientIntro',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.clientIntro'),
-              required: true,
-            },
-          },
-          {
-            className: 'col-12',
-            key: 'notes',
-            type: 'textarea',
-            props: {
-              label: this._languageService.getTransValue('client.notes'),
-              required: true,
-            },
-          },
           {
             className: 'card p-2 my-3 mb-3',
             fieldGroupClassName: 'row',
@@ -180,7 +177,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.addressPlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -192,7 +189,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.addressPlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -204,7 +201,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.cityPlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -217,41 +214,22 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                     'client.countryPlaceholder'
                   ),
                    options:this.lookupsData[1].result.map(obj=>({label:obj.name,value:obj.id})),
-                  required: true,
+                  // options: [
+                  //   { label: 'value 1', value: '1' }
+                  // ],
+                  readonly: this.readOnly,
                 },
               },
               {
                 className: 'col-md-4',
                 key: 'state',
-                type: 'select',
+                type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.state'),
                   placeholder: this._languageService.getTransValue(
                     'client.statePlaceholder'
                   ),
-                  options:[{label:'value2' , value:'value2'}],
-                  required: true,
-                },
-                hooks: {
-                  onInit: (field: FormlyFieldConfig) => {
-                    field.form.get('countryId').valueChanges.subscribe({
-                      next: (res) => {
-                        this._apiService
-                          .get(
-                            this.generalApiUrls.getCountryLookup +
-                            res['countryId']
-                          )
-                          .subscribe({
-                            next: (res) => {
-                              field.props.options = res.map((obj) => ({
-                                label: obj.CountryName,
-                                value: obj,
-                              }));
-                            },
-                          });
-                      },
-                    });
-                  },
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -263,7 +241,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.zipCodePlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
             ],
@@ -281,7 +259,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.phonePlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -293,7 +271,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.phonePlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -305,7 +283,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.mobilePlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -317,7 +295,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.mobilePlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
               },
               {
@@ -329,7 +307,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.emailPlaceholder'
                   ),
-                  required: true,
+                  readonly: this.readOnly,
                 },
                 validators: {
                   validation: ['email'],
@@ -344,16 +322,12 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     if (this.formly.valid) {
       this.isSubmit = true;
-      console.log(this.companyAddress);
       this.formlyModel = {
         ...this.formlyModel,
-        isSapIntegration: false,
         clientContacts: this.contact,
-        phone1: this.formlyModel?.phone1?.internationalNumber,
-        phone2: this.formlyModel?.phone2?.internationalNumber,
+        phone1: this.formlyModel?.phone1['internationalNumber'],
+        phone2: this.formlyModel?.phone2['internationalNumber'],
       };
-      delete this.formlyModel.foreignName;
-      console.log('data', this.formlyModel)
       this._apiService
         .post(this.apiUrls.create, this.formlyModel)
         .pipe(
@@ -399,7 +373,7 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
         this.filterOptions
       ),
       this._apiService.get(this.generalApiUrls.getCountryLookup),
-      // this._apiService.get(this.generalApiUrls.getParties),
+      this._apiService.get(`${this.apiUrls.getById}${this.requestId}`)
     ])
       .pipe(
         finalize(() => (this.isSubmit = false)),
@@ -409,8 +383,16 @@ export class ClientAddComponent extends FormBaseClass implements OnInit {
         next: (res: ApiRes) => {
           console.log(res);
           this.lookupsData = res;
+          if (this.lookupsData[2])
+            this.formlyModel = this.lookupsData[2]
+
           this.initForm();
         },
       });
+  }
+
+  onToggleFields() {
+    this.readOnly = !this.readOnly;
+    this.initForm()
   }
 }

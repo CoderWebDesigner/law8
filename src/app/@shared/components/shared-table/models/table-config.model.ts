@@ -20,6 +20,7 @@ export interface TableAction {
     title?: string;
     queryParams?:any;
     tooltipText?: string;
-    width?:string
+    width?:string;
+    isReadOnly?:boolean;
 
 }
