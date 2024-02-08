@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClientsComponent } from './clients.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
-import { ClientEditorComponent } from './components/client-editor/client-editor.component';
+import { ClientAddComponent } from './components/client-add/client-add.component';
 import { ClientIntakeComponent } from './components/client-intake/client-intake.component';
 
 const routes: Routes = [
@@ -10,10 +10,13 @@ const routes: Routes = [
     path:"",component:ClientsComponent,
   },
   {
-    path:"view/:id",component:ClientEditorComponent,
+    path:"view/:id",component:ClientDetailsComponent,
   },
   {
-    path:"add",component:ClientEditorComponent,
+    path:"update/:id",component:ClientAddComponent,
+  },
+  {
+    path:"add",component:ClientAddComponent,
   },
   {
     path:"intake",component:ClientIntakeComponent,

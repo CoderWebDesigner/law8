@@ -1,6 +1,6 @@
 <app-shared-no-data
-  *ngIf="data?.length == 0 || data == null ">
-
+  *ngIf="data?.length == 0 ||data==null"
+>
   <p-button
     styleClass="btn btn-success"
     type="button"
@@ -12,10 +12,9 @@
   </p-button>
 </app-shared-no-data>
 
-<ng-container *ngIf="data?.length > 0">
+<ng-container *ngIf="data?.length > 0 ">
   <div class="text-end mb-4">
     <p-button
-    *ngIf="!readOnly"
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
@@ -29,7 +28,6 @@
     [data]="data"
     [columnsLocalized]="columnsLocalized"
     [paginationClient]="false"
-    [additionalTableConfig]="additionalTableConfig"
   ></shared-table>
 </ng-container>
 

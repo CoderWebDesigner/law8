@@ -2,17 +2,19 @@ import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { PAGESIZE } from '@core/utilities/defines';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ClientService } from '@shared/services/client.service';
 import { MenuItem } from 'primeng/api';
 import { finalize, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-client-editor',
-  templateUrl: './client-editor.component.html',
-  styleUrls: ['./client-editor.component.scss'],
+  selector: 'app-client-add',
+  templateUrl: './client-add.component.html',
+  styleUrls: ['./client-add.component.scss'],
 })
-export class ClientEditorComponent extends FormBaseClass implements OnInit {
+export class ClientAddComponent extends FormBaseClass implements OnInit {
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.client;
   _clientService = inject(ClientService);
@@ -29,6 +31,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
   billingAddress: any;
   contact: any;
   showLanguageField: boolean;
+  requestId:number;
   ngOnInit(): void {
     this._clientService.companyAddress$.subscribe({
       next: (res) => {
@@ -45,6 +48,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
         this.contact = res;
       },
     });
+    this.requestId = +this._route.snapshot.paramMap.get('id')
     this.getData();
 
   }
@@ -60,7 +64,8 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
-              required: true
+              required: true,
+              disabled:true
             }
           },
           {
@@ -78,7 +83,8 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.clientNamePlaceholder'
                   ),
-                  required:true
+                  required:true,
+                  disabled:true
                 },
               },
               {
@@ -126,25 +132,6 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                 value: ele.clntGrpNo,
               })),
               required: true,
-            },
-          },
-          {
-            className: 'col-md-4',
-            key: 'cDate',
-            type: 'date',
-            props: {
-              label: this._languageService.getTransValue('client.date'),
-              required: true,
-            },
-          },
-
-          {
-            className: 'col-md-4',
-            key: 'foreignName',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.foreignName'),
-              // required: true,
             },
           },
           {
@@ -221,14 +208,34 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
               {
                 className: 'col-md-4',
                 key: 'state',
-                type: 'select',
+                type: 'input',
                 props: {
                   label: this._languageService.getTransValue('client.state'),
                   placeholder: this._languageService.getTransValue(
                     'client.statePlaceholder'
                   ),
-                  options:[{label:'value2' , value:'value2'}],
                   required: true,
+                },
+                hooks: {
+                  onInit: (field: FormlyFieldConfig) => {
+                    field.form.get('countryId').valueChanges.subscribe({
+                      next: (res) => {
+                        this._apiService
+                          .get(
+                            this.generalApiUrls.getCountryLookup +
+                            res['countryId']
+                          )
+                          .subscribe({
+                            next: (res) => {
+                              field.props.options = res.map((obj) => ({
+                                label: obj.CountryName,
+                                value: obj,
+                              }));
+                            },
+                          });
+                      },
+                    });
+                  },
                 },
               },
               {
@@ -324,12 +331,29 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
       console.log(this.companyAddress);
       this.formlyModel = {
         ...this.formlyModel,
-        isSapIntegration: false,
         clientContacts: this.contact,
         phone1: this.formlyModel?.phone1?.internationalNumber,
         phone2: this.formlyModel?.phone2?.internationalNumber,
       };
-      delete this.formlyModel.foreignName;
+      const successMsgKey = (this.requestId) ? 'message.updateSuccessfully' : 'message.createdSuccessfully';
+      const requestPayload = (this.requestId) ? { ...this.formlyModel, id: this.requestId } : this.formlyModel
+      const path = (this.requestId) ? API_Config.client.update : API_Config.client.create
+  
+      console.log(requestPayload)
+      this._apiService.post(path, requestPayload).pipe(
+        finalize(() => this.isSubmit = false),
+        this.takeUntilDestroy()
+      ).subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            const text = this._languageService.getTransValue(successMsgKey)
+            this._toastrNotifiService.displaySuccessMessage(text)
+            this._DialogService.dialogComponentRefMap.forEach(dialog => {
+              dialog.destroy();
+            });
+          }
+        }
+      })
       console.log('data', this.formlyModel)
       this._apiService
         .post(this.apiUrls.create, this.formlyModel)
@@ -339,7 +363,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
         )
         .subscribe({
           next: (res: any) => {
-            if (res?.IsSucess) {
+            if (res?.isSuccess) {
               Swal.fire({
                 title: this._languageService.getTransValue('messages.success'),
                 text: this._languageService.getTransValue(
@@ -376,6 +400,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
         this.filterOptions
       ),
       this._apiService.get(this.generalApiUrls.getCountryLookup),
+      this._apiService.get(`${this.apiUrls.getById}${this.requestId}`)
       // this._apiService.get(this.generalApiUrls.getParties),
     ])
       .pipe(
@@ -386,6 +411,10 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
         next: (res: ApiRes) => {
           console.log(res);
           this.lookupsData = res;
+          if( res[2]){
+
+            this.formlyModel = res[2].result
+          }
           this.initForm();
         },
       });

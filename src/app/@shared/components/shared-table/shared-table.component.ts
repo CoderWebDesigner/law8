@@ -179,6 +179,14 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     this.getData()
   }
 
+  refreshData(){
+    this._sharedTableService.refreshData.subscribe({
+      next:res=>{
+        if(res)
+        this.getData
+      }
+    })
+  }
   onTableAction(action: TableAction, rowData: any) {
     if (action?.type !== 'delete') {
 

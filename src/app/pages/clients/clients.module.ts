@@ -9,25 +9,25 @@ import { SharedModule } from '@shared/shared.module';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { ClientIntakeComponent } from './components/client-intake/client-intake.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
-import { ClientEditorComponent } from './components/client-editor/client-editor.component';
+import { ClientAddComponent } from './components/client-add/client-add.component';
 import { TabViewModule } from 'primeng/tabview';
 import { ClientDetailsAddressComponent } from './components/client-details/components/client-details-address/client-details-address.component';
 import { ClientDetailsDocumentsComponent } from './components/client-details/components/client-details-documents/client-details-documents.component';
 import { ClientDetailsContactsComponent } from './components/client-details/components/client-details-contacts/client-details-contacts.component';
 import { ClientDetailsRelatedMattersComponent } from './components/client-details/components/client-details-related-matters/client-details-related-matters.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { ClientAddCompanyAddressComponent } from './components/client-editor/components/client-add-company-address/client-add-company-address.component';
-import { ClientAddressEditorComponent } from './components/client-editor/components/client-add-billing-address/client-address-editor/client-address-editor.component';
+import { ClientAddCompanyAddressComponent } from './components/client-add/components/client-add-company-address/client-add-company-address.component';
+import { ClientAddressEditorComponent } from './components/client-add/components/client-add-billing-address/client-address-editor/client-address-editor.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { ClientAddBillingAddressComponent } from './components/client-editor/components/client-add-billing-address/client-add-billing-address.component';
-import { ClientEditorContactsComponent } from './components/client-editor/components/client-editor-contacts/client-editor-contacts.component';
-// import { ContactEditorComponent } from './components/client-editor/components/client-editor-contacts/contact-editor/contact-editor.component';
+import { ClientAddBillingAddressComponent } from './components/client-add/components/client-add-billing-address/client-add-billing-address.component';
+import { ClientAddContactsComponent } from './components/client-add/components/client-add-contacts/client-add-contacts.component';
+import { ContactEditorComponent } from './components/client-add/components/client-add-contacts/contact-editor/contact-editor.component';
 @NgModule({
   declarations: [
     ClientsComponent,
     ClientDetailsComponent,
     ClientIntakeComponent,
-    ClientEditorComponent,
+    ClientAddComponent,
     ClientDetailsAddressComponent,
     ClientDetailsDocumentsComponent,
     ClientDetailsContactsComponent,
@@ -35,8 +35,8 @@ import { ClientEditorContactsComponent } from './components/client-editor/compon
     ClientAddCompanyAddressComponent,
     ClientAddressEditorComponent,
     ClientAddBillingAddressComponent,
-    ClientEditorContactsComponent,
-    // ContactEditorComponent,
+    ClientAddContactsComponent,
+    ContactEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -47,7 +47,7 @@ import { ClientEditorContactsComponent } from './components/client-editor/compon
     SharedModule,
     TabViewModule,
     FormlyConfigModule,
-    DynamicDialogModule,
+    DynamicDialogModule
   ],
 })
 export class ClientsModule { }

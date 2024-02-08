@@ -43,6 +43,16 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
         next: (res:ApiRes) => {
           console.log(res)
           this.client = res.result
+          // this.client.lstAddress= this.client.lstAddress.map((v)=>({
+          //   ...v,
+          //   billingAddress:`${v.BillToAddress},${v.BillToBlock},${v.BillToCity},${v.BillToCountry}`,
+          //   shippingAddress:`${v.ShipToAddress},${v.ShipToBlock},${v.ShipToCity},${v.ShipToCountry}`
+          // }))
+          // this.client.lstContactPerson= this.client.lstContactPerson.map((v)=>({
+          //   ...v,
+          //   name:`${v.FirstName} ${v.MiddleName} ${v.LastName}`,
+          // }))
+
         }
       })
   }

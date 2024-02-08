@@ -5,16 +5,15 @@ import { SharedService } from '@shared/services/shared.service';
 import { ClientService } from '@shared/services/client.service';
 import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
-import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
-  selector: 'app-client-editor-contacts',
-  templateUrl: './client-editor-contacts.component.html',
-  styleUrls: ['./client-editor-contacts.component.scss']
+  selector: 'app-client-add-contacts',
+  templateUrl: './client-add-contacts.component.html',
+  styleUrls: ['./client-add-contacts.component.scss']
 })
-export class ClientEditorContactsComponent implements OnInit, OnDestroy {
-   data: any[] = [];
-  @Input() readOnly: boolean;
+export class ClientAddContactsComponent implements OnInit, OnDestroy {
+
+  @Input() data: any[] = [];
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _clientService = inject(ClientService)
@@ -25,22 +24,10 @@ export class ClientEditorContactsComponent implements OnInit, OnDestroy {
     ar: Contact_Columns_AR,
     fr: Contact_Columns_FR,
   };
-  additionalTableConfig: TableConfig
   ngOnInit(): void {
-    this.additionalTableConfig = {
-      id: 'id',
-      actions: [
-        {
-          title: this._languageService.getTransValue('client.clientDetails'),
-          target: ContactEditorComponent,
-          icon:'pencil',
-          isReadOnly:this.readOnly
-        },
-      ],
-    };
-    this.getContacts()
+    this.getCompanyAddress()
   }
-  getContacts() {
+  getCompanyAddress() {
     this._clientService.contacts$.pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
@@ -50,13 +37,12 @@ export class ClientEditorContactsComponent implements OnInit, OnDestroy {
         this.data = this.data.map(element=> {
          return{
           ...element,
-          phone:element.phone.internationalNumber
+          mobile:element.mobile.internationalNumber
          }
         })
       }
     })
   }
-
   openDialog() {
     const ref = this._dialogService.open(ContactEditorComponent, {
       width: '50%',

@@ -12,23 +12,38 @@ import { finalize } from 'rxjs';
   templateUrl: './lookups-main-matter-category.component.html',
   styleUrls: ['./lookups-main-matter-category.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormlyConfigModule
-  ],
+  imports: [CommonModule, SharedModule, FormlyConfigModule],
 })
-export class LookupsMainMatterCategoryComponent extends FormBaseClass implements OnInit {
+export class LookupsMainMatterCategoryComponent
+  extends FormBaseClass
+  implements OnInit
+{
   title: string;
   itemId: number;
-  config = inject(DynamicDialogConfig)
+  config = inject(DynamicDialogConfig);
   ngOnInit(): void {
-    this.initForm()
-
+    if (this.config.data) {
+      this.itemId = +this.config.data?.rowData?.id;
+      this.formlyModel = this.config.data?.rowData;
+    }
+    console.log(this.config.data?.rowData);
+    this.initForm();
   }
   override initForm(): void {
-
     this.formlyFields = [
+      {
+        type: 'select',
+        key: 'Practice Area',
+        className: 'col-md-4',
+        props: {
+          label: this._languageService.getTransValue('matters.practiceArea'),
+          options: [
+            { label: 'Corporate', value: 'Corporate' },
+            { label: 'Litigation', value: 'Litigation' },
+            { label: 'instructor', value: 'instructor' },
+          ],
+        },
+      },
       {
         type: 'input',
         key: 'Appeal Period',
@@ -47,75 +62,70 @@ export class LookupsMainMatterCategoryComponent extends FormBaseClass implements
           label: this._languageService.getTransValue('lookups.cassationPeriod'),
         },
       },
+
       {
-        type: 'select',
-        key: 'Practice Area',
-        className: 'col-md-4',
-        props: {
-          label: this._languageService.getTransValue('matters.practiceArea'),
-          options: [
-            { label: 'Corporate', value: 'Corporate' },
-            { label: 'Litigation', value: 'Litigation' },
-            { label: 'instructor', value: 'instructor' },
-          ],
-        },
-      },
-      {
-        key: 'nameEN',
+        key: 'nameEn',
         type: 'input',
         props: {
           label: this._languageService.getTransValue('lookups.nameEN'),
-          required: true
+          required: true,
         },
         validators: {
           validation: ['englishLetters'],
-        }
+        },
       },
       {
-        key: 'nameAR',
+        key: 'nameAr',
         type: 'input',
         props: {
           label: this._languageService.getTransValue('lookups.nameAR'),
-          required: true
+          required: true,
         },
         validators: {
           validation: ['arabicLetters'],
-        }
+        },
       },
       {
         key: 'active',
         type: 'switch',
-        defaultValue:false,
-        props:{
-          label:this._languageService.getTransValue('lookups.active'),
-          class:'d-block'
-        }
-      }
-    ]
+        defaultValue: false,
+        props: {
+          label: this._languageService.getTransValue('lookups.active'),
+          class: 'd-block',
+        },
+      },
+    ];
   }
   override onSubmit(): void {
-    if(this.formly.invalid) return;
-    if (this.config.data)
-      this.itemId = +this.config.data?.rowData?.id
-    const successMsgKey = (this.itemId) ? 'message.updateSuccessfully' : 'message.createdSuccessfully';
-    const requestPayload = (this.itemId) ? { ...this.formlyModel, id: this.itemId } : this.formlyModel
-    const path = (this.itemId) ? API_Config.matterCategory.update : API_Config.matterCategory.create
+    if (this.formly.invalid) return;
 
-    console.log(requestPayload)
-    this._apiService.post(path, requestPayload).pipe(
-      finalize(() => this.isSubmit = false),
-      this.takeUntilDestroy()
-    ).subscribe({
-      next: (res: ApiRes) => {
-        if (res && res.isSuccess) {
-          const text = this._languageService.getTransValue(successMsgKey)
-          this._toastrNotifiService.displaySuccessMessage(text)
-          this._DialogService.dialogComponentRefMap.forEach(dialog => {
-            dialog.destroy();
-          });
-        }
-      }
-    })
+    const successMsgKey = this.itemId
+      ? 'message.updateSuccessfully'
+      : 'message.createdSuccessfully';
+    const requestPayload = this.itemId
+      ? { ...this.formlyModel, id: this.itemId }
+      : this.formlyModel;
+    const path = this.itemId
+      ? API_Config.matterCategory.update
+      : API_Config.matterCategory.create;
+
+    console.log(requestPayload);
+    this._apiService
+      .post(path, requestPayload)
+      .pipe(
+        finalize(() => (this.isSubmit = false)),
+        this.takeUntilDestroy()
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            const text = this._languageService.getTransValue(successMsgKey);
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              dialog.destroy();
+            });
+          }
+        },
+      });
   }
-
 }

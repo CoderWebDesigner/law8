@@ -6,6 +6,8 @@ import { LanguageService } from '@core/services';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 import { LookupsMainMatterCategoryComponent } from './lookups-main-matter-category/lookups-main-matter-category.component';
 import { API_Config } from '@core/api/api-config/api.config';
+import { SharedService } from '@shared/services/shared.service';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
@@ -15,6 +17,8 @@ import { API_Config } from '@core/api/api-config/api.config';
 export class LookupsMatterCaterogyComponent {
  _dialogService = inject(DialogService)
   _languageService = inject(LanguageService)
+  _sharedService=inject(SharedService);
+  _sharedTableService=inject(SharedTableService)
 
   apiUrl=API_Config.matterCategory
   columnsLocalized: any = {
@@ -59,13 +63,17 @@ export class LookupsMatterCaterogyComponent {
     //     type:categorytype
     //   }
     // })
-    this._dialogService.open(LookupsMainMatterCategoryComponent,{
+    const ref= this._dialogService.open(LookupsMainMatterCategoryComponent,{
       width:'30%',
       header:this.setDialogHeader(formType,categorytype),
       data:{
-        type:categorytype
+        type:categorytype,
+        
       }
     })
+    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      if (result) this._sharedTableService.refreshData.next(true);
+    });
   }
   private setDialogHeader(formType:string,categorytype:string){
     const isSubItem = (categorytype === 'sub');

@@ -144,8 +144,8 @@ export const MENU: MenuItem[] = [
       },
       {
         id: 3,
-        label: 'menu.lookups.matterRegions',
-        link: '/lookups/matter-regions',
+        label: 'menu.lookups.Jurisdictions',
+        link: '/lookups/Jurisdictions',
         parentId: 7
 
       },

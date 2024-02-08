@@ -54,6 +54,7 @@ export const Contact_Columns_FR = [
     header: 'position',
     field: 'position',
   },
+
   {
     header: 'E-mail',
     field: 'email',
