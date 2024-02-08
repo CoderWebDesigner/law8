@@ -1,5 +1,5 @@
 <app-shared-no-data
-  *ngIf="data.length == 0"
+  *ngIf="data?.length == 0"
 >
   <p-button
     styleClass="btn btn-success"
@@ -12,7 +12,7 @@
   </p-button>
 </app-shared-no-data>
 
-<ng-container *ngIf="data.length > 0">
+<ng-container *ngIf="data?.length > 0">
   <div class="text-end mb-4">
     <p-button
     *ngIf="!readOnly"

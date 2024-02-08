@@ -34,7 +34,7 @@ export class TimesheetFormlyEditorComponent extends FormBaseClass implements OnI
 
   }
   override initForm(): void {
-    if (this.data.length == 0) this.addNewRow()
+    if (this.data?.length == 0) this.addNewRow()
     this.formlyModel = { data: this.data }
     this.formlyFields = [
       {
