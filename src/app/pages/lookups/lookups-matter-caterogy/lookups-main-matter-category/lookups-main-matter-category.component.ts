@@ -110,6 +110,9 @@ export class LookupsMainMatterCategoryComponent extends FormBaseClass implements
         if (res && res.isSuccess) {
           const text = this._languageService.getTransValue(successMsgKey)
           this._toastrNotifiService.displaySuccessMessage(text)
+          this._DialogService.dialogComponentRefMap.forEach(dialog => {
+            dialog.destroy();
+          });
         }
       }
     })

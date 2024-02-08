@@ -1,6 +1,6 @@
 <app-shared-no-data
-  *ngIf="data?.length == 0"
->
+  *ngIf="data?.length == 0 || data == null ">
+
   <p-button
     styleClass="btn btn-success"
     type="button"

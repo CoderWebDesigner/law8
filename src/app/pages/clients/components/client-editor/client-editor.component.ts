@@ -18,8 +18,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
   _clientService = inject(ClientService);
   cdRef = inject(ChangeDetectorRef);
   filterOptions?: any = { orderByDirection: 'ASC' };
-  requestId: number;
-  readOnly: boolean =true;
+
   items: MenuItem[] = [
     // { label: this._languageService.getTransValue('common.general') },
     // { label: this._languageService.getTransValue('client.companyAddress') },
@@ -31,7 +30,6 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
   contact: any;
   showLanguageField: boolean;
   ngOnInit(): void {
-
     this._clientService.companyAddress$.subscribe({
       next: (res) => {
         this.companyAddress = res;
@@ -52,11 +50,6 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
   }
 
   override initForm(): void {
-    this.requestId = +this._route.snapshot.paramMap.get('id');
-    console.log(this.requestId)
-    this.showLanguageField = this.requestId?true:false;
-    this.readOnly = !!this.requestId
-    console.log(this.requestId)
     this.formlyFields = [
       {
         fieldGroupClassName: 'row',
@@ -67,8 +60,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
-              required: true,
-              readonly: this.readOnly,
+              required: true
             }
           },
           {
@@ -86,21 +78,19 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.clientNamePlaceholder'
                   ),
-                  required: true,
-                  readonly: this.readOnly,
+                  required:true
                 },
               },
               {
                 type: 'button',
-                hide:!!this.requestId,
                 props: {
-                  style: { marginTop: '24px', padding: '7px 15px' },
-                  class: 'p-button-outlined',
-                  imgPath:this._languageService.getSelectedLanguage() == 'en' ? 'assets/images/icons/ar.png' : 'assets/images/icons/us.jpg',
-                  imgStyle:{ width: '22px', height: '22px' },
+                  label: this._languageService.getTransValue(
+                    this._languageService.getSelectedLanguage() == 'en' ? 'client.ar' : 'client.en'
+                  ),
+                  style: { marginTop: '22px', padding: '10px 20px' },
                   onClick: () => {
                     this.showLanguageField = !this.showLanguageField;
-                    this.formlyFields[0].fieldGroup[2].hide = this.showLanguageField
+                    this.formlyFields[0].fieldGroup[2].hide = this.showLanguageField;
                   },
                 },
               },
@@ -118,52 +108,63 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
               placeholder: this._languageService.getTransValue(
                 'client.clientNamePlaceholder'
               ),
-              readonly: this.readOnly,
+            },
+          },
+
+
+          {
+            className: 'col-md-4',
+            key: 'clientGroupId',
+            type: 'select',
+            props: {
+              label: this._languageService.getTransValue('client.clientGroup'),
+              placeholder: this._languageService.getTransValue(
+                'client.clientGroupPlaceholder'
+              ),
+              options: this.lookupsData[0].result['dataList'].map((ele) => ({
+                label: ele.name,
+                value: ele.clntGrpNo,
+              })),
+              required: true,
             },
           },
           {
-            fieldGroupClassName:'row',
-            fieldGroup:[
-              {
-                className: 'col-md-4',
-                key: 'clientGroupId',
-                type: 'select',
-                props: {
-                  label: this._languageService.getTransValue('client.clientGroup'),
-                  placeholder: this._languageService.getTransValue(
-                    'client.clientGroupPlaceholder'
-                  ),
-                  options: this.lookupsData[0].result['dataList'].map((ele) => ({
-                    label: ele.name,
-                    value: ele.clntGrpNo,
-                  })),
-                  // options: [
-                  //   { label: 'value 2', value: '2' }
-                  // ],
-                  readonly: this.readOnly,
-                },
-              },
-              {
-                className: 'col-md-4',
-                key: 'clientIntro',
-                type: 'input',
-                props: {
-                  label: this._languageService.getTransValue('client.clientIntro'),
-                  readonly: this.readOnly,
-                },
-              },
-              {
-                className: 'col-12',
-                key: 'notes',
-                type: 'textarea',
-                props: {
-                  label: this._languageService.getTransValue('client.notes'),
-                  readonly: this.readOnly,
-                },
-              },
-            ]
+            className: 'col-md-4',
+            key: 'cDate',
+            type: 'date',
+            props: {
+              label: this._languageService.getTransValue('client.date'),
+              required: true,
+            },
           },
 
+          {
+            className: 'col-md-4',
+            key: 'foreignName',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('client.foreignName'),
+              // required: true,
+            },
+          },
+          {
+            className: 'col-md-4',
+            key: 'clientIntro',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('client.clientIntro'),
+              required: true,
+            },
+          },
+          {
+            className: 'col-12',
+            key: 'notes',
+            type: 'textarea',
+            props: {
+              label: this._languageService.getTransValue('client.notes'),
+              required: true,
+            },
+          },
           {
             className: 'card p-2 my-3 mb-3',
             fieldGroupClassName: 'row',
@@ -177,7 +178,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.addressPlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -189,7 +190,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.addressPlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -201,7 +202,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.cityPlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -214,22 +215,20 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                     'client.countryPlaceholder'
                   ),
                    options:this.lookupsData[1].result.map(obj=>({label:obj.name,value:obj.id})),
-                  // options: [
-                  //   { label: 'value 1', value: '1' }
-                  // ],
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
                 className: 'col-md-4',
                 key: 'state',
-                type: 'input',
+                type: 'select',
                 props: {
                   label: this._languageService.getTransValue('client.state'),
                   placeholder: this._languageService.getTransValue(
                     'client.statePlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  options:[{label:'value2' , value:'value2'}],
+                  required: true,
                 },
               },
               {
@@ -241,7 +240,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.zipCodePlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
             ],
@@ -259,7 +258,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.phonePlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -271,7 +270,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.phonePlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -283,7 +282,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.mobilePlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -295,7 +294,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.mobilePlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
               },
               {
@@ -307,7 +306,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
                   placeholder: this._languageService.getTransValue(
                     'client.emailPlaceholder'
                   ),
-                  readonly: this.readOnly,
+                  required: true,
                 },
                 validators: {
                   validation: ['email'],
@@ -322,12 +321,16 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     if (this.formly.valid) {
       this.isSubmit = true;
+      console.log(this.companyAddress);
       this.formlyModel = {
         ...this.formlyModel,
+        isSapIntegration: false,
         clientContacts: this.contact,
-        phone1: this.formlyModel?.phone1['internationalNumber'],
-        phone2: this.formlyModel?.phone2['internationalNumber'],
+        phone1: this.formlyModel?.phone1?.internationalNumber,
+        phone2: this.formlyModel?.phone2?.internationalNumber,
       };
+      delete this.formlyModel.foreignName;
+      console.log('data', this.formlyModel)
       this._apiService
         .post(this.apiUrls.create, this.formlyModel)
         .pipe(
@@ -373,7 +376,7 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
         this.filterOptions
       ),
       this._apiService.get(this.generalApiUrls.getCountryLookup),
-      this._apiService.get(`${this.apiUrls.getById}${this.requestId}`)
+      // this._apiService.get(this.generalApiUrls.getParties),
     ])
       .pipe(
         finalize(() => (this.isSubmit = false)),
@@ -383,16 +386,8 @@ export class ClientEditorComponent extends FormBaseClass implements OnInit {
         next: (res: ApiRes) => {
           console.log(res);
           this.lookupsData = res;
-          if (this.lookupsData[2])
-            this.formlyModel = this.lookupsData[2]
-
           this.initForm();
         },
       });
-  }
-
-  onToggleFields() {
-    this.readOnly = !this.readOnly;
-    this.initForm()
   }
 }

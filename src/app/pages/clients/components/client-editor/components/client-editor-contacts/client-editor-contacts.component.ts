@@ -13,7 +13,7 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
   styleUrls: ['./client-editor-contacts.component.scss']
 })
 export class ClientEditorContactsComponent implements OnInit, OnDestroy {
-  @Input() data: any[] = [];
+   data: any[] = [];
   @Input() readOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)

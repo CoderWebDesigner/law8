@@ -1,28 +1,18 @@
-<shared-card [borderRadius]="20" [title]="(requestId?'client.clientDetails':'client.addClient') | translate">
-  <p-button
-    *ngIf="requestId"
-    headerActions
-    (click)="onToggleFields()"
-    styleClass="p-button-primary p-0"
-    icon="pi pi-pencil"
-  ></p-button>
+<shared-card [borderRadius]="20" [title]="'client.addClient' | translate">
   <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
     <formly-form
       [form]="formly"
       [fields]="formlyFields"
       [model]="formlyModel"
     ></formly-form>
-    <p-tabView >
-      <p-tabPanel
-        [header]="item.label"
-        *ngFor="let item of items; let i = index"
-      >
-        <!-- <app-client-add-company-address *ngIf="i==0"></app-client-add-company-address>
+    <p-tabView body>
+      <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
+          <!-- <app-client-add-company-address *ngIf="i==0"></app-client-add-company-address>
           <app-client-add-billing-address *ngIf="i==1"></app-client-add-billing-address> -->
-        <app-client-editor-contacts *ngIf="i == 0" [data]="formlyModel['clientContacts']" [readOnly]="readOnly"></app-client-editor-contacts>
+          <app-client-add-contacts *ngIf="i==0"></app-client-add-contacts>
       </p-tabPanel>
     </p-tabView>
-    <div class="mt-4 text-end" *ngIf="!this.readOnly">
+    <div class="mt-4 text-end">
       <p-button
         [loading]="isSubmit"
         styleClass="p-button-primary d-block py-3"

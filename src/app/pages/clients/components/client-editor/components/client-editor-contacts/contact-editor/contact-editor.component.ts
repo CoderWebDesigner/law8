@@ -141,6 +141,7 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
         }
       })
     } else {
+      this.formlyModel={...this.formlyModel,phone:this.formlyModel?.phone?.internationalNumber}
       this.contacts.push(this.formlyModel)
     }
     this._clientService.contacts$.next(this.contacts)
