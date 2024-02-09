@@ -44,6 +44,7 @@
     "updateSuccessfully": "Mettre à jour avec succès",
     "deletedSuccessfully": "Supprimé avec succès",
     "internalServerError": "Erreur interne du serveur!",
+    "badRequestError":"Bad Request Error!",
     "userIdOrEmailWrong":"Entré à l'utilisateur ou à l'e-mail mal, veuillez réessayer!",
     "invalidOTP":"OTP non valide",
     "dataMessage": "Totale",

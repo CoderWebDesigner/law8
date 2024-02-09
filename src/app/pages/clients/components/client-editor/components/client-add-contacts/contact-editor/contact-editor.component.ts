@@ -125,10 +125,14 @@ export class ContactEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     if (this.formly.valid) {
       this.formlyModel = {...this.formlyModel, phone:this.formlyModel.phone.internationalNumber}
-      delete this.formlyModel.Address
+      console.log(this.formlyModel)
       this.contacts.push(this.formlyModel)
       this._clientService.contacts$.next(this.contacts)
-
+      this._clientService.contacts$.subscribe({
+        next:res=>{
+          console.log(res)
+        }
+      })
       this._DialogService.dialogComponentRefMap.forEach(dialog => {
         dialog.destroy();
       });

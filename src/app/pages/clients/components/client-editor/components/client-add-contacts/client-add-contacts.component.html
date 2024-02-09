@@ -1,7 +1,9 @@
 <app-shared-no-data
   *ngIf="data?.length == 0 ||data==null"
 >
+{{previewOnly}}
   <p-button
+  *ngIf="!previewOnly"
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
@@ -21,6 +23,7 @@
     [icon]="'pi pi-plus'"
     [label]="'client.addContacts' | translate"
     button
+    *ngIf="!previewOnly"
   >
   </p-button>
   </div>

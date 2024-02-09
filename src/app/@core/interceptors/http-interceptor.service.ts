@@ -40,9 +40,9 @@ export class AppHttpInterceptor implements HttpInterceptor {
         headersToAppend['Authorization'] = `Bearer ${token}`
       }
     }
-    if (!Object.prototype.toString.call(req.body).indexOf('FormData')) {
-      headersToAppend['Content-Type'] = 'application/json'
-    }
+    // if (!Object.prototype.toString.call(req.body).indexOf('FormData')) {
+    //   headersToAppend['Content-Type'] = 'application/json'
+    // }
 
     const newRequest = req.clone({ setHeaders: headersToAppend });
     // eslint-disable-next-line consistent-return

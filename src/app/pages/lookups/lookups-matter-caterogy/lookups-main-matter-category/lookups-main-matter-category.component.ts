@@ -4,6 +4,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
+import { SharedService } from '@shared/services/shared.service';
 import { SharedModule } from '@shared/shared.module';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs';
@@ -21,47 +22,64 @@ export class LookupsMainMatterCategoryComponent
   title: string;
   itemId: number;
   config = inject(DynamicDialogConfig);
+  _sharedService = inject(SharedService);
+  apiUrl=API_Config.general
   ngOnInit(): void {
-    if (this.config.data) {
+    console.log(this.config.data)
+    if (this.config.data.formType!='add') {
       this.itemId = +this.config.data?.rowData?.id;
       this.formlyModel = this.config.data?.rowData;
     }
     console.log(this.config.data?.rowData);
-    this.initForm();
+    this.getLookupsData()
+    
+  }
+  override getLookupsData(): void {
+    this._apiService.get(this.apiUrl.getPractsAreaLookup).pipe(
+      this._sharedService.takeUntilDistroy(),
+      finalize(()=>this.isLoading=false)
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        console.log(res)
+        this.lookupsData=res['result']
+        this.initForm();
+      }
+    })
   }
   override initForm(): void {
     this.formlyFields = [
       {
         type: 'select',
-        key: 'Practice Area',
+        key: 'practsAreaId',
         className: 'col-md-4',
         props: {
           label: this._languageService.getTransValue('matters.practiceArea'),
-          options: [
-            { label: 'Corporate', value: 'Corporate' },
-            { label: 'Litigation', value: 'Litigation' },
-            { label: 'instructor', value: 'instructor' },
-          ],
+          // options: [
+          //   { label: 'Corporate', value: 'Corporate' },
+          //   { label: 'Litigation', value: 'Litigation' },
+          //   { label: 'instructor', value: 'instructor' },
+          // ],
+          options:this.lookupsData.map(obj=>({label:obj.name,value:obj.id}))
         },
       },
-      {
-        type: 'input',
-        key: 'Appeal Period',
-        className: 'col-md-4',
-        props: {
-          type: 'number',
-          label: this._languageService.getTransValue('lookups.appealPeriod'),
-        },
-      },
-      {
-        type: 'input',
-        key: 'Cassation Period',
-        className: 'col-md-4',
-        props: {
-          type: 'number',
-          label: this._languageService.getTransValue('lookups.cassationPeriod'),
-        },
-      },
+      // {
+      //   type: 'input',
+      //   key: 'Appeal Period',
+      //   className: 'col-md-4',
+      //   props: {
+      //     type: 'number',
+      //     label: this._languageService.getTransValue('lookups.appealPeriod'),
+      //   },
+      // },
+      // {
+      //   type: 'input',
+      //   key: 'Cassation Period',
+      //   className: 'col-md-4',
+      //   props: {
+      //     type: 'number',
+      //     label: this._languageService.getTransValue('lookups.cassationPeriod'),
+      //   },
+      // },
 
       {
         key: 'nameEn',
@@ -99,6 +117,7 @@ export class LookupsMainMatterCategoryComponent
   override onSubmit(): void {
     if (this.formly.invalid) return;
 
+    console.log(this.formlyModel)
     const successMsgKey = this.itemId
       ? 'message.updateSuccessfully'
       : 'message.createdSuccessfully';

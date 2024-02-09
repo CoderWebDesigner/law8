@@ -44,6 +44,7 @@
     "updateSuccessfully": "Update successfully",
     "deletedSuccessfully": "Deleted successfully",
     "internalServerError": "Internal Server Error!",
+    "badRequestError":"Bad Request Error!",
     "userIdOrEmailWrong": "Entered UserId or Email Wrong Please Try Again !",
     "invalidOTP": "Invalid OTP",
     "dataMessage": "Total",

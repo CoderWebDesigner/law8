@@ -43,6 +43,7 @@
     "updateSuccessfully": "تم التحديث بنجاح",
     "deletedSuccessfully": "تم الحذف بنجاح",
     "internalServerError": "خطأ داخلي في الخادم!",
+    "badRequestError":"Bad Request Error!",
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
     "invalidOTP": "OTP غير صالح",
     "dataMessage": "المجموع الكلى",

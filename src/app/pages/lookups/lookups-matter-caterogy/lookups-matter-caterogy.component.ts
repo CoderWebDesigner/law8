@@ -68,7 +68,7 @@ export class LookupsMatterCaterogyComponent {
       header:this.setDialogHeader(formType,categorytype),
       data:{
         type:categorytype,
-        
+        formType:formType
       }
     })
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {

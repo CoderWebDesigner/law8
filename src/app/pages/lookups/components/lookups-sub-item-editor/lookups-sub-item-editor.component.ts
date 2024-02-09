@@ -58,6 +58,15 @@ export class LookupsSubItemEditorComponent  extends FormBaseClass implements OnI
           validation: ['arabicLetters'],
         }
       },
+      {
+        key: 'active',
+        type: 'switch',
+        defaultValue: false,
+        props: {
+          label: this._languageService.getTransValue('lookups.active'),
+          class: 'd-block',
+        },
+      },
     ]
   }
   override onSubmit(): void {

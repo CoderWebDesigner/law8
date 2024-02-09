@@ -4,9 +4,12 @@
     body
     [data]="data"
     [columnsLocalized]="columnsLocalized"
-    [paginationClient]="true"
-    [filterBy]="_authService.user.UserId"
-    dataKey="Code"
+    
+    
     (onRowSelect)="onRowSelected($event)"
   ></shared-table>
 </shared-card>
+<!--
+   dataKey="Code"
+  [paginationClient]="true"
+    [filterBy]="_authService.user.UserId" -->

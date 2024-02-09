@@ -5,7 +5,10 @@ import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { LookupsMainItemEditorComponent } from '@components/lookups/components/lookups-main-item-editor/lookups-main-item-editor.component';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
-import { Matter_Main_List_Columns_AR, Matter_Main_List_Columns_EN, Matter_Main_List_Columns_FR } from './main-list-columns.config';
+import { Matter_Main_List_Columns_AR, Matter_Main_List_Columns_EN, Matter_Main_List_Columns_FR, Matter_Sub_List_Columns_FR } from './main-list-columns.config';
+import { ApiService } from '@core/api/api.service';
+import { API_Config } from '@core/api/api-config/api.config';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-lookups-main-list',
@@ -15,7 +18,11 @@ import { Matter_Main_List_Columns_AR, Matter_Main_List_Columns_EN, Matter_Main_L
 export class LookupsMainListComponent {
   _dialogService = inject(DialogService)
   _languageService = inject(LanguageService);
+  _apiService = inject(ApiService);
+  _sharedService = inject(SharedService);
+  apiUrls:any;
   selectedRow: any;
+  childrenData:any[]=[]
   data: any[] = [
     {
       id: 1,
@@ -82,6 +89,11 @@ export class LookupsMainListComponent {
       nameEN: 'Task Code',
       nameAR: 'نوع المهمه',
     },
+    {
+      id: 8,
+      nameEN: 'Practice Area',
+      nameAR: 'Practice Area',
+    },
   ];
   columnsLocalized: any = {
     ar: Matter_Main_List_Columns_AR,
@@ -89,9 +101,9 @@ export class LookupsMainListComponent {
     fr: Matter_Main_List_Columns_FR,
   }
   columnsLocalizedChildren: any = {
-    ar: Matter_Main_List_Columns_FR,
-    en: Matter_Main_List_Columns_FR,
-    fr: Matter_Main_List_Columns_FR,
+    ar: Matter_Sub_List_Columns_FR,
+    en: Matter_Sub_List_Columns_FR,
+    fr: Matter_Sub_List_Columns_FR,
   }
   // additionalTableConfig: TableConfig = {
   //   id: 'id',
@@ -146,6 +158,10 @@ export class LookupsMainListComponent {
   }
   onRowSelected(event) {
     console.log(event)
-    this.selectedRow = event.data
+    this.selectedRow = event.data;
+
+    if(this.selectedRow.id===8){
+      this.apiUrls = API_Config.practiceArea
+    }
   }
 }

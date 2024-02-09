@@ -9,10 +9,10 @@
       <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
           <!-- <app-client-add-company-address *ngIf="i==0"></app-client-add-company-address>
           <app-client-add-billing-address *ngIf="i==1"></app-client-add-billing-address> -->
-          <app-client-add-contacts *ngIf="i==0" [data]="formlyModel?.clientContacts"></app-client-add-contacts>
+          <app-client-add-contacts *ngIf="i==0" [data]="formlyModel?.clientContacts" [previewOnly]="disableInputs"></app-client-add-contacts>
       </p-tabPanel>
     </p-tabView>
-    <div class="mt-4 text-end">
+    <div class="mt-4 text-end" *ngIf="!disableInputs">
       <p-button
         [loading]="isSubmit"
         styleClass="p-button-primary d-block py-3"

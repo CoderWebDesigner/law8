@@ -8,14 +8,7 @@ export const Matter_Category_Columns_AR = [
     header: 'Name AR',
     field: 'nameAr',
   },
-  {
-    header: 'Appeal Period',
-    field: 'appealPeriod',
-  },
-  {
-    header: 'Cassation Period',
-    field: 'cassationPeriod',
-  },
+
   {
     header: 'Practice Area',
     field: 'practiceArea',
@@ -37,16 +30,8 @@ export const Matter_Category_Columns_EN = [
     field: 'nameAr',
   },
   {
-    header: 'Appeal Period',
-    field: 'appealPeriod',
-  },
-  {
-    header: 'Cassation Period',
-    field: 'cassationPeriod',
-  },
-  {
     header: 'Practice Area',
-    field: 'practiceArea',
+    field: "practsArea['nameEn']",
   },
   {
     header: 'Active',
@@ -64,14 +49,7 @@ export const Matter_Category_Columns_FR = [
     header: 'Name AR',
     field: 'nameAr',
   },
-  {
-    header: 'Appeal Period',
-    field: 'appealPeriod',
-  },
-  {
-    header: 'Cassation Period',
-    field: 'cassationPeriod',
-  },
+
   {
     header: 'Practice Area',
     field: 'practiceArea',
@@ -94,12 +72,20 @@ export const Matter_Category_Children_Columns_AR = [
     header: 'Name AR',
     field: 'nameAr',
   },
-
+  {
+    header: 'Appeal Period',
+    field: 'appealPeriod',
+  },
+  {
+    header: 'Cassation Period',
+    field: 'cassationPeriod',
+  },
   {
     header: 'Active',
     field: 'active',
     // isSwitch:true
   },
+
 ]
 export const Matter_Category_Children_Columns_EN = [
 
@@ -110,6 +96,14 @@ export const Matter_Category_Children_Columns_EN = [
   {
     header: 'Name AR',
     field: 'nameAr',
+  },
+  {
+    header: 'Appeal Period',
+    field: 'appealPeriod',
+  },
+  {
+    header: 'Cassation Period',
+    field: 'cassationPeriod',
   },
   {
     header: 'Active',
@@ -127,7 +121,14 @@ export const Matter_Category_Children_Columns_FR = [
     header: 'Name AR',
     field: 'nameAr',
   },
-
+  {
+    header: 'Appeal Period',
+    field: 'appealPeriod',
+  },
+  {
+    header: 'Cassation Period',
+    field: 'cassationPeriod',
+  },
   {
     header: 'Active',
     field: 'active',

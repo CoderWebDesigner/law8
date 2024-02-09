@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { ContactEditorComponent } from './contact-editor/contact-editor.component';
 import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contact-columns.config';
 import { SharedService } from '@shared/services/shared.service';
@@ -11,9 +11,15 @@ import { DialogService } from 'primeng/dynamicdialog';
   templateUrl: './client-add-contacts.component.html',
   styleUrls: ['./client-add-contacts.component.scss']
 })
-export class ClientAddContactsComponent implements OnInit, OnDestroy {
+export class ClientAddContactsComponent implements OnInit,OnChanges, OnDestroy {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    this._clientService.contacts$.next(changes['data']?.currentValue)
+    // this.getContacts()
+  }
+   @Input() data: any[] = [];
 
-  @Input() data: any[] = [];
+  @Input() previewOnly:boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _clientService = inject(ClientService)
@@ -25,15 +31,16 @@ export class ClientAddContactsComponent implements OnInit, OnDestroy {
     fr: Contact_Columns_FR,
   };
   ngOnInit(): void {
-    this.getCompanyAddress()
+    this.getContacts()
+    
   }
-  getCompanyAddress() {
+  getContacts() {
     this._clientService.contacts$.pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
       next: (res: any[]) => {
-        this.data = [...this.data,...res]
-        console.log(this.data)
+        console.log(res)
+        this.data = [...res]
         this.data = this.data.map(element=> {
          return{
           ...element,
