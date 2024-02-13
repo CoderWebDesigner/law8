@@ -9,15 +9,17 @@ import { SharedModule } from '@shared/shared.module';
 import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
-import { LookupsMatterRegionsComponent } from './lookups-matter-regions/lookups-matter-regions.component';
+import { LookupsJurisdictionsComponent } from './lookups-jurisdictions/lookups-jurisdictions.component';
 import { LookupsRateTableComponent } from './lookups-rate-table/lookups-rate-table.component';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
   declarations: [
     LookupsMatterCaterogyComponent,
     LookupsMainListComponent,
-    LookupsMatterRegionsComponent,
+    LookupsJurisdictionsComponent,
     LookupsRateTableComponent
   ],
   imports: [
@@ -28,6 +30,7 @@ import { LookupsRateTableComponent } from './lookups-rate-table/lookups-rate-tab
     SharedCardComponent,
     SharedTableComponent,
     SharedSearchInputComponent,
+    
   ]
 })
 export class LookupsModule { }

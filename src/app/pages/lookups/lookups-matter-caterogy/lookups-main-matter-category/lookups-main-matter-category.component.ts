@@ -6,7 +6,7 @@ import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedModule } from '@shared/shared.module';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs';
 @Component({
   selector: 'app-lookups-main-matter-category',
@@ -23,12 +23,13 @@ export class LookupsMainMatterCategoryComponent
   itemId: number;
   config = inject(DynamicDialogConfig);
   _sharedService = inject(SharedService);
+  dialogRef = inject(DynamicDialogRef)
   apiUrl=API_Config.general
   ngOnInit(): void {
     console.log(this.config.data)
     if (this.config.data.formType!='add') {
       this.itemId = +this.config.data?.rowData?.id;
-      this.formlyModel = this.config.data?.rowData;
+      this.formlyModel = {...this.config.data?.rowData};
     }
     console.log(this.config.data?.rowData);
     this.getLookupsData()
@@ -141,7 +142,7 @@ export class LookupsMainMatterCategoryComponent
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-              dialog.destroy();
+              this.dialogRef.close(dialog);
             });
           }
         },

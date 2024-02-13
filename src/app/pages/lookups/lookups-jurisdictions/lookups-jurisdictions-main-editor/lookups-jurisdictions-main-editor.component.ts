@@ -3,72 +3,53 @@ import { CommonModule } from '@angular/common';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { SharedModule } from '@shared/shared.module';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { Main_List_Types } from '@components/lookups/const/main-list-types';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ButtonModule } from 'primeng/button';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiRes } from '@core/models';
 import { finalize } from 'rxjs';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'app-lookups-sub-item-editor',
+  selector: 'app-lookups-jurisdictions-main-editor',
   standalone: true,
-  imports: [CommonModule, SharedModule, FormlyConfigModule],
-  templateUrl: './lookups-sub-item-editor.component.html',
-  styleUrls: ['./lookups-sub-item-editor.component.scss'],
+  imports: [CommonModule,SharedModule,ButtonModule,FormlyConfigModule],
+  templateUrl: './lookups-jurisdictions-main-editor.component.html',
+  styleUrls: ['./lookups-jurisdictions-main-editor.component.scss']
 })
-export class LookupsSubItemEditorComponent
-  extends FormBaseClass
-  implements OnInit
-{
+export class LookupsJurisdictionsMainEditorComponent extends FormBaseClass implements OnInit {
   title: string;
-  itemId: number;
   config = inject(DynamicDialogConfig);
-  dialogRef = inject(DynamicDialogRef)
+  dialogRef = inject(DynamicDialogRef);
   ngOnInit(): void {
+    console.log(this.config?.data?.rowData)
     if (this.config?.data?.rowData) this.getData();
-    this.initForm();
+    this.initForm()
+
   }
 
   override initForm(): void {
-    console.log(this.config.data);
     this.formlyFields = [
-      {
-        key: 'mainItem',
-        type: 'select',
-        // hide:,
-        props: {
-          // required: true,
-          label: this._languageService.getTransValue('lookups.mainCategory'),
-          options: Main_List_Types.map((obj) => ({
-            label:
-              this._languageService.getSelectedLanguage() == 'ar'
-                ? obj.nameAR
-                : obj.nameEN,
-            value: 1,
-          })),
-        },
-      },
       {
         key: 'nameEn',
         type: 'input',
         props: {
           label: this._languageService.getTransValue('lookups.nameEN'),
-          required: true,
+          required:true
         },
         validators: {
           validation: ['englishLetters'],
-        },
+        }
       },
       {
         key: 'nameAr',
         type: 'input',
         props: {
           label: this._languageService.getTransValue('lookups.nameAR'),
-          required: true,
+          required:true
         },
         validators: {
           validation: ['arabicLetters'],
-        },
+        }
       },
       {
         key: 'active',
@@ -79,7 +60,7 @@ export class LookupsSubItemEditorComponent
           class: 'd-block',
         },
       },
-    ];
+    ]
   }
   override getData(): void {
     this.formlyModel = {...this.config?.data?.rowData};
@@ -88,17 +69,16 @@ export class LookupsSubItemEditorComponent
     if (this.formly.invalid) return;
 
     console.log(this.formlyModel);
-    // const successMsgKey = this.itemId
-    //   ? 'message.updateSuccessfully'
-    //   : 'message.createdSuccessfully';
+    const successMsgKey = this.config?.data?.rowData
+      ? 'messages.updateSuccessfully'
+      : 'messages.createdSuccessfully';
     const requestPayload = this.config?.data?.rowData
       ? { ...this.formlyModel, id: this.config?.data?.rowData?.id }
       : this.formlyModel;
     const path = this.config?.data?.rowData
-      ? API_Config.practiceArea.update
-      : API_Config.practiceArea.create;
+      ? API_Config.jurisdictions.update
+      : API_Config.jurisdictions.create;
 
-    console.log(requestPayload);
     this._apiService
       .post(path, requestPayload)
       .pipe(
@@ -108,8 +88,8 @@ export class LookupsSubItemEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
-            // const text = this._languageService.getTransValue(successMsgKey);
-            // this._toastrNotifiService.displaySuccessMessage(text);
+            const text = this._languageService.getTransValue(successMsgKey);
+            this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {
               this.dialogRef.close(dialog)
             });
@@ -117,6 +97,10 @@ export class LookupsSubItemEditorComponent
             this._toastrNotifiService.displayErrorToastr(res?.message)
           }
         },
+        error:(err:any)=>{
+          this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+        }
       });
   }
+
 }

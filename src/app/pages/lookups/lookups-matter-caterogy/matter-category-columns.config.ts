@@ -11,7 +11,7 @@ export const Matter_Category_Columns_AR = [
 
   {
     header: 'Practice Area',
-    field: 'practiceArea',
+    field: 'practsArea',
   },
   {
     header: 'Active',
@@ -31,7 +31,7 @@ export const Matter_Category_Columns_EN = [
   },
   {
     header: 'Practice Area',
-    field: "practsArea['nameEn']",
+    field: 'practsArea',
   },
   {
     header: 'Active',
@@ -52,7 +52,7 @@ export const Matter_Category_Columns_FR = [
 
   {
     header: 'Practice Area',
-    field: 'practiceArea',
+    field: 'practsArea',
   },
   {
     header: 'Active',

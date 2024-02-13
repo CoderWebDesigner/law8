@@ -67,12 +67,14 @@ export class LookupsMatterCaterogyComponent {
       width:'30%',
       header:this.setDialogHeader(formType,categorytype),
       data:{
-        type:categorytype,
-        formType:formType
+        categorytype:categorytype,//main , sub
+        formType:formType, //add , update
+        moduleType:'category'
       }
     })
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
-      if (result) this._sharedTableService.refreshData.next(true);
+      console.log('hello')
+      this._sharedTableService.refreshData.next(true);
     });
   }
   private setDialogHeader(formType:string,categorytype:string){

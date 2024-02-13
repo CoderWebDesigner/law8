@@ -9,6 +9,8 @@ import { Matter_Main_List_Columns_AR, Matter_Main_List_Columns_EN, Matter_Main_L
 import { ApiService } from '@core/api/api.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { SharedService } from '@shared/services/shared.service';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { LookupsMainListSubEditorComponent } from './lookups-main-list-sub-editor/lookups-main-list-sub-editor.component';
 
 @Component({
   selector: 'app-lookups-main-list',
@@ -20,6 +22,7 @@ export class LookupsMainListComponent {
   _languageService = inject(LanguageService);
   _apiService = inject(ApiService);
   _sharedService = inject(SharedService);
+  _sharedTableService = inject(SharedTableService)
   apiUrls:any;
   selectedRow: any;
   childrenData:any[]=[]
@@ -128,7 +131,7 @@ export class LookupsMainListComponent {
       {
         type: 'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsSubItemEditorComponent,
+        target: LookupsMainListSubEditorComponent,
         icon: 'pencil',
         width: '30%'
       },
@@ -139,14 +142,17 @@ export class LookupsMainListComponent {
       },
     ]
   }
-  openItemEditor(type: string) {
-    this._dialogService.open(type == 'main' ? LookupsMainItemEditorComponent : LookupsSubItemEditorComponent, {
+  openItemEditor(categoryType: string) {
+    const ref=this._dialogService.open(categoryType == 'main' ? LookupsMainItemEditorComponent : LookupsMainListSubEditorComponent, {
       width: '30%',
-      header: this.setDialogHeader(type),
+      header: this.setDialogHeader(categoryType),
       data: {
-        type: type
+        categoryType:categoryType,//main , sub
       }
     })
+    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      this._sharedTableService.refreshData.next(true);
+    });
   }
   private setDialogHeader(type: string, id?: number) {
     const isSubItem = (type === 'sub');
@@ -156,12 +162,16 @@ export class LookupsMainListComponent {
       this._languageService.getTransValue(keyToUpdate) :
       this._languageService.getTransValue(keyToAdd);
   }
+  
   onRowSelected(event) {
     console.log(event)
     this.selectedRow = event.data;
 
     if(this.selectedRow.id===8){
       this.apiUrls = API_Config.practiceArea
+    }
+    if(this.selectedRow.id===3){
+      this.apiUrls = API_Config.clientGroup
     }
   }
 }

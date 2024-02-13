@@ -7,7 +7,8 @@ export const General_API = {
       "getStatesByCountry":"AppLookup/GetCountryLookup",
       "getLawyers":"/GetSPList",
       "getRecentMatters":"/GetRecentMatters/?empCode=",
-      "getPractsAreaLookup":"AppLookup/GetLaw_PractsAreaLookup"
+      "getPractsAreaLookup":"AppLookup/GetLaw_PractsAreaLookup",
+      "getJurisdictionLookup":"AppLookup/GetJurisdictionLookup"
   }
 
 }

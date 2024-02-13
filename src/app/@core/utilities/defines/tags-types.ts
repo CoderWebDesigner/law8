@@ -9,7 +9,6 @@ export const SUCCESS_TAGS =[
 
 export const INFO_TAGS =[
   "INPROGRESS",
-
   "FOR COURT REGISTRATION"
 ]
 

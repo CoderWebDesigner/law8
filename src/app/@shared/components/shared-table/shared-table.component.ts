@@ -69,6 +69,8 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   columnChildren = [];
   @Input() data: any = [];
   @Input() apiUrls;
+  @Input() apiUrlsChild;
+
   @Input() getDataMethod? = 'get';
   @Input() filterBy: string;
 
@@ -111,7 +113,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() callBack: any;
   ngOnInit(): void {
-    this.initTable();
+    this.refreshData()
+    // this.initTable();
+    
   }
 
   private getCurrentPageReportTemplate(): void {
@@ -142,11 +146,11 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     this.columnChildren = this.getColumns(this.columnsLocalizedChildren)
     this.onSearch()
     this.getData();
+    
 
   }
   getData() {
-
-    if (this.apiUrls?.get) {
+    if (this.apiUrls?.get||this.apiUrlsChild?.get) {
       this.isLoading = true;
       this._apiService[this.getDataMethod](`${this.apiUrls.get}`, this.filterOptions) //, this.filterOptions
         .pipe(
@@ -156,7 +160,6 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
           this.data = res.result['dataList'];
           this.totalRecords = res.result['totalCount']
           this.getTableMessages();
-          // this.initTable()
           if (this.callBack) this.callBack()
           if (this.mapData) {
             this.data = this.mapData(this.data);
@@ -171,19 +174,22 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   pageChanged(e?) {
+    console.log(e)
     if (e) {
-      this.filterOptions.pageSize = Number(e.rows);
-      this.filterOptions.pageNo = e.first / e.rows;
+      this.filterOptions.pagSize = Number(e.rows);
+      this.filterOptions.pageNum = (e.first / e.rows)+1;
       this.first = e?.first
     }
     this.getData()
   }
 
   refreshData(){
+    console.log('refreshData')
     this._sharedTableService.refreshData.subscribe({
       next:res=>{
+        console.log(res)
         if(res)
-        this.getData
+        this.getData()
       }
     })
   }
@@ -218,7 +224,6 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
 
   }
   onSwitch(e) {
-    console.log(e.checked)
     // Swal.fire({
     //   title: "Do you want to save the changes?",
     //   showCancelButton: true,
@@ -284,8 +289,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   onSearch() {
     this._sharedTableService.search$.pipe(this._sharedService.takeUntilDistroy()).subscribe({
       next: (res: any) => {
-        console.log('text', res)
-        this.dt.filterGlobal(res, 'contains')
+        this.filterOptions = {...this.filterOptions,search:res}
+       this.getData()
+        // this.dt.filterGlobal(res, 'contains')
       }
     })
   }
@@ -296,6 +302,10 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       width: "50%",
       dismissableMask: true
     })
+  }
+  getSort(e){
+    if(e) this.filterOptions = {...this.filterOptions,orderBy:e?.field,orderByDirection:e?.order===1?'DSC':'ASC'}
+    this.getData()
   }
   ngOnDestroy(): void {
     this._sharedService.destroy()

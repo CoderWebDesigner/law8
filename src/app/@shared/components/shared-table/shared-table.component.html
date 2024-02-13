@@ -1,10 +1,10 @@
-<div class="position-relative" *ngIf="!isLoading; else loadingSkeleton">
+<div class="position-relative" >
   <p-table
     #dt
     [columns]="columns"
     [value]="data"
     [loading]="isLoading"
-    [lazy]="false"
+    [lazy]="true"
     [resizableColumns]="true"
     [tableStyle]="{ 'min-width': '100%' }"
     [(selection)]="selected || defaultSelected"
@@ -16,6 +16,7 @@
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
     [selectionMode]="selectMode"
+    (onSort)="getSort($event)"
   >
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -165,6 +166,7 @@
             [columnsLocalized]="columnsLocalizedChildren"
             [additionalTableConfig]="additionalTableConfigChildren"
             [data]="rowData['children']"
+            [apiUrls]="apiUrlsChild"
             [isPaginator]="false"
           >
           </shared-table>
@@ -178,11 +180,12 @@
     </ng-template>
   </p-table>
   <div dir="ltr">
+
     <p-paginator
       *ngIf="!paginationClient"
       (onPageChange)="pageChanged($event)"
-      [first]="filterOptions?.pageNo * filterOptions?.pageSize"
-      [rows]="filterOptions?.pageSize"
+      [first]="filterOptions?.pageNum* filterOptions?.pagSize"
+      [rows]="filterOptions?.pagSize"
       [totalRecords]="!paginationClient ? totalRecords : data?.length"
       [rowsPerPageOptions]="PAGE_SIZE_OPTION"
       [showCurrentPageReport]="true"
@@ -193,10 +196,10 @@
   </div>
 </div>
 
-<ng-template #loadingSkeleton>
+<!-- <ng-template #loadingSkeleton>
   <p-skeleton
     height="4rem"
     *ngFor="let item of [].constructor(4)"
     styleClass="mb-3"
   ></p-skeleton>
-</ng-template>
+</ng-template> -->

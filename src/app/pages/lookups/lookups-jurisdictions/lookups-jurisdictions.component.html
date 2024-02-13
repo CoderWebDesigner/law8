@@ -6,12 +6,13 @@
     </div>
     <shared-table
       body
-      [data]="data"
       [columnsLocalized]="columnsLocalized"
       [columnsLocalizedChildren]="columnsLocalizedChildren"
       [additionalTableConfig]="additionalTableConfig"
       [additionalTableConfigChildren]="additionalTableConfigChildren"
-      [paginationClient]="false"
-    >
+      [apiUrls]="apiUrl"
+      [apiUrlsChild]="apiUrlsChild"
+      [mapData]="mapData"
+      >
     </shared-table>
   </shared-card>
