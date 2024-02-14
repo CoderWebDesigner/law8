@@ -17,6 +17,8 @@ export const Matter_Category_Columns_AR = [
     header: 'Active',
     field: 'active',
     // isSwitch:true
+    isStatus:true
+
   },
 ]
 export const Matter_Category_Columns_EN = [
@@ -37,6 +39,8 @@ export const Matter_Category_Columns_EN = [
     header: 'Active',
     field: 'active',
     // isSwitch:true
+    isStatus:true
+
   },
 ]
 export const Matter_Category_Columns_FR = [
@@ -48,6 +52,7 @@ export const Matter_Category_Columns_FR = [
   {
     header: 'Name AR',
     field: 'nameAr',
+
   },
 
   {
@@ -58,6 +63,8 @@ export const Matter_Category_Columns_FR = [
     header: 'Active',
     field: 'active',
     // isSwitch:true
+    isStatus:true
+
   },
 ]
 
@@ -109,6 +116,8 @@ export const Matter_Category_Children_Columns_EN = [
     header: 'Active',
     field: 'active',
     // isSwitch:true
+    // isStatus:true
+
   },
 ]
 export const Matter_Category_Children_Columns_FR = [
@@ -133,5 +142,7 @@ export const Matter_Category_Children_Columns_FR = [
     header: 'Active',
     field: 'active',
     // isSwitch:true
+    // isStatus:true
+
   },
 ]

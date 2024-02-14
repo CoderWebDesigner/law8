@@ -207,7 +207,8 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
           data: {
             rowData: rowData,
             action: action,
-            // url: this.apiUrls.update
+            apiUrls: this.apiUrls,
+            isDynamic:action.isDynamic
           },
         });
         dialogRef.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
@@ -251,7 +252,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe(res => {
 
       if (res) {
-        let path = `${this.apiUrls.delete}/${rowData[this.additionalTableConfig.id]}`
+        let path = `${this.apiUrls.delete}?id=${rowData[this.additionalTableConfig.id]}`
 
         this._apiService['delete'](path).pipe(this._sharedService.takeUntilDistroy()).subscribe((res: any) => {
 

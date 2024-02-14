@@ -24,8 +24,10 @@ export class LookupsSubItemEditorComponent
   itemId: number;
   config = inject(DynamicDialogConfig);
   dialogRef = inject(DynamicDialogRef)
+  apiUrls
   ngOnInit(): void {
     if (this.config?.data?.rowData) this.getData();
+    if(this.config?.data?.url) this.apiUrls=this.config?.data?.url
     this.initForm();
   }
 
@@ -95,8 +97,8 @@ export class LookupsSubItemEditorComponent
       ? { ...this.formlyModel, id: this.config?.data?.rowData?.id }
       : this.formlyModel;
     const path = this.config?.data?.rowData
-      ? API_Config.practiceArea.update
-      : API_Config.practiceArea.create;
+      ? this.apiUrls.update 
+      : this.apiUrls.create;
 
     console.log(requestPayload);
     this._apiService

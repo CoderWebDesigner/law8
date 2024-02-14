@@ -85,4 +85,13 @@ export class LookupsMatterCaterogyComponent {
       this._languageService.getTransValue(keyToUpdate) :
       this._languageService.getTransValue(keyToAdd);
   }
+
+  mapData(data:any[]){
+    return data.map(obj=>{
+      return {
+        ...obj,
+        active:(obj.active)?'Active':'Inactive'
+      }
+    })
+  }
 }

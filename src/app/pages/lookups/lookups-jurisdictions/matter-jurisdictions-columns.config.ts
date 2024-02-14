@@ -1,12 +1,13 @@
 export const Jurisdictions_Columns_AR = [
   {
-    header: 'Name AR',
-    field: 'nameAr',
-  },
-  {
     header: 'Name EN',
     field: 'nameEn',
   },
+  {
+    header: 'Name AR',
+    field: 'nameAr',
+  },
+
   {
     header: 'Active',
     field: 'active',
@@ -15,13 +16,14 @@ export const Jurisdictions_Columns_AR = [
 ];
 export const Jurisdictions_Columns_EN = [
   {
-    header: 'Name AR',
-    field: 'nameAr',
-  },
-  {
     header: 'Name EN',
     field: 'nameEn',
   },
+  {
+    header: 'Name AR',
+    field: 'nameAr',
+  },
+
   {
     header: 'Active',
     field: 'active',
@@ -30,13 +32,14 @@ export const Jurisdictions_Columns_EN = [
 ];
 export const Jurisdictions_Columns_FR = [
   {
-    header: 'Name AR',
-    field: 'nameAr',
-  },
-  {
     header: 'Name EN',
     field: 'nameEn',
   },
+  {
+    header: 'Name AR',
+    field: 'nameAr',
+  },
+
   {
     header: 'Active',
     field: 'active',
@@ -47,12 +50,12 @@ export const Jurisdictions_Columns_FR = [
 export const Jurisdictions_Sub_Columns_AR = [
   {
     header: 'Name',
-    field: 'name',
+    field: 'nameEn',
   },
-  // {
-  //   header: 'Jurisdiction',
-  //   field: 'law_Jurisdiction_Name',
-  // },
+  {
+    header: 'Jurisdiction',
+    field: 'law_Jurisdiction_Name',
+  },
   {
     header: 'Active',
     field: 'active',
@@ -61,13 +64,14 @@ export const Jurisdictions_Sub_Columns_AR = [
 ];
 export const Jurisdictions_Sub_Columns_EN = [
   {
-    header: 'Name',
-    field: 'name',
+    header: 'Name EN',
+    field: 'nameEn',
   },
-  // {
-  //   header: 'Jurisdiction',
-  //   field: 'law_Jurisdiction_Name',
-  // },
+  {
+    header: 'Name AR',
+    field: 'nameAr',
+  },
+
   {
     header: 'Active',
     field: 'active',

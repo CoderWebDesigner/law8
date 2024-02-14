@@ -52,6 +52,8 @@ export const Matter_Main_List_Columns_AR = [
       header: 'Active',
       field: 'active',
       // isSwitch:true
+      isStatus:true
+
     },
  
   ]
@@ -69,6 +71,8 @@ export const Matter_Main_List_Columns_AR = [
       header: 'Active',
       field: 'active',
       // isSwitch:true
+      isStatus:true
+
     },
 
   ]
@@ -86,5 +90,7 @@ export const Matter_Main_List_Columns_AR = [
       header: 'Active',
       field: 'active',
       // isSwitch:true
+      isStatus:true
+
     },
   ]

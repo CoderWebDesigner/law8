@@ -11,8 +11,7 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { LookupsJurisdictionsComponent } from './lookups-jurisdictions/lookups-jurisdictions.component';
 import { LookupsRateTableComponent } from './lookups-rate-table/lookups-rate-table.component';
-import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { ButtonModule } from 'primeng/button';
+
 
 
 @NgModule({
@@ -20,7 +19,7 @@ import { ButtonModule } from 'primeng/button';
     LookupsMatterCaterogyComponent,
     LookupsMainListComponent,
     LookupsJurisdictionsComponent,
-    LookupsRateTableComponent
+    LookupsRateTableComponent,
   ],
   imports: [
     CommonModule,

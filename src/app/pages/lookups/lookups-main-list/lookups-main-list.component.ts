@@ -148,6 +148,7 @@ export class LookupsMainListComponent {
       header: this.setDialogHeader(categoryType),
       data: {
         categoryType:categoryType,//main , sub
+        apiUrls:this.apiUrls
       }
     })
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
@@ -162,7 +163,15 @@ export class LookupsMainListComponent {
       this._languageService.getTransValue(keyToUpdate) :
       this._languageService.getTransValue(keyToAdd);
   }
-  
+  mapData(data:any[]){
+    return data.map(obj=>{
+      return {
+        ...obj,
+        active:(obj.active)?'Active':'Inactive'
+      }
+    })
+  }
+
   onRowSelected(event) {
     console.log(event)
     this.selectedRow = event.data;

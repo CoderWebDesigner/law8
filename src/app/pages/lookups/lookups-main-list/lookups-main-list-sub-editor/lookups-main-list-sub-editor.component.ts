@@ -26,9 +26,11 @@ implements OnInit
 {
 title: string;
 config = inject(DynamicDialogConfig);
-dialogRef = inject(DynamicDialogRef)
+dialogRef = inject(DynamicDialogRef);
+apiUrls
 ngOnInit(): void {
   if (this.config?.data?.rowData) this.getData();
+  if(this.config?.data?.apiUrls) this.apiUrls=this.config?.data?.apiUrls
   this.initForm();
 }
 
@@ -40,7 +42,7 @@ override initForm(): void {
       type: 'input',
       props: {
         label: this._languageService.getTransValue('lookups.nameEN'),
-        required: true,
+        required: this._languageService.getSelectedLanguage()=='en',
       },
       validators: {
         validation: ['englishLetters'],
@@ -51,7 +53,7 @@ override initForm(): void {
       type: 'input',
       props: {
         label: this._languageService.getTransValue('lookups.nameAR'),
-        required: true,
+        required: this._languageService.getSelectedLanguage()=='ar',
       },
       validators: {
         validation: ['arabicLetters'],
@@ -60,7 +62,7 @@ override initForm(): void {
     {
       key: 'active',
       type: 'switch',
-      defaultValue: false,
+      defaultValue: true,
       props: {
         label: this._languageService.getTransValue('lookups.active'),
         class: 'd-block',
@@ -82,8 +84,8 @@ override onSubmit(): void {
     ? { ...this.formlyModel, id: this.config?.data?.rowData?.id }
     : this.formlyModel;
   const path = this.config?.data?.rowData
-    ? API_Config.practiceArea.update
-    : API_Config.practiceArea.create;
+    ? this.apiUrls?.update
+    : this.apiUrls?.create;
 
   console.log(requestPayload);
   this._apiService
