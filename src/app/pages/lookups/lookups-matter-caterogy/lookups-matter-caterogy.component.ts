@@ -8,6 +8,7 @@ import { LookupsMainMatterCategoryComponent } from './lookups-main-matter-catego
 import { API_Config } from '@core/api/api-config/api.config';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
@@ -20,7 +21,8 @@ export class LookupsMatterCaterogyComponent {
   _sharedService=inject(SharedService);
   _sharedTableService=inject(SharedTableService)
 
-  apiUrl=API_Config.matterCategory
+  apiUrl=API_Config.matterCategory;
+
   columnsLocalized: any = {
     ar: Matter_Category_Columns_AR,
     en: Matter_Category_Columns_EN,
@@ -56,13 +58,6 @@ export class LookupsMatterCaterogyComponent {
     ]
   }
   openItemEditor(formType:string,categorytype:string){
-    // this._dialogService.open(categorytype == 'main' ? LookupsMainMatterCategoryComponent : LookupsSubItemEditorComponent,{
-    //   width:'30%',
-    //   header:this.setDialogHeader(formType,categorytype),
-    //   data:{
-    //     type:categorytype
-    //   }
-    // })
     const ref= this._dialogService.open(LookupsMainMatterCategoryComponent,{
       width:'30%',
       header:this.setDialogHeader(formType,categorytype),

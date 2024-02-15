@@ -168,6 +168,8 @@
             [data]="rowData['children']"
             [apiUrls]="apiUrlsChild"
             [isPaginator]="false"
+            [mapData]="mapData"
+            [filterOptions]="filterSubOptions"
           >
           </shared-table>
         </td>
@@ -184,7 +186,7 @@
     <p-paginator
       *ngIf="!paginationClient"
       (onPageChange)="pageChanged($event)"
-      [first]="filterOptions?.pageNum* filterOptions?.pagSize"
+
       [rows]="filterOptions?.pagSize"
       [totalRecords]="!paginationClient ? totalRecords : data?.length"
       [rowsPerPageOptions]="PAGE_SIZE_OPTION"

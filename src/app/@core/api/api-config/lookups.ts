@@ -18,11 +18,23 @@ export const Lookups_API={
     "get":"Law_PractsArea/GetList",
     "create":"Law_PractsArea/Create",
     "update":"Law_PractsArea/Update",
-    "delete":"Law_PractsArea/Delete"
+    "post":"Law_PractsArea/Delete"
   },
   "clientGroup":{
     "get":"ClientGroup/GetList",
     "create":"ClientGroup/Create",
     "update":"ClientGroup/Update"
-  }
+  },
+  "department":{
+    "get":"Law_Department/GetList",
+    "create":"Law_Department/Create",
+    "update":"Law_Department/Update",
+    "delete":"Law_Department/Delete"
+  },
+  "industry":{
+    "get":"Law_Industry/GetList",
+    "create":"Law_Industry/Create",
+    "update":"Law_Industry/Update",
+    "delete":"Law_Industry/Delete"
+  },
 }

@@ -13,7 +13,7 @@ import {
   EventEmitter,
   ViewChild,
   ElementRef,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
 import { Table, TableModule } from 'primeng/table';
@@ -26,7 +26,12 @@ import { Router } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { LanguageService, ToasterService } from '@core/services';
-import { DANGER_TAGS, INFO_TAGS, PROCESS_TAGS, SUCCESS_TAGS } from '@core/utilities/defines/tags-types';
+import {
+  DANGER_TAGS,
+  INFO_TAGS,
+  PROCESS_TAGS,
+  SUCCESS_TAGS,
+} from '@core/utilities/defines/tags-types';
 import { PaginatorModule } from 'primeng/paginator';
 import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
 import { InputTextModule } from 'primeng/inputtext';
@@ -53,13 +58,21 @@ import { SkeletonModule } from 'primeng/skeleton';
     PaginatorModule,
     InputTextModule,
     InputSwitchModule,
-    SkeletonModule
+    SkeletonModule,
   ],
   providers: [DialogService],
 })
 export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
-
-  @Input() filterOptions?: any = { pageNum: 1, pagSize: PAGESIZE, orderByDirection: 'ASC' };
+  @Input() filterOptions?: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  };
+  @Input() filterSubOptions?: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  };
 
   @Input() additionalTableConfig?: TableConfig;
   @Input() additionalTableConfigChildren?: TableConfig;
@@ -77,8 +90,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   @ContentChild('actions', { static: false })
   actionsTemplateRef: TemplateRef<any>;
 
-
-  @Input() selectMode: string = ''
+  @Input() selectMode: string = '';
   @Input() paginationClient: boolean = false;
   @Input() mapData: (args: any) => any;
 
@@ -86,7 +98,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isPaginator: boolean = true;
   @Input() withRadioButton: boolean = false;
   @Input() withCheckbox: boolean = false;
-  @Input() withPlaceholder: boolean
+  @Input() withPlaceholder: boolean;
   @Input() defaultSelected: any;
   @Output() onRowSelect: any = new EventEmitter();
 
@@ -98,24 +110,20 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   PAGE_SIZE_OPTION = PAGE_SIZE_OPTION;
   currentPageReportTemplate: string = '';
   tableConfig?: TableConfig = { isSearch: true };
-  selected: any
-
-
+  selected: any;
 
   _apiService = inject(ApiService);
   _dialogService = inject(DialogService);
   _router = inject(Router);
   _languageService = inject(LanguageService);
-  _toastrNotifiService = inject(ToasterService)
-  _sharedTableService = inject(SharedTableService)
-  _sharedService = inject(SharedService)
-
+  _toastrNotifiService = inject(ToasterService);
+  _sharedTableService = inject(SharedTableService);
+  _sharedService = inject(SharedService);
 
   @Input() callBack: any;
   ngOnInit(): void {
-    this.refreshData()
-    // this.initTable();
-    
+    this.refreshData();
+    // this.initTable()
   }
 
   private getCurrentPageReportTemplate(): void {
@@ -143,61 +151,66 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
-    this.columnChildren = this.getColumns(this.columnsLocalizedChildren)
-    this.onSearch()
-    this.getData();
-    
-
+    this.columnChildren = this.getColumns(this.columnsLocalizedChildren);
+    this.onSearch();
+    this.getData('initTable');
   }
-  getData() {
-    if (this.apiUrls?.get||this.apiUrlsChild?.get) {
+  getData(fnName:string) {
+    console.log(fnName);
+    if (this.apiUrls?.get || this.apiUrlsChild?.get) {
       this.isLoading = true;
-      this._apiService[this.getDataMethod](`${this.apiUrls.get}`, this.filterOptions) //, this.filterOptions
+      this._apiService[this.getDataMethod](
+        `${this.apiUrls.get}`,
+        this.filterOptions
+      ) //, this.filterOptions
         .pipe(
-          finalize(() => this.isLoading = false),
+          finalize(() => (this.isLoading = false)),
           this._sharedService.takeUntilDistroy()
-        ).subscribe((res: ApiRes) => {
+        )
+        .subscribe((res: ApiRes) => {
           this.data = res.result['dataList'];
-          this.totalRecords = res.result['totalCount']
+          this.totalRecords = res.result['totalCount'];
           this.getTableMessages();
-          if (this.callBack) this.callBack()
+          if (this.callBack) this.callBack();
           if (this.mapData) {
             this.data = this.mapData(this.data);
           }
         });
     }
-
   }
   getTableMessages(): void {
     const pageCount = this.totalRecords ? this.totalRecords : this.data?.length;
-    this.currentPageReportTemplate = `${this._languageService.getTransValue('messages.dataMessage')} ${pageCount ? pageCount : 0}`
+    this.currentPageReportTemplate = `${this._languageService.getTransValue(
+      'messages.dataMessage'
+    )} ${pageCount ? pageCount : 0}`;
   }
 
   pageChanged(e?) {
-    console.log(e)
-    if (e) {
+    // if (e?.page !=e?.first ) {
+      console.log(e);
       this.filterOptions.pagSize = Number(e.rows);
-      this.filterOptions.pageNum = (e.first / e.rows)+1;
-      this.first = e?.first
-    }
-    this.getData()
+      this.filterOptions.pageNum = e.first / e.rows + 1;
+      this.first = e?.first;
+      this.getData('pageChanged');
+    // }
+    // this.initTable()
   }
 
-  refreshData(){
-    console.log('refreshData')
+  refreshData() {
     this._sharedTableService.refreshData.subscribe({
-      next:res=>{
-        console.log(res)
-        if(res)
-        this.getData()
-      }
-    })
+      next: (res) => {
+        console.log(res);
+        if (res) this.getData('refreshData');
+      },
+    });
   }
   onTableAction(action: TableAction, rowData: any) {
     if (action?.type !== 'delete') {
-
       if (action?.targetType === 'path') {
-        this._router.navigate([action?.target, rowData[this.additionalTableConfig?.id]], { queryParams: action?.queryParams })
+        this._router.navigate(
+          [action?.target, rowData[this.additionalTableConfig?.id]],
+          { queryParams: action?.queryParams }
+        );
       } else {
         const dialogRef = this._dialogService.open(action.target, {
           width: action.width || '50%',
@@ -208,21 +221,21 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
             rowData: rowData,
             action: action,
             apiUrls: this.apiUrls,
-            isDynamic:action.isDynamic
+            isDynamic: action.isDynamic,
           },
         });
-        dialogRef.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
-          if (result) this.getData();
-        });
+        dialogRef.onClose
+          .pipe(this._sharedService.takeUntilDistroy())
+          .subscribe((result: any) => {
+            if (result) this.getData('onTableAction');
+          });
       }
     } else {
-      this.onDelete(action, rowData)
+      this.onDelete(action, rowData);
     }
-
   }
   onEdit(event) {
     console.log('Row Edited:', event);
-
   }
   onSwitch(e) {
     // Swal.fire({
@@ -233,9 +246,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     //   /* Read more about isConfirmed, isDenied below */
     //   if (result.isConfirmed) {
     this._apiService.post(this.apiUrls.switch, {}).pipe(
-      finalize(() => this.isLoading = false),
+      finalize(() => (this.isLoading = false)),
       this._sharedService.takeUntilDistroy()
-    )
+    );
     //   }
     // });
   }
@@ -249,24 +262,29 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       },
       dismissableMask: true,
     });
-    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe(res => {
+    ref.onClose
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe((res) => {
+        if (res) {
+          let path = `${this.apiUrls.delete}?id=${
+            rowData[this.additionalTableConfig.id]
+          }`;
 
-      if (res) {
-        let path = `${this.apiUrls.delete}?id=${rowData[this.additionalTableConfig.id]}`
+          this._apiService['delete'](path)
+            .pipe(this._sharedService.takeUntilDistroy())
+            .subscribe((res: any) => {
+              if (res && !res.error) {
+                let text = this._languageService.getTransValue(
+                  'messages.deletedSuccessfully'
+                );
 
-        this._apiService['delete'](path).pipe(this._sharedService.takeUntilDistroy()).subscribe((res: any) => {
+                this._toastrNotifiService.displaySuccessMessage(text);
 
-          if (res && !res.error) {
-            let text = this._languageService.getTransValue('messages.deletedSuccessfully')
-
-            this._toastrNotifiService.displaySuccessMessage(text);
-
-            this.getData()
-          }
-
-        });
-      }
-    })
+                this.getData('onDelete');
+              }
+            });
+        }
+      });
   }
 
   onSelectionChange(event) {
@@ -279,36 +297,42 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       'tag-info': INFO_TAGS.includes(value),
       'tag-danger': DANGER_TAGS.includes(value),
       'tag-warning': PROCESS_TAGS.includes(value),
-    }
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.initTable();
-
   }
 
   onSearch() {
-    this._sharedTableService.search$.pipe(this._sharedService.takeUntilDistroy()).subscribe({
-      next: (res: any) => {
-        this.filterOptions = {...this.filterOptions,search:res}
-       this.getData()
-        // this.dt.filterGlobal(res, 'contains')
-      }
-    })
+    this._sharedTableService.search$
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any) => {
+          this.filterOptions = { ...this.filterOptions, search: res };
+          this.getData('onSearch');
+          // this.dt.filterGlobal(res, 'contains')
+        },
+      });
   }
   showMore(title: string, value: string) {
     this._dialogService.open(MoreInfoComponent, {
       header: title,
       data: value,
-      width: "50%",
-      dismissableMask: true
-    })
+      width: '50%',
+      dismissableMask: true,
+    });
   }
-  getSort(e){
-    if(e) this.filterOptions = {...this.filterOptions,orderBy:e?.field,orderByDirection:e?.order===1?'DSC':'ASC'}
-    this.getData()
+  getSort(e) {
+    if (e)
+      this.filterOptions = {
+        ...this.filterOptions,
+        orderBy: e?.field,
+        orderByDirection: e?.order === 1 ? 'DSC' : 'ASC',
+      };
+    this.getData('getSort');
   }
   ngOnDestroy(): void {
-    this._sharedService.destroy()
+    this._sharedService.destroy();
   }
 }

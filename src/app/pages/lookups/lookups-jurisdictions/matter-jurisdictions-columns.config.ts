@@ -10,7 +10,7 @@ export const Jurisdictions_Columns_AR = [
 
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     isStatus:true
   },
 ];
@@ -26,7 +26,7 @@ export const Jurisdictions_Columns_EN = [
 
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     isStatus:true
   },
 ];
@@ -42,7 +42,7 @@ export const Jurisdictions_Columns_FR = [
 
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     isStatus:true
   },
 ];
@@ -58,7 +58,7 @@ export const Jurisdictions_Sub_Columns_AR = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     isStatus:true
   },
 ];
@@ -74,7 +74,7 @@ export const Jurisdictions_Sub_Columns_EN = [
 
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     isStatus:true
   },
 ];
@@ -89,7 +89,7 @@ export const Jurisdictions_Sub_Columns_FR = [
   // },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     isStatus:true
   },
 ];

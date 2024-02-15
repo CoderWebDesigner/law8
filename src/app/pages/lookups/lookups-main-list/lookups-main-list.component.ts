@@ -97,6 +97,16 @@ export class LookupsMainListComponent {
       nameEN: 'Practice Area',
       nameAR: 'Practice Area',
     },
+    {
+      id: 9,
+      nameEN: 'Department',
+      nameAR: 'الاقسام',
+    },
+    // {
+    //   id: 10,
+    //   nameEN: 'Industry',
+    //   nameAR: 'industry',
+    // },
   ];
   columnsLocalized: any = {
     ar: Matter_Main_List_Columns_AR,
@@ -167,7 +177,7 @@ export class LookupsMainListComponent {
     return data.map(obj=>{
       return {
         ...obj,
-        active:(obj.active)?'Active':'Inactive'
+        activeText:(obj.active)?'Active':'Inactive'
       }
     })
   }
@@ -182,5 +192,13 @@ export class LookupsMainListComponent {
     if(this.selectedRow.id===3){
       this.apiUrls = API_Config.clientGroup
     }
+    if(this.selectedRow.id===9){
+      this.apiUrls = API_Config.department
+    }
+    // if(this.selectedRow.id===10){
+    //   this.apiUrls = API_Config.industry
+    // }
   }
+
+  
 }

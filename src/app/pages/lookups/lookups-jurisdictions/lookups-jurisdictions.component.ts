@@ -9,6 +9,7 @@ import { LookupsJurisdictionsSubEditorComponent } from './lookups-jurisdictions-
 import { LookupsJurisdictionsMainEditorComponent } from './lookups-jurisdictions-main-editor/lookups-jurisdictions-main-editor.component';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { SharedService } from '@shared/services/shared.service';
+import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-lookups-jurisdictions',
@@ -22,7 +23,13 @@ export class LookupsJurisdictionsComponent {
   _sharedService = inject(SharedService)
 
   apiUrl=API_Config.jurisdictions
-  apiUrlsChild=API_Config.judicature
+  apiUrlsChild=API_Config.judicature;
+  filterSubOptions: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+    mainCategoryId:1
+  };
   columnsLocalized: any = {
     ar: Jurisdictions_Columns_AR,
     en: Jurisdictions_Columns_EN,
@@ -92,7 +99,7 @@ export class LookupsJurisdictionsComponent {
     return data.map(obj=>{
       return {
         ...obj,
-        active:(obj.active)?'Active':'Inactive'
+        activeText:(obj.active)?'Active':'Inactive'
       }
     })
   }
