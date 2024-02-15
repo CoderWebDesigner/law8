@@ -4,6 +4,12 @@ export const Lookups_API={
     "create":"LawMtrCat/Create",
     "update":"LawMtrCat/Update"
   },
+  "matterCategoryType":{
+    "get":"LawMtrTyp/GetList",
+    "create":"LawMtrTyp/Create",
+    "update":"LawMtrTyp/Update",
+    "delete":"LawMtrTyp/Delete"
+  },
   "jurisdictions":{
     "get":"Law_Jurisdiction/GetList",
     "create":"Law_Jurisdiction/Create",
@@ -18,7 +24,7 @@ export const Lookups_API={
     "get":"Law_PractsArea/GetList",
     "create":"Law_PractsArea/Create",
     "update":"Law_PractsArea/Update",
-    "post":"Law_PractsArea/Delete"
+    "delete":"Law_PractsArea/Delete"
   },
   "clientGroup":{
     "get":"ClientGroup/GetList",

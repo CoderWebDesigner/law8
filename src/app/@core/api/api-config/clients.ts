@@ -11,5 +11,6 @@ export const Clients_API = {
     getById: 'Law_ClientContact/GetById?id=',
     create: 'Law_ClientContact/Create',
     update: 'Law_ClientContact/Update',
+    delete:'Law_ClientContact/Delete'
   },
 };

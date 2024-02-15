@@ -37,6 +37,7 @@ export class ClientContactsComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     this._clientService.contacts$.next(changes['data']?.currentValue);
+    this.getParam();
   }
   @Input() data: any[] = [];
 
@@ -59,7 +60,7 @@ export class ClientContactsComponent implements OnInit, OnChanges, OnDestroy {
   };
   ngOnInit(): void {
     this.getContacts();
-    this.getParam();
+
   }
 
   getParam() {
@@ -80,7 +81,13 @@ export class ClientContactsComponent implements OnInit, OnChanges, OnDestroy {
               title: this._languageService.getTransValue('client.updateClient'),
               target: ClientContactEditorComponent,
               icon:'pencil',
-              isDynamic:this.requestId != undefined
+              isDynamic:this.requestId != undefined,
+              isReadOnly:this.previewOnly
+            },
+            {
+              type: 'delete',
+              title: this._languageService.getTransValue('btn.delete'),
+              icon: 'trash'
             },
           ],
         }

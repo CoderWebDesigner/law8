@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from '../lookups-matter-caterogy/matter-category-columns.config';
@@ -23,6 +23,7 @@ export class LookupsMainListComponent {
   _apiService = inject(ApiService);
   _sharedService = inject(SharedService);
   _sharedTableService = inject(SharedTableService)
+  cdref = inject(ChangeDetectorRef)
   apiUrls:any;
   selectedRow: any;
   childrenData:any[]=[]
@@ -102,11 +103,11 @@ export class LookupsMainListComponent {
       nameEN: 'Department',
       nameAR: 'الاقسام',
     },
-    // {
-    //   id: 10,
-    //   nameEN: 'Industry',
-    //   nameAR: 'industry',
-    // },
+    {
+      id: 10,
+      nameEN: 'Industry',
+      nameAR: 'industry',
+    },
   ];
   columnsLocalized: any = {
     ar: Matter_Main_List_Columns_AR,
@@ -195,9 +196,12 @@ export class LookupsMainListComponent {
     if(this.selectedRow.id===9){
       this.apiUrls = API_Config.department
     }
-    // if(this.selectedRow.id===10){
-    //   this.apiUrls = API_Config.industry
-    // }
+    if(this.selectedRow.id===10){
+      this.apiUrls = API_Config.industry
+    }
+    this.cdref.detectChanges()
+    console.log(this.apiUrls)
+    this._sharedTableService.refreshData.next(true)
   }
 
   

@@ -25,10 +25,7 @@ export class LookupsJurisdictionsComponent {
   apiUrl=API_Config.jurisdictions
   apiUrlsChild=API_Config.judicature;
   filterSubOptions: any = {
-    pageNum: 1,
-    pagSize: PAGESIZE,
-    orderByDirection: 'ASC',
-    mainCategoryId:1
+
   };
   columnsLocalized: any = {
     ar: Jurisdictions_Columns_AR,
@@ -63,7 +60,7 @@ export class LookupsJurisdictionsComponent {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsJurisdictionsMainEditorComponent,
+        target: LookupsJurisdictionsSubEditorComponent,
         icon:'pencil',
         width:'30%'
       },
@@ -102,5 +99,13 @@ export class LookupsJurisdictionsComponent {
         activeText:(obj.active)?'Active':'Inactive'
       }
     })
+  }
+  onRowSelect(e){
+    this.filterSubOptions =  {
+      pageNum: 1,
+      pagSize: PAGESIZE,
+      orderByDirection: 'ASC',
+      mainCategoryId:e
+    }
   }
 }

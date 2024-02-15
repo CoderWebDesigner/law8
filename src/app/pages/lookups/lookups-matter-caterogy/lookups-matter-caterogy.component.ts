@@ -22,7 +22,10 @@ export class LookupsMatterCaterogyComponent {
   _sharedTableService=inject(SharedTableService)
 
   apiUrl=API_Config.matterCategory;
+  apiUrlsChild=API_Config.matterCategoryType;
+  filterSubOptions={
 
+  }
   columnsLocalized: any = {
     ar: Matter_Category_Columns_AR,
     en: Matter_Category_Columns_EN,
@@ -88,5 +91,13 @@ export class LookupsMatterCaterogyComponent {
         active:(obj.active)?'Active':'Inactive'
       }
     })
+  }
+  onRowSelect(e){
+    this.filterSubOptions =  {
+      pageNum: 1,
+      pagSize: PAGESIZE,
+      orderByDirection: 'ASC',
+      mainCategoryId:e
+    }
   }
 }

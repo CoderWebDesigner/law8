@@ -65,6 +65,7 @@
             [pRowToggler]="rowData"
             class="p-button-text p-button-rounded p-button-plain"
             [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            (click)="onSelectionChange(rowData?.id,expanded)"
           ></button>
         </td>
         <td *ngFor="let col of columns">
