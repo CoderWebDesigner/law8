@@ -3,7 +3,6 @@
     #dt
     [columns]="columns"
     [value]="data"
-    [loading]="isLoading"
     [lazy]="true"
     [resizableColumns]="true"
     [tableStyle]="{ 'min-width': '100%' }"
@@ -50,7 +49,7 @@
       let-columns="columns"
       let-expanded="expanded"
     >
-      <tr [pSelectableRow]="rowData">
+      <tr [pSelectableRow]="rowData" *ngIf="!isLoading">
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>
@@ -154,6 +153,9 @@
             </ng-container>
           </div>
         </td>
+      </tr>
+      <tr *ngIf="isLoading">
+        <td *ngFor="let column of columns"><p-skeleton></p-skeleton></td>
       </tr>
     </ng-template>
     <ng-template

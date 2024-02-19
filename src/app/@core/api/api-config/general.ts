@@ -8,7 +8,8 @@ export const General_API = {
       "getLawyers":"/GetSPList",
       "getRecentMatters":"/GetRecentMatters/?empCode=",
       "getPractsAreaLookup":"AppLookup/GetLaw_PractsAreaLookup",
-      "getJurisdictionLookup":"AppLookup/GetJurisdictionLookup"
+      "getJurisdictionLookup":"AppLookup/GetJurisdictionLookup",
+      "getMatterCategoriesLookup":"AppLookup/GetLaw_MatCatLookup"
   }
 
 }

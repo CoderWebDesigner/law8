@@ -11,6 +11,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { LookupsMainListSubEditorComponent } from './lookups-main-list-sub-editor/lookups-main-list-sub-editor.component';
+import { API_Data } from '../const/api-data';
 
 @Component({
   selector: 'app-lookups-main-list',
@@ -24,6 +25,7 @@ export class LookupsMainListComponent {
   _sharedService = inject(SharedService);
   _sharedTableService = inject(SharedTableService)
   cdref = inject(ChangeDetectorRef)
+  subTitle:string;
   apiUrls:any;
   selectedRow: any;
   childrenData:any[]=[]
@@ -52,21 +54,7 @@ export class LookupsMainListComponent {
       id: 2,
       nameEN: 'Matter Stage',
       nameAR: 'درجات القضية',
-      active: true,
-      children: [
-        {
-          id: 1,
-          nameEN: 'Matter Stage 1',
-          nameAR: 'درجة القضية 1',
-          active: true,
-        },
-        {
-          id: 1,
-          nameEN: 'Matter Stage 2',
-          nameAR: 'درجة القضية 2',
-          active: true,
-        },
-      ]
+     
     },
     {
       id: 3,
@@ -96,7 +84,7 @@ export class LookupsMainListComponent {
     {
       id: 8,
       nameEN: 'Practice Area',
-      nameAR: 'Practice Area',
+      nameAR: 'مجال التخصص',
     },
     {
       id: 9,
@@ -106,9 +94,27 @@ export class LookupsMainListComponent {
     {
       id: 10,
       nameEN: 'Industry',
-      nameAR: 'industry',
+      nameAR: 'المجال الوظيفي',
     },
+    // {
+    //   id: 11,
+    //   nameEN: 'MattStatus',
+    //   nameAR: 'حالة القضية',
+    // },
+
+ 
   ];
+  apiData={
+    '1': { api: API_Config.mattStatus, title:this._languageService.getTransValue('common.mattStatus') },
+    '2': { api: API_Config.stage, title: this._languageService.getTransValue('common.stage') },
+    '3': { api: API_Config.clientGroup, title:this._languageService.getTransValue('common.clientGroup') },
+    '4': { api: API_Config.referralType, title:this._languageService.getTransValue('common.referralType') },
+    '5': { api: API_Config.partiesDescription, title: this._languageService.getTransValue('common.partiesDescription') },
+    '6': { api: API_Config.adjournmentReasons, title: this._languageService.getTransValue('common.adjournmentReasons') },
+    '8': { api: API_Config.practiceArea, title: this._languageService.getTransValue('common.practiceArea') },
+    '9': { api: API_Config.department, title: this._languageService.getTransValue('common.department') },
+    '10': { api: API_Config.industry, title: this._languageService.getTransValue('common.industry') },
+  }
   columnsLocalized: any = {
     ar: Matter_Main_List_Columns_AR,
     en: Matter_Main_List_Columns_EN,
@@ -186,19 +192,8 @@ export class LookupsMainListComponent {
   onRowSelected(event) {
     console.log(event)
     this.selectedRow = event.data;
-
-    if(this.selectedRow.id===8){
-      this.apiUrls = API_Config.practiceArea
-    }
-    if(this.selectedRow.id===3){
-      this.apiUrls = API_Config.clientGroup
-    }
-    if(this.selectedRow.id===9){
-      this.apiUrls = API_Config.department
-    }
-    if(this.selectedRow.id===10){
-      this.apiUrls = API_Config.industry
-    }
+    this.apiUrls = this.apiData[this.selectedRow?.id]?.api
+    this.subTitle = this.apiData[this.selectedRow?.id]?.title
     this.cdref.detectChanges()
     console.log(this.apiUrls)
     this._sharedTableService.refreshData.next(true)

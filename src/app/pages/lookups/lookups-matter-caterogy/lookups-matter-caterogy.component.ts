@@ -9,6 +9,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { PAGESIZE } from '@core/utilities/defines';
+import { LookupsSubMatterCategoryComponent } from './lookups-sub-matter-category/lookups-sub-matter-category.component';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
@@ -46,6 +47,11 @@ export class LookupsMatterCaterogyComponent {
         icon:'pencil',
         width:'30%'
       },
+      {
+        type:'delete',
+        title: this._languageService.getTransValue('btn.delete'),
+        icon:'trash'
+      },
     ]
   }
   additionalTableConfigChildren: TableConfig = {
@@ -54,14 +60,19 @@ export class LookupsMatterCaterogyComponent {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsSubItemEditorComponent,
+        target: LookupsSubMatterCategoryComponent,
         icon:'pencil',
         width:'30%'
+      },
+      {
+        type:'delete',
+        title: this._languageService.getTransValue('btn.delete'),
+        icon:'trash'
       },
     ]
   }
   openItemEditor(formType:string,categorytype:string){
-    const ref= this._dialogService.open(LookupsMainMatterCategoryComponent,{
+    const ref= this._dialogService.open((categorytype=='main')?LookupsMainMatterCategoryComponent:LookupsSubMatterCategoryComponent,{
       width:'30%',
       header:this.setDialogHeader(formType,categorytype),
       data:{
@@ -88,7 +99,7 @@ export class LookupsMatterCaterogyComponent {
     return data.map(obj=>{
       return {
         ...obj,
-        active:(obj.active)?'Active':'Inactive'
+        activeText:(obj.active)?'Active':'Inactive'
       }
     })
   }

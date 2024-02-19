@@ -15,7 +15,7 @@ export const Matter_Category_Columns_AR = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     // isSwitch:true
     isStatus:true
 
@@ -37,7 +37,7 @@ export const Matter_Category_Columns_EN = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     // isSwitch:true
     isStatus:true
 
@@ -61,7 +61,7 @@ export const Matter_Category_Columns_FR = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     // isSwitch:true
     isStatus:true
 
@@ -89,7 +89,7 @@ export const Matter_Category_Children_Columns_AR = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     // isSwitch:true
   },
 
@@ -114,9 +114,9 @@ export const Matter_Category_Children_Columns_EN = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     // isSwitch:true
-    // isStatus:true
+    isStatus:true
 
   },
 ]
@@ -140,9 +140,9 @@ export const Matter_Category_Children_Columns_FR = [
   },
   {
     header: 'Active',
-    field: 'active',
+    field: 'activeText',
     // isSwitch:true
-    // isStatus:true
+    isStatus:true
 
   },
 ]

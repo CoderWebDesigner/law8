@@ -24,7 +24,17 @@
     "username": "Nom d'utilisateur",
     "mobileNumber":"Numéro de portable",
     "email":"E-mail",
-    "password": "Mot de passe"
+    "password": "Mot de passe",
+    "clientGroup":"Groupe de clients",
+    "practiceArea": "Practice Area",
+    "mattStatus":"Matter Status",
+    "referralType":"ReferralType",
+    "department":"Department",
+    "industry": "Industry",
+    "stage":"stage",
+    "partiesDescription":"Parties Description",
+    "adjournmentReasons":"Adjournment Reasons",
+    "matterCategory":"Matter Category"
   },
   "btn": {
    "save":"Sauvegarder",

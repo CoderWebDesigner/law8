@@ -2,7 +2,9 @@ export const Lookups_API={
   "matterCategory":{
     "get":"LawMtrCat/GetList",
     "create":"LawMtrCat/Create",
-    "update":"LawMtrCat/Update"
+    "update":"LawMtrCat/Update",
+    "delete":"LawMtrCat/Delete"
+
   },
   "matterCategoryType":{
     "get":"LawMtrTyp/GetList",
@@ -13,12 +15,16 @@ export const Lookups_API={
   "jurisdictions":{
     "get":"Law_Jurisdiction/GetList",
     "create":"Law_Jurisdiction/Create",
-    "update":"Law_Jurisdiction/Update"
+    "update":"Law_Jurisdiction/Update",
+    "delete":"Law_Jurisdiction/Delete"
+
   },
   "judicature":{
     "get":"Law_Judicature/GetList",
     "create":"Law_Judicature/Create",
-    "update":"Law_Judicature/Update"
+    "update":"Law_Judicature/Update",
+    "delete":"Law_Judicature/Delete"
+
   },
   "practiceArea":{
     "get":"Law_PractsArea/GetList",
@@ -29,7 +35,9 @@ export const Lookups_API={
   "clientGroup":{
     "get":"ClientGroup/GetList",
     "create":"ClientGroup/Create",
-    "update":"ClientGroup/Update"
+    "update":"ClientGroup/Update",
+    "delete":"ClientGroup/Delete",
+    
   },
   "department":{
     "get":"Law_Department/GetList",
@@ -42,5 +50,35 @@ export const Lookups_API={
     "create":"Law_Industry/Create",
     "update":"Law_Industry/Update",
     "delete":"Law_Industry/Delete"
+  },
+  "mattStatus":{
+    "get":"Law_MattStatus/GetList",
+    "create":"Law_MattStatus/Create",
+    "update":"Law_MattStatus/Update",
+    "delete":"Law_MattStatus/Delete"
+  },
+  "referralType":{
+    "get":"Law_ReferralType/GetList",
+    "create":"Law_ReferralTypes/Create",
+    "update":"Law_ReferralType/Update",
+    "delete":"Law_ReferralType/Delete"
+  },
+  "adjournmentReasons":{
+    "get":"Law_AdjournmentReasons/GetList",
+    "create":"Law_AdjournmentReasons/Create",
+    "update":"Law_AdjournmentReasons/Update",
+    "delete":"Law_AdjournmentReasons/Delete"
+  },
+  "partiesDescription":{
+    "get":"Law_PartiesDescription/GetList",
+    "create":"Law_PartiesDescription/Create",
+    "update":"Law_PartiesDescription/Update",
+    "delete":"Law_PartiesDescription/Delete"
+  },
+  "stage":{
+    "get":"Law_Stage/GetList",
+    "create":"Law_Stage/Create",
+    "update":"Law_Stage/Update",
+    "delete":"Law_Stage/Delete"
   },
 }

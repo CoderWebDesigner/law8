@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -7,61 +6,76 @@ import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.
 import { SharedService } from '@shared/services/shared.service';
 import { SharedModule } from '@shared/shared.module';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { finalize, forkJoin } from 'rxjs';
+import {  finalize } from 'rxjs';
+
 @Component({
-  selector: 'app-lookups-main-matter-category',
-  templateUrl: './lookups-main-matter-category.component.html',
-  styleUrls: ['./lookups-main-matter-category.component.scss'],
-  standalone: true,
-  imports: [CommonModule, SharedModule, FormlyConfigModule],
+  selector: 'app-lookups-sub-matter-category',
+  templateUrl: './lookups-sub-matter-category.component.html',
+  styleUrls: ['./lookups-sub-matter-category.component.scss'],
+  standalone:true,
+  imports:[FormlyConfigModule,SharedModule]
 })
-export class LookupsMainMatterCategoryComponent
+export class LookupsSubMatterCategoryComponent
   extends FormBaseClass
   implements OnInit
 {
   title: string;
-  itemId: number;
   config = inject(DynamicDialogConfig);
   _sharedService = inject(SharedService);
-  dialogRef = inject(DynamicDialogRef)
-  apiUrl=API_Config.general
+  dialogRef = inject(DynamicDialogRef);
+  apiUrl = API_Config.general;
   ngOnInit(): void {
-    console.log(this.config.data)
-    if (this.config.data.formType!='add') {
-      this.itemId = +this.config.data?.rowData?.id;
-      this.formlyModel = {...this.config.data?.rowData};
+    console.log(this.config.data);
+    if (this.config.data?.rowData) {
+
+      this.formlyModel = { ...this.config.data?.rowData };
     }
     console.log(this.config.data?.rowData);
-    this.getLookupsData()
-    
+    this.getLookupsData();
   }
   override getLookupsData(): void {
-    this._apiService.get(this.apiUrl.getPractsAreaLookup)
-    .pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(()=>this.isLoading=false)
-    ).subscribe({
-      next:(res:ApiRes)=>{
-        console.log(res)
-        this.lookupsData=res['result']
-        this.initForm();
-      }
-    })
+      
+      this._apiService.get(this.apiUrl.getMatterCategoriesLookup)
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          console.log(res);
+          this.lookupsData = res['result'];
+          console.log(this.lookupsData.map(obj=>({label:obj.name,value:obj.id})))
+          this.initForm();
+        },
+      });
   }
   override initForm(): void {
     this.formlyFields = [
       {
-        type: 'select',
-        key: 'practsAreaId',
+        type:'select',
+        key:'mtrCatId',
+        className:'col-md-4',
+        props:{
+          label:this._languageService.getTransValue('common.matterCategory'),
+          options:this.lookupsData.map(obj=>({label:obj.name,value:obj.id}))
+        }
+      },
+      {
+        type: 'input',
+        key: 'appealPeriod',
         className: 'col-md-4',
         props: {
-          label: this._languageService.getTransValue('common.practiceArea'),
-          // options: [
-          //   { label: 'Corporate', value: 'Corporate' },
-          //   { label: 'Litigation', value: 'Litigation' },
-          //   { label: 'instructor', value: 'instructor' },
-          // ],
-          options:this.lookupsData.map(obj=>({label:obj.name,value:obj.id}))
+          type: 'number',
+          label: this._languageService.getTransValue('lookups.appealPeriod'),
+        },
+      },
+      {
+        type: 'input',
+        key: 'cassationPeriod',
+        className: 'col-md-4',
+        props: {
+          type: 'number',
+          label: this._languageService.getTransValue('lookups.cassationPeriod'),
         },
       },
       {
@@ -100,20 +114,20 @@ export class LookupsMainMatterCategoryComponent
   override onSubmit(): void {
     if (this.formly.invalid) return;
 
-    console.log(this.formlyModel)
-    const successMsgKey = this.itemId
+    console.log(this.formlyModel);
+    const successMsgKey = this.config.data?.rowData
       ? 'message.updateSuccessfully'
       : 'message.createdSuccessfully';
-    const requestPayload = this.itemId
-      ? { ...this.formlyModel, id: this.itemId }
-      : this.formlyModel;
-    const path = this.itemId
-      ? API_Config.matterCategory.update
-      : API_Config.matterCategory.create;
+    // const requestPayload = this.itemId
+    //   ? { ...this.formlyModel, id: this.itemId }
+    //   : this.formlyModel;
+    const path = this.config.data?.rowData
+      ? API_Config.matterCategoryType.update
+      : API_Config.matterCategoryType.create;
 
-    console.log(requestPayload);
+    // console.log(requestPayload);
     this._apiService
-      .post(path, requestPayload)
+      .post(path, this.formlyModel)
       .pipe(
         finalize(() => (this.isSubmit = false)),
         this.takeUntilDestroy()

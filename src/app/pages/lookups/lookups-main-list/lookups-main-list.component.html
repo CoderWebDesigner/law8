@@ -18,7 +18,7 @@
     </shared-card>
   </div>
   <div class="col-md-7">
-    <shared-card [title]="'lookups.subList' | translate" [borderRadius]="20" *ngIf="selectedRow">
+    <shared-card [title]="subTitle" [borderRadius]="20" *ngIf="selectedRow">
       <div class="d-flex" headerActions>
         <p-button [label]="'lookups.addSubItem'|translate"  (onClick)="openItemEditor('sub')" styleClass="py-2 px-4 mx-2"></p-button>
         <shared-search-input ></shared-search-input>

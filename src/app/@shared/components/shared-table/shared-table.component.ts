@@ -44,6 +44,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import Swal from 'sweetalert2';
 import { ApiRes } from '@core/models';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @Component({
   selector: 'shared-table',
   templateUrl: './shared-table.component.html',
@@ -60,6 +62,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     InputTextModule,
     InputSwitchModule,
     SkeletonModule,
+    ProgressSpinnerModule
   ],
   providers: [DialogService],
 })
@@ -105,6 +108,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild('dt') dt: Table;
   @Input() isLoading: boolean = false;
+  @Input() loadingBodyTemplate: boolean = false;
   columns = [];
   totalRecords: number = 0;
   first: number = 0;

@@ -24,7 +24,18 @@
     "username": "اسم المستخدم",
     "mobileNumber":"رقم الهاتف المحمول",
     "email":"البريد الإكتروني",
-    "password": "كلمة المرور"
+    "password": "كلمة المرور",
+    "clientGroup":"مجموعة العميل",
+    "practiceArea": "مجال التخصص",
+    "mattStatus":"حالة القضية",
+    "referralType":"نوع الترشيح",
+    "department":"الاقسام",
+    "industry":"المجال الوظيفي",
+    "stage":"درجات القضية",
+    "partiesDescription":"صفه الأطراف",
+    "adjournmentReasons":"سبب التأجيل",
+    "matterCategory": "فئة القضية"
+    
   },
   "btn": {
     "submit": "تاكيد",
@@ -78,3 +89,5 @@
     "High": "عالي"
   }
 }
+
+

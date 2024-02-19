@@ -152,7 +152,7 @@ export class ClientEditorComponent
             key: 'clientGroupId',
             type: 'select',
             props: {
-              label: this._languageService.getTransValue('client.clientGroup'),
+              label: this._languageService.getTransValue('common.clientGroup'),
               placeholder: this._languageService.getTransValue(
                 'client.clientGroupPlaceholder'
               ),
