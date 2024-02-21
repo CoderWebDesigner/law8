@@ -70,7 +70,7 @@
     "mobile2":"Mobile2",
     "ar":"AR",
     "en":"EN",
-    "clientNameAr":"Client Name AR",
-    "clientNameEn":"Client Name EN"
+    "clientNameAr":"Foreign Name",
+    "clientNameEn":"Name"
   }
 }

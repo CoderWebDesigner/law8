@@ -34,8 +34,8 @@
     "stage":"درجات القضية",
     "partiesDescription":"صفه الأطراف",
     "adjournmentReasons":"سبب التأجيل",
-    "matterCategory": "فئة القضية"
-    
+    "matterCategory": "فئة القضية",
+    "taskCode":"نوع المهمه"
   },
   "btn": {
     "submit": "تاكيد",

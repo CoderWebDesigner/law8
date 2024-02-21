@@ -9,12 +9,17 @@
     "nameAR":"Name AR",
     "nameEN":"Name EN",
     "mainCategory":"Main Category",
-    "mainList":"Main List",
+    "mainList":" القوائم الرئيسية",
     "subList":"Sub List",
     "rateTable":"Rate Table",
     "appealPeriod":"Appeal Period",
     "cassationPeriod":"Cassation Period",
     "active":"Active",
-    "Jurisdictions":"Jurisdictions"
+    "Jurisdictions":"Jurisdictions",
+    "clientGroupNumber":"رقم مجموعة العميل ",
+    "matterCategory": "فئة القضية",
+    "initial":"الاسم المختصر",
+    "group":"المجموعة"
+
   }
 }

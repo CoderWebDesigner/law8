@@ -2,48 +2,48 @@ export const Rate_Columns_AR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Active',
     field: 'active',
-    isSwitch:true
+   
   },
 ]
 export const Rate_Columns_EN = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+   
   },
 ]
 export const Rate_Columns_FR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+   
   },
 ]
 
@@ -57,6 +57,14 @@ export const Rate_Children_Columns_AR = [
     header: 'Rate Name',
     field: 'rateName',
   },
+  // {
+  //   header: 'Rate Name EN',
+  //   field: 'rateName',
+  // },
+  // {
+  //   header: 'Rate Name AR',
+  //   field: 'rateName',
+  // },
   {
     header: 'Amount',
     field: 'amount',
@@ -72,6 +80,14 @@ export const Rate_Children_Columns_EN = [
     header: 'Rate Name',
     field: 'rateName',
   },
+  // {
+  //   header: 'Rate Name EN',
+  //   field: 'rateName',
+  // },
+  // {
+  //   header: 'Rate Name AR',
+  //   field: 'rateName',
+  // },
   {
     header: 'Amount',
     field: 'amount',
@@ -88,6 +104,14 @@ export const Rate_Children_Columns_FR = [
     header: 'Rate Name',
     field: 'rateName',
   },
+  // {
+  //   header: 'Rate Name EN',
+  //   field: 'rateName',
+  // },
+  // {
+  //   header: 'Rate Name AR',
+  //   field: 'rateName',
+  // },
   {
     header: 'Amount',
     field: 'amount',

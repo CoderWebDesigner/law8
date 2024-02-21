@@ -68,8 +68,8 @@
     "mobile2":"Mobile2",
     "ar":"AR",
     "en":"EN",
-    "clientNameAr":"Client Name AR",
-    "clientNameEn":"Client Name EN"
- 
+    "clientNameAr":"الاسم",
+    "clientNameEn":"الاسم الاجنبى"
+
   }
 }

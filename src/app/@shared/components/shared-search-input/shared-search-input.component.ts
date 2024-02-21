@@ -30,6 +30,9 @@ export class SharedSearchInputComponent
           placeholder: this._languageService.getTransValue('common.search'),
           icon: 'pi pi-search',
           class: 'p-inputtext-sm',
+          onKeyUp:()=>{
+            this._sharedTableService.search$.next(this.formlyModel.search)
+          }
         },
       },
     ];

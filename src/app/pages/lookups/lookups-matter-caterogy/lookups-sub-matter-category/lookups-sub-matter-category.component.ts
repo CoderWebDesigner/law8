@@ -115,13 +115,13 @@ export class LookupsSubMatterCategoryComponent
     if (this.formly.invalid) return;
 
     console.log(this.formlyModel);
-    const successMsgKey = this.config.data?.rowData
-      ? 'message.updateSuccessfully'
-      : 'message.createdSuccessfully';
-    // const requestPayload = this.itemId
-    //   ? { ...this.formlyModel, id: this.itemId }
-    //   : this.formlyModel;
-    const path = this.config.data?.rowData
+    const successMsgKey = this.config?.data?.rowData
+      ? 'messages.updateSuccessfully'
+      : 'messages.createdSuccessfully';
+    const requestPayload = this.config?.data?.rowData
+      ? { ...this.formlyModel, id: this.config?.data?.rowData?.id }
+      : this.formlyModel;
+    const path = this.config?.data?.rowData
       ? API_Config.matterCategoryType.update
       : API_Config.matterCategoryType.create;
 

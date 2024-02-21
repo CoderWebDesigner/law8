@@ -78,6 +78,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     orderByDirection: 'ASC',
   };
 
+  @Input() withPagination:boolean = true
   @Input() additionalTableConfig?: TableConfig;
   @Input() additionalTableConfigChildren?: TableConfig;
   @Input() columnsLocalized;
@@ -108,7 +109,6 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild('dt') dt: Table;
   @Input() isLoading: boolean = false;
-  @Input() loadingBodyTemplate: boolean = false;
   columns = [];
   totalRecords: number = 0;
   first: number = 0;

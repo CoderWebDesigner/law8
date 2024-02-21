@@ -9,8 +9,6 @@ import {
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
-
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ClientService } from '@shared/services/client.service';
 import { MenuItem } from 'primeng/api';
 import { finalize, forkJoin } from 'rxjs';
@@ -44,7 +42,7 @@ export class ClientEditorComponent
   companyAddress: any;
   billingAddress: any;
   contact: any;
-  showLanguageField: boolean;
+  showLanguageField: boolean =true;
   requestId: number;
   ngOnInit(): void {
     this._clientService.companyAddress$.subscribe({
@@ -93,7 +91,7 @@ export class ClientEditorComponent
                     ? 'nameEn'
                     : 'nameAr',
                 type: 'input',
-                className: 'me-2',
+                className: 'me-2 flex-fill',
                 props: {
                   label: this._languageService.getTransValue(
                     this._languageService.getSelectedLanguage() == 'en'
@@ -107,17 +105,36 @@ export class ClientEditorComponent
                   disabled: this.disableInputs,
                 },
               },
+              // {
+              //   type: 'button',
+              //   props: {
+              //     label: this._languageService.getTransValue(
+              //       this._languageService.getSelectedLanguage() == 'en'
+              //         ? 'client.ar'
+              //         : 'client.en'
+              //     ),
+              //     style: { marginTop: '22px', padding: '10px 20px' },
+              //     onClick: () => {
+              //       console.log('before', this.showLanguageField)
+              //       this.showLanguageField = !this.showLanguageField;
+              //       console.log('after', this.showLanguageField)
+              //       this.formlyFields[0].fieldGroup[2].hide =
+              //         this.showLanguageField;
+              //     },
+              //   },
+              // },
               {
                 type: 'button',
+                
                 props: {
-                  label: this._languageService.getTransValue(
-                    this._languageService.getSelectedLanguage() == 'en'
-                      ? 'client.ar'
-                      : 'client.en'
-                  ),
+                  class:'p-button-label p-button-outlined',
+                  imgPath:this._languageService.getSelectedLanguage()=='ar'?'assets/images/icons/us.jpg':'assets/images/icons/ar.png',
+                  imgStyle:{width:'30px'},
                   style: { marginTop: '22px', padding: '10px 20px' },
                   onClick: () => {
+                    console.log('before', this.showLanguageField)
                     this.showLanguageField = !this.showLanguageField;
+                    console.log('after', this.showLanguageField)
                     this.formlyFields[0].fieldGroup[2].hide =
                       this.showLanguageField;
                   },
@@ -132,7 +149,7 @@ export class ClientEditorComponent
                 ? 'nameAr'
                 : 'nameEn',
             type: 'input',
-            hide: !this.showLanguageField,
+            hide: this.showLanguageField,
             props: {
               label: this._languageService.getTransValue(
                 this._languageService.getSelectedLanguage() == 'en'
@@ -146,54 +163,59 @@ export class ClientEditorComponent
               //required: true,
             },
           },
-
           {
-            className: 'col-md-4',
-            key: 'clientGroupId',
-            type: 'select',
-            props: {
-              label: this._languageService.getTransValue('common.clientGroup'),
-              placeholder: this._languageService.getTransValue(
-                'client.clientGroupPlaceholder'
-              ),
-              options: this.lookupsData[0].result.map((ele) => ({
-                label: ele.name,
-                value: ele.id,
-              })),
-              //required: true,
-              disabled: this.disableInputs,
+            fieldGroupClassName: 'row',
+            fieldGroup: [
+            {
+              className: 'col-md-4',
+              key: 'clientGroupId',
+              type: 'select',
+              props: {
+                label: this._languageService.getTransValue('common.clientGroup'),
+                placeholder: this._languageService.getTransValue(
+                  'client.clientGroupPlaceholder'
+                ),
+                options: this.lookupsData[0].result.map((ele) => ({
+                  label: ele.name,
+                  value: ele.id,
+                })),
+                //required: true,
+                disabled: this.disableInputs,
+              },
             },
-          },
-          {
-            className: 'col-md-4',
-            key: 'foreignName',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.foreignName'),
-              //required: true,
-              disabled: this.disableInputs,
+            // {
+            //   className: 'col-md-4',
+            //   key: 'foreignName',
+            //   type: 'input',
+            //   props: {
+            //     label: this._languageService.getTransValue('client.foreignName'),
+            //     //required: true,
+            //     disabled: this.disableInputs,
+            //   },
+            // },
+            {
+              className: 'col-md-4',
+              key: 'clientIntro',
+              type: 'input',
+              props: {
+                label: this._languageService.getTransValue('client.clientIntro'),
+                //required: true,
+                disabled: this.disableInputs,
+              },
             },
-          },
-          {
-            className: 'col-md-4',
-            key: 'clientIntro',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.clientIntro'),
-              //required: true,
-              disabled: this.disableInputs,
+            {
+              className: 'col-12',
+              key: 'notes',
+              type: 'textarea',
+              props: {
+                label: this._languageService.getTransValue('client.notes'),
+                //required: true,
+                disabled: this.disableInputs,
+              },
             },
+          ],
           },
-          {
-            className: 'col-12',
-            key: 'notes',
-            type: 'textarea',
-            props: {
-              label: this._languageService.getTransValue('client.notes'),
-              //required: true,
-              disabled: this.disableInputs,
-            },
-          },
+     
           {
             className: 'card p-2 my-3 mb-3',
             fieldGroupClassName: 'row',

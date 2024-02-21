@@ -34,7 +34,8 @@
     "stage":"stage",
     "partiesDescription":"Parties Description",
     "adjournmentReasons":"Adjournment Reasons",
-    "matterCategory":"Matter Category"
+    "matterCategory":"Matter Category",
+    "taskCode":"Task Code"
   },
   "btn": {
    "save":"Sauvegarder",

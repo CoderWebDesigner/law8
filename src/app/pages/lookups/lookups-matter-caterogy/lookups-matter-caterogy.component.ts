@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { Matter_Category_Children_Columns_AR, Matter_Category_Children_Columns_EN, Matter_Category_Children_Columns_FR, Matter_Category_Columns_AR, Matter_Category_Columns_EN, Matter_Category_Columns_FR } from './matter-category-columns.config';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -10,13 +10,14 @@ import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { PAGESIZE } from '@core/utilities/defines';
 import { LookupsSubMatterCategoryComponent } from './lookups-sub-matter-category/lookups-sub-matter-category.component';
+import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
   templateUrl: './lookups-matter-caterogy.component.html',
   styleUrls: ['./lookups-matter-caterogy.component.scss']
 })
-export class LookupsMatterCaterogyComponent {
+export class LookupsMatterCaterogyComponent implements OnInit{
  _dialogService = inject(DialogService)
   _languageService = inject(LanguageService)
   _sharedService=inject(SharedService);
@@ -70,6 +71,14 @@ export class LookupsMatterCaterogyComponent {
         icon:'trash'
       },
     ]
+  }
+  ngOnInit(): void {
+    this.columnsLocalized = swapFirstTwoIndexes(
+      this.columnsLocalized,this._languageService.getSelectedLanguage()
+    );
+    this.columnsLocalizedChildren= swapFirstTwoIndexes(
+      this.columnsLocalizedChildren,this._languageService.getSelectedLanguage()
+    );
   }
   openItemEditor(formType:string,categorytype:string){
     const ref= this._dialogService.open((categorytype=='main')?LookupsMainMatterCategoryComponent:LookupsSubMatterCategoryComponent,{

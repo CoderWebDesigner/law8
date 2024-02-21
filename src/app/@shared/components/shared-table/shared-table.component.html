@@ -32,7 +32,7 @@
             *ngIf="!col.isExpand"
           >
             {{ col.header }}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
+            <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
           </th>
         </ng-container>
 
@@ -154,9 +154,9 @@
           </div>
         </td>
       </tr>
-      <tr *ngIf="isLoading">
+      <!-- <tr *ngIf="isLoading">
         <td *ngFor="let column of columns"><p-skeleton></p-skeleton></td>
-      </tr>
+      </tr> -->
     </ng-template>
     <ng-template
       pTemplate="rowexpansion"
@@ -187,7 +187,7 @@
   <div dir="ltr">
 
     <p-paginator
-      *ngIf="!paginationClient"
+    *ngIf="withPagination"
       (onPageChange)="pageChanged($event)"
 
       [rows]="filterOptions?.pagSize"

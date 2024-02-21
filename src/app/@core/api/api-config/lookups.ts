@@ -59,7 +59,7 @@ export const Lookups_API={
   },
   "referralType":{
     "get":"Law_ReferralType/GetList",
-    "create":"Law_ReferralTypes/Create",
+    "create":"Law_ReferralType/Create",
     "update":"Law_ReferralType/Update",
     "delete":"Law_ReferralType/Delete"
   },
@@ -81,4 +81,18 @@ export const Lookups_API={
     "update":"Law_Stage/Update",
     "delete":"Law_Stage/Delete"
   },
+  "taskCode":{
+    "get":"Law_TaskCode/GetList",
+    "create":"Law_TaskCode/Create",
+    "update":"Law_TaskCode/Update",
+    "delete":"Law_TaskCode/Delete"
+  },
+  "rateType":{
+    "get":"Law_RateType/GetList",
+    "create":"Law_RateType/Create",
+    "update":"Law_RateType/Update",
+    "delete":"Law_RateType/Delete"
+    
+  }
+
 }

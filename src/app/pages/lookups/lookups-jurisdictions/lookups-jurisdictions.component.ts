@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -10,13 +10,15 @@ import { LookupsJurisdictionsMainEditorComponent } from './lookups-jurisdictions
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { SharedService } from '@shared/services/shared.service';
 import { PAGESIZE } from '@core/utilities/defines';
+import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
 
 @Component({
   selector: 'app-lookups-jurisdictions',
   templateUrl: './lookups-jurisdictions.component.html',
   styleUrls: ['./lookups-jurisdictions.component.scss']
 })
-export class LookupsJurisdictionsComponent {
+export class LookupsJurisdictionsComponent implements OnInit{
+
   _dialogService = inject(DialogService)
   _languageService = inject(LanguageService)
   _sharedTableService = inject(SharedTableService)
@@ -70,6 +72,14 @@ export class LookupsJurisdictionsComponent {
         icon:'trash'
       },
     ]
+  }
+  ngOnInit(): void {
+    this.columnsLocalized = swapFirstTwoIndexes(
+      this.columnsLocalized,this._languageService.getSelectedLanguage()
+    );
+    this.columnsLocalizedChildren= swapFirstTwoIndexes(
+      this.columnsLocalizedChildren,this._languageService.getSelectedLanguage()
+    );
   }
   openItemEditor(formType:string,categorytype:string){
     const ref=this._dialogService.open(categorytype == 'main' ? LookupsJurisdictionsMainEditorComponent : LookupsJurisdictionsSubEditorComponent,{

@@ -6,12 +6,14 @@
     </div>
     <shared-table
       body
-      [data]="data"
       [columnsLocalized]="columnsLocalized"
       [columnsLocalizedChildren]="columnsLocalizedChildren"
       [additionalTableConfig]="additionalTableConfig"
       [additionalTableConfigChildren]="additionalTableConfigChildren"
-      [paginationClient]="false"
+      [apiUrls]="apiUrls"
+      [apiUrlsChild]="apiUrlsChild"
+      [mapData]="mapData"
+      (onRowSelect)="onRowSelect($event)"
     >
     </shared-table>
   </shared-card>

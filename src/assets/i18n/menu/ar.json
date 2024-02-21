@@ -29,9 +29,9 @@
         },
         "lookups":{
           "title":"Lookups",
-          "matterCategory":"Matter Category",
-          "mainList":"Main List",
-          "Jurisdictions":"Jurisdictions",
+          "matterCategory":" تصنيفات القضايا",
+          "mainList":"البيانات الأساسية",
+          "Jurisdictions":"المناطق",
           "rateTable":"جدول الاسعار"
         }
     }
