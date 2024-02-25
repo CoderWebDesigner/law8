@@ -16,7 +16,7 @@ export class SharedSearchInputComponent
 {
   @Input() searchKey: string;
 
-  _tableService = inject(SharedTableService)
+  _sharedTableService = inject(SharedTableService)
   ngOnInit(): void {
     this.initForm();
   }
@@ -30,6 +30,9 @@ export class SharedSearchInputComponent
           placeholder: this._languageService.getTransValue('common.search'),
           icon: 'pi pi-search',
           class: 'p-inputtext-sm',
+          onKeyUp:()=>{
+            this._sharedTableService.search$.next(this.formlyModel.search)
+          }
         },
       },
     ];
@@ -38,6 +41,6 @@ export class SharedSearchInputComponent
   }
 
   override onSubmit(): void {
-    this._tableService.search$.next(this.formlyModel.search)
+    this._sharedTableService.search$.next(this.formlyModel.search)
   }
 }

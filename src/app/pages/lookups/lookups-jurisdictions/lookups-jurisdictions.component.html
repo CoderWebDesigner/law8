@@ -1,0 +1,20 @@
+<shared-card [title]="'lookups.Jurisdictions' | translate" [borderRadius]="20">
+    <div class="d-flex" headerActions>
+      <p-button [label]="'lookups.addMainItem'|translate"  (onClick)="openItemEditor('add','main')" styleClass="py-2 px-4 mx-2"></p-button>
+      <p-button [label]="'lookups.addSubItem'|translate"  (onClick)="openItemEditor('add','sub')" styleClass="py-2 px-4 mx-2"></p-button>
+      <shared-search-input ></shared-search-input>
+    </div>
+    <shared-table
+      body
+      [columnsLocalized]="columnsLocalized"
+      [columnsLocalizedChildren]="columnsLocalizedChildren"
+      [additionalTableConfig]="additionalTableConfig"
+      [additionalTableConfigChildren]="additionalTableConfigChildren"
+      [apiUrls]="apiUrl"
+      [apiUrlsChild]="apiUrlsChild"
+      [mapData]="mapData"
+      [filterSubOptions]="filterSubOptions"
+      (onRowSelect)="onRowSelect($event)"
+      >
+    </shared-table>
+  </shared-card>

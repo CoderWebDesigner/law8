@@ -28,6 +28,9 @@ export class HandleErrorService {
             if (error.status === 401) {
                 this._authService.logout()
             }
+            if (error.status === 400) {
+                this._toastrService.error(this._languageService.getTransValue('messages.badRequestError'))
+            }
             if (error.status === 0) {
                 this._toastrService.error(this._languageService.getTransValue('messages.internalServerError'))
             }

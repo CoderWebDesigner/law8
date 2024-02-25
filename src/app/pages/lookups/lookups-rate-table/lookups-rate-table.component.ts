@@ -1,81 +1,33 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LookupsMainItemEditorComponent } from '../components/lookups-main-item-editor/lookups-main-item-editor.component';
 import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 import { Rate_Children_Columns_AR, Rate_Children_Columns_EN, Rate_Children_Columns_FR, Rate_Columns_AR, Rate_Columns_EN, Rate_Columns_FR } from './rate-table-columns.config';
+import { API_Config } from '@core/api/api-config/api.config';
+import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
+import { SharedService } from '@shared/services/shared.service';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { PAGESIZE } from '@core/utilities/defines';
+import { LookupsSupRateComponent } from './lookups-sup-rate/lookups-sup-rate.component';
 
 @Component({
   selector: 'app-lookups-rate-table',
   templateUrl: './lookups-rate-table.component.html',
   styleUrls: ['./lookups-rate-table.component.scss']
 })
-export class LookupsRateTableComponent {
+export class LookupsRateTableComponent implements OnInit {
+ 
   _dialogService = inject(DialogService)
-  _languageService = inject(LanguageService)
-  data: any[] = [
-    {
-      id:1,
-      nameAR: 'شريك',
-      nameEN: 'Partner',
-      active: true,
-      children: [
-        {
-          id:1,
-          rate: 'A',
-          rateName: 'A Rate',
-          amount:'1000',
-        },
-        {
-          id:1,
-          rate: 'B',
-          rateName: 'B Rate',
-          amount:'1000',
-        },
-      ]
-    },
-    {
-      id:2,
-      nameAR: 'محام اكبر',
-      nameEN: 'Senior Associate',
-      active: true,
-      children: [
-        {
-          id:1,
-          rate: 'A',
-          rateName: 'A Rate',
-          amount:'1500',
-        },
-        {
-          id:1,
-          rate: 'B',
-          rateName: 'B Rate',
-          amount:'300',
-        },
-      ]
-    },
-    {
-      id:3,
-      nameAR: 'محام',
-      nameEN: 'Associate',
-      active: true,
-      children: [
-        {
-          id:1,
-          rate: 'A',
-          rateName: 'A Rate',
-          amount:'1000',
-        },
-        {
-          id:1,
-          rate: 'B',
-          rateName: 'B Rate',
-          amount:'1000',
-        },
-      ]
-    },
-  ];
+  _languageService = inject(LanguageService);
+  _sharedService=inject(SharedService)
+  _sharedTableService = inject(SharedTableService)
+  apiUrls=API_Config.rateType;
+  apiUrlsChild=API_Config.rate;// add child
+  filterSubOptions: any = {
+
+  };
   columnsLocalized: any = {
     ar: Rate_Columns_AR,
     en: Rate_Columns_EN,
@@ -96,6 +48,11 @@ export class LookupsRateTableComponent {
         icon:'pencil',
         width:'30%'
       },
+      {
+        type:'delete',
+        title: this._languageService.getTransValue('btn.delete'),
+        icon:'trash'
+      },
     ]
   }
   additionalTableConfigChildren: TableConfig = {
@@ -104,21 +61,33 @@ export class LookupsRateTableComponent {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsSubItemEditorComponent,
+        target: LookupsSupRateComponent,
         icon:'pencil',
         width:'30%'
       },
     ]
   }
+  ngOnInit(): void {
+    this.columnsLocalized = swapFirstTwoIndexes(
+      this.columnsLocalized,this._languageService.getSelectedLanguage()
+    );
+
+  }
   openItemEditor(formType:string,categorytype:string){
-    this._dialogService.open(categorytype == 'main' ? LookupsMainItemEditorComponent : LookupsSubItemEditorComponent,{
+    const ref = this._dialogService.open(LookupsMainItemEditorComponent,{
       width:'30%',
       header:this.setDialogHeader(formType,categorytype),
       data:{
-        type:categorytype
+        type:categorytype,
+        apiUrls:this.apiUrls
       }
     })
+    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      console.log('hello')
+      this._sharedTableService.refreshData.next(true);
+    });
   }
+
   private setDialogHeader(formType:string,categorytype:string){
     const isSubItem = (categorytype === 'sub');
     const keyToUpdate = isSubItem ? 'lookups.updateSubItem' : 'lookups.updateMainItem';
@@ -126,5 +95,23 @@ export class LookupsRateTableComponent {
     return (formType!='add') ?
       this._languageService.getTransValue(keyToUpdate) :
       this._languageService.getTransValue(keyToAdd);
+  }
+
+  onRowSelect(e){
+    this.filterSubOptions =  {
+      pageNum: 1,
+      pagSize: PAGESIZE,
+      orderByDirection: 'ASC',
+      mainCategoryId:e
+    }
+  }
+
+  mapData(data:any[]){
+    return data.map(obj=>{
+      return {
+        ...obj,
+        activeText:(obj.active)?'Active':'Inactive'
+      }
+    })
   }
 }

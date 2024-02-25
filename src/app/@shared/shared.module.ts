@@ -21,8 +21,8 @@ const components: any = [
   LanguageBindPipe,
   SuccessActionPopupComponent,
   SharedNoDataComponent,
-  MoreInfoComponent
-];
+  MoreInfoComponent,
+  ];
 
 // const components: any = [];
 

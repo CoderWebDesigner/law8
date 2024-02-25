@@ -75,6 +75,7 @@ body.sidebar-enable {
 
     ul {
       li {
+        border-radius: 12px;
         a {
           display: block;
           color: $sidebar-menu-item-color;
@@ -115,7 +116,7 @@ body.sidebar-enable {
               font-size: inherit;
               color: $sidebar-menu-sub-item-color;
               margin-#{$left}: 2.5rem;
-              border-radius: 0 !important;
+              // border-radius: 0 !important;
 
               &:hover {
                 @include bg-opacity(#007AB9, .3)
@@ -388,6 +389,7 @@ body.sidebar-enable {
   color: $white !important;
   background-color: $primaryColor;
   border-radius: 12px;
+
   svg path {
     fill: $white;
   }
@@ -414,3 +416,33 @@ body.sidebar-enable {
 
 }
 
+.logout,
+.help  {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: $sidebar-menu-item-color;
+ 
+  a {
+    font-size: toRem(16);
+    display: block;
+    font-weight: 500;
+    padding: 1rem 1.3rem;
+    cursor: pointer;
+ 
+    &:hover {
+      @extend .active-link;
+    }
+ 
+    i {
+      padding-bottom: 0.125em;
+      font-size: 24px;
+      line-height: 1.40625rem;
+      vertical-align: middle;
+      transition: all 0.4s;
+      margin-#{$right}: 16px;
+      color: #d8d8d8;
+    }
+  }
+}

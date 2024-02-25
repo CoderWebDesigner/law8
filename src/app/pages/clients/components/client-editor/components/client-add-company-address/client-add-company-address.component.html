@@ -1,0 +1,33 @@
+<app-shared-no-data
+  *ngIf="data?.length == 0"
+>
+  <p-button
+    styleClass="btn btn-success"
+    type="button"
+    (onClick)="openDialog()"
+    [icon]="'pi pi-plus'"
+    [label]="'client.addCompanyAddress' | translate"
+    button
+  >
+  </p-button>
+</app-shared-no-data>
+
+<ng-container *ngIf="data?.length > 0">
+  <div class="text-end mb-4">
+    <p-button
+    styleClass="btn btn-success"
+    type="button"
+    (onClick)="openDialog()"
+    [icon]="'pi pi-plus'"
+    [label]="'client.addCompanyAddress' | translate"
+    button
+  >
+  </p-button>
+  </div>
+  <shared-table
+    [data]="data"
+    [columnsLocalized]="columnsLocalized"
+    [paginationClient]="true"
+  ></shared-table>
+</ng-container>
+

@@ -1,49 +1,64 @@
 export const Rate_Columns_AR = [
 
   {
-    header: 'Name EN',
-    field: 'nameEN',
+    header: 'الاسم الاجنبى ',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
-    header: 'Name AR',
-    field: 'nameAR',
+    header: 'الاسم العربى ',
+    field: 'nameAr',
+    isSort:true,
+
   },
   {
-    header: 'Active',
-    field: 'active',
-    isSwitch:true
+    header: 'الحالة',
+    field: 'activeText',
+    isSort:true,
+
   },
+
 ]
 export const Rate_Columns_EN = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
+    isSort:true,
+
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    isSort:true,
+
   },
 ]
 export const Rate_Columns_FR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
+    isSort:true,
+
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    isSort:true,
   },
 ]
 
@@ -52,14 +67,20 @@ export const Rate_Children_Columns_AR = [
   {
     header: 'Rate',
     field: 'rate',
+    isSort:true,
+
   },
   {
     header: 'Rate Name',
-    field: 'rateName',
+    field: 'name',
+    isSort:true,
+
   },
   {
     header: 'Amount',
     field: 'amount',
+    isSort:true,
+
   },
 ]
 export const Rate_Children_Columns_EN = [
@@ -67,14 +88,20 @@ export const Rate_Children_Columns_EN = [
   {
     header: 'Rate',
     field: 'rate',
+    isSort:true,
+
   },
   {
     header: 'Rate Name',
-    field: 'rateName',
+    field: 'name',
+    isSort:true,
+
   },
   {
     header: 'Amount',
     field: 'amount',
+    isSort:true,
+
   },
 
 ]
@@ -83,14 +110,20 @@ export const Rate_Children_Columns_FR = [
   {
     header: 'Rate',
     field: 'rate',
+    isSort:true,
+
   },
   {
     header: 'Rate Name',
-    field: 'rateName',
+    field: 'name',
+    isSort:true,
+
   },
+
   {
     header: 'Amount',
     field: 'amount',
+    isSort:true,
   },
 
 ]

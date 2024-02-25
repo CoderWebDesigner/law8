@@ -1,5 +1,5 @@
 export const environment = {
 
-    baseUrl:"http://law8.ddns.net:16437/LAWPORTALAPILIVE/MobileAPI"
+    baseUrl:"http://192.168.2.87:8021/"
 
 };

@@ -1,5 +1,5 @@
 /** Contains the key to help get and set info from local storage */
-export const LOCAL_STORAGE_PREFIX = 'fatoora-plus-LocalStore';
+export const LOCAL_STORAGE_PREFIX = 'law8-LocalStore';
 /** contains the user info when dealing with storage */
 export const USER = 'user';
 /** contains the user type */

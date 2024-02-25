@@ -3,22 +3,125 @@
     <div class="row">
       <div class="col-12 mb-4">
         <shared-card [borderRadius]="20">
-          <div body  class="row">
-            <div class="col-md-6">
-              <small class="text-secondary">{{'common.clientCode'|translate}}</small>
-              <p class="fw-bold">{{client?.CardCode}}</p>
+          <div body class="row">
+            <div class="col-md-4">
+              <small class="text-secondary">{{
+                "common.clientCode" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.id }}</p>
             </div>
-            <div class="col-md-6">
-              <small class="text-secondary">{{'common.clientName'|translate}}</small>
-              <p class="fw-bold">{{client?.CardName}}</p>
+            <div class="col-md-4">
+              <small class="text-secondary">{{
+                "common.clientName" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.name }}</p>
             </div>
-            <div class="col-md-6">
-              <small class="text-secondary">{{'client.clientFName'|translate}}</small>
-            <p class="fw-bold">{{client?.CardFName}}</p>
+            <div class="col-md-4">
+              <small class="text-secondary">{{
+                "client.date" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.cdate }}</p>
             </div>
-            <div class="col-md-6">
-              <small class="text-secondary">{{'client.groupCode'|translate}}</small>
-              <p class="fw-bold">{{client?.GroupCode}}</p>
+            <div class="col-md-4">
+              <small class="text-secondary">{{
+                "client.groupCode" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.clientGroupId }}</p>
+            </div>
+            <div class="col-md-4">
+              <small class="text-secondary">{{
+                "client.foreignName" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.foreignName }}</p>
+            </div>
+            <div class="col-md-4">
+              <small class="text-secondary">{{
+                "client.clientIntro" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.clientIntro }}</p>
+            </div>
+            <div class="col-12">
+              <small class="text-secondary">{{
+                "client.notes" | translate
+              }}</small>
+              <p class="fw-bold">{{ client?.notes }}</p>
+            </div>
+            <div class="card p-2">
+              <div class="row">
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.address1" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.addLine1 }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.address2" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.addLine2 }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.city" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.city }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.country" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.country }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.state" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.state }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.zipCode" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.zipCode }}</p>
+                </div>
+
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.phone1" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.phone1 }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.phone2" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.phone2 }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.mobile1" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.mobile1 }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.mobile2" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.mobile2 }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "common.email" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.email }}</p>
+                </div>
+                <div class="col-md-4">
+                  <small class="text-secondary">{{
+                    "client.fax" | translate
+                  }}</small>
+                  <p class="fw-bold">{{ client?.fax }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </shared-card>
@@ -26,10 +129,22 @@
       <div class="col-12">
         <shared-card [borderRadius]="20">
           <p-tabView body>
-            <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
-                <app-client-details-address [data]="client?.lstAddress" *ngIf="i==0"></app-client-details-address>
-                <app-client-details-contacts [data]="client?.lstContactPerson" *ngIf="i==1"></app-client-details-contacts>
-                <app-client-details-related-matters [data]="client?.lstMatter" *ngIf="i==2"></app-client-details-related-matters>
+            <p-tabPanel
+              [header]="item.label"
+              *ngFor="let item of items; let i = index"
+            >
+              <!-- <app-client-details-address
+                [data]="client?.lstAddress"
+                *ngIf="i == 0"
+              ></app-client-details-address> -->
+              <app-client-details-contacts
+                [data]="client?.clientContacts"
+                *ngIf="i == 0"
+              ></app-client-details-contacts>
+              <app-client-details-related-matters
+                [data]="client?.lstMatter"
+                *ngIf="i == 1"
+              ></app-client-details-related-matters>
             </p-tabPanel>
           </p-tabView>
         </shared-card>

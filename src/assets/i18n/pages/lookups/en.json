@@ -2,7 +2,6 @@
 
 {
   "lookups":{
-    "matterCategory":"Matter Category",
     "addMainItem":"Add Main Item",
     "addSubItem":"Add Sub Item",
     "updateMainItem":"Update Main Item",
@@ -10,9 +9,18 @@
     "nameAR":"Name AR",
     "nameEN":"Name EN",
     "mainCategory":"Main Category",
-    "mainList":"Main List",
+    "mainList":"Master List",
     "subList":"Sub List",
-    "rateTable":"Rate Table"
-
+    "rateTable":"Rate Table",
+    "appealPeriod":"Appeal Period",
+    "cassationPeriod":"Cassation Period",
+    "active":"Active",
+    "Jurisdictions":"Jurisdictions",
+    "clientGroupNumber":"Client Group Number",
+    "matterCategory":"matter Category",
+    "initial":"Initial",
+    "group":"Group",
+    "rateName":"RateName",
+    "amount":"Amount"
   }
 }

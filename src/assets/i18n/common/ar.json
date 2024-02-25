@@ -24,7 +24,18 @@
     "username": "اسم المستخدم",
     "mobileNumber":"رقم الهاتف المحمول",
     "email":"البريد الإكتروني",
-    "password": "كلمة المرور"
+    "password": "كلمة المرور",
+    "clientGroup":"مجموعة العميل",
+    "practiceArea": "مجال التخصص",
+    "mattStatus":"حالة القضية",
+    "referralType":"نوع الترشيح",
+    "department":"الاقسام",
+    "industry":"المجال الوظيفي",
+    "stage":"درجات القضية",
+    "partiesDescription":"صفه الأطراف",
+    "adjournmentReasons":"سبب التأجيل",
+    "matterCategory": "فئة القضية",
+    "taskCode":"نوع المهمه"
   },
   "btn": {
     "submit": "تاكيد",
@@ -43,6 +54,7 @@
     "updateSuccessfully": "تم التحديث بنجاح",
     "deletedSuccessfully": "تم الحذف بنجاح",
     "internalServerError": "خطأ داخلي في الخادم!",
+    "badRequestError":"Bad Request Error!",
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
     "invalidOTP": "OTP غير صالح",
     "dataMessage": "المجموع الكلى",
@@ -75,5 +87,8 @@
     "Low": "قليل",
     "Normal": "طبيعي",
     "High": "عالي"
+    
   }
 }
+
+

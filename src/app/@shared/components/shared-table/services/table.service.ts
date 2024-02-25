@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedTableService {
-  search$ = new Subject<string>()
+  search$ = new Subject<string>();
+  refreshData = new Subject()
   constructor() { }
 }

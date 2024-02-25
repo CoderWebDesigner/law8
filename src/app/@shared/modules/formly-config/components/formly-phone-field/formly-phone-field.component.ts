@@ -13,5 +13,4 @@ export class FormlyPhoneFieldComponent extends FieldType<FieldTypeConfig> {
 	CountryISO = CountryISO;
 	PhoneNumberFormat = PhoneNumberFormat;
 	preferredCountries: CountryISO[] = [CountryISO.UnitedArabEmirates];
-
 }

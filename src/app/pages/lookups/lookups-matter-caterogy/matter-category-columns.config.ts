@@ -1,85 +1,89 @@
 export const Matter_Category_Columns_AR = [
 
   {
-    header: 'Name EN',
-    field: 'nameEN',
+    header: 'الاسم الاجنبى ',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
-    header: 'Name AR',
-    field: 'nameAR',
+    header: 'الاسم العربى ',
+    field: 'nameAr',
+    isSort:true,
+
   },
-  {
-    header: 'Appeal Period',
-    field: 'appealPeriod',
-  },
-  {
-    header: 'Cassation Period',
-    field: 'cassationPeriod',
-  },
+
   {
     header: 'Practice Area',
-    field: 'practiceArea',
+    field: 'practsArea',
+    isSort:true,
+
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    // isSwitch:true
+    isStatus:true
+
   },
 ]
 export const Matter_Category_Columns_EN = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
+    isSort:true,
+
   },
-  {
-    header: 'Appeal Period',
-    field: 'appealPeriod',
-  },
-  {
-    header: 'Cassation Period',
-    field: 'cassationPeriod',
-  },
+
   {
     header: 'Practice Area',
-    field: 'practiceArea',
+    field: 'practsArea',
+    isSort:true,
+
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    // isSwitch:true
+    isStatus:true
+
   },
 ]
 export const Matter_Category_Columns_FR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
+    isSort:true,
+
+
   },
-  {
-    header: 'Appeal Period',
-    field: 'appealPeriod',
-  },
-  {
-    header: 'Cassation Period',
-    field: 'cassationPeriod',
-  },
+
   {
     header: 'Practice Area',
-    field: 'practiceArea',
+    field: 'practsArea',
+    isSort:true,
+
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    // isSwitch:true
+    isStatus:true
+
   },
 ]
 
@@ -88,49 +92,100 @@ export const Matter_Category_Children_Columns_AR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
-  },
+    field: 'nameAr',
+    isSort:true,
 
+  },
+  {
+    header: 'Appeal Period',
+    field: 'appealPeriod',
+    isSort:true,
+
+  },
+  {
+    header: 'Cassation Period',
+    field: 'cassationPeriod',
+    isSort:true,
+
+  },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    // isSwitch:true
   },
+
 ]
 export const Matter_Category_Children_Columns_EN = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
+    isSort:true,
+
+  },
+  {
+    header: 'Appeal Period',
+    field: 'appealPeriod',
+    isSort:true,
+
+  },
+  {
+    header: 'Cassation Period',
+    field: 'cassationPeriod',
+    isSort:true,
+
   },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    // isSwitch:true
+    isStatus:true
+
   },
 ]
 export const Matter_Category_Children_Columns_FR = [
 
   {
     header: 'Name EN',
-    field: 'nameEN',
+    field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
-    field: 'nameAR',
+    field: 'nameAr',
+    isSort:true,
+
   },
- 
+  {
+    header: 'Appeal Period',
+    field: 'appealPeriod',
+    isSort:true,
+
+  },
+  {
+    header: 'Cassation Period',
+    field: 'cassationPeriod',
+    isSort:true,
+
+  },
   {
     header: 'Active',
-    field: 'active',
-    isSwitch:true
+    field: 'activeText',
+    // isSwitch:true
+    isStatus:true
+
   },
 ]

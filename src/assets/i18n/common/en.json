@@ -24,7 +24,19 @@
     "username": "Username",
     "mobileNumber":"Mobile Number",
     "email":"Email",
-    "password": "Password"
+    "password": "Password",
+    "clientGroup":"Client Group",
+    "practiceArea": "Practice Area",
+    "mattStatus":"Matter Status",
+    "referralType":"ReferralType",
+    "department":"Department",
+    "industry": "Industry",
+    "stage":"stage",
+    "partiesDescription":"Parties Description",
+    "adjournmentReasons":"Adjournment Reasons",
+    "matterCategory":"Matter Category",
+    "taskCode":"Task Code"
+
   },
   "btn": {
     "save": "Save",
@@ -44,6 +56,7 @@
     "updateSuccessfully": "Update successfully",
     "deletedSuccessfully": "Deleted successfully",
     "internalServerError": "Internal Server Error!",
+    "badRequestError":"Bad Request Error!",
     "userIdOrEmailWrong": "Entered UserId or Email Wrong Please Try Again !",
     "invalidOTP": "Invalid OTP",
     "dataMessage": "Total",

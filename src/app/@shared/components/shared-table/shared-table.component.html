@@ -1,10 +1,9 @@
-<div class="position-relative">
+<div class="position-relative" >
   <p-table
     #dt
     [columns]="columns"
     [value]="data"
-    [loading]="isLoading"
-    [lazy]="false"
+    [lazy]="true"
     [resizableColumns]="true"
     [tableStyle]="{ 'min-width': '100%' }"
     [(selection)]="selected || defaultSelected"
@@ -16,10 +15,14 @@
     [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)"
     [selectionMode]="selectMode"
+    (onSort)="getSort($event)"
   >
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngIf="columnsLocalizedChildren || withCheckbox || withRadioButton" style="width: 5rem">
+        <th
+          *ngIf="columnsLocalizedChildren || withCheckbox || withRadioButton"
+          style="width: 5rem"
+        >
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
@@ -29,7 +32,7 @@
             *ngIf="!col.isExpand"
           >
             {{ col.header }}
-            <p-sortIcon [field]="col.field"></p-sortIcon>
+            <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
           </th>
         </ng-container>
 
@@ -37,6 +40,7 @@
         <th *ngIf="tableConfig.actions?.length || actionsTemplateRef">
           {{ "common.actions" | translate }}
         </th>
+
       </tr>
     </ng-template>
     <ng-template
@@ -45,7 +49,7 @@
       let-columns="columns"
       let-expanded="expanded"
     >
-      <tr [pSelectableRow]="rowData">
+      <tr [pSelectableRow]="rowData" *ngIf="!isLoading">
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>
@@ -60,6 +64,7 @@
             [pRowToggler]="rowData"
             class="p-button-text p-button-rounded p-button-plain"
             [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            (click)="onSelectionChange(rowData?.id,expanded)"
           ></button>
         </td>
         <td *ngFor="let col of columns">
@@ -85,7 +90,10 @@
             {{ rowData[col.field] | date : "mediumDate" }}
           </ng-container>
           <ng-container *ngIf="col?.isSwitch">
-            <p-inputSwitch [(ngModel)]="rowData[col.field]" (onChange)="onSwitch($event)"></p-inputSwitch>
+            <p-inputSwitch
+              [(ngModel)]="rowData[col.field]"
+              (onChange)="onSwitch($event)"
+            ></p-inputSwitch>
           </ng-container>
 
           <ng-container *ngIf="col?.withIcon">
@@ -118,6 +126,7 @@
           <div class="d-flex align-items-center">
             <ng-container *ngFor="let action of tableConfig?.actions">
               <p-button
+                *ngIf="!action.isReadOnly"
                 [styleClass]="
                   'p-button-text p-0 me-3 d-flex' +
                   (action.type === 'delete' ? ' p-button-danger' : '')
@@ -145,24 +154,30 @@
           </div>
         </td>
       </tr>
+      <!-- <tr *ngIf="isLoading">
+        <td *ngFor="let column of columns"><p-skeleton></p-skeleton></td>
+      </tr> -->
     </ng-template>
     <ng-template
-    pTemplate="rowexpansion"
-    let-rowData
-    *ngIf="columnsLocalizedChildren"
-  >
-    <tr>
-      <td colspan="7" class="pe-0 ps-5">
-        <shared-table
-          [columnsLocalized]="columnsLocalizedChildren"
-          [additionalTableConfig]="additionalTableConfigChildren"
-          [data]="rowData['children']"
-          [isPaginator]="false"
-        >
-        </shared-table>
-      </td>
-    </tr>
-  </ng-template>
+      pTemplate="rowexpansion"
+      let-rowData
+      *ngIf="columnsLocalizedChildren"
+    >
+      <tr>
+        <td colspan="7" class="pe-0 ps-5">
+          <shared-table
+            [columnsLocalized]="columnsLocalizedChildren"
+            [additionalTableConfig]="additionalTableConfigChildren"
+            [data]="rowData['children']"
+            [apiUrls]="apiUrlsChild"
+            [isPaginator]="false"
+            [mapData]="mapData"
+            [filterOptions]="filterSubOptions"
+          >
+          </shared-table>
+        </td>
+      </tr>
+    </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
       <tr>
         <td [attr.colspan]="columns.length">No records found</td>
@@ -170,11 +185,12 @@
     </ng-template>
   </p-table>
   <div dir="ltr">
+
     <p-paginator
-      *ngIf="!paginationClient"
+    *ngIf="withPagination"
       (onPageChange)="pageChanged($event)"
-      [first]="filterOptions?.pageNo * filterOptions?.pageSize"
-      [rows]="filterOptions?.pageSize"
+
+      [rows]="filterOptions?.pagSize"
       [totalRecords]="!paginationClient ? totalRecords : data?.length"
       [rowsPerPageOptions]="PAGE_SIZE_OPTION"
       [showCurrentPageReport]="true"
@@ -184,3 +200,11 @@
     ></p-paginator>
   </div>
 </div>
+
+<!-- <ng-template #loadingSkeleton>
+  <p-skeleton
+    height="4rem"
+    *ngFor="let item of [].constructor(4)"
+    styleClass="mb-3"
+  ></p-skeleton>
+</ng-template> -->

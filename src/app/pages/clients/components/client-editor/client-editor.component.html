@@ -1,0 +1,24 @@
+<shared-card [borderRadius]="20" [title]="'client.addClient' | translate">
+  <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+    <formly-form
+      [form]="formly"
+      [fields]="formlyFields"
+      [model]="formlyModel"
+    ></formly-form>
+    <p-tabView body>
+      <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
+          <!-- <app-client-add-company-address *ngIf="i==0"></app-client-add-company-address>
+          <app-client-add-billing-address *ngIf="i==1"></app-client-add-billing-address> -->
+          <app-client-contacts *ngIf="i==0" [data]="formlyModel?.clientContacts" [previewOnly]="disableInputs"></app-client-contacts>
+      </p-tabPanel>
+    </p-tabView>
+    <div class="mt-4 text-end" *ngIf="!disableInputs">
+      <p-button
+        [loading]="isSubmit"
+        styleClass="p-button-primary d-block py-3"
+        type="submit"
+        label="{{ 'btn.submit' | translate }}"
+      ></p-button>
+    </div>
+  </form>
+</shared-card>

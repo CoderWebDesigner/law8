@@ -30,8 +30,8 @@
         "lookups":{
           "title":"Lookups",
           "matterCategory":"Matter Category",
-          "mainList":"Main List",
-          "matterRegions":"Matter Regions",
+          "mainList":"Master List",
+          "Jurisdictions":"Jurisdictions",
           "rateTable":"Rate Table"
         }
     }

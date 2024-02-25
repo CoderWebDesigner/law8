@@ -24,14 +24,27 @@ export class ClientsComponent {
   };
 
   additionalTableConfig: TableConfig = {
-    id: 'CardCode',
+    id: 'id',
     actions: [
+      // {
+      //   title: this._languageService.getTransValue('client.clientDetails'),
+      //   targetType: 'path',
+      //   target: '/clients/view/',
+      //   icon:'eye'
+      // },
       {
-        title: this._languageService.getTransValue('client.clientDetails'),
+        title: this._languageService.getTransValue('client.updateClient'),
         targetType: 'path',
-        target: '/clients/view/',
+        target: '/clients/update/',
         icon:'eye'
       },
     ],
   };
+  mapData(data){
+    console.log(data)
+    return data.map((v)=>({
+      ...v,
+      balance:0
+    }))
+  }
 }

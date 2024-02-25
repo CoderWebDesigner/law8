@@ -163,7 +163,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 key: 'matterCategory',
                 className: 'col-md-4',
                 props: {
-                  label: this._languageService.getTransValue('matters.matterCategory'),
+                  label: this._languageService.getTransValue('common.matterCategory'),
                   options: [
                     { label: 'Category 1', value: 'Category 1' },
                     { label: 'Category 2', value: 'Category 2' },

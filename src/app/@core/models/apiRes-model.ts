@@ -1,9 +1,10 @@
 export interface ApiRes {
-  Data: any;
-  Errors: ErrorResponse;
-  Success: boolean;
-  Message: string
+  isSuccess:boolean,
+  message:string;
+  result:any
 }
+
+
 
 
 interface ErrorResponse {

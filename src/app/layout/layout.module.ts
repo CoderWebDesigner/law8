@@ -39,7 +39,7 @@ const components = [
     DropdownModule,
     BreadcrumbModule,
     AppUserComponent,
-    AppSettingsComponent
+    AppSettingsComponent,
   ],
   exports:[
     ...components

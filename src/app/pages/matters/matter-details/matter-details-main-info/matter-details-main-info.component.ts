@@ -154,7 +154,7 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             key: 'matterCategory',
             className: 'col-lg-3 col-md-4',
             props: {
-              label: this._languageService.getTransValue('matters.matterCategory'),
+              label: this._languageService.getTransValue('common.matterCategory'),
               readonly: this.readOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
@@ -178,7 +178,7 @@ export class MatterDetailsMainInfoComponent extends FormBaseClass implements OnI
             key: 'practiceArea',
             className: 'col-lg-3 col-md-4',
             props: {
-              label: this._languageService.getTransValue('matters.practiceArea'),
+              label: this._languageService.getTransValue('common.practiceArea'),
               readonly: this.readOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },

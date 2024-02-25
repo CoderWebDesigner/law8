@@ -5,7 +5,7 @@
 
     "matterType": "نوع القضية",
     "parentMatterCode": "رقم القضية الاساسية",
-    "matterCategory": "فئة القضية",
+    
     "requestType": "نوع الطلب",
     "description": "الوصف",
     "opened": "تاريخ فتح القضية",
@@ -13,7 +13,7 @@
     "juricature": "الجهة القضائية",
     "stage": "Stage",
     "matterStatus": "Matter Status",
-    "practiceArea": "Practice Area",
+
     "courtNumber": "Court Number",
     "matterSummary": "Matter Summay",
     "paymentTerms": "Payment Terms",
