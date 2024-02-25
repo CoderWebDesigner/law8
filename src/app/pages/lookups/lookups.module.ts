@@ -19,7 +19,7 @@ import { LookupsRateTableComponent } from './lookups-rate-table/lookups-rate-tab
     LookupsMatterCaterogyComponent,
     LookupsMainListComponent,
     LookupsJurisdictionsComponent,
-    LookupsRateTableComponent
+    LookupsRateTableComponent,
   ],
   imports: [
     CommonModule,

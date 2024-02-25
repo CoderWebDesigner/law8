@@ -1,13 +1,15 @@
 export const Jurisdictions_Columns_AR = [
   {
-    header: 'Name EN',
+    header: 'الاسم الاجنبى ',
     field: 'nameEn',
     isSort:true,
+
   },
   {
-    header: 'Name AR',
+    header: 'الاسم العربى ',
     field: 'nameAr',
     isSort:true,
+
   },
 
   {

@@ -93,6 +93,13 @@ export const Lookups_API={
     "update":"Law_RateType/Update",
     "delete":"Law_RateType/Delete"
     
+  },
+  "rate":{
+    "get":"Law_Rate/GetList",
+    "create":"Law_Rate/Create",
+    "update":"Law_Rate/Update",
+    "delete":"Law_Rate/Delete"
+    
   }
 
 }

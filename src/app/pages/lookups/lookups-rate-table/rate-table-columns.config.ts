@@ -1,33 +1,44 @@
 export const Rate_Columns_AR = [
 
   {
-    header: 'Name EN',
+    header: 'الاسم الاجنبى ',
     field: 'nameEn',
+    isSort:true,
+
   },
   {
-    header: 'Name AR',
+    header: 'الاسم العربى ',
     field: 'nameAr',
+    isSort:true,
+
   },
   {
-    header: 'Active',
-    field: 'active',
-   
+    header: 'الحالة',
+    field: 'activeText',
+    isSort:true,
+
   },
+
 ]
 export const Rate_Columns_EN = [
 
   {
     header: 'Name EN',
     field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
     field: 'nameAr',
+    isSort:true,
+
   },
   {
     header: 'Active',
     field: 'activeText',
-   
+    isSort:true,
+
   },
 ]
 export const Rate_Columns_FR = [
@@ -35,15 +46,19 @@ export const Rate_Columns_FR = [
   {
     header: 'Name EN',
     field: 'nameEn',
+    isSort:true,
+
   },
   {
     header: 'Name AR',
     field: 'nameAr',
+    isSort:true,
+
   },
   {
     header: 'Active',
     field: 'activeText',
-   
+    isSort:true,
   },
 ]
 
@@ -52,22 +67,20 @@ export const Rate_Children_Columns_AR = [
   {
     header: 'Rate',
     field: 'rate',
+    isSort:true,
+
   },
   {
     header: 'Rate Name',
-    field: 'rateName',
+    field: 'name',
+    isSort:true,
+
   },
-  // {
-  //   header: 'Rate Name EN',
-  //   field: 'rateName',
-  // },
-  // {
-  //   header: 'Rate Name AR',
-  //   field: 'rateName',
-  // },
   {
     header: 'Amount',
     field: 'amount',
+    isSort:true,
+
   },
 ]
 export const Rate_Children_Columns_EN = [
@@ -75,22 +88,20 @@ export const Rate_Children_Columns_EN = [
   {
     header: 'Rate',
     field: 'rate',
+    isSort:true,
+
   },
   {
     header: 'Rate Name',
-    field: 'rateName',
+    field: 'name',
+    isSort:true,
+
   },
-  // {
-  //   header: 'Rate Name EN',
-  //   field: 'rateName',
-  // },
-  // {
-  //   header: 'Rate Name AR',
-  //   field: 'rateName',
-  // },
   {
     header: 'Amount',
     field: 'amount',
+    isSort:true,
+
   },
 
 ]
@@ -99,22 +110,20 @@ export const Rate_Children_Columns_FR = [
   {
     header: 'Rate',
     field: 'rate',
+    isSort:true,
+
   },
   {
     header: 'Rate Name',
-    field: 'rateName',
+    field: 'name',
+    isSort:true,
+
   },
-  // {
-  //   header: 'Rate Name EN',
-  //   field: 'rateName',
-  // },
-  // {
-  //   header: 'Rate Name AR',
-  //   field: 'rateName',
-  // },
+
   {
     header: 'Amount',
     field: 'amount',
+    isSort:true,
   },
 
 ]

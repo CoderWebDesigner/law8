@@ -5,15 +5,16 @@ export let Main_List_Client_Group_Columns_AR = [
     isSort: true,
   },
   {
-    header: 'Name EN',
-    field: 'nameEn',
-    isSort: true,
-  },
-  {
-    header: 'Name AR',
+    header: 'الاسم بالعربى',
     field: 'nameAr',
     isSort: true,
   },
+  {
+    header: 'الاسم بالانجليزى',
+    field: 'nameEn',
+    isSort: true,
+  },
+
   {
     header: 'Active',
     field: 'activeText',

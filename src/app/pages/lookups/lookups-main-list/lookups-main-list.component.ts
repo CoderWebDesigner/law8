@@ -8,6 +8,8 @@ import {
   Matter_Main_List_Columns_AR,
   Matter_Main_List_Columns_EN,
   Matter_Main_List_Columns_FR,
+  Matter_Sub_List_Columns_AR,
+  Matter_Sub_List_Columns_EN,
   Matter_Sub_List_Columns_FR,
 } from './main-list-columns.config';
 import { ApiService } from '@core/api/api.service';
@@ -220,8 +222,8 @@ export class LookupsMainListComponent implements OnInit {
       fr: Main_List_Task_code_Columns_FR,
     };
     let subColumns = {
-      ar: Matter_Sub_List_Columns_FR,
-      en: Matter_Sub_List_Columns_FR,
+      ar: Matter_Sub_List_Columns_AR,
+      en: Matter_Sub_List_Columns_EN,
       fr: Matter_Sub_List_Columns_FR,
     };
     this.selectedRow = event.data;

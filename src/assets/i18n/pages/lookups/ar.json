@@ -19,7 +19,10 @@
     "clientGroupNumber":"رقم مجموعة العميل ",
     "matterCategory": "فئة القضية",
     "initial":"الاسم المختصر",
-    "group":"المجموعة"
+    "group":"المجموعة",
+    "rateName":"RateName",
+    "amount":"Amount"
+
 
   }
 }

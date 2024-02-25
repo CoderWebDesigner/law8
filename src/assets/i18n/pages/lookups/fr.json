@@ -19,6 +19,8 @@
     "clientGroupNumber":"Client Group Number",
     "matterCategory":"matter Category",
     "initial":"Initial",
-    "group":"Group"
+    "group":"Group",
+    "rateName":"RateName",
+    "amount":"Amount"
   }
 }

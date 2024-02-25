@@ -1,14 +1,15 @@
 export let Matter_Main_List_Columns_AR = [
   {
-    header: 'Name EN',
-    field: 'nameEN',
-    isSort: false,
-  },
-  {
-    header: 'Name AR',
+    header: 'الاسم العربى ',
     field: 'nameAR',
 
   },
+  {
+    header: 'الاسم الاجنبى',
+    field: 'nameEN',
+    isSort: false,
+  },
+
 ];
 export let Matter_Main_List_Columns_EN = [
   {
@@ -35,17 +36,18 @@ export let Matter_Main_List_Columns_FR = [
 ];
 export let Matter_Sub_List_Columns_AR = [
   {
-    header: 'Name EN',
-    field: 'nameEn',
-    isSort:true,
-  },
-  {
-    header: 'Name AR',
+    header: 'الاسم العربى ',
     field: 'nameAr',
     isSort:true,
   },
   {
-    header: 'Active',
+    header: 'الاسم الاجنبى',
+    field: 'nameEn',
+    isSort:true,
+  },
+
+  {
+    header: 'الحالة',
     field: 'activeText',
     // isSwitch:true
     isStatus: true,

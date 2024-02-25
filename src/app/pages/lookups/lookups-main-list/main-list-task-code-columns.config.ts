@@ -10,17 +10,20 @@ export let Main_List_Task_code_Columns_AR = [
     isSort: true,
   },
   {
-    header: 'Name EN',
-    field: 'nameEn',
-    isSort: true,
-  },
-  {
-    header: 'Name AR',
+    header: 'الاسم العربى ',
     field: 'nameAr',
-    isSort: true,
+    isSort:true,
+
   },
   {
-    header: 'Active',
+    header: 'الاسم الاجنبى ',
+    field: 'nameEn',
+    isSort:true,
+
+  },
+
+  {
+    header: 'الحالة',
     field: 'activeText',
     // isSwitch:true
     isStatus: true,

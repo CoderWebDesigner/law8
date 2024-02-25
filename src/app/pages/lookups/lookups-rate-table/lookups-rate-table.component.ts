@@ -9,6 +9,8 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { PAGESIZE } from '@core/utilities/defines';
+import { LookupsSupRateComponent } from './lookups-sup-rate/lookups-sup-rate.component';
 
 @Component({
   selector: 'app-lookups-rate-table',
@@ -22,7 +24,10 @@ export class LookupsRateTableComponent implements OnInit {
   _sharedService=inject(SharedService)
   _sharedTableService = inject(SharedTableService)
   apiUrls=API_Config.rateType;
-  apiUrlsChild=API_Config;// add child
+  apiUrlsChild=API_Config.rate;// add child
+  filterSubOptions: any = {
+
+  };
   columnsLocalized: any = {
     ar: Rate_Columns_AR,
     en: Rate_Columns_EN,
@@ -43,11 +48,11 @@ export class LookupsRateTableComponent implements OnInit {
         icon:'pencil',
         width:'30%'
       },
-      // {
-      //   type:'delete',
-      //   title: this._languageService.getTransValue('btn.delete'),
-      //   icon:'trash'
-      // },
+      {
+        type:'delete',
+        title: this._languageService.getTransValue('btn.delete'),
+        icon:'trash'
+      },
     ]
   }
   additionalTableConfigChildren: TableConfig = {
@@ -56,7 +61,7 @@ export class LookupsRateTableComponent implements OnInit {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsSubItemEditorComponent,
+        target: LookupsSupRateComponent,
         icon:'pencil',
         width:'30%'
       },
@@ -82,14 +87,7 @@ export class LookupsRateTableComponent implements OnInit {
       this._sharedTableService.refreshData.next(true);
     });
   }
-  mapData(data:any[]){
-    return data.map(obj=>{
-      return {
-        ...obj,
-        activeText:(obj.active)?'Active':'Inactive'
-      }
-    })
-  }
+
   private setDialogHeader(formType:string,categorytype:string){
     const isSubItem = (categorytype === 'sub');
     const keyToUpdate = isSubItem ? 'lookups.updateSubItem' : 'lookups.updateMainItem';
@@ -98,9 +96,22 @@ export class LookupsRateTableComponent implements OnInit {
       this._languageService.getTransValue(keyToUpdate) :
       this._languageService.getTransValue(keyToAdd);
   }
+
   onRowSelect(e){
-    // this.columnsLocalizedChildren= swapFirstTwoIndexes(
-    //   this.columnsLocalizedChildren,this._languageService.getSelectedLanguage(),1,2
-    // );
+    this.filterSubOptions =  {
+      pageNum: 1,
+      pagSize: PAGESIZE,
+      orderByDirection: 'ASC',
+      mainCategoryId:e
+    }
+  }
+
+  mapData(data:any[]){
+    return data.map(obj=>{
+      return {
+        ...obj,
+        activeText:(obj.active)?'Active':'Inactive'
+      }
+    })
   }
 }
