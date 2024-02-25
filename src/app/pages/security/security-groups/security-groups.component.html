@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-5">
+    <shared-card
+      [title]="'security.groups' | translate"
+      [borderRadius]="20"
+      class="mb-4"
+    >
+      <div headerActions class="d-flex flex-sm-column text-end">
+        <p-button
+          [label]="'security.addGroup' | translate"
+          (onClick)="openItemEditor()"
+          styleClass="py-2 px-4 mx-2 mb-2"
+        ></p-button>
+        <shared-search-input></shared-search-input>
+      </div>
+
+      <shared-table
+        body
+        [data]="data"
+        [withCheckbox]="true"
+        [columnsLocalized]="columnsLocalized"
+        [additionalTableConfig]="additionalTableConfig"
+        (onRowSelect)="onRowSelect($event)"
+        (onRowUnSelect)="onRowUnSelect($event)"
+      ></shared-table>
+    </shared-card>
+  </div>
+  <div class="col-md-7" *ngIf="selectedRow">
+    <shared-card  [borderRadius]="20" [title]="'security.permissions' | translate">
+      <p-pickList
+        dir="ltr"
+        body
+        [source]="source"
+        [target]="target"
+        [sourceHeader]="'security.available'|translate"
+        [targetHeader]="'security.selected'|translate"
+        [dragdrop]="true"
+        [responsive]="true"
+        [showSourceControls]="false"
+        [showTargetControls]="false"
+        breakpoint="1400px"
+      >
+        <ng-template let-item let-rowIndex pTemplate="item">
+          <div class="flex flex-wrap p-2 align-items-center gap-3">
+            <span>
+              {{ item?.id }} -
+              <span>{{ item?.name }}</span></span
+            >
+          </div>
+        </ng-template>
+      </p-pickList>
+    </shared-card>
+  </div>
+</div>

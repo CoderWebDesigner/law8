@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./lookups/lookups.module').then((m) => m.LookupsModule)
   },
   {
+    path: 'security',
+    loadChildren: () => import('./security/security.module').then((m) => m.SecurityModule)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule)
   },

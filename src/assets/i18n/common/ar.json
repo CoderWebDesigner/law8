@@ -45,7 +45,8 @@
     "no": "لا",
     "cancel":"يلغي",
     "filter":"فلتره",
-    "delete":"مسح"
+    "delete":"مسح",
+    "update":"تعديل"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -87,7 +88,7 @@
     "Low": "قليل",
     "Normal": "طبيعي",
     "High": "عالي"
-    
+
   }
 }
 

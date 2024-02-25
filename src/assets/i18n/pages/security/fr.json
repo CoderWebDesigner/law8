@@ -1,0 +1,9 @@
+{
+  "security":{
+    "groups":"Groups",
+    "addGroup":"Add Group",
+    "available":"Available",
+    "selected":"Selected",
+    "permissions":"Permissions"
+  }
+}

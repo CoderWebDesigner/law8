@@ -47,7 +47,8 @@
     "no": "No",
     "cancel":"Cancel",
     "filter":"Filter",
-    "delete":"Delete"
+    "delete":"Delete",
+    "update":"Update"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",

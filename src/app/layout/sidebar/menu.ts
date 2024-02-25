@@ -143,14 +143,14 @@ export const MENU: MenuItem[] = [
 
       },
       {
-        id: 3,
-        label: 'menu.lookups.Jurisdictions',
-        link: '/lookups/Jurisdictions',
+        id: 4,
+        label: 'menu.lookups.jurisdictions',
+        link: '/lookups/jurisdictions',
         parentId: 7
 
       },
       {
-        id: 3,
+        id: 5,
         label: 'menu.lookups.rateTable',
         link: '/lookups/rate',
         parentId: 7
@@ -158,7 +158,11 @@ export const MENU: MenuItem[] = [
       },
     ]
   },
-
-
+  {
+    id: 8,
+    label: 'menu.security.title',
+    icon: 'security.svg',
+    link: '/security'
+  },
 
 ];

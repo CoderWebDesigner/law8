@@ -26,6 +26,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/profile/',
     './assets/i18n/pages/user/',
     './assets/i18n/pages/lookups/',
+    './assets/i18n/pages/security/',
   ]);
 }
 @NgModule({
