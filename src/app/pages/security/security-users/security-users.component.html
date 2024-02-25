@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-7">
     <shared-card
       [title]="'menu.users.title' | translate"
       [borderRadius]="20"
@@ -10,10 +10,13 @@
         body
         [data]="users"
         [columnsLocalized]="columnsLocalized"
+        [selectMode]="'single'"
+        (onRowSelect)="onRowSelect($event)"
+        (onRowUnSelect)="onRowUnSelect($event)"
       ></shared-table>
     </shared-card>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-5" *ngIf="selectedRow">
     <shared-card
       [title]="'security.groups' | translate"
       [borderRadius]="20"

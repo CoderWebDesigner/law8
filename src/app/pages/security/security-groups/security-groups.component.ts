@@ -76,7 +76,6 @@ export class SecurityGroupsComponent {
     });
   }
   onRowSelect(e:any){
-    console.log(e)
     this.selectedRow = e?.data
   }
   onRowUnSelect(e:any){

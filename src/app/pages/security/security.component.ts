@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { LanguageService } from '@core/services';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -9,10 +10,11 @@ import { MenuItem } from 'primeng/api';
 export class SecurityComponent implements OnInit {
   items: MenuItem[] | undefined;
   activeItem: MenuItem | undefined;
+  _languageService = inject(LanguageService)
   ngOnInit(): void {
     this.items = [
-      { label: 'users', icon: 'pi pi-fw pi-home', routerLink: '/security/users' },
-      { label: 'groups', icon: 'pi pi-fw pi-calendar', routerLink: '/security/groups' }
+      { label: this._languageService.getTransValue('menu.users.title'), icon: 'pi pi-fw pi-user', routerLink: '/security/users' },
+      { label: this._languageService.getTransValue('security.groups'), icon: 'pi pi-fw pi-share-alt', routerLink: '/security/groups' }
     ];
     this.activeItem = this.items[1];
   }

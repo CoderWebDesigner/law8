@@ -5,15 +5,17 @@ import { SharedTableComponent } from '@shared/components/shared-table/shared-tab
 import { SharedModule } from '@shared/shared.module';
 import { Security_Groups_Columns_EN, Security_Groups_Columns_AR, Security_Groups_Columns_FR } from '../security-groups/security-groups-columns.config';
 import { Users_Columns_EN, Users_Columns_AR, Users_Columns_FR } from './users-columns-config';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-security-users',
   templateUrl: './security-users.component.html',
   styleUrls: ['./security-users.component.scss'],
   standalone:true,
-  imports:[SharedTableComponent,SharedCardComponent,SharedSearchInputComponent,SharedModule]
+  imports:[CommonModule,SharedTableComponent,SharedCardComponent,SharedSearchInputComponent,SharedModule]
 })
 export class SecurityUsersComponent {
+  selectedRow:any;
   groupColumnsLocalized={
     en: Security_Groups_Columns_EN,
     ar: Security_Groups_Columns_AR,
@@ -37,4 +39,11 @@ export class SecurityUsersComponent {
       "name": "User 1"
     }
   ]
+  onRowSelect(e:any){
+    console.log(e)
+    this.selectedRow = e?.data
+  }
+  onRowUnSelect(e:any){
+    this.selectedRow=e
+  }
 }
