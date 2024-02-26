@@ -4,6 +4,7 @@
     "addGroup":"Add Group",
     "available":"Available",
     "selected":"Selected",
-    "permissions":"Permissions"
+    "permissions":"Permissions",
+    "searchByName":"Search By Name"
   }
 }

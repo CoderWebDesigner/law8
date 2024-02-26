@@ -1,20 +1,16 @@
 <div id="layout-wrapper">
 
-    <app-topbar  (mobileMenuButtonClicked)="onToggleMobileMenu()">
-    </app-topbar>
-    
-    <app-sidebar></app-sidebar>
-  
-    <div class="main-content">
-      <app-breadcrumb></app-breadcrumb>
-      <div class="page-content">
-        <!-- content -->
-        <router-outlet></router-outlet>
-      </div>
-  
-  
+  <app-topbar (mobileMenuButtonClicked)="onToggleMobileMenu()">
+  </app-topbar>
+
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content">
+    <app-breadcrumb></app-breadcrumb>
+    <div class="page-content">
+      <!-- content -->
+      <router-outlet></router-outlet>
     </div>
-    <div class="sidenav-overlay"></div>
   </div>
-
-
+  <div class="sidenav-overlay"></div>
+</div>
