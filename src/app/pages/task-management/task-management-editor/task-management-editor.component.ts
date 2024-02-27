@@ -12,7 +12,6 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 })
 export class TaskManagementEditorComponent extends FormBaseClass implements OnInit, OnDestroy {
   _matterService = inject(MatterService)
-  _sharedService = inject(SharedService)
   _config = inject(DynamicDialogConfig)
   address: any[] = [];
   id:string;

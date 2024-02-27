@@ -6,6 +6,7 @@ import { Lookups_API } from "./lookups";
 import { Permission_API } from "./permission";
 import { Security_API } from "./security";
 import { Timesheet_API } from "./timesheet";
+import { Users_API } from "./users";
 
 export const API_Config = {
   ...General_API,
@@ -13,8 +14,9 @@ export const API_Config = {
   ...Clients_API,
   ...Dashboard_API,
   ...Timesheet_API,
-  ...Lookups_API,
   ...Security_API,
-  ...Permission_API
+  ...Permission_API,
+  ...Users_API,
+  ...Lookups_API
 
 }

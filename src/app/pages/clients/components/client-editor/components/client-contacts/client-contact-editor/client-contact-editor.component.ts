@@ -25,7 +25,6 @@ export class ClientContactEditorComponent
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.clientContact;
   _clientService = inject(ClientService);
-  _sharedService = inject(SharedService);
   _config = inject(DynamicDialogConfig);
   dialogRef = inject(DynamicDialogRef);
   contacts: any[] = [];

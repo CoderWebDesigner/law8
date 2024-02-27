@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@core/api/api.service';
 import { AuthService, LanguageService, ToasterService } from '@core/services';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { SharedService } from '@shared/services/shared.service';
 import {DialogService,DynamicDialogConfig,DynamicDialogRef} from 'primeng/dynamicdialog';
 import { Subject, finalize, takeUntil } from 'rxjs';
 @Component({
@@ -30,6 +32,8 @@ export abstract class FormBaseClass implements OnDestroy {
   _route = inject(ActivatedRoute);
   _router = inject(Router);
   _authService = inject(AuthService);
+  _sharedService = inject(SharedService);
+  _sharedTableService = inject(SharedTableService);
 
   //init Form
   abstract initForm(): void;
