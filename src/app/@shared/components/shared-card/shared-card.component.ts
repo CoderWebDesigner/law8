@@ -14,8 +14,9 @@ export class SharedCardComponent {
   @Input() isSubTitle: boolean = false;
   @Input() isSubCard: boolean = false;
   @Input() withTitleDivider: boolean = true;
-  
+
   @Input() style;
+  @Input() class:string;
 
   getCustomStyle() {
     return { 'border-radius': this.borderRadius, ...this.style };

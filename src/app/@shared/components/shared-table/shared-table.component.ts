@@ -106,6 +106,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() withPlaceholder: boolean;
   @Input() defaultSelected: any;
   @Output() onRowSelect: any = new EventEmitter();
+  @Output() onRowUnSelect: any = new EventEmitter();
 
   @ViewChild('dt') dt: Table;
   @Input() isLoading: boolean = false;
@@ -302,6 +303,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   onSelectionChange(event, isExpand?: boolean) {
     if (!isExpand) this.onRowSelect.emit(event);
   }
+  onUnSelect(e:any){
+    this.onRowUnSelect.emit(null)
+  }
 
   getTagClass(value: string) {
     return {
@@ -315,7 +319,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     // if(this.data || (this.apiUrls && this.columnsLocalized && this.filterOptions)){
       // }
-      
+
   }
 
   onSearch() {

@@ -4,32 +4,28 @@ import { AuthGuard } from '@core/guards/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-
   {
     path: 'auth',
-    loadChildren: () => import('@core/auth/auth.module').then((m) => m.AuthModule)
+    loadChildren: () =>
+      import('@core/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '',
     component: LayoutComponent,
-    loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
+    loadChildren: () =>
+      import('./pages/pages.module').then((m) => m.PagesModule),
     // canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '**', redirectTo: '' },
-
 ];
-
 
 const config: ExtraOptions = {
   useHash: true,
 };
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, config)
-  ],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
-
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

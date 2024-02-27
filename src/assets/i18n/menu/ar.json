@@ -31,8 +31,11 @@
           "title":"القوائم الرئيسية",
           "matterCategory":" تصنيفات القضايا",
           "mainList":"البيانات الأساسية",
-          "Jurisdictions":"المناطق",
+          "jurisdictions":"المناطق",
           "rateTable":"جدول الاسعار"
+        },
+        "security":{
+          "title":"الصلاحيات"
         }
     }
 }

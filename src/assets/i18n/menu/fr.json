@@ -31,8 +31,11 @@
       "title":"Lookups",
       "matterCategory":"Matter Category",
       "mainList":"Master List",
-      "Jurisdictions":"Jurisdictions",
+      "jurisdictions":"Jurisdictions",
       "rateTable":"Rate Table"
+    },
+    "security":{
+      "title":"Security"
     }
   }
 }

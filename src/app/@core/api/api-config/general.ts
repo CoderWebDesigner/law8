@@ -9,7 +9,8 @@ export const General_API = {
       "getRecentMatters":"/GetRecentMatters/?empCode=",
       "getPractsAreaLookup":"AppLookup/GetLaw_PractsAreaLookup",
       "getJurisdictionLookup":"AppLookup/GetJurisdictionLookup",
-      "getMatterCategoriesLookup":"AppLookup/GetLaw_MatCatLookup"
+      "getMatterCategoriesLookup":"AppLookup/GetLaw_MatCatLookup",
+      "getItemLookup":"AppLookup/GetLaw_SEC_ItmLookup"
   }
 
 }

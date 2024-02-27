@@ -26,12 +26,6 @@ export class ClientsComponent {
   additionalTableConfig: TableConfig = {
     id: 'id',
     actions: [
-      // {
-      //   title: this._languageService.getTransValue('client.clientDetails'),
-      //   targetType: 'path',
-      //   target: '/clients/view/',
-      //   icon:'eye'
-      // },
       {
         title: this._languageService.getTransValue('client.updateClient'),
         targetType: 'path',

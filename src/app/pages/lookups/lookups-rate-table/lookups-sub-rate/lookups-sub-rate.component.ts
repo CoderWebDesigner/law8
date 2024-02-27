@@ -12,13 +12,13 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-lookups-sup-rate',
+  selector: 'app-lookups-sub-rate',
   standalone: true,
   imports: [CommonModule, SharedModule, ButtonModule, FormlyConfigModule],
-  templateUrl: './lookups-sup-rate.component.html',
-  styleUrls: ['./lookups-sup-rate.component.scss']
+  templateUrl: './lookups-sub-rate.component.html',
+  styleUrls: ['./lookups-sub-rate.component.scss']
 })
-export class LookupsSupRateComponent extends FormBaseClass
+export class LookupsSubRateComponent extends FormBaseClass
 implements OnInit
 {
 title: string;

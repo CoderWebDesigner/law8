@@ -1,5 +1,5 @@
 <p-card [style]="getCustomStyle()" [ngClass]="[
-    withTitleDivider ? 'borderBottom' : '', isSubCard ? 'sub-card' : '']">
+    withTitleDivider ? 'borderBottom' : '', isSubCard ? 'sub-card' : '']" [styleClass]="class">
 
   <ng-template pTemplate="title">
     <div class="d-flex justify-content-between  flex-row">
@@ -21,4 +21,3 @@
 
   <ng-content select="[body]"></ng-content>
 </p-card>
-

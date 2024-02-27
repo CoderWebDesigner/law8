@@ -10,7 +10,7 @@ import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-firs
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { PAGESIZE } from '@core/utilities/defines';
-import { LookupsSupRateComponent } from './lookups-sup-rate/lookups-sup-rate.component';
+import { LookupsSubRateComponent } from './lookups-sub-rate/lookups-sub-rate.component';
 
 @Component({
   selector: 'app-lookups-rate-table',
@@ -61,7 +61,7 @@ export class LookupsRateTableComponent implements OnInit {
       {
         type:'update',
         title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsSupRateComponent,
+        target: LookupsSubRateComponent,
         icon:'pencil',
         width:'30%'
       },
