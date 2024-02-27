@@ -12,6 +12,15 @@ export const Users_Columns_EN = [
     field: 'name',
   },
   {
+    header: 'Title',
+    field: 'title',
+  },
+  {
+    header: 'Department',
+    field: 'department',
+  },
+
+  {
     header: 'Telephone',
     field: 'telephone',
   },
@@ -53,6 +62,15 @@ export const Users_Columns_FR = [
     field: 'name',
   },
   {
+    header: 'Title',
+    field: 'title',
+  },
+  {
+    header: 'Department',
+    field: 'department',
+  },
+
+  {
     header: 'Telephone',
     field: 'telephone',
   },
@@ -92,6 +110,15 @@ export const Users_Columns_AR = [
     header: 'Name',
     field: 'name',
   },
+  {
+    header: 'Title',
+    field: 'title',
+  },
+  {
+    header: 'Department',
+    field: 'department',
+  },
+
   {
     header: 'Telephone',
     field: 'telephone',
