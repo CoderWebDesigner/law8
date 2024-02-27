@@ -17,7 +17,6 @@ import { SharedMatterTableComponent } from '@shared/components/business/shared-m
 export class TimesheetFormlyEditorComponent extends FormBaseClass implements OnInit, OnDestroy {
   _formlyService = inject(FormlyService)
   _timeSheetService = inject(TimesheetService)
-  _sharedService = inject(SharedService)
   cdRef = inject(ChangeDetectorRef);
   placeholderObject = new TimeSheet(new Date())
   selectedIndex!: string;

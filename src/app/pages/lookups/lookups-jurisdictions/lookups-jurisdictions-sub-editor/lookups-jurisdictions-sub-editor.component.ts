@@ -26,7 +26,6 @@ export class LookupsJurisdictionsSubEditorComponent
 
   config = inject(DynamicDialogConfig);
   dialogRef = inject(DynamicDialogRef);
-  _sharedService = inject(SharedService);
   ngOnInit(): void {
     if (this.config?.data?.rowData) this.getData();
     this.getLookupsData()

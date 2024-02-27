@@ -1,7 +1,7 @@
 export const Users_Columns_EN = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Initial',
@@ -13,20 +13,20 @@ export const Users_Columns_EN = [
   },
   {
     header: 'Title',
-    field: 'title',
+    field: 'titleId',
   },
   {
     header: 'Department',
-    field: 'department',
+    field: 'depart',
   },
 
   {
     header: 'Telephone',
-    field: 'telephone',
+    field: 'telNo',
   },
   {
     header: 'Mobile',
-    field: 'mobile',
+    field: 'mobileNo',
   },
   {
     header: 'Email',
@@ -38,11 +38,12 @@ export const Users_Columns_EN = [
   },
   {
     header: 'Timesheet Date',
-    field: 'timesheetDate',
+    field: 'timeSheetDate',
+    isDate:true,
   },
   {
     header: 'Activation',
-    field: 'activation',
+    field: 'active',
     isSwitch:true
   }
 ];
@@ -51,7 +52,7 @@ export const Users_Columns_EN = [
 export const Users_Columns_FR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Initial',
@@ -63,20 +64,20 @@ export const Users_Columns_FR = [
   },
   {
     header: 'Title',
-    field: 'title',
+    field: 'titleId',
   },
   {
     header: 'Department',
-    field: 'department',
+    field: 'depart',
   },
 
   {
     header: 'Telephone',
-    field: 'telephone',
+    field: 'telNo',
   },
   {
     header: 'Mobile',
-    field: 'mobile',
+    field: 'mobileNo',
   },
   {
     header: 'Email',
@@ -88,11 +89,12 @@ export const Users_Columns_FR = [
   },
   {
     header: 'Timesheet Date',
-    field: 'timesheetDate',
+    field: 'timeSheetDate',
+    isDate:true,
   },
   {
     header: 'Activation',
-    field: 'activation',
+    field: 'active',
     isSwitch:true
   }
 ];
@@ -100,7 +102,7 @@ export const Users_Columns_FR = [
 export const Users_Columns_AR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Initial',
@@ -112,20 +114,20 @@ export const Users_Columns_AR = [
   },
   {
     header: 'Title',
-    field: 'title',
+    field: 'titleId',
   },
   {
     header: 'Department',
-    field: 'department',
+    field: 'depart',
   },
 
   {
     header: 'Telephone',
-    field: 'telephone',
+    field: 'telNo',
   },
   {
     header: 'Mobile',
-    field: 'mobile',
+    field: 'mobileNo',
   },
   {
     header: 'Email',
@@ -137,11 +139,12 @@ export const Users_Columns_AR = [
   },
   {
     header: 'Timesheet Date',
-    field: 'timesheetDate',
+    field: 'timeSheetDate',
+    isDate:true,
   },
   {
     header: 'Activation',
-    field: 'activation',
+    field: 'active',
     isSwitch:true
   }
 ];

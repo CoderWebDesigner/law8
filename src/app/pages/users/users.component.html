@@ -8,9 +8,10 @@
   </div>
   <shared-table
     body
-    [data]="data"
+    [apiUrls]="apiUrls"
     [columnsLocalized]="columnsLocalized"
     [additionalTableConfig]="additionalTableConfig"
+    [filterOptions]="filterOptions"
   
   >
     <ng-template #actions let-rowData>

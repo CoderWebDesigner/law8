@@ -5,6 +5,8 @@ import { Users_Columns_AR, Users_Columns_EN, Users_Columns_FR } from './users-co
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
+import { API_Config } from '@core/api/api-config/api.config';
+import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-users',
@@ -16,20 +18,13 @@ export class UsersComponent {
   _dialogService = inject(DialogService);
   _authService = inject(AuthService);
   router = inject(Router);
-  data:any[]=[
-    {
-      id:1,
-      "code": "User Id",
-      "initial": "Portal Id",
-      "name": "User Name",
-      "telephone": "Telephone",
-      "mobile": "Mobile",
-      "email": "Email",
-      "locked": "Locked",
-      "timesheetDate": "Timesheet Date",
-      "activation": true
+  apiUrls=API_Config.users;
+  filterOptions={
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+    lang:'en' 
   }
-  ]
   showFilter: boolean;
 
 

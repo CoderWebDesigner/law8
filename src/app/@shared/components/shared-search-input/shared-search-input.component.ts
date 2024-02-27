@@ -16,7 +16,6 @@ export class SharedSearchInputComponent
 {
   @Input() searchKey: string;
 
-  _sharedTableService = inject(SharedTableService)
   ngOnInit(): void {
     this.initForm();
   }

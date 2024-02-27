@@ -9,7 +9,6 @@ import { SharedService } from '@shared/services/shared.service';
   styleUrls: ['./matter-editor-payment-terms.component.scss']
 })
 export class MatterEditorPaymentTermsComponent extends FormBaseClass implements OnInit{
-  _sharedService=inject(SharedService);
   @Output() onFormSubmit = new EventEmitter()
   ngOnInit(): void {
     this.initForm()
