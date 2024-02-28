@@ -45,6 +45,7 @@ export class SecurityGroupsComponent {
   };
   source: any[] = [];
   target: any[] = [];
+  permissions:any[]=[]
   selectedRow: any;
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
@@ -113,7 +114,8 @@ export class SecurityGroupsComponent {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
-          this.target = res['result']?.permissions;
+          this.permissions=res['result']?.permissions;
+          this.target = [...this.permissions];
           this.source = this.source.filter(
             (sourceItem) =>
               !this.target.some((targetItem) => targetItem.id === sourceItem.id)

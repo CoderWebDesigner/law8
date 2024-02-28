@@ -9,7 +9,7 @@
 
       <shared-table body [apiUrls]="apiUrls" [columnsLocalized]="columnsLocalized"
         [additionalTableConfig]="additionalTableConfig" [filterOptions]="filterOptions" [selectMode]="'single'"
-        (onRowSelect)="onRowSelect($event)" (onRowUnSelect)="onRowUnSelect($event)"></shared-table>
+        (onRowSelect)="onRowSelect($event)" ></shared-table>
     </shared-card>
   </div>
   <ng-container *ngIf="selectedRow">
@@ -37,9 +37,9 @@
         
       </shared-card>
       <div class="d-flex justify-content-end mt-3">
-        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="target.length==0" [disabled]="target.length==0"
+        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="permissions.length==0" [disabled]="target.length==0"
           label="{{ 'btn.submit' | translate }}" (onClick)="submitPermissions('add')"></p-button>
-        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="target.length!=0" [disabled]="target.length==0"
+        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="permissions.length!=0" [disabled]="target.length==0"
           label="{{ 'btn.update' | translate }}" (onClick)="submitPermissions('update')"></p-button>
       </div>
     </div>
