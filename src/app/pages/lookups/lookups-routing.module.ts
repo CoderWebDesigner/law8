@@ -7,7 +7,7 @@ import { LookupsJurisdictionsComponent } from './lookups-jurisdictions/lookups-j
 
 const routes: Routes = [
   {path:'matter-category', component:LookupsMatterCaterogyComponent},
-  {path:'Jurisdictions', component:LookupsJurisdictionsComponent},
+  {path:'jurisdictions', component:LookupsJurisdictionsComponent},
   {path:'rate', component:LookupsRateTableComponent},
   {path:'main-list', component:LookupsMainListComponent},
 ];

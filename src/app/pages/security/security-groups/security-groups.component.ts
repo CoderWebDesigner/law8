@@ -89,7 +89,7 @@ export class SecurityGroupsComponent {
       });
   }
   onRowSelect(e: any) {
-    this.selectedRow = e?.data;
+    this.selectedRow = e;
     this.getAllPermissions();
   }
   onRowUnSelect(e: any) {
