@@ -10,13 +10,14 @@
     <shared-card [title]="'security.groups' | translate" [borderRadius]="20" class="mb-4">
       <shared-search-input headerActions></shared-search-input>
       <shared-table body [apiUrls]="permissionApiUrls" [withCheckbox]="true"
-        [columnsLocalized]="groupColumnsLocalized" (onRowSelect)="onSelectGroupRow($event)"></shared-table>
+        [columnsLocalized]="groupColumnsLocalized" [defaultSelected]="userGroups" (onRowSelect)="onSelectGroupRow($event)"
+        (onRowUnSelect)="onRowUnSelected($event)"></shared-table>
     </shared-card>
     <div class="d-flex justify-content-end mt-3">
-      <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="groups.length==0"
+      <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="userGroups.length==0"
         [disabled]="selectedGroups.length==0" label="{{ 'btn.submit' | translate }}"
         (onClick)="submitGroups('add')"></p-button>
-      <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="groups.length!=0"
+      <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="userGroups.length!=0"
         [disabled]="selectedGroups.length==0" label="{{ 'btn.update' | translate }}"
         (onClick)="submitGroups('update')"></p-button>
     </div>

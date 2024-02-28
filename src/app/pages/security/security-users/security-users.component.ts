@@ -43,6 +43,7 @@ export class SecurityUsersComponent {
   selectedRow: any;
   isSubmit: boolean;
   groups: any[] = [];
+  userGroups: any[] = [];
   selectedGroups: any[] = [];
   groupColumnsLocalized = {
     en: Security_Groups_Columns_EN,
@@ -55,17 +56,45 @@ export class SecurityUsersComponent {
     fr: Users_Columns_FR,
   };
   onRowSelect(e: any) {
-    console.log(e);
-    this.selectedRow = e;
+    this.selectedRow = e['data'];
+    this.getGroupsByUserId()
   }
   onSelectGroupRow(e: any) {
-    console.log('onSelectGroupRow',e);
-    this.selectedGroups = e;
+    this.selectedGroups.push(e?.data);
   }
-
+  getGroupsByUserId() {
+    this.userGroups=[
+      {
+        "id": "20ae0f21-4967-430e-a14a-de251644166f",
+        "name": "TEST1001"
+    },
+    {
+        "id": "2c6b3f3f-750f-4e8c-81dd-665fb3d5039d",
+        "name": "Group 102"
+    },
+    {
+        "id": "5eac83fd-5ad1-4512-ad2d-bbfddda71aea",
+        "name": "ttttt"
+    },
+    ]
+    this._apiService
+      .get(`${API_Config.userGroup.getById}?id=${this.selectedRow?.id}`)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.userGroups = res['result']//?.groups;
+        },
+      });
+  }
+  onRowUnSelected(e){
+    console.log(e)
+   this.selectedGroups = this.selectedGroups.filter(obj=>obj.id!=e?.id)
+    console.log('selectedGroups',this.selectedGroups)
+  }
   submitGroups(requestType: string) {
+  
     let model = {
-      roleId: this.selectedRow?.id,
+      userId: this.selectedRow?.id,
       itemIds: this.selectedGroups.map((obj) => obj.id),
     };
     const successMsgKey =

@@ -304,7 +304,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     if (!isExpand) this.onRowSelect.emit(event);
   }
   onUnSelect(e:any){
-    this.onRowUnSelect.emit(null)
+    this.onRowUnSelect.emit(e['data'])
   }
 
   getTagClass(value: string) {
