@@ -35,6 +35,8 @@ export const Users_Columns_EN = [
   {
     header: 'Locked',
     field: 'locked',
+    class:'switch-bg',
+    isSwitch:true
   },
   {
     header: 'Timesheet Date',
@@ -86,6 +88,7 @@ export const Users_Columns_FR = [
   {
     header: 'Locked',
     field: 'locked',
+    isSwitch:true
   },
   {
     header: 'Timesheet Date',
@@ -136,6 +139,7 @@ export const Users_Columns_AR = [
   {
     header: 'Locked',
     field: 'locked',
+    isSwitch:true
   },
   {
     header: 'Timesheet Date',

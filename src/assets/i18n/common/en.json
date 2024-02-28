@@ -35,7 +35,7 @@
     "partiesDescription":"Parties Description",
     "adjournmentReasons":"Adjournment Reasons",
     "matterCategory":"Matter Category",
-    "taskCode":"Task Code"
+    "initial":"Initial"
 
   },
   "btn": {
@@ -74,7 +74,9 @@
     "password": "Password should contain at least one lower character, one upper character, one digit character, one special character and length from 8-16 characters",
     "passwordNotMatching": "Password not matching!",
     "englishLetters": "Please enter only english letters!",
-    "arabicLetters": "Please enter only arabic letters!"
+    "arabicLetters": "Please enter only arabic letters!",
+    "max":"You reach maximum number",
+    "min":"You reach minimum number"  
   },
   "tags": {
     "Added": "Added",

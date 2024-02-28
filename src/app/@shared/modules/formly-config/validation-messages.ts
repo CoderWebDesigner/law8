@@ -39,6 +39,18 @@ export function formlyValidationConfig(translate: TranslateService) {
           return translate.stream('validation.password');
         },
       },
+      {
+        name:'max',
+        message(){
+          return translate.stream('validation.max')
+        }
+      },
+      {
+        name:'min',
+        message(){
+          return translate.stream('validation.min')
+        }
+      },
 
 
 

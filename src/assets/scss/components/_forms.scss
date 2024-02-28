@@ -148,3 +148,11 @@ input[readonly],textarea[readonly]{
   background-color: #f4f5fa;
   border: 1px solid rgba(0, 0, 0, 0.175);
 }
+
+
+  .switch-bg.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider{
+    background: #ec2425;
+    &:hover{
+      background:rgba(#ec2425, 0.8) ;
+    }
+  }

@@ -16,9 +16,9 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
   datePipe = inject(DatePipe)
 
   ngOnInit(): void {
-    this.initForm();
+    // this.initForm();
 
-    // this.getLookupsData()
+   this.getLookupsData()
     console.log(this._route.snapshot.paramMap.get('id'))
     this.userId=this._route.snapshot.paramMap.get('id');
     if(this.userId) this.getData()
@@ -63,14 +63,23 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             }
           },
           {
+            type: 'input',
+            key: 'initial',
+            className: 'col-md-4',
+            props: {
+              label: this._languageService.getTransValue('common.initial'),
+              required: true
+            }
+          },
+          {
             type: 'select',
             key: 'indstId',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getTransValue('users.initial'),
+              label: this._languageService.getTransValue('users.industry'),
               required: true,
-              options:[{label:'industry 1',value:1}],
-              // options:this.lookupsData[0].result.map(obj=>({label:obj.name,value:obj.id}))
+              // options:[{label:'industry 1',value:1}],
+              options:this.lookupsData[0].result.map(obj=>({label:obj.name,value:obj.id}))
 
             }
           },
@@ -79,10 +88,10 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             key: 'titleId',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getTransValue('users.portalId'),
+              label: this._languageService.getTransValue('users.title'),
               required: true,
-              options:[{label:'title 1',value:1}],
-              // options:this.lookupsData[1].result.map(obj=>({label:obj.name,value:obj.id}))
+              // options:[{label:'title 1',value:1}],
+             options:this.lookupsData[1].result.map(obj=>({label:obj.name,value:obj.id}))
             }
           },
           {
@@ -90,15 +99,14 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             key: 'deptId',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getTransValue('users.portalId'),
+              label: this._languageService.getTransValue('users.department'),
               required: true,
-              options:[{label:'department 1',value:1}],
-              // options:this.lookupsData[2].result.map(obj=>({label:obj.name,value:obj.id}))
+              options:this.lookupsData[2].result.map(obj=>({label:obj.name,value:obj.id}))
             }
           },
           {
             type: 'input',
-            key: 'goal',
+            key: 'telNo',
             className: 'col-md-4',
             props: {
               type:'number',
@@ -115,15 +123,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
               required: true
             }
           },
-          {
-            type: 'input',
-            key: 'telNo',
-            className: 'col-md-4',
-            props: {
-              label: this._languageService.getTransValue('users.telephone'),
-              required: true
-            }
-          },
+     
           {
             type: 'input',
             key: 'email',
@@ -140,9 +140,21 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             type: 'password',
             key: 'password',
             className: 'col-md-4',
+            hide:this.userId!=null,
             props: {
               label: this._languageService.getTransValue('common.password'),
               required: true
+            }
+          },
+          {
+            type: 'select',
+            key: 'defUsrId',
+            className: 'col-md-4',
+            hide:this.userId==null,
+            props: {
+              label: this._languageService.getTransValue('common.defUsrId'),
+              required: true,
+              options:[{label:'user 1',value:'user 1'}]
             }
           },
           {
@@ -152,6 +164,18 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('users.timesheetDate'),
               required: true
+            }
+          },
+          {
+            type: 'input',
+            key: 'goal',
+            className: 'col-md-4',
+            props: {
+              type:'number',
+              max:25,
+              min:0,
+              label: this._languageService.getTransValue('users.goal'),
+              required: true,
             }
           },
         ]
@@ -164,22 +188,22 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       this._sharedService.takeUntilDistroy()
     ).subscribe({
       next:(res:ApiRes)=>{
-        this.formlyModel = {...res['result'],timeSheetDate:this.datePipe.transform(res['result'].timeSheetDate,'dd.MM.yyyy')}
+        this.formlyModel = {...res['result'],timeSheetDate:this.datePipe.transform(res['result'].timeSheetDate,'yyyy-MM-dd')}
       }
     })
   }
   override getLookupsData(): void {
     forkJoin([
       
-      this._apiService.get(API_Config.general+'.industry'),
-      this._apiService.get(API_Config.general+'.title'),
-      this._apiService.get(API_Config.general+'.department'),
+      this._apiService.get(API_Config.general.getIndustryModel),
+      this._apiService.get(API_Config.general.getRateTypeLookup),
+      this._apiService.get(API_Config.general.getDepartmentLookup),
     ]).pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
       next:(res:any)=>{
         this.lookupsData = res;
-        // this.initForm()
+        this.initForm()
       }
     })
     
@@ -192,8 +216,8 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
     const requestPayload = this.userId
-      ? { ...this.formlyModel,mobileNo:this.formlyModel.mobileNo.internationalNumber, id: this.userId }
-      : {...this.formlyModel,mobileNo:this.formlyModel.mobileNo.internationalNumber};
+      ? { ...this.formlyModel,mobileNo:this.formlyModel.mobileNo.internationalNumber, id: this.userId,goal:+this.formlyModel.goal }
+      : {...this.formlyModel,mobileNo:this.formlyModel.mobileNo.internationalNumber,goal:+this.formlyModel.goal};
     const path = this.userId
       ? this.apiUrls.update
       : this.apiUrls.create;
@@ -209,9 +233,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
           if (res && res.isSuccess) {
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
-            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-              this._dynamicDialogRef.close(dialog);
-            });
+            this._router.navigate(['/users'])
           } else {
             this._toastrNotifiService.displayErrorToastr(res?.message);
           }
