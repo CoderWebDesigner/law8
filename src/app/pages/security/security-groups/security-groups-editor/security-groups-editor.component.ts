@@ -16,7 +16,6 @@ import { finalize } from 'rxjs';
   imports:[SharedModule, FormlyConfigModule],
 })
 export class SecurityGroupsEditorComponent extends FormBaseClass implements OnInit{
-  _sharedService = inject(SharedService);
   apiUrls=API_Config.security
   ngOnInit(): void {
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();

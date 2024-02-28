@@ -1,7 +1,7 @@
 export const Users_Columns_EN = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Initial',
@@ -12,12 +12,21 @@ export const Users_Columns_EN = [
     field: 'name',
   },
   {
+    header: 'Title',
+    field: 'titleId',
+  },
+  {
+    header: 'Department',
+    field: 'depart',
+  },
+
+  {
     header: 'Telephone',
-    field: 'telephone',
+    field: 'telNo',
   },
   {
     header: 'Mobile',
-    field: 'mobile',
+    field: 'mobileNo',
   },
   {
     header: 'Email',
@@ -26,14 +35,17 @@ export const Users_Columns_EN = [
   {
     header: 'Locked',
     field: 'locked',
+    class:'switch-bg',
+    isSwitch:true
   },
   {
     header: 'Timesheet Date',
-    field: 'timesheetDate',
+    field: 'timeSheetDate',
+    isDate:true,
   },
   {
     header: 'Activation',
-    field: 'activation',
+    field: 'active',
     isSwitch:true
   }
 ];
@@ -42,7 +54,7 @@ export const Users_Columns_EN = [
 export const Users_Columns_FR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Initial',
@@ -53,12 +65,21 @@ export const Users_Columns_FR = [
     field: 'name',
   },
   {
+    header: 'Title',
+    field: 'titleId',
+  },
+  {
+    header: 'Department',
+    field: 'depart',
+  },
+
+  {
     header: 'Telephone',
-    field: 'telephone',
+    field: 'telNo',
   },
   {
     header: 'Mobile',
-    field: 'mobile',
+    field: 'mobileNo',
   },
   {
     header: 'Email',
@@ -67,14 +88,16 @@ export const Users_Columns_FR = [
   {
     header: 'Locked',
     field: 'locked',
+    isSwitch:true
   },
   {
     header: 'Timesheet Date',
-    field: 'timesheetDate',
+    field: 'timeSheetDate',
+    isDate:true,
   },
   {
     header: 'Activation',
-    field: 'activation',
+    field: 'active',
     isSwitch:true
   }
 ];
@@ -82,7 +105,7 @@ export const Users_Columns_FR = [
 export const Users_Columns_AR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Initial',
@@ -93,12 +116,21 @@ export const Users_Columns_AR = [
     field: 'name',
   },
   {
+    header: 'Title',
+    field: 'titleId',
+  },
+  {
+    header: 'Department',
+    field: 'depart',
+  },
+
+  {
     header: 'Telephone',
-    field: 'telephone',
+    field: 'telNo',
   },
   {
     header: 'Mobile',
-    field: 'mobile',
+    field: 'mobileNo',
   },
   {
     header: 'Email',
@@ -107,14 +139,16 @@ export const Users_Columns_AR = [
   {
     header: 'Locked',
     field: 'locked',
+    isSwitch:true
   },
   {
     header: 'Timesheet Date',
-    field: 'timesheetDate',
+    field: 'timeSheetDate',
+    isDate:true,
   },
   {
     header: 'Activation',
-    field: 'activation',
+    field: 'active',
     isSwitch:true
   }
 ];

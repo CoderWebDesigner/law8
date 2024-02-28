@@ -18,7 +18,7 @@
     "jurisdictions":"Jurisdictions",
     "clientGroupNumber":"رقم مجموعة العميل ",
     "matterCategory": "فئة القضية",
-    "initial":"الاسم المختصر",
+    "taskCode":"نوع المهمه",
     "group":"المجموعة",
     "rateName":"RateName",
     "amount":"Amount"

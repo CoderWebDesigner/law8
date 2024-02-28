@@ -18,9 +18,9 @@
     "jurisdictions":"Jurisdictions",
     "clientGroupNumber":"Client Group Number",
     "matterCategory":"matter Category",
-    "initial":"Initial",
     "group":"Group",
     "rateName":"RateName",
-    "amount":"Amount"
+    "amount":"Amount",
+    "taskCode": "Task Code"
   }
 }

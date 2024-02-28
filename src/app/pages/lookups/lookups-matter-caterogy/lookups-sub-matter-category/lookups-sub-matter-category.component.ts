@@ -21,7 +21,6 @@ export class LookupsSubMatterCategoryComponent
 {
   title: string;
   config = inject(DynamicDialogConfig);
-  _sharedService = inject(SharedService);
   dialogRef = inject(DynamicDialogRef);
   apiUrl = API_Config.general;
   ngOnInit(): void {

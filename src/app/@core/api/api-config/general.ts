@@ -10,7 +10,10 @@ export const General_API = {
       "getPractsAreaLookup":"AppLookup/GetLaw_PractsAreaLookup",
       "getJurisdictionLookup":"AppLookup/GetJurisdictionLookup",
       "getMatterCategoriesLookup":"AppLookup/GetLaw_MatCatLookup",
-      "getItemLookup":"AppLookup/GetLaw_SEC_ItmLookup"
+      "getItemLookup":"AppLookup/GetLaw_SEC_ItmLookup",
+      "getIndustryModel":"AppLookup/GetLaw_IndustryModelLookupProfile",
+      "getDepartmentLookup":"AppLookup/GetLaw_DepartmentLookupProfile",
+      "getRateTypeLookup":"AppLookup/GetLaw_RateTypeLookupProfile",
   }
 
 }

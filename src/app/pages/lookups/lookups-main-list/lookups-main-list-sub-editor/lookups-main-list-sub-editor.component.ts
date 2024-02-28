@@ -61,7 +61,7 @@ export class LookupsMainListSubEditorComponent
         type: 'input',
         hide:this.config.data.mainListId!=7,
         props: {
-          label: this._languageService.getTransValue('lookups.initial'),
+          label: this._languageService.getTransValue('common.initial'),
         },
         validators: {
           validation: ['englishLetters'],

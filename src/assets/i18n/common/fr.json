@@ -35,7 +35,8 @@
     "partiesDescription": "Parties Description",
     "adjournmentReasons": "Adjournment Reasons",
     "matterCategory": "Matter Category",
-    "taskCode": "Task Code"
+
+    "initial":"Initial"
   },
   "btn": {
     "save": "Sauvegarder",
@@ -73,7 +74,9 @@
     "password": "Le mot de passe doit contenir au moins un caractère inférieur, un caractère supérieur, un caractère à un chiffre, un caractère spécial et une longueur de 8 à 16 caractères ",
     "passwordNotMatching": "Mot de passe ne correspond pas!",
     "englishLetters": "Veuillez entrer uniquement des lettres anglaises!",
-    "arabicLetters": "Veuillez entrer uniquement les lettres arabes!"
+    "arabicLetters": "Veuillez entrer uniquement les lettres arabes!",
+    "max":"You reach maximum number",
+    "min":"You reach minimum number"  
   },
   "tags": {
     "Added": "Ajoutée",
