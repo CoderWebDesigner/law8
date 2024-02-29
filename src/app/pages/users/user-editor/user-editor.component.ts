@@ -172,8 +172,8 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               type:'number',
-              max:25,
-              min:0,
+              max:24,
+              min:1,
               label: this._languageService.getTransValue('users.goal'),
               required: true,
             }
@@ -209,9 +209,9 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
     
   }
   override onSubmit(): void {
+    console.log(this.formly);
     if (this.formly.invalid) return;
 
-    console.log(this.formlyModel);
     const successMsgKey = this.userId
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';

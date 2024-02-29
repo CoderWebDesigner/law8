@@ -89,7 +89,8 @@ export class SecurityGroupsComponent {
       });
   }
   onRowSelect(e: any) {
-    this.selectedRow = e;
+    console.log(e)
+    this.selectedRow = e.data;
     this.getAllPermissions();
   }
   onRowUnSelect(e: any) {
@@ -109,7 +110,7 @@ export class SecurityGroupsComponent {
   getPermissionsByRoleId() {
     this._apiService
       .get(
-        `${API_Config.security.getPermissionsByRoleId}?id=${this.selectedRow?.id}&lang=en`
+        `${API_Config.security.getPermissionsByRoleId}?id=${this.selectedRow?.id}`
       )
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({

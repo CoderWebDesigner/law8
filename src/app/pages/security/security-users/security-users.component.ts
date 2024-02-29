@@ -63,22 +63,9 @@ export class SecurityUsersComponent {
     this.selectedGroups.push(e?.data);
   }
   getGroupsByUserId() {
-    this.userGroups=[
-      {
-        "id": "20ae0f21-4967-430e-a14a-de251644166f",
-        "name": "TEST1001"
-    },
-    {
-        "id": "2c6b3f3f-750f-4e8c-81dd-665fb3d5039d",
-        "name": "Group 102"
-    },
-    {
-        "id": "5eac83fd-5ad1-4512-ad2d-bbfddda71aea",
-        "name": "ttttt"
-    },
-    ]
+
     this._apiService
-      .get(`${API_Config.userGroup.getById}?id=${this.selectedRow?.id}`)
+      .get(`${API_Config.userGroup.getById}?userId=${this.selectedRow?.id}`)
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {

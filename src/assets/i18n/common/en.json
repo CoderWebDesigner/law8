@@ -75,8 +75,8 @@
     "passwordNotMatching": "Password not matching!",
     "englishLetters": "Please enter only english letters!",
     "arabicLetters": "Please enter only arabic letters!",
-    "max":"You reach maximum number",
-    "min":"You reach minimum number"  
+    "max":"the value between 1 and 24",
+    "min":"the value between 1 and 24"  
   },
   "tags": {
     "Added": "Added",
