@@ -35,6 +35,7 @@
     "partiesDescription":"صفه الأطراف",
     "adjournmentReasons":"سبب التأجيل",
     "matterCategory": "فئة القضية",
+    "timesheet": "Timesheet",
     "initial":"الاسم المختصر"
   },
   "btn": {

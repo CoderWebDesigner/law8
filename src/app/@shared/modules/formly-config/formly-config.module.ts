@@ -9,7 +9,7 @@ import { formlyValidationConfig } from './validation-messages';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormlyInputFieldComponent } from './components/formly-input-field/formly-input-field.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormlySelectFiledComponent } from './components/formly-select-filed/formly-select-filed.component';
+import { FormlySelectFieldComponent } from './components/formly-select-field/formly-select-field.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -42,7 +42,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
-    FormlySelectFiledComponent,
+    FormlySelectFieldComponent,
     FormlyRadioButtonFiledComponent,
     FormlyTextareaFiledComponent,
     FormlyDateFieldComponent,
@@ -73,7 +73,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
       ],
       types: [
         { name: 'input', component: FormlyInputFieldComponent },
-        { name: 'select', component: FormlySelectFiledComponent },
+        { name: 'select', component: FormlySelectFieldComponent },
         { name: 'radio', component: FormlyRadioButtonFiledComponent },
         { name: 'textarea', component: FormlyTextareaFiledComponent },
         { name: 'date', component: FormlyDateFieldComponent, extends: 'input' },

@@ -126,7 +126,7 @@ export class SecurityGroupsComponent {
         },
       });
   }
-  submitPermissions(requestType: string) {
+  submit(requestType: string) {
     let model = {
       roleId: this.selectedRow?.id,
       itemIds: this.target.map((obj) => obj.id),

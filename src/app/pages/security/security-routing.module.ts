@@ -4,23 +4,44 @@ import { SecurityComponent } from './security.component';
 
 const routes: Routes = [
   {
-    path: '', component: SecurityComponent, children: [
+    path: '',
+    component: SecurityComponent,
+    children: [
       { path: '', redirectTo: 'users', pathMatch: 'full' },
       {
-        path: 'users', loadComponent: () =>
-          import('./security-users/security-users.component').then((x) => x.SecurityUsersComponent),
+        path: 'users',
+        loadComponent: () =>
+          import('./security-users/security-users.component').then(
+            (x) => x.SecurityUsersComponent
+          ),
       },
       {
-        path: 'groups', loadComponent: () =>
-          import('./security-groups/security-groups.component').then((x) => x.SecurityGroupsComponent),
+        path: 'groups',
+        loadComponent: () =>
+          import('./security-groups/security-groups.component').then(
+            (x) => x.SecurityGroupsComponent
+          ),
       },
-
+      {
+        path: 'timesheet',
+        loadComponent: () =>
+          import('./security-timesheet/security-timesheet.component').then(
+            (x) => x.SecurityTimesheetComponent
+          ),
+      },
+      {
+        path: 'calender',
+        loadComponent: () =>
+          import('./security-calender/security-calender.component').then(
+            (x) => x.SecurityCalenderComponent
+          ),
+      },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SecurityRoutingModule { }
+export class SecurityRoutingModule {}

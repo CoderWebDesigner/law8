@@ -19,12 +19,6 @@ export class UsersComponent {
   _authService = inject(AuthService);
   router = inject(Router);
   apiUrls=API_Config.users;
-  filterOptions={
-    pageNum: 1,
-    pagSize: PAGESIZE,
-    orderByDirection: 'ASC',
-    lang:'en' 
-  }
   showFilter: boolean;
 
 

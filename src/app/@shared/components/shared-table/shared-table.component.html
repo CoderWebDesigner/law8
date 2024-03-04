@@ -3,7 +3,7 @@
     [tableStyle]="{ 'min-width': '100%' }" [(selection)]="selected || defaultSelected" [dataKey]="dataKey"
     [paginator]="paginationClient" [rows]="filterOptions?.pageSize" [showCurrentPageReport]="true"
     [currentPageReportTemplate]="currentPageReportTemplate" [rowsPerPageOptions]="PAGE_SIZE_OPTION"
-    (onRowSelect)="onSelectionChange($event)" (onRowUnselect)="onUnSelect($event)" [selectionMode]="selectMode"
+    (onRowSelect)="onSelectionChange($event)" (onRowUnselect)="onRowUnselect($event)" [selectionMode]="selectMode"
     (onSort)="getSort($event)">
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -11,7 +11,7 @@
           <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
         </th>
         <ng-container *ngFor="let col of columns">
-          <th [pSortableColumn]="col.field" [style]="col.style || { 'min-width': '200px' }" *ngIf="!col.isExpand">
+          <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand">
             {{ col.header }}
             <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
           </th>
@@ -45,7 +45,8 @@
               !col.isDate &&
               !col?.isAction &&
               !col?.withIcon &&
-              !col.isLargeText
+              !col?.isLargeText && 
+              !col?.isCheck
             ">
             {{ rowData[col.field] }}
           </ng-container>
@@ -61,6 +62,10 @@
           <ng-container *ngIf="col?.isSwitch">
             <p-inputSwitch [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
               (onChange)="onSwitch($event)"></p-inputSwitch>
+          </ng-container>
+          <ng-container *ngIf="col?.isCheck">
+            <p-checkbox [binary]="true" inputId="binary" [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
+              (onChange)="onSelectionChange(rowData)"></p-checkbox>
           </ng-container>
 
           <ng-container *ngIf="col?.withIcon">

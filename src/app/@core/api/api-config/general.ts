@@ -14,6 +14,7 @@ export const General_API = {
       "getIndustryModel":"AppLookup/GetLaw_IndustryModelLookupProfile",
       "getDepartmentLookup":"AppLookup/GetLaw_DepartmentLookupProfile",
       "getRateTypeLookup":"AppLookup/GetLaw_RateTypeLookupProfile",
+      "getUsersLookup":"AppLookup/GetLaw_AllUsersLookup"
   }
 
 }

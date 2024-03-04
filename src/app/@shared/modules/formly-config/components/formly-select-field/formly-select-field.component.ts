@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-formly-select-filed',
-  templateUrl: './formly-select-filed.component.html',
-  styleUrls: ['./formly-select-filed.component.scss']
+  selector: 'app-formly-select-field',
+  templateUrl: './formly-select-field.component.html',
+  styleUrls: ['./formly-select-field.component.scss']
 })
-export class FormlySelectFiledComponent extends FieldType <FieldTypeConfig>{
+export class FormlySelectFieldComponent extends FieldType <FieldTypeConfig>{
 
   change(e){
     if(this.props['onChange']) this.props['onChange'](e)

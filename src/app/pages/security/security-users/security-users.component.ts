@@ -78,7 +78,7 @@ export class SecurityUsersComponent {
    this.selectedGroups = this.selectedGroups.filter(obj=>obj.id!=e?.id)
     console.log('selectedGroups',this.selectedGroups)
   }
-  submitGroups(requestType: string) {
+  submit(requestType: string) {
   
     let model = {
       userId: this.selectedRow?.id,

@@ -38,9 +38,9 @@
       </shared-card>
       <div class="d-flex justify-content-end mt-3">
         <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="permissions.length==0" [disabled]="target.length==0"
-          label="{{ 'btn.submit' | translate }}" (onClick)="submitPermissions('add')"></p-button>
+          label="{{ 'btn.submit' | translate }}" (onClick)="submit('add')"></p-button>
         <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="permissions.length!=0" [disabled]="target.length==0"
-          label="{{ 'btn.update' | translate }}" (onClick)="submitPermissions('update')"></p-button>
+          label="{{ 'btn.update' | translate }}" (onClick)="submit('update')"></p-button>
       </div>
     </div>
   </ng-container>

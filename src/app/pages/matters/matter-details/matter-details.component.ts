@@ -20,7 +20,7 @@ export class MatterDetailsComponent implements OnInit {
     { label: this._languageService.getTransValue('common.contacts') },
     { label: this._languageService.getTransValue('matters.activities') },
     { label: this._languageService.getTransValue('matters.invoices') },
-    { label: this._languageService.getTransValue('matters.timesheet') },
+    { label: this._languageService.getTransValue('common.timesheet') },
     { label: this._languageService.getTransValue('common.relatedMatters') },
     // { label: this._languageService.getTransValue('matters.remarks') },
     { label: this._languageService.getTransValue('matters.documents') },

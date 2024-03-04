@@ -8,15 +8,13 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
-  declarations: [
-    SecurityComponent
-  ],
+  declarations: [SecurityComponent],
   imports: [
     CommonModule,
     SecurityRoutingModule,
     SharedModule,
     SharedCardComponent,
     TabMenuModule,
-  ]
+  ],
 })
-export class SecurityModule { }
+export class SecurityModule {}

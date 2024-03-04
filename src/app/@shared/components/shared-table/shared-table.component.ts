@@ -45,7 +45,7 @@ import Swal from 'sweetalert2';
 import { ApiRes } from '@core/models';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import { CheckboxModule } from 'primeng/checkbox';
 @Component({
   selector: 'shared-table',
   templateUrl: './shared-table.component.html',
@@ -62,7 +62,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextModule,
     InputSwitchModule,
     SkeletonModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    CheckboxModule
   ],
   providers: [DialogService],
 })
@@ -255,7 +256,6 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     //   }
     // });
   }
-
   onDelete(action: TableAction, rowData: any) {
     const ref = this._dialogService.open(SharedConfirmDialogComponent, {
       width: '30%',
@@ -303,10 +303,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   onSelectionChange(event, isExpand?: boolean) {
     if (!isExpand) this.onRowSelect.emit(event);
   }
-  onUnSelect(e:any){
+  onRowUnselect(e:any){
     this.onRowUnSelect.emit(e['data'])
   }
-
   getTagClass(value: string) {
     return {
       'tag-success': SUCCESS_TAGS.includes(value),
@@ -317,9 +316,14 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // if(this.data || (this.apiUrls && this.columnsLocalized && this.filterOptions)){
-      // }
 
+    // if(changes['filterOptions'].currentValue ||changes['filterSubOptions'].currentValue){
+    //   this.filterOptions = {...this.filterOptions,...changes['filterOptions'].currentValue}
+    //   this.filterSubOptions = {...this.filterSubOptions,...changes['filterSubOptions'].currentValue}
+
+    //   console.log(this.filterOptions)
+    //   console.log(this.filterSubOptions)
+    // }
   }
 
   onSearch() {

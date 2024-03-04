@@ -5,6 +5,8 @@
     "available":"Available",
     "selected":"Selected",
     "permissions":"Permissions",
-    "searchByName":"Search By Name"
+    "searchByName":"Search By Name",
+    "calender":"Calender",
+    "timesheet":"Timesheet"
   }
 }

@@ -1,4 +1,5 @@
 import { Auth_API } from "./auth";
+import { Calendar_Security_API } from "./calendar-security";
 import { Clients_API } from "./clients";
 import { Dashboard_API } from "./dashboard";
 import { General_API } from "./general";
@@ -6,6 +7,7 @@ import { Lookups_API } from "./lookups";
 import { Permission_API } from "./permission";
 import { Security_API } from "./security";
 import { Timesheet_API } from "./timesheet";
+import { Timesheet_Security_API } from "./timesheet-security";
 import { User_Group_API } from "./userGroup";
 import { Users_API } from "./users";
 
@@ -19,6 +21,8 @@ export const API_Config = {
   ...Permission_API,
   ...Users_API,
   ...User_Group_API,
+  ...Timesheet_Security_API,
+  ...Calendar_Security_API,
   ...Lookups_API
 
 }
