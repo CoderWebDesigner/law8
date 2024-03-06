@@ -1,0 +1,14 @@
+.law{
+    content: '';
+    width: 15px;
+    height: 15px;
+    display: block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+@include law-icon('law-matter','judgement.svg');
+
+@include law-icon('law-en', 'us.jpg');
+@include law-icon('law-ar', 'ar.png');

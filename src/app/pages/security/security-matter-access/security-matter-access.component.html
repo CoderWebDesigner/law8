@@ -1,0 +1,22 @@
+<shared-card [title]="'security.matterAccess' | translate" [borderRadius]="20" class="mb-4">
+    <p-dropdown headerActions [showClear]="true" (onChange)="selectUser($event)" [options]="users" optionLabel="name"
+        optionValue="id" [filter]="true" filterBy="name" placeholder="Select a users" styleClass="list"></p-dropdown>
+    <p-accordion body [multiple]="true">
+        <p-accordionTab>
+            <ng-template pTemplate="header" >
+                <h5>
+                    {{'security.clients'|translate}}
+                </h5>
+            </ng-template>
+            <app-security-matter-access-clients [userId]="userId"></app-security-matter-access-clients>
+        </p-accordionTab>
+        <p-accordionTab>
+            <ng-template pTemplate="header" >
+                <h5>
+                    {{'security.responsibleLawyer'|translate}}
+                </h5>
+            </ng-template>
+            <app-security-matter-access-responsable-lawyers [userId]="userId"></app-security-matter-access-responsable-lawyers>
+        </p-accordionTab>
+    </p-accordion>
+</shared-card>

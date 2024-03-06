@@ -1,15 +1,17 @@
 import { Auth_API } from "./auth";
-import { Calendar_Security_API } from "./calendar-security";
+import { Calendar_Security_API } from "./security/calendar-security";
 import { Clients_API } from "./clients";
 import { Dashboard_API } from "./dashboard";
 import { General_API } from "./general";
 import { Lookups_API } from "./lookups";
-import { Permission_API } from "./permission";
-import { Security_API } from "./security";
+import { Permission_API } from "./security/permission";
+import { Security_API } from "./security/security";
 import { Timesheet_API } from "./timesheet";
-import { Timesheet_Security_API } from "./timesheet-security";
-import { User_Group_API } from "./userGroup";
+import { Timesheet_Security_API } from "./security/timesheet-security";
+import { User_Group_API } from "./security/userGroup";
 import { Users_API } from "./users";
+import { Matter_Client_Security_API } from "./security/matter-client-security";
+import { Reponsable_Lawyer_Security_API } from "./security/reponsable-lawyer-security";
 
 export const API_Config = {
   ...General_API,
@@ -23,6 +25,8 @@ export const API_Config = {
   ...User_Group_API,
   ...Timesheet_Security_API,
   ...Calendar_Security_API,
+  ...Matter_Client_Security_API,
+  ...Reponsable_Lawyer_Security_API,
   ...Lookups_API
 
 }

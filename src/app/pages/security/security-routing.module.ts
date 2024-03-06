@@ -36,6 +36,13 @@ const routes: Routes = [
             (x) => x.SecurityCalenderComponent
           ),
       },
+      {
+        path: 'matter-access',
+        loadComponent: () =>
+          import('./security-matter-access/security-matter-access.component').then(
+            (x) => x.SecurityMatterAccessComponent
+          ),
+      },
     ],
   },
 ];

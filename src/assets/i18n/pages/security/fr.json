@@ -7,6 +7,9 @@
     "permissions":"Permissions",
     "searchByName":"Search By Name",
     "calender":"Calender",
-    "timesheet":"Timesheet"
+    "timesheet":"Timesheet",
+    "matterAccess":"Matter Access",
+    "clients":"Clients",
+    "responsibleLawyer":"Responsible Lawyer"
   }
 }

@@ -1,7 +1,7 @@
 <shared-card [title]="'common.timesheet' | translate" [borderRadius]="20" class="mb-4">
     <div headerActions class="d-flex">
         <p-dropdown [showClear]="true" (onChange)="selectUser($event)" [options]="users" optionLabel="name" optionValue="id"
-            [filter]="true" filterBy="name" placeholder="Select a users"></p-dropdown>
+            [filter]="true" filterBy="name" placeholder="Select a users" styleClass="list"></p-dropdown>
         <shared-search-input class="ms-2"></shared-search-input>
     </div>
     <shared-table body [data]="data" [filterOptions]="filterOptions" [columnsLocalized]="columnsLocalized"

@@ -33,6 +33,11 @@ export class SecurityComponent implements OnInit {
         icon: 'pi pi-fw pi-calendar',
         routerLink: '/security/calender',
       },
+      {
+        label: this._languageService.getTransValue('security.matterAccess'),
+        icon: 'law pi-fw law-matter',
+        routerLink: '/security/matter-access',
+      },
     ];
     this.activeItem = this.items[1];
   }

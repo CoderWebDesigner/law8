@@ -2,7 +2,7 @@
   background: $color;
   background: rgba($color, $opacity);
 }
-@mixin fat-icon($class-name, $image-path) {
+@mixin law-icon($class-name, $image-path) {
   .#{$class-name} {
       background-image: url(../../images/icons/#{$image-path});
 
