@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { SharedService } from '@shared/services/shared.service';
@@ -9,6 +9,7 @@ import { SharedService } from '@shared/services/shared.service';
   styleUrls: ['./matter-editor-general.component.scss']
 })
 export class MatterEditorGeneralComponent extends FormBaseClass implements OnInit{
+  @Input() previewOnly: boolean;
   @Output() onFormSubmit = new EventEmitter()
   ngOnInit(): void {
     this.initForm()
@@ -34,6 +35,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.defaultTask'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Billable',value:'Billable'},
                 {label:'Non-Billable',value:'Non-Billable'},
@@ -47,6 +49,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.defaultTask'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Default Rate',value:'Default Rate'},
                 {label:'Amount',value:'Amount'},
@@ -59,6 +62,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.defaultRate'),
+              disabled: this.previewOnly,
               options:[
                 {label:'A',value:'A'},
                 {label:'B',value:'B'},
@@ -77,6 +81,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.rateAmount'),
+              disabled: this.previewOnly,
               options:[
                 {label:'A',value:'A'},
                 {label:'B',value:'B'},
@@ -95,6 +100,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.referralType'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Email',value:'Email'},
                 {label:'phone',value:'phone'},
@@ -109,6 +115,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.clientIntroducing'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Laywer 1',value:'Laywer 1'},
                 {label:'Laywer 2',value:'Laywer 2'},
@@ -123,6 +130,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.matterIntroducingLawyer'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Laywer 1',value:'Laywer 1'},
                 {label:'Laywer 2',value:'Laywer 2'},
@@ -137,6 +145,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.responsibleLaywer'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Laywer 1',value:'Laywer 1'},
                 {label:'Laywer 2',value:'Laywer 2'},
@@ -151,6 +160,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.assignedLaywer'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Laywer 1',value:'Laywer 1'},
                 {label:'Laywer 2',value:'Laywer 2'},
@@ -165,6 +175,7 @@ export class MatterEditorGeneralComponent extends FormBaseClass implements OnIni
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.otherStaff'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Laywer 1',value:'Laywer 1'},
                 {label:'Laywer 2',value:'Laywer 2'},

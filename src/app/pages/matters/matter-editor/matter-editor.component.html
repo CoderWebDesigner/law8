@@ -7,15 +7,21 @@
     ></formly-form>
     <p-tabView body>
       <ng-container *ngFor="let item of items;let i =index">
-        <p-tabPanel [header]="item.label" *ngIf="item.show" >
-            <app-matter-editor-general *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
-            <app-matter-details-address *ngIf="i==1"></app-matter-details-address>
-            <app-matter-editor-contracts *ngIf="i==2"></app-matter-editor-contracts>
-            <app-matter-editor-payment-terms *ngIf="i==3"></app-matter-editor-payment-terms>
-        </p-tabPanel>
+        <!-- <p-tabPanel [header]="item.label" *ngIf="item.show" >
+            <app-matter-editor-general [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==1" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
+            <app-matter-details-address [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==4"></app-matter-details-address>
+            <app-matter-editor-contracts [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==7"></app-matter-editor-contracts>
+            <app-matter-editor-payment-terms [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==8"></app-matter-editor-payment-terms>
+        </p-tabPanel> -->
+        <p-tabPanel [header]="item.label" >
+          <app-matter-editor-general [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==0" ></app-matter-editor-general>
+          <app-matter-address-editor [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==1"></app-matter-address-editor>
+          <app-matter-editor-contracts [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==2"></app-matter-editor-contracts>
+          <app-matter-editor-payment-terms [previewOnly]="disableInputs" [data]="formlyModel?.clientContacts" *ngIf="i==3"></app-matter-editor-payment-terms>
+      </p-tabPanel>
       </ng-container>
     </p-tabView>
-    <div class="mt-4 text-end">
+    <div class="mt-4 text-end" *ngIf="!disableInputs">
       <p-button
         [loading]="isSubmit"
         styleClass="p-button-primary d-block py-3"

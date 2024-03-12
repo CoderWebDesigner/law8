@@ -74,7 +74,12 @@ export class MatterAddressEditorComponent extends FormBaseClass implements OnIni
             props: {
               label: this._languageService.getTransValue('client.country'),
               placeholder: this._languageService.getTransValue('client.countryPlaceholder'),
-              options: this.lookupsData,
+              // options: this.lookupsData,
+              options: [
+                { label: 'value 1', value: 'value 1' },
+                { label: 'value 2', value: 'value 2' },
+                { label: 'value 3', value: 'value 3' },
+              ],
               required: true,
             }
           },
@@ -126,15 +131,16 @@ export class MatterAddressEditorComponent extends FormBaseClass implements OnIni
       });
     }
   }
-  override getData(): void {
+  override getLookupsData(): void {
     this._apiService.get(this.generalApiUrls.getCountryLookup).pipe(
       finalize(() => this.isSubmit = false),
       this.takeUntilDestroy()
     ).subscribe({
       next: res => {
         this.lookupsData = res;
-        this.lookupsData = this.lookupsData.map(element => ({ label: element.CountryName, value: element }));
-        this.initForm()
+        console.log(res)
+        // this.lookupsData = this.lookupsData.map(element => ({ label: element.CountryName, value: element }));
+        // this.initForm()
       }
     })
   }

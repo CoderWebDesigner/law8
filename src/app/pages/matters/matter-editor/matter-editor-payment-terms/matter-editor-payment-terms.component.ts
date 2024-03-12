@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { SharedService } from '@shared/services/shared.service';
 
@@ -9,6 +9,7 @@ import { SharedService } from '@shared/services/shared.service';
   styleUrls: ['./matter-editor-payment-terms.component.scss']
 })
 export class MatterEditorPaymentTermsComponent extends FormBaseClass implements OnInit{
+  @Input() previewOnly: boolean;
   @Output() onFormSubmit = new EventEmitter()
   ngOnInit(): void {
     this.initForm()
@@ -34,6 +35,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.frequancy'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -42,6 +44,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.billingTemplate'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -50,6 +53,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.emailTemplate'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -62,6 +66,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.automaticallyCreateDisability'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -70,6 +75,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.disability'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Option 1', value:'Option 1'},
                 {label:'Option 2', value:'Option 2'},
@@ -83,6 +89,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.amountAndPrecentage'),
+              disabled: this.previewOnly,
               type:'number',
               min:0
             }
@@ -97,6 +104,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.useTaskBasedBilling'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -105,6 +113,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.applyDiscountFees'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -113,6 +122,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.discount'),
+              disabled: this.previewOnly,
               type:'number',
               min:0,
               max:100
@@ -124,6 +134,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.quoteType'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -132,6 +143,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.amount'),
+              disabled: this.previewOnly,
               type:'number',
               min:0
             }
@@ -142,6 +154,7 @@ export class MatterEditorPaymentTermsComponent extends FormBaseClass implements 
             className:'col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.maximumFee'),
+              disabled: this.previewOnly,
               type:'number',
               min:0
             }

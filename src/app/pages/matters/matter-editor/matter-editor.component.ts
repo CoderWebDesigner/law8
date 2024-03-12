@@ -9,18 +9,20 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./matter-editor.component.scss']
 })
 export class MatterEditorComponent extends FormBaseClass implements OnInit {
-
+  disableInputs: boolean;
+  requestId:number;
   items: any[] = [
     { id: 1, label: this._languageService.getTransValue('common.general'), show: false },
-    { id: 2, label: this._languageService.getTransValue('common.parties'), show: false },
     { id: 3, label: this._languageService.getTransValue('common.address'), show: false },
-    { id: 4, label: this._languageService.getTransValue('matters.applicants'), show: false },
-    { id: 5, label: this._languageService.getTransValue('matters.class'), show: false },
     { id: 6, label: this._languageService.getTransValue('common.contacts'), show: false },
     { id: 7, label: this._languageService.getTransValue('matters.paymentTerms'), show: false },
+    // { id: 2, label: this._languageService.getTransValue('common.parties'), show: false },
+    // { id: 4, label: this._languageService.getTransValue('matters.applicants'), show: false },
+    // { id: 5, label: this._languageService.getTransValue('matters.class'), show: false },
   ];
   ngOnInit(): void {
-    this.initForm()
+    this.requestId = +this._route.snapshot.paramMap.get('id');
+    this.getData()
   }
   override initForm(): void {
     this.formlyFields = [
@@ -35,6 +37,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.requestType'),
               placeholder: '',
+              disabled: this.disableInputs,
               options: [
                 { label: 'New Matter', value: 'New Matter' },
                 { label: 'Sub Matter', value: 'Sub Matter' },
@@ -54,6 +57,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
               placeholder: '',
+              disabled: this.disableInputs,
               options: [
                 { label: 'C00001 : user 1', value: 'C00001 : user 1' },
                 { label: 'C00002 : user 2', value: 'C00002 : user 2' },
@@ -85,6 +89,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.parentMatterCode'),
+              disabled: this.disableInputs,
               options: [
                 { label: 'C00001 : user 1', value: 'C00001 : user 1' },
                 { label: 'C00002 : user 2', value: 'C00002 : user 2' },
@@ -105,6 +110,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.practiceArea'),
+              disabled: this.disableInputs,
               options: [
                 { label: 'Intelecturual Property', value: 'Intelecturual Property' },
                 { label: 'Corporate', value: 'Corporate' },
@@ -141,6 +147,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.opened'),
+              disabled: this.disableInputs,
             }
 
           },
@@ -150,6 +157,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-12',
             props: {
               label: this._languageService.getTransValue('matters.description'),
+              disabled: this.disableInputs,
             }
 
           },
@@ -164,6 +172,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('common.matterCategory'),
+                  disabled: this.disableInputs,
                   options: [
                     { label: 'Category 1', value: 'Category 1' },
                     { label: 'Category 2', value: 'Category 2' },
@@ -190,6 +199,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.instructor'),
+                  disabled: this.disableInputs,
                   options: [
                     { label: 'value 1', value: 'value 1' },
                     { label: 'value 2', value: 'value 2' },
@@ -209,6 +219,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.tradmarkType'),
+                  disabled: this.disableInputs,
                   placeholder: '',
                   options: [
                     { label: 'Logo', value: 'Logo' },
@@ -226,7 +237,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 key: 'wordMark',
                 className: 'col-md-4',
                 props: {
-                  label: this._languageService.getTransValue('matters.wordMark')
+                  label: this._languageService.getTransValue('matters.wordMark'),
+                  disabled: this.disableInputs,
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
@@ -244,6 +256,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.caseSensitive'),
+                  disabled: this.disableInputs,
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
@@ -280,6 +293,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.jurisdicion'),
+                  disabled: this.disableInputs,
                   options: [
                     { label: 'value 1', value: 'value 1' },
                     { label: 'value 2', value: 'value 2' },
@@ -299,6 +313,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.judicature'),
+                  disabled: this.disableInputs,
                   options: [
                     { label: 'value 1', value: 'value 1' },
                     { label: 'value 2', value: 'value 2' },
@@ -318,6 +333,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.matterStatus'),
+                  disabled: this.disableInputs,
                   options: [
                     { label: 'value 1', value: 'value 1' },
                     { label: 'value 2', value: 'value 2' },
@@ -337,6 +353,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.stage'),
+                  disabled: this.disableInputs,
                   options: [
                     { label: 'value 1', value: 'value 1' },
                     { label: 'value 2', value: 'value 2' },
@@ -355,6 +372,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue('matters.courtNumber'),
+                  disabled: this.disableInputs,
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
@@ -368,6 +386,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 className: 'col-12',
                 props: {
                   label: this._languageService.getTransValue('matters.notes'),
+                  disabled: this.disableInputs,
                   rows: 5
                 },
 
@@ -383,8 +402,18 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  getFormData(data: any) {
-    console.log('data', data)
+  override getLookupsData() {
+   
+  }
+  override getData(): void {
+    if (this.requestId) {
+      this.disableInputs  =this.requestId==1
+      // this.formlyModel = res[2].result;
+      // this.disableInputs = this.formlyModel?.id == 1;
+      console.log('disableInputs',this.disableInputs)
+      console.log('requestId',this.requestId)
+    }
+    this.initForm()
   }
 
 }

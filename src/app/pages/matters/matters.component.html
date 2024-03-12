@@ -9,4 +9,14 @@
   ></shared-table>
 </shared-card> -->
 
-<app-shared-matter-table [additionalTableConfig]="additionalTableConfig" [selectMode]="''"></app-shared-matter-table>
+<!-- <app-shared-matter-table [additionalTableConfig]="additionalTableConfig" [selectMode]="''"></app-shared-matter-table> -->
+
+<shared-card [title]="'matters.title' | translate" [borderRadius]="20">
+  <shared-search-input headerActions></shared-search-input>
+  <shared-table
+    body
+    [columnsLocalized]="columnsLocalized"
+    [data]="data"
+    [additionalTableConfig]="additionalTableConfig"
+  ></shared-table>
+</shared-card>

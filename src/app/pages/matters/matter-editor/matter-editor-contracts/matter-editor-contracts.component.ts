@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatterEditorContractEditorComponent } from './matter-editor-contract-editor/matter-editor-contract-editor.component';
 import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contract-columns.config';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -12,7 +12,8 @@ import { SharedService } from '@shared/services/shared.service';
   styleUrls: ['./matter-editor-contracts.component.scss']
 })
 export class MatterEditorContractsComponent {
-  data: any[] = [];
+  @Input() previewOnly: boolean;
+  @Input() data: any[] = [];
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)
@@ -24,6 +25,7 @@ export class MatterEditorContractsComponent {
     fr: Contact_Columns_FR,
   };
   ngOnInit(): void {
+
     this.getCompanyAddress()
   }
   getCompanyAddress() {

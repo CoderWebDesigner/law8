@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { MatterAddressEditorComponent } from './matter-address-editor/matter-address-editor.component';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -13,7 +13,8 @@ import { Address_Columns_AR, Address_Columns_EN, Address_Columns_FR } from './ad
   styleUrls: ['./matter-editor-address.component.scss']
 })
 export class MatterEditorAddressComponent implements OnInit {
-  data: any[] = [];
+  @Input() previewOnly: boolean;
+  @Input() data: any[] = [];
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)
