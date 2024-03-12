@@ -1,3 +1,9 @@
 :host ::ng-deep .list {
     width:  200px;
 }
+
+:host ::ng-deep.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow:unset;
+}

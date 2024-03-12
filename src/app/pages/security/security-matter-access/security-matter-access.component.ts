@@ -14,6 +14,9 @@ import { PickListModule } from 'primeng/picklist';
 import { AccordionModule } from 'primeng/accordion';
 import { SecurityMatterAccessClientsComponent } from './security-matter-access-clients/security-matter-access-clients.component';
 import { SecurityMatterAccessResponsableLawyersComponent } from './security-matter-access-responsable-lawyers/security-matter-access-responsable-lawyers.component';
+import { SecurityMatterAccessJurisdictionComponent } from './security-matter-access-jurisdiction/security-matter-access-jurisdiction.component';
+import { SecurityMatterIncludeComponent } from './security-matter-include/security-matter-include.component';
+import { SecurityAccessExcludeComponent } from './security-access-exclude/security-access-exclude.component';
 
 @Component({
   selector: 'app-security-matter-access',
@@ -28,7 +31,11 @@ import { SecurityMatterAccessResponsableLawyersComponent } from './security-matt
     PickListModule,
     SecurityMatterAccessClientsComponent,
     SecurityMatterAccessResponsableLawyersComponent,
+    SecurityMatterAccessJurisdictionComponent,
+    SecurityMatterIncludeComponent,
     AccordionModule,
+    SecurityAccessExcludeComponent,
+
   ],
   templateUrl: './security-matter-access.component.html',
   styleUrls: ['./security-matter-access.component.scss'],

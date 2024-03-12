@@ -28,9 +28,7 @@ body.sidebar-enable {
 
   // Logo
   .logo {
-    line-height: 134px;
     width: $sidebar-width;
-    height: 134px;
     text-align: center;
 
     .logo-sm {
@@ -86,8 +84,8 @@ body.sidebar-enable {
           padding: 1rem 1.5rem;
           margin-bottom: .5rem;
           svg{
-            width: 2rem;
-            height: 2rem;
+            width: 1.5rem;
+            height: 1.5rem;
           }
           i {
             display: inline-block;

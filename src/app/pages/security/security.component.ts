@@ -37,7 +37,7 @@ export class SecurityComponent implements OnInit {
         label: this._languageService.getTransValue('security.matterAccess'),
         icon: 'law pi-fw law-matter',
         routerLink: '/security/matter-access',
-      },
+      }
     ];
     this.activeItem = this.items[1];
   }

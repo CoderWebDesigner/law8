@@ -42,7 +42,7 @@ const routes: Routes = [
           import('./security-matter-access/security-matter-access.component').then(
             (x) => x.SecurityMatterAccessComponent
           ),
-      },
+      }
     ],
   },
 ];

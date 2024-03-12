@@ -12,6 +12,9 @@ import { User_Group_API } from "./security/userGroup";
 import { Users_API } from "./users";
 import { Matter_Client_Security_API } from "./security/matter-client-security";
 import { Reponsable_Lawyer_Security_API } from "./security/reponsable-lawyer-security";
+import { Matter_Jurisdiction_Security_API } from "./security/matter-jurisdiction-security";
+import { Matter_Include_Security_API } from "./security/matter-include-security";
+import { Matter_Exclude_Security_API } from "./security/matter-exclude-security";
 
 export const API_Config = {
   ...General_API,
@@ -27,6 +30,9 @@ export const API_Config = {
   ...Calendar_Security_API,
   ...Matter_Client_Security_API,
   ...Reponsable_Lawyer_Security_API,
+  ...Matter_Jurisdiction_Security_API,
+  ...Matter_Include_Security_API,
+  ...Matter_Exclude_Security_API,
   ...Lookups_API
 
 }

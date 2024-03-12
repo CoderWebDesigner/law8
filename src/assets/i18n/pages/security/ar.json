@@ -10,6 +10,9 @@
     "timesheet":"Timesheet",
     "matterAccess":"Matter Access",
     "clients":"Clients",
-    "responsibleLawyer":"Responsible Lawyer"
+    "responsibleLawyer":"Responsible Lawyer",
+    "jurisdiction":"Jurisdictions",
+    "matterInclude":"Matter Include",
+    "matterExclude":"Matter Exclude"
   }
 }
