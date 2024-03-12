@@ -50,14 +50,17 @@ export class SecurityAccessExcludeComponent implements OnChanges {
   apiUrls = API_Config.MatterExcludeSecurity;
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.getList();
-    if (this.userId) this.getByUser();
+    
+    if (this.userId){
+      this.getList();
+      this.getByUser();
+    } 
   }
 
   getList() {
     console.log('getList');
     this._apiService
-      .get(this.apiUrls?.get)
+      .get(this.apiUrls?.get+this.userId)
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
