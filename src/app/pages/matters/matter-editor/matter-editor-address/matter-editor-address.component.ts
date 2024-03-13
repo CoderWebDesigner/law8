@@ -8,7 +8,7 @@ import { MatterService } from '@shared/services/matter/matter.service';
 import { Address_Columns_AR, Address_Columns_EN, Address_Columns_FR } from './address-columns.config';
 
 @Component({
-  selector: 'app-matter-details-address',
+  selector: 'app-matter-editor-address',
   templateUrl: './matter-editor-address.component.html',
   styleUrls: ['./matter-editor-address.component.scss']
 })
@@ -25,14 +25,15 @@ export class MatterEditorAddressComponent implements OnInit {
     ar: Address_Columns_AR,
     fr: Address_Columns_FR
   };
-  ngOnInit(): void {  
+  ngOnInit(): void {
+    console.log('Address',this.data)
     this.getCompanyAddress()
-  }  
+  }
   getCompanyAddress() {
-    console.log('Address',this.data) 
+
     this._matterService.address$.pipe(
       this._sharedService.takeUntilDistroy()
-    ).subscribe({ 
+    ).subscribe({
       next: (res: any[]) => {
         this.data = [...this.data, ...res]
       }

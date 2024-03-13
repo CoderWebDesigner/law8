@@ -6,18 +6,16 @@
         <ng-container *ngFor="let item of items;let i =index">
 
           <p-tabPanel [header]="item.label" *ngIf="item.show">
-
             <app-matter-editor-general *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
             <ng-container *ngIf="['Corporate', 'Litegation'].includes(formlyModel.practiceArea)">
               <app-matter-editor-parties *ngIf="i==1"></app-matter-editor-parties>
               <app-matter-editor-address *ngIf="i==2"></app-matter-editor-address>
               <app-matter-editor-contracts *ngIf="i==5"></app-matter-editor-contracts>
-              <app-matter-editor-payment-terms *ngIf="i==6"></app-matter-editor-payment-terms>
             </ng-container>
             <ng-container *ngIf="['Intelecturual Property'].includes(formlyModel.practiceArea)">
               <app-matter-editor-address *ngIf="i==2"></app-matter-editor-address>
-              <app-matter-editor-payment-terms *ngIf="i==6"></app-matter-editor-payment-terms>
             </ng-container>
+            <app-matter-editor-payment-terms *ngIf="i==6"></app-matter-editor-payment-terms>
           </p-tabPanel>
         </ng-container>
       </p-tabView>

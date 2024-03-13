@@ -40,12 +40,14 @@ import { MatterDetailsInvoiceSalesItemsComponent } from './matter-details/matter
 import { MatterDetailsInvoiceSalesEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-editor/matter-details-invoice-sales-editor.component';
 import { MatterEditorPartiesComponent } from './matter-editor/matter-editor-parties/matter-editor-parties.component';
 import { MatterEditorPartiesEditorComponent } from './matter-editor/matter-editor-parties/matter-editor-parties-editor/matter-editor-parties-editor.component';
+import { MatterEditorAddressComponent } from './matter-editor/matter-editor-address/matter-editor-address.component';
 
 
 @NgModule({
   declarations: [
     MattersComponent,
     MatterEditorComponent,
+    MatterEditorAddressComponent,
     MatterEditorGeneralComponent,
     MatterDetailsAddressComponent,
     MatterEditorContractsComponent,
