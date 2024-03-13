@@ -11,6 +11,7 @@
   [styleClass]="props['readonly']?'reset-input':''"
   (onChange)="change($event)"
   (onClick)="onClick()"
+  appendTo="body"
 >
 <ng-template let-selected pTemplate="selectedItem" >
   <div class="flex align-items-center gap-2" >

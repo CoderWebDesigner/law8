@@ -38,6 +38,8 @@ import { MatterDetailsInvoiceComponent } from './matter-details/matter-details-i
 import { MatterDetailsInvoiceEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-editor.component';
 import { MatterDetailsInvoiceSalesItemsComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-items.component';
 import { MatterDetailsInvoiceSalesEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-editor/matter-details-invoice-sales-editor.component';
+import { MatterEditorPartiesComponent } from './matter-editor/matter-editor-parties/matter-editor-parties.component';
+import { MatterEditorPartiesEditorComponent } from './matter-editor/matter-editor-parties/matter-editor-parties-editor/matter-editor-parties-editor.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { MatterDetailsInvoiceSalesEditorComponent } from './matter-details/matte
     MatterDetailsAddressComponent,
     MatterEditorContractsComponent,
     MatterEditorPaymentTermsComponent,
+    MatterEditorPartiesComponent,
+    MatterEditorPartiesEditorComponent,
     MatterDetailsComponent,
     MatterAddressEditorComponent,
     MatterEditorContractEditorComponent,

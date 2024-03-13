@@ -6,10 +6,10 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-matter-editor-parties-editor',
-  templateUrl: './matter-details-parties-editor.component.html',
-  styleUrls: ['./matter-details-parties-editor.component.scss']
+  templateUrl: './matter-editor-parties-editor.component.html',
+  styleUrls: ['./matter-editor-parties-editor.component.scss']
 })
-export class MatterDetailsPartiesEditorComponent extends FormBaseClass implements OnInit{
+export class MatterEditorPartiesEditorComponent extends FormBaseClass implements OnInit{
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.client;
   _matterService = inject(MatterService)

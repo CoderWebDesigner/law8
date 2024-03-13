@@ -19,7 +19,7 @@ export class MatterAddressEditorComponent extends FormBaseClass implements OnIni
   _config = inject(DynamicDialogConfig)
   address: any[] = []
   ngOnInit(): void {
-    this.getData()
+    this.getLookupsData()
   }
 
   override initForm(): void {
@@ -74,12 +74,8 @@ export class MatterAddressEditorComponent extends FormBaseClass implements OnIni
             props: {
               label: this._languageService.getTransValue('client.country'),
               placeholder: this._languageService.getTransValue('client.countryPlaceholder'),
-              // options: this.lookupsData,
-              options: [
-                { label: 'value 1', value: 'value 1' },
-                { label: 'value 2', value: 'value 2' },
-                { label: 'value 3', value: 'value 3' },
-              ],
+              options: this.lookupsData,
+              
               required: true,
             }
           },
@@ -140,7 +136,7 @@ export class MatterAddressEditorComponent extends FormBaseClass implements OnIni
         this.lookupsData = res;
         console.log(res)
         // this.lookupsData = this.lookupsData.map(element => ({ label: element.CountryName, value: element }));
-        // this.initForm()
+        this.initForm()
       }
     })
   }

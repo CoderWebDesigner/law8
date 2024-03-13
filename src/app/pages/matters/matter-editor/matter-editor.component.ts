@@ -13,12 +13,12 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   requestId:number;
   items: any[] = [
     { id: 1, label: this._languageService.getTransValue('common.general'), show: false },
+    { id: 2, label: this._languageService.getTransValue('common.parties'), show: false },
     { id: 3, label: this._languageService.getTransValue('common.address'), show: false },
+    { id: 4, label: this._languageService.getTransValue('matters.applicants'), show: false },
+    { id: 5, label: this._languageService.getTransValue('matters.class'), show: false },
     { id: 6, label: this._languageService.getTransValue('common.contacts'), show: false },
     { id: 7, label: this._languageService.getTransValue('matters.paymentTerms'), show: false },
-    // { id: 2, label: this._languageService.getTransValue('common.parties'), show: false },
-    // { id: 4, label: this._languageService.getTransValue('matters.applicants'), show: false },
-    // { id: 5, label: this._languageService.getTransValue('matters.class'), show: false },
   ];
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
@@ -404,6 +404,9 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
 
   override getLookupsData() {
    
+  }
+  getFormData(event){
+    
   }
   override getData(): void {
     if (this.requestId) {

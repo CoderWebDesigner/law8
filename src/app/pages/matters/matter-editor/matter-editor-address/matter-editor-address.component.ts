@@ -25,22 +25,16 @@ export class MatterEditorAddressComponent implements OnInit {
     ar: Address_Columns_AR,
     fr: Address_Columns_FR
   };
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.getCompanyAddress()
-  }
+  }  
   getCompanyAddress() {
+    console.log('Address',this.data) 
     this._matterService.address$.pipe(
       this._sharedService.takeUntilDistroy()
-    ).subscribe({
+    ).subscribe({ 
       next: (res: any[]) => {
         this.data = [...this.data, ...res]
-        this.data = this.data.map(element => {
-          return {
-            ...element,
-            country: element.CountryObj.CountryName,
-            state: element.StateObj.CountryName
-          }
-        })
       }
     })
   }

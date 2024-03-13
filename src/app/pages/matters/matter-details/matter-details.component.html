@@ -23,9 +23,9 @@
               [header]="item.label"
               *ngFor="let item of items; let i = index"
             >
-              <app-matter-details-parties
+              <app-matter-editor-parties
                 *ngIf="i == 0"
-              ></app-matter-details-parties>
+              ></app-matter-editor-parties>
               <app-matter-details-general
                 *ngIf="i == 1"
               ></app-matter-details-general>

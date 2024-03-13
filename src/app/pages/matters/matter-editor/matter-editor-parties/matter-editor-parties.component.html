@@ -6,7 +6,7 @@
     type="button"
     (onClick)="openDialog()"
     [icon]="'pi pi-plus'"
-    [label]="'client.addContacts' | translate"
+    [label]="'matters.addParties' | translate"
     button
   >
   </p-button>
@@ -14,12 +14,12 @@
 
 <ng-container *ngIf="data?.length > 0">
   <div class="text-end mb-4">
-    <p-button
+    <p-button 
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
     [icon]="'pi pi-plus'"
-    [label]="'client.addContacts' | translate"
+    [label]="'matters.addParties' | translate"
     button
   >
   </p-button>
@@ -29,4 +29,3 @@
     [columnsLocalized]="columnsLocalized"
   ></shared-table>
 </ng-container>
-
