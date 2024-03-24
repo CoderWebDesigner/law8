@@ -1,141 +1,118 @@
 export const Contact_Columns_EN = [
   {
     header: 'First Name',
-    field: 'FirstName',
+    field: 'firstName',
   },
   {
     header: 'Middle Name',
-    field: 'MiddleName',
+    field: 'middleName',
   },
   {
     header: 'Last Name',
-    field: 'LastName',
-  },
-  {
-    header: 'Parties',
-    field: 'party',
+    field: 'lastName',
   },
   {
     header: 'Position',
-    field: 'Position',
-  },
-  {
-    header: 'Address',
-    field: 'Address',
+    field: 'position',
   },
   {
     header: 'Email',
-    field: 'Email',
+    field: 'email',
   },
   {
     header: 'Phone',
-    field: 'TelNo1',
+    field: 'phone',
   },
   {
     header: 'Mobile',
-    field: 'MobileNo',
+    field: 'mobileNumber',
   },
   {
     header: 'Fax',
-    field: 'Fax',
+    field: 'fax',
   },
   {
     header: 'Remarks',
-    field: 'Remarks',
+    field: 'remarks',
     isLargeText:true
   },
 ];
 export const Contact_Columns_FR = [
   {
     header: 'Prénom',
-    field: 'FirstName',
+    field: 'firstName',
   },
   {
     header: 'Deuxième prénom',
-    field: 'MiddleName',
+    field: 'middleName',
   },
   {
     header: 'Nom de famille',
-    field: 'LastName',
-  },
-  {
-    header: 'Des soirées',
-    field: 'party',
+    field: 'lastName',
   },
   {
     header: 'position',
-    field: 'Position',
+    field: 'position',
   },
-  {
-    header: 'Adresse',
-    field: 'Address',
-  },
+
   {
     header: 'E-mail',
-    field: 'Email',
+    field: 'email',
   },
   {
     header: 'Téléphone',
-    field: 'TelNo1',
+    field: 'phone',
   },
   {
     header: 'mobile',
-    field: 'MobileNo',
+    field: 'mobileNumber',
   },
   {
     header: 'fax',
-    field: 'Fax',
+    field: 'fax',
   },
   {
     header: 'Remarques',
-    field: 'Remarks',
+    field: 'remarks',
     isLargeText:true
   },
 ];
 export const Contact_Columns_AR = [
   {
     header: 'الاسم الأول',
-    field: 'FirstName',
+    field: 'firstName',
   },
   {
     header: 'الاسم الأوسط',
-    field: 'MiddleName',
+    field: 'middleName',
   },
   {
     header: 'اسم العائلة',
-    field: 'LastName',
-  },
-  {
-    header: 'حفلات',
-    field: 'party',
+    field: 'lastName',
   },
   {
     header: 'موضع',
-    field: 'Position',
-  },
-  {
-    header: 'عنوان',
-    field: 'Address',
+    field: 'position',
   },
   {
     header: 'بريد إلكتروني',
-    field: 'Email',
+    field: 'email',
   },
   {
     header: 'هاتف',
-    field: 'TelNo1',
+    field: 'phone',
   },
   {
     header: 'جوال',
-    field: 'MobileNo',
+    field: 'mobileNumber',
   },
   {
     header: 'الفاكس',
-    field: 'Fax',
+    field: 'fax',
   },
   {
     header: 'ملاحظات',
-    field: 'Remarks',
+    field: 'remarks',
     isLargeText:true
   },
 ];

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedService } from '@shared/services/shared.service';
@@ -13,7 +13,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./matter-details-activity.component.scss']
 })
 export class MatterDetailsActivityComponent implements OnInit,OnDestroy {
-  data: any[] = [];
+  @Input() data: any[] = [];
+  @Input() previewOnly: boolean;
   matterCode:string
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)

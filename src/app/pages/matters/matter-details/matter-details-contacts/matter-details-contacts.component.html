@@ -2,6 +2,7 @@
   *ngIf="data?.length == 0"
 >
   <p-button
+  *ngIf="!previewOnly"
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
@@ -15,6 +16,7 @@
 <ng-container *ngIf="data?.length > 0">
   <div class="text-end mb-4">
     <p-button
+    *ngIf="!previewOnly"
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
@@ -27,7 +29,6 @@
   <shared-table
     [data]="data"
     [columnsLocalized]="columnsLocalized"
-    [paginationClient]="true"
   ></shared-table>
 </ng-container>
 

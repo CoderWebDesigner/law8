@@ -63,7 +63,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     InputSwitchModule,
     SkeletonModule,
     ProgressSpinnerModule,
-    CheckboxModule
+    CheckboxModule,
   ],
   providers: [DialogService],
 })
@@ -79,7 +79,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     orderByDirection: 'ASC',
   };
 
-  @Input() withPagination:boolean = true
+  @Input() withPagination: boolean = true;
   @Input() additionalTableConfig?: TableConfig;
   @Input() additionalTableConfigChildren?: TableConfig;
   @Input() columnsLocalized;
@@ -130,7 +130,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() callBack: any;
   ngOnInit(): void {
     this.refreshData();
-    this.initTable()
+    this.initTable();
   }
 
   private getCurrentPageReportTemplate(): void {
@@ -155,7 +155,6 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   initTable() {
-    console.log('initTable apiUrls',this.apiUrls)
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
@@ -239,7 +238,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   onEdit(event) {
-    console.log('Row Edited:', event);
+    // console.log('Row Edited:', event);
   }
   onSwitch(e) {
     // Swal.fire({
@@ -269,33 +268,37 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe((res) => {
         if (res) {
-          let path = `${this.apiUrls.delete}?id=${
-            rowData[this.additionalTableConfig.id]
-          }`;
+          if (this.apiUrls) {
+            let path = `${this.apiUrls.delete}?id=${
+              rowData[this.additionalTableConfig.id]
+            }`;
 
-          // let model = {id:rowData[this.additionalTableConfig.id]}
-          this._apiService['post'](path, {})
-            .pipe(this._sharedService.takeUntilDistroy())
-            .subscribe(
-              (res: ApiRes) => {
-                if (res && res.isSuccess) {
-                  let text = this._languageService.getTransValue(
-                    'messages.deletedSuccessfully'
+            // let model = {id:rowData[this.additionalTableConfig.id]}
+            this._apiService['post'](path, {})
+              .pipe(this._sharedService.takeUntilDistroy())
+              .subscribe(
+                (res: ApiRes) => {
+                  if (res && res.isSuccess) {
+                    let text = this._languageService.getTransValue(
+                      'messages.deletedSuccessfully'
+                    );
+
+                    this._toastrNotifiService.displaySuccessMessage(text);
+
+                    this.getData();
+                  } else {
+                    this._toastrNotifiService.displayErrorToastr(res?.message);
+                  }
+                },
+                (error) => {
+                  this._toastrNotifiService.displayErrorToastr(
+                    error?.error?.message
                   );
-
-                  this._toastrNotifiService.displaySuccessMessage(text);
-
-                  this.getData();
-                } else {
-                  this._toastrNotifiService.displayErrorToastr(res?.message);
                 }
-              },
-              (error) => {
-                this._toastrNotifiService.displayErrorToastr(
-                  error?.error?.message
-                );
-              }
-            );
+              );
+          }else{
+            this.data= this.data.filter(obj=>obj!=rowData)
+          }
         }
       });
   }
@@ -303,8 +306,8 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   onSelectionChange(event, isExpand?: boolean) {
     if (!isExpand) this.onRowSelect.emit(event);
   }
-  onRowUnselect(e:any){
-    this.onRowUnSelect.emit(e['data'])
+  onRowUnselect(e: any) {
+    this.onRowUnSelect.emit(e['data']);
   }
   getTagClass(value: string) {
     return {
@@ -316,11 +319,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
     // if(changes['filterOptions'].currentValue ||changes['filterSubOptions'].currentValue){
     //   this.filterOptions = {...this.filterOptions,...changes['filterOptions'].currentValue}
     //   this.filterSubOptions = {...this.filterSubOptions,...changes['filterSubOptions'].currentValue}
-
     //   console.log(this.filterOptions)
     //   console.log(this.filterSubOptions)
     // }

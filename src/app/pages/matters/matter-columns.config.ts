@@ -5,43 +5,38 @@ export const Matters_Columns_EN = [
     field: 'id',
   },
   {
-    header: 'Description',
-    field: 'Description',
-    isLargeText:true
-  },
-  {
     header: 'Opened',
-    field: 'Opened',
-    // isDate:true
+    field: 'openDate',
+    isDate:true
   },
   {
     header: 'Matter Type',
-    field: 'MatterType',
+    field: 'mtrType',
   },
   {
     header: 'Matter Category',
-    field: 'MatterCategory',
+    field: 'law_MtrCat',
   },
   {
     header: 'Practice Area',
-    field: 'PracticeArea',
+    field: 'law_PractsArea',
   },
   {
     header: 'Client',
-    field: 'ClientName',
+    field: 'law_Client',
   },
   {
     header: 'Court Case No',
-    field: 'CourtCaseNo',
+    field: 'courtNumber',
   },
-  {
-    header: 'Parent Matter',
-    field: 'ParentMatter',
-  },
-  {
-    header: 'Status',
-    field: 'Status',
-  }
+  // {
+  //   header: 'Parent Matter',
+  //   field: 'ParentMatter',
+  // },
+  // {
+  //   header: 'Status',
+  //   field: 'law_AppStatus',
+  // }
 ];
 
 
@@ -51,42 +46,37 @@ export const Matters_Columns_FR = [
     field: 'id',
   },
   {
-    header: 'Description',
-    field: 'Description',
-    isLargeText:true
-  },
-  {
     header: 'Opened',
-    field: 'Opened',
-    // isDate:true
+    field: 'cDate',
+    isDate:true
   },
   {
     header: 'Matter Type',
-    field: 'MatterType',
+    field: 'mtrType',
   },
   {
     header: 'Matter Category',
-    field: 'MatterCategory',
+    field: 'law_MtrCat',
   },
   {
     header: 'Practice Area',
-    field: 'PracticeArea',
+    field: 'law_PractsArea',
   },
   {
     header: 'Client',
-    field: 'ClientName',
+    field: 'law_Client',
   },
   {
     header: 'Court Case No',
-    field: 'CourtCaseNo',
+    field: 'courtNumber',
   },
-  {
-    header: 'Parent Matter',
-    field: 'ParentMatter',
-  },
+  // {
+  //   header: 'Parent Matter',
+  //   field: 'ParentMatter',
+  // },
   {
     header: 'Status',
-    field: 'Status',
+    field: 'law_AppStatus',
   }
 ];
 
@@ -97,41 +87,36 @@ export const Matters_Columns_AR = [
     field: 'id',
   },
   {
-    header: 'Description',
-    field: 'Description',
-    isLargeText:true
-  },
-  {
     header: 'Opened',
-    field: 'Opened',
-    // isDate:true
+    field: 'cDate',
+    isDate:true
   },
   {
     header: 'Matter Type',
-    field: 'MatterType',
+    field: 'mtrType',
   },
   {
     header: 'Matter Category',
-    field: 'MatterCategory',
+    field: 'law_MtrCat',
   },
   {
     header: 'Practice Area',
-    field: 'PracticeArea',
+    field: 'law_PractsArea',
   },
   {
     header: 'Client',
-    field: 'ClientName',
+    field: 'law_Client',
   },
   {
     header: 'Court Case No',
-    field: 'CourtCaseNo',
+    field: 'courtNumber',
   },
-  {
-    header: 'Parent Matter',
-    field: 'ParentMatter',
-  },
+  // {
+  //   header: 'Parent Matter',
+  //   field: 'ParentMatter',
+  // },
   {
     header: 'Status',
-    field: 'Status',
+    field: 'law_AppStatus',
   }
 ];

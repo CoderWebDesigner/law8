@@ -1,23 +1,23 @@
 export const Address_Columns_EN = [
   {
-    header: 'Address 1',
-    field: 'Address2',
+    header: 'Line 1',
+    field: 'line1',
   },
   {
-    header: 'Address 2',
-    field: 'Address3',
+    header: 'Line 2',
+    field: 'line2',
   },
   {
     header: 'Street Number',
-    field: 'Street',
+    field: 'streetNumber',
   },
   {
     header: 'City',
-    field: 'City',
+    field: 'city',
   },
   {
     header: 'Country',
-    field: 'country',
+    field: 'countryId',
   },
   {
     header: 'State',
@@ -25,67 +25,67 @@ export const Address_Columns_EN = [
   },
   {
     header: 'Zip Code',
-    field: 'PoBox',
+    field: 'zipCode',
   },
 ];
 export const Address_Columns_FR = [
   {
-    header: 'Adresse 1',
-    field: 'Address2',
+    header: 'Line 1',
+    field: 'line1',
   },
   {
-    header: 'Adresse 2',
-    field: 'Address3',
+    header: 'Line 2',
+    field: 'line2',
   },
   {
-    header: 'Numéro de rue',
-    field: 'Street',
+    header: 'Street Number',
+    field: 'streetNumber',
   },
   {
-    header: 'Ville',
-    field: 'City',
+    header: 'City',
+    field: 'city',
   },
   {
-    header: 'Pays',
-    field: 'country',
+    header: 'Country',
+    field: 'countryId',
   },
   {
-    header: 'État',
+    header: 'State',
     field: 'state',
   },
   {
-    header: 'Code postal',
-    field: 'PoBox',
+    header: 'Zip Code',
+    field: 'zipCode',
   },
 ];
 
 export const Address_Columns_AR = [
   {
-    header: 'العنوان 1',
-    field: 'Address2',
+    header: 'Line 1',
+    field: 'line1',
   },
   {
-    header: 'العنوان 2',
-    field: 'Address3',
+    header: 'Line 2',
+    field: 'line2',
   },
   {
-    header: 'رقم الشارع',
-    field: 'Street',
+    header: 'Street Number',
+    field: 'streetNumber',
   },
   {
-    header: 'مدينة',
-    field: 'City',
+    header: 'City',
+    field: 'city',
   },
   {
-    header: 'دولة',
-    field: 'country',
+    header: 'Country',
+    field: 'countryId',
   },
   {
-    header: 'ولاية',
+    header: 'State',
     field: 'state',
   },
   {
-    header: 'الرمز البريدي',
-    field: 'PoBox',
+    header: 'Zip Code',
+    field: 'zipCode',
   },
 ];

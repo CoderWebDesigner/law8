@@ -5,7 +5,7 @@
     [model]="formlyModel"
     [options]="formlyOption"
   ></formly-form>
-  <div class="mt-4 text-end" *ngIf="!readOnly">
+  <div class="mt-4 text-end" *ngIf="!previewOnly">
     <p-button
       [loading]="isSubmit"
       styleClass="p-button-primary d-block py-3"

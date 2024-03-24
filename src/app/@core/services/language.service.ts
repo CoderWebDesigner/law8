@@ -52,7 +52,6 @@ export class LanguageService {
   }
 
   appendStyle(lang: string){
-    console.log(true);
     const head = window.document.getElementsByTagName("head")[0];
     const link = window.document.createElement('link');
     link.rel = 'stylesheet';

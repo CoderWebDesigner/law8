@@ -2,6 +2,7 @@
   *ngIf="data?.length == 0"
 >
   <p-button
+  *ngIf="!previewOnly"
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
@@ -14,7 +15,8 @@
 
 <ng-container *ngIf="data?.length > 0">
   <div class="text-end mb-4">
-    <p-button 
+    <p-button
+    *ngIf="!previewOnly"
     styleClass="btn btn-success"
     type="button"
     (onClick)="openDialog()"
@@ -24,8 +26,8 @@
   >
   </p-button>
   </div>
-  <shared-table
-    [data]="data"
-    [columnsLocalized]="columnsLocalized"
-  ></shared-table>
+  <shared-table *ngIf="!requestId" [additionalTableConfig]="additionalTableConfig" [data]="data"
+  [columnsLocalized]="columnsLocalized"></shared-table>
+<shared-table *ngIf="requestId" [additionalTableConfig]="additionalTableConfig" [columnsLocalized]="columnsLocalized"
+  [apiUrls]="apiUrls" [filterOptions]="filterOptions"></shared-table>
 </ng-container>

@@ -21,6 +21,7 @@ export abstract class FormBaseClass implements OnDestroy {
   formlyFields: FormlyFieldConfig[] = [];
   formlyOption: FormlyFormOptions = {};
 
+
   lookupsData: any = [];
 
   _languageService = inject(LanguageService);

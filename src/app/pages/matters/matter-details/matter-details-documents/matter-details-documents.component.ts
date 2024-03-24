@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedService } from '@shared/services/shared.service';
@@ -12,7 +12,8 @@ import { Document_Columns_AR, Document_Columns_EN, Document_Columns_FR } from '.
   styleUrls: ['./matter-details-documents.component.scss']
 })
 export class MatterDetailsDocumentsComponent implements OnInit,OnDestroy {
-  data: any[] = [];
+  @Input() data: any[] = [];
+  @Input() previewOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)
@@ -32,7 +33,7 @@ export class MatterDetailsDocumentsComponent implements OnInit,OnDestroy {
     ).subscribe({
       next: (res: any[]) => {
         this.data.push(...res)
-        console.log(this.data)
+        // console.log(this.data)
       }
     })
   }

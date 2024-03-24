@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatterDetailsContactsEditorComponent } from './matter-details-contacts-editor/matter-details-contacts-editor.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
@@ -12,7 +12,8 @@ import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './co
   styleUrls: ['./matter-details-contacts.component.scss']
 })
 export class MatterDetailsContactsComponent {
-  data: any[] = [];
+  @Input() data: any[] = [];
+  @Input() previewOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)

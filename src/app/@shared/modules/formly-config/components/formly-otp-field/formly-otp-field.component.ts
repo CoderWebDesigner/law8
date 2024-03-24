@@ -11,7 +11,7 @@ export class FormlyOtpFieldComponent extends FieldType<FieldTypeConfig> implemen
   @ViewChild(NgOtpInputComponent, { static: false}) ngOtpInput:NgOtpInputComponent;
 
   ngOnInit(): void {
-    console.log(this.formControl.value);
+    // console.log(this.formControl.value);
   }
 
   ngAfterViewInit(): void {

@@ -9,7 +9,7 @@ export const Matter_Parties_Columns_EN = [
   },
   {
     header: 'Party',
-    field: 'party',
+    field: 'law_PartiesDescription',
   },
   {
     header: 'Position',
@@ -31,7 +31,7 @@ export const Matter_Parties_Columns_FR = [
   },
   {
     header: 'Party',
-    field: 'party',
+    field: 'law_PartiesDescription',
   },
   {
     header: 'Position',
@@ -54,7 +54,7 @@ export const Matter_Parties_Columns_AR = [
   },
   {
     header: 'Party',
-    field: 'party',
+    field: 'law_PartiesDescription',
   },
   {
     header: 'Position',

@@ -41,7 +41,7 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
     this._apiService.get(`${this.apiUrls.getById}${this.clientCode}`)
       .pipe(this._sharedService.takeUntilDistroy()).subscribe({
         next: (res:ApiRes) => {
-          console.log(res)
+          // console.log(res)
           this.client = res.result
           // this.client.lstAddress= this.client.lstAddress.map((v)=>({
           //   ...v,

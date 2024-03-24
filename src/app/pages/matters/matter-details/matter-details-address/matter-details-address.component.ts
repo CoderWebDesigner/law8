@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedService } from '@shared/services/shared.service';
@@ -12,7 +12,8 @@ import { MatterDetailsAddressEditorComponent } from './matter-details-address-ed
   styleUrls: ['./matter-details-address.component.scss']
 })
 export class MatterDetailsAddressComponent {
-  data: any[] = [];
+  @Input() data: any[] = [];
+  @Input() previewOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)
@@ -36,7 +37,7 @@ export class MatterDetailsAddressComponent {
           return {
             ...element,
             country: element.CountryObj.CountryName,
-            state: element.StateObj.CountryName
+
           }
         })
       }

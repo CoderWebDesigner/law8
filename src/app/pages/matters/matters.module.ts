@@ -11,14 +11,11 @@ import { MatterEditorComponent } from './matter-editor/matter-editor.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { TabViewModule } from 'primeng/tabview';
 import { MatterEditorGeneralComponent } from './matter-editor/matter-editor-general/matter-editor-general.component';
-import { MatterEditorContractsComponent } from './matter-editor/matter-editor-contracts/matter-editor-contracts.component';
+import { MatterEditorContactsComponent } from './matter-editor/matter-editor-contacts/matter-editor-contacts.component';
 import { MatterEditorPaymentTermsComponent } from './matter-editor/matter-editor-payment-terms/matter-editor-payment-terms.component';
 import { SharedMatterTableComponent } from '@shared/components/business/shared-matter-table/shared-matter-table.component';
 import { MatterDetailsComponent } from './matter-details/matter-details.component';
-import { SharedAddressComponent } from '@shared/components/business/shared-address/shared-address.component';
 import { SharedAddressModule } from '@shared/components/business/shared-address/shared-address.module';
-import { MatterAddressEditorComponent } from './matter-editor/matter-editor-address/matter-address-editor/matter-address-editor.component';
-import { MatterEditorContractEditorComponent } from './matter-editor/matter-editor-contracts/matter-editor-contract-editor/matter-editor-contract-editor.component';
 import { MatterDetailsMainInfoComponent } from './matter-details/matter-details-main-info/matter-details-main-info.component';
 import { MatterDetailsPartiesComponent } from './matter-details/matter-details-parties/matter-details-parties.component';
 import { MatterDetailsPartiesEditorComponent } from './matter-details/matter-details-parties/matter-details-parties-editor/matter-details-parties-editor.component';
@@ -39,8 +36,8 @@ import { MatterDetailsInvoiceEditorComponent } from './matter-details/matter-det
 import { MatterDetailsInvoiceSalesItemsComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-items.component';
 import { MatterDetailsInvoiceSalesEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-editor/matter-details-invoice-sales-editor.component';
 import { MatterEditorPartiesComponent } from './matter-editor/matter-editor-parties/matter-editor-parties.component';
-import { MatterEditorPartiesEditorComponent } from './matter-editor/matter-editor-parties/matter-editor-parties-editor/matter-editor-parties-editor.component';
 import { MatterEditorAddressComponent } from './matter-editor/matter-editor-address/matter-editor-address.component';
+import { SharedListEditorComponent } from './components/shared-list/shared-list-editor/shared-list-editor.component';
 
 
 @NgModule({
@@ -50,13 +47,10 @@ import { MatterEditorAddressComponent } from './matter-editor/matter-editor-addr
     MatterEditorAddressComponent,
     MatterEditorGeneralComponent,
     MatterDetailsAddressComponent,
-    MatterEditorContractsComponent,
+    MatterEditorContactsComponent,
     MatterEditorPaymentTermsComponent,
     MatterEditorPartiesComponent,
-    MatterEditorPartiesEditorComponent,
     MatterDetailsComponent,
-    MatterAddressEditorComponent,
-    MatterEditorContractEditorComponent,
     MatterDetailsMainInfoComponent,
     MatterDetailsPartiesComponent,
     MatterDetailsPartiesEditorComponent,
@@ -74,7 +68,8 @@ import { MatterEditorAddressComponent } from './matter-editor/matter-editor-addr
     MatterDetailsInvoiceComponent,
     MatterDetailsInvoiceEditorComponent,
     MatterDetailsInvoiceSalesItemsComponent,
-    MatterDetailsInvoiceSalesEditorComponent
+    MatterDetailsInvoiceSalesEditorComponent,
+    SharedListEditorComponent
   ],
   imports: [
     CommonModule,

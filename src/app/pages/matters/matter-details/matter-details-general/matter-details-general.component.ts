@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-matter-details-general',
@@ -9,9 +11,9 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 })
 export class MatterDetailsGeneralComponent extends FormBaseClass implements OnInit {
 
-  @Input() showFields: boolean = true
+  @Input() previewOnly: boolean
   ngOnInit(): void {
-    this.initForm()
+    this.getLookupsData()
     this.formlyModel = {
       "clientIntroducing": "Option 1",
       "matterIntroducingLawyer": "Option 1",
@@ -36,7 +38,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.clientIntroducing'),
-              readonly: true,
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -51,7 +53,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.matterIntroducingLawyer'),
-              readonly: true,
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -66,7 +68,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.responsibleLaywer'),
-              readonly: true,
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -81,7 +83,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.assignedLaywer'),
-              readonly: true,
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -96,7 +98,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.defaultTask'),
-              readonly: true,
+              disabled: this.previewOnly,
             }
           },
           {
@@ -105,7 +107,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.defaultRate'),
-              readonly: true,
+              disabled: this.previewOnly,
             }
           },
           {
@@ -114,7 +116,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.referralType'),
-              readonly: true,
+              disabled: this.previewOnly,
             }
           },
           {
@@ -123,7 +125,7 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.otherStaff'),
-              readonly: true,
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -135,6 +137,23 @@ export class MatterDetailsGeneralComponent extends FormBaseClass implements OnIn
         ]
       }
     ]
+  }
+  override getLookupsData() {
+    forkJoin([
+      this._apiService.get(API_Config.general.getMatterCategoriesLookup),
+      this._apiService.get(API_Config.general.getJurisdictionLookup),
+      this._apiService.get(API_Config.general.getMatterStatus),
+      this._apiService.get(API_Config.general.getStages),
+      this._apiService.get(API_Config.general.getPractsAreaLookup),
+      this._apiService.get(API_Config.general.getClients)
+    ])
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res) => {
+          this.lookupsData = res;
+          this.initForm();
+        },
+      });
   }
   override onSubmit(): void {
 

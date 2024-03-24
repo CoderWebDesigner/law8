@@ -36,7 +36,8 @@
     "adjournmentReasons":"سبب التأجيل",
     "matterCategory": "فئة القضية",
     "timesheet": "Timesheet",
-    "initial":"الاسم المختصر"
+    "initial":"الاسم المختصر",
+    "taskCode":"TaskCode"
   },
   "btn": {
     "submit": "تاكيد",

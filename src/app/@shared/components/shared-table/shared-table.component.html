@@ -57,7 +57,7 @@
             </div>
           </ng-container>
           <ng-container *ngIf="col?.isDate">
-            {{ rowData[col.field] | date : "mediumDate" }}
+            {{ rowData[col.field] | date : "dd-MM-yyyy" }}
           </ng-container>
           <ng-container *ngIf="col?.isSwitch">
             <p-inputSwitch [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"

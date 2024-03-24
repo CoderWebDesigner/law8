@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -12,7 +12,8 @@ import { MatterDetailsInvoiceEditorComponent } from './matter-details-invoice-ed
   styleUrls: ['./matter-details-invoice.component.scss']
 })
 export class MatterDetailsInvoiceComponent implements OnInit,OnDestroy {
-  data: any[] = [];
+  @Input() data: any[] = [];
+  @Input() previewOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)

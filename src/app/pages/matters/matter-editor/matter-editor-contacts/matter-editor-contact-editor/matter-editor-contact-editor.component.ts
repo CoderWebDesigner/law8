@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { ApiRes } from '@core/models';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { ApiRes } from '@core/models/apiRes-model';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { ClientService } from '@shared/services/client.service';
 import { MatterService } from '@shared/services/matter/matter.service';
@@ -11,25 +10,24 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-matter-address-editor',
-  templateUrl: './matter-address-editor.component.html',
-  styleUrls: ['./matter-address-editor.component.scss'],
+  selector: 'app-matter-editor-contact-editor',
+  templateUrl: './matter-editor-contact-editor.component.html',
+  styleUrls: ['./matter-editor-contact-editor.component.scss'],
   standalone: true,
   imports: [FormlyConfigModule, SharedModule],
 })
-export class MatterAddressEditorComponent
+export class MatterEditorContactEditorComponent
   extends FormBaseClass
   implements OnInit
 {
-  generalApiUrls = API_Config.general;
-  apiUrls = API_Config.matterAddress;
+  apiUrls = API_Config.matterContact;
   _matterService = inject(MatterService);
-  _config = inject(DynamicDialogConfig);
-  address: any[] = [];
+  contacts: any[] = [];
   ngOnInit(): void {
-    this.getLookupsData();
+    this.initForm();
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
   }
+
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
   }
@@ -40,93 +38,120 @@ export class MatterAddressEditorComponent
         fieldGroup: [
           {
             className: 'col-md-6',
-            key: 'line1',
+            key: 'firstName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.line1'),
+              label: this._languageService.getTransValue('client.firstName'),
               placeholder: this._languageService.getTransValue(
-                'client.linePlaceholder'
+                'client.firstNamePlaceholder'
               ),
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'line2',
+            key: 'middleName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.line2'),
+              label: this._languageService.getTransValue('client.middleName'),
               placeholder: this._languageService.getTransValue(
-                'client.linePlaceholder'
+                'client.middleNamePlaceholder'
               ),
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'streetNumber',
+            key: 'lastName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.streetNumber'),
+              label: this._languageService.getTransValue('client.lastName'),
               placeholder: this._languageService.getTransValue(
-                'client.streetNumberPlaceholder'
+                'client.lastNamePlaceholder'
               ),
-              type: 'number',
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'city',
+            key: 'position',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.city'),
+              label: this._languageService.getTransValue('client.position'),
               placeholder: this._languageService.getTransValue(
-                'client.cityPlaceholder'
+                'client.positionPlaceholder'
               ),
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'countryId',
-            type: 'select',
+            key: 'address',
+            type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.country'),
+              label: this._languageService.getTransValue('common.address'),
+              // required: true
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'mobileNumber',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('common.mobileNumber'),
+              // required: true
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'email',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('common.email'),
               placeholder: this._languageService.getTransValue(
-                'client.countryPlaceholder'
+                'client.emailPlaceholder'
               ),
-              options: this.lookupsData.map((obj) => ({
-                label: obj.name,
-                value: obj.id,
-              })),
+              // required: true
+            },
+            validators: {
+              validation: ['email'],
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'phone',
+            type: 'phone',
+            props: {
+              label: this._languageService.getTransValue('client.phone'),
+              placeholder: this._languageService.getTransValue(
+                'client.phonePlaceholder'
+              ),
+              // required: true
+            },
+          },
 
-              // required: true,
+          {
+            className: 'col-md-6',
+            key: 'fax',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('client.fax'),
+              placeholder: this._languageService.getTransValue(
+                'client.faxPlaceholder'
+              ),
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'state',
+            key: 'remarks',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.state'),
+              label: this._languageService.getTransValue('client.remarks'),
               placeholder: this._languageService.getTransValue(
-                'client.statePlaceholder'
+                'client.remarksPlaceholder'
               ),
-              // options: ,
-              // required: true,
-            },
-          },
-          {
-            className: 'col-md-6',
-            key: 'zipCode',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.zipCode'),
-              placeholder: this._languageService.getTransValue(
-                'client.zipCodePlaceholder'
-              ),
-              // required: true,
+              // required: true
             },
           },
         ],
@@ -135,18 +160,23 @@ export class MatterAddressEditorComponent
   }
   override onSubmit(): void {
     if (this.formly.invalid) return;
+
+    // this.formlyModel = {
+    //   ...this.formlyModel,
+    //   phone: this.formlyModel?.phone?.internationalNumber
+    // };
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          streetNumber: +this.formlyModel.streetNumber,
+          phone: this.formlyModel?.phone?.internationalNumber,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          streetNumber: +this.formlyModel.streetNumber,
+          phone: this.formlyModel?.phone?.internationalNumber,
           law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
     const path = this._dynamicDialogConfig?.data?.rowData
@@ -173,25 +203,11 @@ export class MatterAddressEditorComponent
           },
         });
     } else {
-      this.address.push(this.formlyModel);
-      this._matterService.address$.next(this.address);
+      this.contacts.push(this.formlyModel);
+      this._matterService.contacts$.next(this.contacts);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-        dialog.destroy();
+        this._dynamicDialogRef.close(dialog);
       });
     }
-  }
-  override getLookupsData(): void {
-    this._apiService
-      .get(this.generalApiUrls.getCountryLookup)
-      .pipe(
-        finalize(() => (this.isSubmit = false)),
-        this.takeUntilDestroy()
-      )
-      .subscribe({
-        next: (res: ApiRes) => {
-          this.lookupsData = res.result;
-          this.initForm();
-        },
-      });
   }
 }

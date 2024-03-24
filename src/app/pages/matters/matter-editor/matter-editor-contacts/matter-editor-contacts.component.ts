@@ -1,55 +1,54 @@
-import { Component, Input, OnInit, SimpleChanges, inject } from '@angular/core';
-import { FormBaseClass } from '@core/classes/form-base.class';
-import { MatterAddressEditorComponent } from './matter-address-editor/matter-address-editor.component';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { MatterEditorContactEditorComponent } from './matter-editor-contact-editor/matter-editor-contact-editor.component';
+import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contract-columns.config';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
-import { SharedService } from '@shared/services/shared.service';
 import { MatterService } from '@shared/services/matter/matter.service';
-import {
-  Address_Columns_AR,
-  Address_Columns_EN,
-  Address_Columns_FR,
-} from './address-columns.config';
+import { SharedService } from '@shared/services/shared.service';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
+import { API_Config } from '@core/api/api-config/api.config';
 import { PAGESIZE } from '@core/utilities/defines';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
-import { API_Config } from '@core/api/api-config/api.config';
 
 @Component({
-  selector: 'app-matter-editor-address',
-  templateUrl: './matter-editor-address.component.html',
-  styleUrls: ['./matter-editor-address.component.scss'],
+  selector: 'app-matter-editor-contacts',
+  templateUrl: './matter-editor-contacts.component.html',
+  styleUrls: ['./matter-editor-contacts.component.scss']
 })
-export class MatterEditorAddressComponent implements OnInit {
+export class MatterEditorContactsComponent implements OnInit, OnChanges{
   @Input() previewOnly: boolean;
   @Input() data: any[] = [];
   @Input() requestId:any;
-  filterOptions;
-  additionalTableConfig;
-  apiUrls=API_Config.matterAddress
+
   _dialogService = inject(DialogService);
-  _languageService = inject(LanguageService);
-  _matterService = inject(MatterService);
-  _sharedService = inject(SharedService);
-  _sharedTableService = inject(SharedTableService);
+  _languageService = inject(LanguageService)
+  _matterService = inject(MatterService)
+  _sharedService = inject(SharedService)
+  _sharedTableService=inject(SharedTableService)
 
   columnsLocalized = {
-    en: Address_Columns_EN,
-    ar: Address_Columns_AR,
-    fr: Address_Columns_FR,
+    en: Contact_Columns_EN,
+    ar: Contact_Columns_AR,
+    fr: Contact_Columns_FR,
   };
+  filterOptions = {};
+  additionalTableConfig: TableConfig = {};
+  apiUrls=API_Config.matterContact
   ngOnChanges(changes: SimpleChanges): void {
-    this._matterService.address$.next(changes['data']?.currentValue);
+    // console.log('ngOnChanges',changes['data']?.currentValue)
+    this._matterService.contacts$.next(changes['data']?.currentValue);;
   }
   ngOnInit(): void {
-    // console.log('Address', this.data);
-    this.getList();
+
+    this.getList()
   }
   getList() {
-    this._matterService.address$
+    this._matterService.contacts$
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: any[]) => {
           if(Array.isArray(res)){
+            // console.log('getContacts',res)
             this.data.push(...res)
             this.data = this.data.map((element) => {
               return {
@@ -68,7 +67,7 @@ export class MatterEditorAddressComponent implements OnInit {
               actions: [
                 {
                   title: this._languageService.getTransValue('btn.update'),
-                  target: MatterAddressEditorComponent,
+                  target: MatterEditorContactEditorComponent,
                   icon:'pencil',
                   isDynamic:this.requestId != undefined,
                   isReadOnly:this.previewOnly
@@ -85,9 +84,9 @@ export class MatterEditorAddressComponent implements OnInit {
       });
   }
   openDialog() {
-    const ref = this._dialogService.open(MatterAddressEditorComponent, {
+    const ref = this._dialogService.open(MatterEditorContactEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('matters.addAddress'),
+      header: this._languageService.getTransValue('client.addContacts'),
       dismissableMask: true,
       data:{
         law_MatterId:this.requestId,
@@ -100,6 +99,7 @@ export class MatterEditorAddressComponent implements OnInit {
     });
   }
   ngOnDestroy(): void {
-    this._sharedService.destroy();
+    this._sharedService.destroy()
   }
+
 }

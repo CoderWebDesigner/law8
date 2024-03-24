@@ -24,7 +24,7 @@ export class ClientEditorComponent
   implements OnInit, OnChanges
 {
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    // console.log(changes);
     // this._clientService.contacts$.next()
   }
   generalApiUrls = API_Config.general;
@@ -63,7 +63,7 @@ export class ClientEditorComponent
     this._clientService.contacts$.subscribe({
       next: (res) => {
         this.contact = res;
-        console.log('_clientService', this.contact);
+        // console.log('_clientService', this.contact);
       },
     });
   }
@@ -132,9 +132,9 @@ export class ClientEditorComponent
                   imgStyle:{width:'30px'},
                   style: { marginTop: '22px', padding: '10px 20px' },
                   onClick: () => {
-                    console.log('before', this.showLanguageField)
+                    // console.log('before', this.showLanguageField)
                     this.showLanguageField = !this.showLanguageField;
-                    console.log('after', this.showLanguageField)
+                    // console.log('after', this.showLanguageField)
                     this.formlyFields[0].fieldGroup[2].hide =
                       this.showLanguageField;
                   },
@@ -391,7 +391,7 @@ export class ClientEditorComponent
         phone1: this.formlyModel?.phone1?.internationalNumber,
         phone2: this.formlyModel?.phone2?.internationalNumber,
       };
-      console.log(this.formlyModel);
+      // console.log(this.formlyModel);
       // const requestPayload = this.requestId
       //   ? { ...this.formlyModel, id: this.requestId }
       // : this.formlyModel;
@@ -399,7 +399,7 @@ export class ClientEditorComponent
         ? API_Config.client.update
         : API_Config.client.create;
 
-      console.log(this.formlyModel);
+      // console.log(this.formlyModel);
       this._apiService
         .post(path, this.formlyModel)
         .pipe(
@@ -408,7 +408,7 @@ export class ClientEditorComponent
         )
         .subscribe({
           next: (res: ApiRes) => {
-            console.log('isSuccess',res.isSuccess)
+            // console.log('isSuccess',res.isSuccess)
             if (res.isSuccess) {
               Swal.fire({
                 title: this._languageService.getTransValue('messages.success'),
@@ -459,7 +459,7 @@ export class ClientEditorComponent
       )
       .subscribe({
         next: (res: ApiRes) => {
-          console.log(res);
+          // console.log(res);
           this.lookupsData = res;
           if (this.requestId) {
             this.formlyModel = res[2].result;

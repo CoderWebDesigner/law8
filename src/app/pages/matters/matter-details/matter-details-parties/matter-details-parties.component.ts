@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatterDetailsPartiesEditorComponent } from './matter-details-parties-editor/matter-details-parties-editor.component';
 import { Matter_Parties_Columns_AR, Matter_Parties_Columns_EN, Matter_Parties_Columns_FR } from './matter-parties-columns.config';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -12,7 +12,8 @@ import { MatterService } from '@shared/services/matter/matter.service';
   styleUrls: ['./matter-details-parties.component.scss']
 })
 export class MatterDetailsPartiesComponent implements OnInit {
-  data: any[] = [];
+  @Input() data: any[] = [];
+  @Input() previewOnly: boolean;
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService)
   _matterService = inject(MatterService)
