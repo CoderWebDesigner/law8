@@ -61,8 +61,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       this.previewOnly = this.requestId == 1;
       // this.formlyModel = res[2].result;
       // this.previewOnly = this.formlyModel?.id == 1;
-      console.log('previewOnly', this.previewOnly);
-      console.log('requestId', this.requestId);
+      // console.log('previewOnly', this.previewOnly);
+      // console.log('requestId', this.requestId);
     }
     if (this.requestId) this.getData();
     this.getLookupsData();
@@ -419,7 +419,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     // console.log('field');
                     this.formly.get('jurisdictionId').valueChanges.subscribe({
                       next: (res) => {
-                        console.log(res);
+                        // console.log(res);
                         this._apiService
                           .get(
                             `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${res}`
@@ -518,7 +518,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
 
   getTabsValues() {
-    console.log('getTabsValues');
+    // console.log('getTabsValues');
 
     combineLatest([
       this._matterService.address$,
@@ -531,7 +531,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
         law_MatterAddresses: address,
         law_MatterContactss: contacts,
       };
-      console.log('formlyModel', this.formlyModel);
+      // console.log('formlyModel', this.formlyModel);
     });
     // forkJoin(
     //   [
@@ -592,13 +592,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res) => {
           this.lookupsData = res;
-          console.log(this.lookupsData);
           this.initForm();
         },
       });
   }
   getFormData(event) {
-    console.log('event',event)
     this.formlyModel = {
     ...this.formlyModel,
     ...event

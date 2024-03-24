@@ -50,7 +50,7 @@ export class MatterEditorPartiesComponent implements OnInit,OnChanges {
         next: (res: any[]) => {
           // console.log('parties', res);
          if(Array.isArray(res)){
-          this.data = [...res];
+          this.data = [...this.data,...res];
           this.filterOptions = {
             clientId: this.requestId,
             pageNum: 1,

@@ -37,7 +37,9 @@ import { MatterDetailsInvoiceSalesItemsComponent } from './matter-details/matter
 import { MatterDetailsInvoiceSalesEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-editor/matter-details-invoice-sales-editor.component';
 import { MatterEditorPartiesComponent } from './matter-editor/matter-editor-parties/matter-editor-parties.component';
 import { MatterEditorAddressComponent } from './matter-editor/matter-editor-address/matter-editor-address.component';
-import { SharedListEditorComponent } from './components/shared-list/shared-list-editor/shared-list-editor.component';
+import { MatterApplicantsComponent } from './components/matter-applicants/matter-applicants.component';
+import { MatterClassComponent } from './components/matter-class/matter-class.component';
+import { MatterSelectClassComponent } from './components/matter-class/matter-select-class/matter-select-class.component';
 
 
 @NgModule({
@@ -69,7 +71,9 @@ import { SharedListEditorComponent } from './components/shared-list/shared-list-
     MatterDetailsInvoiceEditorComponent,
     MatterDetailsInvoiceSalesItemsComponent,
     MatterDetailsInvoiceSalesEditorComponent,
-    SharedListEditorComponent
+    MatterApplicantsComponent,
+    MatterClassComponent,
+    MatterSelectClassComponent
   ],
   imports: [
     CommonModule,

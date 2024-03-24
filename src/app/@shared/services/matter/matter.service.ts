@@ -12,5 +12,7 @@ export class MatterService {
   documents$ = new BehaviorSubject([])
   activity$ = new BehaviorSubject([])
   invoice$ = new BehaviorSubject([])
+  applicant$ = new BehaviorSubject([])
+  class$ = new BehaviorSubject([])
   constructor() { }
 }

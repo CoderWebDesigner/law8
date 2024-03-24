@@ -137,7 +137,7 @@ export class MatterEditorPartiesEditorComponent extends FormBaseClass implements
         });
     } else {
       this.data.push(this.formlyModel);
-      this._matterService.address$.next(this.data);
+      this._matterService.parties$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         dialog.destroy();
       });

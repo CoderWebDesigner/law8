@@ -114,6 +114,8 @@
     "uploadLogoMark":"Upload Logo Mark",
     "caseSensitive":"Case Sensitive",
     "applicants":"Applicants",
-    "class":"Class"
+    "class":"Class",
+    "addApplicant":"Add Applicant",
+    "addClass":"Add Class"
   }
 }

@@ -5,18 +5,17 @@
       <p-tabView>
         <ng-container *ngFor="let item of items;let i =index">
           <p-tabPanel [header]="item.label" *ngIf="item.show">
-            <!-- <app-matter-editor-general [data]="data" [previewOnly]="previewOnly" *ngIf="i == 0"></app-matter-editor-general>
-            <app-matter-editor-parties [data]="data?.law_MatterParties" [previewOnly]="previewOnly" *ngIf="i == 1"></app-matter-editor-parties>
-            <app-matter-editor-address [data]="data?.law_MatterAddresses"  [previewOnly]="previewOnly" *ngIf="i == 2"></app-matter-editor-address>
-            <app-matter-editor-contacts  [data]="data?.law_MatterContactss" [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i == 3"></app-matter-editor-contacts> -->
             <app-matter-editor-general [data]="formlyModel" [previewOnly]="previewOnly" *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
             <ng-container *ngIf="[3, 1].includes(formlyModel.practsAreaId)">
+              
               <app-matter-editor-parties   [previewOnly]="previewOnly" *ngIf="i==1"></app-matter-editor-parties>
               <app-matter-editor-address   [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-editor-address>
               <app-matter-editor-contacts  [previewOnly]="previewOnly" *ngIf="i==5"></app-matter-editor-contacts>
             </ng-container>
             <ng-container *ngIf="[4].includes(formlyModel.practsAreaId)">
               <app-matter-editor-address  [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-editor-address>
+              <app-matter-applicants  [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-applicants>
+              <app-matter-class  [previewOnly]="previewOnly" *ngIf="i==4"></app-matter-class>
             </ng-container>
             <app-matter-editor-payment-terms *ngIf="i==6"></app-matter-editor-payment-terms>
           </p-tabPanel>

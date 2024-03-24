@@ -1,21 +1,22 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
-import { MatterEditorContactEditorComponent } from './matter-editor-contact-editor/matter-editor-contact-editor.component';
-import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contract-columns.config';
-import { DialogService } from 'primeng/dynamicdialog';
+import { API_Config } from '@core/api/api-config/api.config';
 import { LanguageService } from '@core/services';
+import { PAGESIZE } from '@core/utilities/defines';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedService } from '@shared/services/shared.service';
-import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
-import { API_Config } from '@core/api/api-config/api.config';
-import { PAGESIZE } from '@core/utilities/defines';
-import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { MatterClassEditorComponent } from './matter-class-editor/matter-class-editor.component';
+import { MatterSelectClassComponent } from './matter-select-class/matter-select-class.component';
+import { Matter_Class_Columns_AR, Matter_Class_Columns_EN, Matter_Class_Columns_FR } from './matter-class-columns.config';
 
 @Component({
-  selector: 'app-matter-editor-contacts',
-  templateUrl: './matter-editor-contacts.component.html',
-  styleUrls: ['./matter-editor-contacts.component.scss']
+  selector: 'app-matter-class',
+  templateUrl: './matter-class.component.html',
+  styleUrls: ['./matter-class.component.scss']
 })
-export class MatterEditorContactsComponent implements OnInit, OnChanges{
+export class MatterClassComponent implements OnInit, OnChanges{
   @Input() previewOnly: boolean;
   @Input() data: any[] = [];
   @Input() requestId:any;
@@ -27,35 +28,28 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
   _sharedTableService=inject(SharedTableService)
 
   columnsLocalized = {
-    en: Contact_Columns_EN,
-    ar: Contact_Columns_AR,
-    fr: Contact_Columns_FR,
+    en: Matter_Class_Columns_EN,
+    ar: Matter_Class_Columns_AR,
+    fr: Matter_Class_Columns_FR,
   };
   filterOptions = {};
   additionalTableConfig: TableConfig = {};
-  apiUrls=API_Config.matterContact
+  apiUrls=API_Config.matterApplicant
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('ngOnChanges',changes['data']?.currentValue)
-    this._matterService.contacts$.next(changes['data']?.currentValue);;
+    this._matterService.class$.next(changes['data']?.currentValue);;
   }
   ngOnInit(): void {
 
     this.getList()
   }
   getList() {
-    this._matterService.contacts$
+    this._matterService.class$
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: any[]) => {
           if(Array.isArray(res)){
             this.data = [...this.data,...res];
-            console.log('data',this.data)
-            this.data = this.data.map((element) => {
-              return {
-                ...element,
-                phone: element?.phone?.internationalNumber,
-              };
-            });
             this.filterOptions = {
               clientId: this.requestId,
               pageNum: 1,
@@ -67,7 +61,7 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
               actions: [
                 {
                   title: this._languageService.getTransValue('btn.update'),
-                  target: MatterEditorContactEditorComponent,
+                  target: MatterClassEditorComponent,
                   icon:'pencil',
                   isDynamic:this.requestId != undefined,
                   isReadOnly:this.previewOnly
@@ -84,9 +78,9 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
       });
   }
   openDialog() {
-    const ref = this._dialogService.open(MatterEditorContactEditorComponent, {
+    const ref = this._dialogService.open(MatterSelectClassComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts'),
+      header: this._languageService.getTransValue('matters.addClass'),
       dismissableMask: true,
       data:{
         law_MatterId:this.requestId,
@@ -101,5 +95,6 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
   ngOnDestroy(): void {
     this._sharedService.destroy()
   }
+
 
 }
