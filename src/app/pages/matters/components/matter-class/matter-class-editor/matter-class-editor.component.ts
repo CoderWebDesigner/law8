@@ -23,7 +23,16 @@ export class MatterClassEditorComponent
   _matterService = inject(MatterService);
   data: any[] = [];
   ngOnInit(): void {
+    this.getList()
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
+  }
+  getList(){
+    this._matterService.class$.subscribe({
+      next:(res:any[])=>{
+        console.log('data',this.data)
+        this.data=[...res]
+      }
+    })
   }
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };

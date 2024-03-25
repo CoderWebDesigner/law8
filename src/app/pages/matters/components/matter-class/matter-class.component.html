@@ -26,7 +26,7 @@
   </div>
   <shared-table *ngIf="!requestId" [additionalTableConfig]="additionalTableConfig" [data]="data"
     [columnsLocalized]="columnsLocalized"></shared-table>
-  <!-- <shared-table *ngIf="requestId" [additionalTableConfig]="additionalTableConfig" [columnsLocalized]="columnsLocalized"
-    [apiUrls]="apiUrls" [filterOptions]="filterOptions"></shared-table> -->
+  <shared-table *ngIf="requestId" [additionalTableConfig]="additionalTableConfig" [columnsLocalized]="columnsLocalized"
+    [apiUrls]="apiUrls" [filterOptions]="filterOptions"></shared-table>
 </ng-container>
 

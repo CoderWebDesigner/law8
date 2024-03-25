@@ -34,11 +34,11 @@ export class MatterClassComponent implements OnInit, OnChanges{
   };
   filterOptions = {};
   additionalTableConfig: TableConfig = {};
-  apiUrls=API_Config.matterApplicant
+  apiUrls=API_Config.matterClass
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('ngOnChanges',changes['data']?.currentValue)
     // this._matterService.class$.next(changes['data']?.currentValue);;
-    if(this.requestId) this.getList()
+     this.getList()
   }
   ngOnInit(): void {
 
@@ -51,12 +51,14 @@ export class MatterClassComponent implements OnInit, OnChanges{
         next: (res: any[]) => {
           if(Array.isArray(res)){
             this.data = [...this.data,...res];
+            console.log('Class', this.data)
             this.filterOptions = {
               matterId: this.requestId,
               pageNum: 1,
               pagSize: PAGESIZE,
               orderByDirection: 'ASC',
             };
+            console.log('matterId',this.requestId)
             this.additionalTableConfig={
               id: 'id',
               actions: [
