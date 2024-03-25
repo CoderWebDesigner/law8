@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatterService {
-  address$ = new BehaviorSubject([])
+  address$ = new Subject()
   contacts$ = new BehaviorSubject([])
   parties$ = new BehaviorSubject([])
   documents$ = new BehaviorSubject([])

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
@@ -24,9 +24,9 @@ export class MatterAddressEditorComponent
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.matterAddress;
   _matterService = inject(MatterService);
-  _config = inject(DynamicDialogConfig);
-  address: any[] = [];
+  address: any[]=[];
   ngOnInit(): void {
+    console.log('address ngOnInit',this.address)
     this.getLookupsData();
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
   }
@@ -133,6 +133,7 @@ export class MatterAddressEditorComponent
       },
     ];
   }
+
   override onSubmit(): void {
     if (this.formly.invalid) return;
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
@@ -173,8 +174,31 @@ export class MatterAddressEditorComponent
           },
         });
     } else {
+      // this.data=this.data.map(obj=>{
+      //   console.log('obj1',obj)
+      //   console.log('obj2',this._dynamicDialogConfig?.data?.rowData)
+      //   console.log('comparsion',JSON.stringify(obj)==JSON.stringify(this._dynamicDialogConfig?.data?.rowData))
+      //   return obj
+      // })
+      // let index =this.data.findIndex(obj=>{
+      //   debugger
+      //   console.log('obj1',obj)
+      //   console.log('obj2',this._dynamicDialogConfig?.data?.rowData)
+      //   console.log('comparsion',JSON.stringify(obj)==JSON.stringify(this._dynamicDialogConfig?.data?.rowData))
+      //   return JSON.stringify(obj)==JSON.stringify(this._dynamicDialogConfig?.data?.rowData)
+      // })
+      // console.log('index',index)
+      // if(index!=-1){
+      //   this.data[index]=this.formlyModel
+      // }else{
+      //   this.data.push(this.formlyModel)
+      //   this._matterService.address$.next(this.formlyModel);
+      // }
+
       this.address.push(this.formlyModel);
-      this._matterService.address$.next(this.address);
+      this._matterService.address$.next(this.formlyModel);
+      console.log('address', this.address);
+
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         dialog.destroy();
       });

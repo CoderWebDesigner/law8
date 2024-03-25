@@ -5,7 +5,7 @@
       <p-tabView>
         <ng-container *ngFor="let item of items;let i =index">
           <p-tabPanel [header]="item.label" *ngIf="item.show">
-            <app-matter-editor-general [data]="formlyModel" [previewOnly]="previewOnly" *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
+            <app-matter-editor-general [previewOnly]="previewOnly" *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
             <ng-container *ngIf="[3, 1].includes(formlyModel.practsAreaId)">
               
               <app-matter-editor-parties   [previewOnly]="previewOnly" *ngIf="i==1"></app-matter-editor-parties>

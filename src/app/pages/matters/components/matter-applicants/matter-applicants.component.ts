@@ -49,14 +49,8 @@ export class MatterApplicantsComponent implements OnInit, OnChanges{
         next: (res: any[]) => {
           if(Array.isArray(res)){
             this.data = [...this.data,...res];
-            this.data = this.data.map((element) => {
-              return {
-                ...element,
-                phone: element?.phone?.internationalNumber,
-              };
-            });
             this.filterOptions = {
-              clientId: this.requestId,
+              matterId: this.requestId,
               pageNum: 1,
               pagSize: PAGESIZE,
               orderByDirection: 'ASC',

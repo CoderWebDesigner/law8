@@ -200,7 +200,9 @@ export class MatterApplicantsEditorComponent
           },
         });
     } else {
-
+      this.formlyModel.phone = this.formlyModel?.phone?.internationalNumber
+      ? this.formlyModel?.phone?.internationalNumber
+      : this.formlyModel.phone;
       this.data.push(this.formlyModel);
       this._matterService.applicant$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {

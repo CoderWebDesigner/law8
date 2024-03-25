@@ -6,7 +6,7 @@ import { ApiRes } from '@core/models/apiRes-model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { MatterService } from '@shared/services/matter/matter.service';
 import { MenuItem } from 'primeng/api';
-import { combineLatest, forkJoin, map } from 'rxjs';
+import { combineLatest, finalize, forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'app-matter-editor',
@@ -108,15 +108,19 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 value: obj.id,
               })),
               onChange: (e) => {
-                this._apiService.get(`${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel.clientId}`).pipe(
-                  this._sharedService.takeUntilDistroy()
-                ).subscribe({
-                  next:(res:ApiRes)=>{
-                    this.formly.get('clientName').setValue(res.result['name']);
-                    this.formly.get('mtrNo').setValue(res.result['mattCode']);
-                  }
-                })
-                
+                this._apiService
+                  .get(
+                    `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel.clientId}`
+                  )
+                  .pipe(this._sharedService.takeUntilDistroy())
+                  .subscribe({
+                    next: (res: ApiRes) => {
+                      this.formly
+                        .get('clientName')
+                        .setValue(res.result['name']);
+                      this.formly.get('mtrNo').setValue(res.result['mattCode']);
+                    },
+                  });
               },
             },
           },
@@ -140,7 +144,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           },
           {
             type: 'select',
-            key: 'parentMatterCode',
+            key: 'parentMatterId',
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue(
@@ -156,8 +160,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             expressions: {
               hide: (field: FormlyFieldConfig) => {
                 return (
-                  field.model?.requestType == 1 ||
-                  !field.model?.requestType
+                  field.model?.requestTypeId == 1 || !field.model?.requestTypeId
                 );
               },
             },
@@ -166,7 +169,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             type: 'select',
             key: 'practsAreaId',
             className: 'col-md-4',
-            defaultValue:1,
+            defaultValue: 1,
             props: {
               label: this._languageService.getTransValue('common.practiceArea'),
               disabled: this.previewOnly,
@@ -245,37 +248,42 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 props: {
                   label:
                     this._languageService.getTransValue('matters.matterType'),
-                  disabled:  this.previewOnly,
+                  disabled: this.previewOnly,
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
                     field.form.get('law_MtrCatId').valueChanges.subscribe({
-                      next: res => {
-                        this._apiService.get(`${API_Config.general.getMatterTypesByCategoryId}?matClntId=${res}`).pipe(
-                              this._sharedService.takeUntilDistroy()
-                            ).subscribe({
-                              next:(res:ApiRes)=>{
-                                field.props.options = res.result.map(obj => ({ label: obj.name, value: obj.id }))
-                              }
-                            })
-                      }
-                    })
-                  }
-                }
+                      next: (res) => {
+                        this._apiService
+                          .get(
+                            `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${res}`
+                          )
+                          .pipe(this._sharedService.takeUntilDistroy())
+                          .subscribe({
+                            next: (res: ApiRes) => {
+                              field.props.options = res.result.map((obj) => ({
+                                label: obj.name,
+                                value: obj.id,
+                              }));
+                            },
+                          });
+                      },
+                    });
+                  },
+                },
               },
               {
                 type: 'select',
-                key: 'instructor',
+                key: 'law_InstructorId',
                 className: 'col-md-4',
                 props: {
                   label:
                     this._languageService.getTransValue('matters.instructor'),
                   disabled: this.previewOnly,
-                  options: [
-                    { label: 'value 1', value: 'value 1' },
-                    { label: 'value 2', value: 'value 2' },
-                    { label: 'value 3', value: 'value 3' },
-                  ],
+                  options: this.lookupsData[5].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
@@ -288,7 +296,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               },
               {
                 type: 'radio',
-                key: 'tradmarkType',
+                key: 'tradmarkTypeId',
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue(
@@ -297,8 +305,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   disabled: this.previewOnly,
                   placeholder: '',
                   options: [
-                    { label: 'Logo', value: 'Logo' },
-                    { label: 'Word', value: 'Word' },
+                    { label: 'Logo', value: 1 },
+                    { label: 'Word', value: 2 },
                   ],
                 },
                 expressions: {
@@ -324,15 +332,15 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     return (
                       [3, 1].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
-                      field.model?.tradmarkType == 'Logo' ||
-                      !field.model?.tradmarkType
+                      field.model?.tradmarkTypeId == 1 ||
+                      !field.model?.tradmarkTypeId
                     );
                   },
                 },
               },
               {
                 type: 'checkbox',
-                key: 'caseSensitive',
+                key: 'isCaseSensitive',
                 className: 'col-md-4',
                 props: {
                   label: this._languageService.getTransValue(
@@ -345,34 +353,32 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     return (
                       [3, 1].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
-                      field.model?.tradmarkType == 'Logo' ||
-                      !field.model?.tradmarkType
+                      field.model?.tradmarkTypeId == 1 ||
+                      !field.model?.tradmarkTypeId
                     );
                   },
                 },
               },
               {
-                type: 'file',
-                key: 'logoMark',
-                className: 'col-md-4',
+                key: 'photo',
+                type: 'attachment',
+                className: ' col-md-4',
                 props: {
-                  label:
-                    this._languageService.getTransValue('matters.logoMark'),
-                  accept: '.jpeg,.jpg,.png',
-                  //  multiple:false
+                  btnLabel: 'matters.uploadLogo',
+                  title: 'matters.uploadLogo',
+                  subTitle: 'common.dragAndDrop',
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
                       [3, 1].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
-                      field.model?.tradmarkType == 'Word' ||
-                      !field.model?.tradmarkType
+                      field.model?.tradmarkTypeId == 2 ||
+                      !field.model?.tradmarkTypeId
                     );
                   },
                 },
               },
-
               {
                 type: 'select',
                 key: 'jurisdictionId',
@@ -425,7 +431,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                             `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${res}`
                           )
                           .subscribe({
-                            next: (res:ApiRes) => {
+                            next: (res: ApiRes) => {
                               field.props.options = res.result.map((obj) => ({
                                 label: obj.name,
                                 value: obj.id,
@@ -524,51 +530,63 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       this._matterService.address$,
       this._matterService.contacts$,
       this._matterService.parties$,
-    ]).subscribe(([address, contacts, parties]) => {
+      this._matterService.class$,
+      this._matterService.applicant$,
+    ]).subscribe(([address, contacts, parties,matterClass,applicant]) => {
       this.formlyModel = {
         ...this.formlyModel,
+        courtNumber :'12',
         law_MatterParties: parties,
         law_MatterAddresses: address,
         law_MatterContactss: contacts,
+        law_MatterClass:matterClass,
+        law_MatterApplicants:applicant
       };
       // console.log('formlyModel', this.formlyModel);
     });
-    // forkJoin(
-    //   [
-    //     this._matterService.address$,
-    //     this._matterService.contacts$,
-    //     this._matterService.parties$
-    //   ]
-
-    // ).pipe(
-    //   map(([address, contacts, parties]) => {
-    //     return {
-    //       address: address,
-    //       contacts: contacts,
-    //       parties: parties,
-    //     };
-    //   })
-    // ).subscribe({
-    //   next:res=>{
-    //     console.log(res)
-    //     this.tabsList = res
-    //   }
-    // })
   }
 
   override onSubmit(): void {
-  
+    // this.isSubmit = true;
+    console.log(this.formlyModel.photo);
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
-            const text = this._languageService.getTransValue(
-              'messages.createdSuccessfully'
-            );
-            this._toastrNotifiService.displaySuccessMessage(text)
-            this._router.navigate(['/matters'])
+            if (this.formlyModel.photo) {
+              let formData = new FormData()
+              formData.append('Attachment',this.formlyModel.photo)
+              formData.append('Law_MatterId',res.result.id)
+              this._apiService
+                .post(API_Config.matters.uploadLogo, formData)
+                .pipe(
+                  this._sharedService.takeUntilDistroy(),
+                  finalize(() => (this.isSubmit = false))
+                )
+                .subscribe({
+                  next: (res: ApiRes) => {
+                    if (res && res.isSuccess) {
+                      const text = this._languageService.getTransValue(
+                        'messages.createdSuccessfully'
+                      );
+                      this._toastrNotifiService.displaySuccessMessage(text);
+                      this._router.navigate(['/matters']);
+                    } else {
+                      this._toastrNotifiService.displayErrorToastr(
+                        res?.message
+                      );
+                    }
+                  },
+                });
+            } else {
+              const text = this._languageService.getTransValue(
+                'messages.createdSuccessfully'
+              );
+              this._toastrNotifiService.displaySuccessMessage(text);
+              this._router.navigate(['/matters']);
+            }
           } else {
             this._toastrNotifiService.displayErrorToastr(res?.message);
           }
@@ -586,7 +604,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       this._apiService.get(API_Config.general.getMatterStatus),
       this._apiService.get(API_Config.general.getStages),
       this._apiService.get(API_Config.general.getPractsAreaLookup),
-      this._apiService.get(API_Config.general.getClients)
+      this._apiService.get(API_Config.general.getClients),
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
@@ -598,18 +616,18 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
   getFormData(event) {
     this.formlyModel = {
-    ...this.formlyModel,
-    ...event
-    }
+      ...this.formlyModel,
+      ...event,
+    };
   }
   override getData(): void {
-    this._apiService.get(API_Config.matters.getById+'?id='+this.requestId).pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next:(res:ApiRes)=>{
-        this.formlyModel = {...res['result']}
-      }
-    })
-    
+    this._apiService
+      .get(API_Config.matters.getById + '?id=' + this.requestId)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.formlyModel = { ...res['result'] };
+        },
+      });
   }
 }

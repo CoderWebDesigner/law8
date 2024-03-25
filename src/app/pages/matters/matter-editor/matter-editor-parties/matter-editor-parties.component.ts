@@ -38,10 +38,11 @@ export class MatterEditorPartiesComponent implements OnInit,OnChanges {
     fr: Matter_Parties_Columns_FR,
   };
   ngOnChanges(changes: SimpleChanges): void {
-    this._matterService.parties$.next(changes['data']?.currentValue);;
+   
+    if(this.requestId) this.getList()
   }
   ngOnInit(): void {
-    this.getList();
+    // this.getList();
   }
   getList() {
     this._matterService.parties$
@@ -52,7 +53,7 @@ export class MatterEditorPartiesComponent implements OnInit,OnChanges {
          if(Array.isArray(res)){
           this.data = [...this.data,...res];
           this.filterOptions = {
-            clientId: this.requestId,
+            matterId: this.requestId,
             pageNum: 1,
             pagSize: PAGESIZE,
             orderByDirection: 'ASC',

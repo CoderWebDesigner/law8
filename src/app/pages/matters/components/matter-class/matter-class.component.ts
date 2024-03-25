@@ -37,11 +37,12 @@ export class MatterClassComponent implements OnInit, OnChanges{
   apiUrls=API_Config.matterApplicant
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('ngOnChanges',changes['data']?.currentValue)
-    this._matterService.class$.next(changes['data']?.currentValue);;
+    // this._matterService.class$.next(changes['data']?.currentValue);;
+    if(this.requestId) this.getList()
   }
   ngOnInit(): void {
 
-    this.getList()
+    // this.getList()
   }
   getList() {
     this._matterService.class$
@@ -51,7 +52,7 @@ export class MatterClassComponent implements OnInit, OnChanges{
           if(Array.isArray(res)){
             this.data = [...this.data,...res];
             this.filterOptions = {
-              clientId: this.requestId,
+              matterId: this.requestId,
               pageNum: 1,
               pagSize: PAGESIZE,
               orderByDirection: 'ASC',

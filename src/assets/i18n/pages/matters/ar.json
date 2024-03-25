@@ -122,6 +122,7 @@
     "applicants":"Applicants",
     "class":"Class",
     "addApplicant":"Add Applicant",
-    "addClass":"Add Class"
+    "addClass":"Add Class",
+    "uploadLogo":"Upload Logo"
   }
 }

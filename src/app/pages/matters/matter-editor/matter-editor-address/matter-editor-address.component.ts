@@ -41,49 +41,46 @@ export class MatterEditorAddressComponent implements OnInit, OnChanges{
   apiUrls=API_Config.matterContact
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('ngOnChanges',changes['data']?.currentValue)
-    this._matterService.address$.next(changes['data']?.currentValue);;
+    // if(changes['data']?.currentValue)this._matterService.address$.next(changes['data']?.currentValue);
+    
+    if(this.requestId) this.getList()
   }
   ngOnInit(): void {
 
-    this.getList()
+    // this.getList()
   }
   getList() {
     this._matterService.address$
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
-        next: (res: any[]) => {
+        next: (res: any) => {
+         
+          this.data = [...this.data,res];
+          console.log('data',this.data)
+          this.filterOptions = {
+            matterId: this.requestId,
+            pageNum: 1,
+            pagSize: PAGESIZE,
+            orderByDirection: 'ASC',
+          };
+          this.additionalTableConfig={
+            id: 'id',
+            actions: [
+              {
+                title: this._languageService.getTransValue('btn.update'),
+                target: MatterAddressEditorComponent,
+                icon:'pencil',
+                isDynamic:this.requestId != undefined,
+                isReadOnly:(this.requestId)?this.previewOnly:true
+              },
+              {
+                type: 'delete',
+                title: this._languageService.getTransValue('btn.delete'),
+                icon: 'trash',
+              },
+            ],
+          }
           if(Array.isArray(res)){
-            this.data = [...this.data,...res];
-            console.log('data',this.data)
-            this.data = this.data.map((element) => {
-              return {
-                ...element,
-                phone: element?.phone?.internationalNumber,
-              };
-            });
-            this.filterOptions = {
-              clientId: this.requestId,
-              pageNum: 1,
-              pagSize: PAGESIZE,
-              orderByDirection: 'ASC',
-            };
-            this.additionalTableConfig={
-              id: 'id',
-              actions: [
-                {
-                  title: this._languageService.getTransValue('btn.update'),
-                  target: MatterAddressEditorComponent,
-                  icon:'pencil',
-                  isDynamic:this.requestId != undefined,
-                  isReadOnly:this.previewOnly
-                },
-                {
-                  type: 'delete',
-                  title: this._languageService.getTransValue('btn.delete'),
-                  icon: 'trash',
-                },
-              ],
-            }
           }
         },
       });

@@ -2,9 +2,11 @@ import { DatePipe } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   inject,
 } from '@angular/core';
@@ -26,11 +28,17 @@ export class MatterDetailsMainInfoComponent
 {
   @Input() previewOnly: boolean;
   @Input() data: any;
+  @Output() onUpdate = new EventEmitter();
   _datePipe = inject(DatePipe);
   requestId: number;
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     this.getLookupsData();
+    this.formly.valueChanges.subscribe({
+      next: (res) => {
+        this.onUpdate.emit(res);
+      },
+    });
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.formlyModel = { ...this.data };
@@ -73,7 +81,7 @@ export class MatterDetailsMainInfoComponent
               },
             },
           },
-   
+
           {
             type: 'input',
             key: 'clientName',
@@ -216,7 +224,28 @@ export class MatterDetailsMainInfoComponent
               disabled: this.previewOnly,
             },
             hooks: {
-              onChanges: (field: FormlyFieldConfig) => {
+              onInit: (field: FormlyFieldConfig) => {
+                this.formly.get('law_MtrCatId').valueChanges.pipe(
+                  this._sharedService.takeUntilDistroy()
+                ).subscribe({
+                  next:res=>{
+                    console.log('res',res)
+                    this._apiService
+                    .get(
+                      `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${this.formlyModel.law_MtrCatId}`
+                    )
+                    .pipe(this._sharedService.takeUntilDistroy())
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        field.props.options = res.result.map((obj) => ({
+                          label: obj.name,
+                          value: obj.id,
+                        }));
+                        this.formlyOption.build();
+                      },
+                    });
+                  }
+                })
                 if (this.formlyModel.law_MtrCatId) {
                   this._apiService
                     .get(
@@ -369,31 +398,38 @@ export class MatterDetailsMainInfoComponent
   //   })
   // }
   override onSubmit(): void {
-    delete this.formlyModel.law_MatterParties
-    delete this.formlyModel.law_MatterAddresses
+    delete this.formlyModel.law_MatterParties;
+    delete this.formlyModel.law_MatterAddresses;
     delete this.formlyModel.law_MatterContactss;
-    this.formlyModel.law_OtherStaffList= this.formlyModel?.law_OtherStaffList?.map(obj=>obj.id)
-    this.formlyModel.law_AssignedLaywerList= this.formlyModel?.law_AssignedLaywerList?.map(obj=>obj.id)
-    this.isSubmit=true
-    this._apiService.post(API_Config.matters.update,this.formlyModel).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(()=>this.isSubmit=false)
-    ).subscribe({
-      next: (res: ApiRes) => {
-        if (res && res.isSuccess) {
-          const text = this._languageService.getTransValue('messages.updateSuccessfully');
-          this._toastrNotifiService.displaySuccessMessage(text);
-          this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-            this._dynamicDialogRef.close(dialog);
-          });
-        } else {
-          this._toastrNotifiService.displayErrorToastr(res?.message);
-        }
-      },
-      error: (err: any) => {
-        this._toastrNotifiService.displayErrorToastr(err?.error?.message);
-      },
-    });
+    this.formlyModel.law_OtherStaffList =
+      this.formlyModel?.law_OtherStaffList?.map((obj) => obj.id);
+    this.formlyModel.law_AssignedLaywerList =
+      this.formlyModel?.law_AssignedLaywerList?.map((obj) => obj.id);
+    this.isSubmit = true;
+    this._apiService
+      .post(API_Config.matters.update, this.formlyModel)
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isSubmit = false))
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            const text = this._languageService.getTransValue(
+              'messages.updateSuccessfully'
+            );
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              this._dynamicDialogRef.close(dialog);
+            });
+          } else {
+            this._toastrNotifiService.displayErrorToastr(res?.message);
+          }
+        },
+        error: (err: any) => {
+          this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+        },
+      });
   }
   formatDate(date: string): string {
     // Convert date string to JavaScript Date object

@@ -203,6 +203,9 @@ export class MatterEditorContactEditorComponent
           },
         });
     } else {
+      this.formlyModel.phone = this.formlyModel?.phone?.internationalNumber
+        ? this.formlyModel?.phone?.internationalNumber
+        : this.formlyModel.phone;
       this.contacts.push(this.formlyModel);
       this._matterService.contacts$.next(this.contacts);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {

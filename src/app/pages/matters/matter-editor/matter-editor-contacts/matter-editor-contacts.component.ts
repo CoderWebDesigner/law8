@@ -35,8 +35,9 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
   additionalTableConfig: TableConfig = {};
   apiUrls=API_Config.matterContact
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log('ngOnChanges',changes['data']?.currentValue)
-    this._matterService.contacts$.next(changes['data']?.currentValue);;
+    console.log('contacts',changes['data']?.currentValue)
+    // this._matterService.contacts$.next(changes['data']?.currentValue);;
+    console.log('requestId',this.requestId)
   }
   ngOnInit(): void {
 
@@ -48,14 +49,6 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
       .subscribe({
         next: (res: any[]) => {
           if(Array.isArray(res)){
-            this.data = [...this.data,...res];
-            console.log('data',this.data)
-            this.data = this.data.map((element) => {
-              return {
-                ...element,
-                phone: element?.phone?.internationalNumber,
-              };
-            });
             this.filterOptions = {
               clientId: this.requestId,
               pageNum: 1,
@@ -79,6 +72,15 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
                 },
               ],
             }
+            this.data = [...this.data,...res];
+            console.log('data',this.data)
+            this.data = this.data.map((element) => {
+              return {
+                ...element,
+                phone: element?.phone?.internationalNumber,
+              };
+            });
+           
           }
         },
       });

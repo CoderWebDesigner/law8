@@ -5,6 +5,7 @@ export const Matters_API = {
     create:'Law_Matter/Create',
     getById:'Law_Matter/GetById',
     delete:'Law_Matter/Delete',
-    getClientNameAndMatterCodeByClientId:'Law_Matter/GetCLientNameAndMattCodeByClient'
+    getClientNameAndMatterCodeByClientId:'Law_Matter/GetCLientNameAndMattCodeByClient',
+    uploadLogo:'Law_Matter/UploadLogo'
   },
 };
