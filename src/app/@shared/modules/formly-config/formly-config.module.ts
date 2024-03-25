@@ -49,7 +49,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     FormlyButtonFieldComponent,
     FormlySelectButtonFieldComponent,
     FormlyUploadProfileFieldComponent,
-    FormlyUploadProfileFieldComponent,
     FormlyPhoneFieldComponent,
     FormlyFileFieldComponent,
     FormlyOtpFieldComponent,

@@ -425,8 +425,9 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     // console.log('field');
                     this.formly.get('jurisdictionId').valueChanges.subscribe({
                       next: (res) => {
-                        // console.log(res);
-                        this._apiService
+                        console.log(res);
+                        if(res){
+                          this._apiService
                           .get(
                             `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${res}`
                           )
@@ -438,6 +439,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                               }));
                             },
                           });
+                        }
+                        
                       },
                     });
                   },
