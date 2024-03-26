@@ -12,8 +12,6 @@ export class MatterService {
   contact$=new Subject()
   contactList$=new BehaviorSubject([])
 
-
-  class$=new Subject()
   classList$=new BehaviorSubject([])
 
   applicant$=new Subject()

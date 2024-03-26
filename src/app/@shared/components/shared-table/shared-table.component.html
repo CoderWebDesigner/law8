@@ -8,7 +8,7 @@
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngIf="columnsLocalizedChildren || withCheckbox || withRadioButton" style="width: 5rem">
-          <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox>
+          <!-- <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox> -->
         </th>
         <ng-container *ngFor="let col of columns">
           <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand">
