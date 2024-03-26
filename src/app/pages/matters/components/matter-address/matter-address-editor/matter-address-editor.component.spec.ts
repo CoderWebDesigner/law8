@@ -8,7 +8,7 @@ describe('MatterAddressEditorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MatterAddressEditorComponent]
+      imports: [MatterAddressEditorComponent]
     });
     fixture = TestBed.createComponent(MatterAddressEditorComponent);
     component = fixture.componentInstance;

@@ -1,21 +1,20 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { API_Config } from '@core/api/api-config/api.config';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { ApiRes } from '@core/models';
-import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { ClientService } from '@shared/services/client.service';
-import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedModule } from '@shared/shared.module';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { API_Config } from '@core/api/api-config/api.config';
+import { ApiRes } from '@core/models';
 import { finalize } from 'rxjs';
+import { MatterService } from '@components/matters/service/matter.service';
+
 
 @Component({
   selector: 'app-matter-address-editor',
+  standalone: true,
+  imports: [CommonModule, FormlyConfigModule, SharedModule],
   templateUrl: './matter-address-editor.component.html',
   styleUrls: ['./matter-address-editor.component.scss'],
-  standalone: true,
-  imports: [FormlyConfigModule, SharedModule],
 })
 export class MatterAddressEditorComponent
   extends FormBaseClass
@@ -23,15 +22,38 @@ export class MatterAddressEditorComponent
 {
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.matterAddress;
-  _matterService = inject(MatterService);
-  address: any[]=[];
+  _addressService = inject(MatterService);
+  data: any[] = [];
   ngOnInit(): void {
-    console.log('address ngOnInit',this.address)
     this.getLookupsData();
+    this.getList();
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
+  }
+  getList() {
+    this._addressService.addressList$
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any[]) => {
+          this.data = res;
+        },
+      });
   }
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+  }
+  override getLookupsData(): void {
+    this._apiService
+      .get(this.generalApiUrls.getCountryLookup)
+      .pipe(
+        finalize(() => (this.isSubmit = false)),
+        this.takeUntilDestroy()
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.lookupsData = res.result;
+          this.initForm();
+        },
+      });
   }
   override initForm(): void {
     this.formlyFields = [
@@ -133,9 +155,7 @@ export class MatterAddressEditorComponent
       },
     ];
   }
-
-  override onSubmit(): void {
-    if (this.formly.invalid) return;
+  save() {
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
@@ -153,69 +173,57 @@ export class MatterAddressEditorComponent
     const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update
       : this.apiUrls.create;
-    if (this._dynamicDialogConfig?.data?.isDynamic) {
-      this._apiService
-        .post(path, requestPayload)
-        .pipe(this._sharedService.takeUntilDistroy())
-        .subscribe({
-          next: (res: ApiRes) => {
-            if (res && res.isSuccess) {
-              const text = this._languageService.getTransValue(successMsgKey);
-              this._toastrNotifiService.displaySuccessMessage(text);
-              this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-                this._dynamicDialogRef.close(dialog);
-              });
+    this._apiService
+      .post(path, requestPayload)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            let index = this.data.findIndex(
+              (obj) => obj?.id == this._dynamicDialogConfig?.data?.rowData?.id
+            );
+            if (index != -1) {
+              this.data[index] = res?.result;
             } else {
-              this._toastrNotifiService.displayErrorToastr(res?.message);
+              this.data.push(res?.result);
             }
-          },
-          error: (err: any) => {
-            this._toastrNotifiService.displayErrorToastr(err?.error?.message);
-          },
-        });
+            this._addressService.addressList$.next(this.data);
+            const text = this._languageService.getTransValue(successMsgKey);
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              this._dynamicDialogRef.close(dialog);
+            });
+          } else {
+            this._toastrNotifiService.displayErrorToastr(res?.message);
+          }
+        },
+        error: (err: any) => {
+          this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+        },
+      });
+  }
+  override onSubmit(): void {
+    if (this._dynamicDialogConfig?.data?.isDynamic) {
+      this.save();
     } else {
-      // this.data=this.data.map(obj=>{
-      //   console.log('obj1',obj)
-      //   console.log('obj2',this._dynamicDialogConfig?.data?.rowData)
-      //   console.log('comparsion',JSON.stringify(obj)==JSON.stringify(this._dynamicDialogConfig?.data?.rowData))
-      //   return obj
-      // })
-      // let index =this.data.findIndex(obj=>{
-      //   debugger
-      //   console.log('obj1',obj)
-      //   console.log('obj2',this._dynamicDialogConfig?.data?.rowData)
-      //   console.log('comparsion',JSON.stringify(obj)==JSON.stringify(this._dynamicDialogConfig?.data?.rowData))
-      //   return JSON.stringify(obj)==JSON.stringify(this._dynamicDialogConfig?.data?.rowData)
-      // })
-      // console.log('index',index)
-      // if(index!=-1){
-      //   this.data[index]=this.formlyModel
-      // }else{
-      //   this.data.push(this.formlyModel)
-      //   this._matterService.address$.next(this.formlyModel);
-      // }
-
-      this.address.push(this.formlyModel);
-      this._matterService.address$.next(this.formlyModel);
-      console.log('address', this.address);
-
+      let index = this.data.findIndex(
+        (obj) => obj?.key == this._dynamicDialogConfig?.data?.rowData?.key
+      );
+      if (index != -1) {
+        this.data[index] = this.formlyModel;
+      } else {
+        this.data.push(this.formlyModel);
+      }
+      this.data = this.data.map((obj) => {
+        if (!obj.hasOwnProperty('key')) {
+          obj.key = Math.random().toString(36).substring(2, 9);
+        }
+        return obj;
+      });
+      this._addressService.addressList$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         dialog.destroy();
       });
     }
-  }
-  override getLookupsData(): void {
-    this._apiService
-      .get(this.generalApiUrls.getCountryLookup)
-      .pipe(
-        finalize(() => (this.isSubmit = false)),
-        this.takeUntilDestroy()
-      )
-      .subscribe({
-        next: (res: ApiRes) => {
-          this.lookupsData = res.result;
-          this.initForm();
-        },
-      });
   }
 }

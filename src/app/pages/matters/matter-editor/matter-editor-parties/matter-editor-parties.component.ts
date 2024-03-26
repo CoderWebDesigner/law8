@@ -45,39 +45,39 @@ export class MatterEditorPartiesComponent implements OnInit,OnChanges {
     // this.getList();
   }
   getList() {
-    this._matterService.parties$
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res: any[]) => {
-          // console.log('parties', res);
-         if(Array.isArray(res)){
-          this.data = [...this.data,...res];
-          this.filterOptions = {
-            matterId: this.requestId,
-            pageNum: 1,
-            pagSize: PAGESIZE,
-            orderByDirection: 'ASC',
-          };
-          this.additionalTableConfig={
-            id: 'id',
-            actions: [
-              {
-                title: this._languageService.getTransValue('btn.update'),
-                target: MatterEditorPartiesEditorComponent,
-                icon:'pencil',
-                isDynamic:this.requestId != undefined,
-                isReadOnly:this.previewOnly
-              },
-              {
-                type: 'delete',
-                title: this._languageService.getTransValue('btn.delete'),
-                icon: 'trash',
-              },
-            ],
-          }
-         } 
-        },
-      });
+    // this._matterService.parties$
+    //   .pipe(this._sharedService.takeUntilDistroy())
+    //   .subscribe({
+    //     next: (res: any[]) => {
+    //       // console.log('parties', res);
+    //      if(Array.isArray(res)){
+    //       this.data = [...this.data,...res];
+    //       this.filterOptions = {
+    //         matterId: this.requestId,
+    //         pageNum: 1,
+    //         pagSize: PAGESIZE,
+    //         orderByDirection: 'ASC',
+    //       };
+    //       this.additionalTableConfig={
+    //         id: 'id',
+    //         actions: [
+    //           {
+    //             title: this._languageService.getTransValue('btn.update'),
+    //             target: MatterEditorPartiesEditorComponent,
+    //             icon:'pencil',
+    //             isDynamic:this.requestId != undefined,
+    //             isReadOnly:this.previewOnly
+    //           },
+    //           {
+    //             type: 'delete',
+    //             title: this._languageService.getTransValue('btn.delete'),
+    //             icon: 'trash',
+    //           },
+    //         ],
+    //       }
+    //      } 
+    //     },
+    //   });
   }
   openDialog() {
     const ref=this._dialogService.open(MatterEditorPartiesEditorComponent, {

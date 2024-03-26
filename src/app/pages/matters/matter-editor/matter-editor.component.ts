@@ -1,12 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
-import { ApiService } from '@core/api/api.service';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models/apiRes-model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { MatterService } from '@shared/services/matter/matter.service';
-import { MenuItem } from 'primeng/api';
-import { combineLatest, finalize, forkJoin, map } from 'rxjs';
+import { combineLatest, finalize, forkJoin } from 'rxjs';
+import { MatterService } from '../service/matter.service';
 
 @Component({
   selector: 'app-matter-editor',
@@ -530,11 +528,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     // console.log('getTabsValues');
 
     combineLatest([
-      this._matterService.address$,
-      this._matterService.contacts$,
-      this._matterService.parties$,
-      this._matterService.class$,
-      this._matterService.applicant$,
+      this._matterService.addressList$,
+      this._matterService.contactList$,
+      this._matterService.partyList$,
+      this._matterService.classList$,
+      this._matterService.applicantList$,
     ]).subscribe(([address, contacts, parties,matterClass,applicant]) => {
       this.formlyModel = {
         ...this.formlyModel,

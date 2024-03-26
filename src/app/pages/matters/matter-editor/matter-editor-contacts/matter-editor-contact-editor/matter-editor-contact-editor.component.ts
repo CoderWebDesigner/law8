@@ -207,7 +207,7 @@ export class MatterEditorContactEditorComponent
         ? this.formlyModel?.phone?.internationalNumber
         : this.formlyModel.phone;
       this.contacts.push(this.formlyModel);
-      this._matterService.contacts$.next(this.contacts);
+      // this._matterService.contacts$.next(this.contacts);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         this._dynamicDialogRef.close(dialog);
       });

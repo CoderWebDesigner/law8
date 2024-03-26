@@ -6,9 +6,9 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class MatterService {
-  address$ = new Subject()
-  contacts$ = new BehaviorSubject([])
-  parties$ = new BehaviorSubject([])
+  // address$ = new Subject()
+  // contacts$ = new BehaviorSubject([])
+  // parties$ = new BehaviorSubject([])
   documents$ = new BehaviorSubject([])
   activity$ = new BehaviorSubject([])
   invoice$ = new BehaviorSubject([])

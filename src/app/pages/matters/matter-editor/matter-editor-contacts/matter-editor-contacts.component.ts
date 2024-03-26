@@ -44,46 +44,46 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
     this.getList()
   }
   getList() {
-    this._matterService.contacts$
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res: any[]) => {
-          if(Array.isArray(res)){
-            this.filterOptions = {
-              clientId: this.requestId,
-              pageNum: 1,
-              pagSize: PAGESIZE,
-              orderByDirection: 'ASC',
-            };
-            this.additionalTableConfig={
-              id: 'id',
-              actions: [
-                {
-                  title: this._languageService.getTransValue('btn.update'),
-                  target: MatterEditorContactEditorComponent,
-                  icon:'pencil',
-                  isDynamic:this.requestId != undefined,
-                  isReadOnly:this.previewOnly
-                },
-                {
-                  type: 'delete',
-                  title: this._languageService.getTransValue('btn.delete'),
-                  icon: 'trash',
-                },
-              ],
-            }
-            this.data = [...this.data,...res];
-            console.log('data',this.data)
-            this.data = this.data.map((element) => {
-              return {
-                ...element,
-                phone: element?.phone?.internationalNumber,
-              };
-            });
+    // this._matterService.contacts$
+    //   .pipe(this._sharedService.takeUntilDistroy())
+    //   .subscribe({
+    //     next: (res: any[]) => {
+    //       if(Array.isArray(res)){
+    //         this.filterOptions = {
+    //           clientId: this.requestId,
+    //           pageNum: 1,
+    //           pagSize: PAGESIZE,
+    //           orderByDirection: 'ASC',
+    //         };
+    //         this.additionalTableConfig={
+    //           id: 'id',
+    //           actions: [
+    //             {
+    //               title: this._languageService.getTransValue('btn.update'),
+    //               target: MatterEditorContactEditorComponent,
+    //               icon:'pencil',
+    //               isDynamic:this.requestId != undefined,
+    //               isReadOnly:this.previewOnly
+    //             },
+    //             {
+    //               type: 'delete',
+    //               title: this._languageService.getTransValue('btn.delete'),
+    //               icon: 'trash',
+    //             },
+    //           ],
+    //         }
+    //         this.data = [...this.data,...res];
+    //         console.log('data',this.data)
+    //         this.data = this.data.map((element) => {
+    //           return {
+    //             ...element,
+    //             phone: element?.phone?.internationalNumber,
+    //           };
+    //         });
            
-          }
-        },
-      });
+    //       }
+    //     },
+    //   });
   }
   openDialog() {
     const ref = this._dialogService.open(MatterEditorContactEditorComponent, {
