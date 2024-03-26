@@ -1,5 +1,5 @@
 <shared-table [apiUrls]="apiUrls" [withCheckbox]="true" [filterOptions]="filterOptions"
-    [columnsLocalized]="columnsLocalized" (onRowSelect)="onRowSelect($event)"></shared-table>
+    [columnsLocalized]="columnsLocalized" [isColumnResize]="false" (onRowSelect)="onRowSelect($event)"></shared-table>
 
 <div class="text-end mb-4">
     <p-button styleClass="btn btn-success" type="button" (onClick)="selectRows()" [icon]="'pi pi-plus'"

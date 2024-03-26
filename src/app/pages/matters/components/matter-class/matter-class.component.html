@@ -24,9 +24,9 @@
   >
   </p-button>
   </div>
-  <shared-table *ngIf="!requestId" [additionalTableConfig]="additionalTableConfig" [data]="data"
+  <shared-table *ngIf="!requestId" [additionalTableConfig]="additionalTableConfig" [isColumnResize]="false" [data]="data"
     [columnsLocalized]="columnsLocalized"></shared-table>
-  <shared-table *ngIf="requestId" [additionalTableConfig]="additionalTableConfig" [columnsLocalized]="columnsLocalized"
+  <shared-table *ngIf="requestId" [additionalTableConfig]="additionalTableConfig" [isColumnResize]="false" [columnsLocalized]="columnsLocalized"
     [apiUrls]="apiUrls" [filterOptions]="filterOptions"></shared-table>
 </ng-container>
 

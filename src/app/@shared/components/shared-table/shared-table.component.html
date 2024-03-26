@@ -1,5 +1,5 @@
 <div class="position-relative">
-  <p-table #dt [columns]="columns" [value]="data" [lazy]="true" [resizableColumns]="true"
+  <p-table #dt [columns]="columns" [value]="data" [lazy]="true" [resizableColumns]="isColumnResize"
     [tableStyle]="{ 'min-width': '100%' }" [(selection)]="selected || defaultSelected" [dataKey]="dataKey"
     [paginator]="paginationClient" [rows]="filterOptions?.pageSize" [showCurrentPageReport]="true"
     [currentPageReportTemplate]="currentPageReportTemplate" [rowsPerPageOptions]="PAGE_SIZE_OPTION"

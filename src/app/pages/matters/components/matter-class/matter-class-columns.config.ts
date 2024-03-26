@@ -6,7 +6,7 @@ export const Matter_Class_Columns_EN = [
   {
     header: 'Description',
     field: 'description',
-    isLargeText:true
+    // isLargeText:true
   },
 ];
 export const Matter_Class_Columns_FR = [

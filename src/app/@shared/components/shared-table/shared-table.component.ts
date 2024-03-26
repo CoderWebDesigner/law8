@@ -80,6 +80,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   @Input() withPagination: boolean = true;
+  @Input() isColumnResize: boolean = true;
   @Input() additionalTableConfig?: TableConfig;
   @Input() additionalTableConfigChildren?: TableConfig;
   @Input() columnsLocalized;
