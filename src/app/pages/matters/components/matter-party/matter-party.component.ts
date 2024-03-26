@@ -50,28 +50,16 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
         },
       ],
     }
-    this.getRecord(); 
     this._matterService.partyList$.next(this.data)
     this.getList()
   }
-  getRecord() {
-    this._matterService.party$.pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next:(res:any)=>{
-        this.data.push(res)
-        this._matterService.partyList$.next(this.data)
-      }
-    })
 
-  }
    getList(){
     this._matterService.partyList$.pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
       next:(res:any[])=>{
-        console.log('getList',this.data)
-        this.data=this.data.length>0?this.data:res
+        this.data=res
       }
     })
   }

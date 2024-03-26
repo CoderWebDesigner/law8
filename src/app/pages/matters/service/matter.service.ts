@@ -5,10 +5,8 @@ import { Subject, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class MatterService {
-  // address$=new Subject()
   addressList$=new BehaviorSubject([])
 
-  party$=new Subject()
   partyList$=new BehaviorSubject([])
 
   contact$=new Subject()
