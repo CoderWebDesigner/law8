@@ -1,36 +1,34 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
-import { API_Config } from '@core/api/api-config/api.config';
-import { ApiRes } from '@core/models';
-import { finalize } from 'rxjs';
 import { MatterService } from '@components/matters/service/matter.service';
-
+import { API_Config } from '@core/api/api-config/api.config';
+import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 
 @Component({
-  selector: 'app-matter-address-editor',
+  selector: 'app-matter-contact-editor',
   standalone: true,
   imports: [CommonModule, FormlyConfigModule, SharedModule],
-  templateUrl: './matter-address-editor.component.html',
-  styleUrls: ['./matter-address-editor.component.scss'],
+  templateUrl: './matter-contact-editor.component.html',
+  styleUrls: ['./matter-contact-editor.component.scss'],
 })
-export class MatterAddressEditorComponent
+export class MatterContactEditorComponent
   extends FormBaseClass
   implements OnInit
 {
   generalApiUrls = API_Config.general;
-  apiUrls = API_Config.matterAddress;
-  _addressService = inject(MatterService);
+  apiUrls = API_Config.matterContact;
+  _matterService = inject(MatterService);
   data: any[] = [];
   ngOnInit(): void {
-    this.getLookupsData();
     this.getList();
+    this.initForm()
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
   }
   getList() {
-    this._addressService.addressList$
+    this._matterService.contactList$
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: any[]) => {
@@ -41,20 +39,6 @@ export class MatterAddressEditorComponent
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
   }
-  override getLookupsData(): void {
-    this._apiService
-      .get(this.generalApiUrls.getCountryLookup)
-      .pipe(
-        finalize(() => (this.isSubmit = false)),
-        this.takeUntilDestroy()
-      )
-      .subscribe({
-        next: (res: ApiRes) => {
-          this.lookupsData = res.result;
-          this.initForm();
-        },
-      });
-  }
   override initForm(): void {
     this.formlyFields = [
       {
@@ -62,93 +46,120 @@ export class MatterAddressEditorComponent
         fieldGroup: [
           {
             className: 'col-md-6',
-            key: 'line1',
+            key: 'firstName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.line1'),
+              label: this._languageService.getTransValue('client.firstName'),
               placeholder: this._languageService.getTransValue(
-                'client.linePlaceholder'
+                'client.firstNamePlaceholder'
               ),
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'line2',
+            key: 'middleName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.line2'),
+              label: this._languageService.getTransValue('client.middleName'),
               placeholder: this._languageService.getTransValue(
-                'client.linePlaceholder'
+                'client.middleNamePlaceholder'
               ),
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'streetNumber',
+            key: 'lastName',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.streetNumber'),
+              label: this._languageService.getTransValue('client.lastName'),
               placeholder: this._languageService.getTransValue(
-                'client.streetNumberPlaceholder'
+                'client.lastNamePlaceholder'
               ),
-              type: 'number',
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'city',
+            key: 'position',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.city'),
+              label: this._languageService.getTransValue('client.position'),
               placeholder: this._languageService.getTransValue(
-                'client.cityPlaceholder'
+                'client.positionPlaceholder'
               ),
-              // required: true,
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'countryId',
-            type: 'select',
+            key: 'address',
+            type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.country'),
+              label: this._languageService.getTransValue('common.address'),
+              // required: true
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'mobileNumber',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('common.mobileNumber'),
+              // required: true
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'email',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('common.email'),
               placeholder: this._languageService.getTransValue(
-                'client.countryPlaceholder'
+                'client.emailPlaceholder'
               ),
-              options: this.lookupsData.map((obj) => ({
-                label: obj.name,
-                value: obj.id,
-              })),
+              // required: true
+            },
+            validators: {
+              validation: ['email'],
+            },
+          },
+          {
+            className: 'col-md-6',
+            key: 'phone',
+            type: 'phone',
+            props: {
+              label: this._languageService.getTransValue('client.phone'),
+              placeholder: this._languageService.getTransValue(
+                'client.phonePlaceholder'
+              ),
+              // required: true
+            },
+          },
 
-              // required: true,
+          {
+            className: 'col-md-6',
+            key: 'fax',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('client.fax'),
+              placeholder: this._languageService.getTransValue(
+                'client.faxPlaceholder'
+              ),
+              // required: true
             },
           },
           {
             className: 'col-md-6',
-            key: 'state',
+            key: 'remarks',
             type: 'input',
             props: {
-              label: this._languageService.getTransValue('client.state'),
+              label: this._languageService.getTransValue('client.remarks'),
               placeholder: this._languageService.getTransValue(
-                'client.statePlaceholder'
+                'client.remarksPlaceholder'
               ),
-              // options: ,
-              // required: true,
-            },
-          },
-          {
-            className: 'col-md-6',
-            key: 'zipCode',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('client.zipCode'),
-              placeholder: this._languageService.getTransValue(
-                'client.zipCodePlaceholder'
-              ),
-              // required: true,
+              // required: true
             },
           },
         ],
@@ -162,12 +173,18 @@ export class MatterAddressEditorComponent
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          streetNumber: +this.formlyModel.streetNumber,
+          // streetNumber: +this.formlyModel.streetNumber,
+          phone : this.formlyModel?.phone?.internationalNumber
+          ? this.formlyModel?.phone?.internationalNumber
+          : this.formlyModel.phone,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          streetNumber: +this.formlyModel.streetNumber,
+          // streetNumber: +this.formlyModel.streetNumber,
+          phone : this.formlyModel?.phone?.internationalNumber
+          ? this.formlyModel?.phone?.internationalNumber
+          : this.formlyModel.phone,
           law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
     const path = this._dynamicDialogConfig?.data?.rowData
@@ -187,7 +204,7 @@ export class MatterAddressEditorComponent
             } else {
               this.data.push(res?.result);
             }
-            this._addressService.addressList$.next(this.data);
+            this._matterService.contactList$.next(this.data);
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {
@@ -221,7 +238,7 @@ export class MatterAddressEditorComponent
         }
         return obj;
       });
-      this._addressService.addressList$.next(this.data);
+      this._matterService.contactList$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         dialog.destroy();
       });

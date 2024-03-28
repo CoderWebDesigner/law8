@@ -159,6 +159,7 @@ export class MatterPartyEditorComponent
       });
   }
   override onSubmit(): void {
+    if (this.formly.invalid) return;
     if (this._dynamicDialogConfig?.data?.isDynamic) {
       this.save();
     } else {

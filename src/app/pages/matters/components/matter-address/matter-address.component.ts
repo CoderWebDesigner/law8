@@ -36,7 +36,7 @@ export class MatterAddressComponent implements OnInit,OnDestroy {
     fr: Address_Columns_FR,
   };
 
-  apiUrls=API_Config.matterAddress;
+  apiUrls:any;
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
     this.additionalTableConfig={
@@ -56,6 +56,9 @@ export class MatterAddressComponent implements OnInit,OnDestroy {
         },
       ],
     }
+    if(this.requestId){
+      this.apiUrls=API_Config.matterAddress;
+    }
     this._addressService.addressList$.next(this.data)
     this.getList()
   }
@@ -74,7 +77,7 @@ export class MatterAddressComponent implements OnInit,OnDestroy {
   openDialog() {
     const ref = this._dialogService.open(MatterAddressEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts'),
+      header: this._languageService.getTransValue('matters.addAddress'),
       dismissableMask: true,
       data:{
         law_MatterId:this.requestId,

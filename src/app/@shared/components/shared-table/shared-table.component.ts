@@ -269,7 +269,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe((res) => {
         if (res) {
-          if (this.apiUrls) {
+          if (this.apiUrls?.delete) {
             let path = `${this.apiUrls.delete}?id=${
               rowData[this.additionalTableConfig.id]
             }`;
@@ -285,7 +285,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
                     );
 
                     this._toastrNotifiService.displaySuccessMessage(text);
-
+                    this.data= this.data.filter(obj=>obj.id!=rowData[this.additionalTableConfig.id])
                     this.getData();
                   } else {
                     this._toastrNotifiService.displayErrorToastr(res?.message);

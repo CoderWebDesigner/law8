@@ -19,6 +19,7 @@ import { ApiRes } from '@core/models';
 import { LanguageService, ToasterService } from '@core/services';
 import { MatterService } from '@components/matters/service/matter.service';
 import { Table } from 'primeng/table';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-matter-select-class',
@@ -35,6 +36,7 @@ export class MatterSelectClassComponent implements OnInit {
   _toastrNotifiService = inject(ToasterService);
   _DialogService = inject(DialogService);
   _dynamicDialogRef = inject(DynamicDialogRef);
+  _route = inject(ActivatedRoute);
   data: any[] = [];
   selected: any[] = [];
   columnsLocalized = {
@@ -50,6 +52,10 @@ export class MatterSelectClassComponent implements OnInit {
     orderByDirection: 'ASC',
   };
   ngOnInit(): void {
+    this.filterOptions={
+      ...this.filterOptions,
+      matterId:this._dynamicDialogConfig?.data?.law_MatterId
+    }
     this.getList();
   }
   getList() {

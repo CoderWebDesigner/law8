@@ -127,7 +127,7 @@ export class MatterClassComponent implements OnInit, OnDestroy {
     fr: Matter_Class_Columns_FR,
   };
 
-  apiUrls = API_Config.matterAddress;
+  apiUrls:any;
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
     this.additionalTableConfig = {
@@ -140,13 +140,16 @@ export class MatterClassComponent implements OnInit, OnDestroy {
           isDynamic: this.requestId != undefined,
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
-        // {
-        //   type: 'delete',
-        //   title: this._languageService.getTransValue('btn.delete'),
-        //   icon: 'trash',
-        // },
+        {
+          type: 'delete',
+          title: this._languageService.getTransValue('btn.delete'),
+          icon: 'trash',
+        },
       ],
     };
+    if(this.requestId){
+      this.apiUrls=API_Config.matterClass
+    }
     this._classService.classList$.next(this.data);
     this.getList();
   }
@@ -172,7 +175,7 @@ export class MatterClassComponent implements OnInit, OnDestroy {
   openDialog() {
     const ref = this._dialogService.open(MatterSelectClassComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts'),
+      header: this._languageService.getTransValue('matters.addClass'),
       dismissableMask: true,
       data: {
         law_MatterId: this.requestId,

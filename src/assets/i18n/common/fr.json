@@ -12,6 +12,7 @@
     "clientName": "Nom client",
     "address": "Adresse",
     "contacts": "Contact",
+    "addContacts":"Ajouter des contacts",
     "general": "Données",
     "parties": "Parties",
     "relatedMatters": "Related Matters",

@@ -1,20 +1,20 @@
 import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
-import { API_Config } from '@core/api/api-config/api.config';
+import { MatterService } from '@components/matters/service/matter.service';
 import { LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { SharedService } from '@shared/services/shared.service';
 import { DialogService } from 'primeng/dynamicdialog';
-import { Matter_Parties_Columns_EN, Matter_Parties_Columns_AR, Matter_Parties_Columns_FR } from './matter-parties-columns.config';
-import { MatterPartyEditorComponent } from './matter-party-editor/matter-party-editor.component';
-import { MatterService } from '@components/matters/service/matter.service';
+import { MatterContactEditorComponent } from './matter-contact-editor/matter-contact-editor.component';
+import { API_Config } from '@core/api/api-config/api.config';
+import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contract-columns.config';
 
 @Component({
-  selector: 'app-matter-party',
-  templateUrl: './matter-party.component.html',
-  styleUrls: ['./matter-party.component.scss']
+  selector: 'app-matter-contact',
+  templateUrl: './matter-contact.component.html',
+  styleUrls: ['./matter-contact.component.scss']
 })
-export class MatterPartyComponent implements OnInit,OnDestroy {
+export class MatterContactComponent implements OnInit,OnDestroy {
   @Input() requestId: number;
   @Input() previewOnly:boolean;
   @Input() data:any[]=[]
@@ -25,12 +25,12 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
   _sharedTableService = inject(SharedTableService);
 
   columnsLocalized = {
-    en: Matter_Parties_Columns_EN,
-    ar: Matter_Parties_Columns_AR,
-    fr: Matter_Parties_Columns_FR,
+    ar: Contact_Columns_AR,
+    en: Contact_Columns_EN,
+    fr: Contact_Columns_FR,
   };
 
-  apiUrls:any
+  apiUrls:any;
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
     this.additionalTableConfig={
@@ -38,7 +38,7 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
       actions: [
         {
           title: this._languageService.getTransValue('btn.update'),
-          target: MatterPartyEditorComponent,
+          target: MatterContactEditorComponent,
           icon:'pencil',
           isDynamic:this.requestId != undefined,
           // isReadOnly:(this.requestId)?this.previewOnly:true
@@ -51,25 +51,28 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
       ],
     }
     if(this.requestId){
-      this.apiUrls=API_Config.matterParties;
+      this.apiUrls=API_Config.matterContact;
     }
-    this._matterService.partyList$.next(this.data)
+    this._matterService.contactList$.next(this.data)
     this.getList()
   }
 
    getList(){
-    this._matterService.partyList$.pipe(
+    this._matterService.contactList$.pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
       next:(res:any[])=>{
+        console.log('get contact',res)
+        // this.data=this.data.length>0?this.data:res
         this.data=res
       }
     })
+
   }
   openDialog() {
-    const ref = this._dialogService.open(MatterPartyEditorComponent, {
+    const ref = this._dialogService.open(MatterContactEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('matters.addParties'),
+      header: this._languageService.getTransValue('common.addContacts'),
       dismissableMask: true,
       data:{
         law_MatterId:this.requestId,

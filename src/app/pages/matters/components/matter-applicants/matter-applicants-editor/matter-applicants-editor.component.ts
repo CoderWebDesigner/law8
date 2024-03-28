@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { MatterService } from '@components/matters/service/matter.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { MatterService } from '@shared/services/matter/matter.service';
+
 import { SharedModule } from '@shared/shared.module';
 
 @Component({
@@ -21,8 +22,19 @@ export class MatterApplicantsEditorComponent
   _matterService = inject(MatterService);
   data: any[] = [];
   ngOnInit(): void {
-    this.initForm();
+    this.initForm()
+    this.getList();
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
+  }
+  getList() {
+    this._matterService.applicantList$
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any[]) => {
+          this.data = res;
+          
+        },
+      });
   }
 
   override getData(): void {
@@ -155,13 +167,8 @@ export class MatterApplicantsEditorComponent
       },
     ];
   }
-  override onSubmit(): void {
-    if (this.formly.invalid) return;
 
-    // this.formlyModel = {
-    //   ...this.formlyModel,
-    //   phone: this.formlyModel?.phone?.internationalNumber
-    // };
+  save(){
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
@@ -179,32 +186,60 @@ export class MatterApplicantsEditorComponent
     const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update
       : this.apiUrls.create;
-    if (this._dynamicDialogConfig?.data?.isDynamic) {
       this._apiService
-        .post(path, requestPayload)
-        .pipe(this._sharedService.takeUntilDistroy())
-        .subscribe({
-          next: (res: ApiRes) => {
-            if (res && res.isSuccess) {
-              const text = this._languageService.getTransValue(successMsgKey);
-              this._toastrNotifiService.displaySuccessMessage(text);
-              this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-                this._dynamicDialogRef.close(dialog);
-              });
+      .post(path, requestPayload)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            let index = this.data.findIndex(
+              (obj) => obj?.id == this._dynamicDialogConfig?.data?.rowData?.id
+            );
+            if (index != -1) {
+              this.data[index] = res?.result;
             } else {
-              this._toastrNotifiService.displayErrorToastr(res?.message);
+              this.data.push(res?.result);
             }
-          },
-          error: (err: any) => {
-            this._toastrNotifiService.displayErrorToastr(err?.error?.message);
-          },
-        });
+            this._matterService.applicantList$.next(this.data);
+            const text = this._languageService.getTransValue(successMsgKey);
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              this._dynamicDialogRef.close(dialog);
+            });
+          } else {
+            this._toastrNotifiService.displayErrorToastr(res?.message);
+          }
+        },
+        error: (err: any) => {
+          this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+        },
+      });
+  }
+  override onSubmit(): void {
+    if (this.formly.invalid) return;
+
+
+    if (this._dynamicDialogConfig?.data?.isDynamic) {
+     this.save()
     } else {
       this.formlyModel.phone = this.formlyModel?.phone?.internationalNumber
       ? this.formlyModel?.phone?.internationalNumber
       : this.formlyModel.phone;
-      this.data.push(this.formlyModel);
-      this._matterService.applicant$.next(this.data);
+      let index = this.data.findIndex(
+        (obj) => obj?.key == this._dynamicDialogConfig?.data?.rowData?.key
+      );
+      if (index != -1) {
+        this.data[index] = this.formlyModel;
+      } else {
+        this.data.push(this.formlyModel);
+      }
+      this.data = this.data.map((obj) => {
+        if (!obj.hasOwnProperty('key')) {
+          obj.key = Math.random().toString(36).substring(2, 9);
+        }
+        return obj;
+      });
+      this._matterService.applicantList$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         this._dynamicDialogRef.close(dialog);
       });

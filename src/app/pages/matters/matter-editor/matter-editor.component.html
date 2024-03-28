@@ -11,9 +11,10 @@
             <ng-container *ngIf="[3, 1].includes(formlyModel.practsAreaId)">
               
               <!-- <app-matter-editor-parties   [previewOnly]="previewOnly" *ngIf="i==1"></app-matter-editor-parties> -->
+              <!-- <app-matter-editor-contacts  [previewOnly]="previewOnly" *ngIf="i==5"></app-matter-editor-contacts> -->
               <!-- <app-matter-editor-address   [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-editor-address> -->
               <app-matter-party *ngIf="i==1"></app-matter-party>
-              <app-matter-editor-contacts  [previewOnly]="previewOnly" *ngIf="i==5"></app-matter-editor-contacts>
+              <app-matter-contact *ngIf="i==5"></app-matter-contact>
             </ng-container>
             <ng-container *ngIf="[4].includes(formlyModel.practsAreaId)">
               <!-- <app-matter-editor-address  [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-editor-address> -->

@@ -88,7 +88,7 @@ export class MatterEditorContactsComponent implements OnInit, OnChanges{
   openDialog() {
     const ref = this._dialogService.open(MatterEditorContactEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts'),
+      header: this._languageService.getTransValue('common.addContacts'),
       dismissableMask: true,
       data:{
         law_MatterId:this.requestId,

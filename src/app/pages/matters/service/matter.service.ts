@@ -9,12 +9,10 @@ export class MatterService {
 
   partyList$=new BehaviorSubject([])
 
-  contact$=new Subject()
   contactList$=new BehaviorSubject([])
 
   classList$=new BehaviorSubject([])
 
-  applicant$=new Subject()
   applicantList$=new BehaviorSubject([])
   constructor() { }
 }
