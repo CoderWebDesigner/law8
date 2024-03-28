@@ -41,7 +41,11 @@ export class MatterDetailsMainInfoComponent
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.formlyModel = { ...this.data };
+    this.formlyModel = {
+       ...this.data,
+      //  photo:this.data.logoFile 
+      };
+
     if (this.formly.get('jurisdictionId'))
       this.formly
         .get('jurisdictionId')

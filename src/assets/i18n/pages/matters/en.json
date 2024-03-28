@@ -68,6 +68,7 @@
     "activityType": "Activity Type",
     "remark": "Remark",
     "hearingSession": "Hearing Session",
+    "newHearingSession": "New Hearing Session",
     "comments": "Comments",
     "report": "Report",
     "decision": "Decision",

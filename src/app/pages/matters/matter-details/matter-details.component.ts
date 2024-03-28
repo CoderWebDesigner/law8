@@ -93,10 +93,11 @@ export class MatterDetailsComponent implements OnInit {
 
   getById() {
     this._apiService
-      .get(API_Config.matters.getById + '?id=' + this.requestId)
+      .get(API_Config.matters.getById + '?id=' + this.requestId+'&LoadFile=true')
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
+          console.log(res)
           this.data = { ...res['result'] };
         },
       });

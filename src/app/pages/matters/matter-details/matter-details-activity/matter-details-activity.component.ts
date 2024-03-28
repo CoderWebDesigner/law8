@@ -47,7 +47,7 @@ export class MatterDetailsActivityComponent implements OnInit,OnDestroy {
   }
   openDialog() {
     this._dialogService.open(MatterDetailsActivityEditorComponent, {
-      width: '50%',
+      width: '75%',
       header: this._languageService.getTransValue('matters.addActivity'),
       data:{
         matterId:this.matterCode
