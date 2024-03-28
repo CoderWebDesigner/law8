@@ -20,6 +20,7 @@ import { LanguageService, ToasterService } from '@core/services';
 import { MatterService } from '@components/matters/service/matter.service';
 import { Table } from 'primeng/table';
 import { ActivatedRoute } from '@angular/router';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 
 @Component({
   selector: 'app-matter-select-class',
@@ -56,7 +57,10 @@ export class MatterSelectClassComponent implements OnInit {
       ...this.filterOptions,
       matterId:this._dynamicDialogConfig?.data?.law_MatterId
     }
-    this.getList();
+    if(!this._dynamicDialogConfig?.data?.law_MatterId){
+      this.getList();
+    }
+    
   }
   getList() {
     this._matterService.classList$
@@ -89,11 +93,9 @@ export class MatterSelectClassComponent implements OnInit {
     console.log('onRowUnSelect',this.selected)
   }
   save() {
-    this.data=this.selected
-    console.log('save',this.data)
     const successMsgKey = 'messages.createdSuccessfully';
     const requestPayload = {
-      law_MatterClassCreateList: this.data,
+      law_MatterClassCreateList: this.selected,
     };
     this._apiService
       .post(API_Config.matterClass.create, requestPayload)
@@ -101,13 +103,12 @@ export class MatterSelectClassComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
-            console.log('law_MatterClassCreateList',res.result['law_MatterClassCreateList'])
-            this._matterService.classList$.next(res.result['law_MatterClassCreateList']);
-            this._matterService.classList$.subscribe({
-              next:res=>{
-                console.log('subscribe',res)
-              }
-            })
+            // this._matterService.classList$.next(res.result['law_MatterClassCreateList']);
+            // this._matterService.classList$.subscribe({
+            //   next:res=>{
+            //     console.log('subscribe',res)
+            //   }
+            // })
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {

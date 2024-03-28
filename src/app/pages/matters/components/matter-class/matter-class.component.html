@@ -1,16 +1,20 @@
-
+<!-- 
 <app-shared-no-data *ngIf="data?.length == 0">
   <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
       [icon]="'pi pi-plus'" [label]="'matters.addClass' | translate" button>
   </p-button>
-</app-shared-no-data>
+</app-shared-no-data> -->
+<!-- *ngIf="data?.length > 0" -->
+<!-- <ng-container *ngIf="data?.length > 0"> -->
+<div class="text-end mb-4">
+    <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+        [icon]="'pi pi-plus'" [label]="'matters.addClass' | translate" button>
+    </p-button>
+</div>
+<shared-table  [additionalTableConfig]="additionalTableConfig" [data]="data" 
+    [columnsLocalized]="columnsLocalized" [isColumnResize]="false" [apiUrls]="apiUrls"
+    [filterOptions]="filterOptions"></shared-table>
+<!-- </ng-container> -->
 
-<ng-container *ngIf="data?.length > 0">
-  <div class="text-end mb-4">
-      <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-          [icon]="'pi pi-plus'" [label]="'matters.addClass' | translate" button>
-      </p-button>
-  </div>
-  <shared-table [additionalTableConfig]="additionalTableConfig" [data]="data"
-      [columnsLocalized]="columnsLocalized"  [isColumnResize]="false" [apiUrls]="apiUrls"></shared-table>
-</ng-container>
+
+<!-- {{data|json}} -->

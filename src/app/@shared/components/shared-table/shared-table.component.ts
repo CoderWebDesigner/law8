@@ -165,6 +165,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   }
   getData() {
     if (this.apiUrls?.get || this.apiUrlsChild?.get) {
+      console.log('apiUrls',this.apiUrls)
       this.isLoading = true;
       this._apiService[this.getDataMethod](
         `${this.apiUrls.get}`,
@@ -180,6 +181,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
           this.getTableMessages();
           if (this.callBack) this.callBack();
           if (this.mapData) {
+            console.log('mapdata shared',this.data)
             this.data = this.mapData(this.data);
           }
         });
@@ -204,6 +206,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   refreshData() {
     this._sharedTableService.refreshData.subscribe({
       next: (res) => {
+        console.log('res refreshData',res)
         if (res) this.initTable();
       },
     });
@@ -285,7 +288,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
                     );
 
                     this._toastrNotifiService.displaySuccessMessage(text);
+                    //to be removed
                     this.data= this.data.filter(obj=>obj.id!=rowData[this.additionalTableConfig.id])
+
                     this.getData();
                   } else {
                     this._toastrNotifiService.displayErrorToastr(res?.message);

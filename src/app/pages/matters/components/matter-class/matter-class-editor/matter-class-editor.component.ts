@@ -93,7 +93,7 @@ export class MatterClassEditorComponent
             } else {
               this.data.push(res?.result);
             }
-            this._matterService.classList$.next(this.data);
+            // this._matterService.classList$.next(this.data);
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {

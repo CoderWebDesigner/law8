@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -30,96 +31,18 @@ import { MatterService } from '@components/matters/service/matter.service';
   styleUrls: ['./matter-class.component.scss'],
 })
 export class MatterClassComponent implements OnInit, OnDestroy {
-  // @Input() previewOnly: boolean;
-  // @Input() data: any[] = [];
-  // @Input() requestId:any;
-
-  // _dialogService = inject(DialogService);
-  // _languageService = inject(LanguageService)
-  // _matterService = inject(MatterService)
-  // _sharedService = inject(SharedService)
-  // _sharedTableService=inject(SharedTableService)
-
-  // columnsLocalized = {
-  //   en: Matter_Class_Columns_EN,
-  //   ar: Matter_Class_Columns_AR,
-  //   fr: Matter_Class_Columns_FR,
-  // };
-  // filterOptions = {};
-  // additionalTableConfig: TableConfig = {};
-  // apiUrls=API_Config.matterClass
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   // console.log('ngOnChanges',changes['data']?.currentValue)
-  //   // this._matterService.class$.next(changes['data']?.currentValue);;
-  //    this.getList()
-  // }
-  // ngOnInit(): void {
-
-  //   // this.getList()
-  // }
-  // getList() {
-  //   this._matterService.class$
-  //     .pipe(this._sharedService.takeUntilDistroy())
-  //     .subscribe({
-  //       next: (res: any[]) => {
-  //         if(Array.isArray(res)){
-  //           this.data = [...this.data,...res];
-  //           console.log('Class', this.data)
-  //           this.filterOptions = {
-  //             matterId: this.requestId,
-  //             pageNum: 1,
-  //             pagSize: PAGESIZE,
-  //             orderByDirection: 'ASC',
-  //           };
-  //           console.log('matterId',this.requestId)
-  //           this.additionalTableConfig={
-  //             id: 'id',
-  //             actions: [
-  //               {
-  //                 title: this._languageService.getTransValue('btn.update'),
-  //                 target: MatterClassEditorComponent,
-  //                 icon:'pencil',
-  //                 isDynamic:this.requestId != undefined,
-  //                 isReadOnly:this.previewOnly
-  //               },
-  //               {
-  //                 type: 'delete',
-  //                 title: this._languageService.getTransValue('btn.delete'),
-  //                 icon: 'trash',
-  //               },
-  //             ],
-  //           }
-  //         }
-  //       },
-  //     });
-  // }
-  // openDialog() {
-  //   const ref = this._dialogService.open(MatterSelectClassComponent, {
-  //     width: '50%',
-  //     header: this._languageService.getTransValue('matters.addClass'),
-  //     dismissableMask: true,
-  //     data:{
-  //       law_MatterId:this.requestId,
-  //       isDynamic:this.requestId != undefined,
-  //     }
-
-  //   })
-  //   ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
-  //     this._sharedTableService.refreshData.next(true);
-  //   });
-  // }
-  // ngOnDestroy(): void {
-  //   this._sharedService.destroy()
-  // }
-
+  
+  
   @Input() requestId: number;
   @Input() previewOnly: boolean;
-  @Input() data: any[] = [];
+  // @Input() data: any[] = [];
+  data: any[] = []
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService);
   _classService = inject(MatterService);
   _sharedService = inject(SharedService);
   _sharedTableService = inject(SharedTableService);
+  _cdRef = inject(ChangeDetectorRef);
 
   columnsLocalized = {
     en: Matter_Class_Columns_EN,
@@ -129,6 +52,11 @@ export class MatterClassComponent implements OnInit, OnDestroy {
 
   apiUrls:any;
   additionalTableConfig: TableConfig = {};
+  filterOptions:any={
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  }
   ngOnInit(): void {
     this.additionalTableConfig = {
       id: 'id',
@@ -148,9 +76,14 @@ export class MatterClassComponent implements OnInit, OnDestroy {
       ],
     };
     if(this.requestId){
+      this.filterOptions={
+        ...this.filterOptions,
+        matterId:this.requestId
+      }
       this.apiUrls=API_Config.matterClass
+      this._cdRef.detectChanges()
     }
-    this._classService.classList$.next(this.data);
+    // this._classService.classList$.next(this.data);
     this.getList();
   }
 
@@ -172,6 +105,7 @@ export class MatterClassComponent implements OnInit, OnDestroy {
       }
     })
   }
+
   openDialog() {
     const ref = this._dialogService.open(MatterSelectClassComponent, {
       width: '50%',
@@ -182,11 +116,10 @@ export class MatterClassComponent implements OnInit, OnDestroy {
         isDynamic: this.requestId != undefined,
       },
     });
-    ref.onClose
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe((result: any) => {
-        this._sharedTableService.refreshData.next(true);
-      });
+    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      this._sharedTableService.refreshData.next(true);
+    });
+
   }
   ngOnDestroy(): void {
     this._sharedService.destroy();
