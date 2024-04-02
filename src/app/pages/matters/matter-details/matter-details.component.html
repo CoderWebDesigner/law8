@@ -29,7 +29,7 @@
                   <app-matter-party [data]="data?.law_MatterParties" [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i==1"></app-matter-party>
 
                   <app-matter-contact [data]="data?.law_MatterContactss"  [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-contact>
-                  <app-matter-details-activity [previewOnly]="previewOnly" *ngIf="i == 6"></app-matter-details-activity>
+                  <app-matter-details-activity [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i == 6"></app-matter-details-activity>
                   <app-matter-details-invoice [previewOnly]="previewOnly" *ngIf="i == 7"></app-matter-details-invoice>
                   <app-matter-details-timesheet [previewOnly]="previewOnly" *ngIf="i == 8"></app-matter-details-timesheet>
                   <app-matter-details-related-matters [previewOnly]="previewOnly"

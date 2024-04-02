@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { MatterService } from '@shared/services/matter/matter.service';
+
 import { SharedService } from '@shared/services/shared.service';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
@@ -11,7 +11,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   styleUrls: ['./task-management-editor.component.scss']
 })
 export class TaskManagementEditorComponent extends FormBaseClass implements OnInit, OnDestroy {
-  _matterService = inject(MatterService)
+  // _matterService = inject(MatterService)
   _config = inject(DynamicDialogConfig)
   address: any[] = [];
   id:string;
@@ -301,7 +301,7 @@ export class TaskManagementEditorComponent extends FormBaseClass implements OnIn
   override onSubmit(): void {
     if (this.formly.valid) {
       this.address.push({...this.formlyModel})
-      this._matterService.activity$.next(this.address)
+      // this._matterService.activity$.next(this.address)
       this._DialogService.dialogComponentRefMap.forEach(dialog => {
         dialog.destroy();
       });

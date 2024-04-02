@@ -22,7 +22,10 @@ export const General_API = {
       "getMatterTypesByCategoryId":"AppLookup/GetLaw_MtrTypeByMatCatIdLookup",
       "getJudicatureByJurisdictionId":"AppLookup/GetLaw_JudicatureLookup",
       "getReferralType":"AppLookup/GetLaw_ReferralTypeLookup",
-      "getPartiesDescription":"AppLookup/GetLaw_PartiesDescriptionModelLookup"
+      "getPartiesDescription":"AppLookup/GetLaw_PartiesDescriptionModelLookup",
+      "getActivityType":"AppLookup/GetLaw_ActivityTypeModelLookup",
+      "getFinalJudgement":"AppLookup/GetLaw_FinalJudgementModelLookup",
+      "getActivityStatus":"AppLookup/GetLaw_ActivityStatusModelLookup"
   }
 
 }

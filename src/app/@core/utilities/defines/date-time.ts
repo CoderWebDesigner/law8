@@ -1,5 +1,5 @@
 /** default date and time format for end points */
-export const GLOBAL_DATE_TIME_FORMATE = 'YYYY-MM-dd hh:mm:ss';
+export const GLOBAL_DATE_TIME_FORMATE = 'YYYY-MM-dd hh:mm:ss a';
 /** default date format for end points */
 export const GLOBAL_DATE_FORMATE = 'DD/MM/YYYY';
 

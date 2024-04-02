@@ -37,7 +37,9 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
   }
 
   ngOnInit(): void {
-    this.fileAsBase64 = 'data:image/jpg;base64,'+this.formControl?.value
+    this.fileAsBase64 = this.formControl?.value
+    // this.fileAsBase64 = 'data:image/jpg;base64,'+this.formControl?.value
+
     // this.form.valueChanges.subscribe((res) => {
     //   this.fileAsBase64 = res[this.field.key as string];
     //   if (!res[this.field.key as string]) this.fileAsBase64 = '';

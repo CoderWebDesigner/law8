@@ -14,5 +14,6 @@ export class MatterService {
   classList$=new BehaviorSubject([])
 
   applicantList$=new BehaviorSubject([])
+  activityList$=new BehaviorSubject([])
   constructor() { }
 }

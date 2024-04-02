@@ -3,7 +3,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { MatterService } from '@shared/services/matter/matter.service';
+// import { MatterService } from '@shared/services/matter/matter.service';
 import { SharedModule } from '@shared/shared.module';
 import { forkJoin } from 'rxjs';
 
@@ -16,7 +16,7 @@ import { forkJoin } from 'rxjs';
 })
 export class MatterEditorPartiesEditorComponent extends FormBaseClass implements OnInit{
   apiUrls = API_Config.matterParties;
-  _matterService = inject(MatterService)
+  // _matterService = inject(MatterService)
   data: any[] = []
   ngOnInit(): void {
     this.getLookupsData()

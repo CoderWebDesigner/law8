@@ -2,11 +2,11 @@
 export const Activity_Columns_EN = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Activity Type',
-    field: 'activityType',
+    field: 'law_ActivityType',
   },
   {
     header: 'Description',
@@ -16,35 +16,27 @@ export const Activity_Columns_EN = [
     header: 'User',
     field: 'user',
   },
-  {
-    header: 'Priority',
-    field: 'priority',
-  },
+  
   {
     header: 'Date',
-    field: 'date',
+    field: 'startDate',
+    isDate:true,
   },
-  {
-    header: 'Start Time',
-    field: 'startTime',
-  },
-  {
-    header: 'Duration',
-    field: 'duration',
-  },
+  
+  
   {
     header: 'Status',
-    field: 'status',
+    field: 'law_ActivityStatus',
   },
 ];
 export const Activity_Columns_FR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Activity Type',
-    field: 'activityType',
+    field: 'law_ActivityType',
   },
   {
     header: 'Description',
@@ -54,36 +46,28 @@ export const Activity_Columns_FR = [
     header: 'User',
     field: 'user',
   },
-  {
-    header: 'Priority',
-    field: 'priority',
-  },
+  
   {
     header: 'Date',
-    field: 'date',
+    field: 'startDate',
+    isDate:true,
   },
-  {
-    header: 'Start Time',
-    field: 'startTime',
-  },
-  {
-    header: 'Duration',
-    field: 'duration',
-  },
+  
+  
   {
     header: 'Status',
-    field: 'status',
+    field: 'law_ActivityStatus',
   },
 ];
 
 export const Activity_Columns_AR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Activity Type',
-    field: 'activityType',
+    field: 'law_ActivityType',
   },
   {
     header: 'Description',
@@ -93,24 +77,16 @@ export const Activity_Columns_AR = [
     header: 'User',
     field: 'user',
   },
-  {
-    header: 'Priority',
-    field: 'priority',
-  },
+  
   {
     header: 'Date',
-    field: 'date',
+    field: 'startDate',
+    isDate:true,
   },
-  {
-    header: 'Start Time',
-    field: 'startTime',
-  },
-  {
-    header: 'Duration',
-    field: 'duration',
-  },
+  
+  
   {
     header: 'Status',
-    field: 'status',
+    field: 'law_ActivityStatus',
   },
 ];

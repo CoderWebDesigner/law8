@@ -22,7 +22,6 @@ import { MatterDetailsRelatedMattersComponent } from './matter-details/matter-de
 import { MatterDetailsDocumentsComponent } from './matter-details/matter-details-documents/matter-details-documents.component';
 import { MatterDetailsDocumentsEditorComponent } from './matter-details/matter-details-documents/matter-details-documents-editor/matter-details-documents-editor.component';
 import { MatterDetailsActivityComponent } from './matter-details/matter-details-activity/matter-details-activity.component';
-import { MatterDetailsActivityEditorComponent } from './matter-details/matter-details-activity/matter-details-activity-editor/matter-details-activity-editor.component';
 import { MatterDetailsGeneralComponent } from './matter-details/matter-details-general/matter-details-general.component';
 import { MatterDetailsBillingSettingsComponent } from './matter-details/matter-details-billing-settings/matter-details-billing-settings.component';
 import { MatterDetailsInvoiceComponent } from './matter-details/matter-details-invoice/matter-details-invoice.component';
@@ -54,7 +53,6 @@ import { MatterContactComponent } from './components/matter-contact/matter-conta
     MatterDetailsDocumentsComponent,
     MatterDetailsDocumentsEditorComponent,
     MatterDetailsActivityComponent,
-    MatterDetailsActivityEditorComponent,
     MatterDetailsGeneralComponent,
     MatterDetailsBillingSettingsComponent,
     MatterDetailsInvoiceComponent,

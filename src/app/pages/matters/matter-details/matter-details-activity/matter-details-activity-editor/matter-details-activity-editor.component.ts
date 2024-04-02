@@ -1,28 +1,62 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { MatterService } from '@components/matters/service/matter.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { MatterService } from '@shared/services/matter/matter.service';
-import { SharedService } from '@shared/services/shared.service';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
+import { SharedModule } from '@shared/shared.module';
+
+import { finalize, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-matter-details-activity-editor',
   templateUrl: './matter-details-activity-editor.component.html',
   styleUrls: ['./matter-details-activity-editor.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormlyConfigModule, SharedModule],
 })
 export class MatterDetailsActivityEditorComponent
   extends FormBaseClass
   implements OnInit, OnDestroy
 {
   generalApiUrls = API_Config.general;
-  apiUrls = API_Config.client;
-  _matterService = inject(MatterService);
-  _config = inject(DynamicDialogConfig);
-  address: any[] = [];
+  apiUrls = API_Config.matterActivity;
+  minDate = new Date();
   ngOnInit(): void {
-    this.initForm();
+    this.getLookupsData();
+    if (this._dynamicDialogConfig?.data?.rowData) this.getData();
+  }
+
+  override getData(): void {
+    let id = this._dynamicDialogConfig?.data?.rowData?.id
+    this._apiService.get(`${API_Config.matterActivity.getById}?id=${id}`).pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        console.log(res)
+      }
+    })
+    // this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+  }
+  override getLookupsData(): void {
+    forkJoin([
+      this._apiService.get(this.generalApiUrls.getActivityType),
+      this._apiService.get(this.generalApiUrls.getFinalJudgement),
+      this._apiService.get(API_Config.responsibleLawyerSecurity.get),
+      this._apiService.get(this.generalApiUrls.getActivityStatus),
+    ])
+      .pipe(
+        finalize(() => (this.isSubmit = false)),
+        this.takeUntilDestroy()
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.lookupsData = res;
+          this.initForm();
+        },
+      });
   }
 
   override initForm(): void {
@@ -32,71 +66,142 @@ export class MatterDetailsActivityEditorComponent
         fieldGroup: [
           {
             type: 'input',
-            key: 'matterCode',
-            className: 'col-lg-3 col-md-4',
-            defaultValue: this._config.data.matterId,
+            key: 'law_MatterId',
+            className: 'col-md-4',
+            defaultValue: this._dynamicDialogConfig.data.law_MatterId,
             props: {
               label: this._languageService.getTransValue('common.matterCode'),
               disabled: true,
             },
           },
-          // {
-          //   className: 'col-lg-3 col-md-4',
-          //   key: 'activity',
-          //   type: 'select',
-          //   props: {
-          //     label: this._languageService.getTransValue('matters.activity'),
-          //     required: true,
-          //     options: [
-          //       { label: 'Phone Call', value: 'Phone Call' },
-          //       { label: 'Meeting', value: 'Meeting' },
-          //       { label: 'Task', value: 'Task' },
-          //       { label: 'Note', value: 'Note' },
-          //       { label: 'Other', value: 'Other' },
-          //       { label: 'Campaign', value: 'Campaign' },
-          //     ]
-          //   },
-          // },
           {
-            className: 'col-lg-3 col-md-4',
-            key: 'activityType',
+            className: 'col-md-4',
+            key: 'law_ActivityTypeId',
             type: 'select',
+            defaultValue: 1,
             props: {
               label: this._languageService.getTransValue(
                 'matters.activityType'
               ),
-              required: true,
-              options: [
-                'Hearing Session',
-                'Task',
-                'Note',
-                'Meeting',
-                'Expert Meeting',
-                'Phone Call',
-                'Report',
-                'Expert Meeting',
-                'Judgement',
-                
-              ].map(item=>({label:item,value:item})),
-              // [
-              //   { label: 'Report', value: 'Report' },
-              //   { label: 'Hearing Session', value: 'Hearing Session' },
-              //   { label: 'Expert Meeting', value: 'Expert Meeting' },
-              //   { label: 'General', value: 'General' },
-              //   { label: 'Judgement', value: 'Judgement' },
-              // ]
+              //required: true,
+              options: this.lookupsData[0].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
             },
           },
+
+          {
+            className: 'col-md-4',
+            key: 'startDate',
+            type: 'date',
+            props: {
+              label: this._languageService.getTransValue('matters.startDate'),
+              //required: true,
+              showTime: true,
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![3, 5, 6, 8, 4, 7].includes(
+                  field.model?.law_ActivityTypeId
+                );
+              },
+            },
+          },
+          {
+            className: 'col-md-4',
+            key: 'endDate',
+            type: 'date',
+            props: {
+              label: this._languageService.getTransValue('matters.endDate'),
+              //required: true,
+              showTime: true,
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![4].includes(field.model?.law_ActivityTypeId);
+              },
+            },
+          },
+          {
+            className: 'col-md-4',
+            key: 'duration',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('matters.duration'),
+              //required: true,
+              showTime: true,
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![4].includes(field.model?.law_ActivityTypeId);
+              },
+            },
+          },
+          {
+            className: 'col-md-4',
+            key: 'location',
+            type: 'input',
+            props: {
+              label: this._languageService.getTransValue('matters.location'),
+              //required: true,
+              showTime: true,
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![4].includes(field.model?.law_ActivityTypeId);
+              },
+            },
+          },
+          {
+            className: 'col-md-4',
+            key: 'law_ActivityStatusId',
+            type: 'select',
+            props: {
+              label: this._languageService.getTransValue('matters.status'),
+              //required: true,
+              options:  this.lookupsData[3].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![4, 7].includes(field.model?.law_ActivityTypeId);
+              },
+            },
+          },
+          {
+            className: 'col-12',
+            key: 'description',
+            type: 'textarea',
+            props: {
+              label: this._languageService.getTransValue('matters.description'),
+              //required: true,
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![3, 5, 6, 8, 4, 7].includes(
+                  field.model?.law_ActivityTypeId
+                );
+              },
+            },
+          },
+
           {
             className: 'col-12',
             key: 'remark',
             type: 'textarea',
             props: {
               label: this._languageService.getTransValue('matters.remark'),
-              required: true,
+              //required: true,
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return [1].includes(field.model?.law_ActivityTypeId);
+              },
             },
           },
-        
           {
             fieldGroupClassName: 'row',
             fieldGroup: [
@@ -108,12 +213,12 @@ export class MatterDetailsActivityEditorComponent
               },
               {
                 className: 'col-12',
-                key: 'comments',
+                key: 'description',
                 type: 'textarea',
                 props: {
                   label:
                     this._languageService.getTransValue('matters.comments'),
-                  required: true,
+                  //required: true,
                 },
               },
               {
@@ -122,200 +227,138 @@ export class MatterDetailsActivityEditorComponent
                 type: 'textarea',
                 props: {
                   label: this._languageService.getTransValue('matters.report'),
-                  required: true,
+                  //required: true,
+                },
+                expressions: {
+                  hide: () => {
+                    return !this._dynamicDialogConfig.data.rowData;
+                  },
                 },
               },
               {
                 className: 'col-12',
-                key: 'decision',
+                key: 'decission',
                 type: 'textarea',
                 props: {
                   label:
                     this._languageService.getTransValue('matters.decision'),
-                  required: true,
+                  //required: true,
+                },
+                expressions: {
+                  hide: () => {
+                    return !this._dynamicDialogConfig.data.rowData;
+                  },
                 },
               },
               {
-                className: 'col-lg-3 col-md-4',
+                className: 'col-12',
+                key: 'remark',
+                type: 'textarea',
+                props: {
+                  label: this._languageService.getTransValue('matters.remark'),
+                  //required: true,
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return ![1].includes(field.model?.law_ActivityTypeId);
+                  },
+                },
+              },
+
+              {
+                className: 'col-md-4',
                 key: 'chamber',
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('matters.chamber'),
-                  required: true,
+                  //required: true,
                 },
               },
               {
-                className: 'col-lg-3 col-md-4',
+                className: 'col-md-4',
                 key: 'rollNumber',
                 type: 'input',
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
-                  required: true,
+                  type:'number'
+                  //required: true,
                 },
               },
               {
-                className: 'col-lg-3 col-md-4',
-                key: 'adjournmentReason',
+                className: 'col-md-4',
+                key: 'law_AdjournmentReasonsId',
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue(
                     'matters.adjournmentReason'
                   ),
-                  required: true,
+                  //required: true,
                   options: [
-                    { label: 'Option 1', value: 'Option 1' },
+                    { label: 'new hearingSession', value: 'adjournmentReason' },
                     { label: 'Option 2', value: 'Option 2' },
                     { label: 'Option 3', value: 'Option 3' },
                     { label: 'Option 4', value: 'Option 4' },
                   ],
                 },
+                expressions: {
+                  hide: () => {
+                    return !this._dynamicDialogConfig.data.rowData;
+                  },
+                },
               },
               {
-                className: 'col-lg-3 col-md-4',
-                key: 'litigator',
+                className: 'col-md-4',
+                key: 'litigatorId',
                 type: 'select',
                 props: {
                   label:
                     this._languageService.getTransValue('matters.litigator'),
-                  required: true,
-                  options: [
-                    { label: 'Option 1', value: 'Option 1' },
-                    { label: 'Option 2', value: 'Option 2' },
-                    { label: 'Option 3', value: 'Option 3' },
-                    { label: 'Option 4', value: 'Option 4' },
-                  ],
+                  //required: true,
+                  options: this.lookupsData[2].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
                 },
               },
-             
+
               {
-                className: 'col-lg-3 col-md-4',
+                className: 'col-md-4',
                 key: 'startDate',
                 type: 'date',
                 props: {
-                  label: this._languageService.getTransValue('matters.startDate'),
-                  required: true,
-                  showTime:true
+                  label:
+                    this._languageService.getTransValue('matters.startDate'),
+                  //required: true,
+                  showTime: true,
                 },
               },
-    
+
               {
-                className: 'col-lg-3 col-md-4',
-                key: 'status',
+                className: 'col-md-4',
+                key: 'law_ActivityStatusId',
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
-                  required: true,
-                  options: [
-                    { label: 'Created', value: 'Created' },
-                    { label: 'Started', value: 'Started' },
-                    { label: 'Hold', value: 'Hold' },
-                    { label: 'Completed', value: 'Completed' },
-                  ],
-                },
-              },
-              {
-                className: 'col-lg-3 col-md-4',
-                key: 'duration',
-                type: 'input',
-                props: {
-                  label: this._languageService.getTransValue('matters.duration'),
-                  required: true,
-                  type: 'number',
-                },
-              },
-              {
-                className: 'col-lg-3 col-md-4',
-                key: 'priority',
-                type: 'select',
-                props: {
-                  label: this._languageService.getTransValue('matters.priority'),
-                  required: true,
-                  options: [
-                    { label: 'Created', value: 'Created' },
-                    { label: 'Started', value: 'Started' },
-                    { label: 'Hold', value: 'Hold' },
-                    { label: 'Completed', value: 'Completed' },
-                  ],
-                },
-              },
-              {
-                className: 'col-lg-3 col-md-4',
-                key: 'taskSelection',
-                type: 'select',
-                props: {
-                  label: this._languageService.getTransValue(
-                    'matters.taskSelection'
-                  ),
-                  required: true,
-                  options: [
-                    { label: 'Billable', value: 'Billable' },
-                    { label: 'Non-Billable', value: 'Non-Billable' },
-                    { label: 'No-Charge', value: 'No-Charge' },
-                  ],
-                },
-              },
-              {
-                className: 'col-lg-3 col-md-4',
-                key: 'finalJudgement',
-                type: 'checkbox',
-                props: {
-                  label: this._languageService.getTransValue(
-                    'matters.finalJudgement'
-                  ),
-                  required: true,
-                },
-              },
-              {
-                className: 'col-lg-3 col-md-4',
-                key: 'finalJudgementType',
-                type: 'select',
-                props: {
-                  label: this._languageService.getTransValue(
-                    'matters.finalJudgement'
-                  ),
-                  required: true,
-                  options: [
-                    { label: 'Option 1', value: 'Option 1' },
-                    { label: 'Option 2', value: 'Option 2' },
-                    { label: 'Option 3', value: 'Option 3' },
-                    { label: 'Option 4', value: 'Option 4' },
-                  ],
-                },
-                expressions: {
-                  hide: (field: FormlyFieldConfig) => {
-                    return !field.model?.finalJudgement;
-                  },
-                },
-              },
-              {
-                className: 'col-lg-3 col-md-4',
-                key: 'cassationOrAppealPeriod',
-                type: 'input',
-                props: {
-                  label: this._languageService.getTransValue(
-                    'matters.cassationOrAppealPeriod'
-                  ),
-                  required: true,
-                },
-                expressions: {
-                  hide: (field: FormlyFieldConfig) => {
-                    return !field.model?.finalJudgement;
-                  },
+                  //required: true,
+                  options:  this.lookupsData[3].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
                 },
               },
             ],
             expressions: {
               hide: (field: FormlyFieldConfig) => {
                 return (
-                  field.model?.activityType != 'Hearing Session' ||
-                  !field.model?.activityType
+                  field.model?.law_ActivityTypeId != 1 ||
+                  !field.model?.law_ActivityTypeId
                 );
               },
             },
           },
           {
-            fieldGroupClassName: 'form-section row',
+            fieldGroupClassName: 'form-section row mb-3',
             fieldGroup: [
               {
                 className: 'col-12',
@@ -330,7 +373,7 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label:
                     this._languageService.getTransValue('matters.comments'),
-                  required: true,
+                  //required: true,
                 },
               },
               {
@@ -339,61 +382,122 @@ export class MatterDetailsActivityEditorComponent
                 type: 'textarea',
                 props: {
                   label: this._languageService.getTransValue('matters.remark'),
-                  required: true,
+                  //required: true,
                 },
               },
 
               {
-                className: 'col-lg-3 col-md-4',
+                className: 'col-md-4',
                 key: 'chamber',
                 type: 'input',
                 props: {
                   label: this._languageService.getTransValue('matters.chamber'),
-                  required: true,
+                  //required: true,
                 },
               },
               {
-                className: 'col-lg-3 col-md-4',
+                className: 'col-md-4',
                 key: 'rollNumber',
                 type: 'input',
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
-                  required: true,
+                  //required: true,
                 },
               },
               {
-                className: 'col-lg-3 col-md-4',
+                className: 'col-md-4',
                 key: 'startDate',
                 type: 'date',
                 props: {
-                  label: this._languageService.getTransValue('matters.startDate'),
-                  required: true,
-                  showTime:true
+                  label:
+                    this._languageService.getTransValue('matters.startDate'),
+                  //required: true,
+                  showTime: true,
+                  minDate: this.minDate,
                 },
               },
-    
+
               {
-                className: 'col-lg-3 col-md-4',
-                key: 'status',
+                className: 'col-md-4',
+                key: 'law_ActivityStatusId',
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
-                  required: true,
-                  options: [
-                    { label: 'Created', value: 'Created' },
-                    { label: 'Started', value: 'Started' },
-                    { label: 'Hold', value: 'Hold' },
-                    { label: 'Completed', value: 'Completed' },
-                  ],
+                  //required: true,
+                  options:  this.lookupsData[3].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
                 },
               },
             ],
             expressions: {
               hide: (field: FormlyFieldConfig) => {
                 return (
-                  field.model?.adjournmentReason != 'Option 1' ||
-                  !field.model?.adjournmentReason
+                  field.model?.law_AdjournmentReasonsId !=
+                    'adjournmentReason' ||
+                  !field.model?.law_AdjournmentReasonsId
+                );
+              },
+            },
+          },
+          {
+            fieldGroupClassName: 'row form-section py-3',
+            fieldGroup: [
+              {
+                className: 'col-md-4',
+                key: 'finalJudgement',
+                type: 'checkbox',
+                props: {
+                  label: this._languageService.getTransValue(
+                    'matters.finalJudgement'
+                  ),
+                  //required: true,
+                },
+              },
+              {
+                className: 'col-md-4',
+                key: 'law_FinalJudgementId',
+                type: 'select',
+                props: {
+                  label: this._languageService.getTransValue(
+                    'matters.finalJudgement'
+                  ),
+                  //required: true,
+                  options: this.lookupsData[1].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return !field.model?.finalJudgement;
+                  },
+                },
+              },
+              {
+                className: 'col-md-4',
+                key: 'cassation_Or_AppealPeriod',
+                type: 'input',
+                props: {
+                  label: this._languageService.getTransValue(
+                    'matters.cassationOrAppealPeriod'
+                  ),
+                  //required: true,
+                },
+                expressions: {
+                  hide: (field: FormlyFieldConfig) => {
+                    return !field.model?.finalJudgement;
+                  },
+                },
+              },
+            ],
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return !(
+                  [1].includes(field.model?.law_ActivityTypeId) &&
+                  this._dynamicDialogConfig.data.rowData
                 );
               },
             },
@@ -402,13 +506,49 @@ export class MatterDetailsActivityEditorComponent
       },
     ];
   }
-  override onSubmit(): void {
-    if (this.formly.valid) {
-      this.address.push({ ...this.formlyModel });
-      this._matterService.activity$.next(this.address);
-      this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-        dialog.destroy();
+  save() {
+    const successMsgKey = this._dynamicDialogConfig?.data?.rowData
+      ? 'messages.updateSuccessfully'
+      : 'messages.createdSuccessfully';
+    const requestPayload = this._dynamicDialogConfig?.data?.rowData
+      ? {
+          ...this.formlyModel,
+          litigatorId:this.formlyModel?.litigatorId?.toString(),
+          id: this._dynamicDialogConfig?.data?.rowData?.id,
+        }
+      : {
+          ...this.formlyModel,
+          litigatorId:this.formlyModel?.litigatorId?.toString(),
+          law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
+        };
+         
+    const path = this._dynamicDialogConfig?.data?.rowData
+      ? this.apiUrls.update
+      : this.apiUrls.create;
+    this._apiService
+      .post(path, requestPayload)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            const text = this._languageService.getTransValue(successMsgKey);
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              this._dynamicDialogRef.close(dialog);
+            });
+          } else {
+            this._toastrNotifiService.displayErrorToastr(res?.message);
+          }
+        },
+        error: (err: any) => {
+          this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+        },
       });
+  }
+  override onSubmit(): void {
+    if (this.formly.invalid) return;
+    if (this._dynamicDialogConfig?.data?.isDynamic) {
+      this.save();
     }
   }
 }

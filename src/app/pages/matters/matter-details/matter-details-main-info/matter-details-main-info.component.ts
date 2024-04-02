@@ -13,6 +13,7 @@ import {
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { GLOBAL_DATE_TIME_FORMATE } from '@core/utilities/defines';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { distinctUntilChanged, finalize, forkJoin } from 'rxjs';
 
@@ -43,6 +44,8 @@ export class MatterDetailsMainInfoComponent
   ngOnChanges(changes: SimpleChanges): void {
     this.formlyModel = {
        ...this.data,
+       openDate:this._datePipe.transform(this.data.openDate,GLOBAL_DATE_TIME_FORMATE)
+
       //  photo:this.data.logoFile 
       };
 
@@ -50,6 +53,7 @@ export class MatterDetailsMainInfoComponent
       this.formly
         .get('jurisdictionId')
         .setValue(this.formlyModel?.jurisdictionId);
+
   }
   override initForm(): void {
     this.formlyFields = [
@@ -736,11 +740,11 @@ export class MatterDetailsMainInfoComponent
         },
       });
   }
-  formatDate(date: string): string {
-    // Convert date string to JavaScript Date object
-    const parsedDate = new Date(date);
+  // formatDate(date: string): string {
+  //   // Convert date string to JavaScript Date object
+  //   const parsedDate = new Date(date);
 
-    // Format the date using the DatePipe
-    return this._datePipe.transform(parsedDate, 'dd/MM/yyyy');
-  }
+  //   // Format the date using the DatePipe
+  //   return this._datePipe.transform(parsedDate, GLOBAL_DATE_TIME_FORMATE);
+  // }
 }

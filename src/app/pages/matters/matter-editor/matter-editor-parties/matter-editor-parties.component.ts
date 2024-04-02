@@ -8,7 +8,7 @@ import {
 import { DialogService } from 'primeng/dynamicdialog';
 import { LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
-import { MatterService } from '@shared/services/matter/matter.service';
+// import { MatterService } from '@shared/services/matter/matter.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { PAGESIZE } from '@core/utilities/defines';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
@@ -28,7 +28,7 @@ export class MatterEditorPartiesComponent implements OnInit,OnChanges {
   apiUrls=API_Config.matterParties
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService);
-  _matterService = inject(MatterService);
+  // _matterService = inject(MatterService);
   _sharedService = inject(SharedService);
   _sharedTableService = inject(SharedTableService);
 
