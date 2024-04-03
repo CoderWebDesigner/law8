@@ -111,7 +111,7 @@ export class MatterDetailsMainInfoComponent
           },
           // {
           //   type: 'input',
-          //   key: 'parentMatter',
+          //   key: 'parentMatterId',
           //   className: 'col-lg-3 col-md-4',
           //   props: {
           //     label: this._languageService.getTransValue('matters.parentMatter'),
@@ -164,115 +164,6 @@ export class MatterDetailsMainInfoComponent
               disabled: true,
             },
           },
-          // {
-          //   type: 'select',
-          //   key: 'statusId',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue(
-          //       'matters.matterStatus'
-          //     ),
-          //     disabled: this.previewOnly,
-          //     options: this.lookupsData[2]?.result?.map((obj) => ({
-          //       label: obj.name,
-          //       value: obj.id,
-          //     })),
-          //   },
-          //   expressions: {
-          //     hide: (field: FormlyFieldConfig) => {
-          //       return (
-          //         field.model?.practsAreaId == 4 || !field.model?.practsAreaId
-          //       );
-          //     },
-          //   },
-          // },
-          // {
-          //   type: 'select',
-          //   key: 'stageId',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue('matters.stage'),
-          //     disabled: this.previewOnly,
-          //     options: this.lookupsData[3]?.result?.map((obj) => ({
-          //       label: obj.name,
-          //       value: obj.id,
-          //     })),
-          //   },
-          //   expressions: {
-          //     hide: (field: FormlyFieldConfig) => {
-          //       return (
-          //         [4, 3].includes(field.model?.practsAreaId) ||
-          //         !field.model?.practsAreaId
-          //       );
-          //     },
-          //   },
-          // },
-
-          // {
-          //   type: 'select',
-          //   key: 'law_MtrCatId',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue(
-          //       'common.matterCategory'
-          //     ),
-          //     disabled: this.previewOnly,
-          //     options: this.lookupsData[0]?.result?.map((obj) => ({
-          //       label: obj.name,
-          //       value: obj.id,
-          //     })),
-          //   },
-          // },
-          // {
-          //   type: 'select',
-          //   key: 'mtrTypeId',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue('matters.matterType'),
-          //     disabled: this.previewOnly,
-          //   },
-          //   hooks: {
-          //     onInit: (field: FormlyFieldConfig) => {
-          //       this.formly.get('law_MtrCatId').valueChanges.pipe(
-          //         this._sharedService.takeUntilDistroy()
-          //       ).subscribe({
-          //         next:res=>{
-          //           console.log('res',res)
-          //           this._apiService
-          //           .get(
-          //             `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${this.formlyModel.law_MtrCatId}`
-          //           )
-          //           .pipe(this._sharedService.takeUntilDistroy())
-          //           .subscribe({
-          //             next: (res: ApiRes) => {
-          //               field.props.options = res.result.map((obj) => ({
-          //                 label: obj.name,
-          //                 value: obj.id,
-          //               }));
-          //               this.formlyOption.build();
-          //             },
-          //           });
-          //         }
-          //       })
-          //       if (this.formlyModel.law_MtrCatId) {
-          //         this._apiService
-          //           .get(
-          //             `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${this.formlyModel.law_MtrCatId}`
-          //           )
-          //           .pipe(this._sharedService.takeUntilDistroy())
-          //           .subscribe({
-          //             next: (res: ApiRes) => {
-          //               field.props.options = res.result.map((obj) => ({
-          //                 label: obj.name,
-          //                 value: obj.id,
-          //               }));
-          //               this.formlyOption.build();
-          //             },
-          //           });
-          //       }
-          //     },
-          //   },
-          // },
           {
             type: 'input',
             key: 'descr',
@@ -295,73 +186,6 @@ export class MatterDetailsMainInfoComponent
               })),
             },
           },
-          // {
-          //   type: 'input',
-          //   key: 'courtNumber',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue('matters.courtNumber'),
-          //     disabled: this.previewOnly,
-          //   },
-          // },
-          // {
-          //   type: 'select',
-          //   key: 'jurisdictionId',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue('matters.jurisdicion'),
-          //     disabled: this.previewOnly,
-          //     options: this.lookupsData[1].result.map((obj) => ({
-          //       label: obj.name,
-          //       value: obj.id,
-          //     })),
-          //   },
-          //   expressions: {
-          //     hide: (field: FormlyFieldConfig) => {
-          //       return (
-          //         field.model?.practsAreaId == 4 || !field.model?.practsAreaId
-          //       );
-          //     },
-          //   },
-          // },
-          // {
-          //   type: 'select',
-          //   key: 'judicatureId',
-          //   className: 'col-lg-3 col-md-4',
-          //   props: {
-          //     label: this._languageService.getTransValue('matters.judicature'),
-          //     disabled: this.previewOnly,
-          //   },
-          //   expressions: {
-          //     hide: (field: FormlyFieldConfig) => {
-          //       return (
-          //         [4, 3].includes(field.model?.practsAreaId) ||
-          //         !field.model?.practsAreaId
-          //       );
-          //     },
-          //   },
-
-          //   hooks: {
-          //     onChanges: (field: FormlyFieldConfig) => {
-          //       if (this.formlyModel.jurisdictionId) {
-          //         this._apiService
-          //           .get(
-          //             `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${this.formlyModel.jurisdictionId}`
-          //           )
-          //           .subscribe({
-          //             next: (res: ApiRes) => {
-          //               field.props.options = res.result.map((obj) => ({
-          //                 label: obj.name,
-          //                 value: obj.id,
-          //               }));
-          //               // to set value returned from api after get options based on value of another field
-          //               this.formlyOption.build();
-          //             },
-          //           });
-          //       }
-          //     },
-          //   },
-          // },
           {
             className: 'card p-2 mx-3 mb-3',
             fieldGroupClassName: 'row',
@@ -677,7 +501,7 @@ export class MatterDetailsMainInfoComponent
       },
     ];
 
-    // this.getData()
+
   }
   override getLookupsData() {
     forkJoin([
@@ -696,23 +520,11 @@ export class MatterDetailsMainInfoComponent
         },
       });
   }
-  // override getData(): void {
-  //   this._apiService.get(API_Config.matters.getById+'?id='+this.requestId).pipe(
-  //     this._sharedService.takeUntilDistroy()
-  //   ).subscribe({
-  //     next:(res:ApiRes)=>{
-  //       this.formlyModel = {...res['result']}
-  //     }
-  //   })
-  // }
+
   override onSubmit(): void {
     delete this.formlyModel.law_MatterParties;
     delete this.formlyModel.law_MatterAddresses;
     delete this.formlyModel.law_MatterContactss;
-    this.formlyModel.law_OtherStaffList =
-      this.formlyModel?.law_OtherStaffList?.map((obj) => obj.id);
-    this.formlyModel.law_AssignedLaywerList =
-      this.formlyModel?.law_AssignedLaywerList?.map((obj) => obj.id);
     this.isSubmit = true;
     this._apiService
       .post(API_Config.matters.update, this.formlyModel)
@@ -739,11 +551,5 @@ export class MatterDetailsMainInfoComponent
         },
       });
   }
-  // formatDate(date: string): string {
-  //   // Convert date string to JavaScript Date object
-  //   const parsedDate = new Date(date);
 
-  //   // Format the date using the DatePipe
-  //   return this._datePipe.transform(parsedDate, GLOBAL_DATE_TIME_FORMATE);
-  // }
 }

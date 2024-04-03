@@ -20,6 +20,7 @@ export class MatterDetailsComponent implements OnInit {
   matter: any;
   requestId: number;
   previewOnly: boolean;
+  isSubmit: boolean;
   data: any;
   items: any[] = [
     {
@@ -97,7 +98,6 @@ export class MatterDetailsComponent implements OnInit {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
-          console.log(res)
           this.data = { ...res['result'] };
         },
       });
@@ -128,6 +128,5 @@ export class MatterDetailsComponent implements OnInit {
       ...event,
     }
     this.data = data
-    console.log('this.data',this.data)
   }
 }

@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -19,30 +11,20 @@ import { finalize, forkJoin } from 'rxjs';
 })
 export class MatterGeneralComponent
   extends FormBaseClass
-  implements OnInit, OnChanges
+  implements OnInit
 {
   @Input() previewOnly: boolean;
   @Input() data: any;
   @Output() onFormSubmit = new EventEmitter();
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log(this.data)
-    // console.log('previewOnly',this.previewOnly)
-
-    this.formlyModel = {
-      ...this.data,
-      law_AssignedLaywerList:
-        this.data?.law_AssignedLaywerList.length > 0
-          ? this.data?.law_AssignedLaywerList?.map((obj) => obj?.id)
-          : [],
-      law_OtherStaffList:
-        this.data?.law_AssignedLaywerList.length > 0
-          ? this.data?.law_OtherStaffList?.map((obj) => obj?.id)
-          : [],
-    };
-  }
   ngOnInit(): void {
     this.getLookupsData();
     this.detectFormChange();
+    console.log('ngOnInit',this.data)
+    this.formlyModel = {
+        ...this.data,
+        law_AssignedLaywerList:this.data?.law_AssignedLaywerList?.map((obj) => obj?.id),
+        law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
+      };
   }
 
   override getLookupsData(): void {
@@ -243,6 +225,7 @@ export class MatterGeneralComponent
   override onSubmit(): void {
     if (this.formlyModel?.rateAmount)
       this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
+    console.log(this.formlyModel)
     this.onFormSubmit.emit(this.formlyModel);
   }
 }
