@@ -8,7 +8,6 @@ import { ApiRes } from '@core/models';
 import { finalize } from 'rxjs';
 import { MatterService } from '@components/matters/service/matter.service';
 
-
 @Component({
   selector: 'app-matter-address-editor',
   standalone: true,
@@ -179,15 +178,6 @@ export class MatterAddressEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
-            let index = this.data.findIndex(
-              (obj) => obj?.id == this._dynamicDialogConfig?.data?.rowData?.id
-            );
-            if (index != -1) {
-              this.data[index] = res?.result;
-            } else {
-              this.data.push(res?.result);
-            }
-            this._addressService.addressList$.next(this.data);
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {

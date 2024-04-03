@@ -8,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { MatterContactEditorComponent } from './matter-contact-editor/matter-contact-editor.component';
 import { API_Config } from '@core/api/api-config/api.config';
 import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './contract-columns.config';
+import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-matter-contact',
@@ -17,7 +18,7 @@ import { Contact_Columns_AR, Contact_Columns_EN, Contact_Columns_FR } from './co
 export class MatterContactComponent implements OnInit,OnDestroy {
   @Input() requestId: number;
   @Input() previewOnly:boolean;
-  @Input() data:any[]=[]
+   data:any[]=[]
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService);
   _matterService = inject(MatterService);
@@ -31,6 +32,11 @@ export class MatterContactComponent implements OnInit,OnDestroy {
   };
 
   apiUrls:any;
+  filterOptions: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  };
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
     this.additionalTableConfig={
@@ -52,8 +58,12 @@ export class MatterContactComponent implements OnInit,OnDestroy {
     }
     if(this.requestId){
       this.apiUrls=API_Config.matterContact;
+      this.filterOptions = {
+        ...this.filterOptions,
+        matterId: this.requestId,
+        // lang: 'en',
+      };
     }
-    this._matterService.contactList$.next(this.data)
     this.getList()
   }
 
@@ -83,6 +93,10 @@ export class MatterContactComponent implements OnInit,OnDestroy {
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
       this._sharedTableService.refreshData.next(true);
     });
+  }
+  onDeleteRow(rowData){
+    this.data=this.data.filter(obj=>obj!=rowData)
+    this._matterService.contactList$.next(this.data)
   }
   ngOnDestroy(): void {
     this._sharedService.destroy()

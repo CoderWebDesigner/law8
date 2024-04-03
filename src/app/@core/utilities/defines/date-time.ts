@@ -27,7 +27,7 @@ export const GLOBAL_DATE_FORMAT_DD_MMM = 'DD MMM YYYY';
 export const GLOBAL_DATE_FORMAT_DD_MMM_YY = 'DD MMM YY';
 
 /** request data format */
-export const REQUEST_DATE_FORMAT = 'YYYY-MM-DD';
+export const REQUEST_DATE_FORMAT = 'YYYY-MM-dd';
 /** Friday, Jul 17, 2020 */
 export const FULL_DATE = 'dddd, ll';
 

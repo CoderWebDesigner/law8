@@ -3,5 +3,9 @@
     <img src="/assets/images/empty.png" alt="" />
   </div>
   <h3 class="fw-bold mb-4">{{ "common.noDataAdded" | translate }}</h3>
-  <ng-content select="[button]"></ng-content>
+  <p-button styleClass="btn btn-success" type="button" (onClick)="fireAction()"
+    [icon]="'pi pi-plus'" [label]="config?.btnLabel | translate" button>
+  </p-button>
+  <!-- <ng-content select="[button]"></ng-content> -->
 </section>
+{{config}}

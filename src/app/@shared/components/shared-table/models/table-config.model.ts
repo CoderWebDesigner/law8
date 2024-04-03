@@ -7,6 +7,10 @@ export interface TableConfig  {
     withRadioButton?: boolean;
     id?:string;
     dataKey?:string;
+    empty?:{
+        btnLabel:string;
+        command:()=>void
+    }
 }
 
 

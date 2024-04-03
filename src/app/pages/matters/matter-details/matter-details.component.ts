@@ -122,4 +122,12 @@ export class MatterDetailsComponent implements OnInit {
       ...e,
     };
   }
+  getFormData(event) {
+    let data = {
+      ...this.data,
+      ...event,
+    }
+    this.data = data
+    console.log('this.data',this.data)
+  }
 }

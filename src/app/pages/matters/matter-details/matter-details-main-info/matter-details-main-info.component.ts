@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
 import {
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -13,9 +12,9 @@ import {
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
-import { GLOBAL_DATE_TIME_FORMATE } from '@core/utilities/defines';
+import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { distinctUntilChanged, finalize, forkJoin } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-matter-details-main-info',
@@ -44,7 +43,7 @@ export class MatterDetailsMainInfoComponent
   ngOnChanges(changes: SimpleChanges): void {
     this.formlyModel = {
        ...this.data,
-       openDate:this._datePipe.transform(this.data.openDate,GLOBAL_DATE_TIME_FORMATE)
+       openDate:this._datePipe.transform(this.data?.openDate,REQUEST_DATE_FORMAT)
 
       //  photo:this.data.logoFile 
       };

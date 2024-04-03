@@ -8,6 +8,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Matter_Parties_Columns_EN, Matter_Parties_Columns_AR, Matter_Parties_Columns_FR } from './matter-parties-columns.config';
 import { MatterPartyEditorComponent } from './matter-party-editor/matter-party-editor.component';
 import { MatterService } from '@components/matters/service/matter.service';
+import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-matter-party',
@@ -17,7 +18,7 @@ import { MatterService } from '@components/matters/service/matter.service';
 export class MatterPartyComponent implements OnInit,OnDestroy {
   @Input() requestId: number;
   @Input() previewOnly:boolean;
-  @Input() data:any[]=[]
+data:any[]=[]
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService);
   _matterService = inject(MatterService);
@@ -30,7 +31,12 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
     fr: Matter_Parties_Columns_FR,
   };
 
-  apiUrls:any
+  apiUrls:any;
+  filterOptions: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  };
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
     this.additionalTableConfig={
@@ -50,10 +56,16 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
         },
       ],
     }
+    this.filterOptions = {
+      ...this.filterOptions,
+      matterId: this.requestId,
+      // lang: 'en',
+    };
     if(this.requestId){
       this.apiUrls=API_Config.matterParties;
+      
     }
-    this._matterService.partyList$.next(this.data)
+    // this._matterService.partyList$.next(this.data)
     this.getList()
   }
 
@@ -80,6 +92,10 @@ export class MatterPartyComponent implements OnInit,OnDestroy {
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
       this._sharedTableService.refreshData.next(true);
     });
+  }
+  onDeleteRow(rowData){
+    this.data=this.data.filter(obj=>obj!=rowData)
+    this._matterService.partyList$.next(this.data)
   }
   ngOnDestroy(): void {
     this._sharedService.destroy()

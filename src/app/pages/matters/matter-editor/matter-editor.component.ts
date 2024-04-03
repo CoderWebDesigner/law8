@@ -424,21 +424,20 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     this.formly.get('jurisdictionId').valueChanges.subscribe({
                       next: (res) => {
                         console.log(res);
-                        if(res){
+                        if (res) {
                           this._apiService
-                          .get(
-                            `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${res}`
-                          )
-                          .subscribe({
-                            next: (res: ApiRes) => {
-                              field.props.options = res.result.map((obj) => ({
-                                label: obj.name,
-                                value: obj.id,
-                              }));
-                            },
-                          });
+                            .get(
+                              `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${res}`
+                            )
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                              },
+                            });
                         }
-                        
                       },
                     });
                   },
@@ -533,15 +532,15 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       this._matterService.partyList$,
       this._matterService.classList$,
       this._matterService.applicantList$,
-    ]).subscribe(([address, contacts, parties,matterClass,applicant]) => {
+    ]).subscribe(([address, contacts, parties, matterClass, applicant]) => {
       this.formlyModel = {
         ...this.formlyModel,
-        courtNumber :'12',
+        courtNumber: '12',
         law_MatterParties: parties,
         law_MatterAddresses: address,
         law_MatterContactss: contacts,
-        law_MatterClass:matterClass,
-        law_MatterApplicants:applicant
+        law_MatterClass: matterClass,
+        law_MatterApplicants: applicant,
       };
       // console.log('formlyModel', this.formlyModel);
     });
@@ -556,10 +555,15 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
+            this._matterService.addressList$.next([]);
+            this._matterService.contactList$.next([]);
+            this._matterService.partyList$.next([]);
+            this._matterService.applicantList$.next([]);
+            this._matterService.classList$.next([]);
             if (this.formlyModel.photo) {
-              let formData = new FormData()
-              formData.append('Attachment',this.formlyModel.photo)
-              formData.append('Law_MatterId',res.result.id)
+              let formData = new FormData();
+              formData.append('Attachment', this.formlyModel.photo);
+              formData.append('Law_MatterId', res.result.id);
               this._apiService
                 .post(API_Config.matters.uploadLogo, formData)
                 .pipe(
@@ -617,8 +621,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
   getFormData(event) {
     this.formlyModel = {
-      ...this.formlyModel,
       ...event,
+      ...this.formlyModel,
     };
   }
   override getData(): void {

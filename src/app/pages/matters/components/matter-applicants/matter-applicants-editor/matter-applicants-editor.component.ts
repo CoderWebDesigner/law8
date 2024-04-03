@@ -32,7 +32,6 @@ export class MatterApplicantsEditorComponent
       .subscribe({
         next: (res: any[]) => {
           this.data = res;
-          
         },
       });
   }
@@ -192,15 +191,6 @@ export class MatterApplicantsEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
-            let index = this.data.findIndex(
-              (obj) => obj?.id == this._dynamicDialogConfig?.data?.rowData?.id
-            );
-            if (index != -1) {
-              this.data[index] = res?.result;
-            } else {
-              this.data.push(res?.result);
-            }
-            this._matterService.applicantList$.next(this.data);
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {

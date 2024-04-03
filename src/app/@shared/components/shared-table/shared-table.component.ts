@@ -109,7 +109,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() defaultSelected: any;
   @Output() onRowSelect: any = new EventEmitter();
   @Output() onRowUnSelect: any = new EventEmitter();
-
+  @Output() onDeleteRow=new EventEmitter()
   @ViewChild('dt') dt: Table;
   @Input() isLoading: boolean = false;
   columns = [];
@@ -303,7 +303,8 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
                 }
               );
           }else{
-            this.data= this.data.filter(obj=>obj!=rowData)
+            this.onDeleteRow.emit(rowData)
+            // this.data= this.data.filter(obj=>obj!=rowData)
           }
         }
       });
