@@ -14,21 +14,12 @@
 </app-shared-no-data> -->
 
 <!-- *ngIf="data?.length > 0" -->
-<ng-container >
+<ng-container>
   <div class="text-end mb-4">
-    <p-button
-    *ngIf="!previewOnly"
-    styleClass="btn btn-success"
-    type="button"
-    (onClick)="openDialog()"
-    [icon]="'pi pi-plus'"
-    [label]="'matters.addDocument' | translate"
-    button
-  >
-  </p-button>
+    <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+      [icon]="'pi pi-plus'" [label]="'matters.addDocument' | translate" button>
+    </p-button>
   </div>
-  <shared-table
-    [data]="data"
-    [columnsLocalized]="columnsLocalized"
-  ></shared-table>
+  <shared-table [additionalTableConfig]="additionalTableConfig" [filterOptions]="filterOptions"
+    [columnsLocalized]="columnsLocalized" [apiUrls]="apiUrls"></shared-table>
 </ng-container>

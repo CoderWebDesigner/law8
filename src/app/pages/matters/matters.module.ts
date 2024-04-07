@@ -11,14 +11,11 @@ import { MatterEditorComponent } from './matter-editor/matter-editor.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { TabViewModule } from 'primeng/tabview';
 import { MatterEditorPaymentTermsComponent } from './matter-editor/matter-editor-payment-terms/matter-editor-payment-terms.component';
-import { SharedMatterTableComponent } from '@shared/components/business/shared-matter-table/shared-matter-table.component';
 import { MatterDetailsComponent } from './matter-details/matter-details.component';
-import { SharedAddressModule } from '@shared/components/business/shared-address/shared-address.module';
 import { MatterDetailsMainInfoComponent } from './matter-details/matter-details-main-info/matter-details-main-info.component';
 import { MatterDetailsTimesheetComponent } from './matter-details/matter-details-timesheet/matter-details-timesheet.component';
 import { MatterDetailsRelatedMattersComponent } from './matter-details/matter-details-related-matters/matter-details-related-matters.component';
 import { MatterDetailsDocumentsComponent } from './matter-details/matter-details-documents/matter-details-documents.component';
-import { MatterDetailsDocumentsEditorComponent } from './matter-details/matter-details-documents/matter-details-documents-editor/matter-details-documents-editor.component';
 import { MatterDetailsActivityComponent } from './matter-details/matter-details-activity/matter-details-activity.component';
 import { MatterDetailsBillingSettingsComponent } from './matter-details/matter-details-billing-settings/matter-details-billing-settings.component';
 import { MatterDetailsInvoiceComponent } from './matter-details/matter-details-invoice/matter-details-invoice.component';
@@ -46,7 +43,6 @@ import { MatterGeneralComponent } from './components/matter-general/matter-gener
     MatterDetailsTimesheetComponent,
     MatterDetailsRelatedMattersComponent,
     MatterDetailsDocumentsComponent,
-    MatterDetailsDocumentsEditorComponent,
     MatterDetailsActivityComponent,
     MatterDetailsBillingSettingsComponent,
     MatterDetailsInvoiceComponent,
@@ -68,8 +64,6 @@ import { MatterGeneralComponent } from './components/matter-general/matter-gener
     SharedSearchInputComponent,
     FormlyConfigModule,
     TabViewModule,
-    SharedMatterTableComponent,
-    SharedAddressModule
   ]
 })
 export class MattersModule { }

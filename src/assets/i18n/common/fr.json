@@ -49,7 +49,8 @@
     "cancel": "Cancel",
     "filter": "Filter",
     "delete": "Delete",
-    "update": "Mise à jour"
+    "update": "Mise à jour",
+    "upload":"Upload"
   },
   "messages": {
     "signInSuccessfully": "Connectez-vous avec succès",
@@ -65,7 +66,8 @@
     "error": "Erreur!",
     "success": "Succès!",
     "sureDelete": "Etes-vous sûr que vous voulez supprimer?",
-    "dropClick": "Déposez les fichiers pour télécharger ou cliquer"
+    "dropClick": "Déposez les fichiers pour télécharger ou cliquer",
+    "uploadFile": "Drag and drop here or click to download"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

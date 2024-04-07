@@ -51,7 +51,8 @@
     "cancel":"Cancel",
     "filter":"Filter",
     "delete":"Delete",
-    "update":"Update"
+    "update":"Update",
+    "upload":"Upload"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
@@ -67,7 +68,8 @@
     "error": "Error!",
     "success": "Success!",
     "sureDelete": "Are you sure you want to delete?",
-    "dropClick":"Drop files to upload or click"
+    "dropClick":"Drop files to upload or click",
+    "uploadFile": "Drag and drop here or click to download"
   },
   "validation": {
     "required": "This field is required!",

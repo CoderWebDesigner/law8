@@ -24,6 +24,7 @@ import { Matters_Class_API } from './matter-class';
 import { Class_API } from './class';
 import { Matters_Activity_API } from './matter-activity';
 import { Matters_Related_Matter_API } from './matter-related-matter';
+import { Matters_Documents_API } from './matter-documents';
 
 export const API_Config = {
   ...General_API,
@@ -51,5 +52,6 @@ export const API_Config = {
   ...Class_API,
   ...Matters_Activity_API,
   ...Matters_Related_Matter_API,
+  ...Matters_Documents_API,
   ...Lookups_API,
 };

@@ -32,7 +32,7 @@ export class MatterDetailsActivityEditorComponent
   override getData(): void {
     let id = this._dynamicDialogConfig?.data?.rowData?.id;
     this._apiService
-      .get(`${API_Config.matterActivity.getById}?id=${id}`)
+      .get(`${this.apiUrls.getById}?id=${id}`)
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
@@ -40,7 +40,6 @@ export class MatterDetailsActivityEditorComponent
           this.formlyModel = { ...res['result'] };
         },
       });
-    // this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
   }
   override getLookupsData(): void {
     forkJoin([
