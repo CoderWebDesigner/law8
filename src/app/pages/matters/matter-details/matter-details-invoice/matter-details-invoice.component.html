@@ -1,4 +1,4 @@
-<app-shared-no-data
+<!-- <app-shared-no-data
   *ngIf="data?.length == 0"
 >
   <p-button
@@ -8,12 +8,11 @@
     (onClick)="openDialog()"
     [icon]="'pi pi-plus'"
     [label]="'matters.addInvoice' | translate"
-    button
-  >
+    button >
   </p-button>
-</app-shared-no-data>
-
-<ng-container *ngIf="data?.length > 0">
+</app-shared-no-data> -->
+<!-- *ngIf="data?.length > 0" -->
+<ng-container >
   <div class="text-end mb-4">
     <p-button
     *ngIf="!previewOnly"

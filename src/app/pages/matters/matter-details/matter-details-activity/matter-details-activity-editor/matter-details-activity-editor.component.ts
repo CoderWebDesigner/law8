@@ -30,14 +30,16 @@ export class MatterDetailsActivityEditorComponent
   }
 
   override getData(): void {
-    let id = this._dynamicDialogConfig?.data?.rowData?.id
-    this._apiService.get(`${API_Config.matterActivity.getById}?id=${id}`).pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next:(res:ApiRes)=>{
-        console.log(res)
-      }
-    })
+    let id = this._dynamicDialogConfig?.data?.rowData?.id;
+    this._apiService
+      .get(`${API_Config.matterActivity.getById}?id=${id}`)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          console.log(res);
+          this.formlyModel = { ...res['result'] };
+        },
+      });
     // this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
   }
   override getLookupsData(): void {
@@ -46,6 +48,7 @@ export class MatterDetailsActivityEditorComponent
       this._apiService.get(this.generalApiUrls.getFinalJudgement),
       this._apiService.get(API_Config.responsibleLawyerSecurity.get),
       this._apiService.get(this.generalApiUrls.getActivityStatus),
+      this._apiService.get(this.generalApiUrls.getAdjournmentReasons),
     ])
       .pipe(
         finalize(() => (this.isSubmit = false)),
@@ -160,7 +163,7 @@ export class MatterDetailsActivityEditorComponent
             props: {
               label: this._languageService.getTransValue('matters.status'),
               //required: true,
-              options:  this.lookupsData[3].result.map((obj) => ({
+              options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -281,7 +284,8 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
-                  type:'number'
+                  // type: 'number',
+                  pKeyFilter: 'int',
                   //required: true,
                 },
               },
@@ -294,12 +298,10 @@ export class MatterDetailsActivityEditorComponent
                     'matters.adjournmentReason'
                   ),
                   //required: true,
-                  options: [
-                    { label: 'new hearingSession', value: 'adjournmentReason' },
-                    { label: 'Option 2', value: 'Option 2' },
-                    { label: 'Option 3', value: 'Option 3' },
-                    { label: 'Option 4', value: 'Option 4' },
-                  ],
+                  options: this.lookupsData[4].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
                 },
                 expressions: {
                   hide: () => {
@@ -341,7 +343,7 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
                   //required: true,
-                  options:  this.lookupsData[3].result.map((obj) => ({
+                  options: this.lookupsData[3].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -359,6 +361,12 @@ export class MatterDetailsActivityEditorComponent
           },
           {
             fieldGroupClassName: 'form-section row mb-3',
+            key: 'newSession',
+            expressions: {
+              hide: () => {
+                return !this.formly.get('law_AdjournmentReasonsId')?.value;
+              },
+            },
             fieldGroup: [
               {
                 className: 'col-12',
@@ -402,6 +410,8 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
+                  // type: 'number',
+                  pKeyFilter: 'int',
                   //required: true,
                 },
               },
@@ -425,22 +435,13 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
                   //required: true,
-                  options:  this.lookupsData[3].result.map((obj) => ({
+                  options: this.lookupsData[3].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
                 },
               },
             ],
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return (
-                  field.model?.law_AdjournmentReasonsId !=
-                    'adjournmentReason' ||
-                  !field.model?.law_AdjournmentReasonsId
-                );
-              },
-            },
           },
           {
             fieldGroupClassName: 'row form-section py-3',
@@ -484,6 +485,8 @@ export class MatterDetailsActivityEditorComponent
                   label: this._languageService.getTransValue(
                     'matters.cassationOrAppealPeriod'
                   ),
+                  // type: 'number',
+                  pKeyFilter: 'int',
                   //required: true,
                 },
                 expressions: {
@@ -507,21 +510,23 @@ export class MatterDetailsActivityEditorComponent
     ];
   }
   save() {
+    this.formlyModel.startDate = this.getDate(this.formlyModel?.startDate)
+    this.formlyModel.endDate = this.getDate(this.formlyModel?.endDate)
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          litigatorId:this.formlyModel?.litigatorId?.toString(),
+          litigatorId: this.formlyModel?.litigatorId?.toString(),
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          litigatorId:this.formlyModel?.litigatorId?.toString(),
+          litigatorId: this.formlyModel?.litigatorId?.toString(),
           law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
-         
+
     const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update
       : this.apiUrls.create;
@@ -550,5 +555,18 @@ export class MatterDetailsActivityEditorComponent
     if (this._dynamicDialogConfig?.data?.isDynamic) {
       this.save();
     }
+  }
+  getDate(date: Date) {
+    let dateFrom = new Date(date);
+    let dateValue = new Date(
+      Date.UTC(
+        dateFrom.getFullYear(),
+        dateFrom.getMonth(),
+        dateFrom.getDate(),
+        dateFrom.getHours(),
+        dateFrom.getMinutes()
+      )
+    );
+    return dateValue;
   }
 }

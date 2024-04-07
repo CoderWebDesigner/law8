@@ -9,7 +9,6 @@ import {
   Activity_Columns_FR,
 } from './activity-columns.config';
 import { MatterDetailsActivityEditorComponent } from './matter-details-activity-editor/matter-details-activity-editor.component';
-import { ActivatedRoute } from '@angular/router';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { MatterService } from '@components/matters/service/matter.service';
@@ -42,7 +41,6 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
   apiUrls:any=API_Config.matterActivity;
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
-    console.log('requeest id',this.requestId)
     this.additionalTableConfig={
       id: 'id',
       actions: [
@@ -66,17 +64,6 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
       matterId:this.requestId
     }
   }
-  // getList(){
-  //   this._matterService.activityList$.pipe(
-  //     this._sharedService.takeUntilDistroy()
-  //   ).subscribe({
-  //     next:(res:any[])=>{
-  //       // this.data=this.data.length>0?this.data:res
-  //       this.data=res
-  //     }
-  //   })
-
-  // }
   openDialog() {
     const ref = this._dialogService.open(MatterDetailsActivityEditorComponent, {
       width: '70%',
@@ -96,50 +83,4 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
     this._sharedService.destroy()
   }
 
-  // @Input() data: any[] = [];
-  // @Input() previewOnly: boolean;
-  // @Input() requestId: number;
-  // matterCode: string;
-  // _dialogService = inject(DialogService);
-  // _languageService = inject(LanguageService);
-  // _matterService = inject(MatterService);
-  // _sharedService = inject(SharedService);
-  // _route = inject(ActivatedRoute);
-
-  // columnsLocalized = {
-  //   en: Activity_Columns_EN,
-  //   ar: Activity_Columns_AR,
-  //   fr: Activity_Columns_FR,
-  // };
-  // ngOnInit(): void {
-  //   this._route.params.pipe().subscribe({
-  //     next: (res) => {
-  //       this.matterCode = res['id'];
-  //       this.getActivity();
-  //     },
-  //   });
-  // }
-  // getActivity() {
-  //   this._matterService.activity$
-  //     .pipe(this._sharedService.takeUntilDistroy())
-  //     .subscribe({
-  //       next: (res: any[]) => {
-  //         this.data.push(...res);
-  //       },
-  //     });
-  // }
-  // openDialog() {
-  //   this._dialogService.open(MatterDetailsActivityEditorComponent, {
-  //     width: '70%',
-  //     header: this._languageService.getTransValue('matters.addActivity'),
-  //     data: {
-  //       matterId: this.matterCode,
-  //       isDynamic: this.requestId != undefined,
-  //     },
-  //     dismissableMask: true,
-  //   });
-  // }
-  // ngOnDestroy(): void {
-  //   this._sharedService.destroy();
-  // }
 }

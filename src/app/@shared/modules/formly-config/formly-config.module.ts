@@ -38,6 +38,7 @@ import { FormlyFileFieldComponent } from './components/formly-file-field/formly-
 import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
 import { FormlySwitchFieldComponent } from './components/formly-switch-field/formly-switch-field.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     TableModule,
     MultiSelectModule,
     CheckboxModule,
-    InputSwitchModule
+    InputSwitchModule,
+    KeyFilterModule
   ],
   exports: [
     ReactiveFormsModule,

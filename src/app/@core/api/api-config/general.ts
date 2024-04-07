@@ -25,7 +25,8 @@ export const General_API = {
       "getPartiesDescription":"AppLookup/GetLaw_PartiesDescriptionModelLookup",
       "getActivityType":"AppLookup/GetLaw_ActivityTypeModelLookup",
       "getFinalJudgement":"AppLookup/GetLaw_FinalJudgementModelLookup",
-      "getActivityStatus":"AppLookup/GetLaw_ActivityStatusModelLookup"
+      "getActivityStatus":"AppLookup/GetLaw_ActivityStatusModelLookup",
+      "getAdjournmentReasons":"AppLookup/GetLaw_AdjournmentReasonsModeLookup"
   }
 
 }

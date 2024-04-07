@@ -6,6 +6,7 @@ import { ApiRes } from '@core/models';
 import { LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
 import { MenuItem } from 'primeng/api';
+import { PracticeArea } from '../enums/practice-area';
 
 @Component({
   selector: 'app-matter-details',
@@ -22,6 +23,7 @@ export class MatterDetailsComponent implements OnInit {
   previewOnly: boolean;
   isSubmit: boolean;
   data: any;
+  practiceArea=PracticeArea
   items: any[] = [
     {
       id: 1,
@@ -103,13 +105,13 @@ export class MatterDetailsComponent implements OnInit {
       });
   }
   onUpdate(e) {
-    if ([4].includes(e.practsAreaId)) {
+    if ([this.practiceArea.IntelecturualProperty].includes(e.practsAreaId)) {
       this.items.forEach((obj) => {
         [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id)
           ? (obj.show = true)
           : (obj.show = false);
       });
-    } else if ([3, 1].includes(e.practsAreaId)) {
+    } else if ([this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(e.practsAreaId)) {
       this.items.forEach((obj) => {
         [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id)
           ? (obj.show = true)

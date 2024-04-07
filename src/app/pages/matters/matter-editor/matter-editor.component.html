@@ -8,11 +8,11 @@
             <app-matter-general [previewOnly]="previewOnly" *ngIf="i==0"  (onFormSubmit)="getFormData($event)"></app-matter-general>
 
             <app-matter-address *ngIf="i==2"></app-matter-address>
-            <ng-container *ngIf="[3, 1].includes(formlyModel.practsAreaId)">
+            <ng-container *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(formlyModel.practsAreaId)">
               <app-matter-party *ngIf="i==1"></app-matter-party>
               <app-matter-contact *ngIf="i==5"></app-matter-contact>
             </ng-container>
-            <ng-container *ngIf="[4].includes(formlyModel.practsAreaId)">
+            <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(formlyModel.practsAreaId)">
               <app-matter-applicants  [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-applicants>
               <app-matter-class  [previewOnly]="previewOnly" *ngIf="i==4"></app-matter-class>
             </ng-container>

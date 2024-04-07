@@ -9,6 +9,7 @@ import {
   SimpleChanges,
   inject,
 } from '@angular/core';
+import { PracticeArea } from '@components/matters/enums/practice-area';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
@@ -31,6 +32,7 @@ export class MatterDetailsMainInfoComponent
   @Output() onUpdate = new EventEmitter();
   _datePipe = inject(DatePipe);
   requestId: number;
+  practiceArea=PracticeArea
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     this.getLookupsData();
@@ -272,7 +274,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == 4 || !field.model?.practsAreaId
+                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty || !field.model?.practsAreaId
                     );
                   },
                 },
@@ -288,7 +290,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [4, 3].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -331,7 +333,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -355,7 +357,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -373,7 +375,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -394,7 +396,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -414,7 +416,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 2 ||
                       !field.model?.tradmarkTypeId
@@ -439,7 +441,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == 4 ||
+                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -460,7 +462,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [4, 3].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -479,7 +481,7 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [4, 3].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },

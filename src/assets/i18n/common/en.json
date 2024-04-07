@@ -94,6 +94,8 @@
     "DONE": "Done",
     "Low": "Low",
     "Normal": "Normal",
-    "High": "High"
+    "High": "High",
+    "new":"New"
+
   }
 }

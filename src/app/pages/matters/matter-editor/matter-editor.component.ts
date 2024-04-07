@@ -5,6 +5,7 @@ import { ApiRes } from '@core/models/apiRes-model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { combineLatest, finalize, forkJoin } from 'rxjs';
 import { MatterService } from '../service/matter.service';
+import { PracticeArea } from '../enums/practice-area';
 
 @Component({
   selector: 'app-matter-editor',
@@ -52,6 +53,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     },
   ];
   tabsList: any;
+  practiceArea=PracticeArea
   _matterService = inject(MatterService);
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
@@ -183,7 +185,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 }, 0);
                 field.form.get('practsAreaId').valueChanges.subscribe({
                   next: (res) => {
-                    if ([4].includes(res)) {
+                    if ([this.practiceArea.IntelecturualProperty].includes(res)) {
                       this.items.forEach((obj) => {
                         [1, 3, 4, 5, 7].includes(obj.id)
                           ? (obj.show = true)
@@ -286,7 +288,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -310,7 +312,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -328,7 +330,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -349,7 +351,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -369,7 +371,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [3, 1].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 2 ||
                       !field.model?.tradmarkTypeId
@@ -394,7 +396,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == 4 ||
+                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -412,7 +414,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [4, 3].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -460,7 +462,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == 4 ||
+                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -481,7 +483,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [4, 3].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -500,7 +502,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [4, 3].includes(field.model?.practsAreaId) ||
+                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },

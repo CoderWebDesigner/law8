@@ -92,6 +92,7 @@
     "DONE": "Fait",
     "Low": "Faible",
     "Normal": "Normale",
-    "High": "Haut"
+    "High": "Haut",
+    "new":"New"
   }
 }

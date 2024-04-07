@@ -4,7 +4,8 @@ export const SUCCESS_TAGS =[
   "Active",
   "DONE",
   "NEW CASE",
-  "Low"
+  "Low",
+  "new"
 ]
 
 export const INFO_TAGS =[
