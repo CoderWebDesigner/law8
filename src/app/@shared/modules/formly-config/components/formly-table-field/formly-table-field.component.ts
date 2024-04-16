@@ -39,8 +39,8 @@ export class FormlyTableFieldComponent extends FieldArrayType implements OnInit 
         this.remove(res)
       }
     })
-    console.log(this.field)
-    console.log(this.model)
+    // console.log(this.field)
+    // console.log(this.model)
   }
   onRowSelect(event: any) {
     // this.selectedRows.push(this.model[event.key])
@@ -64,13 +64,13 @@ export class FormlyTableFieldComponent extends FieldArrayType implements OnInit 
     // console.log(this.id)
     // console.log(this.formState)
     this.selectedRows.push({...this.form.value['data']})
-    console.log(this.selectedRows)
+    // console.log(this.selectedRows)
     // this.formControl.setValue(this.selectedRows)
   }
   getSort(e){
-    console.log(e)
+    // console.log(e)
     this.model.sort((a,b)=>{ return e.order})
-    console.log(this.model)
+    // console.log(this.model)
   }
   sortRepeatedSection(): void {
     // Fetch sorting criteria from your specific input fields

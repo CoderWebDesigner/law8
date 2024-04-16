@@ -1,0 +1,10 @@
+<shared-table [apiUrls]="apiUrls" [withCheckbox]="true" [filterOptions]="filterOptions"
+    [columnsLocalized]="columnsLocalized" [isColumnResize]="false" 
+    (onRowSelect)="onRowSelect($event)" (onRowUnSelect)="onRowUnSelect($event)"
+    [defaultSelected]="data" [dataKey]="'classNo'"></shared-table>
+
+<div class="text-end mb-4">
+    <p-button styleClass="btn btn-success" type="button" (onClick)="selectRows()" [icon]="'pi pi-plus'"
+        [label]="'btn.submit' | translate" button>
+    </p-button>
+</div>

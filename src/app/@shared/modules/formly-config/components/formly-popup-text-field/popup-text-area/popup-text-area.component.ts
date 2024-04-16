@@ -16,6 +16,6 @@ export class PopupTextAreaComponent  {
 
   ngOnInit(): void {
       this.formControlFromDialog = this._dynamicDialogConfig?.data?.formControlFromDialog;
-      console.log(' this.formControlFromDialog : ',  this.formControlFromDialog );
+      // console.log(' this.formControlFromDialog : ',  this.formControlFromDialog );
   }
 }

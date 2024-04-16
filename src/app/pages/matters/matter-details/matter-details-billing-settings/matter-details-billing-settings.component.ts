@@ -7,8 +7,10 @@ import { FormBaseClass } from '@core/classes/form-base.class';
   styleUrls: ['./matter-details-billing-settings.component.scss']
 })
 export class MatterDetailsBillingSettingsComponent extends FormBaseClass implements OnInit {
+  @Input() data: any[] = [];
 
-  @Input() showFields: boolean = true
+  @Input() previewOnly: boolean;
+
   ngOnInit(): void {
     this.initForm()
   }
@@ -32,7 +34,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.frequency'),
-
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -47,7 +49,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.billingTemplate'),
-
+              disabled: this.previewOnly,
             }
           },
           {
@@ -56,7 +58,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.emailTemplate'),
-
+              disabled: this.previewOnly,
             }
           },
           {
@@ -65,7 +67,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.branch'),
-
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -80,7 +82,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.claimAmount'),
-
+              disabled: this.previewOnly,
               type:'number'
             }
           },
@@ -90,7 +92,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.notes'),
-
+              disabled: this.previewOnly,
               type:'number'
             }
           },
@@ -104,6 +106,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.useTaskBasedBilling'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -112,6 +115,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.applyDiscountFees'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -120,6 +124,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.discount'),
+              disabled: this.previewOnly,
               type:'number',
               min:0
             }
@@ -130,7 +135,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.quoteType'),
-
+              disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
                 { label: 'Option 2', value: 'Option 2' },
@@ -146,7 +151,8 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             props: {
               label: this._languageService.getTransValue('matters.amount'),
               type:'number',
-              min:0
+              min:0,
+              disabled: this.previewOnly,
             }
           },
           {
@@ -156,7 +162,8 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             props: {
               label: this._languageService.getTransValue('matters.maximumFee'),
               type:'number',
-              min:0
+              min:0,
+              disabled: this.previewOnly,
             }
           },
           {
@@ -169,6 +176,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className:'col-lg-3 col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.automaticallyCreateDisability'),
+              disabled: this.previewOnly,
             }
           },
           {
@@ -177,6 +185,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className:'col-lg-3 col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.disability'),
+              disabled: this.previewOnly,
               options:[
                 {label:'Option 1', value:'Option 1'},
                 {label:'Option 2', value:'Option 2'},
@@ -190,6 +199,7 @@ export class MatterDetailsBillingSettingsComponent extends FormBaseClass impleme
             className:'col-lg-3 col-md-4',
             props:{
               label:this._languageService.getTransValue('matters.amountAndPrecentage'),
+              disabled: this.previewOnly,
               type:'number',
               min:0
             }

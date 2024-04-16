@@ -1,6 +1,5 @@
 export interface TableConfig  {
     isSearch?: boolean;
-    isEditable?: boolean;
     searchKey?: string;
     anotherFilter?: boolean; //used to add custom filter
     actions?: TableAction [],
@@ -8,6 +7,10 @@ export interface TableConfig  {
     withRadioButton?: boolean;
     id?:string;
     dataKey?:string;
+    empty?:{
+        btnLabel:string;
+        command:()=>void
+    }
 }
 
 

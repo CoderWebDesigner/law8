@@ -40,7 +40,7 @@ export class FormlyTimerFieldComponent  extends FieldType <FieldTypeConfig>{
     }
     if(this.props['onPlay']) this.props['onPlay'](this.field,+this.field.parent.key)
     if(!this.props['play']) this.stop()
-    console.log(this.props['play'])
+    // console.log(this.props['play'])
   }
 
   stop() {

@@ -1,16 +1,25 @@
 <div class="mb-3">
-  <ngx-dropzone (change)="onSelect($event)" [accept]="props['accept']">
+  <ngx-dropzone (change)="onSelect($event)" [compress]="true">
     <ngx-dropzone-label>
-      <div class="mb-3">
-        <i class="fat-upload f-primary" style="font-size: 5rem;"></i>
+      <div class="mb-1">
+        <img
+          width="40px"
+          height="44px"
+          [src]="'assets/images/icons/upload.svg'"
+        />
       </div>
-      <span style="color: #343434;">{{'messages.dropClick' | translate}}</span>
+      <span class="d-block">{{ "messages.uploadFile" | translate }}</span>
+      <!-- <small class="d-block">{{ "messages.multipleFile" | translate }}</small> -->
 
+      <p-button class="d-block h-50 mt-2">{{
+        "btn.upload" | translate
+      }}</p-button>
     </ngx-dropzone-label>
-    <!-- <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-    </ngx-dropzone-image-preview> -->
-    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+    <ngx-dropzone-preview
+      *ngFor="let f of files"
+      [removable]="true"
+      (removed)="onRemove(f)"
+    >
       <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
     </ngx-dropzone-preview>
   </ngx-dropzone>

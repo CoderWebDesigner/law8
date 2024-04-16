@@ -1,18 +1,32 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, LanguageService } from '@core/services';
-import { Timesheet_Columns_AR, Timesheet_Columns_EN, Timesheet_Columns_FR } from './timesheet-columns.config';
+import {
+  Timesheet_Columns_AR,
+  Timesheet_Columns_EN,
+  Timesheet_Columns_FR,
+} from './timesheet-columns.config';
+import { API_Config } from '@core/api/api-config/api.config';
+import { PAGESIZE } from '@core/utilities/defines';
+import { toCamelCase } from '@core/utilities/defines/functions/toCamelCase';
 
 @Component({
   selector: 'app-matter-details-timesheet',
   templateUrl: './matter-details-timesheet.component.html',
-  styleUrls: ['./matter-details-timesheet.component.scss']
+  styleUrls: ['./matter-details-timesheet.component.scss'],
 })
 export class MatterDetailsTimesheetComponent {
   _languageService = inject(LanguageService);
   _authService = inject(AuthService);
   router = inject(Router);
 
+  @Input() requestId;
+  apiUrls = API_Config.matterTimeSheet;
+  filterOptions: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  };
   // apiUrls = API_Config.timesheet;
 
   columnsLocalized = {
@@ -21,17 +35,11 @@ export class MatterDetailsTimesheetComponent {
     ar: Timesheet_Columns_AR,
   };
 
-  data: any[] = [
-    {
-      sheetNumber: 1,
-      documentDate: new Date(),
-      task: '',
-      lawyerInitial: '',
-      rate: 0,
-      hours: 0,
-      totalAmount: 0,
-      remarks: '',
-      timesheetDescription: ''
-    }
-  ]
+  ngOnInit(): void {
+    this.filterOptions = {
+      ...this.filterOptions,
+      matterId: this.requestId,
+    };
+  }
+
 }

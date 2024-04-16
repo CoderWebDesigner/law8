@@ -30,7 +30,7 @@ export class SharedMatterTableComponent implements OnInit{
   @Input() additionalTableConfig:any;
   @Input() data:any[]=[
     {
-      Code: '00000-001',
+      Code: 1,
       Description: 'Description 1',
       Opened: '19/12/2023',
       MatterType: 'Matter Type 1',
@@ -42,7 +42,7 @@ export class SharedMatterTableComponent implements OnInit{
       Status: 'Status 1',
     },
     {
-      Code: '00000-002',
+      Code: 2,
       Description: 'Description 2',
       Opened: '19/12/2023',
       MatterType: 'Matter Type 2',

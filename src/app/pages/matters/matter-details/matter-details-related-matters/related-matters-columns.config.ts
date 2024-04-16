@@ -1,88 +1,88 @@
 export const RelatedMatter_Columns_EN = [
   {
-    header: 'Code',
-    field: 'MatterCode',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: 'Description',
-    field: 'Description',
-    isLargeText:true
+    header: 'Practice Area',
+    field: 'law_PractsArea',
+    
   },
   {
     header: 'Court Number',
-    field: 'CourtNumber',
+    field: 'courtNumber',
   },
   {
     header: 'Stage',
-    field: 'MtrSage',
+    field: 'law_Stage',
   },
   {
     isDate:true,
     header: 'Opened',
-    field: 'Opened',
+    field: 'openDate',
   },
   {
     isStatus:true,
     header: 'Status',
-    field: 'Status',
+    field: 'law_AppStatus',
   },
 ];
 export const RelatedMatter_Columns_FR = [
   {
-    header: 'code',
-    field: 'MatterCode',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: 'description',
-    field: 'Description',
-    isLargeText:true
+    header: 'Practice Area',
+    field: 'law_PractsArea',
+    
   },
   {
     header: 'Numéro de cour',
-    field: 'CourtNumber',
+    field: 'courtNumber',
   },
   {
     header: 'Scène',
-    field: 'MtrSage',
+    field: 'law_Stage',
   },
   {
     isDate:true,
     header: 'Ouverte',
-    field: 'Opened',
+    field: 'openDate',
   },
   {
     isStatus:true,
     header: 'Statut',
-    field: 'Status',
+    field: 'law_AppStatus',
   },
 ];
 
 export const RelatedMatter_Columns_AR = [
   {
-    header: 'شفرة',
-    field: 'MatterCode',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: 'وصف',
-    field: 'Description',
-    isLargeText:true
+    header: 'Practice Area',
+    field: 'law_PractsArea',
+    
   },
   {
     header: 'رقم المحكمة',
-    field: 'CourtNumber',
+    field: 'courtNumber',
   },
   {
     header: 'منصة',
-    field: 'MtrSage',
+    field: 'law_Stage',
   },
   {
     isDate:true,
     header: 'افتتح',
-    field: 'Opened',
+    field: 'openDate',
   },
   {
     isStatus:true,
     header: 'حالة',
-    field: 'Status',
+    field: 'law_AppStatus',
   },
 ];

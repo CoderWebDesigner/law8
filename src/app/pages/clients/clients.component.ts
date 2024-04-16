@@ -35,7 +35,7 @@ export class ClientsComponent {
     ],
   };
   mapData(data){
-    console.log(data)
+    // console.log(data)
     return data.map((v)=>({
       ...v,
       balance:0

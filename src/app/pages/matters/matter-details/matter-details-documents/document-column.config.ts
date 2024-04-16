@@ -12,18 +12,22 @@ export const Document_Columns_EN = [
   {
     header: 'Description',
     field: 'description',
+   
   },
   {
     header: 'Recieved Date',
-    field: 'recievedDate',
+    field: 'receivedDate',
+    isDate:true,
   },
   {
     header: 'Document Date',
     field: 'documentDate',
+    isDate:true,
   },
   {
     header: 'Expiration Date',
     field: 'expirationDate',
+    isDate:true,
   },
 ];
 export const Document_Columns_FR = [
@@ -39,18 +43,22 @@ export const Document_Columns_FR = [
   {
     header: 'Description',
     field: 'description',
+    
   },
   {
     header: 'Recieved Date',
-    field: 'recievedDate',
+    field: 'receivedDate',
+    isDate:true,
   },
   {
     header: 'Document Date',
     field: 'documentDate',
+    isDate:true,
   },
   {
     header: 'Expiration Date',
     field: 'expirationDate',
+    isDate:true,
   },
 ];
 
@@ -67,17 +75,21 @@ export const Document_Columns_AR = [
   {
     header: 'Description',
     field: 'description',
+   
   },
   {
     header: 'Recieved Date',
-    field: 'recievedDate',
+    field: 'receivedDate',
+    isDate:true,
   },
   {
     header: 'Document Date',
     field: 'documentDate',
+    isDate:true,
   },
   {
     header: 'Expiration Date',
     field: 'expirationDate',
+    isDate:true,
   },
 ];

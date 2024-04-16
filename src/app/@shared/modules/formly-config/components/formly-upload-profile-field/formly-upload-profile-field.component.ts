@@ -14,6 +14,7 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
   onSelect(event) {
     this.file = event.rejectedFiles[event.rejectedFiles.length - 1];
     this.readFileAsBase64(this.file);
+    this.formControl.setValue(this.file)
   }
 
   onRemove(event) {
@@ -28,7 +29,7 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
 
     reader.onload = (e: any) => {
       this.fileAsBase64 = e.target.result;
-      this.formControl.setValue(this.fileAsBase64);
+      // this.formControl.setValue(this.fileAsBase64);
       this.cdRef.detectChanges();
     };
 
@@ -37,6 +38,8 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
 
   ngOnInit(): void {
     this.fileAsBase64 = this.formControl?.value
+    // this.fileAsBase64 = 'data:image/jpg;base64,'+this.formControl?.value
+
     // this.form.valueChanges.subscribe((res) => {
     //   this.fileAsBase64 = res[this.field.key as string];
     //   if (!res[this.field.key as string]) this.fileAsBase64 = '';

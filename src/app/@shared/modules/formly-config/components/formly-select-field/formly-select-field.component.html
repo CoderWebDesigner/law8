@@ -11,11 +11,12 @@
   [styleClass]="props['readonly']?'reset-input':''"
   (onChange)="change($event)"
   (onClick)="onClick()"
+  appendTo="body"
 >
 <ng-template let-selected pTemplate="selectedItem" >
   <div class="flex align-items-center gap-2" >
-    <img height="26" *ngIf="selected.img" [src]="'./assets/images/'+ selected.value+ '.png'" [alt]="selected.value">
-    <span *ngIf="selected.label">{{selected.label}}</span>
+    <img height="26" *ngIf="selected?.img" [src]="'./assets/images/'+ selected.value+ '.png'" [alt]="selected.value">
+    <span *ngIf="selected?.label">{{selected?.label}}</span>
   </div>
 </ng-template>
   <ng-template let-option pTemplate="item">

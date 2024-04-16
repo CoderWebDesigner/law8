@@ -1,27 +1,29 @@
 <shared-card [borderRadius]="20" [title]="'matters.addMatter' | translate">
-  <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
-    <formly-form
-      [form]="formly"
-      [fields]="formlyFields"
-      [model]="formlyModel"
-    ></formly-form>
-    <p-tabView body>
-      <ng-container *ngFor="let item of items;let i =index">
-        <p-tabPanel [header]="item.label" *ngIf="item.show" >
-            <app-matter-editor-general *ngIf="i==0" (onFormSubmit)="getFormData($event)"></app-matter-editor-general>
-            <app-matter-details-address *ngIf="i==1"></app-matter-details-address>
-            <app-matter-editor-contracts *ngIf="i==2"></app-matter-editor-contracts>
-            <app-matter-editor-payment-terms *ngIf="i==3"></app-matter-editor-payment-terms>
-        </p-tabPanel>
-      </ng-container>
-    </p-tabView>
-    <div class="mt-4 text-end">
-      <p-button
-        [loading]="isSubmit"
-        styleClass="p-button-primary d-block py-3"
-        type="submit"
-        label="{{ 'btn.submit' | translate }}"
-      ></p-button>
-    </div>
-  </form>
+  <ng-container body>
+    <form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
+      <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel"></formly-form>
+      <p-tabView>
+        <ng-container *ngFor="let item of items;let i =index">
+          <p-tabPanel [header]="item.label" *ngIf="item.show">
+            <app-matter-general [previewOnly]="previewOnly" *ngIf="i==0"  (onFormSubmit)="getFormData($event)"></app-matter-general>
+
+            <app-matter-address *ngIf="i==2"></app-matter-address>
+            <ng-container *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(formlyModel.practsAreaId)">
+              <app-matter-party *ngIf="i==1"></app-matter-party>
+              <app-matter-contact *ngIf="i==5"></app-matter-contact>
+            </ng-container>
+            <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(formlyModel.practsAreaId)">
+              <app-matter-applicants  [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-applicants>
+              <app-matter-class  [previewOnly]="previewOnly" *ngIf="i==4"></app-matter-class>
+            </ng-container>
+            <app-matter-editor-payment-terms *ngIf="i==6"></app-matter-editor-payment-terms>
+          </p-tabPanel>
+        </ng-container>
+      </p-tabView>
+      <div class="mt-4 text-end" *ngIf="!previewOnly">
+        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
+          label="{{ 'btn.submit' | translate }}"></p-button>
+      </div>
+    </form>
+  </ng-container>
 </shared-card>

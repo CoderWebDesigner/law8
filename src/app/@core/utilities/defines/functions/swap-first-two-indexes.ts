@@ -1,6 +1,4 @@
 export function swapFirstTwoIndexes(columnlocalized: any,language:string,firstIndex:number=0,secondIndex:number=1) {
-  console.log(firstIndex)
-  console.log(secondIndex)
   for (let key in columnlocalized) {
     if (columnlocalized.hasOwnProperty(key)) {
       const array = columnlocalized[key];

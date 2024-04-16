@@ -112,7 +112,7 @@ export class ClientContactsComponent implements OnInit, OnChanges, OnDestroy {
   openDialog() {
     const ref = this._dialogService.open(ClientContactEditorComponent, {
       width: '50%',
-      header: this._languageService.getTransValue('client.addContacts'),
+      header: this._languageService.getTransValue('common.addContacts'),
       dismissableMask: true,
       data: {
         isDynamic:this.requestId != undefined,

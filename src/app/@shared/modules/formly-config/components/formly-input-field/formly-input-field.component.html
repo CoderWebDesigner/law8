@@ -10,7 +10,8 @@
     [disabled]="props['disabled']"
     [max]="props['max']"
     [min]="props['min']"
-    (keyup)="onKeyUp()"
+    [pKeyFilter]="props['pKeyFilter']"
+    (keyup)="onKeyUp($event)"
 
   />
 </div>

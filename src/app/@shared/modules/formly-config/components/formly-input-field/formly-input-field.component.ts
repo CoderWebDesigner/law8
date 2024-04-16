@@ -17,7 +17,8 @@ export class FormlyInputFieldComponent extends FieldType<FieldTypeConfig> implem
   togglePassword(){
     this.showPassword =!this.showPassword
   }
-  onKeyUp(){
+  onKeyUp(e){
+    console.log(e.target.value)
     if(this.props['onKeyUp']) this.props['onKeyUp']()
   }
 }
