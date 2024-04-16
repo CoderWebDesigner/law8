@@ -3,7 +3,7 @@
   [formlyAttributes]="field"
   [showIcon]="true"
   dataType="string"
-  dateFormat="yy-mm-dd"
+  [dateFormat]="props['formate']||'yy-mm-dd'"
   appendTo="body"
   [timeOnly]="props['timeOnly'] || false"
   [selectionMode]="props['selectionMode'] || 'single'"

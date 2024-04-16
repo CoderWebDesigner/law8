@@ -103,7 +103,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               label: this._languageService.getTransValue('common.clientCode'),
               placeholder: '',
               disabled: this.previewOnly,
-              options: this.lookupsData[5].result.map((obj) => ({
+              options: this.lookupsData[4].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -173,7 +173,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('common.practiceArea'),
               disabled: this.previewOnly,
-              options: this.lookupsData[4].result.map((obj) => ({
+              options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -235,10 +235,28 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'common.matterCategory'
                   ),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[0].result.map((obj) => ({
-                    label: obj.name,
-                    value: obj.id,
-                  })),
+                },
+                hooks: {
+                  onInit: (field: FormlyFieldConfig) => {
+
+                    field.form.get('practsAreaId').valueChanges.subscribe({
+                      next: (res) => {
+                        this._apiService
+                          .get(
+                            `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                          )
+                          .pipe(this._sharedService.takeUntilDistroy())
+                          .subscribe({
+                            next: (res: ApiRes) => {
+                              field.props.options = res.result.map((obj) => ({
+                                label: obj.name,
+                                value: obj.id,
+                              }));
+                            },
+                          });
+                      },
+                    });
+                  },
                 },
               },
               {
@@ -280,7 +298,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   label:
                     this._languageService.getTransValue('matters.instructor'),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[5].result.map((obj) => ({
+                  options: this.lookupsData[4].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -388,7 +406,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'matters.jurisdicion'
                   ),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[1].result.map((obj) => ({
+                  options: this.lookupsData[0].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -454,7 +472,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'matters.matterStatus'
                   ),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[2].result.map((obj) => ({
+                  options: this.lookupsData[1].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -475,7 +493,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 props: {
                   label: this._languageService.getTransValue('matters.stage'),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[3].result.map((obj) => ({
+                  options: this.lookupsData[2].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -606,7 +624,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
 
   override getLookupsData() {
     forkJoin([
-      this._apiService.get(API_Config.general.getMatterCategoriesLookup),
+      // this._apiService.get(API_Config.general.getMatterCategoriesLookup),
       this._apiService.get(API_Config.general.getJurisdictionLookup),
       this._apiService.get(API_Config.general.getMatterStatus),
       this._apiService.get(API_Config.general.getStages),

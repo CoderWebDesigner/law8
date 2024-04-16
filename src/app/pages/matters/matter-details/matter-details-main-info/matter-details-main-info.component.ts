@@ -45,7 +45,8 @@ export class MatterDetailsMainInfoComponent
   ngOnChanges(changes: SimpleChanges): void {
     this.formlyModel = {
        ...this.data,
-       openDate:this._datePipe.transform(this.data?.openDate,REQUEST_DATE_FORMAT)
+       openDate:this._datePipe.transform(this.data?.openDate,REQUEST_DATE_FORMAT),
+       closeDate:this._datePipe.transform(this.data?.closeDate,REQUEST_DATE_FORMAT)
 
       //  photo:this.data.logoFile 
       };
@@ -69,7 +70,7 @@ export class MatterDetailsMainInfoComponent
               label: this._languageService.getTransValue('common.clientCode'),
               placeholder: '',
               disabled: true,
-              options: this.lookupsData[5].result.map((obj) => ({
+              options: this.lookupsData[4].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -149,12 +150,11 @@ export class MatterDetailsMainInfoComponent
             },
           },
           {
-            type: 'input',
-            key: 'close',
+            type: 'date',
+            key: 'closeDate',
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.close'),
-              disabled: true,
             },
           },
           {
@@ -182,7 +182,7 @@ export class MatterDetailsMainInfoComponent
             props: {
               label: this._languageService.getTransValue('common.practiceArea'),
               disabled: this.previewOnly,
-              options: this.lookupsData[4]?.result?.map((obj) => ({
+              options: this.lookupsData[3]?.result?.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -201,10 +201,29 @@ export class MatterDetailsMainInfoComponent
                     'common.matterCategory'
                   ),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[0]?.result?.map((obj) => ({
-                    label: obj.name,
-                    value: obj.id,
-                  })),
+                },
+                hooks: {
+                  onInit: (field: FormlyFieldConfig) => {
+
+                    field.form.get('practsAreaId').valueChanges.subscribe({
+                      next: (res) => {
+                        this._apiService
+                          .get(
+                            `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                          )
+                          .pipe(this._sharedService.takeUntilDistroy())
+                          .subscribe({
+                            next: (res: ApiRes) => {
+                              field.props.options = res.result.map((obj) => ({
+                                label: obj.name,
+                                value: obj.id,
+                              }));
+                              this.formlyOption.build();
+                            },
+                          });
+                      },
+                    });
+                  },
                 },
               },
               {
@@ -266,7 +285,7 @@ export class MatterDetailsMainInfoComponent
                 props: {
                   label: this._languageService.getTransValue('matters.jurisdicion'),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[1].result.map((obj) => ({
+                  options: this.lookupsData[0].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -325,7 +344,7 @@ export class MatterDetailsMainInfoComponent
                   label:
                     this._languageService.getTransValue('matters.instructor'),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[5].result.map((obj) => ({
+                  options: this.lookupsData[4].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -433,7 +452,7 @@ export class MatterDetailsMainInfoComponent
                     'matters.matterStatus'
                   ),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[2].result.map((obj) => ({
+                  options: this.lookupsData[1].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -454,7 +473,7 @@ export class MatterDetailsMainInfoComponent
                 props: {
                   label: this._languageService.getTransValue('matters.stage'),
                   disabled: this.previewOnly,
-                  options: this.lookupsData[3].result.map((obj) => ({
+                  options: this.lookupsData[2].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
                   })),
@@ -507,7 +526,7 @@ export class MatterDetailsMainInfoComponent
   }
   override getLookupsData() {
     forkJoin([
-      this._apiService.get(API_Config.general.getMatterCategoriesLookup),
+      // this._apiService.get(API_Config.general.getMatterCategoriesLookup),
       this._apiService.get(API_Config.general.getJurisdictionLookup),
       this._apiService.get(API_Config.general.getMatterStatus),
       this._apiService.get(API_Config.general.getStages),

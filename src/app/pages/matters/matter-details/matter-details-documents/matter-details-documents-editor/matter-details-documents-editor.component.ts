@@ -68,6 +68,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.receivedDate'
               ),
+              formate:'y-mm-dd'
               // required: true,
             },
           },
@@ -79,6 +80,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.documentDate'
               ),
+              formate:'y-mm-dd'
               // required: true,
             },
           },
@@ -90,6 +92,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.expirationDate'
               ),
+              formate:'y-mm-dd'
               // required: true,
             },
           },
@@ -98,6 +101,9 @@ export class MatterDetailsDocumentsEditorComponent
     ];
   }
   save() {
+    delete this.formlyModel.fileName
+    delete this.formlyModel.filePathe
+    delete this.formlyModel.logoFile
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
@@ -112,7 +118,6 @@ export class MatterDetailsDocumentsEditorComponent
 
           Law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
-
     console.log(requestPayload);
     let formData = new FormData();
     for (const [key, value] of Object.entries(requestPayload)) {

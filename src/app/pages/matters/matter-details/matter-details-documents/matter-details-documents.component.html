@@ -21,5 +21,15 @@
     </p-button>
   </div>
   <shared-table [additionalTableConfig]="additionalTableConfig" [filterOptions]="filterOptions"
-    [columnsLocalized]="columnsLocalized" [apiUrls]="apiUrls"></shared-table>
+    [columnsLocalized]="columnsLocalized" [apiUrls]="apiUrls">
+
+    <ng-template #actions let-rowData>
+      <p-button [styleClass]="'p-button-text p-button-secondary p-0 me-3 d-flex'" #preview [icon]="'fs-4 pi pi-eye'" [loading]="preview.isLoading" type="button" (onClick)="previewFile(rowData?.id,preview)">
+      </p-button>
+      <p-button [styleClass]="'p-button-text p-button-secondary p-0 me-3 d-flex'" #download [icon]="'fs-4 pi pi-download'" [loading]="download.isLoading" type="button" (onClick)="downloadFile(rowData?.id,download)">
+
+      </p-button>
+    </ng-template>
+
+  </shared-table>
 </ng-container>

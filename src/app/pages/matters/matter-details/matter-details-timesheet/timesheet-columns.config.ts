@@ -2,20 +2,20 @@
 export const Timesheet_Columns_EN = [
   {
     header: 'Sheet Number',
-    field: 'sheetNumber',
+    field: 'id',
   },
   {
     header: 'Document Date',
-    field: 'documentDate',
+    field: 'tmDate',
     isDate:true
   },
   {
     header: 'Task',
-    field: 'task',
+    field: 'law_TaskCode',
   },
   {
     header: 'Lawyer Initial',
-    field: 'lawyerInitial',
+    field: 'law_Lawer',
   },
   {
     header: 'Rate',
@@ -30,12 +30,12 @@ export const Timesheet_Columns_EN = [
     field: 'totalAmount',
   },
   {
-    header: 'Remarks',
-    field: 'remarks',
+    header: 'Explanation',
+    field: 'explanationExplanation',
   },
   {
-    header: 'Timesheet Description',
-    field: 'timesheetDescription',
+    header: 'Notes',
+    field: 'notes',
     isLargeText:true
   },
 ];
@@ -44,20 +44,20 @@ export const Timesheet_Columns_EN = [
 export const Timesheet_Columns_FR = [
   {
     header: 'Sheet Number',
-    field: 'sheetNumber',
+    field: 'id',
   },
   {
     header: 'Document Date',
-    field: 'documentDate',
+    field: 'tmDate',
     isDate:true
   },
   {
     header: 'Task',
-    field: 'task',
+    field: 'law_TaskCode',
   },
   {
     header: 'Lawyer Initial',
-    field: 'lawyerInitial',
+    field: 'law_Lawer',
   },
   {
     header: 'Rate',
@@ -72,12 +72,12 @@ export const Timesheet_Columns_FR = [
     field: 'totalAmount',
   },
   {
-    header: 'Remarks',
-    field: 'remarks',
+    header: 'Explanation',
+    field: 'explanationExplanation',
   },
   {
-    header: 'Timesheet Description',
-    field: 'timesheetDescription',
+    header: 'Notes',
+    field: 'notes',
     isLargeText:true
   },
 ];
@@ -85,20 +85,20 @@ export const Timesheet_Columns_FR = [
 export const Timesheet_Columns_AR = [
   {
     header: 'Sheet Number',
-    field: 'sheetNumber',
+    field: 'id',
   },
   {
     header: 'Document Date',
-    field: 'documentDate',
+    field: 'tmDate',
     isDate:true
   },
   {
     header: 'Task',
-    field: 'task',
+    field: 'law_TaskCode',
   },
   {
     header: 'Lawyer Initial',
-    field: 'lawyerInitial',
+    field: 'law_Lawer',
   },
   {
     header: 'Rate',
@@ -113,12 +113,12 @@ export const Timesheet_Columns_AR = [
     field: 'totalAmount',
   },
   {
-    header: 'Remarks',
-    field: 'remarks',
+    header: 'Explanation',
+    field: 'explanationExplanation',
   },
   {
-    header: 'Timesheet Description',
-    field: 'timesheetDescription',
+    header: 'Notes',
+    field: 'notes',
     isLargeText:true
   },
 ];

@@ -3,15 +3,6 @@
     <div class="row">
       <div class="col-12 mb-4">
         <shared-card [borderRadius]="20">
-          <!-- <p-button
-            headerActions
-            (click)="onToggleFields()"
-            styleClass="p-button-primary p-0"
-            icon="pi pi-pencil"
-            ></p-button
-          > -->
-          <!-- [readOnly]="readOnly" -->
-
           <app-matter-details-main-info (onUpdate)="onUpdate($event)" [data]="data" [previewOnly]="previewOnly"
             body></app-matter-details-main-info>
         </shared-card>
@@ -19,53 +10,57 @@
       <div class="col-12">
         <shared-card [borderRadius]="20">
           <p-tabView body [scrollable]="true">
+
             <ng-container *ngFor="let item of items; let i = index">
               <p-tabPanel [header]="item.label" *ngIf="item.show">
                 <app-matter-general (onFormSubmit)="getFormData($event)" [data]="data" [previewOnly]="previewOnly"
                   *ngIf="i == 0"></app-matter-general>
-                <app-matter-address [data]="data?.law_MatterAddresses" [requestId]="requestId"
-                  [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-address>
-                <ng-container *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(data?.practsAreaId)">
-                  <app-matter-party [data]="data?.law_MatterParties" [requestId]="requestId" [previewOnly]="previewOnly"
-                    *ngIf="i==1"></app-matter-party>
-                  <app-matter-contact [data]="data?.law_MatterContactss" [requestId]="requestId"
-                    [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-contact>
-                  <app-matter-details-activity [requestId]="requestId" [previewOnly]="previewOnly"
-                    *ngIf="i == 6"></app-matter-details-activity>
-                  <app-matter-details-invoice [previewOnly]="previewOnly" *ngIf="i == 7"></app-matter-details-invoice>
-                  <app-matter-details-timesheet [previewOnly]="previewOnly"
-                    *ngIf="i == 8"></app-matter-details-timesheet>
-                  <app-matter-details-related-matters [requestId]="requestId" [previewOnly]="previewOnly"
-                    *ngIf="i ==9"></app-matter-details-related-matters>
-                  <app-matter-details-documents [requestId]="requestId" [previewOnly]="previewOnly"
-                    *ngIf="i ==10"></app-matter-details-documents>
-                  <app-matter-details-billing-settings [requestId]="requestId" [previewOnly]="previewOnly"
-                    *ngIf="i == 11"></app-matter-details-billing-settings>
-                </ng-container>
-                <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(data?.practsAreaId)">
+                <ng-template pTemplate="content">
+                  <app-matter-address [data]="data?.law_MatterAddresses" [requestId]="requestId"
+                    [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-address>
+                  <ng-container
+                    *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(data?.practsAreaId)">
+                    <app-matter-contact [data]="data?.law_MatterContactss" [requestId]="requestId"
+                      [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-contact>
+                    <app-matter-details-activity [requestId]="requestId" [previewOnly]="previewOnly"
+                      *ngIf="i == 6"></app-matter-details-activity>
+                    <app-matter-details-invoice [previewOnly]="previewOnly" *ngIf="i == 7"></app-matter-details-invoice>
+                    <app-matter-details-timesheet [requestId]="requestId"
+                      *ngIf="i == 8"></app-matter-details-timesheet>
+                    <app-matter-details-related-matters [requestId]="requestId" [previewOnly]="previewOnly"
+                      *ngIf="i ==9"></app-matter-details-related-matters>
+                    <app-matter-details-documents [requestId]="requestId" [previewOnly]="previewOnly"
+                      *ngIf="i ==10"></app-matter-details-documents>
+                    <app-matter-details-billing-settings [requestId]="requestId" [previewOnly]="previewOnly"
+                      *ngIf="i == 11"></app-matter-details-billing-settings>
+                  </ng-container>
+                  <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(data?.practsAreaId)">
+                    <app-matter-applicants [data]="data?.law_MatterApplicantss" [requestId]="requestId"
+                      [previewOnly]="previewOnly" *ngIf="i==4"></app-matter-applicants>
+                    <app-matter-class [requestId]="requestId" [previewOnly]="previewOnly"
+                      *ngIf="i==5"></app-matter-class>
+                    <app-matter-details-activity [previewOnly]="previewOnly"
+                      *ngIf="i == 6"></app-matter-details-activity>
+                    <app-matter-details-invoice [previewOnly]="previewOnly" *ngIf="i == 7"></app-matter-details-invoice>
+                    <app-matter-details-timesheet [requestId]="requestId"
+                      *ngIf="i == 8"></app-matter-details-timesheet>
+                    <app-matter-details-related-matters [previewOnly]="previewOnly"
+                      *ngIf="i ==9"></app-matter-details-related-matters>
+                    <app-matter-details-documents [previewOnly]="previewOnly"
+                      *ngIf="i == 10"></app-matter-details-documents>
+                    <app-matter-details-billing-settings [previewOnly]="previewOnly"
+                      *ngIf="i ==11"></app-matter-details-billing-settings>
+                  </ng-container>
+                </ng-template>
 
-                  <!-- <app-matter-editor-address [data]="data?.law_MatterAddresses" [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-editor-address> -->
-                  <app-matter-applicants [data]="data?.law_MatterApplicantss" [requestId]="requestId"
-                    [previewOnly]="previewOnly" *ngIf="i==4"></app-matter-applicants>
-                  <app-matter-class [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i==5"></app-matter-class>
-                  <app-matter-details-activity [previewOnly]="previewOnly" *ngIf="i == 6"></app-matter-details-activity>
-                  <app-matter-details-invoice [previewOnly]="previewOnly" *ngIf="i == 7"></app-matter-details-invoice>
-                  <app-matter-details-timesheet [previewOnly]="previewOnly"
-                    *ngIf="i == 8"></app-matter-details-timesheet>
-                  <app-matter-details-related-matters [previewOnly]="previewOnly"
-                    *ngIf="i ==9"></app-matter-details-related-matters>
-                  <app-matter-details-documents [previewOnly]="previewOnly"
-                    *ngIf="i == 10"></app-matter-details-documents>
-                  <app-matter-details-billing-settings [previewOnly]="previewOnly"
-                    *ngIf="i ==11"></app-matter-details-billing-settings>
-                </ng-container>
+
 
               </p-tabPanel>
             </ng-container>
           </p-tabView>
         </shared-card>
 
-       
+
       </div>
     </div>
   </div>

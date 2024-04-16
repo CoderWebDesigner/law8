@@ -5,7 +5,6 @@ import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
 import { LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
-import { MenuItem } from 'primeng/api';
 import { PracticeArea } from '../enums/practice-area';
 
 @Component({
@@ -23,7 +22,8 @@ export class MatterDetailsComponent implements OnInit {
   previewOnly: boolean;
   isSubmit: boolean;
   data: any;
-  practiceArea=PracticeArea
+  practiceArea=PracticeArea;
+
   items: any[] = [
     {
       id: 1,

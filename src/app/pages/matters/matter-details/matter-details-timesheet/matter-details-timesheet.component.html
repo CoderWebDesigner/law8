@@ -1,4 +1,4 @@
-<shared-card [title]="'timesheet.title' | translate" [borderRadius]="20">
+<!-- <shared-card [title]="'timesheet.title' | translate" [borderRadius]="20">
   <shared-search-input headerActions></shared-search-input>
   <shared-table
     body
@@ -6,6 +6,17 @@
     [columnsLocalized]="columnsLocalized"
    
   ></shared-table>
-</shared-card>
+</shared-card> -->
 <!-- [paginationClient]="true"
 [filterBy]="_authService.user.UserId" -->
+
+
+<shared-card [title]="'timesheet.title' | translate" [borderRadius]="20">
+  <shared-search-input headerActions></shared-search-input>
+  <shared-table
+    body
+    [apiUrls]="apiUrls"
+    [columnsLocalized]="columnsLocalized"
+    [filterOptions]="filterOptions"
+  ></shared-table>
+</shared-card>
