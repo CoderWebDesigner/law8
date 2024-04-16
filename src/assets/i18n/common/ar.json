@@ -50,7 +50,8 @@
     "filter":"فلتره",
     "delete":"مسح",
     "update":"تعديل",
-    "upload":"Upload"
+    "upload":"Upload",
+    "saveDraft":"Save Draft"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",

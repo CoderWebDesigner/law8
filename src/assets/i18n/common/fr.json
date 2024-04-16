@@ -50,7 +50,8 @@
     "filter": "Filter",
     "delete": "Delete",
     "update": "Mise à jour",
-    "upload":"Upload"
+    "upload":"Upload",
+    "saveDraft":"Save Draft"
   },
   "messages": {
     "signInSuccessfully": "Connectez-vous avec succès",

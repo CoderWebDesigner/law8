@@ -5,11 +5,9 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { ClientService } from '@shared/services/client.service';
-import { SharedService } from '@shared/services/shared.service';
 import { SharedModule } from '@shared/shared.module';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-client-contact-editor',
@@ -23,22 +21,29 @@ export class ClientContactEditorComponent
   implements OnInit
 {
   generalApiUrls = API_Config.general;
-  apiUrls = API_Config.clientContact;
+  apiUrls = API_Config.clientsContact;
   _clientService = inject(ClientService);
-  _config = inject(DynamicDialogConfig);
-  dialogRef = inject(DynamicDialogRef);
-  contacts: any[] = [];
+  data: any[] = [];
   ngOnInit(): void {
+    this.getList();
     this.initForm();
-    if (this._config?.data?.rowData) this.getData();
+    if (this._dynamicDialogConfig?.data?.rowData) this.getData();
   }
-
+  getList() {
+    this._clientService.contacts$
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any[]) => {
+          this.data = res;
+        },
+      });
+  }
   override getData(): void {
-    this.formlyModel = { ...this._config?.data?.rowData };
+    this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
   }
 
   override initForm(): void {
-    console.log()
+    console.log();
     this.formlyFields = [
       {
         fieldGroupClassName: 'row',
@@ -156,61 +161,76 @@ export class ClientContactEditorComponent
       },
     ];
   }
-  override onSubmit(): void {
-    if (this.formly.invalid) return;
-
-    this.formlyModel = {
-      ...this.formlyModel,
-      phone: this.formlyModel.phone.internationalNumber,
-    };
-    const successMsgKey = this._config?.data?.rowData
+  save() {
+    const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
-    const requestPayload = this._config?.data?.rowData
-      ? { ...this.formlyModel, id: this._config?.data?.rowData?.id }
-      : {...this.formlyModel,clientId:this._config?.data?.clientId};
-    const path = this._config?.data?.rowData
+    const requestPayload = this._dynamicDialogConfig?.data?.rowData
+      ? {
+          ...this.formlyModel,
+          phone: this.formlyModel?.phone?.internationalNumber
+            ? this.formlyModel?.phone?.internationalNumber
+            : this.formlyModel.phone,
+          id: this._dynamicDialogConfig?.data?.rowData?.id,
+        }
+      : {
+          ...this.formlyModel,
+          phone: this.formlyModel?.phone?.internationalNumber
+            ? this.formlyModel?.phone?.internationalNumber
+            : this.formlyModel.phone,
+          clientId: this._dynamicDialogConfig?.data?.clientId,
+        };
+
+        console.log('requestPayload',requestPayload)
+    const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update
       : this.apiUrls.create;
-    if (this._config?.data?.isDynamic) {
-      this._apiService
-        .post(path, requestPayload)
-        .pipe(this._sharedService.takeUntilDistroy())
-        .subscribe({
-          next: (res: ApiRes) => {
-            if (res && res.isSuccess) {
-              const text = this._languageService.getTransValue(successMsgKey);
-              this._toastrNotifiService.displaySuccessMessage(text);
-              this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-                this.dialogRef.close(dialog);
-              });
-            } else {
-              this._toastrNotifiService.displayErrorToastr(res?.message);
-            }
-          },
-          error: (err: any) => {
-            this._toastrNotifiService.displayErrorToastr(err?.error?.message);
-          },
-        });
-    } else {
-      this.contacts.push(this.formlyModel);
-      this._clientService.contacts$.next(this.contacts);
-      this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-        this.dialogRef.close(dialog);
+    this._apiService
+      .post(path, requestPayload)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            const text = this._languageService.getTransValue(successMsgKey);
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              this._dynamicDialogRef.close(dialog);
+            });
+          } else {
+            this._toastrNotifiService.displayErrorToastr(res?.message);
+          }
+        },
+        error: (err: any) => {
+          this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+        },
       });
-     
+  }
+  override onSubmit(): void {
+    if (this.formly.invalid) return;
+    if (this._dynamicDialogConfig?.data?.isDynamic) {
+      this.save();
+    } else {
+      let index = this.data.findIndex(
+        (obj) => obj?.key == this._dynamicDialogConfig?.data?.rowData?.key
+      );
+      if (index != -1) {
+        this.data[index] = this.formlyModel;
+      } else {
+        this.formlyModel.phone= this.formlyModel?.phone?.internationalNumber
+            ? this.formlyModel?.phone?.internationalNumber
+            : this.formlyModel.phone,
+        this.data.push(this.formlyModel);
+      }
+      this.data = this.data.map((obj) => {
+        if (!obj.hasOwnProperty('key')) {
+          obj.key = Math.random().toString(36).substring(2, 9);
+        }
+        return obj;
+      });
+      this._clientService.contacts$.next(this.data);
+      this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+        dialog.destroy();
+      });
     }
   }
-  // override getData(): void {
-  //   this._apiService.get(this.generalApiUrls.getParties).pipe(
-  //     finalize(() => this.isSubmit = false),
-  //     this.takeUntilDestroy()
-  //   ).subscribe({
-  //     next: res => {
-  //       this.lookupsData = res;
-  //       this.lookupsData = this.lookupsData.map(element => ({ label: element.Name, value: element }));
-  //       this.initForm()
-  //     }
-  //   })
-  // }
 }

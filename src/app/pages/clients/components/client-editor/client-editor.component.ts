@@ -57,6 +57,7 @@ export class ClientEditorComponent
     });
     this.getContasts();
     this.requestId = +this._route.snapshot.paramMap.get('id');
+    console.log('requestId',this.requestId)
     this.getData();
   }
   getContasts() {

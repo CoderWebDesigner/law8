@@ -221,6 +221,10 @@ export class MatterContactEditorComponent
       if (index != -1) {
         this.data[index] = this.formlyModel;
       } else {
+
+        this.formlyModel.phone= this.formlyModel?.phone?.internationalNumber
+        ? this.formlyModel?.phone?.internationalNumber
+        : this.formlyModel.phone,
         this.data.push(this.formlyModel);
       }
       this.data = this.data.map((obj) => {

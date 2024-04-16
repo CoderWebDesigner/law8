@@ -1,28 +1,35 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { API_Config } from '@core/api/api-config/api.config';
 import { AuthService, LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
-import { Timesheet_Editor_Columns_AR, Timesheet_Editor_Columns_EN, Timesheet_Editor_Columns_FR } from './timesheet-editor-columns.config';
+import {
+  Timesheet_Editor_Columns_AR,
+  Timesheet_Editor_Columns_EN,
+  Timesheet_Editor_Columns_FR,
+} from './timesheet-editor-columns.config';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService } from 'primeng/dynamicdialog';
 import { SharedMatterTableComponent } from '@shared/components/business/shared-matter-table/shared-matter-table.component';
 import Swal from 'sweetalert2';
 import { TimesheetService } from '@shared/services/timesheet.service';
+import { forkJoin } from 'rxjs';
+import { API_Config } from '@core/api/api-config/api.config';
+import { ApiService } from '@core/api/api.service';
+import { ApiRes } from '@core/models';
 
 @Component({
   selector: 'app-timesheet-editor',
   templateUrl: './timesheet-editor.component.html',
-  styleUrls: ['./timesheet-editor.component.scss']
+  styleUrls: ['./timesheet-editor.component.scss'],
 })
 export class TimesheetEditorComponent implements OnInit {
-
-  _sharedService = inject(SharedService)
+  _sharedService = inject(SharedService);
   _dialogService = inject(DialogService);
-  _timeSheetService = inject(TimesheetService)
-  _authService = inject(AuthService)
-  _languageService = inject(LanguageService)
+  _timeSheetService = inject(TimesheetService);
+  _authService = inject(AuthService);
+  _languageService = inject(LanguageService);
+  _apiService = inject(ApiService);
   cdRef = inject(ChangeDetectorRef);
-  fb = inject(FormBuilder)
+  fb = inject(FormBuilder);
   isSubmit: boolean;
   selectAllRows: boolean;
   selectedMatter: any;
@@ -30,26 +37,19 @@ export class TimesheetEditorComponent implements OnInit {
   billableCount: number = 0;
   nonBillableCount: number = 0;
   noChargeCount: number = 0;
+  lookupsData: any;
   columnsLocalized = {
     ar: Timesheet_Editor_Columns_AR,
     en: Timesheet_Editor_Columns_EN,
-    fr: Timesheet_Editor_Columns_FR
-  }
+    fr: Timesheet_Editor_Columns_FR,
+  };
   matters = [
     { label: '00000-001', value: '00000-001' },
     { label: '00000-002', value: '00000-002' },
     { label: 'All Matters', value: 'All Matters' },
-  ]
-  tasks = [
-    { label: 'Billable', value: 'Billable' },
-    { label: 'Non-Billable', value: 'Non-Billable' },
-    { label: 'No-Charge', value: 'No-Charge' },
-  ]
-  laywers = [
-    { label: 'Lawyer 1', value: 'Lawyer 1' },
-    { label: 'Lawyer 2', value: 'Lawyer 1' },
-    { label: 'Ahmad Awad', value: 'Ahmad Awad' },
-  ]
+  ];
+  tasks = [];
+  laywers: any[] = [];
   requestForm = this.fb.group({
     data: this.fb.array([
       this.fb.group({
@@ -66,15 +66,35 @@ export class TimesheetEditorComponent implements OnInit {
         amount: ['', [Validators.required]],
         explanation: ['', [Validators.required]],
         notes: [],
-      })
+      }),
     ]),
-  })
-  address: any[] = []
-  data: any[] = []
+  });
+  address: any[] = [];
+  data: any[] = [];
   ngOnInit(): void {
-
-    this.getTableStatistics()
+    this.getTableStatistics();
+    this.getLookupsData();
     // this.checkAllRowsChecked()
+  }
+
+  getLookupsData() {
+    forkJoin([
+      this._apiService.get(API_Config.responsibleLawyerSecurity.get),
+      this._apiService.get(API_Config.general.getTaskCode),
+    ])
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes[]) => {
+          this.laywers = res[0].result.map((obj) => ({
+            label: obj.name,
+            value: obj.id,
+          }));
+          this.tasks = res[1].result.map((obj) => ({
+            label: obj.name,
+            value: obj.id,
+          }));
+        },
+      });
   }
   getColumns(columnsLocalized) {
     switch (this._languageService.getSelectedLanguage()) {
@@ -92,13 +112,13 @@ export class TimesheetEditorComponent implements OnInit {
   }
 
   onStart(seconds: number, rowIndex: number) {
-    this.getFormArray.controls[rowIndex].get('hours').setValue(seconds)
+    this.getFormArray.controls[rowIndex].get('hours').setValue(seconds);
   }
   onStop(rowIndex: number) {
-    this.getFormArray.controls[rowIndex].get('timing').setValue(true)
+    this.getFormArray.controls[rowIndex].get('timing').setValue(true);
     this.getFormArray.controls.forEach((field, index) => {
-      if (rowIndex != index) field.get('timing').setValue(false)
-    })
+      if (rowIndex != index) field.get('timing').setValue(false);
+    });
   }
   addRow() {
     const row = this.fb.group({
@@ -116,15 +136,16 @@ export class TimesheetEditorComponent implements OnInit {
       explanation: ['', [Validators.required]],
       notes: [''],
     });
-    if (this.getFormArray.controls.every((formGroup) => formGroup.get('matter').value !="" ||formGroup.get('explanation').value !="")) {
+    if (
+      this.getFormArray.controls.every(
+        (formGroup) =>
+          formGroup.get('matter').value != '' ||
+          formGroup.get('explanation').value != ''
+      )
+    ) {
       this.getFormArray.push(row);
-      this.cdRef.detectChanges()
+      this.cdRef.detectChanges();
     }
-  }
-  compareObjects(obj1: any, obj2: any): boolean {
-    // Implement your logic to compare two objects
-    // For simplicity, this example assumes a shallow comparison
-    return JSON.stringify(obj1) === JSON.stringify(obj2);
   }
   onDeleteRow(rowIndex: number): void {
     Swal.fire({
@@ -138,72 +159,92 @@ export class TimesheetEditorComponent implements OnInit {
         this.getFormArray.removeAt(rowIndex);
       }
     });
-
   }
   submit() {
-    this.selectedRows = this.getFormArray.controls.filter(field => field.get('selected').value === true)
-    console.log(this.selectedRows)
+    this.selectedRows = this.getFormArray.controls.filter(
+      (field) => field.get('selected').value === true
+    );
+    console.log(this.selectedRows);
   }
   selectMatter(e, rowIndex) {
     if (e.value == 'All Matters') {
       this._dialogService.open(SharedMatterTableComponent, {
         width: '70%',
         data: {
-          selectRow: true
+          selectRow: true,
         },
-        dismissableMask: true
-      })
+        dismissableMask: true,
+      });
     }
 
-    this.getSelectedMatter(rowIndex)
-    this.addRow()
+    this.getSelectedMatter(rowIndex);
+    this.addRow();
   }
   getSelectedMatter(rowIndex: number) {
-    this._timeSheetService.selectedMatter$.pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next: (res: any) => {
-        console.log('rowIndex', rowIndex)
-        this.getFormArray.controls[rowIndex].patchValue({
-          clientName: res.ClientName,
-          matter: res.Code,
-          laywer: this._authService.user.UserName,
-          task: 'Billable'
-        })
-      }
-    })
+    this._timeSheetService.selectedMatter$
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any) => {
+          console.log('rowIndex', rowIndex);
+          this.getFormArray.controls[rowIndex].patchValue({
+            clientName: res.ClientName,
+            matter: res.Code,
+            laywer: this._authService.user.UserName,
+            task: 'Billable',
+          });
+        },
+      });
   }
   onSort(field: string, element: any) {
-    element.sort = (element.sort === undefined) ? 'asc' : (element.sort === 'asc') ? 'desc' : 'asc';
+    element.sort =
+      element.sort === undefined
+        ? 'asc'
+        : element.sort === 'asc'
+        ? 'desc'
+        : 'asc';
     const controlsExceptLast = this.getFormArray.controls.slice(0, -1);
-    const lastELement = this.getFormArray.controls[this.getFormArray.controls.length - 1]
+    const lastELement =
+      this.getFormArray.controls[this.getFormArray.controls.length - 1];
     controlsExceptLast.sort((a, b) => {
       const nameA = a.get(field)?.value;
       const nameB = b.get(field)?.value;
       if (isNaN(nameA) && isNaN(nameB)) {
-        return element.sort == 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+        return element.sort == 'asc'
+          ? nameA.localeCompare(nameB)
+          : nameB.localeCompare(nameA);
       } else {
-        return element.sort == 'asc' ? -1 : 1
+        return element.sort == 'asc' ? -1 : 1;
       }
     });
-    this.getFormArray.controls = [...controlsExceptLast, lastELement]
+    this.getFormArray.controls = [...controlsExceptLast, lastELement];
   }
   toggleSelectAll() {
     this.getFormArray.controls.forEach((formGroup: FormGroup) => {
-      formGroup.get('selected').setValue(this.selectAllRows)
+      formGroup.get('selected').setValue(this.selectAllRows);
     });
   }
   getTableStatistics() {
-    this.requestForm.get('data').valueChanges.pipe().subscribe({
-      next: res => {
-        this.billableCount = this.getFormArray.controls
-          .filter(field => field.get('task').value == 'Billable')
-          .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
-        this.noChargeCount = this.getFormArray.controls
-          .filter(field => field.get('task').value == 'No-Charge')
-          .reduce((accumulator, currentControl) => accumulator + currentControl.value.hours, 0);
-      }
-    })
+    this.requestForm
+      .get('data')
+      .valueChanges.pipe()
+      .subscribe({
+        next: (res) => {
+          this.billableCount = this.getFormArray.controls
+            .filter((field) => field.get('task').value == 'Billable')
+            .reduce(
+              (accumulator, currentControl) =>
+                accumulator + currentControl.value.hours,
+              0
+            );
+          this.noChargeCount = this.getFormArray.controls
+            .filter((field) => field.get('task').value == 'No-Charge')
+            .reduce(
+              (accumulator, currentControl) =>
+                accumulator + currentControl.value.hours,
+              0
+            );
+        },
+      });
   }
   // checkAllRowsChecked(){
   //   this.form.get('data').valueChanges.pipe().subscribe({
