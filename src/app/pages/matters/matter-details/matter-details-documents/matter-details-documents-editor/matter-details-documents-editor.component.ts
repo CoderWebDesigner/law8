@@ -33,7 +33,9 @@ export class MatterDetailsDocumentsEditorComponent
         next: (res: ApiRes) => {
           console.log(res);
           this.formlyModel = { ...res['result'] };
-          this.formlyModel.attachment=res['result'].logoFile
+          this.formlyModel.attachment=res['result'].applicationType+res['result'].logoFile
+
+          console.log('formlyModel',this.formlyModel)
         },
       });
   }
@@ -104,6 +106,7 @@ export class MatterDetailsDocumentsEditorComponent
     delete this.formlyModel.fileName
     delete this.formlyModel.filePathe
     delete this.formlyModel.logoFile
+    delete this.formlyModel.applicationType
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';

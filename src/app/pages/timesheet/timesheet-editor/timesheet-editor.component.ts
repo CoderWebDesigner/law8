@@ -11,15 +11,18 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { SharedMatterTableComponent } from '@shared/components/business/shared-matter-table/shared-matter-table.component';
 import Swal from 'sweetalert2';
 import { TimesheetService } from '@shared/services/timesheet.service';
-import { forkJoin } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
+import { DatePipe } from '@angular/common';
+import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-timesheet-editor',
   templateUrl: './timesheet-editor.component.html',
   styleUrls: ['./timesheet-editor.component.scss'],
+  providers: [DatePipe],
 })
 export class TimesheetEditorComponent implements OnInit {
   _sharedService = inject(SharedService);
@@ -28,6 +31,7 @@ export class TimesheetEditorComponent implements OnInit {
   _authService = inject(AuthService);
   _languageService = inject(LanguageService);
   _apiService = inject(ApiService);
+  _datePipe = inject(DatePipe);
   cdRef = inject(ChangeDetectorRef);
   fb = inject(FormBuilder);
   isSubmit: boolean;
@@ -43,37 +47,33 @@ export class TimesheetEditorComponent implements OnInit {
     en: Timesheet_Editor_Columns_EN,
     fr: Timesheet_Editor_Columns_FR,
   };
-  matters = [
-    { label: '00000-001', value: '00000-001' },
-    { label: '00000-002', value: '00000-002' },
-    { label: 'All Matters', value: 'All Matters' },
-  ];
+  matters = [];
   tasks = [];
   laywers: any[] = [];
   requestForm = this.fb.group({
     data: this.fb.array([
-      this.fb.group({
-        id: [0],
-        selected: [false],
-        timing: [false],
-        date: [new Date(), [Validators.required]],
-        matter: ['', [Validators.required]],
-        clientName: ['', [Validators.required]],
-        laywer: ['', [Validators.required]],
-        task: ['', [Validators.required]],
-        hours: ['', [Validators.required]],
-        rate: ['', [Validators.required]],
-        amount: ['', [Validators.required]],
-        explanation: ['', [Validators.required]],
-        notes: [],
-      }),
+      // this.fb.group({
+      // id: [0],
+      // selected: [false],
+      // timing: [false],
+      // tsTimmer: [0],
+      // tmDate: [new Date(), [Validators.required]],
+      // matterId: ['', [Validators.required]],
+      // clientName: ['', [Validators.required]],
+      // law_LawerId: ['', [Validators.required]],
+      // law_TaskCodeId: ['', [Validators.required]],
+      // hours: ['', [Validators.required]],
+      // rate: ['', [Validators.required]],
+      // amount: ['', [Validators.required]],
+      // explanationExplanation: ['', [Validators.required]],
+      // notes: [''],
+      // }),
     ]),
   });
-  address: any[] = [];
-  data: any[] = [];
   ngOnInit(): void {
     this.getTableStatistics();
-    this.getLookupsData();
+
+    this.getDraftTimesheet();
     // this.checkAllRowsChecked()
   }
 
@@ -81,6 +81,7 @@ export class TimesheetEditorComponent implements OnInit {
     forkJoin([
       this._apiService.get(API_Config.responsibleLawyerSecurity.get),
       this._apiService.get(API_Config.general.getTaskCode),
+      this._apiService.get(API_Config.general.getRecentMatters),
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
@@ -93,6 +94,11 @@ export class TimesheetEditorComponent implements OnInit {
             label: obj.name,
             value: obj.id,
           }));
+          this.matters = res[2].result.map((obj) => ({
+            label: obj.name,
+            value: obj.id,
+          }));
+          this.matters.push({ label: 'All Matters', value: 'All Matters' });
         },
       });
   }
@@ -108,7 +114,7 @@ export class TimesheetEditorComponent implements OnInit {
   }
 
   get getFormArray(): FormArray {
-    return this.requestForm.get('data') as FormArray;
+    return this.requestForm?.get('data') as FormArray;
   }
 
   onStart(seconds: number, rowIndex: number) {
@@ -120,27 +126,32 @@ export class TimesheetEditorComponent implements OnInit {
       if (rowIndex != index) field.get('timing').setValue(false);
     });
   }
-  addRow() {
+  addRow(obj?: any) {
     const row = this.fb.group({
-      id: [this.getFormArray.controls.length],
+      id: [obj?.id],
       selected: [false],
       timing: [false],
-      date: [new Date(), [Validators.required]],
-      matter: ['', [Validators.required]],
-      clientName: ['', [Validators.required]],
-      laywer: ['', [Validators.required]],
-      task: ['', [Validators.required]],
-      hours: ['', [Validators.required]],
-      rate: ['', [Validators.required]],
-      amount: ['', [Validators.required]],
-      explanation: ['', [Validators.required]],
-      notes: [''],
+      tsTimmer: [0],
+      tmDate: [obj?.tmDate, [Validators.required]],
+      matterId: [obj?.matterId, [Validators.required]],
+      clientName: [obj?.clientName, [Validators.required]],
+      law_LawerId: [obj?.law_LawerId, [Validators.required]],
+      law_TaskCodeId: [obj?.law_TaskCodeId, [Validators.required]],
+      hours: [obj?.hours, [Validators.required]],
+      rate: [obj?.rate, [Validators.required]],
+      amount: [obj?.amount, [Validators.required]],
+      explanationExplanation: [
+        obj?.explanationExplanation,
+        [Validators.required],
+      ],
+      notes: [obj?.notes],
     });
+    console.log('');
     if (
       this.getFormArray.controls.every(
         (formGroup) =>
-          formGroup.get('matter').value != '' ||
-          formGroup.get('explanation').value != ''
+          formGroup.get('matterId')?.value != '' ||
+          formGroup.get('explanationExplanation')?.value != ''
       )
     ) {
       this.getFormArray.push(row);
@@ -148,6 +159,7 @@ export class TimesheetEditorComponent implements OnInit {
     }
   }
   onDeleteRow(rowIndex: number): void {
+    const selectedRow = this.getFormArray.at(rowIndex).value;
     Swal.fire({
       showDenyButton: true,
       text: this._languageService.getTransValue('messages.sureDelete'),
@@ -156,9 +168,72 @@ export class TimesheetEditorComponent implements OnInit {
       icon: 'question',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.getFormArray.removeAt(rowIndex);
+        const rowId = selectedRow.id; 
+        this._apiService
+          .post(API_Config.timesheet.delete + '?id=' + rowId, {}) 
+          .pipe(this._sharedService.takeUntilDistroy())
+          .subscribe({
+            next: (res: ApiRes) => {
+              if (res.isSuccess) {
+                this.getFormArray.removeAt(rowIndex);
+                Swal.fire(
+                  'Success!',
+                  'Data has been deleted successfully!',
+                  'success'
+                );
+              } else {
+                Swal.fire(
+                  'Error!',
+                  'Failed to delete data: ' + res.message,
+                  'error'
+                );
+              }
+            },
+          });
       }
     });
+  }
+  
+  
+
+  // onDeleteRow(rowIndex: number): void {
+  //   console.log(this.getFormArray[rowIndex].value)
+  //   Swal.fire({
+  //     showDenyButton: true,
+  //     text: this._languageService.getTransValue('messages.sureDelete'),
+  //     confirmButtonText: this._languageService.getTransValue('btn.yes'),
+  //     denyButtonText: this._languageService.getTransValue('btn.no'),
+  //     icon: 'question',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       console.log()
+  //       this.getFormArray.removeAt(rowIndex);
+  //     }
+  //   });
+  // }
+  getDraftTimesheet() {
+    this._apiService
+      .get(`${API_Config.timesheet.getDraftTimeSheet}?orderByDirection=ASC`)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          console.log('getDraftTimesheet', res['result']);
+
+          if (res['result'].length > 0) {
+            res['result'].forEach((item) => {
+              item.tmDate = this._datePipe.transform(
+                item?.tmDate,
+                REQUEST_DATE_FORMAT
+              );
+              this.addRow(item);
+            });
+            this.addRow();
+          } else {
+            this.addRow();
+          }
+          this.getLookupsData();
+        },
+      });
   }
   submit() {
     this.selectedRows = this.getFormArray.controls.filter(
@@ -175,10 +250,23 @@ export class TimesheetEditorComponent implements OnInit {
         },
         dismissableMask: true,
       });
+    } else {
+      this.getClientNameByMatterId(e.value, rowIndex);
     }
 
     this.getSelectedMatter(rowIndex);
-    this.addRow();
+  }
+  getClientNameByMatterId(matterId: number, rowIndex: number) {
+    this._apiService
+      .get(`${API_Config.timesheet.getClientNameByMatterId}?id=${matterId}`)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.getFormArray.controls[rowIndex].patchValue({
+            clientName: res['result'].name,
+          });
+        },
+      });
   }
   getSelectedMatter(rowIndex: number) {
     this._timeSheetService.selectedMatter$
@@ -188,9 +276,9 @@ export class TimesheetEditorComponent implements OnInit {
           console.log('rowIndex', rowIndex);
           this.getFormArray.controls[rowIndex].patchValue({
             clientName: res.ClientName,
-            matter: res.Code,
-            laywer: this._authService.user.UserName,
-            task: 'Billable',
+            matterId: res.Code,
+            // law_LawerId: this._authService.user.UserName,
+            law_TaskCodeId: 'Billable',
           });
         },
       });
@@ -230,14 +318,16 @@ export class TimesheetEditorComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.billableCount = this.getFormArray.controls
-            .filter((field) => field.get('task').value == 'Billable')
+            .filter((field) => field.get('law_TaskCodeId')?.value == 'Billable')
             .reduce(
               (accumulator, currentControl) =>
                 accumulator + currentControl.value.hours,
               0
             );
           this.noChargeCount = this.getFormArray.controls
-            .filter((field) => field.get('task').value == 'No-Charge')
+            .filter(
+              (field) => field.get('law_TaskCodeId')?.value == 'No-Charge'
+            )
             .reduce(
               (accumulator, currentControl) =>
                 accumulator + currentControl.value.hours,
@@ -245,23 +335,73 @@ export class TimesheetEditorComponent implements OnInit {
             );
         },
       });
+
+    // checkAllRowsChecked(){
+    //   this.form.get('data').valueChanges.pipe().subscribe({
+    //     next:res=>{
+    //       let countRows= this.getFormArray.controls.filter((formGroup: FormGroup) => {
+    //         return formGroup.get('selected').value === true;
+    //       }).length
+    //       this.selectAllRows = countRows === this.getFormArray.controls.length;
+    //       // let checkSelected = this.getFormArray.controls.every(field=>field.get('selected').value==true)
+    //       // if(checkSelected) this.selectAllRows = checkSelected :false
+    //     }
+    //   })
+    // }
   }
-  // checkAllRowsChecked(){
-  //   this.form.get('data').valueChanges.pipe().subscribe({
-  //     next:res=>{
-  //       let countRows= this.getFormArray.controls.filter((formGroup: FormGroup) => {
-  //         return formGroup.get('selected').value === true;
-  //       }).length
-  //       this.selectAllRows = countRows === this.getFormArray.controls.length;
-  //       // let checkSelected = this.getFormArray.controls.every(field=>field.get('selected').value==true)
-  //       // if(checkSelected) this.selectAllRows = checkSelected :false
-  //     }
-  //   })
+  // } if (nameA < nameB) {
+  //   return -1;
   // }
+  // if (nameA > nameB) {
+  //   return 1;
+  // saveDraft() {
+  //   this.isSubmit = true;
+  //   this.selectedRows = this.getFormArray.controls.filter(
+  //     (field) => field.get('selected').value === true
+  //   );
+  //   this._apiService
+  //     .post(API_Config.timesheet.create, this.selectedRows)
+  //     .pipe(
+  //       this._sharedService.takeUntilDistroy(),
+  //       finalize(() => (this.isSubmit = false))
+  //     )
+  //     .subscribe({
+  //       next: (res: ApiRes) => {
+  //         console.log(this.selectedRows);
+  //       },
+  //     });
+
+  //   console.log(this.selectedRows);
+  // }
+  saveDraft() {
+    this.isSubmit = true;
+    this.selectedRows = this.getFormArray.value.filter(
+      (obj) => obj.selected === true
+    );
+    console.log('Selected Rows:', this.selectedRows);
+    const selectedRowsJSON = this.selectedRows.map((control) => control.value);
+    this._apiService
+      .post(API_Config.timesheet.update, this.selectedRows)
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isSubmit = false))
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          console.log('Response from API:', res);
+          const resultData = res.result;
+
+          // this.getFormArray=res.['result']
+          if (res.isSuccess) {
+            Swal.fire(
+              'Success!',
+              'Data has been saved successfully!',
+              'success'
+            );
+          } else {
+            Swal.fire('Error!', 'Failed to save data: ' + res.message, 'error');
+          }
+        },
+      });
+  }
 }
-// } if (nameA < nameB) {
-//   return -1;
-// }
-// if (nameA > nameB) {
-//   return 1;
-// }

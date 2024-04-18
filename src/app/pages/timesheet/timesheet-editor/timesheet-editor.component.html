@@ -35,16 +35,16 @@
                   <p-checkbox [binary]="true" formControlName="selected"></p-checkbox>
                 </td>
                 <td>
-                  <app-stop-watch [stopInterval]="row.get('timing').value" (onStart)="onStart($event, rowIndex)"
+                  <app-stop-watch [stopInterval]="row.get('timing')?.value" (onStart)="onStart($event, rowIndex)"
                     (onStop)="onStop(rowIndex)"></app-stop-watch>
                 </td>
                 <td>
-                  <p-calendar dateFormat="yy-mm-dd" formControlName="date" appendTo="body"
-                    [baseZIndex]="1009"></p-calendar>
+                  <p-calendar dateFormat="yy-mm-dd" formControlName="tmDate" appendTo="body"
+                    [baseZIndex]="1009" hourFormat="12"></p-calendar>
                   <div [appErrorMessages]="getFormArray.controls[rowIndex].date" class="mt-3"></div>
                 </td>
                 <td>
-                  <p-dropdown formControlName="matter" label="" [options]="matters" placeholder="Any" appendTo="body"
+                  <p-dropdown formControlName="matterId" optionLabel="label" optionValue="value" [options]="matters" placeholder="Any" appendTo="body"
                     (onChange)="selectMatter($event, rowIndex)">
                   </p-dropdown>
                 </td>
@@ -52,11 +52,11 @@
                   <input type="text" formControlName="clientName" pInputText readonly class="w-75" />
                 </td>
                 <td>
-                  <p-dropdown formControlName="laywer" label="" [options]="laywers" placeholder="Any" appendTo="body">
+                  <p-dropdown formControlName="law_LawerId" label="" [options]="laywers" placeholder="Any" appendTo="body">
                   </p-dropdown>
                 </td>
                 <td>
-                  <p-dropdown formControlName="task" label="" [options]="tasks" placeholder="Any" appendTo="body">
+                  <p-dropdown formControlName="law_TaskCodeId" label="" [options]="tasks" placeholder="Any" appendTo="body">
                   </p-dropdown>
                 </td>
                 <td>
@@ -69,14 +69,15 @@
                   <input type="text" formControlName="amount" pInputText readonly class="w-75" />
                 </td>
                 <td>
-                  <textarea rows="1" pInputTextarea formControlName="explanation" (input)="addRow()"></textarea>
+                  <textarea rows="1" pInputTextarea formControlName="explanationExplanation" (input)="addRow()"></textarea>
                 </td>
 
                 <td>
                   <textarea rows="1" pInputTextarea formControlName="notes"></textarea>
                 </td>
                 <td>
-                  <button class="text-danger bg-transparent border-0 p-2">
+                
+                  <button class="text-danger bg-transparent border-0 p-2" >
                     <i class="pi pi-trash fs-4" (click)="onDeleteRow(rowIndex)"></i>
                   </button>
                 </td>
@@ -88,7 +89,7 @@
     </div>
     <div class="mt-4 text-end">
       <p-button [loading]="isSubmit" styleClass="p-button-label p-button-outlined d-block py-3 me-3" type="submit"
-        label="{{ 'btn.saveDraft' | translate }}"></p-button>
+        label="{{ 'btn.saveDraft' | translate }}" (onClick)="saveDraft()"></p-button>
       <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
         label="{{ 'btn.submit' | translate }}"></p-button>
     </div>
