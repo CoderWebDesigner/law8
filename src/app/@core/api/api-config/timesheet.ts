@@ -1,10 +1,10 @@
 export const Timesheet_API = {
   "timesheet":{
-      "get":"/GetTimeSheetSummaryList/?empCode=",
+      "get":"TimeSheet/GetList",
       "getTempTimeSheet":"/GetTempTimeSheet/?empCode=",
       "getClientNameByMatterId":"AppLookup/GetClientNameByMatterIdLookup",
       "getDraftTimeSheet":"TimeSheet/GetListWithoutPag",
-      "create":"TimeSheet/Create",
+      "create":"TimeSheet/SubmitTemps",
       "update":"TimeSheet/Update",
       "delete":"TimeSheet/Delete",
   }

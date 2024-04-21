@@ -15,16 +15,33 @@ export class StopWatchComponent implements OnInit,OnChanges{
   interval;
   start: boolean;
   time: number = 0;
+  minInSeconds:number;
+  hourInSeconds:number;
   @Input() stopInterval:boolean;
+  @Input() data: number;
   @Output()  onStart = new EventEmitter()
   @Output()  onStop = new EventEmitter()
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.data){
+      console.log('input seconds',this.data)
+      this.convertSecondsToHMS()
+    }
+  }
+
+  convertSecondsToHMS(){
+   this.hours = Math.floor(this.data / 3600);
+   this.minutes = Math.floor((this.data % 3600) / 60);
+   this.seconds = this.data % 60;
+   console.log('input hours',this.hours)
+   console.log('input minutes',this.minutes)
+   console.log('input seconds',this.seconds)
+  }
   play() {
     if(!this.start){
       this.start=true
       this._sharedService?.timerWorking$?.next(this.start)
-      this.seconds = this.time
+      if(this.time!=0)this.seconds = this.time
       this.interval = setInterval(() => {
         this.seconds++
         if(this.seconds>59){
@@ -35,12 +52,13 @@ export class StopWatchComponent implements OnInit,OnChanges{
           this.minutes=0;
           this.hours++
         }
-        let minInSeconds = this.minutes*60
-        let hourInSeconds = this.hours*3600
-        this.totalSeconds = this.calculateValueInSeconds(this.seconds+minInSeconds+hourInSeconds)
+        this.minInSeconds = this.minutes*60
+        this.hourInSeconds = this.hours*3600
+        this.totalSeconds = this.calculateValueInSeconds(this.seconds+this.minInSeconds+this.hourInSeconds)
         this.onStart.emit(this.totalSeconds)
       }, 1000)
-      this.onStop.emit(true)
+      // this.onStop.emit(true)
+      this.onStop.emit(this.seconds+this.minInSeconds+this.hourInSeconds)
     }else{
       this._sharedService?.timerWorking$?.next(!this.start)
     }
@@ -55,11 +73,11 @@ export class StopWatchComponent implements OnInit,OnChanges{
   calculateValueInSeconds(seconds) {
     // Convert seconds to Minutes
     const secondsToMinutes = seconds / 60;
-    if (secondsToMinutes % 6 == 0) this.incrementValue += 0.1
+    if (secondsToMinutes % 3 == 0) this.incrementValue += 0.1
     return parseFloat(this.incrementValue.toFixed(1));
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if(!changes['stopInterval'].currentValue){
+    if(!changes['stopInterval']?.currentValue){
       this.stop()
     }
   }

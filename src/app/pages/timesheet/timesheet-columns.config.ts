@@ -1,50 +1,193 @@
 
+// export const Timesheet_Columns_EN = [
+//   {
+//     header: 'Doc Num',
+//     field: 'DocNum',
+//   },
+//   {
+//     header: 'Date',
+//     field: 'Date',
+//     isDate:true
+//   },
+//   {
+//     header: 'Matter Code',
+//     field: 'MatterCode',
+//   },
+//   {
+//     header: 'Client Name',
+//     field: 'ClientName',
+//   },
+//   {
+//     header: 'Task Code',
+//     field: 'TaskCode',
+//   },
+//   {
+//     header: 'Hours',
+//     field: 'Hours',
+//   },
+//   {
+//     header: 'Lawyer Rate',
+//     field: 'LawyerRate',
+//   },
+//   {
+//     header: 'Total Amount',
+//     field: 'TotalAmt',
+//   },
+//   {
+//     header: 'Delay Post',
+//     field: 'DelayPost',
+//   },
+//   {
+//     header: 'Description',
+//     field: 'Description',
+//     isLargeText:true
+//   },
+//   {
+//     header: 'Remarks',
+//     field: 'Remarks',
+//     isLargeText:true
+//   },
+// ];
+
+
+// export const Timesheet_Columns_FR = [
+//   {
+//     header: 'Numéro de doc',
+//     field: 'DocNum',
+//   },
+//   {
+//     header: 'Date',
+//     field: 'Date',
+//     isDate:true
+//   },
+//   {
+//     header: 'Code de matière',
+//     field: 'MatterCode',
+//   },
+//   {
+//     header: 'Nom du client',
+//     field: 'ClientName',
+//   },
+//   {
+//     header: 'Code de tâche',
+//     field: 'TaskCode',
+//   },
+//   {
+//     header: 'Heures',
+//     field: 'Hours',
+//   },
+//   {
+//     header: "Taux d'avocat",
+//     field: 'LawyerRate',
+//   },
+//   {
+//     header: 'Montant total',
+//     field: 'TotalAmt',
+//   },
+//   {
+//     header: 'Poste de poste',
+//     field: 'DelayPost',
+//   },
+//   {
+//     header: 'description',
+//     field: 'Description',
+//     isLargeText:true
+//   },
+//   {
+//     header: 'Remarques',
+//     field: 'Remarks',
+//     isLargeText:true
+//   },
+// ];
+
+// export const Timesheet_Columns_AR = [
+//   {
+//     header: 'Doc Num',
+//     field: 'DocNum',
+//   },
+//   {
+//     header: 'Date',
+//     field: 'Date',
+//     isDate:true
+//   },
+//   {
+//     header: 'Matter Code',
+//     field: 'MatterCode',
+//   },
+//   {
+//     header: 'Client Name',
+//     field: 'ClientName',
+//   },
+//   {
+//     header: 'Task Code',
+//     field: 'TaskCode',
+//   },
+//   {
+//     header: 'Hours',
+//     field: 'Hours',
+//   },
+//   {
+//     header: 'Lawyer Rate',
+//     field: 'LawyerRate',
+//   },
+//   {
+//     header: 'Total Amount',
+//     field: 'TotalAmt',
+//   },
+//   {
+//     header: 'Delay Post',
+//     field: 'DelayPost',
+//   },
+//   {
+//     header: 'Description',
+//     field: 'Description',
+//     isLargeText:true
+//   },
+//   {
+//     header: 'Remarks',
+//     field: 'Remarks',
+//     isLargeText:true
+//   },
+// ];
+
+
 export const Timesheet_Columns_EN = [
   {
-    header: 'Doc Num',
-    field: 'DocNum',
+    header: 'Sheet Number',
+    field: 'id',
   },
   {
-    header: 'Date',
-    field: 'Date',
+    header: 'Document Date',
+    field: 'tmDate',
     isDate:true
   },
   {
-    header: 'Matter Code',
-    field: 'MatterCode',
+    header: 'Task',
+    field: 'law_TaskCode',
   },
   {
-    header: 'Client Name',
-    field: 'ClientName',
+    header: 'Lawyer Initial',
+    field: 'law_Lawer',
   },
   {
-    header: 'Task Code',
-    field: 'TaskCode',
+    header: 'Rate',
+    field: 'rate',
   },
   {
     header: 'Hours',
-    field: 'Hours',
-  },
-  {
-    header: 'Lawyer Rate',
-    field: 'LawyerRate',
+    field: 'hours',
   },
   {
     header: 'Total Amount',
-    field: 'TotalAmt',
+    field: 'totalAmount',
   },
   {
-    header: 'Delay Post',
-    field: 'DelayPost',
+    header: 'Explanation',
+    field: 'explanationExplanation',
   },
   {
-    header: 'Description',
-    field: 'Description',
-    isLargeText:true
-  },
-  {
-    header: 'Remarks',
-    field: 'Remarks',
+    header: 'Notes',
+    field: 'notes',
     isLargeText:true
   },
 ];
@@ -52,100 +195,83 @@ export const Timesheet_Columns_EN = [
 
 export const Timesheet_Columns_FR = [
   {
-    header: 'Numéro de doc',
-    field: 'DocNum',
+    header: 'Sheet Number',
+    field: 'id',
   },
   {
-    header: 'Date',
-    field: 'Date',
+    header: 'Document Date',
+    field: 'tmDate',
     isDate:true
   },
   {
-    header: 'Code de matière',
-    field: 'MatterCode',
+    header: 'Task',
+    field: 'law_TaskCode',
   },
   {
-    header: 'Nom du client',
-    field: 'ClientName',
+    header: 'Lawyer Initial',
+    field: 'law_Lawer',
   },
   {
-    header: 'Code de tâche',
-    field: 'TaskCode',
+    header: 'Rate',
+    field: 'rate',
   },
   {
-    header: 'Heures',
-    field: 'Hours',
+    header: 'Hours',
+    field: 'hours',
   },
   {
-    header: "Taux d'avocat",
-    field: 'LawyerRate',
+    header: 'Total Amount',
+    field: 'totalAmount',
   },
   {
-    header: 'Montant total',
-    field: 'TotalAmt',
+    header: 'Explanation',
+    field: 'explanationExplanation',
   },
   {
-    header: 'Poste de poste',
-    field: 'DelayPost',
-  },
-  {
-    header: 'description',
-    field: 'Description',
-    isLargeText:true
-  },
-  {
-    header: 'Remarques',
-    field: 'Remarks',
+    header: 'Notes',
+    field: 'notes',
     isLargeText:true
   },
 ];
 
 export const Timesheet_Columns_AR = [
   {
-    header: 'Doc Num',
-    field: 'DocNum',
+    header: 'Sheet Number',
+    field: 'id',
   },
   {
-    header: 'Date',
-    field: 'Date',
+    header: 'Document Date',
+    field: 'tmDate',
     isDate:true
   },
   {
-    header: 'Matter Code',
-    field: 'MatterCode',
+    header: 'Task',
+    field: 'law_TaskCode',
   },
   {
-    header: 'Client Name',
-    field: 'ClientName',
+    header: 'Lawyer Initial',
+    field: 'law_Lawer',
   },
   {
-    header: 'Task Code',
-    field: 'TaskCode',
+    header: 'Rate',
+    field: 'rate',
   },
   {
     header: 'Hours',
-    field: 'Hours',
-  },
-  {
-    header: 'Lawyer Rate',
-    field: 'LawyerRate',
+    field: 'hours',
   },
   {
     header: 'Total Amount',
-    field: 'TotalAmt',
+    field: 'totalAmount',
   },
   {
-    header: 'Delay Post',
-    field: 'DelayPost',
+    header: 'Explanation',
+    field: 'explanationExplanation',
   },
   {
-    header: 'Description',
-    field: 'Description',
-    isLargeText:true
-  },
-  {
-    header: 'Remarks',
-    field: 'Remarks',
+    header: 'Notes',
+    field: 'notes',
     isLargeText:true
   },
 ];
+

@@ -15,33 +15,7 @@ export class MattersComponent {
   _authService = inject(AuthService);
   _dialogService = inject(DialogService);
   _timeSheetService = inject(TimesheetService);
-  data: any[] = [
-    {
-      Code: '00000-001',
-      Description: 'Description 1',
-      Opened: '19/12/2023',
-      MatterType: 'Matter Type 1',
-      MatterCategory: 'Matter Category 1',
-      PracticeArea: 'Practice Area 1',
-      ClientName: 'Client 1',
-      CourtCaseNo: 'Court Case No 1',
-      ParentMatter: 'Parent Matter 1',
-      Status: 'Status 1',
-    },
-    {
-      Code: '00000-002',
-      Description: 'Description 2',
-      Opened: '19/12/2023',
-      MatterType: 'Matter Type 2',
-      MatterCategory: 'Matter Category 2',
-      PracticeArea: 'Practice Area 2',
-      ClientName: 'Client 2',
-      CourtCaseNo: 'Court Case No 2',
-      ParentMatter: 'Parent Matter 2',
-      Status: 'Status 2',
-    },
-  ]
-  apiUrls = API_Config.timesheet;
+  apiUrls = API_Config.matters;
 
   columnsLocalized = {
     en: Matters_Columns_EN,

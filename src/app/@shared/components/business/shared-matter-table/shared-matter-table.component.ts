@@ -28,32 +28,7 @@ export class SharedMatterTableComponent implements OnInit{
   @Input() selectMode:string='single';
   @Input() mattersColumnsLocalized:any;
   @Input() additionalTableConfig:any;
-  @Input() data:any[]=[
-    {
-      Code: 1,
-      Description: 'Description 1',
-      Opened: '19/12/2023',
-      MatterType: 'Matter Type 1',
-      MatterCategory: 'Matter Category 1',
-      PracticeArea: 'Practice Area 1',
-      ClientName: 'Client 1',
-      CourtCaseNo: 'Court Case No 1',
-      ParentMatter: 'Parent Matter 1',
-      Status: 'Status 1',
-    },
-    {
-      Code: 2,
-      Description: 'Description 2',
-      Opened: '19/12/2023',
-      MatterType: 'Matter Type 2',
-      MatterCategory: 'Matter Category 2',
-      PracticeArea: 'Practice Area 2',
-      ClientName: 'Client 2',
-      CourtCaseNo: 'Court Case No 2',
-      ParentMatter: 'Parent Matter 2',
-      Status: 'Status 2',
-    },
-  ]
+  @Input() apiUrls:any
   columnsLocalized = {
     en: Matters_Columns_EN,
     fr: Matters_Columns_FR,
@@ -61,6 +36,7 @@ export class SharedMatterTableComponent implements OnInit{
   };
   ngOnInit(): void {
     this.columnsLocalized = {...this.columnsLocalized,...this.mattersColumnsLocalized}
+    this.apiUrls=(this.apiUrls)?this.apiUrls:this._dialogConfig.data.apiUrls
   }
   onRowSelected(e){
     if(this._dialogConfig.data['selectRow']){

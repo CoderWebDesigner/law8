@@ -17,6 +17,7 @@ import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
 import { DatePipe } from '@angular/common';
 import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
+import { Task } from '../enums/task.enum';
 
 @Component({
   selector: 'app-timesheet-editor',
@@ -34,7 +35,6 @@ export class TimesheetEditorComponent implements OnInit {
   _datePipe = inject(DatePipe);
   cdRef = inject(ChangeDetectorRef);
   fb = inject(FormBuilder);
-  isSubmit: boolean;
   selectAllRows: boolean;
   selectedMatter: any;
   selectedRows: any[] = [];
@@ -42,6 +42,7 @@ export class TimesheetEditorComponent implements OnInit {
   nonBillableCount: number = 0;
   noChargeCount: number = 0;
   lookupsData: any;
+  task = Task;
   columnsLocalized = {
     ar: Timesheet_Editor_Columns_AR,
     en: Timesheet_Editor_Columns_EN,
@@ -51,29 +52,11 @@ export class TimesheetEditorComponent implements OnInit {
   tasks = [];
   laywers: any[] = [];
   requestForm = this.fb.group({
-    data: this.fb.array([
-      // this.fb.group({
-      // id: [0],
-      // selected: [false],
-      // timing: [false],
-      // tsTimmer: [0],
-      // tmDate: [new Date(), [Validators.required]],
-      // matterId: ['', [Validators.required]],
-      // clientName: ['', [Validators.required]],
-      // law_LawerId: ['', [Validators.required]],
-      // law_TaskCodeId: ['', [Validators.required]],
-      // hours: ['', [Validators.required]],
-      // rate: ['', [Validators.required]],
-      // amount: ['', [Validators.required]],
-      // explanationExplanation: ['', [Validators.required]],
-      // notes: [''],
-      // }),
-    ]),
+    data: this.fb.array([]),
   });
   ngOnInit(): void {
-    this.getTableStatistics();
-
     this.getDraftTimesheet();
+    this.getSelectedRows()
     // this.checkAllRowsChecked()
   }
 
@@ -116,11 +99,26 @@ export class TimesheetEditorComponent implements OnInit {
   get getFormArray(): FormArray {
     return this.requestForm?.get('data') as FormArray;
   }
-
+  getSelectedRows(){
+    this.getFormArray.valueChanges.pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:any[])=>{
+       
+        this.selectedRows = res.filter(
+          (obj) => obj.selected === true
+        );
+      }
+    })
+  }
   onStart(seconds: number, rowIndex: number) {
     this.getFormArray.controls[rowIndex].get('hours').setValue(seconds);
+    let amount =
+      seconds * this.getFormArray.controls[rowIndex].get('rate').value;
+    this.getFormArray.controls[rowIndex].get('amount').setValue(amount);
   }
-  onStop(rowIndex: number) {
+  onStop(seconds, rowIndex: number) {
+    this.getFormArray.controls[rowIndex].get('tsTimmer').setValue(seconds);
     this.getFormArray.controls[rowIndex].get('timing').setValue(true);
     this.getFormArray.controls.forEach((field, index) => {
       if (rowIndex != index) field.get('timing').setValue(false);
@@ -131,8 +129,8 @@ export class TimesheetEditorComponent implements OnInit {
       id: [obj?.id],
       selected: [false],
       timing: [false],
-      tsTimmer: [0],
-      tmDate: [obj?.tmDate, [Validators.required]],
+      tsTimmer: [obj?.tsTimmer],
+      tmDate: [obj?.tmDate || new Date(), [Validators.required]],
       matterId: [obj?.matterId, [Validators.required]],
       clientName: [obj?.clientName, [Validators.required]],
       law_LawerId: [obj?.law_LawerId, [Validators.required]],
@@ -146,12 +144,11 @@ export class TimesheetEditorComponent implements OnInit {
       ],
       notes: [obj?.notes],
     });
-    console.log('');
     if (
       this.getFormArray.controls.every(
         (formGroup) =>
-          formGroup.get('matterId')?.value != '' ||
-          formGroup.get('explanationExplanation')?.value != ''
+          formGroup.get('matterId')?.value ||
+          formGroup.get('explanationExplanation')?.value
       )
     ) {
       this.getFormArray.push(row);
@@ -168,9 +165,9 @@ export class TimesheetEditorComponent implements OnInit {
       icon: 'question',
     }).then((result) => {
       if (result.isConfirmed) {
-        const rowId = selectedRow.id; 
+        const rowId = selectedRow.id;
         this._apiService
-          .post(API_Config.timesheet.delete + '?id=' + rowId, {}) 
+          .post(API_Config.timesheet.delete + '?id=' + rowId, {})
           .pipe(this._sharedService.takeUntilDistroy())
           .subscribe({
             next: (res: ApiRes) => {
@@ -193,8 +190,6 @@ export class TimesheetEditorComponent implements OnInit {
       }
     });
   }
-  
-  
 
   // onDeleteRow(rowIndex: number): void {
   //   console.log(this.getFormArray[rowIndex].value)
@@ -225,6 +220,7 @@ export class TimesheetEditorComponent implements OnInit {
                 item?.tmDate,
                 REQUEST_DATE_FORMAT
               );
+              item.amount = (item.hours * item.rate).toFixed(2);
               this.addRow(item);
             });
             this.addRow();
@@ -232,21 +228,18 @@ export class TimesheetEditorComponent implements OnInit {
             this.addRow();
           }
           this.getLookupsData();
+          this.getTableStatistics();
         },
       });
   }
-  submit() {
-    this.selectedRows = this.getFormArray.controls.filter(
-      (field) => field.get('selected').value === true
-    );
-    console.log(this.selectedRows);
-  }
+
   selectMatter(e, rowIndex) {
     if (e.value == 'All Matters') {
       this._dialogService.open(SharedMatterTableComponent, {
         width: '70%',
         data: {
           selectRow: true,
+          apiUrls:API_Config.matters,
         },
         dismissableMask: true,
       });
@@ -273,12 +266,13 @@ export class TimesheetEditorComponent implements OnInit {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: any) => {
+          console.log('getSelectedMatter',res)
           console.log('rowIndex', rowIndex);
           this.getFormArray.controls[rowIndex].patchValue({
-            clientName: res.ClientName,
-            matterId: res.Code,
+            clientName: res.law_Client,
+            matterId: res.id,
             // law_LawerId: this._authService.user.UserName,
-            law_TaskCodeId: 'Billable',
+            // law_TaskCodeId: 'Billable',
           });
         },
       });
@@ -316,21 +310,29 @@ export class TimesheetEditorComponent implements OnInit {
       .get('data')
       .valueChanges.pipe()
       .subscribe({
-        next: (res) => {
-          this.billableCount = this.getFormArray.controls
-            .filter((field) => field.get('law_TaskCodeId')?.value == 'Billable')
+        next: (res: any[]) => {
+          console.log(res);
+          this.billableCount = res
+            .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
             .reduce(
               (accumulator, currentControl) =>
-                accumulator + currentControl.value.hours,
+                accumulator + currentControl.hours,
               0
             );
-          this.noChargeCount = this.getFormArray.controls
-            .filter(
-              (field) => field.get('law_TaskCodeId')?.value == 'No-Charge'
-            )
+            console.log('this.billableCount1', res
+            .filter((obj) => obj.law_TaskCodeId == this.task.Billable).reduce(
+              (accumulator, currentControl) =>{
+                return accumulator + currentControl.hours
+              },
+                
+              0
+            ))
+            console.log('this.billableCount',this.billableCount)
+          this.noChargeCount = res
+          .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
             .reduce(
               (accumulator, currentControl) =>
-                accumulator + currentControl.value.hours,
+                accumulator + currentControl.hours,
               0
             );
         },
@@ -373,25 +375,47 @@ export class TimesheetEditorComponent implements OnInit {
 
   //   console.log(this.selectedRows);
   // }
-  saveDraft() {
-    this.isSubmit = true;
-    this.selectedRows = this.getFormArray.value.filter(
-      (obj) => obj.selected === true
-    );
-    console.log('Selected Rows:', this.selectedRows);
-    const selectedRowsJSON = this.selectedRows.map((control) => control.value);
+  saveDraft(btn) {
+    btn.isLoading = true;
     this._apiService
       .post(API_Config.timesheet.update, this.selectedRows)
       .pipe(
         this._sharedService.takeUntilDistroy(),
-        finalize(() => (this.isSubmit = false))
+        finalize(() => (btn.isLoading = false))
       )
       .subscribe({
         next: (res: ApiRes) => {
           console.log('Response from API:', res);
           const resultData = res.result;
 
-          // this.getFormArray=res.['result']
+          if (res.isSuccess) {
+            Swal.fire(
+              'Success!',
+              'Data has been saved successfully!',
+              'success'
+            );
+          } else {
+            Swal.fire('Error!', 'Failed to save data: ' + res.message, 'error');
+          }
+        },
+      });
+  }
+  submit(btn) {
+    btn.isLoading = true;
+    this._apiService
+      .post(API_Config.timesheet.create, this.selectedRows)
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (btn.isLoading = false))
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          console.log();
+          this.getFormArray.clear();
+          this.addRow();
+          console.log('Response from API:', res);
+          const resultData = res.result;
+
           if (res.isSuccess) {
             Swal.fire(
               'Success!',
