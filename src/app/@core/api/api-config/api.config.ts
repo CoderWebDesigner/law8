@@ -26,11 +26,13 @@ import { Matters_Activity_API } from './matter-activity';
 import { Matters_Related_Matter_API } from './matter-related-matter';
 import { Matters_Documents_API } from './matter-documents';
 import { Matters_Time_Sheet_API } from './matter-timesheet';
+import { Clients_Contact_API } from './client-contacts';
 
 export const API_Config = {
   ...General_API,
   ...Auth_API,
   ...Clients_API,
+  ...Clients_Contact_API,
   ...Dashboard_API,
   ...Timesheet_API,
   ...Security_API,

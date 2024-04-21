@@ -6,7 +6,6 @@ export const General_API = {
       "getParties":"/GetBPpartiesList",
       "getStatesByCountry":"AppLookup/GetCountryLookup",
       "getLawyers":"/GetSPList",
-      "getRecentMatters":"/GetRecentMatters/?empCode=",
       "getPractsAreaLookup":"AppLookup/GetLaw_PractsAreaLookup",
       "getJurisdictionLookup":"AppLookup/GetJurisdictionLookup",
       "getMatterCategoriesLookup":"AppLookup/GetLaw_MatCatLookup",
@@ -26,7 +25,8 @@ export const General_API = {
       "getActivityType":"AppLookup/GetLaw_ActivityTypeModelLookup",
       "getFinalJudgement":"AppLookup/GetLaw_FinalJudgementModelLookup",
       "getActivityStatus":"AppLookup/GetLaw_ActivityStatusModelLookup",
-      "getAdjournmentReasons":"AppLookup/GetLaw_AdjournmentReasonsModeLookup"
+      "getAdjournmentReasons":"AppLookup/GetLaw_AdjournmentReasonsModeLookup",
+      "getRecentMatters":"AppLookup/GetRecentMatterCodeForUserLookup"
   }
 
 }

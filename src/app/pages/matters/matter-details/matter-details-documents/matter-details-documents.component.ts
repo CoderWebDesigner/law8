@@ -92,24 +92,57 @@ export class MatterDetailsDocumentsComponent extends FileActions implements OnIn
       }
     })
   }
-  previewFile(id:number,btn:any){
-    btn.isLoading=true
-    this._apiService.get(`${this.apiUrls.getById}?id=${id}&LoadFile=true`).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(()=>btn.isLoading=false)
+  // previewFile(id:number,btn:any){
+  //   btn.isLoading=true
+  //   this._apiService.get(`${this.apiUrls.getById}?id=${id}&LoadFile=true`).pipe(
+  //     this._sharedService.takeUntilDistroy(),
+  //     finalize(()=>btn.isLoading=false)
+  //   ).subscribe({
+  //     next:(res:ApiRes)=>{
+  //       this._dialogService.open(MatterDocumentPreviewComponent,{
+  //         width:'40%',
+  //         height:'100%',
+  //         data:{
+  //           src:res['result'].logoFile,
+  //           applicationType:res['result'].applicationType//'data:image/png;base64,'
+  //         }
+  //       })
+  //       // this.preview(res['result'].applicationType+res['result'].logoFile)
+  //     }
+  //   })
+  // }
+  previewFile(id: number, btn: any) {
+    btn.isLoading = true;
+  this._apiService.get(`${this.apiUrls.getById}?id=${id}&LoadFile=true`).pipe(
+    this._sharedService.takeUntilDistroy(),
+      finalize(() => btn.isLoading = false)
     ).subscribe({
-      next:(res:ApiRes)=>{
-        this._dialogService.open(MatterDocumentPreviewComponent,{
-          width:'40%',
-          height:'100%',
-          data:{
-            src:res['result'].logoFile,
-            applicationType:res['result'].applicationType//'data:image/png;base64,'
-          }
-        })
-        // this.preview(res['result'].applicationType+res['result'].logoFile)
+      next: (res: ApiRes) => {
+        // تحقق من نوع الملف
+        const fileType = res['result'].applicationType;
+        if (fileType.includes('pdf') || fileType.includes('image')) {
+          // إذا كان الملف PDF أو صورة، افتح المعاينة
+          this._dialogService.open(MatterDocumentPreviewComponent, {
+            width: '40%',
+            height: '100%',
+            data: {
+              src: res['result'].logoFile,
+              applicationType: fileType
+            }
+          });
+        } else {
+          const placeholder = '/assets/images/empty.png';
+          // this._dialogService.open(MatterDocumentPreviewComponent, {
+          //   width: '40%',
+          //   height: '100%',
+          //   data: {
+          //     src: placeholder,
+          //     applicationType: 'text'
+          //   }
+          // });
+        }
       }
-    })
+    });
   }
   ngOnDestroy(): void {
     this._sharedService.destroy()

@@ -1,12 +1,6 @@
 <shared-card [title]="'matters.title' | translate" [borderRadius]="20">
   <shared-search-input headerActions></shared-search-input>
-  <shared-table
-    body
-    [columnsLocalized]="columnsLocalized"
-    [data]="data"
-    [additionalTableConfig]="additionalTableConfig"
-    [selectMode]="selectMode"
-    dataKey="Code"
-    (onRowSelect)="onRowSelected($event)"
-  ></shared-table>
+  <shared-table body [columnsLocalized]="columnsLocalized" [apiUrls]="apiUrls"
+    [additionalTableConfig]="additionalTableConfig" [selectMode]="selectMode"
+    (onRowSelect)="onRowSelected($event)"></shared-table>
 </shared-card>

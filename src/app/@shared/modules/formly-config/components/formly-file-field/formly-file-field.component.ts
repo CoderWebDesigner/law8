@@ -43,7 +43,16 @@ export class FormlyFileFieldComponent
 
   ngOnInit(): void {
     this.formControl.valueChanges.subscribe((res) => {
-      
+      if(typeof res  ==='string'){
+        console.log('onchange',res)
+
+        let file = this.base64ToFile(res)
+        this.files = [file]
+        this.formControl.setValue(this.files)
+        console.log('formControl', this.formControl.value)
+        console.log('base64ToFile', this.base64ToFile(res))
+      }
+     
       // this.filesBase64 = res
       // console.log('filesBase64',this.filesBase64)
       // if(this.filesBase64?.length){
@@ -79,25 +88,35 @@ export class FormlyFileFieldComponent
   //   this.formControl.setValue(this.files);
   // }
 
-  // base64ToFile(base64:string) {
-  //   // Split the base64 string into header and data
-  //   // const parts = f.file.split(';base64,');
-  //   const data = window.atob(base64);
-  //   const array = new Uint8Array(data.length);
+  base64ToFile(base64:string) {
+    // Split the base64 string into header and data
+    const parts = base64.split(';base64,');
+    const base64String = parts[1]
+    const fileType=parts[0].split('data:')[1]
+
+    const data = window.atob(base64String);
+    const array = new Uint8Array(data.length);
   
-  //   // Convert data to array buffer
-  //   for (let i = 0; i < data.length; ++i) {
-  //     array[i] = data.charCodeAt(i);
-  //   }
+    // Convert data to array buffer
+    for (let i = 0; i < data.length; ++i) {
+      array[i] = data.charCodeAt(i);
+    }
   
-  //   // Create a blob
-  //   const blob = new Blob([array], { type: f?.type });
+    // Create a blob
+    const blob = new Blob([array], { type: fileType });
   
-  //   // Create a file object
-  //   const file = new File([blob], f?.name, { type: f?.type });
+    // Create a file object
+    const file = new File([blob], 'file', { type: fileType });
   
-  //   return file;
-  // }
+    return file;
+    // const byteCharacters = atob(base64);
+    // const byteNumbers = new Array(byteCharacters.length);
+    // for (let i = 0; i < byteCharacters.length; i++) {
+    //   byteNumbers[i] = byteCharacters.charCodeAt(i);
+    // }
+    // const byteArray = new Uint8Array(byteNumbers);
+    // return new Blob([byteArray]);
+  }
 
 
 }

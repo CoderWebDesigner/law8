@@ -1,14 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  SimpleChanges,
-  inject,
-} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { ClientContactEditorComponent } from './client-contact-editor/client-contact-editor.component';
 import {
   Contact_Columns_AR,
@@ -19,9 +9,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { ClientService } from '@shared/services/client.service';
 import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ApiService } from '@core/api/api.service';
 import { API_Config } from '@core/api/api-config/api.config';
-import { ActivatedRoute } from '@angular/router';
 import { PAGESIZE } from '@core/utilities/defines';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
@@ -31,100 +19,88 @@ import { SharedTableService } from '@shared/components/shared-table/services/tab
   templateUrl: './client-contacts.component.html',
   styleUrls: ['./client-contacts.component.scss'],
 })
-export class ClientContactsComponent implements OnInit, OnChanges, OnDestroy {
-  apiUrls = API_Config.clientContact;
-  requestId: number;
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    this._clientService.contacts$.next(changes['data']?.currentValue);
-    this.getParam();
-  }
-  @Input() data: any[] = [];
-
-  @Input() previewOnly: boolean;
+export class ClientContactsComponent implements OnInit, OnDestroy {
+  @Input() requestId: number;
+  @Input() previewOnly:boolean;
+  data:any[]=[]
   _dialogService = inject(DialogService);
   _languageService = inject(LanguageService);
   _clientService = inject(ClientService);
   _sharedService = inject(SharedService);
   _sharedTableService = inject(SharedTableService);
-  _apiService = inject(ApiService);
-  _route = inject(ActivatedRoute);
-  filterOptions = {};
+
   columnsLocalized = {
-    en: Contact_Columns_EN,
     ar: Contact_Columns_AR,
+    en: Contact_Columns_EN,
     fr: Contact_Columns_FR,
   };
-  additionalTableConfig: TableConfig = {
-   
+
+  apiUrls:any;
+  filterOptions: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
   };
+  additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
-    this.getContacts();
-
-  }
-
-  getParam() {
-    this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
-      next: (res) => {
-        console.log()
-        this.requestId = res['id'];
-        this.filterOptions = {
-          clientId: this.requestId,
-          pageNum: 1,
-          pagSize: PAGESIZE,
-          orderByDirection: 'ASC',
-        };
-        this.additionalTableConfig={
-          id: 'id',
-          actions: [
-            {
-              title: this._languageService.getTransValue('client.updateClient'),
-              target: ClientContactEditorComponent,
-              icon:'pencil',
-              isDynamic:this.requestId != undefined,
-              isReadOnly:this.previewOnly
-            },
-            {
-              type: 'delete',
-              title: this._languageService.getTransValue('btn.delete'),
-              icon: 'trash'
-            },
-          ],
-        }
-      },
-    });
-  }
-  getContacts() {
-    this._clientService.contacts$
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res: any[]) => {
-          this.data = [...res];
-          this.data = this.data.map((element) => {
-            return {
-              ...element,
-              mobile: element.mobile.internationalNumber,
-            };
-          });
+    this.additionalTableConfig={
+      id: 'id',
+      actions: [
+        {
+          title: this._languageService.getTransValue('btn.update'),
+          target: ClientContactEditorComponent,
+          icon:'pencil',
+          isDynamic:this.requestId != undefined,
+          // isReadOnly:(this.requestId)?this.previewOnly:true
         },
-      });
+        {
+          type: 'delete',
+          title: this._languageService.getTransValue('btn.delete'),
+          icon: 'trash',
+        },
+      ],
+    }
+    if(this.requestId){
+      this.apiUrls=API_Config.clientsContact;
+      this.filterOptions = {
+        ...this.filterOptions,
+        clientId: this.requestId,
+      };
+    }
+    this.getList()
+  }
+
+   getList(){
+    this._clientService.contacts$.pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:any[])=>{
+        console.log('get contact',res)
+        this.data=res
+      }
+    })
+
   }
   openDialog() {
     const ref = this._dialogService.open(ClientContactEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('common.addContacts'),
       dismissableMask: true,
-      data: {
+      data:{
+        clientId:this.requestId,
         isDynamic:this.requestId != undefined,
-        clientId:this.requestId
-      },
+      }
+      
+    })
+    ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      this._sharedTableService.refreshData.next(true);
     });
-
-      ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
-        this._sharedTableService.refreshData.next(true);
-      });
+  }
+  onDeleteRow(rowData){
+    this.data=this.data.filter(obj=>obj!=rowData)
+    this._clientService.contacts$.next(this.data)
   }
   ngOnDestroy(): void {
-    this._sharedService.destroy();
+    this._sharedService.destroy()
   }
 }

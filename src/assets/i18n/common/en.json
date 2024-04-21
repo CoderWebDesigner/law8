@@ -52,7 +52,8 @@
     "filter":"Filter",
     "delete":"Delete",
     "update":"Update",
-    "upload":"Upload"
+    "upload":"Upload",
+    "saveDraft":"Save Draft"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
