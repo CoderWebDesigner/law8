@@ -14,21 +14,7 @@ export class TaskManagementComponent {
   _languageService = inject(LanguageService);
   _authService = inject(AuthService);
   router = inject(Router);
-  apiUrls = API_Config.client;
-
-  data:any[]=[
-    {
-      code: '1',
-      activityType: 'Hearing Session',
-      matter: '00479-034',
-      description: 'نحضر عن المدعية، مؤجلة للتقرير، مراجعة الاستاذ فؤاد،تنظر الدعوى في الدائرة الابتدائية التجارية الخامسة، الساعة (9) رول رقم(27)',
-      priority: 'low',
-      date: new Date(),
-      startTime: '10:40 AM',
-      courtFileNumber: '',
-      status: ''
-    }
-  ]
+  apiUrls = API_Config.matterActivity;
   columnsLocalized = {
     en: Task_Management_Columns_EN,
     ar:  Task_Management_Columns_AR,
@@ -36,7 +22,7 @@ export class TaskManagementComponent {
   };
 
   additionalTableConfig: TableConfig = {
-    id: 'code',
+    id:'id',
     actions: [
       {
         title: this._languageService.getTransValue('taskManagement.updateTask'),
@@ -44,6 +30,11 @@ export class TaskManagementComponent {
         targetType: 'path',
         target: '/task-management/update/',
         icon:'pencil'
+      },
+      {
+        type: 'delete',
+        title: this._languageService.getTransValue('btn.delete'),
+        icon: 'trash',
       },
     ],
   };

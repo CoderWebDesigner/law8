@@ -22,10 +22,10 @@ export class TaskManagementCalenderComponent implements OnInit {
     {
       id: '1',
       title: 'Other',
-      start: '2024-01-15',
+      start: '2024-04-21',
       assigned: 'Ahmed Awad',
-      from: '2024-01-15T00:00:00',
-      to: '2024-01-15T03:00:00',
+      from: '2024-04-21T00:00:00',
+      to: '2024-04-21T03:00:00',
       matterCode: '0000-001',
       priority:'low'
     },
@@ -97,18 +97,8 @@ export class TaskManagementCalenderComponent implements OnInit {
   }
   initCalender() {
 
-    this.calendarOptions = {
-      // plugins: [dayGridPlugin],
-      //    headerToolbar: {
-      //     left: 'title',
-      //     center: 'month,agendaWeek,agendaDay',
-      //     right: 'prev,next,today'
-      //   },
-      // initialView: 'dayGridMonth',
-      // weekends: false,
-      // events: [
-      //   { title: 'Meeting', start: new Date() }
-      // ]
+    this.calendarOptions= {
+
       plugins: [
         interactionPlugin,
         dayGridPlugin,
@@ -124,6 +114,7 @@ export class TaskManagementCalenderComponent implements OnInit {
       // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
       initialEvents: this.events,
       eventDidMount: function (info) {
+        console.log('info',info)
 
       },
       weekends: true,
@@ -148,6 +139,7 @@ export class TaskManagementCalenderComponent implements OnInit {
     // let overlayPanel = new OverlayPanel()
   }
   handleEventClick(arg: EventClickArg) {
+    console.log(arg)
     // Get the clicked event data
     const eventId = arg.event.id;
     let selectedEvent = this.events.find(obj => obj.id === eventId)

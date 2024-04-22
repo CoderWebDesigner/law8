@@ -1,4 +1,4 @@
-<shared-card [borderRadius]="20" [title]="(id?'taskManagement.updateTask':'menu.taskManagement.taskManagementAdd') | translate">
+<shared-card [borderRadius]="20" [title]="(requestId?'taskManagement.updateTask':'menu.taskManagement.taskManagementAdd') | translate">
   <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
     <formly-form
       [form]="formly"

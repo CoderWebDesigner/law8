@@ -111,18 +111,23 @@ export class TimesheetEditorComponent implements OnInit {
       }
     })
   }
-  onStart(seconds: number, rowIndex: number) {
-    this.getFormArray.controls[rowIndex].get('hours').setValue(seconds);
+  onStart(value: any, rowIndex: number) {
+    console.log('value',value)
+    this.getFormArray.controls[rowIndex].get('tsTimmer').setValue(value?.total);
+    this.getFormArray.controls[rowIndex].get('hours').setValue(value?.hourRatio);
     let amount =
-      seconds * this.getFormArray.controls[rowIndex].get('rate').value;
+    value?.hourRatio * this.getFormArray.controls[rowIndex].get('rate').value;
     this.getFormArray.controls[rowIndex].get('amount').setValue(amount);
-  }
-  onStop(seconds, rowIndex: number) {
-    this.getFormArray.controls[rowIndex].get('tsTimmer').setValue(seconds);
-    this.getFormArray.controls[rowIndex].get('timing').setValue(true);
+    this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
     this.getFormArray.controls.forEach((field, index) => {
       if (rowIndex != index) field.get('timing').setValue(false);
     });
+  }
+  onStop( rowIndex: number) {
+    // this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
+    // this.getFormArray.controls.forEach((field, index) => {
+    //   if (rowIndex != index) field.get('timing').setValue(false);
+    // });
   }
   addRow(obj?: any) {
     const row = this.fb.group({
@@ -262,6 +267,7 @@ export class TimesheetEditorComponent implements OnInit {
       });
   }
   getSelectedMatter(rowIndex: number) {
+    // this.matters.push({ label: 'test', value: });
     this._timeSheetService.selectedMatter$
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
@@ -311,7 +317,6 @@ export class TimesheetEditorComponent implements OnInit {
       .valueChanges.pipe()
       .subscribe({
         next: (res: any[]) => {
-          console.log(res);
           this.billableCount = res
             .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
             .reduce(
@@ -319,15 +324,6 @@ export class TimesheetEditorComponent implements OnInit {
                 accumulator + currentControl.hours,
               0
             );
-            console.log('this.billableCount1', res
-            .filter((obj) => obj.law_TaskCodeId == this.task.Billable).reduce(
-              (accumulator, currentControl) =>{
-                return accumulator + currentControl.hours
-              },
-                
-              0
-            ))
-            console.log('this.billableCount',this.billableCount)
           this.noChargeCount = res
           .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
             .reduce(
@@ -386,8 +382,9 @@ export class TimesheetEditorComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           console.log('Response from API:', res);
-          const resultData = res.result;
-
+          this.getFormArray.controls.forEach((field, index) => {
+             field.get('timing').setValue(false);
+          });
           if (res.isSuccess) {
             Swal.fire(
               'Success!',

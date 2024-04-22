@@ -67,15 +67,20 @@ export class MatterDetailsActivityEditorComponent
         fieldGroupClassName: 'row',
         fieldGroup: [
           {
-            type: 'input',
+            // type: 'input',
             key: 'law_MatterId',
-            className: 'col-md-4',
             defaultValue: this._dynamicDialogConfig.data.law_MatterId,
-            props: {
-              label: this._languageService.getTransValue('common.matterCode'),
-              disabled: true,
-            },
           },
+          // {
+          //   type: 'input',
+          //   key: 'matterCode',
+          //   className: 'col-md-4',
+          //   defaultValue: this._dynamicDialogConfig.data.matterCode,
+          //   props: {
+          //     label: this._languageService.getTransValue('common.matterCode'),
+          //     disabled: true,
+          //   },
+          // },
           {
             className: 'col-md-4',
             key: 'law_ActivityTypeId',

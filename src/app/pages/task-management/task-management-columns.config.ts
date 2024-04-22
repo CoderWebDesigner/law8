@@ -2,127 +2,91 @@
 export const Task_Management_Columns_EN = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Activity Type',
-    field: 'activityType',
-  },
-  {
-    header: 'Matter',
-    field: 'matter',
+    field: 'law_ActivityType',
   },
   {
     header: 'Description',
     field: 'description',
-    isLargeText:true
   },
-
   {
-    header: 'Priority',
-    field: 'priority',
+    header: 'User',
+    field: 'user',
   },
+  
   {
     header: 'Date',
-    field: 'date',
+    field: 'startDate',
     isDate:true,
   },
-  {
-    header: 'Start Time',
-    field: 'startTime',
-
-  },
-  {
-    header: 'Court File Number',
-    field: 'courtFileNumber',
-  },
+  
+  
   {
     header: 'Status',
-    field: 'status',
+    field: 'law_ActivityStatus',
   },
 ];
 export const Task_Management_Columns_FR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Activity Type',
-    field: 'activityType',
-  },
-  {
-    header: 'Matter',
-    field: 'matter',
+    field: 'law_ActivityType',
   },
   {
     header: 'Description',
     field: 'description',
-    isLargeText:true
   },
-
   {
-    header: 'Priority',
-    field: 'priority',
+    header: 'User',
+    field: 'user',
   },
+  
   {
     header: 'Date',
-    field: 'date',
+    field: 'startDate',
     isDate:true,
   },
-  {
-    header: 'Start Time',
-    field: 'startTime',
-
-  },
-  {
-    header: 'Court File Number',
-    field: 'courtFileNumber',
-  },
+  
+  
   {
     header: 'Status',
-    field: 'status',
+    field: 'law_ActivityStatus',
   },
 ];
 
 export const Task_Management_Columns_AR = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'id',
   },
   {
     header: 'Activity Type',
-    field: 'activityType',
-  },
-  {
-    header: 'Matter',
-    field: 'matter',
+    field: 'law_ActivityType',
   },
   {
     header: 'Description',
     field: 'description',
-    isLargeText:true
   },
-
   {
-    header: 'Priority',
-    field: 'priority',
+    header: 'User',
+    field: 'user',
   },
+  
   {
     header: 'Date',
-    field: 'date',
+    field: 'startDate',
     isDate:true,
   },
-  {
-    header: 'Start Time',
-    field: 'startTime',
-
-  },
-  {
-    header: 'Court File Number',
-    field: 'courtFileNumber',
-  },
+  
+  
   {
     header: 'Status',
-    field: 'status',
+    field: 'law_ActivityStatus',
   },
 ];

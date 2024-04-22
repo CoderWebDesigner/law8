@@ -35,7 +35,7 @@
                   <p-checkbox [binary]="true" formControlName="selected"></p-checkbox>
                 </td>
                 <td>
-                  <app-stop-watch [stopInterval]="row.get('timing')?.value" [data]="row.get('tsTimmer')?.value" (onStart)="onStart($event, rowIndex)"
+                  <app-stop-watch [stopInterval]="row.get('timing')?.value" [data]="row.get('tsTimmer').value" (onStart)="onStart($event, rowIndex)"
                     (onStop)="onStop($event,rowIndex)"></app-stop-watch>
                 </td>
                 <td>
