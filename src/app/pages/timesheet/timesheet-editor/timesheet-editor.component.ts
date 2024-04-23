@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { AuthService, LanguageService } from '@core/services';
+import { AuthService, LanguageService, ToasterService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
 import {
   Timesheet_Editor_Columns_AR,
@@ -35,6 +35,7 @@ export class TimesheetEditorComponent implements OnInit {
   _datePipe = inject(DatePipe);
   cdRef = inject(ChangeDetectorRef);
   fb = inject(FormBuilder);
+  _toastrNotifiService = inject(ToasterService);
   selectAllRows: boolean;
   selectedMatter: any;
   selectedRows: any[] = [];
@@ -56,7 +57,7 @@ export class TimesheetEditorComponent implements OnInit {
   });
   ngOnInit(): void {
     this.getDraftTimesheet();
-    this.getSelectedRows()
+    this.getSelectedRows();
     // this.checkAllRowsChecked()
   }
 
@@ -99,31 +100,30 @@ export class TimesheetEditorComponent implements OnInit {
   get getFormArray(): FormArray {
     return this.requestForm?.get('data') as FormArray;
   }
-  getSelectedRows(){
-    this.getFormArray.valueChanges.pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next:(res:any[])=>{
-       
-        this.selectedRows = res.filter(
-          (obj) => obj.selected === true
-        );
-      }
-    })
+  getSelectedRows() {
+    this.getFormArray.valueChanges
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any[]) => {
+          this.selectedRows = res.filter((obj) => obj.selected === true);
+        },
+      });
   }
   onStart(value: any, rowIndex: number) {
-    console.log('value',value)
+    console.log('value', value);
     this.getFormArray.controls[rowIndex].get('tsTimmer').setValue(value?.total);
-    this.getFormArray.controls[rowIndex].get('hours').setValue(value?.hourRatio);
+    this.getFormArray.controls[rowIndex]
+      .get('hours')
+      .setValue(value?.hourRatio);
     let amount =
-    value?.hourRatio * this.getFormArray.controls[rowIndex].get('rate').value;
+      value?.hourRatio * this.getFormArray.controls[rowIndex].get('rate').value;
     this.getFormArray.controls[rowIndex].get('amount').setValue(amount);
     this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
     this.getFormArray.controls.forEach((field, index) => {
       if (rowIndex != index) field.get('timing').setValue(false);
     });
   }
-  onStop( rowIndex: number) {
+  onStop(rowIndex: number) {
     // this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
     // this.getFormArray.controls.forEach((field, index) => {
     //   if (rowIndex != index) field.get('timing').setValue(false);
@@ -137,6 +137,7 @@ export class TimesheetEditorComponent implements OnInit {
       tsTimmer: [obj?.tsTimmer],
       tmDate: [obj?.tmDate || new Date(), [Validators.required]],
       matterId: [obj?.matterId, [Validators.required]],
+      mtrNo: [obj?.mtrNo],
       clientName: [obj?.clientName, [Validators.required]],
       law_LawerId: [obj?.law_LawerId, [Validators.required]],
       law_TaskCodeId: [obj?.law_TaskCodeId, [Validators.required]],
@@ -244,12 +245,15 @@ export class TimesheetEditorComponent implements OnInit {
         width: '70%',
         data: {
           selectRow: true,
-          apiUrls:API_Config.matters,
+          apiUrls: API_Config.matters,
         },
         dismissableMask: true,
       });
     } else {
-      this.getClientNameByMatterId(e.value, rowIndex);
+      let matterId = this.matters.find((obj) => obj.label == e.value).value;
+      this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId)
+
+      this.getClientNameByMatterId(matterId, rowIndex);
     }
 
     this.getSelectedMatter(rowIndex);
@@ -272,13 +276,15 @@ export class TimesheetEditorComponent implements OnInit {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: any) => {
-          console.log('getSelectedMatter',res)
+          console.log('getSelectedMatter', res);
           console.log('rowIndex', rowIndex);
           this.getFormArray.controls[rowIndex].patchValue({
             clientName: res.law_Client,
             matterId: res.id,
-            // law_LawerId: this._authService.user.UserName,
-            // law_TaskCodeId: 'Billable',
+            mtrNo: res.mtrNo,
+            // law_LawerId: res.law_LawerId,
+            // law_TaskCodeId: res.law_TaskCodeId,
+            // rate: res.rate,
           });
         },
       });
@@ -325,7 +331,7 @@ export class TimesheetEditorComponent implements OnInit {
               0
             );
           this.noChargeCount = res
-          .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
+            .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
             .reduce(
               (accumulator, currentControl) =>
                 accumulator + currentControl.hours,
@@ -373,8 +379,13 @@ export class TimesheetEditorComponent implements OnInit {
   // }
   saveDraft(btn) {
     btn.isLoading = true;
+    let validValue = this.getFormArray.value.filter(
+      (obj) => obj.explanationExplanation != null && obj.law_TaskCodeId != null
+    );
+    console.log(validValue);
+    console.log(this.getFormArray.value);
     this._apiService
-      .post(API_Config.timesheet.update, this.selectedRows)
+      .post(API_Config.timesheet.update, validValue)
       .pipe(
         this._sharedService.takeUntilDistroy(),
         finalize(() => (btn.isLoading = false))
@@ -383,16 +394,15 @@ export class TimesheetEditorComponent implements OnInit {
         next: (res: ApiRes) => {
           console.log('Response from API:', res);
           this.getFormArray.controls.forEach((field, index) => {
-             field.get('timing').setValue(false);
+            field.get('timing').setValue(false);
           });
           if (res.isSuccess) {
-            Swal.fire(
-              'Success!',
-              'Data has been saved successfully!',
-              'success'
+            const text = this._languageService.getTransValue(
+              'messages.createdSuccessfully'
             );
+            this._toastrNotifiService.displaySuccessMessage(text);
           } else {
-            Swal.fire('Error!', 'Failed to save data: ' + res.message, 'error');
+            this._toastrNotifiService.displayErrorToastr(res?.message);
           }
         },
       });
@@ -407,20 +417,15 @@ export class TimesheetEditorComponent implements OnInit {
       )
       .subscribe({
         next: (res: ApiRes) => {
-          console.log();
-          this.getFormArray.clear();
-          this.addRow();
-          console.log('Response from API:', res);
-          const resultData = res.result;
-
           if (res.isSuccess) {
-            Swal.fire(
-              'Success!',
-              'Data has been saved successfully!',
-              'success'
+            this.getFormArray.controls=[]
+            this.getDraftTimesheet();
+            const text = this._languageService.getTransValue(
+              'messages.createdSuccessfully'
             );
+            this._toastrNotifiService.displaySuccessMessage(text);
           } else {
-            Swal.fire('Error!', 'Failed to save data: ' + res.message, 'error');
+            this._toastrNotifiService.displayErrorToastr(res?.message);
           }
         },
       });

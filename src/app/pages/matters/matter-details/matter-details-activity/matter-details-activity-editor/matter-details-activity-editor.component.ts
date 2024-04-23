@@ -164,6 +164,7 @@ export class MatterDetailsActivityEditorComponent
             className: 'col-md-4',
             key: 'law_ActivityStatusId',
             type: 'select',
+            defaultValue:!this._dynamicDialogConfig?.data?.rowData?1:'',
             props: {
               label: this._languageService.getTransValue('matters.status'),
               //required: true,
@@ -306,6 +307,10 @@ export class MatterDetailsActivityEditorComponent
                     label: obj.name,
                     value: obj.id,
                   })),
+                  onChange:(field: FormlyFieldConfig)=>{
+                    console.log('change')
+                    this.formly.get('law_ActivityStatusId').setValue(4)
+                  }
                 },
                 expressions: {
                   hide: () => {
@@ -343,6 +348,7 @@ export class MatterDetailsActivityEditorComponent
               {
                 className: 'col-md-4',
                 key: 'law_ActivityStatusId',
+                defaultValue:!this._dynamicDialogConfig?.data?.rowData?1:'',
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
@@ -436,6 +442,7 @@ export class MatterDetailsActivityEditorComponent
                 className: 'col-md-4',
                 key: 'law_ActivityStatusId',
                 type: 'select',
+                defaultValue:1,
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
                   //required: true,

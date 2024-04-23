@@ -8,20 +8,17 @@
   <div class="col-md-6">
     <small class="text-secondary">{{ "common.matterCode" | translate }}</small>
     <p>
-      <a href="#" class="fw-bold" (click)="nagivateToMatter($event)">{{ config.data["event"]?.matterCode }}</a>
+      <a href="#" class="fw-bold" (click)="nagivateToMatter($event)">x{{ config.data["event"]?.matterCode }}</a>
     </p>
 
   </div>
-  <div class="col-md-6">
-    <small class="text-secondary">{{ "common.priority" | translate }}</small>
-    <p class="fw-bold" >{{ config.data["event"]?.priority }}</p>
-  </div>
+
   <div class="col-md-3">
     <small class="text-secondary">{{ "common.from" | translate }}</small>
-    <p class="fw-bold">{{ config.data["event"]?.from  | date:'shortTime'}}</p>
+    <p class="fw-bold">{{data?.startDate | date:'shortTime'}}</p>
   </div>
   <div class="col-md-3">
     <small class="text-secondary">{{ "common.to" | translate }}</small>
-    <p class="fw-bold">{{ config.data["event"]?.to  | date:'shortTime'}}</p>
+    <p class="fw-bold">{{data?.endDate  | date:'shortTime'}}</p>
   </div>
 </div>

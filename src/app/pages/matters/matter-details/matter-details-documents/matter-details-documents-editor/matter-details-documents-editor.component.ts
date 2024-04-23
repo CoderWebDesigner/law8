@@ -70,7 +70,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.receivedDate'
               ),
-              formate:'y-mm-dd'
+              // formate:'y-mm-dd'
               // required: true,
             },
           },
@@ -82,7 +82,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.documentDate'
               ),
-              formate:'y-mm-dd'
+              // formate:'y-mm-dd'
               // required: true,
             },
           },
@@ -94,7 +94,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.expirationDate'
               ),
-              formate:'y-mm-dd'
+              // formate:'y-mm-dd'
               // required: true,
             },
           },

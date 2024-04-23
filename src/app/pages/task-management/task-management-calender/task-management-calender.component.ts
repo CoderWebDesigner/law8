@@ -1,5 +1,17 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, inject, signal } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventApi, EventClickArg } from '@fullcalendar/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventApi,
+  EventClickArg,
+} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -8,97 +20,67 @@ import { EventsFilterPipe } from '@shared/pipes/events-filter.pipe';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TaskManagementEventDetailsComponent } from '../components/task-management-event-details/task-management-event-details.component';
+import { ApiService } from '@core/api/api.service';
+import { SharedService } from '@shared/services/shared.service';
+import { API_Config } from '@core/api/api-config/api.config';
+import { ApiRes } from '@core/models';
+import { DatePipe } from '@angular/common';
+import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
 @Component({
   selector: 'app-task-management-calender',
   templateUrl: './task-management-calender.component.html',
-  styleUrls: ['./task-management-calender.component.scss']
+  styleUrls: ['./task-management-calender.component.scss'],
+  providers: [DatePipe],
 })
 export class TaskManagementCalenderComponent implements OnInit {
   @ViewChild('fullCalendar') fullCalendar!: FullCalendarComponent;
   showFilter: boolean;
   _changeDetector = inject(ChangeDetectorRef);
-  _dialogService = inject(DialogService)
-  events: any[] = [
-    {
-      id: '1',
-      title: 'Other',
-      start: '2024-04-21',
-      assigned: 'Ahmed Awad',
-      from: '2024-04-21T00:00:00',
-      to: '2024-04-21T03:00:00',
-      matterCode: '0000-001',
-      priority:'low'
-    },
-    {
-      id: '2',
-      title: 'Hearing Session',
-      start: '2024-01-16',
-      assigned: 'Ahmed Awad',
-      matterCode: '0000-001'
-    },
-    {
-      id: '3',
-      title: 'Task',
-      start: '2024-01-17',
-      assigned: 'Ahmed Galal'
-    },
-    {
-      id: '4',
-      title: 'Hearing Session',
-      start: '2024-01-18',
-      assigned: 'Karim Galal',
-      matterCode: '0000-002'
-    },
-    {
-      id: '5',
-      title: 'Other',
-      start: '2024-01-19',
-      assigned: 'Sara Awad'
-    },
-    {
-      id: '6',
-      title: 'Hearing Session',
-      start: '2024-01-20',
-      assigned: 'Fatma Awad',
-      matterCode: '0000-001'
-    },
-    {
-      id: '7',
-      title: 'Task',
-      start: '2024-01-21',
-      assigned: 'Mariem Galal'
-    },
-    {
-      id: '8',
-      title: 'Hearing Session',
-      start: '2024-01-22',
-      assigned: 'Karim Galal',
-      matterCode: '0000-002'
-    },
-    {
-      id: '9',
-      title: 'Other',
-      start: '2024-01-15',
-      assigned: 'Ahmed Awad'
-    },
-  ]
+  _dialogService = inject(DialogService);
+  _apiService = inject(ApiService);
+  _sharedService = inject(SharedService);
+  _datePipe = inject(DatePipe);
+  events: any[] = [];
 
   calendarOptions: CalendarOptions;
-
+  constructor() {
+    console.log('constructor')
+    
+  }
   ngOnInit(): void {
+    
+    
+    this.getTaskManagementEvents();
+  }
+  getTaskManagementEvents() {
+    this._apiService
+      .get(API_Config.taskManagementCalender.get)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: any) => {
+          console.log(res['result']);
+          this.events = res['result'].map((obj) => ({
+            id: obj?.id,
+            title: obj?.law_ActivityType,
+            start: this._datePipe.transform(
+              obj?.startDate,
+              REQUEST_DATE_FORMAT
+            ),
+          }));
 
-    this.addColor()
+          this.initCalender();
+
+        },
+      });
   }
   addColor() {
-    this.events = this.events.map(obj => {
-      return { ...obj, color: this.stringToColor(obj.assigned) }
-    })
-    this.initCalender()
+    this.events = this.events.map((obj) => {
+      return { ...obj, color: this.stringToColor(obj.law_ActivityType) };
+    });
+    // this.initCalender();
   }
   initCalender() {
-
-    this.calendarOptions= {
-
+    this.calendarOptions = {
       plugins: [
         interactionPlugin,
         dayGridPlugin,
@@ -108,14 +90,12 @@ export class TaskManagementCalenderComponent implements OnInit {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
       },
       initialView: 'dayGridMonth',
-      // initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
       initialEvents: this.events,
       eventDidMount: function (info) {
-        console.log('info',info)
-
+        console.log('info', info);
       },
       weekends: true,
       editable: true,
@@ -135,25 +115,25 @@ export class TaskManagementCalenderComponent implements OnInit {
     };
   }
   handleEventHover() {
-    console.log(new Date().toISOString().replace(/T.*$/, ''))
+    console.log(new Date().toISOString().replace(/T.*$/, ''));
     // let overlayPanel = new OverlayPanel()
   }
   handleEventClick(arg: EventClickArg) {
-    console.log(arg)
+    console.log( arg.event.id);
     // Get the clicked event data
     const eventId = arg.event.id;
-    let selectedEvent = this.events.find(obj => obj.id === eventId)
+
     this._dialogService.open(TaskManagementEventDetailsComponent, {
-      width: "40%",
+      width: '40%',
       data: {
-        event: selectedEvent
+        event: eventId,
       },
-      dismissableMask: true
-    })
+      dismissableMask: true,
+    });
   }
   stringToColor(str) {
     let hash = 0;
-    for (let i = 0; i < str.length; i++) {
+    for (let i = 0; i < str?.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
 
@@ -161,14 +141,18 @@ export class TaskManagementCalenderComponent implements OnInit {
     return '#' + '000000'.substring(0, 6 - color.length) + color;
   }
   toggleFilter() {
-    this.showFilter = !this.showFilter
+    this.showFilter = !this.showFilter;
   }
   onClose(event: boolean) {
-    this.showFilter = event
+    this.showFilter = event;
   }
   onFilter(event: any) {
     const eventsFilter = new EventsFilterPipe();
-    this.calendarOptions.events = eventsFilter.transform(this.events, event['user'], 'assigned')
+    this.calendarOptions.events = eventsFilter.transform(
+      this.events,
+      event['user'],
+      'assigned'
+    );
   }
   // calendarVisible = signal(true);
   // calendarOptions = signal<CalendarOptions>({

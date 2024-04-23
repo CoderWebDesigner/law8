@@ -44,7 +44,7 @@
                   <div [appErrorMessages]="getFormArray.controls[rowIndex].date" class="mt-3"></div>
                 </td>
                 <td>
-                  <p-dropdown formControlName="matterId" [editable]="true" optionLabel="label" optionValue="value" [options]="matters" placeholder="Any" appendTo="body"
+                  <p-dropdown formControlName="mtrNo" [editable]="true" optionLabel="label" optionValue="label" [options]="matters" placeholder="Any" appendTo="body"
                     (onChange)="selectMatter($event, rowIndex)">
                   </p-dropdown>
                 </td>
@@ -88,7 +88,7 @@
       </table>
     </div>
     <div class="mt-4 d-flex justify-content-end">
-      <p-button [loading]="draftBtn.isLoading" [disabled]="selectedRows.length==0" #draftBtn styleClass="p-button-label p-button-outlined d-block py-3 me-3" 
+      <p-button [loading]="draftBtn.isLoading"  #draftBtn styleClass="p-button-label p-button-outlined d-block py-3 me-3" 
         label="{{ 'btn.saveDraft' | translate }}" (onClick)="saveDraft(draftBtn)"></p-button>
       <p-button [loading]="saveBtn.isLoading" [disabled]="selectedRows.length==0" #saveBtn styleClass="p-button-primary d-block py-3" type="submit"
         label="{{ 'btn.submit' | translate }}"></p-button>
