@@ -44,12 +44,9 @@ export class TaskManagementCalenderComponent implements OnInit {
 
   calendarOptions: CalendarOptions;
   constructor() {
-    console.log('constructor')
-    
+    console.log('constructor');
   }
   ngOnInit(): void {
-    
-    
     this.getTaskManagementEvents();
   }
   getTaskManagementEvents() {
@@ -58,35 +55,23 @@ export class TaskManagementCalenderComponent implements OnInit {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: any) => {
-          console.log(res['result']);
           this.events = res['result'].map((obj) => ({
             id: obj?.id,
             title: obj?.law_ActivityType,
-            start: this._datePipe.transform(
-              obj?.startDate,
-              REQUEST_DATE_FORMAT
-            ),
+            start: obj?.startDate,
+            // start: this._datePipe.transform(
+            //   obj?.startDate,
+            //   REQUEST_DATE_FORMAT
+            // ),
+            backgroundColor: this.stringToColor(obj.law_ActivityType),
           }));
-
           this.initCalender();
-
         },
       });
   }
-  addColor() {
-    this.events = this.events.map((obj) => {
-      return { ...obj, color: this.stringToColor(obj.law_ActivityType) };
-    });
-    // this.initCalender();
-  }
   initCalender() {
     this.calendarOptions = {
-      plugins: [
-        interactionPlugin,
-        dayGridPlugin,
-        timeGridPlugin,
-        listPlugin,
-      ],
+      plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -95,10 +80,41 @@ export class TaskManagementCalenderComponent implements OnInit {
       initialView: 'dayGridMonth',
       initialEvents: this.events,
       eventDidMount: function (info) {
-        console.log('info', info);
+        console.log('info', info.event.title);
+        switch (info.event.title) {
+          case 'Hearing Session':
+            info.el.style.backgroundColor = '#91619e';
+            info.el.style.color = 'white';
+            break;
+          case 'Task':
+            info.el.style.backgroundColor = '#108af3';
+            info.el.style.color = 'white';
+            break;
+          case 'Meeting':
+            info.el.style.backgroundColor = '#17367d';
+            info.el.style.color = 'white';
+            break;
+
+          default:
+            break;
+        }
+        info.el.classList.add('event-with-border');
+
       },
+ 
+      // eventRender: function(info) {
+      //   var date = new Date(info.event.start);
+      //   var hour = date.getHours();
+      //   if (hour === 5) {
+      //     info.el.style.backgroundColor = 'red';
+      //   } else if (hour === 7) {
+      //     info.el.style.backgroundColor = 'green';
+      //   } else {
+      //     info.el.style.backgroundColor = 'black';
+      //   }
+      //  },
       weekends: true,
-      editable: true,
+      editable: false,
       selectable: true,
       selectMirror: true,
       dayMaxEvents: true,
@@ -114,12 +130,14 @@ export class TaskManagementCalenderComponent implements OnInit {
       */
     };
   }
+
+  
   handleEventHover() {
     console.log(new Date().toISOString().replace(/T.*$/, ''));
     // let overlayPanel = new OverlayPanel()
   }
   handleEventClick(arg: EventClickArg) {
-    console.log( arg.event.id);
+    console.log(arg.event.id);
     // Get the clicked event data
     const eventId = arg.event.id;
 
@@ -138,7 +156,7 @@ export class TaskManagementCalenderComponent implements OnInit {
     }
 
     const color = Math.abs(hash).toString(16).substring(0, 6);
-    return '#' + '000000'.substring(0, 6 - color.length) + color;
+    return '#' + '00000'.substring(0, 6 - color.length) + color;
   }
   toggleFilter() {
     this.showFilter = !this.showFilter;

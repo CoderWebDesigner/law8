@@ -38,7 +38,8 @@
     "matterCategory": "فئة القضية",
     "timesheet": "Timesheet",
     "initial":"الاسم المختصر",
-    "taskCode":"TaskCode"
+    "taskCode":"TaskCode",
+    "description": "الوصف"
   },
   "btn": {
     "submit": "تاكيد",

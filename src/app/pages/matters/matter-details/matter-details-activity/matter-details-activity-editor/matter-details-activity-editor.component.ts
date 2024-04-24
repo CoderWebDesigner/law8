@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { MatterService } from '@components/matters/service/matter.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { GLOBAL_DATE_TIME_Without_Seconds_FORMATE } from '@core/utilities/defines';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
@@ -15,20 +15,38 @@ import { finalize, forkJoin } from 'rxjs';
   templateUrl: './matter-details-activity-editor.component.html',
   styleUrls: ['./matter-details-activity-editor.component.scss'],
   standalone: true,
+  providers: [DatePipe],
   imports: [CommonModule, FormlyConfigModule, SharedModule],
 })
 export class MatterDetailsActivityEditorComponent
   extends FormBaseClass
   implements OnInit, OnDestroy
 {
+  _datePipe = inject(DatePipe);
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.matterActivity;
   minDate = new Date();
   ngOnInit(): void {
-    this.getLookupsData();
-    if (this._dynamicDialogConfig?.data?.rowData) this.getData();
+    if (!this._dynamicDialogConfig?.data?.rowData)
+      this.getMatterCodeByMatterId();
+    if (this._dynamicDialogConfig?.data?.rowData) {
+      this.getLookupsData();
+      this.getData();
+    }
   }
 
+  getMatterCodeByMatterId() {
+    let matterId = this._dynamicDialogConfig?.data?.law_MatterId;
+    this._apiService
+      .get(`${API_Config.matters.getMatterCodeByMatterId}?id=${matterId}`)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.formlyModel.mtrNo = res['result'].name;
+          this.getLookupsData();
+        },
+      });
+  }
   override getData(): void {
     let id = this._dynamicDialogConfig?.data?.rowData?.id;
     this._apiService
@@ -38,6 +56,19 @@ export class MatterDetailsActivityEditorComponent
         next: (res: ApiRes) => {
           console.log(res);
           this.formlyModel = { ...res['result'] };
+          this.formlyModel.startDate = this._datePipe.transform(
+            this.formlyModel?.startDate,
+            GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+          );
+          this.formlyModel.endDate = this._datePipe.transform(
+            this.formlyModel?.endDate,
+            GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+          );
+          if (this.formlyModel?.newSession?.startDate)
+            this.formlyModel.newSession.startDate = this._datePipe.transform(
+              this.formlyModel?.newSession?.startDate,
+              GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+            );
         },
       });
   }
@@ -71,16 +102,16 @@ export class MatterDetailsActivityEditorComponent
             key: 'law_MatterId',
             defaultValue: this._dynamicDialogConfig.data.law_MatterId,
           },
-          // {
-          //   type: 'input',
-          //   key: 'matterCode',
-          //   className: 'col-md-4',
-          //   defaultValue: this._dynamicDialogConfig.data.matterCode,
-          //   props: {
-          //     label: this._languageService.getTransValue('common.matterCode'),
-          //     disabled: true,
-          //   },
-          // },
+          {
+            type: 'input',
+            key: 'mtrNo',
+            className: 'col-md-4',
+            defaultValue: this._dynamicDialogConfig.data.matterCode,
+            props: {
+              label: this._languageService.getTransValue('common.matterCode'),
+              disabled: true,
+            },
+          },
           {
             className: 'col-md-4',
             key: 'law_ActivityTypeId',
@@ -109,7 +140,7 @@ export class MatterDetailsActivityEditorComponent
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return ![3, 5, 6, 8, 4, 7].includes(
+                return ![2, 3, 5, 6, 8, 4, 7].includes(
                   field.model?.law_ActivityTypeId
                 );
               },
@@ -164,7 +195,7 @@ export class MatterDetailsActivityEditorComponent
             className: 'col-md-4',
             key: 'law_ActivityStatusId',
             type: 'select',
-            defaultValue:!this._dynamicDialogConfig?.data?.rowData?1:'',
+            defaultValue: !this._dynamicDialogConfig?.data?.rowData ? 1 : '',
             props: {
               label: this._languageService.getTransValue('matters.status'),
               //required: true,
@@ -184,12 +215,12 @@ export class MatterDetailsActivityEditorComponent
             key: 'description',
             type: 'textarea',
             props: {
-              label: this._languageService.getTransValue('matters.description'),
+              label: this._languageService.getTransValue('common.description'),
               //required: true,
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return ![3, 5, 6, 8, 4, 7].includes(
+                return ![2, 3, 5, 6, 8, 4, 7].includes(
                   field.model?.law_ActivityTypeId
                 );
               },
@@ -307,10 +338,10 @@ export class MatterDetailsActivityEditorComponent
                     label: obj.name,
                     value: obj.id,
                   })),
-                  onChange:(field: FormlyFieldConfig)=>{
-                    console.log('change')
-                    this.formly.get('law_ActivityStatusId').setValue(4)
-                  }
+                  onChange: (field: FormlyFieldConfig) => {
+                    console.log('change');
+                    this.formly.get('law_ActivityStatusId').setValue(4);
+                  },
                 },
                 expressions: {
                   hide: () => {
@@ -348,7 +379,9 @@ export class MatterDetailsActivityEditorComponent
               {
                 className: 'col-md-4',
                 key: 'law_ActivityStatusId',
-                defaultValue:!this._dynamicDialogConfig?.data?.rowData?1:'',
+                defaultValue: !this._dynamicDialogConfig?.data?.rowData
+                  ? 1
+                  : '',
                 type: 'select',
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
@@ -442,7 +475,7 @@ export class MatterDetailsActivityEditorComponent
                 className: 'col-md-4',
                 key: 'law_ActivityStatusId',
                 type: 'select',
-                defaultValue:1,
+                defaultValue: 1,
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
                   //required: true,
@@ -521,8 +554,11 @@ export class MatterDetailsActivityEditorComponent
     ];
   }
   save() {
-    this.formlyModel.startDate = this.getDate(this.formlyModel?.startDate)
-    this.formlyModel.endDate = this.getDate(this.formlyModel?.endDate)
+    this.formlyModel.startDate = this.getDate(this.formlyModel?.startDate);
+    if (this.formlyModel.endDate)
+      this.formlyModel.endDate = this.getDate(this.formlyModel?.endDate);
+    if (this.formlyModel?.newSession?.startDate)
+      this.formlyModel.newSession.startDate = this.getDate(this.formlyModel?.newSession?.startDate);
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';

@@ -109,20 +109,31 @@ export class TimesheetEditorComponent implements OnInit {
         },
       });
   }
+  calcAmount(hours: number, rate: number) {
+    let amount = hours * rate;
+    return amount;
+  }
   onStart(value: any, rowIndex: number) {
     console.log('value', value);
-    this.getFormArray.controls[rowIndex].get('tsTimmer').setValue(value?.total);
-    this.getFormArray.controls[rowIndex]
-      .get('hours')
-      .setValue(value?.hourRatio);
-    let amount =
-      value?.hourRatio * this.getFormArray.controls[rowIndex].get('rate').value;
-    this.getFormArray.controls[rowIndex].get('amount').setValue(amount);
-    this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
+    // this.getFormArray.controls[rowIndex].get('tsTimmer').setValue(value?.total);
+    // this.getFormArray.controls[rowIndex]
+    //   .get('hours')
+    //   .setValue(value?.hourRatio);
+    // this.getFormArray.controls[rowIndex].get('amount').setValue(this.calcAmount(hours,rate));
+    // this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
+    let hours = value?.hourRatio;
+    let rate = this.getFormArray.controls[rowIndex].get('rate').value;
+    this.getFormArray.controls[rowIndex].patchValue({
+      tsTimmer: value?.total,
+      hours: value?.hourRatio,
+      amount: this.calcAmount(hours, rate),
+      timing: true,
+    });
     this.getFormArray.controls.forEach((field, index) => {
       if (rowIndex != index) field.get('timing').setValue(false);
     });
   }
+
   onStop(rowIndex: number) {
     // this.getFormArray.controls[rowIndex]?.get('timing').setValue(true);
     // this.getFormArray.controls.forEach((field, index) => {
@@ -226,7 +237,7 @@ export class TimesheetEditorComponent implements OnInit {
                 item?.tmDate,
                 REQUEST_DATE_FORMAT
               );
-              item.amount = (item.hours * item.rate).toFixed(2);
+              item.amount = this.calcAmount(item.hours, item.rate).toFixed(2);
               this.addRow(item);
             });
             this.addRow();
@@ -251,8 +262,10 @@ export class TimesheetEditorComponent implements OnInit {
       });
     } else {
       let matterId = this.matters.find((obj) => obj.label == e.value).value;
-      this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId)
-
+      this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId);
+      let lawyerId =
+        this.getFormArray.controls[rowIndex].get('law_LawerId').value;
+      this.getRateFromLawyerIdAndMatterId(rowIndex);
       this.getClientNameByMatterId(matterId, rowIndex);
     }
 
@@ -316,6 +329,35 @@ export class TimesheetEditorComponent implements OnInit {
     this.getFormArray.controls.forEach((formGroup: FormGroup) => {
       formGroup.get('selected').setValue(this.selectAllRows);
     });
+  }
+  getRateFromLawyerIdAndMatterId(rowIndex: number) {
+    let row = this.getFormArray.value[rowIndex];
+    let lawyerId = row?.law_LawerId;
+    let matterId = row?.matterId;
+    console.log('');
+    if (lawyerId && matterId) {
+      this._apiService
+        .get(
+          `${API_Config.timesheet.getRateFromLawyerIdAndMatterId}?id=${matterId}&lawerId=${lawyerId}`
+        )
+        .pipe(this._sharedService.takeUntilDistroy())
+        .subscribe({
+          next: (res: ApiRes) => {
+            console.log(+res['result'].amount);
+            let hours =
+              this.getFormArray.controls[rowIndex]?.get('hours').value;
+            let rate = this.getFormArray.controls[rowIndex]?.get('rate').value;
+            this.getFormArray.controls[rowIndex].patchValue({
+              rate: +res['result'].amount,
+              amount: this.calcAmount(hours, rate),
+              law_TaskCodeId: res['result'].law_TaskCodeId,
+            });
+          },
+        });
+    }
+    console.log('row', this.getFormArray.value[rowIndex]);
+    console.log('laywerId', lawyerId);
+    console.log('matterId', matterId);
   }
   getTableStatistics() {
     this.requestForm
@@ -418,7 +460,7 @@ export class TimesheetEditorComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           if (res.isSuccess) {
-            this.getFormArray.controls=[]
+            this.getFormArray.controls = [];
             this.getDraftTimesheet();
             const text = this._languageService.getTransValue(
               'messages.createdSuccessfully'

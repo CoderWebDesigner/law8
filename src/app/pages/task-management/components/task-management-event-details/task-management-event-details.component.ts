@@ -38,10 +38,16 @@ export class TaskManagementEventDetailsComponent implements OnInit {
 
   nagivateToMatter(e) {
     e.preventDefault();
-    this._router.navigate([
-      'matters/view/',
-     this.data.law_MatterId,
-    ]);
+    const url = this._router.serializeUrl(
+      this._router.createUrlTree([`/matters/view/${this.data.law_MatterId}`])
+    );
+    console.log('url',url)
+  
+    window.open("#" +url, '_blank');
+    // this._router.navigate([
+    //   'matters/view/',
+     
+    // ]);
     this._dialogService.dialogComponentRefMap.forEach((dialog) => {
       dialog.destroy();
     });

@@ -38,7 +38,8 @@
     "matterCategory":"Matter Category",
     "timesheet": "Timesheet",
     "initial":"Initial",
-    "taskCode":"TaskCode"
+    "taskCode":"TaskCode",
+    "description":"Description"
 
   },
   "btn": {

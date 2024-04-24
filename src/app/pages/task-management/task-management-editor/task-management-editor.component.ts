@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
-import { GLOBAL_DATE_TIME_FORMATE } from '@core/utilities/defines';
+import { GLOBAL_DATE_TIME_FORMATE, GLOBAL_DATE_TIME_Without_Seconds_FORMATE } from '@core/utilities/defines';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 import { forkJoin, finalize } from 'rxjs';
@@ -44,7 +44,20 @@ export class TaskManagementEditorComponent
         next: (res: ApiRes) => {
           console.log(res);
           this.formlyModel = { ...res['result'] };
-          this.formlyModel.startDate = this._datePipe.transform(this.formlyModel.startDate,GLOBAL_DATE_TIME_FORMATE)
+         
+          this.formlyModel.startDate = this._datePipe.transform(
+            this.formlyModel?.startDate,
+            GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+          );
+          this.formlyModel.endDate = this._datePipe.transform(
+            this.formlyModel?.endDate,
+            GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+          );
+          if (this.formlyModel?.newSession?.startDate)
+            this.formlyModel.newSession.startDate = this._datePipe.transform(
+              this.formlyModel?.newSession?.startDate,
+              GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+            );
         },
       });
   }
@@ -115,7 +128,7 @@ export class TaskManagementEditorComponent
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return ![3, 5, 6, 8, 4, 7].includes(
+                return ![2, 3, 5, 6, 8, 4, 7].includes(
                   field.model?.law_ActivityTypeId
                 );
               },
@@ -170,6 +183,9 @@ export class TaskManagementEditorComponent
             className: 'col-md-4',
             key: 'law_ActivityStatusId',
             type: 'select',
+            defaultValue: !this.requestId
+            ? 1
+            : '',
             props: {
               label: this._languageService.getTransValue('matters.status'),
               //required: true,
@@ -189,12 +205,12 @@ export class TaskManagementEditorComponent
             key: 'description',
             type: 'textarea',
             props: {
-              label: this._languageService.getTransValue('matters.description'),
+              label: this._languageService.getTransValue('common.description'),
               //required: true,
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return ![3, 5, 6, 8, 4, 7].includes(
+                return ![2,3, 5, 6, 8, 4, 7].includes(
                   field.model?.law_ActivityTypeId
                 );
               },
@@ -312,6 +328,10 @@ export class TaskManagementEditorComponent
                     label: obj.name,
                     value: obj.id,
                   })),
+                  onChange: (field: FormlyFieldConfig) => {
+                    console.log('change');
+                    this.formly.get('law_ActivityStatusId').setValue(4);
+                  },
                 },
                 expressions: {
                   hide: () => {
@@ -350,6 +370,9 @@ export class TaskManagementEditorComponent
                 className: 'col-md-4',
                 key: 'law_ActivityStatusId',
                 type: 'select',
+                defaultValue: !this.requestId
+                ? 1
+                : '',
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
                   //required: true,
@@ -442,6 +465,7 @@ export class TaskManagementEditorComponent
                 className: 'col-md-4',
                 key: 'law_ActivityStatusId',
                 type: 'select',
+                defaultValue: 1,
                 props: {
                   label: this._languageService.getTransValue('matters.status'),
                   //required: true,
@@ -523,8 +547,10 @@ export class TaskManagementEditorComponent
   override onSubmit(): void {
     if (this.formly.invalid) return;
     this.formlyModel.startDate = this.getDate(this.formlyModel?.startDate);
-    this.formlyModel.endDate = this.getDate(this.formlyModel?.endDate);
-    console.log('startDate',this.getDate(this.formlyModel?.startDate))
+    if (this.formlyModel.endDate)
+      this.formlyModel.endDate = this.getDate(this.formlyModel?.endDate);
+    if (this.formlyModel?.newSession?.startDate)
+      this.formlyModel.newSession.startDate = this.getDate(this.formlyModel?.newSession?.startDate);
     const successMsgKey = this.requestId
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';

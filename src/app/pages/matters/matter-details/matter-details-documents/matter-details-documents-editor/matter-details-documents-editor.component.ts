@@ -58,7 +58,7 @@ export class MatterDetailsDocumentsEditorComponent
             key: 'description',
             type: 'textarea',
             props: {
-              label: this._languageService.getTransValue('matters.description'),
+              label: this._languageService.getTransValue('common.description'),
               // required: true,
             },
           },

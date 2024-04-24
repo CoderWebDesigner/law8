@@ -217,7 +217,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             key: 'descr',
             className: 'col-md-12',
             props: {
-              label: this._languageService.getTransValue('matters.description'),
+              label: this._languageService.getTransValue('common.description'),
               disabled: this.previewOnly,
             },
           },

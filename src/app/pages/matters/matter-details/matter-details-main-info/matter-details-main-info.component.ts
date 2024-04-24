@@ -171,7 +171,7 @@ export class MatterDetailsMainInfoComponent
             key: 'descr',
             className: 'col-lg-3 col-md-4',
             props: {
-              label: this._languageService.getTransValue('matters.description'),
+              label: this._languageService.getTransValue('common.description'),
               disabled: this.previewOnly,
             },
           },
