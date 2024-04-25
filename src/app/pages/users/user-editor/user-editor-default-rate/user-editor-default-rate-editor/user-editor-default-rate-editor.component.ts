@@ -1,56 +1,47 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { SharedService } from '@shared/services/shared.service';
 import { SharedModule } from '@shared/shared.module';
 import { ButtonModule } from 'primeng/button';
-
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-lookups-sub-rate',
+  selector: 'app-user-editor-default-rate-editor',
+  templateUrl: './user-editor-default-rate-editor.component.html',
+  styleUrls: ['./user-editor-default-rate-editor.component.scss'],
   standalone: true,
-  imports: [CommonModule, SharedModule, ButtonModule, FormlyConfigModule],
-  templateUrl: './lookups-sub-rate.component.html',
-  styleUrls: ['./lookups-sub-rate.component.scss'],
+  imports: [ SharedModule, ButtonModule, FormlyConfigModule],
 })
-export class LookupsSubRateComponent extends FormBaseClass implements OnInit {
-  title: string;
-
-  config = inject(DynamicDialogConfig);
-  dialogRef = inject(DynamicDialogRef);
+export class UserEditorDefaultRateEditorComponent extends FormBaseClass implements OnInit {
   ngOnInit(): void {
-    if (this.config?.data?.rowData) this.getData();
-    this.getLookupsData();
+    if (this._dynamicDialogConfig?.data?.rowData) this.getData();
+    this.initForm()
   }
 
   override initForm(): void {
-    console.log(this.config.data);
+    console.log(this._dynamicDialogConfig.data);
     this.formlyFields = [
-      // {
-      //   key: 'mainItem',
-      //   type: 'select',
-      //   // hide:,
-      //   props: {
-      //     // required: true,
-      //     label: this._languageService.getTransValue('lookups.mainCategory'),
-      //       label:
-      //         this._languageService.getSelectedLanguage() == 'ar'
-      //           ? obj.nameAR
-      //           : obj.nameEN,
-      //       value: 1,
-      //   },
-      // },
+
+      {
+        key: 'rate',
+        type: 'input',
+        props: {
+          label: this._languageService.getTransValue('lookups.rateName'),
+          disabled: true,
+          
+        },
+        validators: {
+          validation: ['englishLetters'],
+        },
+      },
       {
         key: 'name',
         type: 'input',
         props: {
           label: this._languageService.getTransValue('lookups.rateName'),
-          required: true,
+          disabled: true,
         },
         validators: {
           validation: ['englishLetters'],
@@ -74,39 +65,24 @@ export class LookupsSubRateComponent extends FormBaseClass implements OnInit {
         props: {
           label: this._languageService.getTransValue('lookups.active'),
           class: 'd-block',
+          disabled:true
         },
       },
     ];
   }
   override getData(): void {
-    this.formlyModel = { ...this.config?.data?.rowData };
+    this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
   }
-  override getLookupsData(): void {
-    this._apiService
-      .get(API_Config.general.getJurisdictionLookup)
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res: ApiRes) => {
-          if (res && res.isSuccess) {
-            this.lookupsData = res['result'];
-            this.initForm();
-          }
-        },
-      });
-  }
+
   override onSubmit(): void {
     if (this.formly.invalid) return;
 
     console.log(this.formlyModel);
-    const successMsgKey = this.config?.data?.rowData
-      ? 'messages.updateSuccessfully'
-      : 'messages.createdSuccessfully';
-    const requestPayload = this.config?.data?.rowData
-      ? { ...this.formlyModel, id: this.config?.data?.rowData?.id }
+    const successMsgKey = 'messages.createdSuccessfully';
+    const requestPayload = this._dynamicDialogConfig?.data?.rowData
+      ? { ...this.formlyModel, id: this._dynamicDialogConfig?.data?.rowData?.id }
       : this.formlyModel;
-    const path = this.config?.data?.rowData
-      ? API_Config.rate.update
-      : API_Config.rate.create;
+    const path = API_Config.usersRate.update
 
     this._apiService
       .post(path, requestPayload)
@@ -120,7 +96,7 @@ export class LookupsSubRateComponent extends FormBaseClass implements OnInit {
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-              this.dialogRef.close(dialog);
+              this._dynamicDialogRef.close(dialog);
             });
           } else {
             this._toastrNotifiService.displayErrorToastr(res?.message);
@@ -131,4 +107,6 @@ export class LookupsSubRateComponent extends FormBaseClass implements OnInit {
         },
       });
   }
+
+
 }

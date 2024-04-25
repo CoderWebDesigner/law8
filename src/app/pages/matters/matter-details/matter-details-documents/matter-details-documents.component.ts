@@ -118,10 +118,8 @@ export class MatterDetailsDocumentsComponent extends FileActions implements OnIn
       finalize(() => btn.isLoading = false)
     ).subscribe({
       next: (res: ApiRes) => {
-        // تحقق من نوع الملف
         const fileType = res['result'].applicationType;
         if (fileType.includes('pdf') || fileType.includes('image')) {
-          // إذا كان الملف PDF أو صورة، افتح المعاينة
           this._dialogService.open(MatterDocumentPreviewComponent, {
             width: '40%',
             height: '100%',

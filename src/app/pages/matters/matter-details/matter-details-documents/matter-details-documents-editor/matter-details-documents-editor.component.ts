@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -13,6 +13,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   styleUrls: ['./matter-details-documents-editor.component.scss'],
   standalone: true,
   imports: [CommonModule, FormlyConfigModule, SharedModule],
+  providers: [DatePipe],
 })
 export class MatterDetailsDocumentsEditorComponent
   extends FormBaseClass
@@ -20,6 +21,7 @@ export class MatterDetailsDocumentsEditorComponent
 {
   apiUrls = API_Config.matterDocuments;
   _config = inject(DynamicDialogConfig);
+  _datePipe = inject(DatePipe);
   ngOnInit(): void {
     this.initForm();
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
@@ -33,9 +35,10 @@ export class MatterDetailsDocumentsEditorComponent
         next: (res: ApiRes) => {
           console.log(res);
           this.formlyModel = { ...res['result'] };
-          this.formlyModel.attachment=res['result'].applicationType+res['result'].logoFile
+          this.formlyModel.attachment =
+            res['result'].applicationType + res['result'].logoFile;
 
-          console.log('formlyModel',this.formlyModel)
+          console.log('formlyModel', this.formlyModel);
         },
       });
   }
@@ -70,7 +73,7 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.receivedDate'
               ),
-              // formate:'y-mm-dd'
+              //  formate:''
               // required: true,
             },
           },
@@ -82,8 +85,6 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.documentDate'
               ),
-              // formate:'y-mm-dd'
-              // required: true,
             },
           },
           {
@@ -94,8 +95,6 @@ export class MatterDetailsDocumentsEditorComponent
               label: this._languageService.getTransValue(
                 'matters.expirationDate'
               ),
-              // formate:'y-mm-dd'
-              // required: true,
             },
           },
         ],
@@ -103,13 +102,30 @@ export class MatterDetailsDocumentsEditorComponent
     ];
   }
   save() {
-    delete this.formlyModel.fileName
-    delete this.formlyModel.filePathe
-    delete this.formlyModel.logoFile
-    delete this.formlyModel.applicationType
+    delete this.formlyModel.fileName;
+    delete this.formlyModel.filePathe;
+    delete this.formlyModel.logoFile;
+    delete this.formlyModel.applicationType;
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
+    const formattedDate = this._datePipe.transform(
+      this.formlyModel.documentDate,
+      'yyyy-MM-ddTHH:mm:ss.SSSZ'
+    );
+    const expirationDate = this._datePipe.transform(
+      this.formlyModel.expirationDate,
+      'yyyy-MM-ddTHH:mm:ss.SSSZ'
+    );
+    const ReceivedDate = this._datePipe.transform(
+      this.formlyModel.receivedDate,
+      'yyyy-MM-ddTHH:mm:ss.SSSZ'
+    );
+
+    this.formlyModel.documentDate = formattedDate;
+    this.formlyModel.expirationDate = expirationDate;
+    this.formlyModel.receivedDate = ReceivedDate;
+
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,

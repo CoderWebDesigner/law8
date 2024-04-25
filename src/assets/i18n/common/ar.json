@@ -69,7 +69,8 @@
     "success": "نجاح!",
     "sureDelete": "هل أنت متأكد أنك تريد حذف؟",
     "dropClick":"رفع الملفات للتحميل أو النقر فوق",
-    "uploadFile": "قم بسحب وإفلات  هنا او اضغط للتحميل"
+    "uploadFile": "قم بسحب وإفلات  هنا او اضغط للتحميل",
+    "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",

@@ -28,6 +28,7 @@ import { Matters_Documents_API } from './matter-documents';
 import { Matters_Time_Sheet_API } from './matter-timesheet';
 import { Clients_Contact_API } from './client-contacts';
 import { Task_Management_Calender_API } from './task-managment-calender';
+import { Users_Rate_API } from './user-rate';
 
 export const API_Config = {
   ...General_API,
@@ -59,5 +60,6 @@ export const API_Config = {
   ...Matters_Documents_API,
   ...Lookups_API,
   ...Task_Management_Calender_API,
+  ...Users_Rate_API,
   ...Matters_Time_Sheet_API
 };

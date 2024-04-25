@@ -9,6 +9,13 @@
     "telephone":"Telephone",
     "addUser":"Add User",
     "timesheetDate":"Timesheet Date",
-    "timesheetDateSetting":"Timesheet Date Setting"
+    "timesheetDateSetting":"Timesheet Date Setting",
+    "defaultRate":"Default Rate",
+    "title": "Title",
+    "industry": "Industry",
+    "department": "Department",
+    "defUsrId": "Default User ID",
+    "goal": "Goal"
+
   }
 }
