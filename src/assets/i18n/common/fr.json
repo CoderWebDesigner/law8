@@ -37,7 +37,8 @@
     "adjournmentReasons": "Adjournment Reasons",
     "matterCategory": "Matter Category",
     "timesheet":"Timesheet",
-    "initial":"Initial"
+    "initial":"Initial",
+    "description":"Description"
   },
   "btn": {
     "save": "Sauvegarder",
@@ -68,7 +69,8 @@
     "success": "Succès!",
     "sureDelete": "Etes-vous sûr que vous voulez supprimer?",
     "dropClick": "Déposez les fichiers pour télécharger ou cliquer",
-    "uploadFile": "Drag and drop here or click to download"
+    "uploadFile": "Drag and drop here or click to download",
+    "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

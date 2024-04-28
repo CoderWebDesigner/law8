@@ -12,13 +12,16 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { UsersTimesheetSettingComponent } from './users-timesheet-setting/users-timesheet-setting.component';
+import { UserEditorDefaultRateComponent } from './user-editor/user-editor-default-rate/user-editor-default-rate.component';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
     UsersComponent,
     UserEditorComponent,
     UserChangePasswordComponent,
-    UsersTimesheetSettingComponent
+    UsersTimesheetSettingComponent,
+    UserEditorDefaultRateComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { UsersTimesheetSettingComponent } from './users-timesheet-setting/users-
     SharedSearchInputComponent,
     SharedModule,
     FormlyConfigModule,
-    TooltipModule
+    TooltipModule,
+    TabViewModule
   ]
 })
 export class UsersModule { }

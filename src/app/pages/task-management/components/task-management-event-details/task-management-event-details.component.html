@@ -3,25 +3,26 @@
     <small class="text-secondary">{{
       "taskManagement.eventTitle" | translate
     }}</small>
-    <p class="fw-bold">{{ config.data["event"]?.title }}</p>
+    <p class="fw-bold">{{ data?.law_ActivityType }}</p>
   </div>
   <div class="col-md-6">
     <small class="text-secondary">{{ "common.matterCode" | translate }}</small>
     <p>
-      <a href="#" class="fw-bold" (click)="nagivateToMatter($event)">{{ config.data["event"]?.matterCode }}</a>
+      <a href="#" class="fw-bold" (click)="nagivateToMatter($event)" target="_blank">{{ data?.mtrNo }}</a>
     </p>
 
   </div>
-  <div class="col-md-6">
-    <small class="text-secondary">{{ "common.priority" | translate }}</small>
-    <p class="fw-bold" >{{ config.data["event"]?.priority }}</p>
-  </div>
+
   <div class="col-md-3">
     <small class="text-secondary">{{ "common.from" | translate }}</small>
-    <p class="fw-bold">{{ config.data["event"]?.from  | date:'shortTime'}}</p>
+    <p class="fw-bold">{{data?.startDate | date:'shortTime'}}</p>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3" *ngIf="data?.endDate && data.law_ActivityTypeId ==4">
     <small class="text-secondary">{{ "common.to" | translate }}</small>
-    <p class="fw-bold">{{ config.data["event"]?.to  | date:'shortTime'}}</p>
+    <p class="fw-bold">{{data?.endDate  | date:'shortTime'}}</p>
+  </div>
+  <div class="col-12">
+    <small class="text-secondary">{{ "common.description" | translate }}</small>
+    <p class="fw-bold">{{data?.description }}</p>
   </div>
 </div>

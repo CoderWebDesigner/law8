@@ -39,8 +39,8 @@ export class LanguageService {
   }
 
 
-  getTransValue(value: string) {
-    return this._translateService.instant(value)
+  getTransValue(value: string,obj?:{[key:string]:any}) {
+    return this._translateService.instant(value,obj)
   }
 
   changeDirection(lang: string) {

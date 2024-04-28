@@ -1,9 +1,10 @@
 <shared-card [title]="'menu.taskManagement.calender' | translate" [borderRadius]="20">
- <div headerActions>
-  <div class="filter position-relative">
-    <p-button icon="pi pi-filter"(onClick)="toggleFilter()"></p-button>
-    <app-task-management-calender-filter-form *ngIf="showFilter" (onFilter)="onFilter($event)" (onClose)="onClose($event)"></app-task-management-calender-filter-form>
+  <div headerActions>
+    <div class="filter position-relative">
+      <p-button icon="pi pi-filter" (onClick)="toggleFilter()"></p-button>
+      <app-task-management-calender-filter-form *ngIf="showFilter" (onFilter)="onFilter($event)"
+        (onClose)="onClose($event)"></app-task-management-calender-filter-form>
+    </div>
   </div>
- </div>
-  <full-calendar #fullCalendar [options]="calendarOptions" body></full-calendar>
+  <full-calendar #fullCalendar [options]="calendarOptions" body *ngIf="calendarOptions"></full-calendar>
 </shared-card>

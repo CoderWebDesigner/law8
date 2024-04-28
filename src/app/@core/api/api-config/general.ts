@@ -26,7 +26,8 @@ export const General_API = {
       "getFinalJudgement":"AppLookup/GetLaw_FinalJudgementModelLookup",
       "getActivityStatus":"AppLookup/GetLaw_ActivityStatusModelLookup",
       "getAdjournmentReasons":"AppLookup/GetLaw_AdjournmentReasonsModeLookup",
-      "getRecentMatters":"AppLookup/GetRecentMatterCodeForUserLookup"
+      "getRecentMatters":"AppLookup/GetRecentMatterCodeForUserLookup",
+      "getMatterCodes":"AppLookup/GetLawMattertCodeLookup"
   }
 
 }
