@@ -10,7 +10,7 @@
     "logout":"Logout",
     "resetPassword":"Reset Password",
     "resetPasswordInThreeSteps":"Give following information & reset password in 3 steps only",
-    "userIdAndEmail":"User Id & Email",
+    "userIdAndEmail":"Email",
     "verify":"Verify",
     "newPassword":"New Password",
     "userId":"User Id",
@@ -19,7 +19,9 @@
     "verfiyOtp":"Verify OTP",
     "twoStepsVerifiy":"Two-Step Verification",
     "enterVerificationCode":"Enter the verification code we sent to your email",
-    "confirmPassword":"Confirm Password"
+    "confirmPassword":"Confirm Password",
+    "username": "Username",
+    "password": "Password"
 
 
   }

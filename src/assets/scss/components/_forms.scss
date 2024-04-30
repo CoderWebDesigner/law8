@@ -167,3 +167,7 @@ textarea[readonly] {
     background: rgba(#ec2425, 0.8);
   }
 }
+
+.show-password{
+  #{$right}: 15px;
+}

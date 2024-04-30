@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 
 @Component({
   selector: 'app-user-change-password',
@@ -13,12 +15,16 @@ export class UserChangePasswordComponent extends FormBaseClass implements OnInit
   initForm() {
     this.formlyFields = [
       {
-        key: "password",
+        key: "newPassword",
         type: "password",
         props: {
           label: this._languageService.getTransValue("common.password"),
           required:true
         }
+      },
+      {
+        key:'userId',
+        defaultValue:this._dynamicDialogConfig?.data?.userId
       },
       {
         key: "confirmPassword",
@@ -30,20 +36,34 @@ export class UserChangePasswordComponent extends FormBaseClass implements OnInit
         validators: {
           fieldMatch: {
             expression: (control) =>
-              control.value === this.formlyModel.password,
+              control.value === this.formlyModel.newPassword,
             message: this._languageService.getTransValue(
               'validation.passwordNotMatching'
             ),
           },
         },
         expressionProperties: {
-          'props.disabled': (model) => !this.formly.get('password')?.valid,
+          'props.disabled': (model) => !this.formly.get('newPassword')?.valid,
         },
       },
     ]
   }
   override onSubmit(): void {
-    throw new Error('Method not implemented.');
+    delete this.formlyModel.confirmPassword
+    this._apiService.post(API_Config.auth.changePassword,this.formlyModel).pipe(
+      this._sharedService.takeUntilDistroy(),
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res.isSuccess){
+          this._toastrNotifiService.displaySuccessMessage(res.message);
+          this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+            this._dynamicDialogRef.close(dialog);
+          });
+        }else{
+          this._toastrNotifiService.displaySuccessMessage(res.message);
+        }
+      }
+    })
   }
 
 }

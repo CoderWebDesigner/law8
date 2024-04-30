@@ -12,7 +12,7 @@ import { OtpComponent } from './otp/otp.component';
 import { UserIdStepOneComponent } from './forgetpassword/user-id-step-one/user-id-step-one.component';
 import { VerfiyStepTwoComponent } from './forgetpassword/verfiy-step-two/verfiy-step-two.component';
 import { NewPasswordStepThreeComponent } from './forgetpassword/new-password-step-three/new-password-step-three.component';
-import { SharedActionsComponent } from '@shared/components/shared-actions/shared-actions.component';
+import { SecondsToTimePipe } from '@shared/pipes/secondsToTime/seconds-to-time.pipe';
 
 const routes: Routes = [
   {
@@ -41,6 +41,7 @@ const routes: Routes = [
     SharedModule,
     FormlyConfigModule,
     StepsModule
-  ]
+  ],
+  providers:[SecondsToTimePipe]
 })
 export class AuthModule { }

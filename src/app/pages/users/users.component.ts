@@ -6,7 +6,6 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 import { API_Config } from '@core/api/api-config/api.config';
-import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-users',
@@ -39,11 +38,14 @@ export class UsersComponent {
     ar:  Users_Columns_AR,
   };
 
-  openChangePasswordModal(){
+  openChangePasswordModal(userId:string){
     this._dialogService.open(UserChangePasswordComponent,{
       width:'30%',
       dismissableMask: true,
-      header:this._languageService.getTransValue('users.changePassword')
+      header:this._languageService.getTransValue('users.changePassword'),
+      data:{
+        userId:userId
+      }
     })
   }
   toggleFilter() {

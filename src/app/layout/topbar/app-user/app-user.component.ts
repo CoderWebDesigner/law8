@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { SharedModule } from '@shared/shared.module';
@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [MenuModule, SharedModule,InlineSVGModule],
 })
-export class AppUserComponent {
+export class AppUserComponent implements OnInit{
+  ngOnInit(): void {
+    console.log(this._authService.getDecodedToken())
+  }
   _languageService = inject(LanguageService);
   _authService = inject(AuthService);
   _router = inject(Router);
@@ -21,14 +24,14 @@ export class AppUserComponent {
   items: MenuItem[] = [
     {
       label: this?._languageService.getTransValue('common.profile'),
-      icon: 'kl kl-assign',
+      icon: 'pi pi-user',
       command:()=>{
         this._router.navigate(['/profile'])
       }
     },
     {
       label: this?._languageService.getTransValue('auth.logout'),
-      icon: 'kl kl-logout',
+      icon: 'pi pi-sign-out',
       command: () => {
         this._authService.logout();
       },

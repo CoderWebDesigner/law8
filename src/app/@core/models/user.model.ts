@@ -1,4 +1,5 @@
 export interface User {
+  userName?:string;
   Role?: string;
   UserId?: string;
   spId?: number;

@@ -18,7 +18,7 @@
         [icon]="'pi pi-key  fs-4'"
         tooltipPosition="top"
         [pTooltip]="'users.changePassword'| translate"
-        (onClick)="openChangePasswordModal()"
+        (onClick)="openChangePasswordModal(rowData.id)"
       ></p-button>
     </ng-template>
   </shared-table>
