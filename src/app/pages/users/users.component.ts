@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, LanguageService } from '@core/services';
 import { Users_Columns_AR, Users_Columns_EN, Users_Columns_FR } from './users-columns.config';
@@ -6,7 +6,7 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
 import { DialogService } from 'primeng/dynamicdialog';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 import { API_Config } from '@core/api/api-config/api.config';
-import { PAGESIZE } from '@core/utilities/defines';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 
 @Component({
   selector: 'app-users',
@@ -17,6 +17,7 @@ export class UsersComponent {
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
   _authService = inject(AuthService);
+  _sharedTableService=inject(SharedTableService)
   router = inject(Router);
   apiUrls=API_Config.users;
   showFilter: boolean;
@@ -39,11 +40,14 @@ export class UsersComponent {
     ar:  Users_Columns_AR,
   };
 
-  openChangePasswordModal(){
+  openChangePasswordModal(userId:string){
     this._dialogService.open(UserChangePasswordComponent,{
       width:'30%',
       dismissableMask: true,
-      header:this._languageService.getTransValue('users.changePassword')
+      header:this._languageService.getTransValue('users.changePassword'),
+      data:{
+        userId:userId
+      }
     })
   }
   toggleFilter() {
@@ -51,5 +55,8 @@ export class UsersComponent {
   }
   onClose(event: boolean) {
     this.showFilter = event
+  }
+  onFilter(){
+    this._sharedTableService.refreshData.next(true);
   }
 }

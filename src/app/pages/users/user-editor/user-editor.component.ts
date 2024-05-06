@@ -189,7 +189,10 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('users.defUsrId'),
               required: true,
-              options: [{ label: 'user 1', value: 'user 1' }],
+              options: this.lookupsData[3].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
             },
           },
           {
@@ -239,6 +242,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       this._apiService.get(API_Config.general.getIndustryModel),
       this._apiService.get(API_Config.general.getRateTypeLookup),
       this._apiService.get(API_Config.general.getDepartmentLookup),
+      this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({

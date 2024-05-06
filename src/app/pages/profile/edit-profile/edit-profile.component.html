@@ -3,8 +3,7 @@
 <form [formGroup]="formly" (ngSubmit)="onSubmit()">
   <shared-card [title]="'profile.editProfile' | translate" [withTitleDivider]="true">
       <div headerActions>
-          <button pButton type="submit" class="mx-3">
-              {{'profile.saveBtn'|translate}}
+          <button pButton type="submit" class="mx-3" [loading]="isLoading" [label]="'profile.saveBtn'|translate">
           </button>
           <p-button (onClick)="onChangeActiveIndex()">
               {{'profile.resetPassword'|translate}}

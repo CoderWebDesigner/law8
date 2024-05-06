@@ -46,7 +46,8 @@
               !col?.isAction &&
               !col?.withIcon &&
               !col?.isLargeText && 
-              !col?.isCheck
+              !col?.isCheck && 
+              !col?.isFloat
             ">
             {{ rowData[col.field] }}
           </ng-container>
@@ -67,6 +68,10 @@
             <p-checkbox [binary]="true" inputId="binary" [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
               (onChange)="onSelectionChange(rowData)"></p-checkbox>
           </ng-container>
+          <ng-container *ngIf="col?.isFloat">
+            <span> {{rowData[col.field] | number : '1.2-2'}}</span>
+          </ng-container>
+          
 
           <ng-container *ngIf="col?.withIcon">
             <img [src]="'./assets/images/' + rowData[col.field] + '.png'" alt="" />

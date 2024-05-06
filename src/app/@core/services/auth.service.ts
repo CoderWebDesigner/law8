@@ -24,22 +24,16 @@ export class AuthService {
   _apiService = inject(ApiService);
   _router = inject(Router);
 
+  setUser(user:User){
+    this.user=user
+  }
 
+  
   // initiating the default values
   constructor() {
     this.status = { isLoggedIn: !!this._storageService.getStorage(USER) };
     this.user = this._storageService.getStorage(USER) || null;
   }
-
-
-  public setUser(user: any) {
-    this.user = user;
-  }
-
-  public getUser() {
-    return this.user;
-  }
-
 
   login(body: { username: string, password: string }): Observable<{ token: string }> {
     return this._apiService.post(this.apiUrl, body)

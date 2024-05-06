@@ -180,6 +180,7 @@ export const Timesheet_Columns_EN = [
   {
     header: 'Total Amount',
     field: 'totalAmount',
+    isFloat:true
   },
   {
     header: 'Explanation',
@@ -222,6 +223,7 @@ export const Timesheet_Columns_FR = [
   {
     header: 'Total Amount',
     field: 'totalAmount',
+    isFloat:true
   },
   {
     header: 'Explanation',
@@ -263,6 +265,7 @@ export const Timesheet_Columns_AR = [
   {
     header: 'Total Amount',
     field: 'totalAmount',
+    isFloat:true
   },
   {
     header: 'Explanation',

@@ -1,5 +1,5 @@
 
-<ng-otp-input  [formCtrl]="formControl"  [config]="{length:5, inputClass:'custom-otp-input',containerClass: props['class']}"></ng-otp-input>
+<ng-otp-input  [formCtrl]="formControl"  [config]="{length:props['length'], inputClass:'custom-otp-input',containerClass: props['class']}"></ng-otp-input>
 <p class="mt-2">
   {{props['desc']}}
 </p>

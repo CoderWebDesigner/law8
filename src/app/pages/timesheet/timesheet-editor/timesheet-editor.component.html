@@ -40,7 +40,7 @@
                 </td>
                 <td>
                   <p-calendar dateFormat="yy-mm-dd" formControlName="tmDate" appendTo="body" [baseZIndex]="1009"
-                    hourFormat="12"></p-calendar>
+                    hourFormat="12" [minDate]="timesheetDate"></p-calendar>
                   <div [appErrorMessages]="getFormArray.controls[rowIndex].date" class="mt-3"></div>
                 </td>
                 <td>

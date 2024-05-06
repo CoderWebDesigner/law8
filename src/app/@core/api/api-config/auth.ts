@@ -1,9 +1,11 @@
 export const Auth_API = {
   "auth":{
-      "login":"/PortalLogin",
-      "verifyOTP": "/VerifyOTP/",
-      "getVerificationCode": "/GetVerificationCode/",
-      "verifyEmailCode": "/VerifyEmailCode/"
+      "login":"Auth/login",
+      "verifyOTP": "Auth/SignIn",
+      "forgetPasswordSendOtp":"Auth/SendOtp",
+      "forgetPassword":"Auth/ForgetPassword",
+      "forgetPasswordValidateOtp":"Auth/ValidateOtp",
+      "changePassword":"Auth/ChangePassword"
   }
 
 }

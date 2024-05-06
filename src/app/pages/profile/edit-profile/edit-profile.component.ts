@@ -1,39 +1,60 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
+import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { User } from '@core/models';
+import { ApiRes, User } from '@core/models';
 import { StorageService } from '@core/services';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
 })
-export class EditProfileComponent extends FormBaseClass implements OnChanges{
+export class EditProfileComponent extends FormBaseClass implements OnChanges {
+  @Input({ required: true }) userInfo: User;
+  @Output() changeActiveIndex = new EventEmitter<number>();
+  @Output() onEdit = new EventEmitter<boolean>();
+  _storageService = inject(StorageService);
 
-  @Input({required:true}) userInfo:User;
-  @Output() changeActiveIndex = new EventEmitter<number>()
-  @Output() onEdit = new EventEmitter<boolean>()
-  _storageService = inject(StorageService)
   ngOnChanges(changes: SimpleChanges): void {
-    this.formlyModel =  {...changes['userInfo'].currentValue}
-    this.initForm()
+    this.formlyModel = { ...changes['userInfo'].currentValue };
+    this.formlyModel.Attachment=this._authService?.user?.Photo
+    this.getLookupsData();
+  }
+  override getLookupsData(): void {
+    this._apiService
+      .get(API_Config.general.getAssignedUsersTimeSheet)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.lookupsData = res;
+          this.initForm();
+        },
+      });
   }
   override initForm(): void {
     this.formlyFields = [
       {
-        fieldGroupClassName:'row',
-        fieldGroup:[
+        fieldGroupClassName: 'row',
+        fieldGroup: [
           {
-            className:"col-md-6",
-            fieldGroupClassName:'row',
-            fieldGroup:[
+            className: 'col-md-6',
+            fieldGroupClassName: 'row',
+            fieldGroup: [
               {
-                key: 'username',
+                key: 'userName',
                 type: 'input',
                 props: {
-                  label: this._languageService.getTransValue(
-                    'profile.username'
-                  ),
+                  label:
+                    this._languageService.getTransValue('profile.username'),
                   required: true,
                 },
               },
@@ -41,70 +62,97 @@ export class EditProfileComponent extends FormBaseClass implements OnChanges{
                 key: 'email',
                 type: 'input',
                 props: {
-                  label: this._languageService.getTransValue(
-                    'common.email'
-                  ),
+                  label: this._languageService.getTransValue('common.email'),
                   required: true,
                 },
                 validators: {
                   validation: ['email'],
-                }
+                },
               },
               {
-                key: 'phoneNumber',
-                type: 'phone',
+                key: 'mobileNo',
+                type: 'input',
                 props: {
-                  label: this._languageService.getTransValue(
-                    'profile.phone'
-                  ),
-                  required: true,
+                  label: this._languageService.getTransValue('profile.phone'),
+                  // required: true,
                 },
-              }
-
+              },
+              {
+                type: 'select',
+                key: 'defUsrId',
+                props: {
+                  label: this._languageService.getTransValue('users.defUsrId'),
+                  required: true,
+                  options: this.lookupsData.result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
+                },
+              },
             ],
           },
           {
-            className:"col-md-6",
-            fieldGroup:[
+            className: 'col-md-6',
+            fieldGroup: [
               {
-                key: 'photo',
+                key: 'Attachment',
                 type: 'attachment',
-                className:'mx-auto',
+                className: 'mx-auto',
                 props: {
-                  btnLabel: "profile.uploadProfilePic",
-                  title: "profile.uploadProfilePic",
-                  subTitle: "common.dragAndDrop"
+                  btnLabel: 'profile.uploadProfilePic',
+                  title: 'profile.uploadProfilePic',
+                  subTitle: 'common.dragAndDrop',
                 },
-              }
-            ]
+              },
+            ],
           },
-
-        ]
-      }
-    ]
+        ],
+      },
+    ];
   }
   override onSubmit(): void {
-    // if (this.formly.invalid) {
-    //   this.formly.markAllAsTouched();
-    //   return;
-    // }
-    this.isLoading =true
+    if (this.formly.invalid) {
+      this.formly.markAllAsTouched();
+      return;
+    }
+    this.isLoading = true;
 
-    // this._apiService.put(API_Config.profile.update,body).pipe(
-    //   finalize(()=> this.isLoading =false),
-    //   this.takeUntilDestroy()
-    // ).subscribe({
-    //   next:(res:ApiRes)=>{
-    //     if (res && !res.error) {
-    //       const text = this._languageService.getTransValue('messages.updateSuccessfully');
-    //       this._toastrNotifiService.displaySuccess(text);
-          this.onEdit.emit(true)
-    //     }
-    //   }
-    // })
-  }
-  onChangeActiveIndex(){
-    this.changeActiveIndex.emit(2)
-  }
+    let body = {
+      userName: this.formlyModel.userName,
+      email: this.formlyModel.email,
+      mobileNo: this.formlyModel.mobileNo,
+      defUsrId: this.formlyModel.defUsrId,
+      Attachment: this.formlyModel.Attachment,
+    };
+    let formData = new FormData();
+    for (const [key, value] of Object.entries(body)) {
+      if (key != 'Attachment') {
+        formData.append(key, `${value}`);
+      }
+    }
 
+    formData.append('Attachment', body.Attachment);
+    //
+
+    this._apiService
+      .post(API_Config.profile.update, formData)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        this.takeUntilDestroy()
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res && res.isSuccess) {
+            const text = this._languageService.getTransValue(
+              'messages.updateSuccessfully'
+            );
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this.onEdit.emit(true);
+          }
+        },
+      });
+  }
+  onChangeActiveIndex() {
+    this.changeActiveIndex.emit(2);
+  }
 }

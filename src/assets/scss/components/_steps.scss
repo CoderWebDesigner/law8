@@ -68,9 +68,9 @@
 
   .p-steps-item:before {
     border-top: 3px solid #dee2e6;
-    z-index: 1;
+    z-index: 0;
     #{$left}: 50%;
-    width: 95%;
+    // width: 95%;
   }
 
   ul li {

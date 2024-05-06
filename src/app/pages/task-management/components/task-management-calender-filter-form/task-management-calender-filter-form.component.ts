@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 
 @Component({
   selector: 'app-task-management-calender-filter-form',
@@ -10,24 +12,30 @@ export class TaskManagementCalenderFilterFormComponent extends FormBaseClass imp
   @Output() onClose = new EventEmitter()
   @Output() onFilter = new EventEmitter()
   ngOnInit(): void {
-    this.initForm()
+    this.getLookupsData()
+  }
+
+  override getLookupsData(): void {
+    this._apiService.get(API_Config.general.getAssignedUsersCalender).pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res.isSuccess){
+          this.lookupsData=res.result
+          this.initForm()
+        }
+      }
+    })
   }
   override initForm(): void {
     this.formlyFields = [
       {
         type: 'select',
-        key: 'user',
+        key: 'userId',
+        // defaultValue:this._authService.getDecodedToken()['Id'],
         props: {
           required: true,
-          options: [
-            { label: 'All', value: 'All' },
-            { label: 'Ahmed Galal', value: 'Ahmed Galal' },
-            { label: 'Karim Galal', value: 'Karim Galal' },
-            { label: 'Ahmed Awad', value: 'Ahmed Awad' },
-            { label: 'Sara Awad', value: 'Sara Awad' },
-            { label: 'Fatma Awad', value: 'Fatma Awad' },
-            { label: 'Mariem Galal', value: 'Mariem Galal' },
-          ]
+          options: this.lookupsData.map(obj=>({label:obj.name,value:obj.id}))
         }
       }
     ]
@@ -36,7 +44,7 @@ export class TaskManagementCalenderFilterFormComponent extends FormBaseClass imp
     if (this.formly.invalid) {
       return
     }
-    this.onFilter.emit(this.formlyModel)
+    this.onFilter.emit(this.formlyModel.userId)
     this.onClose.emit(false)
   }
   cancel() {

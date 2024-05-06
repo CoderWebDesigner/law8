@@ -3,7 +3,8 @@
     "login": "تسجيل الدخول",
     "welcomeBack": "!مرحبًا بعودتك",
 
-
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
     "rememberMe": "ذكرنى",
     "forgetPassword": "هل نسيت كلمة السر",
     "toSignInPleaseEnterYourUsernameAndPassword":"لتسجيل الدخول الرجاء إدخال اسم المستخدم وكلمة المرور",
@@ -12,7 +13,7 @@
     "logout":"تسجيل خروج",
     "resetPassword":"إعادة تعيين كلمة المرور",
     "resetPasswordInThreeSteps":"قدم المعلومات التالية وإعادة تعيين كلمة المرور في 3 خطوات فقط",
-    "userIdAndEmail":"رقم العميل & البريد الالكتروني",
+    "userIdAndEmail":"البريد الالكتروني",
     "verify":"تاكيد",
     "newPassword":"كلمة المرور الجديدة",
     "userId":"معرف المستخدم",

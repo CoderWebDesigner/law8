@@ -27,7 +27,9 @@ export const General_API = {
       "getActivityStatus":"AppLookup/GetLaw_ActivityStatusModelLookup",
       "getAdjournmentReasons":"AppLookup/GetLaw_AdjournmentReasonsModeLookup",
       "getRecentMatters":"AppLookup/GetRecentMatterCodeForUserLookup",
-      "getMatterCodes":"AppLookup/GetLawMattertCodeLookup"
+      "getMatterCodes":"AppLookup/GetLawMattertCodeLookup",
+      "getAssignedUsersTimeSheet":"AppLookup/GetLaw_AssignAddUsersForTimeShetLookup",
+      "getAssignedUsersCalender":"AppLookup/GetLaw_AssignViewUsersForCalendertLookup"
   }
 
 }

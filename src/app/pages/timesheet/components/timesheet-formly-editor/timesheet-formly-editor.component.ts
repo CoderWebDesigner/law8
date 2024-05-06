@@ -254,7 +254,7 @@ export class TimesheetFormlyEditorComponent extends FormBaseClass implements OnI
           ...this.formlyModel.data[this.selectedIndex],
           ClientName: this.selectedMatter.ClientName,
           Matter: this.selectedMatter.Code,
-          Laywer: this._authService.user.UserName,
+          Laywer: this._authService.user.userName,
           Task: 'Billable',
           stop: true
         }

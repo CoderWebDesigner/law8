@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { ForgetpasswordComponent } from '../forgetpassword/forgetpassword.component';
 import { API_Config } from '@core/api/api-config/api.config';
 import { finalize } from 'rxjs';
 import { StorageService } from '@core/services';
-import { Login } from '@core/models';
+import { ApiRes } from '@core/models';
+import { ForgetpasswordComponent } from '../forgetpassword/forgetpassword.component';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,9 @@ import { Login } from '@core/models';
 })
 export class LoginComponent extends FormBaseClass implements OnInit {
   apiURL = API_Config.auth;
-  _storageService = inject(StorageService)
-  loginData  = new Login()
+  _storageService = inject(StorageService);
+  
+ 
   ngOnInit() {
     this.initForm();
   }
@@ -22,7 +23,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
   initForm() {
     this.formlyFields = [
       {
-        key: "EmployeeId",
+        key: "userName",
         type: "input",
         props: {
           label: this._languageService.getTransValue("auth.username"),
@@ -32,26 +33,27 @@ export class LoginComponent extends FormBaseClass implements OnInit {
         }
       },
       {
-        key: "Password",
+        key: "password",
         type: "input",
         props: {
           type: "password",
           label: this._languageService.getTransValue("auth.password"),
           placeholder: this._languageService.getTransValue("auth.passwordPlaceholder"),
           icon: "pi pi-lock",
-          required:true
+          required:true,
+          feedback:false
         }
       },
       {
         fieldGroupClassName: "d-flex justify-content-between align-items-center",
         fieldGroup: [
-          {
-            key: "RememberMe",
-            type: "checkbox",
-            props: {
-              label: this._languageService.getTransValue("auth.rememberMe"),
-            }
-          },
+          // {
+          //   key: "RememberMe",
+          //   type: "checkbox",
+          //   props: {
+          //     label: this._languageService.getTransValue("auth.rememberMe"),
+          //   }
+          // },
           {
             type: "button",
             props: {
@@ -74,15 +76,16 @@ export class LoginComponent extends FormBaseClass implements OnInit {
 
     if (this.formly.valid) {
       this.isSubmit = true;
-      this.loginData = {...this.loginData,...this.formlyModel}
-      this._apiService.post(this.apiURL.login,this.loginData).pipe(
+
+      this._apiService.post(this.apiURL.login,this.formlyModel).pipe(
         finalize(() => this.isSubmit = false),
-        this.takeUntilDestroy()
+        this._sharedService.takeUntilDistroy()
       ).subscribe({
-        next: res => {
-          this._storageService.setStorage('user', res);
-          this._authService.setUser(res)
-          this._router.navigate(['/auth/otp'])
+        next: (res:ApiRes) => {
+          if(res.isSuccess){
+            this._authService.setUser({userName:this.formlyModel.userName})
+            this._router.navigate(['/auth/otp'])
+          }
         },
         error:err=>{
           this._toastrNotifiService.displayErrorToastr(this._languageService.getTransValue('messages.signInError'));

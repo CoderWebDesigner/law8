@@ -1,6 +1,7 @@
 export const Timesheet_API = {
   "timesheet":{
-      "get":"TimeSheet/GetList",
+      // "get":"TimeSheet/GetList",
+      "get":"TimeSheet/GetListForMatterById",
       "getTempTimeSheet":"/GetTempTimeSheet/?empCode=",
       "getClientNameByMatterId":"AppLookup/GetClientNameByMatterIdLookup",
       "getRateFromLawyerIdAndMatterId":"AppLookup/GetClientNameAndRateByMatterId",

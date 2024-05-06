@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { SharedNoDataComponent } from './components/shared-no-data/shared-no-data.component';
 import { MoreInfoComponent } from './components/shared-table/components/more-info/more-info.component';
 import { EventsFilterPipe } from './pipes/events-filter.pipe';
+import { SecondsToTimePipe } from './pipes/secondsToTime/seconds-to-time.pipe';
 
 const components: any = [
   SharedActionsComponent,
@@ -22,14 +23,16 @@ const components: any = [
   SuccessActionPopupComponent,
   SharedNoDataComponent,
   MoreInfoComponent,
-  ];
+  EventsFilterPipe,
+  SecondsToTimePipe,
+];
 
 // const components: any = [];
 
 const modules = [TranslateModule, ButtonModule, SkeletonModule, RouterModule];
 
 @NgModule({
-  declarations: [...components, EventsFilterPipe],
+  declarations: [...components],
   imports: [CommonModule, ...modules],
   exports: [...components, ...modules],
   providers: [
@@ -39,4 +42,4 @@ const modules = [TranslateModule, ButtonModule, SkeletonModule, RouterModule];
     LanguageBindPipe,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -52,18 +52,23 @@ export class TimesheetEditorComponent implements OnInit {
   matters = [];
   tasks = [];
   laywers: any[] = [];
+  timesheetDate:any;
   requestForm = this.fb.group({
     data: this.fb.array([]),
   });
   ngOnInit(): void {
     this.getDraftTimesheet();
     this.getSelectedRows();
+    this.timesheetDate=new Date((JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'])
+    // let date=(JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'];
+    // this.timesheetDate=this._datePipe.transform(date,'yyyy-MM-dd')
+    // console.log(this.timesheetDate)
     // this.checkAllRowsChecked()
   }
 
   getLookupsData() {
     forkJoin([
-      this._apiService.get(API_Config.responsibleLawyerSecurity.get),
+      this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
       this._apiService.get(API_Config.general.getTaskCode),
       this._apiService.get(API_Config.general.getRecentMatters),
     ])
@@ -150,7 +155,7 @@ export class TimesheetEditorComponent implements OnInit {
       matterId: [obj?.matterId, [Validators.required]],
       mtrNo: [obj?.mtrNo],
       clientName: [obj?.clientName, [Validators.required]],
-      law_LawerId: [obj?.law_LawerId, [Validators.required]],
+      law_LawerId: [obj?.law_LawerId??this._authService.getDecodedToken()['Id'], [Validators.required]],
       law_TaskCodeId: [obj?.law_TaskCodeId, [Validators.required]],
       hours: [obj?.hours, [Validators.required]],
       rate: [obj?.rate, [Validators.required]],
@@ -164,7 +169,7 @@ export class TimesheetEditorComponent implements OnInit {
     if (
       this.getFormArray.controls.every(
         (formGroup) =>
-          formGroup.get('matterId')?.value ||
+          formGroup.get('matterId')?.value &&
           formGroup.get('explanationExplanation')?.value
       )
     ) {
@@ -240,6 +245,7 @@ export class TimesheetEditorComponent implements OnInit {
               item.amount = this.calcAmount(item.hours, item.rate).toFixed(2);
               this.addRow(item);
             });
+
             this.addRow();
           } else {
             this.addRow();
@@ -263,10 +269,9 @@ export class TimesheetEditorComponent implements OnInit {
     } else {
       let matterId = this.matters.find((obj) => obj.label == e.value).value;
       this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId);
-      let lawyerId =
-        this.getFormArray.controls[rowIndex].get('law_LawerId').value;
       this.getRateFromLawyerIdAndMatterId(rowIndex);
       this.getClientNameByMatterId(matterId, rowIndex);
+      this.addRow()
     }
 
     this.getSelectedMatter(rowIndex);
