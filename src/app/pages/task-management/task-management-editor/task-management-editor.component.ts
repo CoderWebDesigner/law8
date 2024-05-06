@@ -216,7 +216,6 @@ export class TaskManagementEditorComponent
               },
             },
           },
-
           {
             className: 'col-12',
             key: 'remark',
@@ -228,6 +227,22 @@ export class TaskManagementEditorComponent
             expressions: {
               hide: (field: FormlyFieldConfig) => {
                 return [1].includes(field.model?.law_ActivityTypeId);
+              },
+            },
+          },
+          {
+            key: 'isPrivate',
+            type: 'switch',
+            defaultValue: false,
+            props: {
+              label: this._languageService.getTransValue('matters.isPrivate'),
+              class: 'd-block',
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return ![2,3, 5, 6, 8, 4, 7].includes(
+                  field.model?.law_ActivityTypeId
+                );
               },
             },
           },

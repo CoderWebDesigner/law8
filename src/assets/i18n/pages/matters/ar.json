@@ -124,6 +124,8 @@
     "class":"Class",
     "addApplicant":"Add Applicant",
     "addClass":"Add Class",
-    "uploadLogo":"Upload Logo"
+    "uploadLogo":"Upload Logo",
+
+    "isPrivate":"isPrivate"
   }
 }

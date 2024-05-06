@@ -2,14 +2,14 @@
   <div body>
       <div class="d-flex mb-4">
           <div class="flex-shrink-0">
-              <img [src]="userInfo?.Photo || 'assets/images/user.png'" [alt]="userInfo?.UserName" class="img-fluid" width="150px">
+              <img [src]="this._authService.user?.Photo || 'assets/images/user.png'" [alt]="this._authService.user?.userName" class="img-fluid" width="150px">
           </div>
           <div class="flex-grow-1 ms-3">
               <div class="user-info p-3">
-                  <h3>{{userInfo?.UserName}}</h3>
+                  <h3>{{_authService.user?.userName}}</h3>
                   <div class="d-flex">
-                      <span class="fw-semibold me-sm-4"><i class="fat fat-user me-2"></i> <span *ngIf="userInfo?.roles?.length>0">{{userInfo?.roles[0]?.name}}</span></span>
-                      <span class="fw-semibold"><i class="fat fat-envelope me-2"></i><span>{{userInfo?.Email}}</span></span>
+                      <span class="fw-semibold me-sm-4"><i class="fat fat-user me-2"></i> <span *ngIf="this._authService.user?.role?.length>0">{{this._authService.user?.roles[0]?.name}}</span></span>
+                      <span class="fw-semibold"><i class="fat fat-envelope me-2"></i><span>{{this._authService.user?.email}}</span></span>
                   </div>
                   <div class="row mt-5 justify-content-end">
                       <div class="col-md-4">
@@ -25,13 +25,13 @@
       </div>
       <p-tabView  [activeIndex]="activeIndex" (onChange)="resetActiveIndex()">
           <p-tabPanel [header]="'profile.overview'|translate">
-              <app-overview  [userInfo]="userInfo" (changeActiveIndex)="onChangeActiveIndex($event)"></app-overview>
+              <app-overview  [userInfo]="this._authService.user" (changeActiveIndex)="onChangeActiveIndex($event)"></app-overview>
           </p-tabPanel>
           <p-tabPanel [header]="'profile.setting'|translate">
-              <app-edit-profile [userInfo]="userInfo" (changeActiveIndex)="onChangeActiveIndex($event)" (onEdit)="getProfile()"></app-edit-profile>
+              <app-edit-profile [userInfo]="this._authService.user" (changeActiveIndex)="onChangeActiveIndex($event)" (onEdit)="getProfile()"></app-edit-profile>
           </p-tabPanel>
           <p-tabPanel [header]="'profile.resetPassword'|translate">
-              <app-reset-password [userInfo]="userInfo" (onEdit)="getProfile()"></app-reset-password>
+              <app-reset-password [userInfo]="this._authService.user" (onEdit)="getProfile()"></app-reset-password>
           </p-tabPanel>
       </p-tabView>
   </div>

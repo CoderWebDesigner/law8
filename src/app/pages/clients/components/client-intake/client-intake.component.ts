@@ -154,35 +154,35 @@ export class ClientIntakeComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     if(this.formly.valid){
       this.isSubmit = true
-      this.formlyModel = { ...this.formlyModel, Flag: "LP", UserId: this._authService.user.UserId }
-      this._apiService.post(this.apiUrls.createIntake, this.formlyModel).pipe(
-        finalize(() => this.isSubmit = false),
-        this.takeUntilDestroy()
-      ).subscribe({
-        next: (res:any) => {
-          if(res?.StatusObj.IsSucess){
+      // this.formlyModel = { ...this.formlyModel, Flag: "LP", UserId: this._authService.user.UserId }
+      // this._apiService.post(this.apiUrls.createIntake, this.formlyModel).pipe(
+      //   finalize(() => this.isSubmit = false),
+      //   this.takeUntilDestroy()
+      // ).subscribe({
+      //   next: (res:any) => {
+      //     if(res?.StatusObj.IsSucess){
 
-            Swal.fire({
-              title: this._languageService.getTransValue('messages.success'),
-              text:  this._languageService.getTransValue('messages.createdSuccessfully'),
-              icon: 'success',
-              allowOutsideClick: false,
-              confirmButtonText: this._languageService.getTransValue('client.goClientList')
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this._router.navigate(['/clients'])
-              }
-            });
-          }else{
-            Swal.fire({
-              title: this._languageService.getTransValue('messages.error'),
-              icon: 'error',
-              allowOutsideClick: false,
-              confirmButtonText: this._languageService.getTransValue('btn.close')
-            })
-          }
-        }
-      })
+      //       Swal.fire({
+      //         title: this._languageService.getTransValue('messages.success'),
+      //         text:  this._languageService.getTransValue('messages.createdSuccessfully'),
+      //         icon: 'success',
+      //         allowOutsideClick: false,
+      //         confirmButtonText: this._languageService.getTransValue('client.goClientList')
+      //       }).then((result) => {
+      //         if (result.isConfirmed) {
+      //           this._router.navigate(['/clients'])
+      //         }
+      //       });
+      //     }else{
+      //       Swal.fire({
+      //         title: this._languageService.getTransValue('messages.error'),
+      //         icon: 'error',
+      //         allowOutsideClick: false,
+      //         confirmButtonText: this._languageService.getTransValue('btn.close')
+      //       })
+      //     }
+      //   }
+      // })
     }
   }
   override getData(): void {

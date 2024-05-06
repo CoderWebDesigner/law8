@@ -5,17 +5,21 @@ import { SharedModule } from '@shared/shared.module';
 import { AuthService, LanguageService } from '@core/services';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { Router } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { ApiService } from '@core/api/api.service';
+import { API_Config } from '@core/api/api-config/api.config';
+import { ApiRes } from '@core/models';
 @Component({
   selector: 'app-user',
   templateUrl: './app-user.component.html',
   styleUrls: ['./app-user.component.scss'],
   standalone: true,
-  imports: [MenuModule, SharedModule,InlineSVGModule],
+  imports: [CommonModule,MenuModule, SharedModule,InlineSVGModule],
 })
 export class AppUserComponent implements OnInit{
+  _apiService=inject(ApiService)
   ngOnInit(): void {
-    console.log(this._authService.getDecodedToken())
+    this.getProfile()
   }
   _languageService = inject(LanguageService);
   _authService = inject(AuthService);
@@ -37,4 +41,14 @@ export class AppUserComponent implements OnInit{
       },
     },
   ];
+  getProfile() {
+    this._apiService.get(API_Config.profile.get).subscribe({
+      next: (res: ApiRes) => {
+        if (res && res.isSuccess) {
+          this._authService.user = res['result'];
+          this._authService.user.Photo = `data:image/jpg;base64,${res['result'].logoFile}`;
+        }
+      },
+    });
+  }
 }

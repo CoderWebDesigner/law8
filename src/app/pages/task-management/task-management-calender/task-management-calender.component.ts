@@ -1,31 +1,18 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-  inject,
-  signal,
-} from '@angular/core';
-import {
-  CalendarOptions,
-  DateSelectArg,
-  EventApi,
-  EventClickArg,
-} from '@fullcalendar/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
-import { EventsFilterPipe } from '@shared/pipes/events-filter.pipe';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TaskManagementEventDetailsComponent } from '../components/task-management-event-details/task-management-event-details.component';
 import { ApiService } from '@core/api/api.service';
 import { SharedService } from '@shared/services/shared.service';
 import { API_Config } from '@core/api/api-config/api.config';
-import { ApiRes } from '@core/models';
 import { DatePipe } from '@angular/common';
-import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
+import { AuthService } from '@core/services';
+import { ApiRes } from '@core/models';
 @Component({
   selector: 'app-task-management-calender',
   templateUrl: './task-management-calender.component.html',
@@ -40,7 +27,9 @@ export class TaskManagementCalenderComponent implements OnInit {
   _apiService = inject(ApiService);
   _sharedService = inject(SharedService);
   _datePipe = inject(DatePipe);
+  _authService=inject(AuthService)
   events: any[] = [];
+  userId:string;
 
   calendarOptions: CalendarOptions;
   constructor() {
@@ -50,11 +39,12 @@ export class TaskManagementCalenderComponent implements OnInit {
     this.getTaskManagementEvents();
   }
   getTaskManagementEvents() {
+    // ??this._authService.getDecodedToken()['Id']
     this._apiService
-      .get(API_Config.taskManagementCalender.get)
+      .get(`${API_Config.taskManagementCalender.get}${(this.userId)?`?userId=${this.userId}`:''}`)
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
-        next: (res: any) => {
+        next: (res: ApiRes) => {
           this.events = res['result'].map((obj) => ({
             id: obj?.id,
             title: obj?.law_ActivityType,
@@ -164,13 +154,15 @@ export class TaskManagementCalenderComponent implements OnInit {
   onClose(event: boolean) {
     this.showFilter = event;
   }
-  onFilter(event: any) {
-    const eventsFilter = new EventsFilterPipe();
-    this.calendarOptions.events = eventsFilter.transform(
-      this.events,
-      event['user'],
-      'assigned'
-    );
+  onFilter(userId: string) {
+    this.userId=userId
+    this.getTaskManagementEvents()
+    // const eventsFilter = new EventsFilterPipe();
+    // this.calendarOptions.events = eventsFilter.transform(
+    //   this.events,
+    //   event['user'],
+    //   'assigned'
+    // );
   }
   // calendarVisible = signal(true);
   // calendarOptions = signal<CalendarOptions>({

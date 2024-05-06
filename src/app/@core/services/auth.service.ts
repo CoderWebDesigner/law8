@@ -14,7 +14,7 @@ export class AuthService {
   readonly apiUrl: string = `/auth/login`;
 
   // hold user data
-  user: any;
+  user: User;
 
   //  holds current logged in user status
   status: { isLoggedIn: boolean };
@@ -24,7 +24,7 @@ export class AuthService {
   _apiService = inject(ApiService);
   _router = inject(Router);
 
-  setUser(user:any){
+  setUser(user:User){
     this.user=user
   }
 

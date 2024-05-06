@@ -96,15 +96,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getStatistics()
   }
   getStatistics() {
-    this._apiService.get(this.apiUrls.getStatistics + this._authService.user.UserId).pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next: res => {
-        this.items.forEach(element => {
-          element.data = res[element.key]
-        });
-      }
-    })
+    // this._apiService.get(this.apiUrls.getStatistics + this._authService.user.UserId).pipe(
+    //   this._sharedService.takeUntilDistroy()
+    // ).subscribe({
+    //   next: res => {
+    //     this.items.forEach(element => {
+    //       element.data = res[element.key]
+    //     });
+    //   }
+    // })
   }
   setActiveCard(item) {
     this.selectedCard = item;
@@ -199,57 +199,57 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getClients(type: string) {
     this.isLoading = true
-    this._apiService.get(`${this.apiUrls.getClients}${this._authService.user.UserId}&sts=${type}`).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(() => this.isLoading = false),
-    ).subscribe({
-      next: (res: any[]) => {
-        this.data = res
-      }
-    })
+    // this._apiService.get(`${this.apiUrls.getClients}${this._authService.user.UserId}&sts=${type}`).pipe(
+    //   this._sharedService.takeUntilDistroy(),
+    //   finalize(() => this.isLoading = false),
+    // ).subscribe({
+    //   next: (res: any[]) => {
+    //     this.data = res
+    //   }
+    // })
   }
   getMatters(type: string) {
     this.isLoading = true
-    this._apiService.get(`${this.apiUrls.getMatters}${this._authService.user.UserId}&sts=${type}`).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(() => this.isLoading = false),
-    ).subscribe({
-      next: (res: any[]) => {
-        this.data = res
-      }
-    })
+    // this._apiService.get(`${this.apiUrls.getMatters}${this._authService.user.UserId}&sts=${type}`).pipe(
+    //   this._sharedService.takeUntilDistroy(),
+    //   finalize(() => this.isLoading = false),
+    // ).subscribe({
+    //   next: (res: any[]) => {
+    //     this.data = res
+    //   }
+    // })
   }
   getActivities() {
     this.isLoading = true
-    this._apiService.get(`${this.apiUrls.getActivities}${this._authService.user.UserId}&sts=ra`).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(() => this.isLoading = false),
-    ).subscribe({
-      next: (res: any[]) => {
-        this.data = res
-        this.data = this.data.map((v) => ({
-          ...v,
-          Action: v?.Action === "Other" ? v?.ActivityType : v?.Action,
-          StartDate: new Date(parseInt(v.StartDate.match(/\d+/)[0], 10)),
-        }))
-      }
-    })
+    // this._apiService.get(`${this.apiUrls.getActivities}${this._authService.user.UserId}&sts=ra`).pipe(
+    //   this._sharedService.takeUntilDistroy(),
+    //   finalize(() => this.isLoading = false),
+    // ).subscribe({
+    //   next: (res: any[]) => {
+    //     this.data = res
+    //     this.data = this.data.map((v) => ({
+    //       ...v,
+    //       Action: v?.Action === "Other" ? v?.ActivityType : v?.Action,
+    //       StartDate: new Date(parseInt(v.StartDate.match(/\d+/)[0], 10)),
+    //     }))
+    //   }
+    // })
   }
   getSessions(type: string) {
     this.isLoading = true
-    this._apiService.get(`${this.apiUrls.getSessions}${this._authService.user.UserId}&sts=${type}`).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(() => this.isLoading = false),
-    ).subscribe({
-      next: (res: any[]) => {
-        this.data = res
-        this.data = this.data.map((v) => ({
-          ...v,
-          Action: v?.Action === "Other" ? v?.ActivityType : v?.Action,
-          StartDate: new Date(parseInt(v.StartDate.match(/\d+/)[0], 10)),
-        }))
-      }
-    })
+    // this._apiService.get(`${this.apiUrls.getSessions}${this._authService.user.UserId}&sts=${type}`).pipe(
+    //   this._sharedService.takeUntilDistroy(),
+    //   finalize(() => this.isLoading = false),
+    // ).subscribe({
+    //   next: (res: any[]) => {
+    //     this.data = res
+    //     this.data = this.data.map((v) => ({
+    //       ...v,
+    //       Action: v?.Action === "Other" ? v?.ActivityType : v?.Action,
+    //       StartDate: new Date(parseInt(v.StartDate.match(/\d+/)[0], 10)),
+    //     }))
+    //   }
+    // })
   }
   ngOnDestroy(): void {
     this._sharedService.destroy()

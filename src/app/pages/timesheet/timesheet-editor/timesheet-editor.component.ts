@@ -52,18 +52,23 @@ export class TimesheetEditorComponent implements OnInit {
   matters = [];
   tasks = [];
   laywers: any[] = [];
+  timesheetDate:any;
   requestForm = this.fb.group({
     data: this.fb.array([]),
   });
   ngOnInit(): void {
     this.getDraftTimesheet();
     this.getSelectedRows();
+    this.timesheetDate=new Date((JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'])
+    // let date=(JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'];
+    // this.timesheetDate=this._datePipe.transform(date,'yyyy-MM-dd')
+    // console.log(this.timesheetDate)
     // this.checkAllRowsChecked()
   }
 
   getLookupsData() {
     forkJoin([
-      this._apiService.get(API_Config.responsibleLawyerSecurity.get),
+      this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
       this._apiService.get(API_Config.general.getTaskCode),
       this._apiService.get(API_Config.general.getRecentMatters),
     ])

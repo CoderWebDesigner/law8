@@ -63,7 +63,9 @@ export class NewPasswordStepThreeComponent extends FormBaseClass implements OnIn
       next:(res:ApiRes)=>{
         if(res.isSuccess){
           this._toastrNotifiService.displaySuccessMessage('Successfully Logged in');
-          this._router.navigate(['/auth/login'])
+          this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+            this._dynamicDialogRef.close(dialog);
+          });
         }
       }
     })
