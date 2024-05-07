@@ -72,7 +72,8 @@
     "sureDelete": "Are you sure you want to delete?",
     "dropClick":"Drop files to upload or click",
     "uploadFile": "Drag and drop here or click to download",
-    "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?"
+    "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?",
+    "youDontHavePermission":"You Don't Have Permission"
   },
   "validation": {
     "required": "This field is required!",

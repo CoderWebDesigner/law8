@@ -9,11 +9,12 @@ const routes: Routes = [
   {
     path:"",component:ClientsComponent,
   },
+  // {
+  //   path:"view/:id",component:ClientDetailsComponent,
+    
+  // },
   {
-    path:"view/:id",component:ClientDetailsComponent,
-  },
-  {
-    path:"update/:id",component:ClientEditorComponent,
+    path:"view/:id",component:ClientEditorComponent,
   },
   {
     path:"add",component:ClientEditorComponent,

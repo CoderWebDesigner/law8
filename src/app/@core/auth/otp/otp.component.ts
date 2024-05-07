@@ -3,6 +3,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { StorageService } from '@core/services';
+import { PermissionService } from '@core/services/permission.service';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ import { finalize } from 'rxjs';
 export class OtpComponent extends FormBaseClass implements OnInit {
   apiURL = API_Config.auth;
   _storageService = inject(StorageService);
+  _permissionService=inject(PermissionService)
   counterInSeconds: number = 300;
   interval: any;
   user=this._authService.user
@@ -68,6 +70,8 @@ export class OtpComponent extends FormBaseClass implements OnInit {
                   'messages.signInSuccessfully'
                 )
               );
+              console.log('permissions',this._authService.getDecodedToken()['role'])
+              this._permissionService.userPermissions=this._authService.getDecodedToken()['role']
               this._router.navigate(['/dashboard']);
             } else {
               this._toastrNotifiService.displayErrorToastr(

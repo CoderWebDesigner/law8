@@ -83,6 +83,7 @@ export class LoginComponent extends FormBaseClass implements OnInit {
       ).subscribe({
         next: (res:ApiRes) => {
           if(res.isSuccess){
+  
             this._authService.setUser({userName:this.formlyModel.userName})
             this._router.navigate(['/auth/otp'])
           }

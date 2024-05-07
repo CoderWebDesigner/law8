@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   hasToken(): boolean {
-    return localStorage.getItem('token') ? true : false
+    return this._storageService.getStorage('token') ? true : false
   }
 
   getToken() {

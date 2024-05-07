@@ -12,16 +12,13 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef,
   OnDestroy,
-  ChangeDetectionStrategy,
 } from '@angular/core';
 import { PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
 import { Table, TableModule } from 'primeng/table';
 import { TableAction, TableConfig } from './models/table-config.model';
-import { TranslateService } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { Subject, finalize, takeUntil } from 'rxjs';
+import { finalize } from 'rxjs';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
@@ -38,14 +35,13 @@ import { SharedConfirmDialogComponent } from '@shared/components/shared-confirm-
 import { InputTextModule } from 'primeng/inputtext';
 import { SharedTableService } from './services/table.service';
 import { SharedService } from '@shared/services/shared.service';
-import { DropdownModule } from 'primeng/dropdown';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import Swal from 'sweetalert2';
 import { ApiRes } from '@core/models';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
+import { PermissionService } from '@core/services/permission.service';
 @Component({
   selector: 'shared-table',
   templateUrl: './shared-table.component.html',
@@ -127,6 +123,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   _toastrNotifiService = inject(ToasterService);
   _sharedTableService = inject(SharedTableService);
   _sharedService = inject(SharedService);
+  _permissionService=inject(PermissionService)
 
   @Input() callBack: any;
   ngOnInit(): void {

@@ -70,7 +70,8 @@
     "sureDelete": "Etes-vous sûr que vous voulez supprimer?",
     "dropClick": "Déposez les fichiers pour télécharger ou cliquer",
     "uploadFile": "Drag and drop here or click to download",
-    "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?"
+    "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?",
+    "youDontHavePermission":"You Don't Have Permission"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

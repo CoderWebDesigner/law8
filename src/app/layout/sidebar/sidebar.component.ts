@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Input, OnChanges, inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input, OnChanges, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 
@@ -6,6 +6,7 @@ import { MENU } from './menu';
 import { MenuItem } from './menu.model';
 import MetisMenu from 'metismenujs';
 import { AuthService } from '@core/services';
+import { PermissionService } from '@core/services/permission.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,16 +17,17 @@ import { AuthService } from '@core/services';
 /**
  * Sidebar component
  */
-export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
+export class SidebarComponent implements OnInit, OnChanges {
   @ViewChild('componentRef') scrollRef:any;
   @ViewChild('sideMenu') sideMenu: ElementRef | undefined;
 
   @Input() isCondensed = false;
   menu: any;
   data: any;
-  menuItems:any[] = [];
+  menuItems:MenuItem[] = [];
 
    _authService = inject(AuthService);
+   _permissionService=inject(PermissionService)
 
    parentRoute:string;
    isHovered:boolean = false;
@@ -39,13 +41,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    this.initialize();
-    this._scrollElement();
-  }
-
-  ngAfterViewInit() {
-    this.menu = new MetisMenu(this.sideMenu?.nativeElement);
-    this._activateMenuDropdown();
+    this.getUserPermissions();
+    
   }
 
   toggleMenu(event) {
@@ -136,14 +133,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     addClass(parent5El, 'mm-active');
  //   addClass(parent5El.querySelector('.is-parent'), 'mm-active');
   }
-  /**
-   * Initialize
-   */
-  initialize(): void {
-    this.parentRoute = `/`
-    this.menuItems = MENU;
 
-  }
 
   /**
    * Returns true or false if given menu item has child or not
@@ -151,6 +141,48 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    */
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
+  }
+
+  getUserPermissions(){
+    if(this._permissionService.userPermissions.length>0){
+      const filteredMenu:MenuItem[]=this.filterMenu(MENU);
+      this.menuItems=filteredMenu;
+      this.parentRoute = `/`
+      setTimeout(() => {
+        this._scrollElement();
+        this.menu=new MetisMenu(this.sideMenu?.nativeElement);
+        this._activateMenuDropdown()
+      }, 100);
+    }
+  }
+
+  filterMenu(menuItems:MenuItem[]){
+    return menuItems.reduce((filteredItems:any,menuItem)=>{
+      const foundFilter=this._permissionService.userPermissions.find((permission:string)=> permission===menuItem.role)
+      console.log('foundFilter',foundFilter)
+      if (foundFilter) {
+        const filteredMenuItem: MenuItem = {
+          ...menuItem,
+        };
+        if (menuItem.subItems) {
+          filteredMenuItem.subItems = this.filterMenu(menuItem.subItems)
+
+        }
+        filteredItems.push(filteredMenuItem);
+      } else if (menuItem.subItems) {
+        const filteredSubItems = this.filterMenu(menuItem.subItems);
+        
+        if (filteredSubItems.length > 0) {
+          const filteredMenuItem: MenuItem = { ...menuItem, subItems: filteredSubItems };
+          filteredItems.push(filteredMenuItem);
+        }else{
+
+        }
+      }
+      console.log('filteredItems',filteredItems)
+      return filteredItems;
+
+    },[])
   }
 
   logout() {

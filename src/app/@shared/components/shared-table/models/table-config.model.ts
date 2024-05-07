@@ -24,7 +24,6 @@ export interface TableAction {
     queryParams?:any;
     tooltipText?: string;
     width?:string;
-    isReadOnly?:boolean;
     isDynamic?:boolean;
 
 }

@@ -9,6 +9,7 @@ import {
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { PermissionService } from '@core/services/permission.service';
 import { ClientService } from '@shared/services/client.service';
 import { MenuItem } from 'primeng/api';
 import { finalize, forkJoin } from 'rxjs';
@@ -31,6 +32,7 @@ export class ClientEditorComponent
   apiUrls = API_Config.client;
   _clientService = inject(ClientService);
   cdRef = inject(ChangeDetectorRef);
+  _permissionService=inject(PermissionService)
   filterOptions?: any = { orderByDirection: 'ASC' };
   disableInputs: boolean;
   items: MenuItem[] = [
@@ -464,9 +466,9 @@ export class ClientEditorComponent
           this.lookupsData = res;
           if (this.requestId) {
             this.formlyModel = res[2].result;
-            this.disableInputs = this.formlyModel?.id == 1;
+            this.disableInputs = !this._permissionService.hasPermission("Update_Client");
+            console.log('disableInputs',!this._permissionService.hasPermission("Update_Client"))
           }
-
           this.initForm();
         },
       });

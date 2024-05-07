@@ -48,4 +48,5 @@ export interface User {
   role?:string[];
   TimeSheetDate?:string;
   Photo?:string;
+  permissions?:string[]
 }
