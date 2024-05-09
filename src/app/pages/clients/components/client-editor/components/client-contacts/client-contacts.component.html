@@ -16,7 +16,7 @@
 
 <div class="text-end mb-4">
   <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-      [icon]="'pi pi-plus'" [label]="'common.addContacts' | translate" button>
+      [icon]="'pi pi-plus'" [label]="'common.addContacts' | translate"  [requiredPermission]="'Add_ClientContact'">
   </p-button>
 </div>
 <shared-table [additionalTableConfig]="additionalTableConfig" [data]="data" [columnsLocalized]="columnsLocalized"

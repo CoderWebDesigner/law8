@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SecurityComponent } from './security.component';
+import { permissionGuard } from '@core/guards/permission.guard';
 
 const routes: Routes = [
   {
@@ -14,6 +15,8 @@ const routes: Routes = [
           import('./security-users/security-users.component').then(
             (x) => x.SecurityUsersComponent
           ),
+        canActivate: [permissionGuard],
+        data: { permission: 'View_Security_Users' },
       },
       {
         path: 'groups',
@@ -21,6 +24,8 @@ const routes: Routes = [
           import('./security-groups/security-groups.component').then(
             (x) => x.SecurityGroupsComponent
           ),
+        canActivate: [permissionGuard],
+        data: { permission: 'View_Security_Groups' },
       },
       {
         path: 'timesheet',
@@ -28,6 +33,8 @@ const routes: Routes = [
           import('./security-timesheet/security-timesheet.component').then(
             (x) => x.SecurityTimesheetComponent
           ),
+        canActivate: [permissionGuard],
+        data: { permission: 'View_Security_Timesheet' },
       },
       {
         path: 'calender',
@@ -35,14 +42,18 @@ const routes: Routes = [
           import('./security-calender/security-calender.component').then(
             (x) => x.SecurityCalenderComponent
           ),
+        canActivate: [permissionGuard],
+        data: { permission: 'View_Security_Calendar' },
       },
       {
         path: 'matter-access',
         loadComponent: () =>
-          import('./security-matter-access/security-matter-access.component').then(
-            (x) => x.SecurityMatterAccessComponent
-          ),
-      }
+          import(
+            './security-matter-access/security-matter-access.component'
+          ).then((x) => x.SecurityMatterAccessComponent),
+        canActivate: [permissionGuard],
+        data: { permission: 'View_Security_MatterAccess' },
+      },
     ],
   },
 ];

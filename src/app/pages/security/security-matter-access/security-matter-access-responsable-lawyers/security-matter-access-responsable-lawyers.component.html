@@ -14,5 +14,5 @@
 </p-pickList>
 <div class="d-flex justify-content-end my-3">
     <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" [disabled]="!userId"
-        label="{{ 'btn.submit' | translate }}" (onClick)="submit()"></p-button>
+        label="{{ 'btn.submit' | translate }}" (onClick)="submit()" [requiredPermission]="'Update_Security_MatterAccess'"></p-button>
 </div>

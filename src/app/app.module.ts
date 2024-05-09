@@ -12,7 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from '@core/interceptors';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { HandleErrorService } from '@core/services/handle-error-service';
-import { PermissionDirective } from './@core/directives/permission.directive';
+
 
 export function HttpLoaderFactory(httpBackend: HttpBackend) {
   return new MultiTranslateHttpLoader(httpBackend, [
@@ -32,8 +32,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
 }
 @NgModule({
   declarations: [
-    AppComponent,
-    PermissionDirective,
+    AppComponent
   ],
   imports: [
     BrowserModule,

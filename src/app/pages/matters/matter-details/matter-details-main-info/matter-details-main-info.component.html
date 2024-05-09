@@ -1,16 +1,7 @@
 <form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
-  <formly-form
-    [form]="formly"
-    [fields]="formlyFields"
-    [model]="formlyModel"
-    [options]="formlyOption"
-  ></formly-form>
+  <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel" [options]="formlyOption"></formly-form>
   <div class="mt-4 text-end">
-    <p-button
-      [loading]="isSubmit"
-      styleClass="p-button-primary d-block py-3"
-      type="submit"
-      label="{{ 'btn.submit' | translate }}"
-    ></p-button>
+    <p-button *ngIf="!previewOnly" [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
+      label="{{ 'btn.submit' | translate }}"></p-button>
   </div>
 </form>

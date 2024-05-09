@@ -8,6 +8,7 @@ import { ClientIntakeComponent } from './components/client-intake/client-intake.
 const routes: Routes = [
   {
     path:"",component:ClientsComponent,
+
   },
   // {
   //   path:"view/:id",component:ClientDetailsComponent,
@@ -17,12 +18,16 @@ const routes: Routes = [
     path:"view/:id",component:ClientEditorComponent,
   },
   {
+    path:"update/:id",component:ClientEditorComponent,
+  },
+  {
     path:"add",component:ClientEditorComponent,
   },
   {
     path:"intake",component:ClientIntakeComponent,
   },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

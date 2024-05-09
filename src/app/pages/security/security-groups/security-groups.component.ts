@@ -69,11 +69,13 @@ export class SecurityGroupsComponent {
         target: SecurityGroupsEditorComponent,
         icon: 'pencil',
         width: '30%',
+        permission:'Update_Security_Groups'
       },
       {
         type: 'delete',
         title: this._languageService.getTransValue('btn.delete'),
         icon: 'trash',
+        permission:'Delete_Security_Groups'
       },
     ],
   };

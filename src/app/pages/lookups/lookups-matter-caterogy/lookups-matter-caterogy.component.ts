@@ -11,6 +11,7 @@ import { SharedTableService } from '@shared/components/shared-table/services/tab
 import { PAGESIZE } from '@core/utilities/defines';
 import { LookupsSubMatterCategoryComponent } from './lookups-sub-matter-category/lookups-sub-matter-category.component';
 import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
+import { PermissionService } from '@core/services/permission.service';
 
 @Component({
   selector: 'app-lookups-matter-caterogy',
@@ -22,6 +23,7 @@ export class LookupsMatterCaterogyComponent implements OnInit{
   _languageService = inject(LanguageService)
   _sharedService=inject(SharedService);
   _sharedTableService=inject(SharedTableService)
+  _permissionService=inject(PermissionService)
 
   apiUrl=API_Config.matterCategory;
   apiUrlsChild=API_Config.matterCategoryType;
@@ -35,8 +37,8 @@ export class LookupsMatterCaterogyComponent implements OnInit{
   }
   columnsLocalizedChildren: any = {
     ar: Matter_Category_Children_Columns_AR,
-    en: Matter_Category_Children_Columns_EN,
-    fr: Matter_Category_Children_Columns_FR,
+        en: Matter_Category_Children_Columns_EN,
+        fr: Matter_Category_Children_Columns_FR,
   }
   additionalTableConfig: TableConfig = {
     id:'id',
@@ -46,12 +48,14 @@ export class LookupsMatterCaterogyComponent implements OnInit{
         title: this._languageService.getTransValue('lookups.updateMainItem'),
         target: LookupsMainMatterCategoryComponent,
         icon:'pencil',
-        width:'30%'
+        width:'30%',
+        permission:'Update_MatterCategory'
       },
       {
         type:'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon:'trash',
+        permission:'Delete_MatterCategory'
       },
     ]
   }
@@ -63,12 +67,14 @@ export class LookupsMatterCaterogyComponent implements OnInit{
         title: this._languageService.getTransValue('lookups.updateSubItem'),
         target: LookupsSubMatterCategoryComponent,
         icon:'pencil',
-        width:'30%'
+        width:'30%',
+        permission:'Update_MatterType'
       },
       {
         type:'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon:'trash',
+        permission:'Delete_MatterType'
       },
     ]
   }
@@ -79,6 +85,9 @@ export class LookupsMatterCaterogyComponent implements OnInit{
     this.columnsLocalizedChildren= swapFirstTwoIndexes(
       this.columnsLocalizedChildren,this._languageService.getSelectedLanguage()
     );
+    if(!this._permissionService.hasPermission('View_MatterType')){
+      this.columnsLocalizedChildren=null
+    }
   }
   openItemEditor(formType:string,categorytype:string){
     const ref= this._dialogService.open((categorytype=='main')?LookupsMainMatterCategoryComponent:LookupsSubMatterCategoryComponent,{

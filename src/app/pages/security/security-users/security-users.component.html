@@ -16,10 +16,10 @@
     <div class="d-flex justify-content-end mt-3">
       <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="userGroups.length==0"
         [disabled]="selectedGroups.length==0" label="{{ 'btn.submit' | translate }}"
-        (onClick)="submit('add')"></p-button>
+        (onClick)="submit('add')" [requiredPermission]="'Update_Security_Users'"></p-button>
       <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="userGroups.length!=0"
         [disabled]="selectedGroups.length==0" label="{{ 'btn.update' | translate }}"
-        (onClick)="submit('update')"></p-button>
+        (onClick)="submit('update')" [requiredPermission]="'Update_Security_Users'"></p-button>
     </div>
   </div>
 </div>

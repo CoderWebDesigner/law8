@@ -35,11 +35,12 @@ export class ClientEditorComponent
   _permissionService=inject(PermissionService)
   filterOptions?: any = { orderByDirection: 'ASC' };
   disableInputs: boolean;
-  items: MenuItem[] = [
+  items: any[] = [
     // { label: this._languageService.getTransValue('common.general') },
     // { label: this._languageService.getTransValue('client.companyAddress') },
     // { label: this._languageService.getTransValue('client.billingAddress') },
-    { label: this._languageService.getTransValue('common.contacts') },
+    
+    { label: this._languageService.getTransValue('common.contacts') ,permission:this._permissionService.hasPermission('View_ClientContact')},
   ];
   companyAddress: any;
   billingAddress: any;
@@ -467,7 +468,6 @@ export class ClientEditorComponent
           if (this.requestId) {
             this.formlyModel = res[2].result;
             this.disableInputs = !this._permissionService.hasPermission("Update_Client");
-            console.log('disableInputs',!this._permissionService.hasPermission("Update_Client"))
           }
           this.initForm();
         },

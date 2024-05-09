@@ -29,12 +29,14 @@ export class TaskManagementComponent {
         type:'update',
         targetType: 'path',
         target: '/task-management/update/',
-        icon:'pencil'
+        icon:'pencil',
+        permission:'Update_TaskManagement'
       },
       {
         type: 'delete',
         title: this._languageService.getTransValue('btn.delete'),
         icon: 'trash',
+        permission:'Delete_TaskManagement'
       },
     ],
   };

@@ -16,6 +16,7 @@ import { SharedNoDataComponent } from './components/shared-no-data/shared-no-dat
 import { MoreInfoComponent } from './components/shared-table/components/more-info/more-info.component';
 import { EventsFilterPipe } from './pipes/events-filter.pipe';
 import { SecondsToTimePipe } from './pipes/secondsToTime/seconds-to-time.pipe';
+import { PermissionDirective } from '@core/directives/permission.directive';
 
 const components: any = [
   SharedActionsComponent,
@@ -25,6 +26,7 @@ const components: any = [
   MoreInfoComponent,
   EventsFilterPipe,
   SecondsToTimePipe,
+  PermissionDirective
 ];
 
 // const components: any = [];

@@ -30,10 +30,11 @@ export class ClientsComponent {
         title: this._languageService.getTransValue('client.updateClient'),
         targetType: 'path',
         target: '/clients/view/',
-        icon:'eye',
+        icon:'pencil',
         type:'update',
-        permission:'Update_Client' //'Update_Client'
+        permission:'View_Client' //detail
       },
+ 
     ],
   };
   mapData(data){

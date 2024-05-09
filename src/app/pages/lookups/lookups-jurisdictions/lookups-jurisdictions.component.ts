@@ -11,6 +11,7 @@ import { SharedTableService } from '@shared/components/shared-table/services/tab
 import { SharedService } from '@shared/services/shared.service';
 import { PAGESIZE } from '@core/utilities/defines';
 import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
+import { PermissionService } from '@core/services/permission.service';
 
 @Component({
   selector: 'app-lookups-jurisdictions',
@@ -23,6 +24,7 @@ export class LookupsJurisdictionsComponent implements OnInit{
   _languageService = inject(LanguageService)
   _sharedTableService = inject(SharedTableService)
   _sharedService = inject(SharedService)
+  _permissionService=inject(PermissionService)
 
   apiUrl=API_Config.jurisdictions
   apiUrlsChild=API_Config.judicature;
@@ -47,12 +49,14 @@ export class LookupsJurisdictionsComponent implements OnInit{
         title: this._languageService.getTransValue('lookups.updateMainItem'),
         target: LookupsJurisdictionsMainEditorComponent,
         icon:'pencil',
-        width:'30%'
+        width:'30%',
+        permission:'Update_Jurisdiction'
       },
       {
         type:'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon:'trash',
+        permission:'Delete_Jurisdiction'
       },
     ]
   }
@@ -64,12 +68,14 @@ export class LookupsJurisdictionsComponent implements OnInit{
         title: this._languageService.getTransValue('lookups.updateSubItem'),
         target: LookupsJurisdictionsSubEditorComponent,
         icon:'pencil',
-        width:'30%'
+        width:'30%',
+        permission:'Update_Judicature'
       },
       {
         type:'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon:'trash',
+        permission:'Delete_Judicature'
       },
     ]
   }
@@ -80,6 +86,9 @@ export class LookupsJurisdictionsComponent implements OnInit{
     this.columnsLocalizedChildren= swapFirstTwoIndexes(
       this.columnsLocalizedChildren,this._languageService.getSelectedLanguage()
     );
+    if(!this._permissionService.hasPermission('View_Judicature')){
+      this.columnsLocalizedChildren=null
+    }
   }
   openItemEditor(formType:string,categorytype:string){
     const ref=this._dialogService.open(categorytype == 'main' ? LookupsJurisdictionsMainEditorComponent : LookupsJurisdictionsSubEditorComponent,{

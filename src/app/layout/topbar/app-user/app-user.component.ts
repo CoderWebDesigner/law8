@@ -46,7 +46,7 @@ export class AppUserComponent implements OnInit{
       next: (res: ApiRes) => {
         if (res && res.isSuccess) {
           this._authService.user = res['result'];
-          this._authService.user.Photo = `data:image/jpg;base64,${res['result'].logoFile}`;
+          this._authService.user.Photo =(res['result'].logoFile)? `data:image/jpg;base64,${res['result'].logoFile}`:res['result'].logoFile;
         }
       },
     });

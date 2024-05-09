@@ -3,7 +3,6 @@ import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { LookupsMainItemEditorComponent } from '@components/lookups/components/lookups-main-item-editor/lookups-main-item-editor.component';
-import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 import {
   Matter_Main_List_Columns_AR,
   Matter_Main_List_Columns_EN,
@@ -17,14 +16,17 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { LookupsMainListSubEditorComponent } from './lookups-main-list-sub-editor/lookups-main-list-sub-editor.component';
-import { API_Data } from '../const/api-data';
 import {
   Main_List_Client_Group_Columns_AR,
   Main_List_Client_Group_Columns_EN,
   Main_List_Client_Group_Columns_FR,
 } from './main-list-client-group-columns.config';
 import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
-import { Main_List_Task_code_Columns_AR, Main_List_Task_code_Columns_EN, Main_List_Task_code_Columns_FR } from './main-list-task-code-columns.config';
+import {
+  Main_List_Task_code_Columns_AR,
+  Main_List_Task_code_Columns_EN,
+  Main_List_Task_code_Columns_FR,
+} from './main-list-task-code-columns.config';
 
 @Component({
   selector: 'app-lookups-main-list',
@@ -46,6 +48,7 @@ export class LookupsMainListComponent implements OnInit {
       id: 1,
       nameEN: 'Matter Status',
       nameAR: 'حالة القضية',
+
     },
     {
       id: 2,
@@ -102,42 +105,72 @@ export class LookupsMainListComponent implements OnInit {
     '1': {
       api: API_Config.mattStatus,
       title: this._languageService.getTransValue('common.mattStatus'),
+      addPermission: 'Add_MatterStatus',
+      updatePermission: 'Update_MatterStatus',
+      deletePermission: 'Delete_MatterStatus',
     },
     '2': {
       api: API_Config.stage,
       title: this._languageService.getTransValue('common.stage'),
+      addPermission: 'Add_Stage',
+      updatePermission: 'Update_Stage',
+      deletePermission: 'Delete_Stage',
     },
     '3': {
       api: API_Config.clientGroup,
       title: this._languageService.getTransValue('common.clientGroup'),
+      addPermission: 'Add_ClientGroup',
+      updatePermission: 'Update_ClientGroup',
+      deletePermission: 'Delete_ClientGroup',
     },
     '4': {
       api: API_Config.referralType,
       title: this._languageService.getTransValue('common.referralType'),
+      addPermission: 'Add_ReferralType',
+      updatePermission: 'Update_ReferralType',
+      deletePermission: 'Delete_ReferralType',
     },
     '5': {
       api: API_Config.partiesDescription,
       title: this._languageService.getTransValue('common.partiesDescription'),
+      addPermission: 'Add_PartiesDescription',
+      updatePermission: 'Update_PartiesDescription',
+      deletePermission: 'Delete_PartiesDescription',
     },
     '6': {
       api: API_Config.adjournmentReasons,
       title: this._languageService.getTransValue('common.adjournmentReasons'),
+      addPermission: 'Add_AdjournmentReasons',
+      updatePermission: 'Update_AdjournmentReasons',
+      deletePermission: 'Delete_AdjournmentReasons',
     },
     '7': {
       api: API_Config.taskCode,
       title: this._languageService.getTransValue('common.taskCode'),
+      addPermission: 'Add_TaskCode',
+      updatePermission: 'Update_TaskCode',
+      deletePermission: 'Delete_TaskCode',
     },
     '8': {
       api: API_Config.practiceArea,
       title: this._languageService.getTransValue('common.practiceArea'),
+      addPermission: 'Add_PractsArea',
+      updatePermission: 'Update_PractsArea',
+      deletePermission: 'Delete_PractsArea',
     },
     '9': {
       api: API_Config.department,
       title: this._languageService.getTransValue('common.department'),
+      addPermission: 'Add_Department',
+      updatePermission: 'Update_Department',
+      deletePermission: 'Delete_Department',
     },
     '10': {
       api: API_Config.industry,
       title: this._languageService.getTransValue('common.industry'),
+      addPermission: 'Add_Industry',
+      updatePermission: 'Update_Industry',
+      deletePermission: 'Delete_Industry',
     },
   };
   columnsLocalized: any = {
@@ -146,26 +179,14 @@ export class LookupsMainListComponent implements OnInit {
     fr: Matter_Main_List_Columns_FR,
   };
   columnsLocalizedChildren: any = {};
-  additionalTableConfigChildren: TableConfig = {
-    id: 'id',
-    actions: [
-      {
-        type: 'update',
-        title: this._languageService.getTransValue('lookups.updateSubItem'),
-        target: LookupsMainListSubEditorComponent,
-        icon: 'pencil',
-        width: '30%',
-      },
-      {
-        type: 'delete',
-        title: this._languageService.getTransValue('btn.delete'),
-        icon: 'trash',
-      },
-    ],
-  };
+  additionalTableConfigChildren: TableConfig = {};
   ngOnInit(): void {
     console.log(this._languageService.getSelectedLanguage());
-    this.columnsLocalized = swapFirstTwoIndexes(this.columnsLocalized,this._languageService.getSelectedLanguage())
+    this.columnsLocalized = swapFirstTwoIndexes(
+      this.columnsLocalized,
+      this._languageService.getSelectedLanguage()
+    );
+
     console.log(this.columnsLocalized);
   }
   openItemEditor(categoryType: string) {
@@ -180,6 +201,7 @@ export class LookupsMainListComponent implements OnInit {
           categoryType: categoryType, //main , sub
           apiUrls: this.apiUrls,
           mainListId: this.selectedRow?.id,
+          
         },
       }
     );
@@ -225,6 +247,25 @@ export class LookupsMainListComponent implements OnInit {
       ar: Matter_Sub_List_Columns_AR,
       en: Matter_Sub_List_Columns_EN,
       fr: Matter_Sub_List_Columns_FR,
+    };
+    this.additionalTableConfigChildren = {
+      id: 'id',
+      actions: [
+        {
+          type: 'update',
+          title: this._languageService.getTransValue('lookups.updateSubItem'),
+          target: LookupsMainListSubEditorComponent,
+          icon: 'pencil',
+          width: '30%',
+          permission: this.apiData[this.selectedRow?.id]?.updatePermission,
+        },
+        {
+          type: 'delete',
+          title: this._languageService.getTransValue('btn.delete'),
+          icon: 'trash',
+          permission: this.apiData[this.selectedRow?.id]?.deletePermission,
+        },
+      ],
     };
     this.selectedRow = event.data;
     this.apiUrls = this.apiData[this.selectedRow?.id]?.api;

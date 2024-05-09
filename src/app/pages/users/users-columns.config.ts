@@ -36,7 +36,8 @@ export const Users_Columns_EN = [
     header: 'Locked',
     field: 'locked',
     class:'switch-bg',
-    isSwitch:true
+    isSwitch:true,
+    permission:'Unlock_Users'
   },
   {
     header: 'Timesheet Date',
@@ -46,7 +47,8 @@ export const Users_Columns_EN = [
   {
     header: 'Activation',
     field: 'active',
-    isSwitch:true
+    isSwitch:true,
+    permission:'Deactivate_Users'
   }
 ];
 

@@ -47,12 +47,14 @@ data:any[]=[]
           target: MatterPartyEditorComponent,
           icon:'pencil',
           isDynamic:this.requestId != undefined,
+          permission:'Update_Matter_Parties'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
+          permission:'Delete_Parties_Matter'
         },
       ],
     }

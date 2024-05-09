@@ -11,6 +11,7 @@ import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { PAGESIZE } from '@core/utilities/defines';
 import { LookupsSubRateComponent } from './lookups-sub-rate/lookups-sub-rate.component';
+import { PermissionService } from '@core/services/permission.service';
 
 @Component({
   selector: 'app-lookups-rate-table',
@@ -22,12 +23,11 @@ export class LookupsRateTableComponent implements OnInit {
   _dialogService = inject(DialogService)
   _languageService = inject(LanguageService);
   _sharedService=inject(SharedService)
-  _sharedTableService = inject(SharedTableService)
+  _sharedTableService = inject(SharedTableService);
+  _permissionService=inject(PermissionService)
   apiUrls=API_Config.rateType;
   apiUrlsChild=API_Config.rate;// add child
-  filterSubOptions: any = {
-
-  };
+  filterSubOptions: any = {};
   columnsLocalized: any = {
     ar: Rate_Columns_AR,
     en: Rate_Columns_EN,
@@ -46,12 +46,14 @@ export class LookupsRateTableComponent implements OnInit {
         title: this._languageService.getTransValue('lookups.updateMainItem'),
         target: LookupsMainItemEditorComponent,
         icon:'pencil',
-        width:'30%'
+        width:'30%',
+        permission:'Update_RateType'
       },
       {
         type:'delete',
         title: this._languageService.getTransValue('btn.delete'),
-        icon:'trash'
+        icon:'trash',
+        permission:'Delete_RateType'
       },
     ]
   }
@@ -63,7 +65,8 @@ export class LookupsRateTableComponent implements OnInit {
         title: this._languageService.getTransValue('lookups.updateSubItem'),
         target: LookupsSubRateComponent,
         icon:'pencil',
-        width:'30%'
+        width:'30%',
+        permission:'Update_Rate'
       },
     ]
   }
@@ -71,7 +74,9 @@ export class LookupsRateTableComponent implements OnInit {
     this.columnsLocalized = swapFirstTwoIndexes(
       this.columnsLocalized,this._languageService.getSelectedLanguage()
     );
-
+    if(!this._permissionService.hasPermission('View_Rate')){
+      this.columnsLocalizedChildren=null
+    }
   }
   openItemEditor(formType:string,categorytype:string){
     const ref = this._dialogService.open(LookupsMainItemEditorComponent,{

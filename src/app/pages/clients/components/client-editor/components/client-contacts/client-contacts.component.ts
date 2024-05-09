@@ -51,12 +51,14 @@ export class ClientContactsComponent implements OnInit, OnDestroy {
           target: ClientContactEditorComponent,
           icon:'pencil',
           isDynamic:this.requestId != undefined,
+          permission:'Update_ClientContact'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
+          permission:'Delete_ClientContact'
         },
       ],
     }

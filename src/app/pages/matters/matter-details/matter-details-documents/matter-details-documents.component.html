@@ -17,7 +17,7 @@
 <ng-container>
   <div class="text-end mb-4">
     <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-      [icon]="'pi pi-plus'" [label]="'matters.addDocument' | translate" button>
+      [icon]="'pi pi-plus'" [label]="'matters.addDocument' | translate" [requiredPermission]="'Add_Matter_Documents'">
     </p-button>
   </div>
   <shared-table [additionalTableConfig]="additionalTableConfig" [filterOptions]="filterOptions"

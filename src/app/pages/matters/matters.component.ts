@@ -27,6 +27,7 @@ export class MattersComponent {
         targetType: 'path',
         target: '/matters/view/',
         icon: 'eye',
+        permission:'View_Matter'
       },
     ],
   };

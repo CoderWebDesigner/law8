@@ -11,6 +11,13 @@
           <!-- <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox> -->
         </th>
         <ng-container *ngFor="let col of columns">
+          <!-- <ng-container *ngIf="col.isSwitch">
+            <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand" [requiredPermission]="col?.permission">
+              {{ col.header }}
+              <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
+            </th>
+          </ng-container> -->
+          
           <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand">
             {{ col.header }}
             <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
@@ -61,7 +68,7 @@
             {{ rowData[col.field] | date : "dd-MM-yyyy" }}
           </ng-container>
           <ng-container *ngIf="col?.isSwitch">
-            <p-inputSwitch [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
+            <p-inputSwitch [styleClass]="col?.class" [(ngModel)]="rowData[col.field]" [requiredPermission]="col?.permission"
               (onChange)="onSwitch($event)"></p-inputSwitch>
           </ng-container>
           <ng-container *ngIf="col?.isCheck">
@@ -102,7 +109,7 @@
                   action.tooltipText ||
                   action.title ||
                   ('btn.' + action.type | translate)
-                " tooltipPosition="top" [styeClass]="action.type === 'delete' ? 'p-button-danger' : ''">
+                " tooltipPosition="top" [styeClass]="action.type === 'delete' ? 'p-button-danger' : ''" >
                 <i class="fs-4" [ngClass]="['pi pi-' + action?.icon]"></i>
               </p-button>
             </ng-container>

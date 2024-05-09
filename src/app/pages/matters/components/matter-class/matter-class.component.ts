@@ -1,13 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  inject,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { LanguageService } from '@core/services';
 import { PAGESIZE } from '@core/utilities/defines';
@@ -66,12 +57,14 @@ export class MatterClassComponent implements OnInit, OnDestroy {
           target: MatterClassEditorComponent,
           icon: 'pencil',
           isDynamic: this.requestId != undefined,
+          permission:'Update_Matter_Classes'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
+          permission:'Delete_Matter_Classes'
         },
       ],
     };

@@ -59,12 +59,14 @@ export class MatterAddressComponent implements OnInit, OnDestroy {
           target: MatterAddressEditorComponent,
           icon: 'pencil',
           isDynamic: this.requestId != undefined,
+          permission:'Update_Matter_Addres'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
+          permission:'Delete_Matter_Addres'
         },
       ],
     };

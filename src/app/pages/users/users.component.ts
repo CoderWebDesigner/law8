@@ -30,7 +30,8 @@ export class UsersComponent {
         title: this._languageService.getTransValue('users.updateUser'),
         targetType: 'path',
         target: '/users/update',
-        icon:'pencil'
+        icon:'pencil',
+        permission:'Update_Users'
       },
     ],
   };

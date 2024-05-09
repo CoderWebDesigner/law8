@@ -10,5 +10,5 @@
 
 <div class="d-flex justify-content-end my-3">
     <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" [disabled]="updatedRows.length==0"
-        label="{{ 'btn.submit' | translate }}" (onClick)="submit()"></p-button>
+        label="{{ 'btn.submit' | translate }}" (onClick)="submit()" [requiredPermission]="'Update_Security_Calendar'"></p-button>
 </div>

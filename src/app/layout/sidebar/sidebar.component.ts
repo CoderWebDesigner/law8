@@ -159,7 +159,6 @@ export class SidebarComponent implements OnInit, OnChanges {
   filterMenu(menuItems:MenuItem[]){
     return menuItems.reduce((filteredItems:any,menuItem)=>{
       const foundFilter=this._permissionService.userPermissions.find((permission:string)=> permission===menuItem.role)
-      console.log('foundFilter',foundFilter)
       if (foundFilter) {
         const filteredMenuItem: MenuItem = {
           ...menuItem,
@@ -179,7 +178,6 @@ export class SidebarComponent implements OnInit, OnChanges {
 
         }
       }
-      console.log('filteredItems',filteredItems)
       return filteredItems;
 
     },[])

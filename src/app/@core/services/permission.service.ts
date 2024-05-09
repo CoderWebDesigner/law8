@@ -22,4 +22,7 @@ export class PermissionService {
     return this.userPermissions.some((value:string)=> value===permission)
   }
   
+//   hasPermission(permission: string) {
+//     return Array.isArray(this.userPermissions)?this.userPermissions.some((value: string) => value === permission):false;
+// }
 }
