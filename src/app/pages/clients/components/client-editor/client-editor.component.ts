@@ -80,9 +80,10 @@ export class ClientEditorComponent
             className: 'col-md-4',
             key: 'clientCode',
             type: 'input',
+            
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
-              disabled: this.disableInputs,
+              disabled: true,
             },
           },
           {
@@ -198,15 +199,30 @@ export class ClientEditorComponent
             //   },
             // },
             {
+              type: 'select',
+              key: 'introducingLawyer',
               className: 'col-md-4',
-              key: 'clientIntro',
-              type: 'input',
               props: {
-                label: this._languageService.getTransValue('client.clientIntro'),
-                //required: true,
+                label: this._languageService.getTransValue(
+                  'matters.clientIntroducing'
+                ),
                 disabled: this.disableInputs,
+                options: this.lookupsData[4].result.map((obj) => ({
+                  label: obj.name,
+                  value: obj.id,
+                })),
               },
             },
+            // {
+            //   className: 'col-md-4',
+            //   key: 'clientIntro',
+            //   type: 'select',
+            //   props: {
+            //     label: this._languageService.getTransValue('client.clientIntro'),
+            //     //required: true,
+            //     disabled: this.disableInputs,
+            //   },
+            // },
             {
               className: 'col-12',
               key: 'notes',
@@ -455,6 +471,8 @@ export class ClientEditorComponent
       ),
       this._apiService.get(this.generalApiUrls.getCountryLookup),
       this._apiService.get(`${this.apiUrls.getById}${this.requestId}`),
+      this._apiService.post(this.apiUrls.getOrNewClientCode,null),
+      this._apiService.get(API_Config.general.getLawyerShort),
       // this._apiService.get(this.generalApiUrls.getParties),
     ])
       .pipe(
@@ -465,6 +483,9 @@ export class ClientEditorComponent
         next: (res: ApiRes) => {
           // console.log(res);
           this.lookupsData = res;
+          this.formlyModel={
+            clientCode:res[3].result
+          }
           if (this.requestId) {
             this.formlyModel = res[2].result;
             this.disableInputs = !this._permissionService.hasPermission("Update_Client");

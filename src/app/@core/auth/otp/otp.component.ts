@@ -70,7 +70,6 @@ export class OtpComponent extends FormBaseClass implements OnInit {
                   'messages.signInSuccessfully'
                 )
               );
-              console.log('permissions',this._authService.getDecodedToken()['role'])
               this._permissionService.userPermissions=this._authService.getDecodedToken()['role']
               this._router.navigate(['/dashboard']);
             } else {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { ApiRes } from '@core/models';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { finalize, forkJoin } from 'rxjs';
 
@@ -9,22 +10,21 @@ import { finalize, forkJoin } from 'rxjs';
   templateUrl: './matter-general.component.html',
   styleUrls: ['./matter-general.component.scss'],
 })
-export class MatterGeneralComponent
-  extends FormBaseClass
-  implements OnInit
-{
+export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   @Input() previewOnly: boolean;
   @Input() data: any;
   @Output() onFormSubmit = new EventEmitter();
   ngOnInit(): void {
     this.getLookupsData();
-    this.detectFormChange();
-    console.log('ngOnInit',this.data)
+    // this.detectFormChange();
+    console.log('ngOnInit', this.data);
     this.formlyModel = {
-        ...this.data,
-        law_AssignedLaywerList:this.data?.law_AssignedLaywerList?.map((obj) => obj?.id),
-        law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
-      };
+      ...this.data,
+      law_AssignedLaywerList: this.data?.law_AssignedLaywerList?.map(
+        (obj) => obj?.id
+      ),
+      law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
+    };
   }
 
   override getLookupsData(): void {
@@ -33,6 +33,7 @@ export class MatterGeneralComponent
       this._apiService.get(API_Config.general.getTaskCode),
       this._apiService.get(API_Config.general.getReferralType),
       this._apiService.get(API_Config.responsibleLawyerSecurity.get),
+      this._apiService.get(API_Config.general.getLawyerShort),
     ])
       .pipe(
         this._sharedService.takeUntilDistroy(),
@@ -45,16 +46,16 @@ export class MatterGeneralComponent
         },
       });
   }
-  detectFormChange() {
-    console.log('detectFormChange');
-    this.formly.valueChanges
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res) => {
-          this.onSubmit();
-        },
-      });
-  }
+  // detectFormChange() {
+  //   console.log('detectFormChange');
+  //   this.formly.valueChanges
+  //     .pipe(this._sharedService.takeUntilDistroy())
+  //     .subscribe({
+  //       next: (res) => {
+  //         this.onSubmit();
+  //       },
+  //     });
+  // }
   override initForm(): void {
     this.formlyFields = [
       {
@@ -146,7 +147,7 @@ export class MatterGeneralComponent
                 'matters.clientIntroducing'
               ),
               disabled: this.previewOnly,
-              options: this.lookupsData[2].result.map((obj) => ({
+              options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -161,7 +162,7 @@ export class MatterGeneralComponent
                 'matters.matterIntroducingLawyer'
               ),
               disabled: this.previewOnly,
-              options: this.lookupsData[2].result.map((obj) => ({
+              options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -176,7 +177,7 @@ export class MatterGeneralComponent
                 'matters.responsibleLaywer'
               ),
               disabled: this.previewOnly,
-              options: this.lookupsData[2].result.map((obj) => ({
+              options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -191,7 +192,7 @@ export class MatterGeneralComponent
                 'matters.assignedLaywer'
               ),
               disabled: this.previewOnly,
-              options: this.lookupsData[2].result.map((obj) => ({
+              options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
@@ -223,9 +224,33 @@ export class MatterGeneralComponent
     return arr;
   }
   override onSubmit(): void {
+    if (this.formly.invalid) return;
+    this.isSubmit = true;
     if (this.formlyModel?.rateAmount)
       this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-    console.log(this.formlyModel)
-    this.onFormSubmit.emit(this.formlyModel);
+    // console.log(this.formlyModel)
+    this._apiService
+      .post(API_Config.matters.updateGeneral, this.formlyModel)
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isSubmit = false))
+      )
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res.result && res.isSuccess) {
+            const text = this._languageService.getTransValue(
+              'messages.updateSuccessfully'
+            );
+            this._toastrNotifiService.displaySuccessMessage(text);
+            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+              this._dynamicDialogRef.close(dialog);
+            });
+          } else {
+            this._toastrNotifiService.displayErrorToastr(res?.message);
+          }
+        },
+      });
+
+    // this.onFormSubmit.emit(this.formlyModel);
   }
 }

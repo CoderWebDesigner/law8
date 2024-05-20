@@ -53,7 +53,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     },
   ];
   tabsList: any;
-  practiceArea=PracticeArea
+  practiceArea = PracticeArea;
   _matterService = inject(MatterService);
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
@@ -108,19 +108,23 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 value: obj.id,
               })),
               onChange: (e) => {
-                this._apiService
-                  .get(
-                    `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel.clientId}`
-                  )
-                  .pipe(this._sharedService.takeUntilDistroy())
-                  .subscribe({
-                    next: (res: ApiRes) => {
-                      this.formly
-                        .get('clientName')
-                        .setValue(res.result['name']);
-                      this.formly.get('mtrNo').setValue(res.result['mattCode']);
-                    },
-                  });
+                if (this.formlyModel.requestTypeId == 1) {
+                  this._apiService
+                    .get(
+                      `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel.clientId}`
+                    )
+                    .pipe(this._sharedService.takeUntilDistroy())
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        this.formly
+                          .get('clientName')
+                          .setValue(res.result['name']);
+                        this.formly
+                          .get('mtrNo')
+                          .setValue(res.result['mattCode']);
+                      },
+                    });
+                }
               },
             },
           },
@@ -151,11 +155,56 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 'matters.parentMatterCode'
               ),
               disabled: this.previewOnly,
-              options: [
-                { label: 'C00001 : user 1', value: 'C00001 : user 1' },
-                { label: 'C00002 : user 2', value: 'C00002 : user 2' },
-                { label: 'C00003 : user 3', value: 'C00003 : user 3' },
-              ],
+              options: this.lookupsData[5]?.result?.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+              onChange: (e) => {
+                this._apiService
+                  .get(
+                    `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel.clientId}&parentId=${this.formlyModel.parentMatterId}`
+                  )
+                  .pipe(this._sharedService.takeUntilDistroy())
+                  .subscribe({
+                    next: (res: ApiRes) => {
+                      if (res.isSuccess) {
+                        console.log('getCLientNameAndMattCodeByClientAndParent',res)
+                        this.formly
+                          .get('clientName')
+                          .setValue(res.result['name']);
+                        this.formly
+                          .get('mtrNo')
+                          .setValue(res.result['mattCode']);
+                      }
+                    },
+                  });
+              },
+            },
+
+            hooks: {
+              onInit: (field: FormlyFieldConfig) => {
+                field.form.get('clientId').valueChanges.subscribe({
+                  next: (res) => {
+                    if (this.formlyModel.requestTypeId == 2) {
+                      this._apiService
+                        .get(
+                          `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel.clientId}`
+                        )
+                        .pipe(this._sharedService.takeUntilDistroy())
+                        .subscribe({
+                          next: (res: ApiRes) => {
+                            if (res?.isSuccess) {
+                              field.props.options = res.result.map((obj) => ({
+                                label: obj.name,
+                                value: obj.id,
+                              }));
+                            }
+                          },
+                        });
+                    }
+                  },
+                });
+              },
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
@@ -185,7 +234,9 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 }, 0);
                 field.form.get('practsAreaId').valueChanges.subscribe({
                   next: (res) => {
-                    if ([this.practiceArea.IntelecturualProperty].includes(res)) {
+                    if (
+                      [this.practiceArea.IntelecturualProperty].includes(res)
+                    ) {
                       this.items.forEach((obj) => {
                         [1, 3, 4, 5, 7].includes(obj.id)
                           ? (obj.show = true)
@@ -238,7 +289,6 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
-
                     field.form.get('practsAreaId').valueChanges.subscribe({
                       next: (res) => {
                         this._apiService
@@ -306,7 +356,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -330,7 +384,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -348,7 +406,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -369,7 +431,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -389,7 +455,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 2 ||
                       !field.model?.tradmarkTypeId
@@ -414,7 +484,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty ||
+                      field.model?.practsAreaId ==
+                        this.practiceArea.IntelecturualProperty ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -432,7 +503,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.IntelecturualProperty,
+                        this.practiceArea.Corporate,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -480,7 +554,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty ||
+                      field.model?.practsAreaId ==
+                        this.practiceArea.IntelecturualProperty ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -501,7 +576,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.IntelecturualProperty,
+                        this.practiceArea.Corporate,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -520,7 +598,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.IntelecturualProperty,
+                        this.practiceArea.Corporate,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },

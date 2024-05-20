@@ -27,6 +27,7 @@ import {
   Main_List_Task_code_Columns_EN,
   Main_List_Task_code_Columns_FR,
 } from './main-list-task-code-columns.config';
+import { PermissionService } from '@core/services/permission.service';
 
 @Component({
   selector: 'app-lookups-main-list',
@@ -39,6 +40,7 @@ export class LookupsMainListComponent implements OnInit {
   _apiService = inject(ApiService);
   _sharedService = inject(SharedService);
   _sharedTableService = inject(SharedTableService);
+  _permissionService=inject(PermissionService)
   cdref = inject(ChangeDetectorRef);
   subTitle: string;
   apiUrls: any;
@@ -48,52 +50,62 @@ export class LookupsMainListComponent implements OnInit {
       id: 1,
       nameEN: 'Matter Status',
       nameAR: 'حالة القضية',
-
+      permission:'View_MatterStatus'
     },
     {
       id: 2,
       nameEN: 'Matter Stage',
       nameAR: 'درجات القضية',
+      permission:'View_Stage'
     },
     {
       id: 3,
       nameEN: 'Client group',
       nameAR: '  مجموعات العملاء',
+      permission:'View_ClientGroup'
     },
     {
       id: 4,
       nameEN: 'Referral Type',
       nameAR: 'نوع الترشيح',
+      permission:'View_ReferralType'
     },
     {
       id: 5,
-      nameEN: 'Parties’ description ',
+      nameEN: 'Parties description',
       nameAR: 'صفه الأطراف',
+      permission:'View_PartiesDescription'
     },
     {
       id: 6,
       nameEN: 'Adjournment reasons',
       nameAR: 'سبب التأجيل',
+      permission:'View_AdjournmentReasons'
     },
     {
       id: 7,
       nameEN: 'Task Code',
       nameAR: 'نوع المهمه',
+      permission:'View_TaskCode',
+
     },
     {
       id: 8,
       nameEN: 'Practice Area',
       nameAR: 'مجال التخصص',
+      permission:'View_PractsArea'
     },
     {
       id: 9,
       nameEN: 'Department',
       nameAR: 'الاقسام',
+      permission:'View_Department'
     },
     {
       id: 10,
       nameEN: 'Industry',
       nameAR: 'المجال الوظيفي',
+      permission:'View_Industry'
     },
     // {
     //   id: 11,
@@ -108,6 +120,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_MatterStatus',
       updatePermission: 'Update_MatterStatus',
       deletePermission: 'Delete_MatterStatus',
+      values:[]
     },
     '2': {
       api: API_Config.stage,
@@ -115,6 +128,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_Stage',
       updatePermission: 'Update_Stage',
       deletePermission: 'Delete_Stage',
+      values:[]
     },
     '3': {
       api: API_Config.clientGroup,
@@ -122,6 +136,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_ClientGroup',
       updatePermission: 'Update_ClientGroup',
       deletePermission: 'Delete_ClientGroup',
+      values:[]
     },
     '4': {
       api: API_Config.referralType,
@@ -129,6 +144,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_ReferralType',
       updatePermission: 'Update_ReferralType',
       deletePermission: 'Delete_ReferralType',
+      values:[]
     },
     '5': {
       api: API_Config.partiesDescription,
@@ -136,6 +152,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_PartiesDescription',
       updatePermission: 'Update_PartiesDescription',
       deletePermission: 'Delete_PartiesDescription',
+      values:[]
     },
     '6': {
       api: API_Config.adjournmentReasons,
@@ -143,6 +160,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_AdjournmentReasons',
       updatePermission: 'Update_AdjournmentReasons',
       deletePermission: 'Delete_AdjournmentReasons',
+      values:[]
     },
     '7': {
       api: API_Config.taskCode,
@@ -150,6 +168,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_TaskCode',
       updatePermission: 'Update_TaskCode',
       deletePermission: 'Delete_TaskCode',
+      values:['Billable','Non-Billable', 'No-charge']
     },
     '8': {
       api: API_Config.practiceArea,
@@ -157,6 +176,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_PractsArea',
       updatePermission: 'Update_PractsArea',
       deletePermission: 'Delete_PractsArea',
+      values:[]
     },
     '9': {
       api: API_Config.department,
@@ -164,6 +184,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_Department',
       updatePermission: 'Update_Department',
       deletePermission: 'Delete_Department',
+      values:[]
     },
     '10': {
       api: API_Config.industry,
@@ -171,6 +192,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_Industry',
       updatePermission: 'Update_Industry',
       deletePermission: 'Delete_Industry',
+      values:['Lawyer']
     },
   };
   columnsLocalized: any = {
@@ -181,13 +203,15 @@ export class LookupsMainListComponent implements OnInit {
   columnsLocalizedChildren: any = {};
   additionalTableConfigChildren: TableConfig = {};
   ngOnInit(): void {
-    console.log(this._languageService.getSelectedLanguage());
-    this.columnsLocalized = swapFirstTwoIndexes(
-      this.columnsLocalized,
-      this._languageService.getSelectedLanguage()
-    );
+    this.data=this.data.filter(obj=>this._permissionService.hasPermission(obj.permission))
+    
+    // console.log(this._languageService.getSelectedLanguage());
+    // this.columnsLocalized = swapFirstTwoIndexes(
+    //   this.columnsLocalized,
+    //   this._languageService.getSelectedLanguage()
+    // );
 
-    console.log(this.columnsLocalized);
+    // console.log(this.columnsLocalized);
   }
   openItemEditor(categoryType: string) {
     const ref = this._dialogService.open(
@@ -287,4 +311,7 @@ export class LookupsMainListComponent implements OnInit {
     this.cdref.detectChanges();
     this._sharedTableService.refreshData.next(true);
   }
+
+
+
 }

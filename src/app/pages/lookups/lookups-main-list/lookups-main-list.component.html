@@ -5,34 +5,31 @@
         <!-- <p-button [label]="'lookups.addMainItem'|translate"  (onClick)="openItemEditor('main')" styleClass="py-2 px-4 mx-2"></p-button> -->
         <!-- <shared-search-input ></shared-search-input> -->
       </div>
-      <shared-table
-        body
-        [data]="data"
-        [columnsLocalized]="columnsLocalized"
-        [selectMode]="'single'"
-        (onRowSelect)="onRowSelected($event)"
-        [withPagination]="false"
-        
-      >
+      <shared-table body [data]="data" [columnsLocalized]="columnsLocalized" [selectMode]="'single'"
+        (onRowSelect)="onRowSelected($event)" [withPagination]="false">
       </shared-table>
     </shared-card>
   </div>
   <div class="col-md-7">
-    <shared-card [title]="subTitle" [borderRadius]="20" *ngIf="selectedRow">
-      <div class="d-flex" headerActions>
-        <p-button [requiredPermission]="apiData[selectedRow?.id]?.addPermission" [label]="'lookups.addSubItem'|translate"  (onClick)="openItemEditor('sub')" styleClass="py-2 px-4 mx-2"></p-button>
-        <shared-search-input ></shared-search-input>
-      </div>
-      <shared-table
-        body
-        [columnsLocalized]="columnsLocalizedChildren"
-        [additionalTableConfig]="additionalTableConfigChildren"
-        [apiUrls]="apiUrls"
-        [mapData]="mapData"
-      >
+    <shared-card [title]="subTitle" [borderRadius]="20" *ngIf="selectedRow" [isSubCard]="true">
+      <ng-container headerActions>
+        <div class="d-flex">
+          <p-button [requiredPermission]="apiData[selectedRow?.id]?.addPermission"
+            [label]="'lookups.addSubItem'|translate" (onClick)="openItemEditor('sub')"
+            styleClass="py-2 px-4 mx-2"></p-button>
+          <shared-search-input></shared-search-input>
+        </div>
+       
+      </ng-container>
+      <ng-container subTitle *ngFor="let current of apiData[selectedRow?.id]?.values">
+        <p-chip [label]="current" />
+      </ng-container>
+      
+
+      <shared-table body [columnsLocalized]="columnsLocalizedChildren"
+        [additionalTableConfig]="additionalTableConfigChildren" [apiUrls]="apiUrls" [mapData]="mapData">
       </shared-table>
     </shared-card>
 
   </div>
 </div>
-

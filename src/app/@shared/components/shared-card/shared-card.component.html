@@ -5,11 +5,16 @@
     <div class="d-flex justify-content-between  flex-row">
       <div  [class]="{ 'sub-title': isSubTitle }">
         {{ title }}
+        <div>
+
+          <ng-content select="[subTitle]"></ng-content>
+        </div>
       </div>
       <div class="header-actions" >
         <ng-content select="[headerActions]"></ng-content>
       </div>
     </div>
+  
 
   </ng-template>
 

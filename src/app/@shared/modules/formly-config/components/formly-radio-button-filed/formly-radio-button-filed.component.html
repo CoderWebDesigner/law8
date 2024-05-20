@@ -1,6 +1,6 @@
 <div class="d-flex w-100" [ngClass]="{'flex-column': props['vertical']}">
   <div *ngFor="let option of props['options']; let i = index" class="radio-filed" [ngClass]="{'radio-checked': i == selectedIndex}">
-    <p-radioButton class="me-3" [formControl]="formControl" [formlyAttributes]="field" [value]="option.value" [name]="field.name" (onClick)="selectedIndex = i">
+    <p-radioButton class="me-3" [formControl]="formControl" [formlyAttributes]="field" [value]="option.value" [name]="field.name" (onClick)="selectedIndex = i;onClick()">
     </p-radioButton>
     <label class="m-0 me-2" *ngIf="option.label">{{ option.label }}</label>
     <img *ngIf="option.img" [src]="option.img" alt="">

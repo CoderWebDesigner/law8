@@ -15,7 +15,7 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { finalize, forkJoin } from 'rxjs';
+import { catchError, finalize, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-matter-details-main-info',
@@ -32,7 +32,7 @@ export class MatterDetailsMainInfoComponent
   @Output() onUpdate = new EventEmitter();
   _datePipe = inject(DatePipe);
   requestId: number;
-  practiceArea=PracticeArea
+  practiceArea = PracticeArea;
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     this.getLookupsData();
@@ -44,18 +44,23 @@ export class MatterDetailsMainInfoComponent
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.formlyModel = {
-       ...this.data,
-       openDate:this._datePipe.transform(this.data?.openDate,REQUEST_DATE_FORMAT),
-       closeDate:this._datePipe.transform(this.data?.closeDate,REQUEST_DATE_FORMAT)
+      ...this.data,
+      openDate: this._datePipe.transform(
+        this.data?.openDate,
+        REQUEST_DATE_FORMAT
+      ),
+      closeDate: this._datePipe.transform(
+        this.data?.closeDate,
+        REQUEST_DATE_FORMAT
+      ),
 
-      //  photo:this.data.logoFile 
-      };
+      //  photo:this.data.logoFile
+    };
 
     if (this.formly.get('jurisdictionId'))
       this.formly
         .get('jurisdictionId')
         .setValue(this.formlyModel?.jurisdictionId);
-
   }
   override initForm(): void {
     this.formlyFields = [
@@ -187,6 +192,12 @@ export class MatterDetailsMainInfoComponent
                 value: obj.id,
               })),
             },
+            // hooks: {
+            //   onInit: (field: FormlyFieldConfig) => {
+            //     field.
+            //     this.formlyOption.build();
+            //   }
+            // }
           },
           {
             className: 'card p-2 mx-3 mb-3',
@@ -204,8 +215,7 @@ export class MatterDetailsMainInfoComponent
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
-
-                    field.form.get('practsAreaId').valueChanges.subscribe({
+                    this.formly.get('practsAreaId').valueChanges.subscribe({
                       next: (res) => {
                         this._apiService
                           .get(
@@ -223,6 +233,22 @@ export class MatterDetailsMainInfoComponent
                           });
                       },
                     });
+                    if (this.formlyModel.practsAreaId) {
+                      this._apiService
+                        .get(
+                          `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${this.formlyModel.practsAreaId}`
+                        )
+                        .pipe(this._sharedService.takeUntilDistroy())
+                        .subscribe({
+                          next: (res: ApiRes) => {
+                            field.props.options = res.result.map((obj) => ({
+                              label: obj.name,
+                              value: obj.id,
+                            }));
+                            this.formlyOption.build();
+                          },
+                        });
+                    }
                   },
                 },
               },
@@ -283,7 +309,9 @@ export class MatterDetailsMainInfoComponent
                 key: 'jurisdictionId',
                 className: 'col-lg-3 col-md-4',
                 props: {
-                  label: this._languageService.getTransValue('matters.jurisdicion'),
+                  label: this._languageService.getTransValue(
+                    'matters.jurisdicion'
+                  ),
                   disabled: this.previewOnly,
                   options: this.lookupsData[0].result.map((obj) => ({
                     label: obj.name,
@@ -293,7 +321,9 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty || !field.model?.practsAreaId
+                      field.model?.practsAreaId ==
+                        this.practiceArea.IntelecturualProperty ||
+                      !field.model?.practsAreaId
                     );
                   },
                 },
@@ -303,18 +333,22 @@ export class MatterDetailsMainInfoComponent
                 key: 'judicatureId',
                 className: 'col-lg-3 col-md-4',
                 props: {
-                  label: this._languageService.getTransValue('matters.judicature'),
+                  label:
+                    this._languageService.getTransValue('matters.judicature'),
                   disabled: this.previewOnly,
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.IntelecturualProperty,
+                        this.practiceArea.Corporate,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
                 },
-    
+
                 hooks: {
                   onChanges: (field: FormlyFieldConfig) => {
                     if (this.formlyModel.jurisdictionId) {
@@ -352,7 +386,11 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -376,7 +414,11 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -394,7 +436,11 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -415,7 +461,11 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 1 ||
                       !field.model?.tradmarkTypeId
@@ -435,7 +485,11 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.Corporate, this.practiceArea.Litigation,this.practiceArea.Arbitration].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.Corporate,
+                        this.practiceArea.Litigation,
+                        this.practiceArea.Arbitration,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId ||
                       field.model?.tradmarkTypeId == 2 ||
                       !field.model?.tradmarkTypeId
@@ -460,7 +514,8 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      field.model?.practsAreaId == this.practiceArea.IntelecturualProperty ||
+                      field.model?.practsAreaId ==
+                        this.practiceArea.IntelecturualProperty ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -481,7 +536,10 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.IntelecturualProperty,
+                        this.practiceArea.Corporate,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -500,7 +558,10 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [this.practiceArea.IntelecturualProperty, this.practiceArea.Corporate].includes(field.model?.practsAreaId) ||
+                      [
+                        this.practiceArea.IntelecturualProperty,
+                        this.practiceArea.Corporate,
+                      ].includes(field.model?.practsAreaId) ||
                       !field.model?.practsAreaId
                     );
                   },
@@ -521,8 +582,6 @@ export class MatterDetailsMainInfoComponent
         ],
       },
     ];
-
-
   }
   override getLookupsData() {
     forkJoin([
@@ -551,6 +610,10 @@ export class MatterDetailsMainInfoComponent
       .post(API_Config.matters.update, this.formlyModel)
       .pipe(
         this._sharedService.takeUntilDistroy(),
+        catchError((error:any)=>{
+          console.log(error)
+          return error 
+        }),
         finalize(() => (this.isSubmit = false))
       )
       .subscribe({
@@ -572,5 +635,4 @@ export class MatterDetailsMainInfoComponent
         },
       });
   }
-
 }

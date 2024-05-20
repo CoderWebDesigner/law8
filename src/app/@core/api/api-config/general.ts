@@ -29,7 +29,9 @@ export const General_API = {
       "getRecentMatters":"AppLookup/GetRecentMatterCodeForUserLookup",
       "getMatterCodes":"AppLookup/GetLawMattertCodeLookup",
       "getAssignedUsersTimeSheet":"AppLookup/GetLaw_AssignAddUsersForTimeShetLookup",
-      "getAssignedUsersCalender":"AppLookup/GetLaw_AssignViewUsersForCalendertLookup"
+      "getAssignedUsersCalender":"AppLookup/GetLaw_AssignViewUsersForCalendertLookup",
+      "getLawyerShort":"AppLookup/GetLaw_LawyerShortLookup",
+      "getLawMattertCodeByClient":"AppLookup/GetLawMattertCodeByClientLookup"
   }
 
 }

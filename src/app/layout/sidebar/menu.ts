@@ -84,7 +84,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.taskManagement.calender',
         link: '/task-management/calender',
         parentId: 4,
-        role: 'Calender_TaskManagement',
+        role: 'View_TaskManagement',
       },
     ],
   },
@@ -106,7 +106,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.timesheet.timesheetAdd',
         link: '/timesheet/add',
         parentId: 5,
-        // role:'Add_Client'
+        role: 'View_Timesheet',
       },
     ],
   },
@@ -150,7 +150,17 @@ export const MENU: MenuItem[] = [
         label: 'menu.lookups.mainList',
         link: '/lookups/main-list',
         parentId: 7,
-        role: 'Add_Client',
+        role:
+          'View_MatterStatus' ||
+          'View_Stage' ||
+          'View_ClientGroup' ||
+          'View_ReferralType' ||
+          'View_PartiesDescription' ||
+          'View_AdjournmentReasons' ||
+          'View_TaskCode' ||
+          'View_PractsArea' ||
+          'View_Department' ||
+          'View_Industry',
       },
       {
         id: 4,

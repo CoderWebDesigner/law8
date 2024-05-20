@@ -9,4 +9,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 export class FormlyRadioButtonFiledComponent extends FieldType <FieldTypeConfig> {
 
   selectedIndex: number;
+  onClick(){
+    if(this.props['onClick']) this.props['onClick'](this.formControl.value)
+  }
 }
