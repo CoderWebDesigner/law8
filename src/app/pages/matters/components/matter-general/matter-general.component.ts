@@ -16,7 +16,8 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   @Output() onFormSubmit = new EventEmitter();
   ngOnInit(): void {
     this.getLookupsData();
-    // this.detectFormChange();
+    if(!this.data) this.detectFormChange();
+    
     console.log('ngOnInit', this.data);
     this.formlyModel = {
       ...this.data,
@@ -46,16 +47,16 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
         },
       });
   }
-  // detectFormChange() {
-  //   console.log('detectFormChange');
-  //   this.formly.valueChanges
-  //     .pipe(this._sharedService.takeUntilDistroy())
-  //     .subscribe({
-  //       next: (res) => {
-  //         this.onSubmit();
-  //       },
-  //     });
-  // }
+  detectFormChange() {
+    console.log('detectFormChange');
+    this.formly.valueChanges
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res) => {
+          this.onSubmit();
+        },
+      });
+  }
   override initForm(): void {
     this.formlyFields = [
       {
@@ -65,6 +66,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             type: 'select',
             key: 'law_TaskCodeId',
             className: 'col-md-4',
+            defaultValue:1,
             props: {
               label: this._languageService.getTransValue('matters.defaultTask'),
               disabled: this.previewOnly,
@@ -78,6 +80,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             type: 'radio',
             key: 'defaultTaskTypeId',
             className: 'col-md-4',
+            defaultValue:1,
             props: {
               label: this._languageService.getTransValue('matters.defaultTask'),
               disabled: this.previewOnly,
@@ -91,6 +94,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             type: 'select',
             key: 'defaultRate',
             className: 'col-md-4',
+            defaultValue:'A',
             props: {
               label: this._languageService.getTransValue('matters.defaultRate'),
               disabled: this.previewOnly,
@@ -228,8 +232,8 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
     this.isSubmit = true;
     if (this.formlyModel?.rateAmount)
       this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-    // console.log(this.formlyModel)
-    this._apiService
+    if(this.data){
+      this._apiService
       .post(API_Config.matters.updateGeneral, this.formlyModel)
       .pipe(
         this._sharedService.takeUntilDistroy(),
@@ -250,6 +254,11 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
           }
         },
       });
+    }else{
+       this.onFormSubmit.emit(this.formlyModel);
+    }
+    // console.log(this.formlyModel)
+    
 
     // this.onFormSubmit.emit(this.formlyModel);
   }

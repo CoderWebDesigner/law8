@@ -88,7 +88,7 @@ export class MatterDetailsMainInfoComponent
                   .subscribe({
                     next: (res: ApiRes) => {
                       this.formly
-                        .get('clientName')
+                        .get('client')
                         .setValue(res.result['name']);
                       this.formly.get('mtrNo').setValue(res.result['mattCode']);
                     },
@@ -99,7 +99,7 @@ export class MatterDetailsMainInfoComponent
 
           {
             type: 'input',
-            key: 'clientName',
+            key: 'client',
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('common.clientName'),
@@ -148,10 +148,12 @@ export class MatterDetailsMainInfoComponent
           {
             type: 'input',
             key: 'openDate',
+            defaultValue:new Date,
             className: 'col-lg-3 col-md-4',
             props: {
               label: this._languageService.getTransValue('matters.opened'),
               disabled: true,
+              defaultValue: new Date().toISOString().split('T')[0], 
             },
           },
           {

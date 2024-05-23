@@ -19,7 +19,7 @@
     "clientGroupNumber":"Client Group Number",
     "matterCategory":"matter Category",
     "group":"Group",
-    "rateName":"RateName",
+    "rateName":"Rate Name",
     "amount":"Amount",
     "taskCode": "Task Code"
   }

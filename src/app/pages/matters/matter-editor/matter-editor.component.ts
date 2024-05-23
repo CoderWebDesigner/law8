@@ -55,6 +55,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   tabsList: any;
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
+  
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) {
@@ -258,6 +259,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             type: 'date',
             key: 'openDate',
             className: 'col-md-4',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue('matters.opened'),
               disabled: this.previewOnly,
@@ -268,6 +270,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             key: 'descr',
             className: 'col-md-12',
             props: {
+              
               label: this._languageService.getTransValue('common.description'),
               disabled: this.previewOnly,
             },
@@ -541,6 +544,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 type: 'select',
                 key: 'statusId',
                 className: 'col-md-4',
+                defaultValue:4,
                 props: {
                   label: this._languageService.getTransValue(
                     'matters.matterStatus'
@@ -550,6 +554,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     label: obj.name,
                     value: obj.id,
                   })),
+                  
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {

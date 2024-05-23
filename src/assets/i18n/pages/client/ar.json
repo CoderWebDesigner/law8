@@ -69,7 +69,9 @@
     "ar":"AR",
     "en":"EN",
     "clientNameAr":"الاسم",
-    "clientNameEn":"الاسم الاجنبى"
+    "clientNameEn":"الاسم الاجنبى",
+    "viewClient":"View Client",
+    "updateClient":"Update Client"
 
   }
 }

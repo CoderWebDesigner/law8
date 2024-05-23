@@ -1,4 +1,4 @@
-<shared-card [borderRadius]="20" [title]="'client.addClient' | translate">
+<shared-card [borderRadius]="20" [title]="((requestId)?(_router.url.includes('view'))?'client.viewClient':'client.updateClient':'client.addClient') | translate">
   <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
     <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel"></formly-form>
     <p-tabView body>

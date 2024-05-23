@@ -2,7 +2,7 @@
 export const Matters_Columns_EN = [
   {
     header: 'Code',
-    field: 'id',
+    field: 'mtrNo',
   },
   {
     header: 'Opened',

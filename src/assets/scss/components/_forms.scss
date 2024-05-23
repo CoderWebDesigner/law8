@@ -6,7 +6,7 @@
 .p-password,
 .iti {
   width: 100%;
-  height: 40px;
+  // height: 40px;
 }
 
 form label {
@@ -54,9 +54,9 @@ label .ng-star-inserted {
   }
 }
 
-textarea{
-  height: auto !important;
-}
+// textarea{
+//   height: auto ;
+// }
 
 
 [dir=rtl] {
@@ -170,4 +170,9 @@ textarea[readonly] {
 
 .show-password{
   #{$right}: 15px;
+}
+
+.p-dropdown .p-dropdown-clear-icon{
+  #{$right}:3rem;
+  #{$left}:auto
 }

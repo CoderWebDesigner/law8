@@ -18,7 +18,7 @@
             </th>
           </ng-container> -->
           
-          <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand">
+          <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }">
             {{ col.header }}
             <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
           </th>

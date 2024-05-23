@@ -6,14 +6,14 @@ export const Jurisdictions_Columns_AR = [
 
   },
   {
-    header: 'الاسم العربى ',
+    header: 'الاسم',
     field: 'nameAr',
     isSort:true,
 
   },
 
   {
-    header: 'Active',
+    header: 'الحالة',
     field: 'activeText',
     isSort:true,
     isStatus:true
@@ -21,12 +21,12 @@ export const Jurisdictions_Columns_AR = [
 ];
 export const Jurisdictions_Columns_EN = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },
@@ -40,12 +40,12 @@ export const Jurisdictions_Columns_EN = [
 ];
 export const Jurisdictions_Columns_FR = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },
@@ -60,12 +60,12 @@ export const Jurisdictions_Columns_FR = [
 
 export const Jurisdictions_Sub_Columns_AR = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },
@@ -78,12 +78,12 @@ export const Jurisdictions_Sub_Columns_AR = [
 ];
 export const Jurisdictions_Sub_Columns_EN = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },
@@ -97,12 +97,12 @@ export const Jurisdictions_Sub_Columns_EN = [
 ];
 export const Jurisdictions_Sub_Columns_FR = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },

@@ -59,24 +59,7 @@ export class LookupsSubMatterCategoryComponent
           options:this.lookupsData.map(obj=>({label:obj.name,value:obj.id}))
         }
       },
-      {
-        type: 'input',
-        key: 'appealPeriod',
-        className: 'col-md-4',
-        props: {
-          type: 'number',
-          label: this._languageService.getTransValue('lookups.appealPeriod'),
-        },
-      },
-      {
-        type: 'input',
-        key: 'cassationPeriod',
-        className: 'col-md-4',
-        props: {
-          type: 'number',
-          label: this._languageService.getTransValue('lookups.cassationPeriod'),
-        },
-      },
+     
       {
         key: 'nameEn',
         type: 'input',
@@ -100,9 +83,27 @@ export class LookupsSubMatterCategoryComponent
         },
       },
       {
+        type: 'input',
+        key: 'appealPeriod',
+        className: 'col-md-4',
+        props: {
+          type: 'number',
+          label: this._languageService.getTransValue('lookups.appealPeriod'),
+        },
+      },
+      {
+        type: 'input',
+        key: 'cassationPeriod',
+        className: 'col-md-4',
+        props: {
+          type: 'number',
+          label: this._languageService.getTransValue('lookups.cassationPeriod'),
+        },
+      },
+      {
         key: 'active',
         type: 'switch',
-        defaultValue: false,
+        defaultValue: true,
         props: {
           label: this._languageService.getTransValue('lookups.active'),
           class: 'd-block',
@@ -136,9 +137,10 @@ export class LookupsSubMatterCategoryComponent
           if (res && res.isSuccess) {
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
-            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-              this.dialogRef.close(dialog);
-            });
+            this._dynamicDialogRef.close(true)
+            // this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+            //   this.dialogRef.close(dialog);
+            // });
           }
         },
       });
