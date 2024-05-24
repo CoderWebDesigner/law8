@@ -294,19 +294,22 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   onInit: (field: FormlyFieldConfig) => {
                     field.form.get('practsAreaId').valueChanges.subscribe({
                       next: (res) => {
-                        this._apiService
-                          .get(
-                            `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
-                          )
-                          .pipe(this._sharedService.takeUntilDistroy())
-                          .subscribe({
-                            next: (res: ApiRes) => {
-                              field.props.options = res.result.map((obj) => ({
-                                label: obj.name,
-                                value: obj.id,
-                              }));
-                            },
-                          });
+                        if(res){
+
+                          this._apiService
+                            .get(
+                              `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                            )
+                            .pipe(this._sharedService.takeUntilDistroy())
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                              },
+                            });
+                        }
                       },
                     });
                   },
@@ -641,7 +644,6 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     ]).subscribe(([address, contacts, parties, matterClass, applicant]) => {
       this.formlyModel = {
         ...this.formlyModel,
-        courtNumber: '12',
         law_MatterParties: parties,
         law_MatterAddresses: address,
         law_MatterContactss: contacts,

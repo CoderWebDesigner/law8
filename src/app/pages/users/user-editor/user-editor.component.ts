@@ -33,11 +33,11 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
         fieldGroupClassName: 'row',
         fieldGroup: [
           {
-            key: 'nameEn',
+            key: this._languageService.getSelectedLanguage() == 'en'?'nameEn':'nameAr',
             type: 'input',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getTransValue('lookups.nameEN'),
+              label: this._languageService.getSelectedLanguage() == 'en'?this._languageService.getTransValue('lookups.nameEN'):this._languageService.getTransValue('lookups.nameAR'),
               required: this._languageService.getSelectedLanguage() == 'en' && true,
             },
             validators: {
@@ -45,11 +45,11 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             },
           },
           {
-            key: 'nameAr',
+            key: this._languageService.getSelectedLanguage() == 'ar'?'nameEn':'nameAr',
             type: 'input',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getTransValue('lookups.nameAR'),
+              label: this._languageService.getSelectedLanguage() == 'ar'?this._languageService.getTransValue('lookups.nameEN'):this._languageService.getTransValue('lookups.nameAR'),
               required: this._languageService.getSelectedLanguage() == 'ar' && true,
             },
             validators: {
