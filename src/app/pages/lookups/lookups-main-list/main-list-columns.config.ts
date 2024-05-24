@@ -1,6 +1,6 @@
 export let Matter_Main_List_Columns_AR = [
   {
-    header: 'الاسم العربى ',
+    header: 'الاسم',
     field: 'nameAR',
 
   },
@@ -13,30 +13,30 @@ export let Matter_Main_List_Columns_AR = [
 ];
 export let Matter_Main_List_Columns_EN = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEN',
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAR',
 
   },
 ];
 export let Matter_Main_List_Columns_FR = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEN',
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAR'
   },
 ];
 export let Matter_Sub_List_Columns_AR = [
   {
-    header: 'الاسم العربى ',
+    header: 'الاسم',
     field: 'nameAr',
     isSort:true,
   },
@@ -56,12 +56,12 @@ export let Matter_Sub_List_Columns_AR = [
 ];
 export let Matter_Sub_List_Columns_EN = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },
@@ -74,12 +74,12 @@ export let Matter_Sub_List_Columns_EN = [
 ];
 export let Matter_Sub_List_Columns_FR = [
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
   },

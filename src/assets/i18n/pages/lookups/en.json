@@ -6,8 +6,8 @@
     "addSubItem":"Add Sub Item",
     "updateMainItem":"Update Main Item",
     "updateSubItem":"Update Sub Item",
-    "nameAR":"Name AR",
-    "nameEN":"Name EN",
+    "nameAR":"Foreign Name",
+    "nameEN":"Name",
     "mainCategory":"Main Category",
     "mainList":"Master List",
     "subList":"Sub List",
@@ -20,7 +20,7 @@
     "matterCategory":"matter Category",
     "taskCode":"Task Code",
     "group":"Group",
-    "rateName":"RateName",
+    "rateName":"Rate Name",
     "amount":"Amount"
   }
 }

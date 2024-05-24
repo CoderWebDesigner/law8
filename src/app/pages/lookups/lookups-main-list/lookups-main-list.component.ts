@@ -120,7 +120,7 @@ export class LookupsMainListComponent implements OnInit {
       addPermission: 'Add_MatterStatus',
       updatePermission: 'Update_MatterStatus',
       deletePermission: 'Delete_MatterStatus',
-      values:[]
+      values:['New Case']
     },
     '2': {
       api: API_Config.stage,

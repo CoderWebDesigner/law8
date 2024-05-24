@@ -69,7 +69,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.middleNamePlaceholder'
               ),
-              required: true,
             },
           },
           {
@@ -81,7 +80,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.lastNamePlaceholder'
               ),
-              required: true,
             },
           },
           {
@@ -93,7 +91,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.positionPlaceholder'
               ),
-              required: true,
             },
           },
           {
@@ -102,7 +99,6 @@ export class ClientContactEditorComponent
             type: 'input',
             props: {
               label: this._languageService.getTransValue('common.mobileNumber'),
-              required: true,
             },
           },
           {
@@ -114,7 +110,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.emailPlaceholder'
               ),
-              required: true,
             },
             validators: {
               validation: ['email'],
@@ -129,7 +124,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.phonePlaceholder'
               ),
-              required: true,
             },
           },
 
@@ -142,7 +136,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.faxPlaceholder'
               ),
-              required: true,
             },
           },
           {
@@ -154,7 +147,6 @@ export class ClientContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.remarksPlaceholder'
               ),
-              required: true,
             },
           },
         ],
@@ -178,7 +170,9 @@ export class ClientContactEditorComponent
           phone: this.formlyModel?.phone?.internationalNumber
             ? this.formlyModel?.phone?.internationalNumber
             : this.formlyModel.phone,
-          clientId: this._dynamicDialogConfig?.data?.clientId,
+           clientId: this._dynamicDialogConfig?.data?.clientId,
+         // clientId: this._dynamicDialogConfig?.data?.requestId,
+
         };
 
         console.log('requestPayload',requestPayload)

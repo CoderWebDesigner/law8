@@ -7,7 +7,7 @@ export const Rate_Columns_AR = [
 
   },
   {
-    header: 'الاسم العربى ',
+    header: 'الاسم',
     field: 'nameAr',
     isSort:true,
 
@@ -15,6 +15,8 @@ export const Rate_Columns_AR = [
   {
     header: 'الحالة',
     field: 'activeText',
+    isStatus:true,
+
     isSort:true,
 
   },
@@ -23,13 +25,13 @@ export const Rate_Columns_AR = [
 export const Rate_Columns_EN = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -37,6 +39,7 @@ export const Rate_Columns_EN = [
   {
     header: 'Active',
     field: 'activeText',
+    isStatus:true,
     isSort:true,
 
   },
@@ -44,13 +47,13 @@ export const Rate_Columns_EN = [
 export const Rate_Columns_FR = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -59,6 +62,8 @@ export const Rate_Columns_FR = [
     header: 'Active',
     field: 'activeText',
     isSort:true,
+    isStatus:true,
+
   },
 ]
 

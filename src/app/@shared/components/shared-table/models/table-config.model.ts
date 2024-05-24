@@ -25,5 +25,7 @@ export interface TableAction {
     tooltipText?: string;
     width?:string;
     isDynamic?:boolean;
+    targetAttr?: string
+
 
 }

@@ -55,6 +55,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   tabsList: any;
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
+  
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) {
@@ -258,6 +259,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             type: 'date',
             key: 'openDate',
             className: 'col-md-4',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue('matters.opened'),
               disabled: this.previewOnly,
@@ -268,6 +270,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             key: 'descr',
             className: 'col-md-12',
             props: {
+              
               label: this._languageService.getTransValue('common.description'),
               disabled: this.previewOnly,
             },
@@ -291,19 +294,22 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   onInit: (field: FormlyFieldConfig) => {
                     field.form.get('practsAreaId').valueChanges.subscribe({
                       next: (res) => {
-                        this._apiService
-                          .get(
-                            `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
-                          )
-                          .pipe(this._sharedService.takeUntilDistroy())
-                          .subscribe({
-                            next: (res: ApiRes) => {
-                              field.props.options = res.result.map((obj) => ({
-                                label: obj.name,
-                                value: obj.id,
-                              }));
-                            },
-                          });
+                        if(res){
+
+                          this._apiService
+                            .get(
+                              `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                            )
+                            .pipe(this._sharedService.takeUntilDistroy())
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                              },
+                            });
+                        }
                       },
                     });
                   },
@@ -541,6 +547,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 type: 'select',
                 key: 'statusId',
                 className: 'col-md-4',
+                defaultValue:4,
                 props: {
                   label: this._languageService.getTransValue(
                     'matters.matterStatus'
@@ -550,6 +557,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     label: obj.name,
                     value: obj.id,
                   })),
+                  
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
@@ -636,7 +644,6 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     ]).subscribe(([address, contacts, parties, matterClass, applicant]) => {
       this.formlyModel = {
         ...this.formlyModel,
-        courtNumber: '12',
         law_MatterParties: parties,
         law_MatterAddresses: address,
         law_MatterContactss: contacts,

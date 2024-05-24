@@ -211,10 +211,17 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   onTableAction(action: TableAction, rowData: any) {
     if (action?.type !== 'delete') {
       if (action?.targetType === 'path') {
-        this._router.navigate(
-          [action?.target, rowData[this.additionalTableConfig?.id]],
-          { queryParams: action?.queryParams }
+        const url = this._router.serializeUrl(
+          this._router.createUrlTree([`${action?.target}/${rowData[this.additionalTableConfig?.id]}`],
+          { queryParams: action?.queryParams })
         );
+        console.log('url',url)
+      
+        window.open("#" +url, '_blank');
+        // this._router.navigate(
+        //   [action?.target, rowData[this.additionalTableConfig?.id]],
+        //   { queryParams: action?.queryParams }
+        // );
       } else {
         const dialogRef = this._dialogService.open(action.target, {
           width: action.width || '50%',

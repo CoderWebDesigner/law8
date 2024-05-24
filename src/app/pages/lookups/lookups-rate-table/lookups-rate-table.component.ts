@@ -111,6 +111,14 @@ export class LookupsRateTableComponent implements OnInit {
     }
   }
 
+  // mapData(data:any[]){
+  //   return data.map(obj=>{
+  //     return {
+  //       ...obj,
+  //       activeText:(obj.active)?'Active':'Inactive'
+  //     }
+  //   })
+  // }
   mapData(data:any[]){
     return data.map(obj=>{
       return {

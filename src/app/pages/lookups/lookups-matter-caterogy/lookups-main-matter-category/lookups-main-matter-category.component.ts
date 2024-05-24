@@ -122,9 +122,10 @@ export class LookupsMainMatterCategoryComponent
           if (res && res.isSuccess) {
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
-            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-              this.dialogRef.close(dialog);
-            });
+            this._dynamicDialogRef.close(true)
+            // this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+            //   this.dialogRef.close(dialog);
+            // });
           }
         },
       });

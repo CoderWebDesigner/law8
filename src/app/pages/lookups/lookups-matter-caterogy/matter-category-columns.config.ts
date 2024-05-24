@@ -7,36 +7,37 @@ export const Matter_Category_Columns_AR = [
 
   },
   {
-    header: 'الاسم العربى ',
+    header: 'الاسم',
     field: 'nameAr',
     isSort:true,
 
   },
 
   {
-    header: 'Practice Area',
+    header: 'مجال التخصص',
     field: 'practsArea',
     isSort:true,
 
   },
   {
-    header: 'Active',
+    header: 'الحالة',
     field: 'activeText',
     // isSwitch:true
-    isStatus:true
+    isStatus:true,
+    isSort:true,
 
   },
 ]
 export const Matter_Category_Columns_EN = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -52,20 +53,21 @@ export const Matter_Category_Columns_EN = [
     header: 'Active',
     field: 'activeText',
     // isSwitch:true
-    isStatus:true
+    isStatus:true,
+    isSort:true,
 
   },
 ]
 export const Matter_Category_Columns_FR = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -81,7 +83,8 @@ export const Matter_Category_Columns_FR = [
   {
     header: 'Active',
     field: 'activeText',
-    // isSwitch:true
+    // isSwitch:true,
+    isSort:true,
     isStatus:true
 
   },
@@ -91,13 +94,13 @@ export const Matter_Category_Columns_FR = [
 export const Matter_Category_Children_Columns_AR = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -117,20 +120,23 @@ export const Matter_Category_Children_Columns_AR = [
   {
     header: 'Active',
     field: 'activeText',
+    isStatus:true,
     // isSwitch:true
+    isSort:true,
+
   },
 
 ]
 export const Matter_Category_Children_Columns_EN = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -151,20 +157,22 @@ export const Matter_Category_Children_Columns_EN = [
     header: 'Active',
     field: 'activeText',
     // isSwitch:true
-    isStatus:true
+    isStatus:true,
+    isSort:true,
+
 
   },
 ]
 export const Matter_Category_Children_Columns_FR = [
 
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort:true,
 
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort:true,
 
@@ -185,7 +193,9 @@ export const Matter_Category_Children_Columns_FR = [
     header: 'Active',
     field: 'activeText',
     // isSwitch:true
-    isStatus:true
+    isStatus:true,
+    isSort:true,
+
 
   },
 ]

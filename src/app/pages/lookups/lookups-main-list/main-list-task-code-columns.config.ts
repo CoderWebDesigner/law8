@@ -10,7 +10,7 @@ export let Main_List_Task_code_Columns_AR = [
     isSort: true,
   },
   {
-    header: 'الاسم العربى ',
+    header: 'الاسم',
     field: 'nameAr',
     isSort:true,
 
@@ -42,12 +42,12 @@ export let Main_List_Task_code_Columns_EN = [
     isSort: true,
   },
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort: true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort: true,
   },
@@ -70,12 +70,12 @@ export let Main_List_Task_code_Columns_FR = [
     isSort: true,
   },
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort: true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort: true,
   },

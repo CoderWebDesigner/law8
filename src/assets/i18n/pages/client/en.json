@@ -71,6 +71,8 @@
     "ar":"AR",
     "en":"EN",
     "clientNameAr":"Foreign Name",
-    "clientNameEn":"Name"
+    "clientNameEn":"Name",
+    "viewClient":"View Client",
+    "updateClient":"Update Client"
   }
 }

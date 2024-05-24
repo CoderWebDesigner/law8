@@ -84,6 +84,8 @@ export class ClientEditorComponent
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
               disabled: true,
+              required: true,
+
             },
           },
           {
@@ -118,7 +120,7 @@ export class ClientEditorComponent
               //         ? 'client.ar'
               //         : 'client.en'
               //     ),
-              //     style: { marginTop: '22px', padding: '10px 20px' },
+              //     style: { marginTop: '22px', padding: '10px 20px' , border: 'none' },
               //     onClick: () => {
               //       console.log('before', this.showLanguageField)
               //       this.showLanguageField = !this.showLanguageField;
@@ -128,14 +130,14 @@ export class ClientEditorComponent
               //     },
               //   },
               // },
-              {
+               {
                 type: 'button',
                 
                 props: {
                   class:'p-button-label p-button-outlined',
                   imgPath:this._languageService.getSelectedLanguage()=='ar'?'assets/images/icons/us.jpg':'assets/images/icons/ar.png',
                   imgStyle:{width:'30px'},
-                  style: { marginTop: '22px', padding: '10px 20px' },
+                  style: { marginTop: '22px', padding: '10px 20px', border: 'none' },
                   onClick: () => {
                     // console.log('before', this.showLanguageField)
                     this.showLanguageField = !this.showLanguageField;

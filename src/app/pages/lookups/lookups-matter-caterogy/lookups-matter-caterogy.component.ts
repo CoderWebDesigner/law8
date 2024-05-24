@@ -89,6 +89,34 @@ export class LookupsMatterCaterogyComponent implements OnInit{
       this.columnsLocalizedChildren=null
     }
   }
+  openSubEditor(){
+    const subRef= this._dialogService.open(LookupsSubMatterCategoryComponent,{
+      width:'30%',
+      header:this._languageService.getTransValue('lookups.addSubItem'),
+      data:{
+        categorytype:'sub',//main , sub
+        formType:'add', //add , update
+        moduleType:'category'
+      }
+    })
+    subRef.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      if(result)this._sharedTableService.refreshData.next(true);
+    });
+  }
+  openMainEditor(){
+    const mainRef= this._dialogService.open(LookupsMainMatterCategoryComponent,{
+      width:'30%',
+      header:this._languageService.getTransValue('lookups.addMainItem'),
+      data:{
+        categorytype:'main',//main , sub
+        formType:'add', //add , update
+        moduleType:'category'
+      }
+    })
+    mainRef.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
+      if(result)this._sharedTableService.refreshData.next(true);
+    });
+  }
   openItemEditor(formType:string,categorytype:string){
     const ref= this._dialogService.open((categorytype=='main')?LookupsMainMatterCategoryComponent:LookupsSubMatterCategoryComponent,{
       width:'30%',
@@ -100,8 +128,7 @@ export class LookupsMatterCaterogyComponent implements OnInit{
       }
     })
     ref.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe((result: any) => {
-      console.log('hello')
-      this._sharedTableService.refreshData.next(true);
+      if(result)this._sharedTableService.refreshData.next(true);
     });
   }
   private setDialogHeader(formType:string,categorytype:string){

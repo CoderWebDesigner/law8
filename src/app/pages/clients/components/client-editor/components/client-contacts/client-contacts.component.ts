@@ -84,13 +84,14 @@ export class ClientContactsComponent implements OnInit, OnDestroy {
 
   }
   openDialog() {
+    console.log('client contacts requestId',this.requestId)
     const ref = this._dialogService.open(ClientContactEditorComponent, {
       width: '50%',
       header: this._languageService.getTransValue('common.addContacts'),
       dismissableMask: true,
       data:{
         clientId:this.requestId,
-        isDynamic:this.requestId != undefined,
+        isDynamic:this.requestId != 0,
       }
       
     })

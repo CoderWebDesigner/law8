@@ -5,12 +5,12 @@ export let Main_List_Client_Group_Columns_AR = [
     isSort: true,
   },
   {
-    header: 'الاسم بالعربى',
+    header: 'الاسم',
     field: 'nameAr',
     isSort: true,
   },
   {
-    header: 'الاسم بالانجليزى',
+    header: 'الاسم الاجنبى',
     field: 'nameEn',
     isSort: true,
   },
@@ -30,12 +30,12 @@ export let Main_List_Client_Group_Columns_EN = [
     isSort: true,
   },
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort: true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort: true,
   },
@@ -53,12 +53,12 @@ export let Main_List_Client_Group_Columns_FR = [
     isSort: true,
   },
   {
-    header: 'Name EN',
+    header: 'Name',
     field: 'nameEn',
     isSort: true,
   },
   {
-    header: 'Name AR',
+    header: 'Foreign Name',
     field: 'nameAr',
     isSort: true,
   },
