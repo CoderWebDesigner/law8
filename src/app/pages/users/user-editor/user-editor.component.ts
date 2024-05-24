@@ -38,7 +38,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('lookups.nameEN'),
-              required: this._languageService.getSelectedLanguage() == 'en',
+              required: this._languageService.getSelectedLanguage() == 'en' && true,
             },
             validators: {
               validation: ['englishLetters'],
@@ -50,7 +50,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('lookups.nameAR'),
-              required: this._languageService.getSelectedLanguage() == 'ar',
+              required: this._languageService.getSelectedLanguage() == 'ar' && true,
             },
             validators: {
               validation: ['arabicLetters'],
@@ -146,7 +146,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             props: {
               type: 'number',
               label: this._languageService.getTransValue('users.telephone'),
-              required: true,
             },
           },
           {
@@ -155,7 +154,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('common.mobileNumber'),
-              required: true,
             },
           },
 
@@ -165,7 +163,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('common.email'),
-              required: true,
             },
             validators: {
               validation: ['email'],
@@ -178,7 +175,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             hide: this.userId != null,
             props: {
               label: this._languageService.getTransValue('common.password'),
-              required: true,
             },
           },
           {
@@ -188,7 +184,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             hide: this.userId == null,
             props: {
               label: this._languageService.getTransValue('users.defUsrId'),
-              required: true,
               options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
@@ -201,7 +196,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('users.timesheetDate'),
-              required: true,
             },
           },
           {
@@ -213,7 +207,6 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
               max: 24,
               min: 1,
               label: this._languageService.getTransValue('users.goal'),
-              required: true,
             },
           },
         ],
@@ -253,7 +246,8 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       });
   }
   override onSubmit(): void {
-    console.log(this.formly);
+  
+    console.log('onSubmit',this.formly);
     if (this.formly.invalid) return;
 
     const successMsgKey = this.userId
