@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models/apiRes-model';
@@ -55,7 +55,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   tabsList: any;
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
-  
+  _cdRef=inject(ChangeDetectorRef)
+
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) {
@@ -90,6 +91,30 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 { label: 'Linked Matter', value: 3 },
               ],
             },
+            hooks: {
+              onInit: (field: FormlyFieldConfig) => {
+                console.log('requestTypeId',field.formControl.value)
+                this.formly.get('requestTypeId').valueChanges.pipe(
+                  this._sharedService.takeUntilDistroy()
+                ).subscribe({
+                  next:(res)=>{
+                 
+                    if(res==1){
+                      this.formly
+                      .get('clientName')
+                      .setValue(null);
+                    this.formly
+                      .get('mtrNo')
+                      .setValue(null);
+                    this.formly
+                      .get('clientId')
+                      .setValue(null);
+                    }
+                  }
+                })
+                
+              },
+            },
           },
         ],
       },
@@ -109,10 +134,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 value: obj.id,
               })),
               onChange: (e) => {
-                if (this.formlyModel.requestTypeId == 1) {
+                if (this.formlyModel?.requestTypeId == 1) {
                   this._apiService
                     .get(
-                      `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel.clientId}`
+                      `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel?.clientId}`
                     )
                     .pipe(this._sharedService.takeUntilDistroy())
                     .subscribe({
@@ -163,13 +188,16 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               onChange: (e) => {
                 this._apiService
                   .get(
-                    `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel.clientId}&parentId=${this.formlyModel.parentMatterId}`
+                    `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
                   )
                   .pipe(this._sharedService.takeUntilDistroy())
                   .subscribe({
                     next: (res: ApiRes) => {
                       if (res.isSuccess) {
-                        console.log('getCLientNameAndMattCodeByClientAndParent',res)
+                        console.log(
+                          'getCLientNameAndMattCodeByClientAndParent',
+                          res
+                        );
                         this.formly
                           .get('clientName')
                           .setValue(res.result['name']);
@@ -186,10 +214,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               onInit: (field: FormlyFieldConfig) => {
                 field.form.get('clientId').valueChanges.subscribe({
                   next: (res) => {
-                    if (this.formlyModel.requestTypeId == 2) {
+                    if (this.formlyModel?.requestTypeId == 2) {
                       this._apiService
                         .get(
-                          `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel.clientId}`
+                          `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
                         )
                         .pipe(this._sharedService.takeUntilDistroy())
                         .subscribe({
@@ -259,7 +287,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             type: 'date',
             key: 'openDate',
             className: 'col-md-4',
-            defaultValue:new Date(),
+            defaultValue: new Date(),
             props: {
               label: this._languageService.getTransValue('matters.opened'),
               disabled: this.previewOnly,
@@ -270,7 +298,6 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             key: 'descr',
             className: 'col-md-12',
             props: {
-              
               label: this._languageService.getTransValue('common.description'),
               disabled: this.previewOnly,
             },
@@ -294,8 +321,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   onInit: (field: FormlyFieldConfig) => {
                     field.form.get('practsAreaId').valueChanges.subscribe({
                       next: (res) => {
-                        if(res){
-
+                        console.log('res practsAreaId', res);
+                        if (res) {
                           this._apiService
                             .get(
                               `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
@@ -309,6 +336,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                                 }));
                               },
                             });
+                        } else {
+                          // this.formlyModel?.law_MtrCatId=null
+                          field.props.options = [];
+                          this.formly.get('law_MtrCatId').setValue(null);
                         }
                       },
                     });
@@ -328,19 +359,24 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   onInit: (field: FormlyFieldConfig) => {
                     field.form.get('law_MtrCatId').valueChanges.subscribe({
                       next: (res) => {
-                        this._apiService
-                          .get(
-                            `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${res}`
-                          )
-                          .pipe(this._sharedService.takeUntilDistroy())
-                          .subscribe({
-                            next: (res: ApiRes) => {
-                              field.props.options = res.result.map((obj) => ({
-                                label: obj.name,
-                                value: obj.id,
-                              }));
-                            },
-                          });
+                        if (res) {
+                          this._apiService
+                            .get(
+                              `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${res}`
+                            )
+                            .pipe(this._sharedService.takeUntilDistroy())
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                              },
+                            });
+                        } else {
+                          field.props.options = [];
+                          this.formly.get('mtrTypeId').setValue(null);
+                        }
                       },
                     });
                   },
@@ -547,7 +583,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 type: 'select',
                 key: 'statusId',
                 className: 'col-md-4',
-                defaultValue:4,
+                defaultValue: 4,
                 props: {
                   label: this._languageService.getTransValue(
                     'matters.matterStatus'
@@ -557,7 +593,6 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     label: obj.name,
                     value: obj.id,
                   })),
-                  
                 },
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
@@ -656,7 +691,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
 
   override onSubmit(): void {
     // this.isSubmit = true;
-    console.log(this.formlyModel.photo);
+    console.log(this.formlyModel?.photo);
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
       .pipe(this._sharedService.takeUntilDistroy())
@@ -668,9 +703,9 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             this._matterService.partyList$.next([]);
             this._matterService.applicantList$.next([]);
             this._matterService.classList$.next([]);
-            if (this.formlyModel.photo) {
+            if (this.formlyModel?.photo) {
               let formData = new FormData();
-              formData.append('Attachment', this.formlyModel.photo);
+              formData.append('Attachment', this.formlyModel?.photo);
               formData.append('Law_MatterId', res.result.id);
               this._apiService
                 .post(API_Config.matters.uploadLogo, formData)
@@ -732,6 +767,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       ...event,
       ...this.formlyModel,
     };
+  }
+  resetFormExcludingField(fieldToExclude: string) {
+    // Reset each field except the specified one
+    this.formlyFields.forEach(field => {
+      if (field.key !== fieldToExclude) {
+        field.formControl.reset();
+      }
+    });
   }
   override getData(): void {
     this._apiService
