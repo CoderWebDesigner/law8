@@ -73,7 +73,7 @@ export class MatterPartyEditorComponent
               // required: true,
               options: this.lookupsData[1]?.result?.map((obj) => ({
                 label: obj.name,
-                value: obj.id,
+                value: +obj.id,
               })),
               onChange:(e)=>{
                 this.formly.get('partyType').setValue(e?.originalEvent.target.innerText)
