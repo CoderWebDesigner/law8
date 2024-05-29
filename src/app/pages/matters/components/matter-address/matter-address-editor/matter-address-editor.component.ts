@@ -39,6 +39,7 @@ export class MatterAddressEditorComponent
   }
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+    console.log('formlyModel',this.formlyModel)
   }
   override getLookupsData(): void {
     this._apiService
@@ -123,7 +124,14 @@ export class MatterAddressEditorComponent
               })),
 
               // required: true,
+              onChange:(e)=>{
+                this.formly.get('country').setValue(e?.originalEvent.target.innerText)
+              }
             },
+            
+          },
+          {
+            key:'country'
           },
           {
             className: 'col-md-6',
@@ -211,6 +219,7 @@ export class MatterAddressEditorComponent
         }
         return obj;
       });
+      console.log('this.data',this.data)
       this._addressService.addressList$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         dialog.destroy();

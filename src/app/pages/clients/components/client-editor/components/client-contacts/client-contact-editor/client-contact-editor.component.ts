@@ -96,7 +96,7 @@ export class ClientContactEditorComponent
           {
             className: 'col-md-6',
             key: 'mobile',
-            type: 'input',
+            type: 'phone',
             props: {
               label: this._languageService.getTransValue('common.mobileNumber'),
             },
@@ -157,25 +157,18 @@ export class ClientContactEditorComponent
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
+    
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          phone: this.formlyModel?.phone?.internationalNumber
-            ? this.formlyModel?.phone?.internationalNumber
-            : this.formlyModel.phone,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          phone: this.formlyModel?.phone?.internationalNumber
-            ? this.formlyModel?.phone?.internationalNumber
-            : this.formlyModel.phone,
-           clientId: this._dynamicDialogConfig?.data?.clientId,
-         // clientId: this._dynamicDialogConfig?.data?.requestId,
-
+          clientId: this._dynamicDialogConfig?.data?.clientId,
         };
 
-        console.log('requestPayload',requestPayload)
+    console.log('requestPayload', requestPayload);
     const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update
       : this.apiUrls.create;
@@ -201,6 +194,15 @@ export class ClientContactEditorComponent
   }
   override onSubmit(): void {
     if (this.formly.invalid) return;
+    this.formlyModel = {
+      ...this.formlyModel,
+      phone: this.formlyModel?.phone?.internationalNumber
+        ? this.formlyModel?.phone?.internationalNumber
+        : this.formlyModel.phone,
+      mobile: this.formlyModel?.mobile?.internationalNumber
+        ? this.formlyModel?.mobile?.internationalNumber
+        : this.formlyModel.mobile,
+    };
     if (this._dynamicDialogConfig?.data?.isDynamic) {
       this.save();
     } else {
@@ -210,9 +212,6 @@ export class ClientContactEditorComponent
       if (index != -1) {
         this.data[index] = this.formlyModel;
       } else {
-        this.formlyModel.phone= this.formlyModel?.phone?.internationalNumber
-            ? this.formlyModel?.phone?.internationalNumber
-            : this.formlyModel.phone,
         this.data.push(this.formlyModel);
       }
       this.data = this.data.map((obj) => {

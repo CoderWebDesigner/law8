@@ -31,7 +31,8 @@ export const General_API = {
       "getAssignedUsersTimeSheet":"AppLookup/GetLaw_AssignAddUsersForTimeShetLookup",
       "getAssignedUsersCalender":"AppLookup/GetLaw_AssignViewUsersForCalendertLookup",
       "getLawyerShort":"AppLookup/GetLaw_LawyerShortLookup",
-      "getLawMattertCodeByClient":"AppLookup/GetLawMattertCodeByClientLookup"
+      "getLawMattertCodeByClient":"AppLookup/GetLawMattertCodeByClientLookup",
+      "getPartyTypes":"AppLookup/GetLawpartyTypeLookup"
   }
 
 }

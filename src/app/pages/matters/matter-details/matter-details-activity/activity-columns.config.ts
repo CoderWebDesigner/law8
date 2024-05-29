@@ -1,4 +1,3 @@
-
 export const Activity_Columns_EN = [
   {
     header: 'Code',
@@ -16,14 +15,14 @@ export const Activity_Columns_EN = [
     header: 'User',
     field: 'user',
   },
-  
+
   {
     header: 'Date',
     field: 'startDate',
-    isDate:true,
+    isDate: true,
+    isSort: true,
   },
-  
-  
+
   {
     header: 'Status',
     field: 'law_ActivityStatus',
@@ -46,14 +45,14 @@ export const Activity_Columns_FR = [
     header: 'User',
     field: 'user',
   },
-  
+
   {
     header: 'Date',
     field: 'startDate',
-    isDate:true,
+    isDate: true,
+    isSort: true,
   },
-  
-  
+
   {
     header: 'Status',
     field: 'law_ActivityStatus',
@@ -77,14 +76,14 @@ export const Activity_Columns_AR = [
     header: 'User',
     field: 'user',
   },
-  
+
   {
     header: 'Date',
     field: 'startDate',
-    isDate:true,
+    isDate: true,
+    isSort: true,
   },
-  
-  
+
   {
     header: 'Status',
     field: 'law_ActivityStatus',

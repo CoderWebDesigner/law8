@@ -99,7 +99,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 ).subscribe({
                   next:(res)=>{
                  
-                    if(res==1){
+                    if(res){
                       this.formly
                       .get('clientName')
                       .setValue(null);
@@ -214,7 +214,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               onInit: (field: FormlyFieldConfig) => {
                 field.form.get('clientId').valueChanges.subscribe({
                   next: (res) => {
-                    if (this.formlyModel?.requestTypeId == 2) {
+                    if(res){
                       this._apiService
                         .get(
                           `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
@@ -230,6 +230,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                             }
                           },
                         });
+                    }else{
+                      field.props.options=[]
+                    }
+                    if (this.formlyModel?.requestTypeId == 2) {
                     }
                   },
                 });

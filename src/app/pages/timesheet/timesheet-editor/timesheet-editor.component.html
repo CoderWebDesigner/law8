@@ -102,19 +102,19 @@
   <div class="row" body>
     <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
       <h6 class="fw-bold align-middle">{{'common.total'|translate}}</h6>
-      <p class="mb-0 h5">{{ +billableCount+ +nonBillableCount+ +noChargeCount }}</p>
+      <p class="mb-0 h5">{{ +billableHoursCount+ +nonBillableHoursCount+ +noChargeHoursCount }}</p>
+    </div>
+    <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
+      <h6 class="fw-bold  align-middle">{{'timesheet.billableCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ billableHoursCount }}</p>
     </div>
     <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
       <h6 class="fw-bold  align-middle">{{'timesheet.nonBillableCount'|translate}}</h6>
-      <p class="mb-0 h5">{{ billableCount }}</p>
-    </div>
-    <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
-      <h6 class="fw-bold  align-middle">{{'timesheet.nonBillableCount'|translate}}</h6>
-      <p class="mb-0 h5">{{ nonBillableCount }}</p>
+      <p class="mb-0 h5">{{ nonBillableHoursCount }}</p>
     </div>
     <div class="col-md-3 d-flex justify-content-between">
       <h6 class="fw-bold align-middle">{{'timesheet.noChargeCount'|translate}}</h6>
-      <p class="mb-0 h5">{{ noChargeCount }}</p>
+      <p class="mb-0 h5">{{ noChargeHoursCount }}</p>
     </div>
   </div>
 </shared-card>

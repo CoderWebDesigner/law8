@@ -9,7 +9,7 @@
     },
     "timesheet": {
       "title": "Compteur horaire",
-      "timesheetAdd": "TimeSheet Add"
+      "timesheetAdd":"New TimeSheet"
     },
     "matters": {
       "title": "Dossiers",
@@ -36,6 +36,9 @@
     },
     "security":{
       "title":"Security"
+    },
+    "reports":{
+      "title":"Reports"
     }
   }
 }

@@ -6,7 +6,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 import { MatterService } from '@components/matters/service/matter.service';
 
 @Component({
@@ -40,16 +40,21 @@ export class MatterPartyEditorComponent
   }
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+    console.log(' this.formlyModel', this.formlyModel)
   }
   override getLookupsData(): void {
-    this._apiService.get(API_Config.general.getPartiesDescription)
+    forkJoin([
+      this._apiService.get(API_Config.general.getPartiesDescription),
+      this._apiService.get(API_Config.general.getPartyTypes)
+    ])
+    
       .pipe(
         finalize(() => (this.isSubmit = false)),
         this.takeUntilDestroy()
       )
       .subscribe({
         next: (res: ApiRes) => {
-          this.lookupsData = res.result;
+          this.lookupsData = res;
           this.initForm();
         },
       });
@@ -66,14 +71,17 @@ export class MatterPartyEditorComponent
             props: {
               label: this._languageService.getTransValue('matters.partyType'),
               // required: true,
-              options: [
-                { label: 'Opponent', value: 1 },
-                { label: 'Others', value: 2 },
-                { label: 'Expert', value: 3 },
-                { label: 'Judge', value: 4 },
-                { label: 'Client', value: 5 },
-              ],
+              options: this.lookupsData[1]?.result?.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+              onChange:(e)=>{
+                this.formly.get('partyType').setValue(e?.originalEvent.target.innerText)
+              }
             },
+          },
+          {
+            key:'partyType'
           },
           {
             className: 'col-md-6',
@@ -91,11 +99,17 @@ export class MatterPartyEditorComponent
             props: {
               label: this._languageService.getTransValue('matters.party'),
               // required: true,
-              options: this.lookupsData.map((obj) => ({
+              options: this.lookupsData[0].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
+              onChange:(e)=>{
+                this.formly.get('law_PartiesDescription').setValue(e?.originalEvent.target.innerText)
+              }
             },
+          },
+          {
+            key:'law_PartiesDescription'
           },
           {
             className: 'col-md-6',
@@ -118,12 +132,10 @@ export class MatterPartyEditorComponent
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          streetNumber: +this.formlyModel.streetNumber,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          streetNumber: +this.formlyModel.streetNumber,
           law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
     const path = this._dynamicDialogConfig?.data?.rowData
