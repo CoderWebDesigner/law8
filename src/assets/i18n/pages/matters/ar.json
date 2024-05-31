@@ -126,6 +126,7 @@
     "addClass":"Add Class",
     "uploadLogo":"Upload Logo",
 
-    "isPrivate":"isPrivate"
+    "isPrivate":"isPrivate",
+    "location":"location"
   }
 }

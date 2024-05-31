@@ -134,7 +134,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 value: obj.id,
               })),
               onChange: (e) => {
-                if (this.formlyModel?.requestTypeId == 1) {
+                if (this.formlyModel?.requestTypeId == 1,3) {
                   this._apiService
                     .get(
                       `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel?.clientId}`
@@ -145,9 +145,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         this.formly
                           .get('clientName')
                           .setValue(res.result['name']);
+                      //   this.formly
+                      //     .get('mtrNo')
+                      //     .setValue(res.result['mattCode']);
+                      if (this.formlyModel?.requestTypeId !== 2) {
                         this.formly
                           .get('mtrNo')
                           .setValue(res.result['mattCode']);
+                      }
                       },
                     });
                 }
@@ -201,9 +206,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         this.formly
                           .get('clientName')
                           .setValue(res.result['name']);
-                        this.formly
-                          .get('mtrNo')
-                          .setValue(res.result['mattCode']);
+                          if (this.formlyModel?.requestTypeId == 2) {
+                            this.formly
+                              .get('mtrNo')
+                              .setValue(res.result['mattCode']);
+                          }
                       }
                     },
                   });

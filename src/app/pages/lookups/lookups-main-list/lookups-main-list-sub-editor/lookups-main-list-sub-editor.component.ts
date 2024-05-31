@@ -33,18 +33,18 @@ export class LookupsMainListSubEditorComponent
   override initForm(): void {
     console.log(this.config.data);
     this.formlyFields = [
-      {
-        key: 'clntGrpNo',
-        type: 'input',
-        hide:this.config.data.mainListId!=3,
-        props: {
-          label: this._languageService.getTransValue('lookups.clientGroupNumber'),
-          disabled:true
-        },
-        validators: {
-          validation: ['englishLetters'],
-        },
-      },
+      // {
+      //   key: 'clntGrpNo',
+      //   type: 'input',
+      //   hide:this.config.data.mainListId!=3,
+      //   props: {
+      //     label: this._languageService.getTransValue('lookups.clientGroupNumber'),
+      //     disabled:true
+      //   },
+      //   validators: {
+      //     validation: ['englishLetters'],
+      //   },
+      // },
       {
         key: 'group',
         type: 'input',

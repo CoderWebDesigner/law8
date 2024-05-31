@@ -150,21 +150,21 @@ export class TaskManagementEditorComponent
               },
             },
           },
-          {
-            className: 'col-md-4',
-            key: 'duration',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('matters.duration'),
-              //required: true,
-              showTime: true,
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ![4].includes(field.model?.law_ActivityTypeId);
-              },
-            },
-          },
+          // {
+          //   className: 'col-md-4',
+          //   key: 'duration',
+          //   type: 'input',
+          //   props: {
+          //     label: this._languageService.getTransValue('matters.duration'),
+          //     //required: true,
+          //     showTime: true,
+          //   },
+          //   expressions: {
+          //     hide: (field: FormlyFieldConfig) => {
+          //       return ![4].includes(field.model?.law_ActivityTypeId);
+          //     },
+          //   },
+          // },
           {
             className: 'col-md-4',
             key: 'location',
