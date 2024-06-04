@@ -83,7 +83,7 @@ export class StopWatchComponent implements OnInit, OnChanges {
   calculateValueInSeconds(seconds) {
     // Convert seconds to Minutes
     const secondsToMinutes = seconds / 60;
-    if (secondsToMinutes % 3 == 0) this.incrementValue += 0.1;
+    if (secondsToMinutes % 6 == 0) this.incrementValue += 0.1;
     return parseFloat(this.incrementValue.toFixed(1));
   }
   ngOnChanges(changes: SimpleChanges): void {

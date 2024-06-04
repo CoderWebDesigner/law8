@@ -2,8 +2,8 @@
   "timesheet": {
     "title": "سجل الوقت",
     "addTimeSheet": "إضافة سجل الوقت",
-    "billableCount": "Billable Count",
-    "nonBillableCount": "Nonbillable Count",
-    "noChargeCount": "Nocharge Count"
+    "billableCount": "Billable",
+    "nonBillableCount": "Non-billable",
+    "noChargeCount": "Nocharge"
   }
 }

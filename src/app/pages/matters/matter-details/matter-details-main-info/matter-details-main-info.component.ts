@@ -219,20 +219,25 @@ export class MatterDetailsMainInfoComponent
                   onInit: (field: FormlyFieldConfig) => {
                     this.formly.get('practsAreaId').valueChanges.subscribe({
                       next: (res) => {
-                        this._apiService
-                          .get(
-                            `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
-                          )
-                          .pipe(this._sharedService.takeUntilDistroy())
-                          .subscribe({
-                            next: (res: ApiRes) => {
-                              field.props.options = res.result.map((obj) => ({
-                                label: obj.name,
-                                value: obj.id,
-                              }));
-                              this.formlyOption.build();
-                            },
-                          });
+                        if(res){
+                          this._apiService
+                            .get(
+                              `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                            )
+                            .pipe(this._sharedService.takeUntilDistroy())
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                                this.formlyOption.build();
+                              },
+                            });
+                        }else{
+                          field.props.options=[]
+                          this.formly.get('law_MtrCatId').setValue(null)
+                        }
                       },
                     });
                     if (this.formlyModel.practsAreaId) {
@@ -270,21 +275,27 @@ export class MatterDetailsMainInfoComponent
                       .valueChanges.pipe(this._sharedService.takeUntilDistroy())
                       .subscribe({
                         next: (res) => {
-                          console.log('res', res);
-                          this._apiService
-                            .get(
-                              `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${this.formlyModel.law_MtrCatId}`
-                            )
-                            .pipe(this._sharedService.takeUntilDistroy())
-                            .subscribe({
-                              next: (res: ApiRes) => {
-                                field.props.options = res.result.map((obj) => ({
-                                  label: obj.name,
-                                  value: obj.id,
-                                }));
-                                this.formlyOption.build();
-                              },
-                            });
+                          if(res){
+                            console.log('res', res);
+                            this._apiService
+                              .get(
+                                `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${this.formlyModel.law_MtrCatId}`
+                              )
+                              .pipe(this._sharedService.takeUntilDistroy())
+                              .subscribe({
+                                next: (res: ApiRes) => {
+                                  field.props.options = res.result.map((obj) => ({
+                                    label: obj.name,
+                                    value: obj.id,
+                                  }));
+                                  this.formlyOption.build();
+                                },
+                              });
+                          }else{
+                            field.props.options=[]
+                            this.formly.get('mtrTypeId').setValue(null)
+                          }
+                         
                         },
                       });
                     if (this.formlyModel.law_MtrCatId) {

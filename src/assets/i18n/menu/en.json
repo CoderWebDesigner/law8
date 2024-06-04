@@ -9,7 +9,7 @@
         },
         "timesheet":{
           "title":"TimeSheet",
-          "timesheetAdd":"TimeSheet Add"
+          "timesheetAdd":"New TimeSheet"
         },
         "matters":{
           "title":"Matters",
@@ -36,6 +36,11 @@
         },
          "security":{
           "title":"Security"
+        },
+        "reports":{
+          "title":"Reports",
+          "activityreport":"activity Report"
+
         }
     }
 }

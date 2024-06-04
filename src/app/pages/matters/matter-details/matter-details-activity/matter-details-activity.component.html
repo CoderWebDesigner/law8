@@ -40,7 +40,7 @@
 
 <!-- <ng-container *ngIf="data?.length > 0"> -->
   <div class="text-end mb-4">
-      <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+      <p-button *ngIf="!previewOnly" [requiredPermission]="'Add_Matter_Activities'" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
           [icon]="'pi pi-plus'" [label]="'matters.addActivity' | translate" button>
       </p-button>
   </div>

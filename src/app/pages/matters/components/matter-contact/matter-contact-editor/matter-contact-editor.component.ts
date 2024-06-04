@@ -24,7 +24,7 @@ export class MatterContactEditorComponent
   data: any[] = [];
   ngOnInit(): void {
     this.getList();
-    this.initForm()
+    this.initForm();
     if (this._dynamicDialogConfig?.data?.rowData) this.getData();
   }
   getList() {
@@ -53,7 +53,7 @@ export class MatterContactEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.firstNamePlaceholder'
               ),
-              // required: true
+              required: true
             },
           },
           {
@@ -104,7 +104,7 @@ export class MatterContactEditorComponent
           {
             className: 'col-md-6',
             key: 'mobileNumber',
-            type: 'input',
+            type: 'phone',
             props: {
               label: this._languageService.getTransValue('common.mobileNumber'),
               // required: true
@@ -170,21 +170,14 @@ export class MatterContactEditorComponent
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
+   
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          // streetNumber: +this.formlyModel.streetNumber,
-          phone : this.formlyModel?.phone?.internationalNumber
-          ? this.formlyModel?.phone?.internationalNumber
-          : this.formlyModel.phone,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          // streetNumber: +this.formlyModel.streetNumber,
-          phone : this.formlyModel?.phone?.internationalNumber
-          ? this.formlyModel?.phone?.internationalNumber
-          : this.formlyModel.phone,
           law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
     const path = this._dynamicDialogConfig?.data?.rowData
@@ -212,6 +205,15 @@ export class MatterContactEditorComponent
   }
   override onSubmit(): void {
     if (this.formly.invalid) return;
+    this.formlyModel = {
+      ...this.formlyModel,
+      phone: this.formlyModel?.phone?.internationalNumber
+        ? this.formlyModel?.phone?.internationalNumber
+        : this.formlyModel.phone,
+      mobileNumber: this.formlyModel?.mobileNumber?.internationalNumber
+        ? this.formlyModel?.mobileNumber?.internationalNumber
+        : this.formlyModel.mobileNumber,
+    };
     if (this._dynamicDialogConfig?.data?.isDynamic) {
       this.save();
     } else {
@@ -221,11 +223,7 @@ export class MatterContactEditorComponent
       if (index != -1) {
         this.data[index] = this.formlyModel;
       } else {
-
-        this.formlyModel.phone= this.formlyModel?.phone?.internationalNumber
-        ? this.formlyModel?.phone?.internationalNumber
-        : this.formlyModel.phone,
-        this.data.push(this.formlyModel);
+          this.data.push(this.formlyModel);
       }
       this.data = this.data.map((obj) => {
         if (!obj.hasOwnProperty('key')) {

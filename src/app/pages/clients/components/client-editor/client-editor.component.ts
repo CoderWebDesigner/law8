@@ -359,7 +359,7 @@ export class ClientEditorComponent
               {
                 className: 'col-md-4',
                 key: 'mobile1',
-                type: 'input',
+                type: 'phone',
                 props: {
                   label: this._languageService.getTransValue('client.mobile1'),
                   placeholder: this._languageService.getTransValue(
@@ -372,7 +372,7 @@ export class ClientEditorComponent
               {
                 className: 'col-md-4',
                 key: 'mobile2',
-                type: 'input',
+                type: 'phone',
                 props: {
                   label: this._languageService.getTransValue('client.mobile2'),
                   placeholder: this._languageService.getTransValue(
@@ -412,6 +412,12 @@ export class ClientEditorComponent
         clientContacts: this.contact,
         phone1: this.formlyModel?.phone1?.internationalNumber,
         phone2: this.formlyModel?.phone2?.internationalNumber,
+        mobile1: this.formlyModel?.mobile1?.internationalNumber
+        ? this.formlyModel?.mobile1?.internationalNumber
+        : this.formlyModel.mobile1,
+        mobile2: this.formlyModel?.mobile2?.internationalNumber
+        ? this.formlyModel?.mobile2?.internationalNumber
+        : this.formlyModel.mobile2,
       };
       // console.log(this.formlyModel);
       // const requestPayload = this.requestId

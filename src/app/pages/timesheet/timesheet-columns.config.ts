@@ -153,11 +153,11 @@
 
 export const Timesheet_Columns_EN = [
   {
-    header: 'Sheet Number',
-    field: 'id',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: 'Document Date',
+    header: 'Date',
     field: 'tmDate',
     isDate:true
   },

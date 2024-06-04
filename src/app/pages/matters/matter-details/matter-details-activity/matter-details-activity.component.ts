@@ -49,13 +49,14 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
           target: MatterDetailsActivityEditorComponent,
           icon:'pencil',
           isDynamic:this.requestId != undefined,
-          width:'70%'
-          // isReadOnly:(this.requestId)?this.previewOnly:true
+          width:'70%',
+          permission:'Update_Matter_Activities'
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
+          permission:'Delete_Matter_Activities'
         },
       ],
     }

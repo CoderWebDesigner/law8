@@ -45,17 +45,17 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         id: 1,
-        label: 'menu.matters.matterList',
-        link: '/matters',
-        parentId: 3,
-        role: 'View_Matter',
-      },
-      {
-        id: 2,
         label: 'menu.matters.matterAdd',
         link: '/matters/add',
         parentId: 3,
         role: 'Add_Matter',
+      },
+      {
+        id: 2,
+        label: 'menu.matters.matterList',
+        link: '/matters',
+        parentId: 3,
+        role: 'View_Matter',
       },
     ],
   },
@@ -67,18 +67,19 @@ export const MENU: MenuItem[] = [
     subItems: [
       {
         id: 1,
-        label: 'menu.taskManagement.taskManagementList',
-        link: '/task-management',
-        parentId: 4,
-        role: 'View_TaskManagement',
-      },
-      {
-        id: 2,
         label: 'menu.taskManagement.taskManagementAdd',
         link: '/task-management/add',
         parentId: 4,
         role: 'Add_TaskManagement',
       },
+      {
+        id: 2,
+        label: 'menu.taskManagement.taskManagementList',
+        link: '/task-management',
+        parentId: 4,
+        role: 'View_TaskManagement',
+      },
+      
       {
         id: 3,
         label: 'menu.taskManagement.calender',
@@ -94,17 +95,18 @@ export const MENU: MenuItem[] = [
     icon: 'trace.svg',
     role: 'timesheet',
     subItems: [
+     
       {
         id: 1,
-        label: 'menu.timesheet.title',
-        link: '/timesheet',
+        label: 'menu.timesheet.timesheetAdd',
+        link: '/timesheet/add',
         parentId: 5,
         role: 'View_Timesheet',
       },
       {
         id: 2,
-        label: 'menu.timesheet.timesheetAdd',
-        link: '/timesheet/add',
+        label: 'menu.timesheet.title',
+        link: '/timesheet',
         parentId: 5,
         role: 'View_Timesheet',
       },
@@ -116,19 +118,20 @@ export const MENU: MenuItem[] = [
     icon: 'client.svg',
     role: 'users',
     subItems: [
+      
       {
         id: 1,
-        label: 'menu.users.usersList',
-        link: '/users',
-        parentId: 6,
-        role: 'View_Users',
-      },
-      {
-        id: 2,
         label: 'menu.users.userAdd',
         link: '/users/add',
         parentId: 6,
         role: 'Add_Users',
+      },
+      {
+        id: 2,
+        label: 'menu.users.usersList',
+        link: '/users',
+        parentId: 6,
+        role: 'View_Users',
       },
     ],
   },
@@ -184,5 +187,22 @@ export const MENU: MenuItem[] = [
     icon: 'security.svg',
     link: '/security',
     role: 'View_Role',
+  },
+  {
+    id: 9,
+    label: 'menu.reports.title',
+    icon: 'security.svg',
+    link: '/security',
+    role: 'View_Role',
+    subItems: [
+      
+      {
+        id: 1,
+        label: 'menu.reports.activityreport',
+        // link: '/users/add',
+        parentId: 6,
+        role: 'Add_Users',
+      },
+    ]
   },
 ];

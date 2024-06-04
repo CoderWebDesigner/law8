@@ -120,6 +120,7 @@ export class TaskManagementEditorComponent
           {
             className: 'col-md-4',
             key: 'startDate',
+            defaultValue:new Date(),
             type: 'date',
             props: {
               label: this._languageService.getTransValue('matters.startDate'),
@@ -149,21 +150,21 @@ export class TaskManagementEditorComponent
               },
             },
           },
-          {
-            className: 'col-md-4',
-            key: 'duration',
-            type: 'input',
-            props: {
-              label: this._languageService.getTransValue('matters.duration'),
-              //required: true,
-              showTime: true,
-            },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return ![4].includes(field.model?.law_ActivityTypeId);
-              },
-            },
-          },
+          // {
+          //   className: 'col-md-4',
+          //   key: 'duration',
+          //   type: 'input',
+          //   props: {
+          //     label: this._languageService.getTransValue('matters.duration'),
+          //     //required: true,
+          //     showTime: true,
+          //   },
+          //   expressions: {
+          //     hide: (field: FormlyFieldConfig) => {
+          //       return ![4].includes(field.model?.law_ActivityTypeId);
+          //     },
+          //   },
+          // },
           {
             className: 'col-md-4',
             key: 'location',
@@ -240,7 +241,7 @@ export class TaskManagementEditorComponent
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return ![2,3, 5, 6, 8, 4, 7].includes(
+                return ![2,3, 5, 4].includes(
                   field.model?.law_ActivityTypeId
                 );
               },
@@ -372,6 +373,7 @@ export class TaskManagementEditorComponent
               {
                 className: 'col-md-4',
                 key: 'startDate',
+                defaultValue:new Date(),
                 type: 'date',
                 props: {
                   label:
@@ -467,6 +469,7 @@ export class TaskManagementEditorComponent
                 className: 'col-md-4',
                 key: 'startDate',
                 type: 'date',
+                defaultValue:new Date(),
                 props: {
                   label:
                     this._languageService.getTransValue('matters.startDate'),

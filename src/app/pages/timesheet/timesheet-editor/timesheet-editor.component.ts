@@ -39,9 +39,9 @@ export class TimesheetEditorComponent implements OnInit {
   selectAllRows: boolean;
   selectedMatter: any;
   selectedRows: any[] = [];
-  billableCount: number = 0;
-  nonBillableCount: number = 0;
-  noChargeCount: number = 0;
+  billableHoursCount: number = 0;
+  nonBillableHoursCount: number = 0;
+  noChargeHoursCount: number = 0;
   lookupsData: any;
   task = Task;
   columnsLocalized = {
@@ -370,14 +370,21 @@ export class TimesheetEditorComponent implements OnInit {
       .valueChanges.pipe()
       .subscribe({
         next: (res: any[]) => {
-          this.billableCount = res
+          this.billableHoursCount = res
             .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
             .reduce(
               (accumulator, currentControl) =>
                 accumulator + currentControl.hours,
               0
             );
-          this.noChargeCount = res
+          this.nonBillableHoursCount = res
+            .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
+            .reduce(
+              (accumulator, currentControl) =>
+                accumulator + currentControl.hours,
+              0
+            );
+          this.noChargeHoursCount = res
             .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
             .reduce(
               (accumulator, currentControl) =>

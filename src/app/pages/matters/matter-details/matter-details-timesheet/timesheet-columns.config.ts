@@ -1,11 +1,11 @@
 
 export const Timesheet_Columns_EN = [
   {
-    header: 'Sheet Number',
+    header: 'ID',
     field: 'id',
   },
   {
-    header: 'Document Date',
+    header: 'Date',
     field: 'tmDate',
     isDate:true
   },
@@ -43,11 +43,11 @@ export const Timesheet_Columns_EN = [
 
 export const Timesheet_Columns_FR = [
   {
-    header: 'Sheet Number',
+    header: 'ID',
     field: 'id',
   },
   {
-    header: 'Document Date',
+    header: 'Date',
     field: 'tmDate',
     isDate:true
   },
@@ -84,11 +84,11 @@ export const Timesheet_Columns_FR = [
 
 export const Timesheet_Columns_AR = [
   {
-    header: 'Sheet Number',
+    header: 'ID',
     field: 'id',
   },
   {
-    header: 'Document Date',
+    header: 'Date',
     field: 'tmDate',
     isDate:true
   },

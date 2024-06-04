@@ -71,7 +71,9 @@
     "clientNameAr":"الاسم",
     "clientNameEn":"الاسم الاجنبى",
     "viewClient":"View Client",
-    "updateClient":"Update Client"
-
+    "updateClient":"Update Client",
+    "line1":"line1",
+    "line2":"line2",
+    "linePlaceholder":"Please Enter line"
   }
 }

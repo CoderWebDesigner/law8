@@ -17,21 +17,38 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   ngOnInit(): void {
     this.getLookupsData();
     if (!this.data) this.detectFormChange();
+    if(this.data) this.getData()
+   
+  }
 
-    console.log('ngOnInit', this.data);
-    for (let key in this.formlyModel) {
-      if (this.data.hasOwnProperty(key)) {
-        this.formlyModel[key] = this.data[key];
-      }
-    }
-    console.log(this.formlyModel)
+  override getData(): void {
+  
+    // console.log()
+    // for (let key in this.data) {
+    //   this.formlyModel[key] = this.data[key];
+    //   console.log(`${key}`,this.formlyModel[key])
+    //   console.log(this.formly.contains(key))
+    //   if (this.formly.value.hasOwnProperty(key)) {
+    //   }
+    // }
+    // for(let key in this.formlyFields[0]?.fieldGroup){
+    //   console.log('key',key)
+    //   if (this.data.hasOwnProperty(key)) {
+    //     this.formlyModel[key]=this.data[key]
+    //     console.log(`Found key: ${key} : ${this.formlyModel[key]}`);
+    //   }
+    // }
+    // this.findKeyProperty(this.formlyFields);
+
     this.formlyModel = {
-      id:this.data?.id,
+      // id:this.data?.id,
+      ...this.data,
       law_AssignedLaywerList: this.data?.law_AssignedLaywerList?.map(
         (obj) => obj?.id
       ),
       law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
     };
+    console.log('getData formlyModel',this.formlyModel)
   }
 
   override getLookupsData(): void {
@@ -50,6 +67,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
         next: (res: any) => {
           this.lookupsData = res;
           this.initForm();
+         
         },
       });
   }

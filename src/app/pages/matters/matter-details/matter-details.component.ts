@@ -124,10 +124,10 @@ export class MatterDetailsComponent implements OnInit {
       });
   }
   updatePracticeArea(e?: any) {
-    console.log(e.practsAreaId ?? this.data.practsAreaId);
+    // console.log(e.practsAreaId ?? this.data.practsAreaId);
     if (
       [this.practiceArea.IntelecturualProperty].includes(
-        e.practsAreaId ?? this.data.practsAreaId
+        e?.practsAreaId ?? this.data?.practsAreaId
       )
     ) {
       this.items.forEach((obj) => {
@@ -141,7 +141,7 @@ export class MatterDetailsComponent implements OnInit {
         this.practiceArea.Corporate,
         this.practiceArea.Litigation,
         this.practiceArea.Arbitration,
-      ].includes(e.practsAreaId ?? this.data.practsAreaId)
+      ].includes(e?.practsAreaId ?? this.data?.practsAreaId)
     ) {
       this.items.forEach((obj) => {
         obj.show = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;

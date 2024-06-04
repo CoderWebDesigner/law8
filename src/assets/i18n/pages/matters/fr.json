@@ -18,7 +18,7 @@
     "amount":"Amount",
     "rateAmount":"Rate Amount",
     "referralType":"Referral Type",
-    "clientIntroducing":"Introducing Lawyer",
+    "clientIntroducing":"Client Introducing Lawyer",
     "matterIntroducingLawyer":"Matter Introducing Lawyer",
     "responsibleLaywer":"Responsible Laywer",
     "assignedLaywer":"Assigned Laywer",
@@ -119,7 +119,9 @@
     "addApplicant":"Add Applicant",
     "addClass":"Add Class",
     "uploadLogo":"Upload Logo",
-    "isPrivate":"isPrivate"
+    "isPrivate":"isPrivate,",
+    "location":"location"
+
 
   }
 }

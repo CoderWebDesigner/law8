@@ -1,16 +1,16 @@
 export const Contact_Columns_EN = [
   {
-    header: 'First Name',
-    field: 'firstName',
+    header: 'Full Name',
+    field: 'fullName',
   },
-  {
-    header: 'Middle Name',
-    field: 'middleName',
-  },
-  {
-    header: 'Last Name',
-    field: 'lastName',
-  },
+  // {
+  //   header: 'Middle Name',
+  //   field: 'middleName',
+  // },
+  // {
+  //   header: 'Last Name',
+  //   field: 'lastName',
+  // },
   {
     header: 'Position',
     field: 'position',

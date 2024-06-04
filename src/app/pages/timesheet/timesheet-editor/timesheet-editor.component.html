@@ -100,21 +100,21 @@
 </shared-card>
 <shared-card borderRadius="20">
   <div class="row" body>
-    <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
-      <h6 class="fw-bold align-middle">{{'common.total'|translate}}</h6>
-      <p class="mb-0 h5">{{ +billableCount+ +nonBillableCount+ +noChargeCount }}</p>
+    <div class="col-md-3 mb-md-0 mb-3 text-center border-end border-1 border-secondary">
+      <h6 class="fw-bold  align-middle mb-4">{{'timesheet.billableCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ billableHoursCount }}</p>
     </div>
-    <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
-      <h6 class="fw-bold  align-middle">{{'timesheet.nonBillableCount'|translate}}</h6>
-      <p class="mb-0 h5">{{ billableCount }}</p>
+    <div class="col-md-3 mb-md-0 mb-3 text-center border-end border-1 border-secondary">
+      <h6 class="fw-bold  align-middle mb-4">{{'timesheet.nonBillableCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ nonBillableHoursCount }}</p>
     </div>
-    <div class="col-md-3 mb-md-0 mb-3 d-flex justify-content-between border-end border-2">
-      <h6 class="fw-bold  align-middle">{{'timesheet.nonBillableCount'|translate}}</h6>
-      <p class="mb-0 h5">{{ nonBillableCount }}</p>
+    <div class="col-md-3 mb-md-0 mb-3 text-center border-end border-1 border-secondary">
+      <h6 class="fw-bold align-middle mb-4">{{'timesheet.noChargeCount'|translate}}</h6>
+      <p class="mb-0 h5">{{ noChargeHoursCount }}</p>
     </div>
-    <div class="col-md-3 d-flex justify-content-between">
-      <h6 class="fw-bold align-middle">{{'timesheet.noChargeCount'|translate}}</h6>
-      <p class="mb-0 h5">{{ noChargeCount }}</p>
+    <div class="col-md-3 text-center">
+      <h6 class="fw-bold align-middle mb-4">{{'common.total'|translate}}</h6>
+      <p class="mb-0 h5">{{ +billableHoursCount+ +nonBillableHoursCount+ +noChargeHoursCount }}</p>
     </div>
   </div>
 </shared-card>
