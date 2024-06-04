@@ -69,7 +69,7 @@ export class MatterAddressEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.linePlaceholder'
               ),
-              // required: true,
+              required: true,
             },
           },
           {

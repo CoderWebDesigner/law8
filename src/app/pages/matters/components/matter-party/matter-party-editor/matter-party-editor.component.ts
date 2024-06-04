@@ -8,6 +8,8 @@ import { ApiRes } from '@core/models';
 
 import { finalize, forkJoin } from 'rxjs';
 import { MatterService } from '@components/matters/service/matter.service';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { Params } from '@angular/router';
 
 @Component({
   selector: 'app-matter-party-editor',
@@ -24,6 +26,7 @@ export class MatterPartyEditorComponent
   apiUrls = API_Config.matterParties;
   _matterService = inject(MatterService);
   data: any[] = [];
+
   ngOnInit(): void {
     this.getLookupsData();
     this.getList();
@@ -40,14 +43,13 @@ export class MatterPartyEditorComponent
   }
   override getData(): void {
     this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
-    console.log(' this.formlyModel', this.formlyModel)
+    console.log(' this.formlyModel', this.formlyModel);
   }
   override getLookupsData(): void {
     forkJoin([
       this._apiService.get(API_Config.general.getPartiesDescription),
-      this._apiService.get(API_Config.general.getPartyTypes)
+      this._apiService.get(API_Config.general.getPartyTypes),
     ])
-    
       .pipe(
         finalize(() => (this.isSubmit = false)),
         this.takeUntilDestroy()
@@ -75,13 +77,15 @@ export class MatterPartyEditorComponent
                 label: obj.name,
                 value: +obj.id,
               })),
-              onChange:(e)=>{
-                this.formly.get('partyType').setValue(e?.originalEvent.target.innerText)
-              }
+              onChange: (e) => {
+                this.formly
+                  .get('partyType')
+                  .setValue(e?.originalEvent.target.innerText);
+              },
             },
           },
           {
-            key:'partyType'
+            key: 'partyType',
           },
           {
             className: 'col-md-6',
@@ -103,13 +107,20 @@ export class MatterPartyEditorComponent
                 label: obj.name,
                 value: obj.id,
               })),
-              onChange:(e)=>{
-                this.formly.get('law_PartiesDescription').setValue(e?.originalEvent.target.innerText)
-              }
+              onChange: (e) => {
+                this.formly
+                  .get('law_PartiesDescription')
+                  .setValue(e?.originalEvent.target.innerText);
+              },
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return field.model?.partyTypeId == 6 || field.model?.partyTypeId == 7;
+              },
             },
           },
           {
-            key:'law_PartiesDescription'
+            key: 'law_PartiesDescription',
           },
           {
             className: 'col-md-6',
@@ -118,7 +129,55 @@ export class MatterPartyEditorComponent
             props: {
               label: this._languageService.getTransValue('matters.position'),
               // required: true,
-              options: [{ label: '1', value: 1 }],
+            },
+            expressions: {
+              hide: (field: FormlyFieldConfig) => {
+                return field.model?.partyTypeId == 6 || field.model?.partyTypeId == 7;
+              },
+            },
+            hooks: {
+              onInit: (field: FormlyFieldConfig) => {
+                // console.log('field');
+                this.formly
+                  .get('law_PartiesDescriptionId')
+                  .valueChanges.subscribe({
+                    next: (res) => {
+                      if (res) {
+                        this._apiService
+                          .get(API_Config.general.getPartyPosition, {
+                            Law_MatterId:
+                              this._dynamicDialogConfig?.data?.law_MatterId,
+                            Law_PartiesDescriptionId: res,
+                          })
+                          .subscribe({
+                            next: (res: ApiRes) => {
+                              field.props.options = res.result.map((obj) => ({
+                                label: obj.name,
+                                value: obj.id,
+                              }));
+                            },
+                          });
+                      }
+                    },
+                  });
+                if (this.formlyModel?.law_PartiesDescriptionId) {
+                  this._apiService
+                    .get(API_Config.general.getPartyPosition, {
+                      Law_MatterId:
+                        this._dynamicDialogConfig?.data?.law_MatterId,
+                      Law_PartiesDescriptionId:
+                        this.formlyModel?.law_PartiesDescriptionId,
+                    })
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        field.props.options = res.result.map((obj) => ({
+                          label: obj.name,
+                          value: obj.id,
+                        }));
+                      },
+                    });
+                }
+              },
             },
           },
         ],

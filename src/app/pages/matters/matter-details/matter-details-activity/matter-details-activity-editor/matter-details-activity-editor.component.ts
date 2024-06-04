@@ -121,7 +121,7 @@ export class MatterDetailsActivityEditorComponent
               label: this._languageService.getTransValue(
                 'matters.activityType'
               ),
-              //required: true,
+              required: true,
               options: this.lookupsData[0].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
@@ -133,9 +133,10 @@ export class MatterDetailsActivityEditorComponent
             className: 'col-md-4',
             key: 'startDate',
             type: 'date',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue('matters.startDate'),
-              //required: true,
+              required: true,
               showTime: true,
             },
             expressions: {
@@ -159,6 +160,7 @@ export class MatterDetailsActivityEditorComponent
               hide: (field: FormlyFieldConfig) => {
                 return ![4].includes(field.model?.law_ActivityTypeId);
               },
+              'props.required': '[4].includes(field.model?.law_ActivityTypeId)',
             },
           },
           // {
@@ -206,8 +208,9 @@ export class MatterDetailsActivityEditorComponent
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return ![4, 7].includes(field.model?.law_ActivityTypeId);
+                return ![2,4,5, 7].includes(field.model?.law_ActivityTypeId);
               },
+              'props.required': '[1,4, 7].includes(field.model?.law_ActivityTypeId)',
             },
           },
           {
@@ -224,6 +227,7 @@ export class MatterDetailsActivityEditorComponent
                   field.model?.law_ActivityTypeId
                 );
               },
+              'props.required': '[2, 3, 5, 6, 8, 4, 7].includes(field.model?.law_ActivityTypeId)',
             },
           },
 
@@ -384,10 +388,11 @@ export class MatterDetailsActivityEditorComponent
                 className: 'col-md-4',
                 key: 'startDate',
                 type: 'date',
+                defaultValue:new Date(),
                 props: {
                   label:
                     this._languageService.getTransValue('matters.startDate'),
-                  //required: true,
+                  required: true,
                   showTime: true,
                 },
               },
@@ -406,6 +411,9 @@ export class MatterDetailsActivityEditorComponent
                     label: obj.name,
                     value: obj.id,
                   })),
+                },
+                expressions: {
+                  'props.required': '[1,4, 7].includes(field.model?.law_ActivityTypeId)',
                 },
               },
             ],
@@ -478,10 +486,11 @@ export class MatterDetailsActivityEditorComponent
                 className: 'col-md-4',
                 key: 'startDate',
                 type: 'date',
+                defaultValue:new Date(),
                 props: {
                   label:
                     this._languageService.getTransValue('matters.startDate'),
-                  //required: true,
+                  required: true,
                   showTime: true,
                   minDate: this.minDate,
                 },
@@ -499,7 +508,8 @@ export class MatterDetailsActivityEditorComponent
                     label: obj.name,
                     value: obj.id,
                   })),
-                },
+                }
+                
               },
             ],
           },

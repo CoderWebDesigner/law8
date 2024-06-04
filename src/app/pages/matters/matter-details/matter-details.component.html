@@ -13,7 +13,7 @@
 
             <ng-container *ngFor="let item of items; let i = index">
               <p-tabPanel [header]="item.label" *ngIf="item.show">
-                <app-matter-general [previewOnly]="previewOnly" [data]="data"
+                <app-matter-general [previewOnly]="previewOnly"  [data]="data"
                   *ngIf="i == 0"></app-matter-general>
                 <ng-template pTemplate="content">
                   <app-matter-address [requestId]="requestId" *ngIf="i==2"></app-matter-address>

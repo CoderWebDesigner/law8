@@ -51,13 +51,16 @@ export class MatterDetailsDocumentsComponent extends FileActions implements OnIn
           target: MatterDetailsDocumentsEditorComponent,
           icon:'pencil',
           isDynamic:this.requestId != undefined,
-          width:'70%'
+          width:'70%',
+          permission:'Update_Matter_Documents'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
+
+          permission:'Delete_Matter_Documents'
         },
       ],
     }
@@ -69,7 +72,7 @@ export class MatterDetailsDocumentsComponent extends FileActions implements OnIn
   openDialog() {
     const ref = this._dialogService.open(MatterDetailsDocumentsEditorComponent, {
       width: '70%',
-      header: this._languageService.getTransValue('matters.addActivity'),
+      header: this._languageService.getTransValue('matters.addDocument'),
       dismissableMask: true,
       data:{
         law_MatterId:this.requestId,

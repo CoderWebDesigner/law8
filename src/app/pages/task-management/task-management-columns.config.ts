@@ -4,6 +4,14 @@ export const Task_Management_Columns_EN = [
     field: 'id',
   },
   {
+    header: 'Matter Number',
+    field: 'mtrNo',
+  },
+  {
+    header: 'Court Number',
+    field: 'courtNumber',
+  },
+  {
     header: 'Activity Type',
     field: 'law_ActivityType',
   },
@@ -15,6 +23,7 @@ export const Task_Management_Columns_EN = [
     header: 'User',
     field: 'user',
   },
+ 
 
   {
     header: 'Date',
@@ -32,6 +41,14 @@ export const Task_Management_Columns_FR = [
   {
     header: 'Code',
     field: 'id',
+  },
+  {
+    header: 'Matter Number',
+    field: 'mtrNo',
+  },
+  {
+    header: 'Court Number',
+    field: 'courtNumber',
   },
   {
     header: 'Activity Type',
@@ -63,6 +80,14 @@ export const Task_Management_Columns_AR = [
   {
     header: 'Code',
     field: 'id',
+  },
+  {
+    header: 'Matter Number',
+    field: 'mtrNo',
+  },
+  {
+    header: 'Court Number',
+    field: 'courtNumber',
   },
   {
     header: 'Activity Type',

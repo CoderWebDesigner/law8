@@ -1,8 +1,8 @@
 
 export const Matters_Columns_EN = [
   {
-    header: 'Code',
-    field: 'id',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
     header: 'Opened',
@@ -42,8 +42,8 @@ export const Matters_Columns_EN = [
 
 export const Matters_Columns_FR = [
   {
-    header: 'Code',
-    field: 'id',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
     header: 'Opened',
@@ -83,8 +83,8 @@ export const Matters_Columns_FR = [
 
 export const Matters_Columns_AR = [
   {
-    header: 'Code',
-    field: 'id',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
     header: 'Opened',

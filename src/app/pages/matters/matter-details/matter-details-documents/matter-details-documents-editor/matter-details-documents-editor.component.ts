@@ -69,6 +69,7 @@ export class MatterDetailsDocumentsEditorComponent
             className: 'col-md-6',
             key: 'receivedDate',
             type: 'date',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue(
                 'matters.receivedDate'
