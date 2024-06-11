@@ -49,6 +49,7 @@ $highlightFocusBg: rgba($primaryColor, .24);
 $dangerButtonBg:#D94841 !default;
 $dangerButtonTextColor: #D94841 !default;
 
+
 $buttonBg:$primaryColor;
 
 $gray-100: #f8f9fa;
@@ -139,3 +140,7 @@ $tagInfoBg: rgba($tagInfoColor, 0.10);
 
 $tagWarningColor: #F59E0B;
 $tagWarningBg: rgba($tagWarningColor, 0.10);
+
+
+$tagHelpColor: #a855f7;
+$tagHelpBg: rgba($tagHelpColor, 0.10);

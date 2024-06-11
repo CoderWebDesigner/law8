@@ -1,15 +1,19 @@
 export const Applicant_Columns_EN = [
+  // {
+  //   header: 'First Name',
+  //   field: 'firstName',
+  // },
+  // {
+  //   header: 'Middle Name',
+  //   field: 'middleName',
+  // },
+  // {
+  //   header: 'Last Name',
+  //   field: 'lastName',
+  // },
   {
-    header: 'First Name',
-    field: 'firstName',
-  },
-  {
-    header: 'Middle Name',
-    field: 'middleName',
-  },
-  {
-    header: 'Last Name',
-    field: 'lastName',
+    header: 'Full Name',
+    field: 'fullName',
   },
   {
     header: 'Position',
@@ -39,16 +43,8 @@ export const Applicant_Columns_EN = [
 ];
 export const Applicant_Columns_FR = [
   {
-    header: 'Prénom',
-    field: 'firstName',
-  },
-  {
-    header: 'Deuxième prénom',
-    field: 'middleName',
-  },
-  {
-    header: 'Nom de famille',
-    field: 'lastName',
+    header: 'Full Name',
+    field: 'fullName',
   },
   {
     header: 'position',
@@ -79,16 +75,8 @@ export const Applicant_Columns_FR = [
 ];
 export const Applicant_Columns_AR = [
   {
-    header: 'الاسم الأول',
-    field: 'firstName',
-  },
-  {
-    header: 'الاسم الأوسط',
-    field: 'middleName',
-  },
-  {
-    header: 'اسم العائلة',
-    field: 'lastName',
+    header: 'الاسم',
+    field: 'fullName',
   },
   {
     header: 'موضع',

@@ -18,7 +18,11 @@ export class TopbarComponent implements OnInit {
     @Inject(DOCUMENT) private document: any
     ) {
   }
+  showInput = false;
 
+  toggleInput() {
+    this.showInput = !this.showInput;
+  }
 
   openMobileMenu!: boolean;
 

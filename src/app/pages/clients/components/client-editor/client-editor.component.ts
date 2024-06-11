@@ -108,7 +108,7 @@ export class ClientEditorComponent
                   placeholder: this._languageService.getTransValue(
                     'client.clientNamePlaceholder'
                   ),
-                  //required: true,
+                  required: true,
                   disabled: this.disableInputs,
                 },
               },

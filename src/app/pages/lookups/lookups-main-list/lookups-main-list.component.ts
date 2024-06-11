@@ -201,7 +201,7 @@ export class LookupsMainListComponent implements OnInit {
     fr: Matter_Main_List_Columns_FR,
   };
   columnsLocalizedChildren: any = {};
-  additionalTableConfigChildren: TableConfig = {};
+  additionalTableConfigChildren: TableConfig;
   ngOnInit(): void {
     this.data=this.data.filter(obj=>this._permissionService.hasPermission(obj.permission))
     
@@ -256,7 +256,8 @@ export class LookupsMainListComponent implements OnInit {
   }
 
   onRowSelected(event) {
-    console.log(event);
+    console.log('event',event);
+    this.selectedRow = event.data;
     let clientGroupColumns = {
       ar: Main_List_Client_Group_Columns_AR,
       en: Main_List_Client_Group_Columns_EN,
@@ -291,7 +292,7 @@ export class LookupsMainListComponent implements OnInit {
         },
       ],
     };
-    this.selectedRow = event.data;
+    
     this.apiUrls = this.apiData[this.selectedRow?.id]?.api;
     this.subTitle = this.apiData[this.selectedRow?.id]?.title;
     if (this.selectedRow?.id == 3) {

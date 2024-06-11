@@ -36,7 +36,7 @@ export class MatterDetailsRelatedMattersComponent implements OnInit{
   ngOnInit(): void {
     this.filterOptions={
       ...this.filterOptions,
-      parentMatterId:this.requestId
+      MatterId:this.requestId
     }
   }
   mapData(e){

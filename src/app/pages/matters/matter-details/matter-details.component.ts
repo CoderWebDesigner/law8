@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
@@ -20,7 +20,7 @@ export class MatterDetailsComponent implements OnInit {
   _sharedService = inject(SharedService);
   _permissionService = inject(PermissionService);
   _router = inject(Router);
-  matter: any;
+  _cdRef = inject(ChangeDetectorRef);
   requestId: number;
   previewOnly: boolean;
   isSubmit: boolean;
@@ -32,73 +32,81 @@ export class MatterDetailsComponent implements OnInit {
       id: 1,
       label: this._languageService.getTransValue('common.general'),
       show: false,
-      permission:this._permissionService.hasPermission('View_General_Matter')
+      permission: this._permissionService.hasPermission('View_General_Matter'),
     },
     {
       id: 2,
       label: this._languageService.getTransValue('common.parties'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Parties')
+      permission: this._permissionService.hasPermission('View_Matter_Parties'),
     },
     {
       id: 3,
       label: this._languageService.getTransValue('common.address'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Addres')
+      permission: this._permissionService.hasPermission('View_Matter_Addres'),
     },
     {
       id: 4,
       label: this._languageService.getTransValue('common.contacts'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Contacts')
+      permission: this._permissionService.hasPermission('View_Matter_Contacts'),
     },
     {
       id: 5,
       label: this._languageService.getTransValue('matters.applicants'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Applicants')
+      permission: this._permissionService.hasPermission(
+        'View_Matter_Applicants'
+      ),
     },
     {
       id: 6,
       label: this._languageService.getTransValue('matters.class'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Classes')
+      permission: this._permissionService.hasPermission('View_Matter_Classes'),
     },
     {
       id: 7,
       label: this._languageService.getTransValue('matters.activities'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Activities')
+      permission: this._permissionService.hasPermission(
+        'View_Matter_Activities'
+      ),
     },
     {
       id: 8,
       label: this._languageService.getTransValue('matters.invoices'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Invoices')
+      permission: this._permissionService.hasPermission('View_Matter_Invoices'),
     },
     {
       id: 9,
       label: this._languageService.getTransValue('common.timesheet'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Matter_Timesheet')
+      permission: this._permissionService.hasPermission(
+        'View_Matter_Timesheet'
+      ),
     },
     {
       id: 10,
       label: this._languageService.getTransValue('common.relatedMatters'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Related_Matters')
+      permission: this._permissionService.hasPermission('View_Related_Matters'),
     },
     {
       id: 11,
       label: this._languageService.getTransValue('matters.documents'),
       show: false,
-      permission:this._permissionService.hasPermission('Add_Matter_Documents')
+      permission: this._permissionService.hasPermission('Add_Matter_Documents'),
     },
     {
       id: 12,
       label: this._languageService.getTransValue('matters.billingSettings'),
       show: false,
-      permission:this._permissionService.hasPermission('View_Billing_Settings')
+      permission: this._permissionService.hasPermission(
+        'View_Billing_Settings'
+      ),
     },
     // { label: this._languageService.getTransValue('matters.remarks') },
     // { label: this._languageService.getTransValue('matters.status') },
@@ -112,9 +120,7 @@ export class MatterDetailsComponent implements OnInit {
 
   getById() {
     this._apiService
-      .get(
-        API_Config.matters.getById + '?id=' + this.requestId + '&LoadFile=true'
-      )
+      .get(API_Config.matters.getById, { id: this.requestId, LoadFile: true })
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
@@ -131,7 +137,9 @@ export class MatterDetailsComponent implements OnInit {
       )
     ) {
       this.items.forEach((obj) => {
-        obj.show = [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+        obj.show =
+          [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+        this._cdRef.detectChanges();
         // [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id)
         //   ? (obj.show = true)
         //   : (obj.show = false);
@@ -144,7 +152,9 @@ export class MatterDetailsComponent implements OnInit {
       ].includes(e?.practsAreaId ?? this.data?.practsAreaId)
     ) {
       this.items.forEach((obj) => {
-        obj.show = [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+        obj.show =
+          [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+        this._cdRef.detectChanges();
         // [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id)
         //   ? (obj.show = true)
         //   : (obj.show = false);

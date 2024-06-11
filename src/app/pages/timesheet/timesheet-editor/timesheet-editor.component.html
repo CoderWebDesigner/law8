@@ -54,18 +54,27 @@
                 <td>
                   <p-dropdown formControlName="law_LawerId" label="" [options]="laywers" placeholder="Any"
                     appendTo="body" (onChange)="getRateFromLawyerIdAndMatterId(rowIndex)">
+                    <!-- <ng-template let-item pTemplate="selectedItem">
+                      <span style="vertical-align:middle">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-target pTemplate="item">
+                      <div class="ui-helper-clearfix" [pTooltip]="target.inital" tooltipPosition="top">
+                          <span >{{target.label}}</span>
+                      </div>
+                  </ng-template> -->
                   </p-dropdown>
                 </td>
                 <td>
                   <p-dropdown formControlName="law_TaskCodeId" label="" [options]="tasks" placeholder="Any"
                     appendTo="body">
+                   
                   </p-dropdown>
                 </td>
                 <td>
-                  <input type="number" step="0.1" formControlName="hours" pInputText />
+                  <input type="number" step="0.1" formControlName="hours" pInputText (input)="onValueChange(rowIndex)"/>
                 </td>
                 <td>
-                  <input type="number" formControlName="rate" pInputText />
+                  <input type="number" formControlName="rate" pInputText (input)="onValueChange(rowIndex)"/>
                 </td>
                 <td>
                   <input type="text" formControlName="amount" pInputText readonly class="w-75 disabled-input" />

@@ -37,9 +37,9 @@ export class MatterDetailsDocumentsEditorComponent
           console.log(res);
           this.formlyModel = { 
             ...res['result'],
-            receivedDate:this._datePipe.transform(res['result'].receivedDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
-            documentDate:this._datePipe.transform(res['result'].documentDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
-            expirationDate:this._datePipe.transform(res['result'].expirationDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
+            // receivedDate:this._datePipe.transform(res['result'].receivedDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
+            // documentDate:this._datePipe.transform(res['result'].documentDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
+            // expirationDate:this._datePipe.transform(res['result'].expirationDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
             attachment: res['result'].applicationType + res['result'].logoFile
            };
 
@@ -126,17 +126,24 @@ export class MatterDetailsDocumentsEditorComponent
       this.formlyModel.documentDate,
       'yyyy-MM-ddTHH:mm:ss.SSSZ'
     );
-    const expirationDate = this._datePipe.transform(
-      this.formlyModel.expirationDate,
-      'yyyy-MM-ddTHH:mm:ss.SSSZ'
-    );
+    // const expirationDate = this._datePipe.transform(
+    //   this.formlyModel.expirationDate,
+    //   'yyyy-MM-ddTHH:mm:ss.SSSZ'
+    // );
+    if (this.formlyModel.expirationDate) {
+      const expirationDate = this._datePipe.transform(
+          this.formlyModel.expirationDate,
+          'yyyy-MM-ddTHH:mm:ss.SSSZ'
+      );
+      this.formlyModel.expirationDate = expirationDate;
+  }
     const ReceivedDate = this._datePipe.transform(
       this.formlyModel.receivedDate,
       'yyyy-MM-ddTHH:mm:ss.SSSZ'
     );
 
     this.formlyModel.documentDate = formattedDate;
-    this.formlyModel.expirationDate = expirationDate;
+    // this.formlyModel.expirationDate = expirationDate;
     this.formlyModel.receivedDate = ReceivedDate;
 
     const requestPayload = this._dynamicDialogConfig?.data?.rowData

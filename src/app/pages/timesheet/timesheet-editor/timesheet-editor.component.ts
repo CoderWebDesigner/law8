@@ -78,6 +78,7 @@ export class TimesheetEditorComponent implements OnInit {
           this.laywers = res[0].result.map((obj) => ({
             label: obj.name,
             value: obj.id,
+            initial:obj.initial
           }));
           this.tasks = res[1].result.map((obj) => ({
             label: obj.name,
@@ -431,6 +432,13 @@ export class TimesheetEditorComponent implements OnInit {
 
   //   console.log(this.selectedRows);
   // }
+  onValueChange(rowIndex:number){
+    let hours = this.getFormArray.controls[rowIndex]?.get('hours').value
+    let rate = this.getFormArray.controls[rowIndex]?.get('rate').value
+    this.getFormArray.controls[rowIndex].patchValue({
+      amount:hours*rate
+    })
+  }
   saveDraft(btn) {
     btn.isLoading = true;
     let validValue = this.getFormArray.value.filter(

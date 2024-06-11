@@ -55,7 +55,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   tabsList: any;
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
-  _cdRef=inject(ChangeDetectorRef)
+  _cdRef = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
@@ -93,26 +93,19 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             },
             hooks: {
               onInit: (field: FormlyFieldConfig) => {
-                console.log('requestTypeId',field.formControl.value)
-                this.formly.get('requestTypeId').valueChanges.pipe(
-                  this._sharedService.takeUntilDistroy()
-                ).subscribe({
-                  next:(res)=>{
-                 
-                    if(res){
-                      this.formly
-                      .get('clientName')
-                      .setValue(null);
-                    this.formly
-                      .get('mtrNo')
-                      .setValue(null);
-                    this.formly
-                      .get('clientId')
-                      .setValue(null);
-                    }
-                  }
-                })
-                
+                console.log('requestTypeId', field.formControl.value);
+                this.formly
+                  .get('requestTypeId')
+                  .valueChanges.pipe(this._sharedService.takeUntilDistroy())
+                  .subscribe({
+                    next: (res) => {
+                      if (res) {
+                        this.formly.get('clientName').setValue(null);
+                        this.formly.get('mtrNo').setValue(null);
+                        this.formly.get('clientId').setValue(null);
+                      }
+                    },
+                  });
               },
             },
           },
@@ -129,12 +122,13 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               label: this._languageService.getTransValue('common.clientCode'),
               placeholder: '',
               disabled: this.previewOnly,
+              required: true,
               options: this.lookupsData[4].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
               onChange: (e) => {
-                if (this.formlyModel?.requestTypeId == 1,3) {
+                if ((this.formlyModel?.requestTypeId == 1, 3)) {
                   this._apiService
                     .get(
                       `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel?.clientId}`
@@ -145,14 +139,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         this.formly
                           .get('clientName')
                           .setValue(res.result['name']);
-                      //   this.formly
-                      //     .get('mtrNo')
-                      //     .setValue(res.result['mattCode']);
-                      if (this.formlyModel?.requestTypeId !== 2) {
-                        this.formly
-                          .get('mtrNo')
-                          .setValue(res.result['mattCode']);
-                      }
+                        //   this.formly
+                        //     .get('mtrNo')
+                        //     .setValue(res.result['mattCode']);
+                        if (this.formlyModel?.requestTypeId !== 2) {
+                          this.formly
+                            .get('mtrNo')
+                            .setValue(res.result['mattCode']);
+                        }
                       },
                     });
                 }
@@ -206,11 +200,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         this.formly
                           .get('clientName')
                           .setValue(res.result['name']);
-                          if (this.formlyModel?.requestTypeId == 2) {
-                            this.formly
-                              .get('mtrNo')
-                              .setValue(res.result['mattCode']);
-                          }
+                        if (this.formlyModel?.requestTypeId == 2) {
+                          this.formly
+                            .get('mtrNo')
+                            .setValue(res.result['mattCode']);
+                        }
                       }
                     },
                   });
@@ -221,7 +215,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               onInit: (field: FormlyFieldConfig) => {
                 field.form.get('clientId').valueChanges.subscribe({
                   next: (res) => {
-                    if(res){
+                    if (res) {
                       this._apiService
                         .get(
                           `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
@@ -237,8 +231,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                             }
                           },
                         });
-                    }else{
-                      field.props.options=[]
+                    } else {
+                      field.props.options = [];
                     }
                     if (this.formlyModel?.requestTypeId == 2) {
                     }
@@ -266,6 +260,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
+              required: true,
             },
             hooks: {
               onChanges: (field: FormlyFieldConfig) => {
@@ -302,6 +297,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.opened'),
               disabled: this.previewOnly,
+              required: true,
             },
           },
           {
@@ -327,6 +323,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'common.matterCategory'
                   ),
                   disabled: this.previewOnly,
+                  required: true,
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
@@ -365,6 +362,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   label:
                     this._languageService.getTransValue('matters.matterType'),
                   disabled: this.previewOnly,
+                  required: true,
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
@@ -600,6 +598,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'matters.matterStatus'
                   ),
                   disabled: this.previewOnly,
+                  required: true,
                   options: this.lookupsData[1].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
@@ -622,6 +621,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 props: {
                   label: this._languageService.getTransValue('matters.stage'),
                   disabled: this.previewOnly,
+                  required: true,
                   options: this.lookupsData[2].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
@@ -703,6 +703,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     // this.isSubmit = true;
     console.log(this.formlyModel?.photo);
+    if (this.formly.invalid) return;
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
       .pipe(this._sharedService.takeUntilDistroy())
@@ -781,7 +782,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
   resetFormExcludingField(fieldToExclude: string) {
     // Reset each field except the specified one
-    this.formlyFields.forEach(field => {
+    this.formlyFields.forEach((field) => {
       if (field.key !== fieldToExclude) {
         field.formControl.reset();
       }

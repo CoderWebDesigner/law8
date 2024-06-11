@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { addOption } from '@core/utilities/defines/functions/add-option';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { finalize, forkJoin } from 'rxjs';
 
@@ -17,12 +18,10 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   ngOnInit(): void {
     this.getLookupsData();
     if (!this.data) this.detectFormChange();
-    if(this.data) this.getData()
-   
+    if (this.data) this.getData();
   }
 
   override getData(): void {
-  
     // console.log()
     // for (let key in this.data) {
     //   this.formlyModel[key] = this.data[key];
@@ -48,7 +47,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
       ),
       law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
     };
-    console.log('getData formlyModel',this.formlyModel)
+    console.log('getData formlyModel', this.formlyModel);
   }
 
   override getLookupsData(): void {
@@ -66,8 +65,9 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.lookupsData = res;
+          console.log('this.data', this.data);
+          if (this.data) addOption(this.lookupsData[0].result, this.data, 'law_TaskCode');
           this.initForm();
-         
         },
       });
   }
@@ -94,6 +94,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.defaultTask'),
               disabled: this.previewOnly,
+              required: true,
               options: this.lookupsData[0].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
@@ -122,6 +123,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.defaultRate'),
               disabled: this.previewOnly,
+              required: true,
               options: this.generateChars(),
             },
             expressions: {
@@ -179,6 +181,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
+              required: true,
             },
           },
           {
@@ -205,6 +208,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
                 'matters.responsibleLaywer'
               ),
               disabled: this.previewOnly,
+              required: true,
               options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,

@@ -41,6 +41,7 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
   apiUrls:any=API_Config.matterActivity;
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
+    console.log('matterId',this.requestId)
     this.additionalTableConfig={
       id: 'id',
       actions: [

@@ -6,13 +6,13 @@ export const Timesheet_Editor_Columns_EN = [
   },
   {
     header: 'Date',
-    field:'Date',
+    field:'tmDate',
     style:'',
-    sortable:false
+    sortable:true
   },
   {
     header: 'Matter',
-    field:'matter',
+    field:'mtrNo',
     style:'',
     sortable:true
   },
@@ -79,12 +79,13 @@ export const Timesheet_Editor_Columns_FR = [
   },
   {
     header: 'date',
-    field:'Date',
-    style:''
+    field:'tmDate',
+    style:'',
+    sortable:true
   },
   {
     header: 'Matière',
-    field:'Matter',
+    field:'mtrNo',
     style:'',
     sortable:true
   },
@@ -140,13 +141,13 @@ export const Timesheet_Editor_Columns_AR = [
   },
   {
     header: 'التاريخ',
-    field:'Date',
-
+    field:'tmDate',
+    sortable:true,
     style:''
   },
   {
     header: 'القضايا / المواضيع',
-    field:'Matter',
+    field:'mtrNo',
     style:'',
     sortable:true
   },
