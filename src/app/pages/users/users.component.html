@@ -4,7 +4,7 @@
     <div class="filter position-relative">
       <app-users-timesheet-setting *ngIf="showFilter" (onFilter)="onFilter($event)"
         (onClose)="onClose($event)"></app-users-timesheet-setting>
-      <p-button [requiredPermission]="'UsersEditTimeSheetDate'" [label]="'users.timesheetDateSetting'|translate"
+      <p-button [requiredPermission]="'Update_TimeSheetDate_User'" [label]="'users.timesheetDateSetting'|translate"
         (onClick)="toggleFilter()" styleClass="py-2 px-4 mx-2"></p-button>
     </div>
   </div>

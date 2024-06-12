@@ -53,15 +53,15 @@
                 </td>
                 <td>
                   <p-dropdown formControlName="law_LawerId" label="" [options]="laywers" placeholder="Any"
-                    appendTo="body" (onChange)="getRateFromLawyerIdAndMatterId(rowIndex)">
-                    <!-- <ng-template let-item pTemplate="selectedItem">
-                      <span style="vertical-align:middle">{{item.label}}</span>
+                    appendTo="body" (onChange)="getRateFromLawyerIdAndMatterId(rowIndex)" >
+                    <ng-template let-item pTemplate="selectedItem">
+                      <span style="vertical-align:middle" [pTooltip]="item?.initial" tooltipPosition="top">{{item.label}}</span>
                   </ng-template>
                   <ng-template let-target pTemplate="item">
-                      <div class="ui-helper-clearfix" [pTooltip]="target.inital" tooltipPosition="top">
+                      <div class="ui-helper-clearfix" [pTooltip]="target.initial" tooltipPosition="top">
                           <span >{{target.label}}</span>
                       </div>
-                  </ng-template> -->
+                  </ng-template>
                   </p-dropdown>
                 </td>
                 <td>

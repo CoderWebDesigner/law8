@@ -68,7 +68,8 @@ export class TimesheetEditorComponent implements OnInit {
 
   getLookupsData() {
     forkJoin([
-      this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
+      // this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
+      this._apiService.get(API_Config.general.getUsersInitialSaparateForTimeShet),
       this._apiService.get(API_Config.general.getTaskCode),
       this._apiService.get(API_Config.general.getRecentMatters),
     ])
@@ -76,9 +77,9 @@ export class TimesheetEditorComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes[]) => {
           this.laywers = res[0].result.map((obj) => ({
-            label: obj.name,
+            label: obj.initial,
             value: obj.id,
-            initial:obj.initial
+            initial:obj.name
           }));
           this.tasks = res[1].result.map((obj) => ({
             label: obj.name,
