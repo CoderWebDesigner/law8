@@ -641,9 +641,10 @@ export class MatterDetailsMainInfoComponent
       .subscribe({
         next: (res) => {
           this.lookupsData = res;
-
-          addOption(this.lookupsData[0].result,this.data,'jurisdiction')
-          addOption(this.lookupsData[3].result,this.data,'practsArea')
+          if(this.data){
+            addOption(this.lookupsData[0].result,this.data,'jurisdiction')
+            addOption(this.lookupsData[3].result,this.data,'practsArea')
+          }
           
           this.initForm();
         },
