@@ -58,10 +58,10 @@ export class MatterDetailsMainInfoComponent
        photo:this.data?.logoFile
     };
 
-    if (this.formly.get('jurisdictionId'))
-      this.formly
-        .get('jurisdictionId')
-        .setValue(this.formlyModel?.jurisdictionId);
+    // if (this.formly.get('jurisdictionId'))
+    //   this.formly
+    //     .get('jurisdictionId')
+    //     .setValue(this.formlyModel?.jurisdictionId);
   }
   override initForm(): void {
     this.formlyFields = [
@@ -218,31 +218,31 @@ export class MatterDetailsMainInfoComponent
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
-                    // this.formly.get('practsAreaId').valueChanges.subscribe({
-                    //   next: (res) => {
-                    //     if(res){
-                    //       console.log('valueChanges',res)
-                    //       this._apiService
-                    //         .get(
-                    //           `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
-                    //         )
-                    //         .pipe(this._sharedService.takeUntilDistroy())
-                    //         .subscribe({
-                    //           next: (res: ApiRes) => {
-                    //             addOption(res.result,this.data,'law_MtrCat')
-                    //             field.props.options = res.result.map((obj) => ({
-                    //               label: obj.name,
-                    //               value: obj.id,
-                    //             }));
-                    //             this.formlyOption.build();
-                    //           },
-                    //         });
-                    //     }else{
-                    //       field.props.options=[]
-                    //       this.formly.get('law_MtrCatId').setValue(null)
-                    //     }
-                    //   },
-                    // });
+                    this.formly.get('practsAreaId').valueChanges.subscribe({
+                      next: (res) => {
+                        if(res){
+                          console.log('valueChanges',res)
+                          this._apiService
+                            .get(
+                              `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                            )
+                            .pipe(this._sharedService.takeUntilDistroy())
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                               
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                                this.formlyOption.build();
+                              },
+                            });
+                        }else{
+                          field.props.options=[]
+                          this.formly.get('law_MtrCatId').setValue(null)
+                        }
+                      },
+                    });
                     console.log('',this.formlyModel.practsAreaId)
                     if (this.formlyModel.practsAreaId) {
                       this._apiService
@@ -289,7 +289,7 @@ export class MatterDetailsMainInfoComponent
                               .pipe(this._sharedService.takeUntilDistroy())
                               .subscribe({
                                 next: (res: ApiRes) => {
-                                  addOption(res.result,this.data,'mtrType')
+                                 
                                   field.props.options = res.result.map((obj) => ({
                                     label: obj.name,
                                     value: obj.id,
@@ -380,7 +380,7 @@ export class MatterDetailsMainInfoComponent
                           )
                           .subscribe({
                             next: (res: ApiRes) => {
-                              addOption(res.result,this.data,'judicature')
+                              
                               field.props.options = res.result.map((obj) => ({
                                 label: obj.name,
                                 value: obj.id,
