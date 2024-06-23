@@ -9,6 +9,7 @@ export const Matters_API = {
     uploadLogo:'Law_Matter/UploadLogo',
     getMatterCodeByMatterId:"AppLookup/GetMatterCodeById",
     updateGeneral:"Law_Matter/UpdateGeneral",
-    getCLientNameAndMattCodeByClientAndParent:"Law_Matter/GetCLientNameAndMattCodeByClientAndParent"
+    getCLientNameAndMattCodeByClientAndParent:"Law_Matter/GetCLientNameAndMattCodeByClientAndParent",
+    deactiveMatter:"Law_Matter/Law_MatterActiveAndDeactive"
   },
 };

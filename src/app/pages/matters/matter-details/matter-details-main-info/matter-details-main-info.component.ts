@@ -17,6 +17,7 @@ import { REQUEST_DATE_FORMAT } from '@core/utilities/defines';
 import { addOption } from '@core/utilities/defines/functions/add-option';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { catchError, finalize, forkJoin } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-matter-details-main-info',
@@ -370,49 +371,104 @@ export class MatterDetailsMainInfoComponent
                 },
 
                 hooks: {
-                  onChanges: (field: FormlyFieldConfig) => {
-                    this.formly.get('practsAreaId').valueChanges.subscribe({
+                  onInit: (field: FormlyFieldConfig) => {
+                    // console.log('field');
+                    this.formly.get('jurisdictionId').valueChanges.subscribe({
                       next: (res) => {
-                        if(res){
+                        console.log(res);
+                        if (res) {
                           this._apiService
-                          .get(
-                            `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${this.formlyModel.jurisdictionId}`
-                          )
-                          .subscribe({
-                            next: (res: ApiRes) => {
-                              
-                              field.props.options = res.result.map((obj) => ({
-                                label: obj.name,
-                                value: obj.id,
-                              }));
-                              // to set value returned from api after get options based on value of another field
-                              this.formlyOption.build();
-                            },
-                          });
-                        }else{
-                          field.props.options=[]
-                          this.formly.get('law_MtrCatId').setValue(null)
+                            .get(
+                              `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${res}`
+                            )
+                            .subscribe({
+                              next: (res: ApiRes) => {
+                                field.props.options = res.result.map((obj) => ({
+                                  label: obj.name,
+                                  value: obj.id,
+                                }));
+                                this.formlyOption.build();
+                              },
+                            });
                         }
                       },
                     });
                     if (this.formlyModel.jurisdictionId) {
                       this._apiService
-                        .get(
-                          `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${this.formlyModel.jurisdictionId}`
-                        )
-                        .subscribe({
-                          next: (res: ApiRes) => {
-                            addOption(res.result,this.data,'judicature')
-                            field.props.options = res.result.map((obj) => ({
-                              label: obj.name,
-                              value: obj.id,
-                            }));
-                            // to set value returned from api after get options based on value of another field
-                            this.formlyOption.build();
-                          },
-                        });
+                      .get(
+                        `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${this.formlyModel.jurisdictionId}`
+                      )
+                      .subscribe({
+                        next: (res: ApiRes) => {
+                          // console.log('res judicature',res)
+                          addOption(res.result,this.data,'judicature')
+                          field.props.options = res.result.map((obj) => ({
+                            label: obj.name,
+                            value: obj.id,
+                          }));
+                          this.formlyOption.build();
+                        },
+                      });
+                      // this._apiService
+                      //   .get(
+                      //     `${API_Config.general.getMatterTypesByCategoryId}?matClntId=${this.formlyModel.law_MtrCatId}`
+                      //   )
+                      //   .pipe(this._sharedService.takeUntilDistroy())
+                      //   .subscribe({
+                      //     next: (res: ApiRes) => {
+                      //       addOption(res.result,this.data,'mtrType')
+                      //       field.props.options = res.result.map((obj) => ({
+                      //         label: obj.name,
+                      //         value: obj.id,
+                      //       }));
+                      //       this.formlyOption.build();
+                      //     },
+                      //   });
                     }
                   },
+                  // onChanges: (field: FormlyFieldConfig) => {
+                  //   this.formly.get('practsAreaId').valueChanges.subscribe({
+                  //     next: (res) => {
+                  //       if(res){
+                  //         this._apiService
+                  //         .get(
+                  //           `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${this.formlyModel.jurisdictionId}`
+                  //         )
+                  //         .subscribe({
+                  //           next: (res: ApiRes) => {
+                              
+                  //             field.props.options = res.result.map((obj) => ({
+                  //               label: obj.name,
+                  //               value: obj.id,
+                  //             }));
+                  //             // to set value returned from api after get options based on value of another field
+                  //             this.formlyOption.build();
+                  //           },
+                  //         });
+                  //       }else{
+                  //         field.props.options=[]
+                  //         this.formly.get('law_MtrCatId').setValue(null)
+                  //       }
+                  //     },
+                  //   });
+                  //   if (this.formlyModel.jurisdictionId) {
+                  //     this._apiService
+                  //       .get(
+                  //         `${API_Config.general.getJudicatureByJurisdictionId}?Law_JurisdictionId=${this.formlyModel.jurisdictionId}`
+                  //       )
+                  //       .subscribe({
+                  //         next: (res: ApiRes) => {
+                  //           addOption(res.result,this.data,'judicature')
+                  //           field.props.options = res.result.map((obj) => ({
+                  //             label: obj.name,
+                  //             value: obj.id,
+                  //           }));
+                  //           // to set value returned from api after get options based on value of another field
+                  //           this.formlyOption.build();
+                  //         },
+                  //       });
+                  //   }
+                  // },
                 },
               },
               {
@@ -650,7 +706,42 @@ export class MatterDetailsMainInfoComponent
         },
       });
   }
+  onToggleMatter(active:boolean){
+    Swal.fire({
+      showDenyButton: true,
+      text: this._languageService.getTransValue(
+        'messages.confirmDeactiveMatter',
+        { matterNo: this.data?.mtrNo }
+      ),
+      confirmButtonText:
+        this._languageService.getTransValue('btn.yes'),
+      denyButtonText: this._languageService.getTransValue('btn.no'),
+      icon: 'question',
+    }).then((result) => {
+      if (result.isConfirmed) {
+       this.toggleMatter(active)
+      } else if (result.isDenied) {
+        
+      }
+    });
+  }
 
+  toggleMatter(active:boolean){
+    let payload={
+      "matterId": this.requestId,
+      "isActive": active
+    }
+    this._apiService.post(API_Config.matters.deactiveMatter,payload).pipe(
+      this._sharedService.takeUntilDistroy(),
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res&&res.isSuccess){
+          this._toastrNotifiService.displaySuccessMessage(res.message);
+          this._router.navigate(['/matters'])
+        }
+      }
+    })
+  }
   
   override onSubmit(): void {
     delete this.formlyModel.law_MatterParties;
