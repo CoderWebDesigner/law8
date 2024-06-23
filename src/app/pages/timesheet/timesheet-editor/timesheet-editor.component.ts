@@ -58,6 +58,7 @@ export class TimesheetEditorComponent implements OnInit {
   });
   ngOnInit(): void {
     this.getDraftTimesheet();
+    this.getTableStatistics();
     this.getSelectedRows();
     this.timesheetDate=new Date((JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'])
     // let date=(JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'];
@@ -230,6 +231,30 @@ export class TimesheetEditorComponent implements OnInit {
   //     }
   //   });
   // }
+
+  calcStatistics(data:any[]){
+    this.billableHoursCount = data
+    .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
+    .reduce(
+      (accumulator, currentControl) =>
+        accumulator + currentControl.hours,
+      0
+    );
+  this.nonBillableHoursCount = data
+    .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
+    .reduce(
+      (accumulator, currentControl) =>
+        accumulator + currentControl.hours,
+      0
+    );
+  this.noChargeHoursCount = data
+    .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
+    .reduce(
+      (accumulator, currentControl) =>
+        accumulator + currentControl.hours,
+      0
+    );
+  }
   getDraftTimesheet() {
     this._apiService
       .get(`${API_Config.timesheet.getDraftTimeSheet}?orderByDirection=ASC`)
@@ -246,14 +271,17 @@ export class TimesheetEditorComponent implements OnInit {
               );
               item.amount = this.calcAmount(item.hours, item.rate).toFixed(2);
               this.addRow(item);
+              
             });
 
             this.addRow();
+            this.calcStatistics(res['result'])
           } else {
             this.addRow();
           }
           this.getLookupsData();
-          this.getTableStatistics();
+          
+          
         },
       });
   }
@@ -366,33 +394,40 @@ export class TimesheetEditorComponent implements OnInit {
     console.log('laywerId', lawyerId);
     console.log('matterId', matterId);
   }
+
+  
   getTableStatistics() {
     this.requestForm
       .get('data')
-      .valueChanges.pipe()
+      .valueChanges.pipe(
+        this._sharedService.takeUntilDistroy()
+      )
       .subscribe({
         next: (res: any[]) => {
-          this.billableHoursCount = res
-            .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
-            .reduce(
-              (accumulator, currentControl) =>
-                accumulator + currentControl.hours,
-              0
-            );
-          this.nonBillableHoursCount = res
-            .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
-            .reduce(
-              (accumulator, currentControl) =>
-                accumulator + currentControl.hours,
-              0
-            );
-          this.noChargeHoursCount = res
-            .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
-            .reduce(
-              (accumulator, currentControl) =>
-                accumulator + currentControl.hours,
-              0
-            );
+          console.log('getTableStatistics x',res)
+          this.calcStatistics(res)
+          // this.billableHoursCount = res
+          //   .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
+          //   .reduce(
+          //     (accumulator, currentControl) =>
+          //       accumulator + currentControl.hours,
+          //     0
+          //   );
+          // this.nonBillableHoursCount = res
+          //   .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
+          //   .reduce(
+          //     (accumulator, currentControl) =>
+          //       accumulator + currentControl.hours,
+          //     0
+          //   );
+          // this.noChargeHoursCount = res
+          //   .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
+          //   .reduce(
+          //     (accumulator, currentControl) =>
+          //       accumulator + currentControl.hours,
+          //     0
+          //   );
+            console.log('this.billableHoursCount',this.billableHoursCount)
         },
       });
 
