@@ -15,6 +15,7 @@ import { PracticeArea } from '../enums/practice-area';
 export class MatterEditorComponent extends FormBaseClass implements OnInit {
   previewOnly: boolean;
   requestId: number;
+  formValid:boolean;
   items: any[] = [
     {
       id: 1,
@@ -703,7 +704,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     // this.isSubmit = true;
     console.log(this.formlyModel?.photo);
-    if (this.formly.invalid) return;
+    if (this.formly.invalid || !this.formValid) return;
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
       .pipe(this._sharedService.takeUntilDistroy())
@@ -779,6 +780,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       ...event,
       ...this.formlyModel,
     };
+    console.log('event',event)
+  }
+  getFormStatus(event){
+    this.formValid=event
+    console.log('this.formValid',this.formValid)
   }
   resetFormExcludingField(fieldToExclude: string) {
     // Reset each field except the specified one

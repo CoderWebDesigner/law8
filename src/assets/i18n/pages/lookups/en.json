@@ -21,6 +21,7 @@
     "taskCode":"Task Code",
     "group":"Group",
     "rateName":"Rate Name",
+    "rate":"Rate",
     "amount":"Amount"
   }
 }

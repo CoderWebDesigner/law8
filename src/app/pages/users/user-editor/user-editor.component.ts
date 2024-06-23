@@ -203,6 +203,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             type: 'select',
             key: 'defUsrId',
             className: 'col-md-4',
+            
             hide: this.userId == null,
             props: {
               label: this._languageService.getTransValue('users.defUsrId'),
@@ -244,12 +245,15 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
+          console.log('user',this._authService.getDecodedToken()['DefUsrId'])
           this.formlyModel = {
             ...res['result'],
             timeSheetDate: this.datePipe.transform(
               res['result'].timeSheetDate,
-              'yyyy-MM-dd'
+              'yyyy-MM-dd',
+              
             ),
+            defUsrId:this._authService.getDecodedToken()['DefUsrId']
           };
         },
       });

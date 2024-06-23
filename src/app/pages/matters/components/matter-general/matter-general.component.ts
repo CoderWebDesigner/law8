@@ -15,6 +15,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   @Input() previewOnly: boolean;
   @Input() data: any;
   @Output() onFormSubmit = new EventEmitter();
+  @Output() formStatus = new EventEmitter();
   ngOnInit(): void {
     this.getLookupsData();
     if (!this.data) this.detectFormChange();
@@ -181,7 +182,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
-              required: true,
+              // required: true,
             },
           },
           {
@@ -256,36 +257,49 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
     return arr;
   }
   override onSubmit(): void {
-    if (this.formly.invalid) return;
-    this.isSubmit = true;
-    if (this.formlyModel?.rateAmount)
-      this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-    if (this.data) {
-      this._apiService
-        .post(API_Config.matters.updateGeneral, this.formlyModel)
-        .pipe(
-          this._sharedService.takeUntilDistroy(),
-          finalize(() => (this.isSubmit = false))
-        )
-        .subscribe({
-          next: (res: ApiRes) => {
-            if (res.result && res.isSuccess) {
-              const text = this._languageService.getTransValue(
-                'messages.updateSuccessfully'
-              );
-              this._toastrNotifiService.displaySuccessMessage(text);
-              this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-                this._dynamicDialogRef.close(dialog);
-              });
-            } else {
-              this._toastrNotifiService.displayErrorToastr(res?.message);
-            }
-          },
-        });
-    } else {
-      this.onFormSubmit.emit(this.formlyModel);
+    this.formStatus.emit(this.formly.valid);
+    console.log('this.formly.invalid',this.formly)
+    if (this.formly.invalid){
+      this.formly.markAllAsTouched()
+      return
+    } ;
+    if(this.formly.valid){
+
+      this.isSubmit = true;
+      if (this.formlyModel?.rateAmount)
+        this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
+      console.log('onSubmit this.data',this.data)
+      if (this.data) {
+        this._apiService
+          .post(API_Config.matters.updateGeneral, this.formlyModel)
+          .pipe(
+            this._sharedService.takeUntilDistroy(),
+            finalize(() => (this.isSubmit = false))
+          )
+          .subscribe({
+            next: (res: ApiRes) => {
+              if (res.result && res.isSuccess) {
+                const text = this._languageService.getTransValue(
+                  'messages.updateSuccessfully'
+                );
+                this._toastrNotifiService.displaySuccessMessage(text);
+                this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+                  this._dynamicDialogRef.close(dialog);
+                });
+              } else {
+                this._toastrNotifiService.displayErrorToastr(res?.message);
+              }
+            },
+          });
+      } else {
+        console.log(this.formlyModel)
+  
+        this.onFormSubmit.emit(this.formlyModel);
+        
+      }
     }
-    // console.log(this.formlyModel)
+    
+    //
 
     // this.onFormSubmit.emit(this.formlyModel);
   }
