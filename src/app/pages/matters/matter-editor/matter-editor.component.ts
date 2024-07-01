@@ -143,7 +143,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         //   this.formly
                         //     .get('mtrNo')
                         //     .setValue(res.result['mattCode']);
-                        if (this.formlyModel?.requestTypeId !== 2) {
+                        if (this.formlyModel?.requestTypeId ===1) {
                           this.formly
                             .get('mtrNo')
                             .setValue(res.result['mattCode']);
