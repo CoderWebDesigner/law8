@@ -199,7 +199,7 @@ export const MENU: MenuItem[] = [
   {
     id: 9,
     label: 'menu.reports.title',
-    icon: 'security.svg',
+    icon: 'report.svg',
     link: '/security',
     role: 'View_Role',
     subItems: [
@@ -207,7 +207,7 @@ export const MENU: MenuItem[] = [
       {
         id: 1,
         label: 'menu.reports.activityreport',
-        // link: '/users/add',
+        link: '/reports',
         parentId: 6,
         role: 'Add_Users',
       },

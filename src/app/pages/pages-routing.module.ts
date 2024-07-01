@@ -62,6 +62,13 @@ const routes: Routes = [
     data: { permission: 'Add_Client' },
   },
   {
+    path: 'reports',
+    loadChildren: () =>
+      import('./reports/reports.module').then((m) => m.ReportsModule),
+    canActivate: [permissionGuard],
+    data: { permission: 'Add_Client' },
+  },
+  {
     path: 'profile',
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),

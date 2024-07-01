@@ -1,0 +1,5 @@
+<shared-card [title]="'report.activityReport' | translate" [borderRadius]="20">
+    <ng-container body>
+        <app-activity-report-editor (onFilter)="onFilter($event)"></app-activity-report-editor>
+    </ng-container>
+</shared-card>

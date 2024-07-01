@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -6,15 +5,13 @@ import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { ClientService } from '@shared/services/client.service';
 import { SharedModule } from '@shared/shared.module';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-client-contact-editor',
   templateUrl: './client-contact-editor.component.html',
   styleUrls: ['./client-contact-editor.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, SharedModule, ButtonModule],
+  imports: [ FormlyConfigModule, SharedModule],
 })
 export class ClientContactEditorComponent
   extends FormBaseClass
