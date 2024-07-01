@@ -331,8 +331,8 @@ export class TimesheetEditorComponent implements OnInit {
             matterId: res.id,
             mtrNo: res.mtrNo,
             // law_LawerId: res.law_LawerId,
-            // law_TaskCodeId: res.law_TaskCodeId,
-            // rate: res.rate,
+            law_TaskCodeId: res.law_TaskCodeId,
+            //  rate: res.rateAmount,
           });
         },
       });

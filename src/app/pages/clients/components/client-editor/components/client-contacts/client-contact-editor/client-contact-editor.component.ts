@@ -39,24 +39,22 @@ export class ClientContactEditorComponent
       });
   }
   override getData(): void {
-    if(this._dynamicDialogConfig?.data?.rowData?.id){
+    if (this._dynamicDialogConfig?.data?.rowData?.id) {
       this._apiService
-      .get(API_Config.clientsContact.getById, {
-        id: this._dynamicDialogConfig?.data?.rowData?.id,
-      })
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res: ApiRes) => {
-          if (res.result && res.isSuccess) {
-            this.formlyModel = { ...res.result };
-          }
-        },
-      });
-    }else{
-this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+        .get(API_Config.clientsContact.getById, {
+          id: this._dynamicDialogConfig?.data?.rowData?.id,
+        })
+        .pipe(this._sharedService.takeUntilDistroy())
+        .subscribe({
+          next: (res: ApiRes) => {
+            if (res.result && res.isSuccess) {
+              this.formlyModel = { ...res.result };
+            }
+          },
+        });
+    } else {
+      this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
     }
-    
-    
   }
 
   override initForm(): void {
@@ -231,7 +229,7 @@ this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
       } else {
         this.formlyModel = {
           ...this.formlyModel,
-          fullName:`${this.formlyModel?.firstName} ${this.formlyModel?.middleName} ${this.formlyModel?.lastName}`
+          fullName: `${this.formlyModel?.firstName} ${this.formlyModel?.middleName} ${this.formlyModel?.lastName}`,
         };
         this.data.push(this.formlyModel);
       }

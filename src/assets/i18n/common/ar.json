@@ -53,8 +53,8 @@
     "update":"تعديل",
     "upload":"Upload",
     "saveDraft":"Save Draft",
-    "deactive":"Deactive",
-    "active":"Active"
+    "deactive":"تعطيل",
+    "active":"تنشيط"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -74,7 +74,8 @@
     "uploadFile": "قم بسحب وإفلات  هنا او اضغط للتحميل",
     "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?",
     "youDontHavePermission":"You Don't Have Permission",
-    "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?"
+    "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
+    "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",

@@ -51,14 +51,14 @@ export class MatterApplicantsComponent implements OnInit, OnDestroy {
           target: MatterApplicantsEditorComponent,
           icon: 'pencil',
           isDynamic: this.requestId != undefined,
-          permission:'Update_Matter_Applicants'
+          permission:this.previewOnly?'':'Update_Matter_Applicants'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
-          permission:'Delete_Matter_Applicants'
+          permission:this.previewOnly?'':'Delete_Matter_Applicants'
         },
       ],
     };

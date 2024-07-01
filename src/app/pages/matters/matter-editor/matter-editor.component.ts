@@ -175,16 +175,12 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           {
             type: 'select',
             key: 'parentMatterId',
-            className: 'col-md-4',
+            className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue(
                 'matters.parentMatterCode'
               ),
               disabled: this.previewOnly,
-              options: this.lookupsData[5]?.result?.map((obj) => ({
-                label: obj.name,
-                value: obj.id,
-              })),
               onChange: (e) => {
                 this._apiService
                   .get(
@@ -198,13 +194,24 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                           'getCLientNameAndMattCodeByClientAndParent',
                           res
                         );
-                        this.formly
-                          .get('clientName')
-                          .setValue(res.result['name']);
+                        this.formly.patchValue({
+                               clientName:res.result['name'],
+                          mtrNo:res.result['mattCode']
+                        })
+                        // this.formlyModel = { 
+                        //   ...this.formlyModel,
+                        //   clientName:res.result['name'],
+                        //   mtrNo:res.result['mattCode']
+                        //  };
+                        // this.formly
+                        //   .get('clientName')
+                        //   .setValue(res.result['name']);
+                        // this.formly
+                        //   .get('mtrNo')
+                        //   .setValue(res.result['mattCode']);
+                          this.formlyOption.build()
+                          console.log(this.formly.value)
                         if (this.formlyModel?.requestTypeId == 2) {
-                          this.formly
-                            .get('mtrNo')
-                            .setValue(res.result['mattCode']);
                         }
                       }
                     },
@@ -235,20 +242,114 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     } else {
                       field.props.options = [];
                     }
-                    if (this.formlyModel?.requestTypeId == 2) {
-                    }
                   },
                 });
+                if (
+                  // this.formlyModel?.requestTypeId == 2 ||
+                  this.formlyModel?.requestTypeId == 3
+                ) {
+                  this._apiService
+                    .get(
+                      `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
+                    )
+                    .pipe(this._sharedService.takeUntilDistroy())
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        if (res?.isSuccess) {
+                          field.props.options = res.result.map((obj) => ({
+                            label: obj.name,
+                            value: obj.id,
+                          }));
+                          this.formlyOption.build();
+                        }
+                      },
+                    });
+                }
               },
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return (
-                  field.model?.requestTypeId == 1 || !field.model?.requestTypeId
-                );
+                return this.formlyModel?.requestTypeId == 1;
               },
             },
           },
+          // {
+          //   type: 'select',
+          //   key: 'parentMatterId',
+          //   className: 'col-md-4',
+          //   props: {
+          //     label: this._languageService.getTransValue(
+          //       'matters.parentMatterCode'
+          //     ),
+          //     disabled: this.previewOnly,
+          //     // options: this.lookupsData[5]?.result?.map((obj) => ({
+          //     //   label: obj.name,
+          //     //   value: obj.id,
+          //     // })),
+          //     onChange: (e) => {
+          //       this._apiService
+          //         .get(
+          //           `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
+          //         )
+          //         .pipe(this._sharedService.takeUntilDistroy())
+          //         .subscribe({
+          //           next: (res: ApiRes) => {
+          //             if (res.isSuccess) {
+          //               console.log(
+          //                 'getCLientNameAndMattCodeByClientAndParent',
+          //                 res
+          //               );
+          //               this.formly
+          //                 .get('clientName')
+          //                 .setValue(res.result['name']);
+          //               if (this.formlyModel?.requestTypeId == 2) {
+          //                 this.formly
+          //                   .get('mtrNo')
+          //                   .setValue(res.result['mattCode']);
+          //               }
+          //             }
+          //           },
+          //         });
+          //     },
+          //   },
+
+          //   hooks: {
+          //     onInit: (field: FormlyFieldConfig) => {
+          //       field.form.get('clientId').valueChanges.subscribe({
+          //         next: (res) => {
+          //           if (res) {
+          //             this._apiService
+          //               .get(
+          //                 `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
+          //               )
+          //               .pipe(this._sharedService.takeUntilDistroy())
+          //               .subscribe({
+          //                 next: (res: ApiRes) => {
+          //                   if (res?.isSuccess) {
+          //                     field.props.options = res.result.map((obj) => ({
+          //                       label: obj.name,
+          //                       value: obj.id,
+          //                     }));
+          //                   }
+          //                 },
+          //               });
+          //           } else {
+          //             field.props.options = [];
+          //           }
+          //           if (this.formlyModel?.requestTypeId == 2) {
+          //           }
+          //         },
+          //       });
+          //     },
+          //   },
+          //   expressions: {
+          //     hide: (field: FormlyFieldConfig) => {
+          //       return (
+          //         field.model?.requestTypeId == 1 || !field.model?.requestTypeId
+          //       );
+          //     },
+          //   },
+          // },
           {
             type: 'select',
             key: 'practsAreaId',
@@ -278,7 +379,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                           ? (obj.show = true)
                           : (obj.show = false);
                       });
-                    } else if ([3, 1].includes(res)) {
+                    } else if ([3, 1,5].includes(res)) {
                       this.items.forEach((obj) => {
                         [1, 2, 3, 6, 7].includes(obj.id)
                           ? (obj.show = true)
@@ -771,6 +872,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res) => {
           this.lookupsData = res;
+          console.log(this.lookupsData)
           this.initForm();
         },
       });

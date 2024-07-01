@@ -37,7 +37,24 @@ export class MatterApplicantsEditorComponent
   }
 
   override getData(): void {
-    this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+    if (this._dynamicDialogConfig?.data?.rowData?.id) {
+      this._apiService
+        .get(API_Config.matterApplicant.getById, {
+          id: this._dynamicDialogConfig?.data?.rowData?.id,
+        })
+        .pipe(this._sharedService.takeUntilDistroy())
+        .subscribe({
+          next: (res: ApiRes) => {
+            if (res.result && res.isSuccess) {
+              this.formlyModel = { ...res.result };
+            }
+          },
+        });
+    } else {
+      this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+    }
+    // this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+    // console.log()
   }
   override initForm(): void {
     this.formlyFields = [
@@ -217,7 +234,7 @@ export class MatterApplicantsEditorComponent
         phone:this.formlyModel?.phone?.internationalNumber
         ? this.formlyModel?.phone?.internationalNumber
         : this.formlyModel.phone,
-        fullName: `${this.formlyModel?.firstName} ${this.formlyModel?.middleName} ${this.formlyModel?.lastName}`
+        fullName: `${this.formlyModel?.firstName??''} ${this.formlyModel?.middleName??''} ${this.formlyModel?.lastName??''}`
       };
       let index = this.data.findIndex(
         (obj) => obj?.key == this._dynamicDialogConfig?.data?.rowData?.key

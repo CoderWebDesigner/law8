@@ -50,19 +50,20 @@ export const MENU: MenuItem[] = [
         parentId: 3,
         role: 'Add_Matter',
       },
-      {
-        id: 1,
-        label: 'menu.matters.inactiveMatters',
-        link: '/matters/inactive',
-        parentId: 3,
-        role: 'Add_Matter',
-      },
+      
       {
         id: 2,
         label: 'menu.matters.matterList',
         link: '/matters',
         parentId: 3,
         role: 'View_Matter',
+      },
+      {
+        id: 3,
+        label: 'menu.matters.inactiveMatters',
+        link: '/matters/inactive',
+        parentId: 3,
+        role: 'Add_Matter',
       },
     ],
   },

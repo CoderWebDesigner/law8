@@ -53,8 +53,8 @@
     "update": "Mise à jour",
     "upload":"Upload",
     "saveDraft":"Save Draft",
-    "deactive":"Deactive",
-    "active":"Active"
+    "deactive":"Deactivate",
+    "active":"Activate"
   },
   "messages": {
     "signInSuccessfully": "Connectez-vous avec succès",
@@ -74,7 +74,8 @@
     "uploadFile": "Drag and drop here or click to download",
     "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?",
     "youDontHavePermission":"You Don't Have Permission",
-    "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?"
+    "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
+    "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?"
   },
   "validation": {
     "required": "Ce champ est obligatoire!",

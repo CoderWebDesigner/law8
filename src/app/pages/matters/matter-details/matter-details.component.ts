@@ -26,7 +26,7 @@ export class MatterDetailsComponent implements OnInit {
   isSubmit: boolean;
   data: any;
   practiceArea = PracticeArea;
-
+  practiceAreaId:number;
   items: any[] = [
     {
       id: 1,
@@ -115,7 +115,7 @@ export class MatterDetailsComponent implements OnInit {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) this.getById();
     // this.previewOnly=this._router.url.includes('view')
-    this.previewOnly = !this._permissionService.hasPermission('Update_Matter');
+    // this.previewOnly = !this._permissionService.hasPermission('Update_Matter');
   }
 
   getById() {
@@ -125,15 +125,20 @@ export class MatterDetailsComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           this.data = { ...res['result'] };
+          this.previewOnly = !this._permissionService.hasPermission('Update_Matter')|| !res['result']?.isActive;
+          // this.previewOnly = !res['result'].isActive;
           this.updatePracticeArea();
         },
       });
   }
   updatePracticeArea(e?: any) {
+    console.log('practsAreaId',e)
     // console.log(e.practsAreaId ?? this.data.practsAreaId);
+    // this.practiceAreaId=e
+    this.data.practsAreaId=e??this.data.practsAreaId
     if (
       [this.practiceArea.IntelecturualProperty].includes(
-        e?.practsAreaId ?? this.data?.practsAreaId
+        e ?? this.data?.practsAreaId
       )
     ) {
       this.items.forEach((obj) => {
@@ -149,7 +154,7 @@ export class MatterDetailsComponent implements OnInit {
         this.practiceArea.Corporate,
         this.practiceArea.Litigation,
         this.practiceArea.Arbitration,
-      ].includes(e?.practsAreaId ?? this.data?.practsAreaId)
+      ].includes(e ?? this.data?.practsAreaId)
     ) {
       this.items.forEach((obj) => {
         obj.show =
@@ -160,11 +165,14 @@ export class MatterDetailsComponent implements OnInit {
         //   : (obj.show = false);
       });
     }
+    
 
-    this.data = {
-      ...this.data,
-      ...e,
-    };
+    // ** /
+    // console.log('updatePracticeArea',e)
+    // this.data = {
+    //   ...this.data,
+    //   ...e
+    // };
   }
   // getFormData(event) {
   //   let data = {

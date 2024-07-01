@@ -206,7 +206,7 @@ export class ClientEditorComponent
               className: 'col-md-4',
               props: {
                 label: this._languageService.getTransValue(
-                  'matters.clientIntroducing'
+                  'client.clientIntroducing'
                 ),
                 disabled: this.disableInputs,
                 options: this.lookupsData[4].result.map((obj) => ({
