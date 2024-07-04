@@ -288,22 +288,32 @@ export class TimesheetEditorComponent implements OnInit {
 
   selectMatter(e, rowIndex) {
     if (e.value == 'All Matters') {
-      this._dialogService.open(SharedMatterTableComponent, {
+      let dialogRef=this._dialogService.open(SharedMatterTableComponent, {
         width: '70%',
         data: {
           selectRow: true,
-          apiUrls: API_Config.matters,
+          apiUrls: API_Config.matters
         },
         dismissableMask: true,
       });
+      // dialogRef.onClose.pipe(
+      //   this._sharedService.takeUntilDistroy()
+      // ).subscribe({
+      //   next:(res:any)=>{
+      //     console.log('selectMatter',res)
+      //     this.getRateFromLawyerIdAndMatterId(rowIndex,res.id);
+      //   }
+      // })
     } else {
-      let matterId = this.matters.find((obj) => obj.label == e.value).value;
+      let matterId = this.matters.find((obj) => obj.label == e.value)?.value;
       this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId);
       this.getRateFromLawyerIdAndMatterId(rowIndex);
-      this.getClientNameByMatterId(matterId, rowIndex);
+      if(matterId)this.getClientNameByMatterId(matterId, rowIndex);
+      
       this.addRow()
     }
 
+    
     this.getSelectedMatter(rowIndex);
   }
   getClientNameByMatterId(matterId: number, rowIndex: number) {
@@ -326,6 +336,7 @@ export class TimesheetEditorComponent implements OnInit {
         next: (res: any) => {
           console.log('getSelectedMatter', res);
           console.log('rowIndex', rowIndex);
+          this.getRateFromLawyerIdAndMatterId(rowIndex,res.id);
           this.getFormArray.controls[rowIndex].patchValue({
             clientName: res.law_Client,
             matterId: res.id,
@@ -365,11 +376,12 @@ export class TimesheetEditorComponent implements OnInit {
       formGroup.get('selected').setValue(this.selectAllRows);
     });
   }
-  getRateFromLawyerIdAndMatterId(rowIndex: number) {
+  getRateFromLawyerIdAndMatterId(rowIndex: number,mattId?:number) {
     let row = this.getFormArray.value[rowIndex];
     let lawyerId = row?.law_LawerId;
-    let matterId = row?.matterId;
-    console.log('');
+    let matterId = row?.matterId??mattId;
+    console.log('lawyerId',lawyerId);
+    console.log('matterId',matterId);
     if (lawyerId && matterId) {
       this._apiService
         .get(
@@ -378,6 +390,10 @@ export class TimesheetEditorComponent implements OnInit {
         .pipe(this._sharedService.takeUntilDistroy())
         .subscribe({
           next: (res: ApiRes) => {
+            this._dialogService.dialogComponentRefMap.forEach(dialog => {
+        // this._dynamicDialogRef.close(e.data)
+        dialog.destroy();
+      });
             console.log(+res['result'].amount);
             let hours =
               this.getFormArray.controls[rowIndex]?.get('hours').value;

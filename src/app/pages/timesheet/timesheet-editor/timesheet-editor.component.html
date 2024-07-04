@@ -44,7 +44,7 @@
                   <div [appErrorMessages]="getFormArray.controls[rowIndex].date" class="mt-3"></div>
                 </td>
                 <td>
-                  <p-dropdown formControlName="mtrNo" [editable]="true" optionLabel="label" optionValue="label"
+                  <p-dropdown formControlName="mtrNo" [editable]="true" optionLabel="label" optionValue="label" [showClear]="true"
                     [options]="matters" placeholder="Any" appendTo="body" (onChange)="selectMatter($event, rowIndex)">
                   </p-dropdown>
                 </td>

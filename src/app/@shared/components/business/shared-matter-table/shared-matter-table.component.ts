@@ -4,9 +4,21 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
 import { SharedModule } from '@shared/shared.module';
-import { Matters_Columns_AR, Matters_Columns_EN, Matters_Columns_FR } from './matter-columns.config';
-import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import {
+  Matters_Columns_AR,
+  Matters_Columns_EN,
+  Matters_Columns_FR,
+} from './matter-columns.config';
+import {
+  DialogService,
+  DynamicDialogConfig,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 import { TimesheetService } from '@shared/services/timesheet.service';
+import { API_Config } from '@core/api/api-config/api.config';
+import { ApiRes } from '@core/models';
+import { ApiService } from '@core/api/api.service';
+import { SharedService } from '@shared/services/shared.service';
 
 @Component({
   selector: 'app-shared-matter-table',
@@ -18,34 +30,42 @@ import { TimesheetService } from '@shared/services/timesheet.service';
     SharedCardComponent,
     SharedTableComponent,
     SharedSearchInputComponent,
-    SharedModule
+    SharedModule,
   ],
 })
-export class SharedMatterTableComponent implements OnInit{
-  _dialogConfig= inject(DynamicDialogConfig)
+export class SharedMatterTableComponent implements OnInit {
+  _dialogConfig = inject(DynamicDialogConfig);
   _dialogService = inject(DialogService);
   _timeSheetService = inject(TimesheetService);
-  @Input() selectMode:string='single';
-  @Input() mattersColumnsLocalized:any;
-  @Input() additionalTableConfig:any;
-  @Input() apiUrls:any
+  _dynamicDialogRef = inject(DynamicDialogRef);
+  _apiService = inject(ApiService);
+  _sharedService = inject(SharedService);
+  @Input() selectMode: string = 'single';
+  @Input() mattersColumnsLocalized: any;
+  @Input() additionalTableConfig: any;
+  @Input() apiUrls: any;
   columnsLocalized = {
     en: Matters_Columns_EN,
     fr: Matters_Columns_FR,
     ar: Matters_Columns_AR,
   };
   ngOnInit(): void {
-    this.columnsLocalized = {...this.columnsLocalized,...this.mattersColumnsLocalized}
-    this.apiUrls=(this.apiUrls)?this.apiUrls:this._dialogConfig.data.apiUrls
+    this.columnsLocalized = {
+      ...this.columnsLocalized,
+      ...this.mattersColumnsLocalized,
+    };
+    this.apiUrls = this.apiUrls
+      ? this.apiUrls
+      : this._dialogConfig.data.apiUrls;
   }
-  onRowSelected(e){
-    if(this._dialogConfig.data['selectRow']){
+  onRowSelected(e: any) {
+    if (this._dialogConfig.data['selectRow']) {
+      // this.getRateFromLawyerIdAndMatterId(e?.data)
       this._timeSheetService.selectedMatter$.next(e.data)
-      this._dialogService.dialogComponentRefMap.forEach(dialog => {
-        dialog.destroy();
-      });
+      // this._dialogService.dialogComponentRefMap.forEach(dialog => {
+      //   this._dynamicDialogRef.close(e.data)
+      //   // dialog.destroy();
+      // });
     }
   }
-
-  
 }

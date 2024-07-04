@@ -49,10 +49,10 @@ export class ActivityReportEditorComponent
             type: 'select',
             props: {
               label: this._languageService.getTransValue('matters.title'),
-              options: [
-                { label: 'Matter 1', value: 'Matter 1' },
-                { label: 'Matter 2', value: 'Matter 2' },
-              ],
+              options: this.lookupsData[7].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
             },
           },
           {
@@ -110,20 +110,20 @@ export class ActivityReportEditorComponent
               })),
             }
           },
-          {
-            type: 'multi-select',
-            key: 'stageId',
-            className: 'col-md-3',
-            props: {
-              label: this._languageService.getTransValue('matters.stage'),
+          // {
+          //   type: 'multi-select',
+          //   key: 'stageId',
+          //   className: 'col-md-3',
+          //   props: {
+          //     label: this._languageService.getTransValue('matters.stage'),
 
               
-              options: this.lookupsData[3].result.map((obj) => ({
-                label: obj.name,
-                value: obj.id,
-              })),
-            }
-          },
+          //     options: this.lookupsData[3].result.map((obj) => ({
+          //       label: obj.name,
+          //       value: obj.id,
+          //     })),
+          //   }
+          // },
           {
             type: 'multi-select',
             key: 'matterType',
@@ -175,6 +175,7 @@ export class ActivityReportEditorComponent
       this._apiService.get(API_Config.general.getAllMatterTypes),
       this._apiService.get(API_Config.general.getLawyerShort),
       this._apiService.get(API_Config.matterClientSecurity.get),
+      this._apiService.get(API_Config.general.getAllMatter),
     ])
       .pipe(
         finalize(() => (this.isSubmit = false)),

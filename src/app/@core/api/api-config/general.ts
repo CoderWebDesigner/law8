@@ -35,7 +35,8 @@ export const General_API = {
       "getPartyTypes":"AppLookup/GetLawpartyTypeLookup",
       "getPartyPosition":"AppLookup/GetLaw_MatterPartiesPositionsLookup",
       "getUsersInitialSaparateForTimeShet":"AppLookup/GetLaw_AssignAddUsersInitialSaparateForTimeShetLookup",
-      "getAllMatterTypes":"AppLookup/GetLaw_MtrTyppLookup"
+      "getAllMatterTypes":"AppLookup/GetLaw_MtrTyppLookup",
+      "getAllMatter":"AppLookup/GetLawMattertLookup"
   }
 
 }
