@@ -433,8 +433,6 @@ export class MatterDetailsActivityEditorComponent
             key: 'newSession',
             expressions: {
               hide: () => {
-                console.log('hide',this.formlyModel.law_AdjournmentReasonsId)
-                //|| this.formlyModel.law_AdjournmentReasonsId
                 return !this.formly.get('law_AdjournmentReasonsId')?.value || this.data?.law_AdjournmentReasonsId;
               },
             },

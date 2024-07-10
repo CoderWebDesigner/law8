@@ -803,12 +803,13 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
 
   override onSubmit(): void {
-    // this.isSubmit = true;
+    this.isSubmit = true;
     console.log(this.formlyModel?.photo);
     if (this.formly.invalid || !this.formValid) return;
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
-      .pipe(this._sharedService.takeUntilDistroy())
+      .pipe(this._sharedService.takeUntilDistroy(),
+    finalize(()=> this.isSubmit=false))
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
