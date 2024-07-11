@@ -445,7 +445,8 @@ export class MatterDetailsActivityEditorComponent
               },
               {
                 className: 'col-12',
-                key: 'comments',
+                // key: 'comments',
+                key: 'description',
                 type: 'textarea',
                 props: {
                   label:
