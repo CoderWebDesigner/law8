@@ -1,7 +1,6 @@
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { SharedTableService } from '../shared-table/services/table.service';
 
 @Component({
   selector: 'shared-search-input',
@@ -16,6 +15,7 @@ export class SharedSearchInputComponent
 {
   @Input() searchKey: string;
 
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -29,14 +29,12 @@ export class SharedSearchInputComponent
           placeholder: this._languageService.getTransValue('common.search'),
           icon: 'pi pi-search',
           class: 'p-inputtext-sm',
-          onKeyUp:()=>{
+          keyup:(e)=>{
             this._sharedTableService.search$.next(this.formlyModel.search)
           }
         },
       },
     ];
-
-    this.getData();
   }
 
   override onSubmit(): void {

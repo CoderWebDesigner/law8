@@ -347,6 +347,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe({
         next: (res: any) => {
           this.filterOptions = { ...this.filterOptions, search: res };
+          // console.log('this.filterOptions',this.filterOptions)
           this.getData();
           // this.dt.filterGlobal(res, 'contains')
         },
