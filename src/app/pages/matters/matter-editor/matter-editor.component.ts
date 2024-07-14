@@ -3,9 +3,10 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models/apiRes-model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { combineLatest, finalize, forkJoin } from 'rxjs';
+import { catchError, combineLatest, finalize, forkJoin, take } from 'rxjs';
 import { MatterService } from '../service/matter.service';
 import { PracticeArea } from '../enums/practice-area';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-matter-editor',
@@ -15,7 +16,7 @@ import { PracticeArea } from '../enums/practice-area';
 export class MatterEditorComponent extends FormBaseClass implements OnInit {
   previewOnly: boolean;
   requestId: number;
-  formValid:boolean;
+  formValid: boolean;
   items: any[] = [
     {
       id: 1,
@@ -143,7 +144,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         //   this.formly
                         //     .get('mtrNo')
                         //     .setValue(res.result['mattCode']);
-                        if (this.formlyModel?.requestTypeId ===1) {
+                        if (this.formlyModel?.requestTypeId === 1) {
                           this.formly
                             .get('mtrNo')
                             .setValue(res.result['mattCode']);
@@ -195,10 +196,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                           res
                         );
                         this.formly.patchValue({
-                               clientName:res.result['name'],
-                          mtrNo:res.result['mattCode']
-                        })
-                        // this.formlyModel = { 
+                          clientName: res.result['name'],
+                          mtrNo: res.result['mattCode'],
+                        });
+                        // this.formlyModel = {
                         //   ...this.formlyModel,
                         //   clientName:res.result['name'],
                         //   mtrNo:res.result['mattCode']
@@ -209,8 +210,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         // this.formly
                         //   .get('mtrNo')
                         //   .setValue(res.result['mattCode']);
-                          this.formlyOption.build()
-                          console.log(this.formly.value)
+                        this.formlyOption.build();
+                        console.log(this.formly.value);
                         if (this.formlyModel?.requestTypeId == 2) {
                         }
                       }
@@ -379,7 +380,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                           ? (obj.show = true)
                           : (obj.show = false);
                       });
-                    } else if ([3, 1,5].includes(res)) {
+                    } else if ([3, 1, 5].includes(res)) {
                       this.items.forEach((obj) => {
                         [1, 2, 3, 6, 7].includes(obj.id)
                           ? (obj.show = true)
@@ -433,18 +434,29 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                       next: (res) => {
                         console.log('res practsAreaId', res);
                         if (res) {
+                          let model = {
+                            PractsAreaId: res,
+                          };
                           this._apiService
                             .get(
-                              `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                              API_Config.general.getMatterCategoriesLookup,
+                              model
                             )
-                            .pipe(this._sharedService.takeUntilDistroy())
+                            .pipe(
+                              take(1)
+                              // this._sharedService.takeUntilDistroy(),
+                              // catchError((error) => {
+                              //   console.log(error);
+                              //   return error;
+                              // })
+                            )
                             .subscribe({
                               next: (res: ApiRes) => {
                                 field.props.options = res.result.map((obj) => ({
                                   label: obj.name,
                                   value: obj.id,
                                 }));
-                              },
+                              }
                             });
                         } else {
                           // this.formlyModel?.law_MtrCatId=null
@@ -808,8 +820,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     if (this.formly.invalid || !this.formValid) return;
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
-      .pipe(this._sharedService.takeUntilDistroy(),
-    finalize(()=> this.isSubmit=false))
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isSubmit = false))
+      )
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
@@ -873,7 +887,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res) => {
           this.lookupsData = res;
-          console.log(this.lookupsData)
+          console.log(this.lookupsData);
           this.initForm();
         },
       });
@@ -883,11 +897,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       ...event,
       ...this.formlyModel,
     };
-    console.log('event',event)
+    console.log('event', event);
   }
-  getFormStatus(event){
-    this.formValid=event
-    console.log('this.formValid',this.formValid)
+  getFormStatus(event) {
+    this.formValid = event;
+    console.log('this.formValid', this.formValid);
   }
   resetFormExcludingField(fieldToExclude: string) {
     // Reset each field except the specified one
