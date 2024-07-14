@@ -275,7 +275,12 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
   }
   override onSubmit(): void {
     console.log('onSubmit', this.formly);
-    if (this.formly.invalid) return;
+    if (this.formly.invalid){
+      const text = this._languageService.getTransValue('messages.checkDataValidation');
+      this._toastrNotifiService.displayErrorToastr(text);
+      this.formly.markAllAsTouched()
+      return;
+    } 
 
     const successMsgKey = this.userId
       ? 'messages.updateSuccessfully'

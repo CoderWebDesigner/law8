@@ -75,7 +75,8 @@
     "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?",
     "youDontHavePermission":"You Don't Have Permission",
     "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
-    "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?"
+    "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?",
+    "checkDataValidation":"يرجى التاكد من صحة البيانات"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",
