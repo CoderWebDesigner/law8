@@ -71,6 +71,8 @@
     "clientNameAr":"Client Name AR",
     "clientNameEn":"Foreign Name",
     "viewClient":"View Client",
-    "updateClient":"Update Client"
+    "updateClient":"Update Client",
+    "clientIntroducing": "Introducing Lawyer"
+
   }
 }

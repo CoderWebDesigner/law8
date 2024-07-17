@@ -27,9 +27,7 @@ export class LookupsMatterCaterogyComponent implements OnInit{
 
   apiUrl=API_Config.matterCategory;
   apiUrlsChild=API_Config.matterCategoryType;
-  filterSubOptions={
-
-  }
+  filterSubOptions=null
   columnsLocalized: any = {
     ar: Matter_Category_Columns_AR,
     en: Matter_Category_Columns_EN,
@@ -40,6 +38,7 @@ export class LookupsMatterCaterogyComponent implements OnInit{
         en: Matter_Category_Children_Columns_EN,
         fr: Matter_Category_Children_Columns_FR,
   }
+  searchValue:string;
   additionalTableConfig: TableConfig = {
     id:'id',
     actions:[
@@ -85,6 +84,22 @@ export class LookupsMatterCaterogyComponent implements OnInit{
     this.columnsLocalizedChildren= swapFirstTwoIndexes(
       this.columnsLocalizedChildren,this._languageService.getSelectedLanguage()
     );
+    this._sharedTableService.search$.pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:string)=>{
+        this.searchValue=res
+        console.log('filterSubOptions search',res)
+        this.filterSubOptions={...this.filterSubOptions,search:res}
+        // this.filterSubOptions =  {
+        //   pageNum: 1,
+        //   pagSize: PAGESIZE,
+        //   orderByDirection: 'ASC',
+        //   // mainCategoryId:e,
+        //   search:res
+        // }
+      }
+    })
     if(!this._permissionService.hasPermission('View_MatterType')){
       this.columnsLocalizedChildren=null
     }
@@ -149,11 +164,14 @@ export class LookupsMatterCaterogyComponent implements OnInit{
     })
   }
   onRowSelect(e){
+    console.log('onRowSelect',e)
     this.filterSubOptions =  {
-      pageNum: 1,
-      pagSize: PAGESIZE,
-      orderByDirection: 'ASC',
-      mainCategoryId:e
-    }
+          pageNum: 1,
+          pagSize: PAGESIZE,
+          orderByDirection: 'ASC',
+          mainCategoryId:e,
+          search:this.searchValue
+        }
+   
   }
 }

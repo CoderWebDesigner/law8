@@ -3,9 +3,10 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models/apiRes-model';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { combineLatest, finalize, forkJoin } from 'rxjs';
+import { catchError, combineLatest, finalize, forkJoin, take } from 'rxjs';
 import { MatterService } from '../service/matter.service';
 import { PracticeArea } from '../enums/practice-area';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-matter-editor',
@@ -15,6 +16,7 @@ import { PracticeArea } from '../enums/practice-area';
 export class MatterEditorComponent extends FormBaseClass implements OnInit {
   previewOnly: boolean;
   requestId: number;
+  formValid: boolean;
   items: any[] = [
     {
       id: 1,
@@ -55,7 +57,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   tabsList: any;
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
-  _cdRef=inject(ChangeDetectorRef)
+  _cdRef = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
@@ -93,26 +95,19 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             },
             hooks: {
               onInit: (field: FormlyFieldConfig) => {
-                console.log('requestTypeId',field.formControl.value)
-                this.formly.get('requestTypeId').valueChanges.pipe(
-                  this._sharedService.takeUntilDistroy()
-                ).subscribe({
-                  next:(res)=>{
-                 
-                    if(res){
-                      this.formly
-                      .get('clientName')
-                      .setValue(null);
-                    this.formly
-                      .get('mtrNo')
-                      .setValue(null);
-                    this.formly
-                      .get('clientId')
-                      .setValue(null);
-                    }
-                  }
-                })
-                
+                console.log('requestTypeId', field.formControl.value);
+                this.formly
+                  .get('requestTypeId')
+                  .valueChanges.pipe(this._sharedService.takeUntilDistroy())
+                  .subscribe({
+                    next: (res) => {
+                      if (res) {
+                        this.formly.get('clientName').setValue(null);
+                        this.formly.get('mtrNo').setValue(null);
+                        this.formly.get('clientId').setValue(null);
+                      }
+                    },
+                  });
               },
             },
           },
@@ -129,12 +124,13 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               label: this._languageService.getTransValue('common.clientCode'),
               placeholder: '',
               disabled: this.previewOnly,
+              required: true,
               options: this.lookupsData[4].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
               })),
               onChange: (e) => {
-                if (this.formlyModel?.requestTypeId == 1,3) {
+                if ((this.formlyModel?.requestTypeId == 1, 3)) {
                   this._apiService
                     .get(
                       `${API_Config.matters.getClientNameAndMatterCodeByClientId}?clientId=${this.formlyModel?.clientId}`
@@ -145,14 +141,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                         this.formly
                           .get('clientName')
                           .setValue(res.result['name']);
-                      //   this.formly
-                      //     .get('mtrNo')
-                      //     .setValue(res.result['mattCode']);
-                      if (this.formlyModel?.requestTypeId !== 2) {
-                        this.formly
-                          .get('mtrNo')
-                          .setValue(res.result['mattCode']);
-                      }
+                        //   this.formly
+                        //     .get('mtrNo')
+                        //     .setValue(res.result['mattCode']);
+                        if (this.formlyModel?.requestTypeId === 1) {
+                          this.formly
+                            .get('mtrNo')
+                            .setValue(res.result['mattCode']);
+                        }
                       },
                     });
                 }
@@ -180,16 +176,12 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           {
             type: 'select',
             key: 'parentMatterId',
-            className: 'col-md-4',
+            className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue(
                 'matters.parentMatterCode'
               ),
               disabled: this.previewOnly,
-              options: this.lookupsData[5]?.result?.map((obj) => ({
-                label: obj.name,
-                value: obj.id,
-              })),
               onChange: (e) => {
                 this._apiService
                   .get(
@@ -203,14 +195,25 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                           'getCLientNameAndMattCodeByClientAndParent',
                           res
                         );
-                        this.formly
-                          .get('clientName')
-                          .setValue(res.result['name']);
-                          if (this.formlyModel?.requestTypeId == 2) {
-                            this.formly
-                              .get('mtrNo')
-                              .setValue(res.result['mattCode']);
-                          }
+                        this.formly.patchValue({
+                          clientName: res.result['name'],
+                          mtrNo: res.result['mattCode'],
+                        });
+                        // this.formlyModel = {
+                        //   ...this.formlyModel,
+                        //   clientName:res.result['name'],
+                        //   mtrNo:res.result['mattCode']
+                        //  };
+                        // this.formly
+                        //   .get('clientName')
+                        //   .setValue(res.result['name']);
+                        // this.formly
+                        //   .get('mtrNo')
+                        //   .setValue(res.result['mattCode']);
+                        this.formlyOption.build();
+                        console.log(this.formly.value);
+                        if (this.formlyModel?.requestTypeId == 2) {
+                        }
                       }
                     },
                   });
@@ -221,7 +224,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               onInit: (field: FormlyFieldConfig) => {
                 field.form.get('clientId').valueChanges.subscribe({
                   next: (res) => {
-                    if(res){
+                    if (res) {
                       this._apiService
                         .get(
                           `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
@@ -237,23 +240,117 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                             }
                           },
                         });
-                    }else{
-                      field.props.options=[]
-                    }
-                    if (this.formlyModel?.requestTypeId == 2) {
+                    } else {
+                      field.props.options = [];
                     }
                   },
                 });
+                if (
+                  // this.formlyModel?.requestTypeId == 2 ||
+                  this.formlyModel?.requestTypeId == 3
+                ) {
+                  this._apiService
+                    .get(
+                      `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
+                    )
+                    .pipe(this._sharedService.takeUntilDistroy())
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        if (res?.isSuccess) {
+                          field.props.options = res.result.map((obj) => ({
+                            label: obj.name,
+                            value: obj.id,
+                          }));
+                          this.formlyOption.build();
+                        }
+                      },
+                    });
+                }
               },
             },
             expressions: {
               hide: (field: FormlyFieldConfig) => {
-                return (
-                  field.model?.requestTypeId == 1 || !field.model?.requestTypeId
-                );
+                return this.formlyModel?.requestTypeId == 1;
               },
             },
           },
+          // {
+          //   type: 'select',
+          //   key: 'parentMatterId',
+          //   className: 'col-md-4',
+          //   props: {
+          //     label: this._languageService.getTransValue(
+          //       'matters.parentMatterCode'
+          //     ),
+          //     disabled: this.previewOnly,
+          //     // options: this.lookupsData[5]?.result?.map((obj) => ({
+          //     //   label: obj.name,
+          //     //   value: obj.id,
+          //     // })),
+          //     onChange: (e) => {
+          //       this._apiService
+          //         .get(
+          //           `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
+          //         )
+          //         .pipe(this._sharedService.takeUntilDistroy())
+          //         .subscribe({
+          //           next: (res: ApiRes) => {
+          //             if (res.isSuccess) {
+          //               console.log(
+          //                 'getCLientNameAndMattCodeByClientAndParent',
+          //                 res
+          //               );
+          //               this.formly
+          //                 .get('clientName')
+          //                 .setValue(res.result['name']);
+          //               if (this.formlyModel?.requestTypeId == 2) {
+          //                 this.formly
+          //                   .get('mtrNo')
+          //                   .setValue(res.result['mattCode']);
+          //               }
+          //             }
+          //           },
+          //         });
+          //     },
+          //   },
+
+          //   hooks: {
+          //     onInit: (field: FormlyFieldConfig) => {
+          //       field.form.get('clientId').valueChanges.subscribe({
+          //         next: (res) => {
+          //           if (res) {
+          //             this._apiService
+          //               .get(
+          //                 `${API_Config.general.getLawMattertCodeByClient}?clientId=${this.formlyModel?.clientId}`
+          //               )
+          //               .pipe(this._sharedService.takeUntilDistroy())
+          //               .subscribe({
+          //                 next: (res: ApiRes) => {
+          //                   if (res?.isSuccess) {
+          //                     field.props.options = res.result.map((obj) => ({
+          //                       label: obj.name,
+          //                       value: obj.id,
+          //                     }));
+          //                   }
+          //                 },
+          //               });
+          //           } else {
+          //             field.props.options = [];
+          //           }
+          //           if (this.formlyModel?.requestTypeId == 2) {
+          //           }
+          //         },
+          //       });
+          //     },
+          //   },
+          //   expressions: {
+          //     hide: (field: FormlyFieldConfig) => {
+          //       return (
+          //         field.model?.requestTypeId == 1 || !field.model?.requestTypeId
+          //       );
+          //     },
+          //   },
+          // },
           {
             type: 'select',
             key: 'practsAreaId',
@@ -266,6 +363,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
+              required: true,
             },
             hooks: {
               onChanges: (field: FormlyFieldConfig) => {
@@ -282,7 +380,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                           ? (obj.show = true)
                           : (obj.show = false);
                       });
-                    } else if ([3, 1].includes(res)) {
+                    } else if ([3, 1, 5].includes(res)) {
                       this.items.forEach((obj) => {
                         [1, 2, 3, 6, 7].includes(obj.id)
                           ? (obj.show = true)
@@ -302,6 +400,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.opened'),
               disabled: this.previewOnly,
+              required: true,
             },
           },
           {
@@ -327,6 +426,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'common.matterCategory'
                   ),
                   disabled: this.previewOnly,
+                  required: true,
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
@@ -334,18 +434,29 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                       next: (res) => {
                         console.log('res practsAreaId', res);
                         if (res) {
+                          let model = {
+                            PractsAreaId: res,
+                          };
                           this._apiService
                             .get(
-                              `${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`
+                              API_Config.general.getMatterCategoriesLookup,
+                              model
                             )
-                            .pipe(this._sharedService.takeUntilDistroy())
+                            .pipe(
+                              take(1)
+                              // this._sharedService.takeUntilDistroy(),
+                              // catchError((error) => {
+                              //   console.log(error);
+                              //   return error;
+                              // })
+                            )
                             .subscribe({
                               next: (res: ApiRes) => {
                                 field.props.options = res.result.map((obj) => ({
                                   label: obj.name,
                                   value: obj.id,
                                 }));
-                              },
+                              }
                             });
                         } else {
                           // this.formlyModel?.law_MtrCatId=null
@@ -365,6 +476,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   label:
                     this._languageService.getTransValue('matters.matterType'),
                   disabled: this.previewOnly,
+                  required: true,
                 },
                 hooks: {
                   onInit: (field: FormlyFieldConfig) => {
@@ -600,6 +712,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                     'matters.matterStatus'
                   ),
                   disabled: this.previewOnly,
+                  required: true,
                   options: this.lookupsData[1].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
@@ -622,6 +735,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 props: {
                   label: this._languageService.getTransValue('matters.stage'),
                   disabled: this.previewOnly,
+                  required: true,
                   options: this.lookupsData[2].result.map((obj) => ({
                     label: obj.name,
                     value: obj.id,
@@ -701,11 +815,15 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
 
   override onSubmit(): void {
-    // this.isSubmit = true;
+    this.isSubmit = true;
     console.log(this.formlyModel?.photo);
+    if (this.formly.invalid || !this.formValid) return;
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
-      .pipe(this._sharedService.takeUntilDistroy())
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isSubmit = false))
+      )
       .subscribe({
         next: (res: ApiRes) => {
           if (res && res.isSuccess) {
@@ -769,6 +887,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res) => {
           this.lookupsData = res;
+          console.log(this.lookupsData);
           this.initForm();
         },
       });
@@ -778,10 +897,15 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       ...event,
       ...this.formlyModel,
     };
+    console.log('event', event);
+  }
+  getFormStatus(event) {
+    this.formValid = event;
+    console.log('this.formValid', this.formValid);
   }
   resetFormExcludingField(fieldToExclude: string) {
     // Reset each field except the specified one
-    this.formlyFields.forEach(field => {
+    this.formlyFields.forEach((field) => {
       if (field.key !== fieldToExclude) {
         field.formControl.reset();
       }

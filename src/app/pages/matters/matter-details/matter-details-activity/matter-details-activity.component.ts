@@ -41,6 +41,7 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
   apiUrls:any=API_Config.matterActivity;
   additionalTableConfig: TableConfig = {};
   ngOnInit(): void {
+    console.log('matterId',this.requestId)
     this.additionalTableConfig={
       id: 'id',
       actions: [
@@ -50,13 +51,13 @@ export class MatterDetailsActivityComponent implements OnInit, OnDestroy {
           icon:'pencil',
           isDynamic:this.requestId != undefined,
           width:'70%',
-          permission:'Update_Matter_Activities'
+          permission:this.previewOnly?'':'Update_Matter_Activities'
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
-          permission:'Delete_Matter_Activities'
+          permission:this.previewOnly?'':'Delete_Matter_Activities'
         },
       ],
     }

@@ -15,9 +15,9 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
   userId: string;
   apiUrls = API_Config.users;
   datePipe = inject(DatePipe);
-  items:any[]=[
+  items: any[] = [
     { label: this._languageService.getTransValue('users.defaultRate') },
-  ]
+  ];
   ngOnInit(): void {
     // this.initForm();
 
@@ -33,31 +33,45 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
         fieldGroupClassName: 'row',
         fieldGroup: [
           {
-            key: this._languageService.getSelectedLanguage() == 'en'?'nameEn':'nameAr',
+            key:
+              this._languageService.getSelectedLanguage() == 'en'
+                ? 'nameEn'
+                : 'nameAr',
             type: 'input',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getSelectedLanguage() == 'en'?this._languageService.getTransValue('lookups.nameEN'):this._languageService.getTransValue('lookups.nameAR'),
-              required: this._languageService.getSelectedLanguage() == 'en' && true,
+              label:
+                this._languageService.getSelectedLanguage() == 'en'
+                  ? this._languageService.getTransValue('lookups.nameEN')
+                  : this._languageService.getTransValue('lookups.nameAR'),
+              required:
+                this._languageService.getSelectedLanguage() == 'en' && true,
             },
             validators: {
               validation: ['englishLetters'],
             },
           },
           {
-            key: this._languageService.getSelectedLanguage() == 'ar'?'nameEn':'nameAr',
+            key:
+              this._languageService.getSelectedLanguage() == 'ar'
+                ? 'nameEn'
+                : 'nameAr',
             type: 'input',
             className: 'col-md-4',
             props: {
-              label: this._languageService.getSelectedLanguage() == 'ar'?this._languageService.getTransValue('lookups.nameEN'):this._languageService.getTransValue('lookups.nameAR'),
-              required: this._languageService.getSelectedLanguage() == 'ar' && true,
+              label:
+                this._languageService.getSelectedLanguage() == 'ar'
+                  ? this._languageService.getTransValue('lookups.nameEN')
+                  : this._languageService.getTransValue('lookups.nameAR'),
+              required:
+                this._languageService.getSelectedLanguage() == 'ar' && true,
             },
             validators: {
               validation: ['arabicLetters'],
             },
           },
           {
-            key:'defaultRateApproved',
+            key: 'defaultRateApproved',
           },
           {
             type: 'input',
@@ -103,27 +117,33 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
-              onChange:(e)=>{
-                let obj = this.lookupsData[1].result.find(obj=>obj.id===e.value)
-                console.log(obj)
-    
-                console.log(e.value)
+              onChange: (e) => {
+                let obj = this.lookupsData[1].result.find(
+                  (obj) => obj.id === e.value
+                );
+                console.log(obj);
+
+                console.log(e.value);
                 Swal.fire({
                   showDenyButton: true,
-                  text: this._languageService.getTransValue('messages.confirmApplyDefaultRate',{title:obj.name}),
-                  confirmButtonText: this._languageService.getTransValue('btn.yes'),
+                  text: this._languageService.getTransValue(
+                    'messages.confirmApplyDefaultRate',
+                    { title: obj.name }
+                  ),
+                  confirmButtonText:
+                    this._languageService.getTransValue('btn.yes'),
                   denyButtonText: this._languageService.getTransValue('btn.no'),
                   icon: 'question',
                 }).then((result) => {
-                  console.log(result)
+                  console.log(result);
                   if (result.isConfirmed) {
-                    this.formlyModel.defaultRateApproved=true
-                  }else if(result.isDenied){
-                    this.formlyModel.defaultRateApproved=false
+                    this.formlyModel.defaultRateApproved = true;
+                  } else if (result.isDenied) {
+                    this.formlyModel.defaultRateApproved = false;
                   }
                 });
-                console.log(e)
-              }
+                console.log(e);
+              },
             },
           },
           {
@@ -140,7 +160,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             },
           },
           {
-            type: 'input',
+            type: 'phone',
             key: 'telNo',
             className: 'col-md-4',
             props: {
@@ -163,6 +183,7 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue('common.email'),
+              required:true,
             },
             validators: {
               validation: ['email'],
@@ -175,12 +196,14 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             hide: this.userId != null,
             props: {
               label: this._languageService.getTransValue('common.password'),
+              required:true,
             },
           },
           {
             type: 'select',
             key: 'defUsrId',
             className: 'col-md-4',
+            
             hide: this.userId == null,
             props: {
               label: this._languageService.getTransValue('users.defUsrId'),
@@ -194,8 +217,10 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
             type: 'date',
             key: 'timeSheetDate',
             className: 'col-md-4',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue('users.timesheetDate'),
+              required:true,
             },
           },
           {
@@ -220,12 +245,15 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
+          console.log('user',this._authService.getDecodedToken()['DefUsrId'])
           this.formlyModel = {
             ...res['result'],
             timeSheetDate: this.datePipe.transform(
               res['result'].timeSheetDate,
-              'yyyy-MM-dd'
+              'yyyy-MM-dd',
+              
             ),
+            defUsrId:this._authService.getDecodedToken()['DefUsrId']
           };
         },
       });
@@ -246,25 +274,30 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       });
   }
   override onSubmit(): void {
-  
-    console.log('onSubmit',this.formly);
-    if (this.formly.invalid) return;
+    console.log('onSubmit', this.formly);
+    if (this.formly.invalid){
+      const text = this._languageService.getTransValue('messages.checkDataValidation');
+      this._toastrNotifiService.displayErrorToastr(text);
+      this.formly.markAllAsTouched()
+      return;
+    } 
 
     const successMsgKey = this.userId
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
+
+    this.formlyModel = {
+      ...this.formlyModel,
+      mobileNo: this.formlyModel?.mobileNo?.internationalNumber,
+      goal: +this.formlyModel.goal,
+      telNo: this.formlyModel?.telNo?.internationalNumber,
+    };
     const requestPayload = this.userId
       ? {
           ...this.formlyModel,
-          mobileNo: this.formlyModel.mobileNo.internationalNumber,
           id: this.userId,
-          goal: +this.formlyModel.goal,
         }
-      : {
-          ...this.formlyModel,
-          mobileNo: this.formlyModel.mobileNo.internationalNumber,
-          goal: +this.formlyModel.goal,
-        };
+      : this.formlyModel;
     const path = this.userId ? this.apiUrls.update : this.apiUrls.create;
 
     this._apiService

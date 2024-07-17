@@ -19,16 +19,16 @@
             styleClass="py-2 px-4 mx-2"></p-button>
           <shared-search-input></shared-search-input>
         </div>
-       
+
       </ng-container>
       <ng-container subTitle *ngFor="let current of apiData[selectedRow?.id]?.values">
         <p-chip [label]="current" />
       </ng-container>
-      
-
       <shared-table body [columnsLocalized]="columnsLocalizedChildren"
         [additionalTableConfig]="additionalTableConfigChildren" [apiUrls]="apiUrls" [mapData]="mapData">
       </shared-table>
+
+
     </shared-card>
 
   </div>

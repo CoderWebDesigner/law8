@@ -10,9 +10,9 @@
     <div class="d-flex align-items-center justify-content-center position-relative">
       <img
         class="logo-lg"
-        width="100px"
-        height="100px"
-        [ngClass]="{'rounded-circle': fileAsBase64 || formControl?.value} "
+        width="200px"
+        height="200px"
+        [ngClass]="{'img-thumbnail': fileAsBase64 || formControl?.value} "
         [src]="fileAsBase64 || props['defaultIcon']|| formControl?.value ||'assets/images/photo.png' "
       />
       <div class="iconPosition" (click)="onRemove($event)" *ngIf="fileAsBase64 ||formControl?.value">

@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { GLOBAL_DATE_TIME_Without_Seconds_FORMATE } from '@core/utilities/defines';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -34,9 +35,20 @@ export class MatterDetailsDocumentsEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           console.log(res);
-          this.formlyModel = { ...res['result'] };
-          this.formlyModel.attachment =
-            res['result'].applicationType + res['result'].logoFile;
+          this.formlyModel = { 
+            ...res['result'],
+            // receivedDate:this._datePipe.transform(res['result'].receivedDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
+            // documentDate:this._datePipe.transform(res['result'].documentDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
+            // expirationDate:this._datePipe.transform(res['result'].expirationDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
+            attachment: res['result'].applicationType + res['result'].logoFile
+           };
+
+          // this.formlyModel.startDate = this._datePipe.transform(
+          //   this.formlyModel?.startDate,
+          //   GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+          // );
+          // this.formlyModel.attachment =
+          //   res['result'].applicationType + res['result'].logoFile;
 
           console.log('formlyModel', this.formlyModel);
         },
@@ -62,7 +74,7 @@ export class MatterDetailsDocumentsEditorComponent
             type: 'textarea',
             props: {
               label: this._languageService.getTransValue('common.description'),
-              // required: true,
+              required: true,
             },
           },
           {
@@ -75,7 +87,7 @@ export class MatterDetailsDocumentsEditorComponent
                 'matters.receivedDate'
               ),
               //  formate:''
-              // required: true,
+              required: true,
             },
           },
           {
@@ -114,17 +126,24 @@ export class MatterDetailsDocumentsEditorComponent
       this.formlyModel.documentDate,
       'yyyy-MM-ddTHH:mm:ss.SSSZ'
     );
-    const expirationDate = this._datePipe.transform(
-      this.formlyModel.expirationDate,
-      'yyyy-MM-ddTHH:mm:ss.SSSZ'
-    );
+    // const expirationDate = this._datePipe.transform(
+    //   this.formlyModel.expirationDate,
+    //   'yyyy-MM-ddTHH:mm:ss.SSSZ'
+    // );
+    if (this.formlyModel.expirationDate) {
+      const expirationDate = this._datePipe.transform(
+          this.formlyModel.expirationDate,
+          'yyyy-MM-ddTHH:mm:ss.SSSZ'
+      );
+      this.formlyModel.expirationDate = expirationDate;
+  }
     const ReceivedDate = this._datePipe.transform(
       this.formlyModel.receivedDate,
       'yyyy-MM-ddTHH:mm:ss.SSSZ'
     );
 
     this.formlyModel.documentDate = formattedDate;
-    this.formlyModel.expirationDate = expirationDate;
+    // this.formlyModel.expirationDate = expirationDate;
     this.formlyModel.receivedDate = ReceivedDate;
 
     const requestPayload = this._dynamicDialogConfig?.data?.rowData

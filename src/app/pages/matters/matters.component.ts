@@ -40,6 +40,7 @@ export class MattersComponent {
     pageNum: 1,
     pagSize: PAGESIZE,
     orderByDirection: 'ASC',
+    orderBy:'mtrNo',
     lang:'en'
   };
 }

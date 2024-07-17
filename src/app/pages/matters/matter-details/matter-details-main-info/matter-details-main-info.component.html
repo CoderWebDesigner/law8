@@ -1,6 +1,10 @@
 <form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
   <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel" [options]="formlyOption"></formly-form>
   <div class="mt-4 text-end">
+    <p-button *ngIf="this.data?.isActive" [loading]="isSubmit" styleClass="p-button-danger text-white d-block py-3 me-3" type="button"
+      label="{{ 'btn.deactive' | translate }}" (onClick)="onToggleMatter(false)"></p-button>
+    <p-button *ngIf="!this.data?.isActive"  [loading]="isSubmit" styleClass="p-button-danger text-white d-block py-3 me-3" type="button"
+      label="{{ 'btn.active' | translate }}" (onClick)="onToggleMatter(true)"></p-button>
     <p-button *ngIf="!previewOnly" [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
       label="{{ 'btn.submit' | translate }}"></p-button>
   </div>

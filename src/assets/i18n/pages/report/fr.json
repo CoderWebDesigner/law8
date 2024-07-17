@@ -1,0 +1,9 @@
+{
+    "report":{
+        "activityReport":"Activity Report",
+        "dateFrom":"Date From",
+        "dateTo":"Date To",
+         "lawyer":"Lawyer",
+        "client":"Client"
+    }
+}

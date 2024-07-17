@@ -74,6 +74,8 @@
     "updateClient":"Update Client",
     "line1":"line1",
     "line2":"line2",
-    "linePlaceholder":"Please Enter line"
+    "linePlaceholder":"Please Enter line",
+    "clientIntroducing": "Introducing Lawyer"
+
   }
 }

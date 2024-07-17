@@ -27,6 +27,7 @@ export class UserEditorDefaultRateComponent implements OnInit {
         target: UserEditorDefaultRateEditorComponent,
         icon: 'pencil',
         width: '30%',
+        permission:'Update_Users'
       },
     ],
   };

@@ -1,8 +1,16 @@
-<p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+<!-- <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
 <button pButton type="button" (click)="menu.toggle($event)" class="p-button-text header-item" *ngIf="_authService?.user">
     <img [src]="_authService?.user?.Photo||'./assets/images/user.png'" alt="user" class="me-2 user-img">
-    {{_authService?.user?.userName}}
+    {{_authService?.user?.nameEn}}
     <i class="ms-2" inlineSVG="./assets/images/icons/right-arrow.svg"
         [setSVGAttributes]="{width:'10', height:'10'}"></i>
-</button>
+</button> -->
 
+ <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+ <button pButton type="button" (click)="menu.toggle($event)" class="p-button-text header-item" *ngIf="_authService?.user">
+     <img [src]="_authService?.user?.Photo||'./assets/images/user.png'" alt="user" class="me-2 user-img">
+     <span *ngIf="this._languageService.getSelectedLanguage() == 'en'">{{_authService?.user?.nameEn}}</span>
+     <span *ngIf="this._languageService.getSelectedLanguage() == 'ar'">{{_authService?.user?.nameAr}}</span>
+     <i class="ms-2" inlineSVG="./assets/images/icons/right-arrow.svg"
+         [setSVGAttributes]="{width:'10', height:'10'}"></i>
+ </button>

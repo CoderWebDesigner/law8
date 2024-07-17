@@ -33,7 +33,10 @@ export const General_API = {
       "getLawyerShort":"AppLookup/GetLaw_LawyerShortLookup",
       "getLawMattertCodeByClient":"AppLookup/GetLawMattertCodeByClientLookup",
       "getPartyTypes":"AppLookup/GetLawpartyTypeLookup",
-      "getPartyPosition":"AppLookup/GetLaw_MatterPartiesPositionsLookup"
+      "getPartyPosition":"AppLookup/GetLaw_MatterPartiesPositionsLookup",
+      "getUsersInitialSaparateForTimeShet":"AppLookup/GetLaw_AssignAddUsersInitialSaparateForTimeShetLookup",
+      "getAllMatterTypes":"AppLookup/GetLaw_MtrTyppLookup",
+      "getAllMatter":"AppLookup/GetLawMattertLookup"
   }
 
 }

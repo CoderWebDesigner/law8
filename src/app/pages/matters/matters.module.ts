@@ -30,6 +30,7 @@ import { MatterPartyComponent } from './components/matter-party/matter-party.com
 import { MatterContactComponent } from './components/matter-contact/matter-contact.component';
 import { MatterGeneralComponent } from './components/matter-general/matter-general.component';
 import { MatterDocumentPreviewComponent } from './matter-details/matter-details-documents/matter-document-preview/matter-document-preview.component';
+import { MattersInactiveComponent } from './matters-inactive/matters-inactive.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { MatterDocumentPreviewComponent } from './matter-details/matter-details-
     MatterSelectClassComponent,
     MatterPartyComponent,
     MatterContactComponent,
-    MatterDocumentPreviewComponent
+    MatterDocumentPreviewComponent,
+    MattersInactiveComponent
   ],
   imports: [
     CommonModule,

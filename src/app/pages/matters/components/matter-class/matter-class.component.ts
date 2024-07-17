@@ -57,14 +57,14 @@ export class MatterClassComponent implements OnInit, OnDestroy {
           target: MatterClassEditorComponent,
           icon: 'pencil',
           isDynamic: this.requestId != undefined,
-          permission:'Update_Matter_Classes'
+          permission:this.previewOnly?'':'Update_Matter_Classes'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
-          permission:'Delete_Matter_Classes'
+          permission:this.previewOnly?'':'Delete_Matter_Classes'
         },
       ],
     };

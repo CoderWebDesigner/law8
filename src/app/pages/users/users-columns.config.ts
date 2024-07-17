@@ -1,7 +1,7 @@
 export const Users_Columns_EN = [
   {
     header: 'Code',
-    field: 'id',
+    field: 'empNo',
   },
   {
     header: 'Initial',
@@ -13,7 +13,7 @@ export const Users_Columns_EN = [
   },
   {
     header: 'Title',
-    field: 'titleId',
+    field: 'title',
   },
   {
     header: 'Department',

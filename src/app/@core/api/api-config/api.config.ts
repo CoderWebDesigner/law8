@@ -30,6 +30,7 @@ import { Clients_Contact_API } from './client-contacts';
 import { Task_Management_Calender_API } from './task-managment-calender';
 import { Users_Rate_API } from './user-rate';
 import { Profile_API } from './profile';
+import { InActive_Matters_API } from './inactive-matters';
 
 export const API_Config = {
   ...General_API,
@@ -50,6 +51,7 @@ export const API_Config = {
   ...Matter_Include_Security_API,
   ...Matter_Exclude_Security_API,
   ...Matters_API,
+  ...InActive_Matters_API,
   ...Matters_Contact_API,
   ...Matters_Address_API,
   ...Matters_Parties_API,

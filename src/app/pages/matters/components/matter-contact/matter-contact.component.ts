@@ -47,14 +47,14 @@ export class MatterContactComponent implements OnInit,OnDestroy {
           target: MatterContactEditorComponent,
           icon:'pencil',
           isDynamic:this.requestId != undefined,
-          permission:'Update_Matter_Contacts'
+          permission:this.previewOnly?'':'Update_Matter_Contacts'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
           type: 'delete',
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
-          permission:'Delete_Matter_Contacts'
+          permission:this.previewOnly?'':'Delete_Matter_Contacts'
         },
       ],
     }

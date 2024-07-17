@@ -20,6 +20,7 @@
     "matterCategory":"matter Category",
     "group":"Group",
     "rateName":"Rate Name",
+    "rate":"Rate",
     "amount":"Amount",
     "taskCode": "Task Code"
   }

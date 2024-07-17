@@ -28,7 +28,7 @@ export class UserEditorDefaultRateEditorComponent extends FormBaseClass implemen
         key: 'rate',
         type: 'input',
         props: {
-          label: this._languageService.getTransValue('lookups.rateName'),
+          label: this._languageService.getTransValue('lookups.rate'),
           disabled: true,
           
         },
@@ -41,7 +41,6 @@ export class UserEditorDefaultRateEditorComponent extends FormBaseClass implemen
         type: 'input',
         props: {
           label: this._languageService.getTransValue('lookups.rateName'),
-          disabled: true,
         },
         validators: {
           validation: ['englishLetters'],
@@ -58,16 +57,16 @@ export class UserEditorDefaultRateEditorComponent extends FormBaseClass implemen
           validation: ['arabicLetters'],
         },
       },
-      {
-        key: 'active',
-        type: 'switch',
-        defaultValue: false,
-        props: {
-          label: this._languageService.getTransValue('lookups.active'),
-          class: 'd-block',
-          disabled:true
-        },
-      },
+      // {
+      //   key: 'active',
+      //   type: 'switch',
+      //   defaultValue: false,
+      //   props: {
+      //     label: this._languageService.getTransValue('lookups.active'),
+      //     class: 'd-block',
+      //     disabled:true
+      //   },
+      // },
     ];
   }
   override getData(): void {

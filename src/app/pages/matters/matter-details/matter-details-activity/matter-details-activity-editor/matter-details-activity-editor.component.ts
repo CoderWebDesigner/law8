@@ -26,6 +26,7 @@ export class MatterDetailsActivityEditorComponent
   generalApiUrls = API_Config.general;
   apiUrls = API_Config.matterActivity;
   minDate = new Date();
+  data:any;
   ngOnInit(): void {
     if (!this._dynamicDialogConfig?.data?.rowData)
       this.getMatterCodeByMatterId();
@@ -55,7 +56,8 @@ export class MatterDetailsActivityEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           console.log(res);
-          this.formlyModel = { ...res['result'] };
+          this.data=res['result']
+          this.formlyModel = { ...this.data };
           this.formlyModel.startDate = this._datePipe.transform(
             this.formlyModel?.startDate,
             GLOBAL_DATE_TIME_Without_Seconds_FORMATE
@@ -431,7 +433,7 @@ export class MatterDetailsActivityEditorComponent
             key: 'newSession',
             expressions: {
               hide: () => {
-                return !this.formly.get('law_AdjournmentReasonsId')?.value;
+                return !this.formly.get('law_AdjournmentReasonsId')?.value || this.data?.law_AdjournmentReasonsId;
               },
             },
             fieldGroup: [
@@ -443,7 +445,8 @@ export class MatterDetailsActivityEditorComponent
               },
               {
                 className: 'col-12',
-                key: 'comments',
+                // key: 'comments',
+                key: 'description',
                 type: 'textarea',
                 props: {
                   label:

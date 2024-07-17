@@ -14,11 +14,11 @@ export const User_Default_Rate_Columns_AR = [
     field: 'amount',
     isSort: true,
   },
-  {
-    header: 'Active',
-    field: 'activeText',
-    isStatus: true,
-  },
+  // {
+  //   header: 'Active',
+  //   field: 'activeText',
+  //   isStatus: true,
+  // },
 ];
 export const User_Default_Rate_Columns_EN = [
   {
@@ -36,11 +36,11 @@ export const User_Default_Rate_Columns_EN = [
     field: 'amount',
     isSort: true,
   },
-  {
-    header: 'Active',
-    field: 'activeText',
-    isStatus: true,
-  },
+  // {
+  //   header: 'Active',
+  //   field: 'activeText',
+  //   isStatus: true,
+  // },
 ];
 export const User_Default_Rate_Columns_FR = [
   {
@@ -59,9 +59,9 @@ export const User_Default_Rate_Columns_FR = [
     field: 'amount',
     isSort: true,
   },
-  {
-    header: 'Active',
-    field: 'activeText',
-    isStatus: true,
-  },
+  // {
+  //   header: 'Active',
+  //   field: 'activeText',
+  //   isStatus: true,
+  // },
 ];

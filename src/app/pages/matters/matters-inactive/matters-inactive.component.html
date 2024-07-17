@@ -1,0 +1,10 @@
+<shared-card [title]="'menu.matters.inactiveMatters' | translate" [borderRadius]="20">
+    <shared-search-input headerActions></shared-search-input>
+    <shared-table
+      body
+      [columnsLocalized]="columnsLocalized"
+      [additionalTableConfig]="additionalTableConfig"
+      [filterOptions]="filterOptions"
+      [apiUrls]="apiUrls"
+    ></shared-table>
+  </shared-card>

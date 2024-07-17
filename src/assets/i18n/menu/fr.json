@@ -13,6 +13,7 @@
     },
     "matters": {
       "title": "Dossiers",
+      "inactiveMatters":"Inactive Matters",
       "matterList": "Liste De Dossiers",
       "mattersAdd": "Nouveau Dossier"
     },

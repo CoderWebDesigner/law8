@@ -44,7 +44,7 @@
                   <div [appErrorMessages]="getFormArray.controls[rowIndex].date" class="mt-3"></div>
                 </td>
                 <td>
-                  <p-dropdown formControlName="mtrNo" [editable]="true" optionLabel="label" optionValue="label"
+                  <p-dropdown formControlName="mtrNo" [editable]="true" optionLabel="label" optionValue="label" [showClear]="true"
                     [options]="matters" placeholder="Any" appendTo="body" (onChange)="selectMatter($event, rowIndex)">
                   </p-dropdown>
                 </td>
@@ -53,19 +53,28 @@
                 </td>
                 <td>
                   <p-dropdown formControlName="law_LawerId" label="" [options]="laywers" placeholder="Any"
-                    appendTo="body" (onChange)="getRateFromLawyerIdAndMatterId(rowIndex)">
+                    appendTo="body" (onChange)="getRateFromLawyerIdAndMatterId(rowIndex)" >
+                    <ng-template let-item pTemplate="selectedItem">
+                      <span style="vertical-align:middle" [pTooltip]="item?.initial" tooltipPosition="top">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-target pTemplate="item">
+                      <div class="ui-helper-clearfix" [pTooltip]="target.initial" tooltipPosition="top">
+                          <span >{{target.label}}</span>
+                      </div>
+                  </ng-template>
                   </p-dropdown>
                 </td>
                 <td>
                   <p-dropdown formControlName="law_TaskCodeId" label="" [options]="tasks" placeholder="Any"
                     appendTo="body">
+                   
                   </p-dropdown>
                 </td>
                 <td>
-                  <input type="number" step="0.1" formControlName="hours" pInputText />
+                  <input type="number" step="0.1" formControlName="hours" pInputText (input)="onValueChange(rowIndex)"/>
                 </td>
                 <td>
-                  <input type="number" formControlName="rate" pInputText />
+                  <input type="number" formControlName="rate" pInputText (input)="onValueChange(rowIndex)"/>
                 </td>
                 <td>
                   <input type="text" formControlName="amount" pInputText readonly class="w-75 disabled-input" />

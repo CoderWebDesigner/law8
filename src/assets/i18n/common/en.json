@@ -54,7 +54,9 @@
     "delete":"Delete",
     "update":"Update",
     "upload":"Upload",
-    "saveDraft":"Save Draft"
+    "saveDraft":"Save Draft",
+    "deactive":"Deactivate",
+    "active":"Activate"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
@@ -73,7 +75,10 @@
     "dropClick":"Drop files to upload or click",
     "uploadFile": "Drag and drop here or click to download",
     "confirmApplyDefaultRate":"Would you like to apply the default rate Of {{title}} ?",
-    "youDontHavePermission":"You Don't Have Permission"
+    "youDontHavePermission":"You Don't Have Permission",
+    "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
+    "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?",
+    "checkDataValidation":"Please Check Data Validation !"
   },
   "validation": {
     "required": "This field is required!",

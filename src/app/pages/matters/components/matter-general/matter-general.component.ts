@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { addOption } from '@core/utilities/defines/functions/add-option';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { finalize, forkJoin } from 'rxjs';
 
@@ -14,15 +15,14 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   @Input() previewOnly: boolean;
   @Input() data: any;
   @Output() onFormSubmit = new EventEmitter();
+  @Output() formStatus = new EventEmitter();
   ngOnInit(): void {
     this.getLookupsData();
     if (!this.data) this.detectFormChange();
-    if(this.data) this.getData()
-   
+    if (this.data) this.getData();
   }
 
   override getData(): void {
-  
     // console.log()
     // for (let key in this.data) {
     //   this.formlyModel[key] = this.data[key];
@@ -48,7 +48,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
       ),
       law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
     };
-    console.log('getData formlyModel',this.formlyModel)
+    console.log('getData formlyModel', this.formlyModel);
   }
 
   override getLookupsData(): void {
@@ -66,8 +66,9 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.lookupsData = res;
+          console.log('this.data', this.data);
+          if (this.data) addOption(this.lookupsData[0].result, this.data, 'law_TaskCode');
           this.initForm();
-         
         },
       });
   }
@@ -94,6 +95,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.defaultTask'),
               disabled: this.previewOnly,
+              required: true,
               options: this.lookupsData[0].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
@@ -122,6 +124,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             props: {
               label: this._languageService.getTransValue('matters.defaultRate'),
               disabled: this.previewOnly,
+              required: true,
               options: this.generateChars(),
             },
             expressions: {
@@ -179,6 +182,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
+              // required: true,
             },
           },
           {
@@ -205,6 +209,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
                 'matters.responsibleLaywer'
               ),
               disabled: this.previewOnly,
+              required: true,
               options: this.lookupsData[3].result.map((obj) => ({
                 label: obj.name,
                 value: obj.id,
@@ -252,36 +257,49 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
     return arr;
   }
   override onSubmit(): void {
-    if (this.formly.invalid) return;
-    this.isSubmit = true;
-    if (this.formlyModel?.rateAmount)
-      this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-    if (this.data) {
-      this._apiService
-        .post(API_Config.matters.updateGeneral, this.formlyModel)
-        .pipe(
-          this._sharedService.takeUntilDistroy(),
-          finalize(() => (this.isSubmit = false))
-        )
-        .subscribe({
-          next: (res: ApiRes) => {
-            if (res.result && res.isSuccess) {
-              const text = this._languageService.getTransValue(
-                'messages.updateSuccessfully'
-              );
-              this._toastrNotifiService.displaySuccessMessage(text);
-              this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-                this._dynamicDialogRef.close(dialog);
-              });
-            } else {
-              this._toastrNotifiService.displayErrorToastr(res?.message);
-            }
-          },
-        });
-    } else {
-      this.onFormSubmit.emit(this.formlyModel);
+    this.formStatus.emit(this.formly.valid);
+    console.log('this.formly.invalid',this.formly)
+    if (this.formly.invalid){
+      this.formly.markAllAsTouched()
+      return
+    } ;
+    if(this.formly.valid){
+
+      this.isSubmit = true;
+      if (this.formlyModel?.rateAmount)
+        this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
+      console.log('onSubmit this.data',this.data)
+      if (this.data) {
+        this._apiService
+          .post(API_Config.matters.updateGeneral, this.formlyModel)
+          .pipe(
+            this._sharedService.takeUntilDistroy(),
+            finalize(() => (this.isSubmit = false))
+          )
+          .subscribe({
+            next: (res: ApiRes) => {
+              if (res.result && res.isSuccess) {
+                const text = this._languageService.getTransValue(
+                  'messages.updateSuccessfully'
+                );
+                this._toastrNotifiService.displaySuccessMessage(text);
+                this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+                  this._dynamicDialogRef.close(dialog);
+                });
+              } else {
+                this._toastrNotifiService.displayErrorToastr(res?.message);
+              }
+            },
+          });
+      } else {
+        console.log(this.formlyModel)
+  
+        this.onFormSubmit.emit(this.formlyModel);
+        
+      }
     }
-    // console.log(this.formlyModel)
+    
+    //
 
     // this.onFormSubmit.emit(this.formlyModel);
   }

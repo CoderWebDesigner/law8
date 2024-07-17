@@ -108,7 +108,7 @@ export class ClientEditorComponent
                   placeholder: this._languageService.getTransValue(
                     'client.clientNamePlaceholder'
                   ),
-                  //required: true,
+                  required: true,
                   disabled: this.disableInputs,
                 },
               },
@@ -206,7 +206,7 @@ export class ClientEditorComponent
               className: 'col-md-4',
               props: {
                 label: this._languageService.getTransValue(
-                  'matters.clientIntroducing'
+                  'client.clientIntroducing'
                 ),
                 disabled: this.disableInputs,
                 options: this.lookupsData[4].result.map((obj) => ({

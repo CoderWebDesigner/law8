@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -6,15 +5,13 @@ import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { ClientService } from '@shared/services/client.service';
 import { SharedModule } from '@shared/shared.module';
-import { ButtonModule } from 'primeng/button';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-client-contact-editor',
   templateUrl: './client-contact-editor.component.html',
   styleUrls: ['./client-contact-editor.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, SharedModule, ButtonModule],
+  imports: [ FormlyConfigModule, SharedModule],
 })
 export class ClientContactEditorComponent
   extends FormBaseClass
@@ -39,24 +36,22 @@ export class ClientContactEditorComponent
       });
   }
   override getData(): void {
-    if(this._dynamicDialogConfig?.data?.rowData?.id){
+    if (this._dynamicDialogConfig?.data?.rowData?.id) {
       this._apiService
-      .get(API_Config.clientsContact.getById, {
-        id: this._dynamicDialogConfig?.data?.rowData?.id,
-      })
-      .pipe(this._sharedService.takeUntilDistroy())
-      .subscribe({
-        next: (res: ApiRes) => {
-          if (res.result && res.isSuccess) {
-            this.formlyModel = { ...res.result };
-          }
-        },
-      });
-    }else{
-this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
+        .get(API_Config.clientsContact.getById, {
+          id: this._dynamicDialogConfig?.data?.rowData?.id,
+        })
+        .pipe(this._sharedService.takeUntilDistroy())
+        .subscribe({
+          next: (res: ApiRes) => {
+            if (res.result && res.isSuccess) {
+              this.formlyModel = { ...res.result };
+            }
+          },
+        });
+    } else {
+      this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
     }
-    
-    
   }
 
   override initForm(): void {
@@ -170,26 +165,25 @@ this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
       },
     ];
   }
-  save() {
+  save(){
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
-
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
+          phone: this.formlyModel?.phone?.internationalNumber,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          clientId: this._dynamicDialogConfig?.data?.clientId,
+          phone: this.formlyModel?.phone?.internationalNumber,
+          law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
         };
-
-    console.log('requestPayload', requestPayload);
     const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update
       : this.apiUrls.create;
-    this._apiService
+      this._apiService
       .post(path, requestPayload)
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
@@ -213,28 +207,28 @@ this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
     if (this.formly.invalid) return;
     this.formlyModel = {
       ...this.formlyModel,
-      phone: this.formlyModel?.phone?.internationalNumber
-        ? this.formlyModel?.phone?.internationalNumber
-        : this.formlyModel.phone,
+      phone:this.formlyModel?.phone?.internationalNumber
+      ? this.formlyModel?.phone?.internationalNumber
+      : this.formlyModel.phone,
+      fullName: `${this.formlyModel?.firstName??''} ${this.formlyModel?.middleName??''} ${this.formlyModel?.lastName??''}`,
       mobile: this.formlyModel?.mobile?.internationalNumber
-        ? this.formlyModel?.mobile?.internationalNumber
-        : this.formlyModel.mobile,
+      ? this.formlyModel?.mobile?.internationalNumber
+      : this.formlyModel.mobile,
     };
+   
     if (this._dynamicDialogConfig?.data?.isDynamic) {
-      this.save();
+     this.save()
     } else {
+     
       let index = this.data.findIndex(
         (obj) => obj?.key == this._dynamicDialogConfig?.data?.rowData?.key
       );
       if (index != -1) {
         this.data[index] = this.formlyModel;
       } else {
-        this.formlyModel = {
-          ...this.formlyModel,
-          fullName:`${this.formlyModel?.firstName} ${this.formlyModel?.middleName} ${this.formlyModel?.lastName}`
-        };
         this.data.push(this.formlyModel);
       }
+      
       this.data = this.data.map((obj) => {
         if (!obj.hasOwnProperty('key')) {
           obj.key = Math.random().toString(36).substring(2, 9);
@@ -243,8 +237,86 @@ this.formlyModel = { ...this._dynamicDialogConfig?.data?.rowData };
       });
       this._clientService.contacts$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-        dialog.destroy();
+        this._dynamicDialogRef.close(dialog);
       });
     }
   }
+
+  // save() {
+  //   const successMsgKey = this._dynamicDialogConfig?.data?.rowData
+  //     ? 'messages.updateSuccessfully'
+  //     : 'messages.createdSuccessfully';
+
+  //   const requestPayload = this._dynamicDialogConfig?.data?.rowData
+  //     ? {
+  //         ...this.formlyModel,
+  //         id: this._dynamicDialogConfig?.data?.rowData?.id,
+  //       }
+  //     : {
+  //         ...this.formlyModel,
+  //         clientId: this._dynamicDialogConfig?.data?.clientId,
+  //       };
+
+  //   console.log('requestPayload', requestPayload);
+  //   const path = this._dynamicDialogConfig?.data?.rowData
+  //     ? this.apiUrls.update
+  //     : this.apiUrls.create;
+  //   this._apiService
+  //     .post(path, requestPayload)
+  //     .pipe(this._sharedService.takeUntilDistroy())
+  //     .subscribe({
+  //       next: (res: ApiRes) => {
+  //         if (res && res.isSuccess) {
+  //           const text = this._languageService.getTransValue(successMsgKey);
+  //           this._toastrNotifiService.displaySuccessMessage(text);
+  //           this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+  //             this._dynamicDialogRef.close(dialog);
+  //           });
+  //         } else {
+  //           this._toastrNotifiService.displayErrorToastr(res?.message);
+  //         }
+  //       },
+  //       error: (err: any) => {
+  //         this._toastrNotifiService.displayErrorToastr(err?.error?.message);
+  //       },
+  //     });
+  // }
+  // override onSubmit(): void {
+  //   if (this.formly.invalid) return;
+  //   this.formlyModel = {
+  //     ...this.formlyModel,
+  //     phone: this.formlyModel?.phone?.internationalNumber
+  //       ? this.formlyModel?.phone?.internationalNumber
+  //       : this.formlyModel.phone,
+  //     mobile: this.formlyModel?.mobile?.internationalNumber
+  //       ? this.formlyModel?.mobile?.internationalNumber
+  //       : this.formlyModel.mobile,
+  //   };
+  //   if (this._dynamicDialogConfig?.data?.isDynamic) {
+  //     this.save();
+  //   } else {
+  //     let index = this.data.findIndex(
+  //       (obj) => obj?.key == this._dynamicDialogConfig?.data?.rowData?.key
+  //     );
+  //     if (index != -1) {
+  //       this.data[index] = this.formlyModel;
+  //     } else {
+  //       this.formlyModel = {
+  //         ...this.formlyModel,
+  //         fullName: `${this.formlyModel?.firstName} ${this.formlyModel?.middleName} ${this.formlyModel?.lastName}`,
+  //       };
+  //       this.data.push(this.formlyModel);
+  //     }
+  //     this.data = this.data.map((obj) => {
+  //       if (!obj.hasOwnProperty('key')) {
+  //         obj.key = Math.random().toString(36).substring(2, 9);
+  //       }
+  //       return obj;
+  //     });
+  //     this._clientService.contacts$.next(this.data);
+  //     this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+  //       dialog.destroy();
+  //     });
+  //   }
+  // }
 }

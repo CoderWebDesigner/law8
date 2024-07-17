@@ -26,6 +26,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { LanguageService, ToasterService } from '@core/services';
 import {
   DANGER_TAGS,
+  HELP_TAGS,
   INFO_TAGS,
   PROCESS_TAGS,
   SUCCESS_TAGS,
@@ -327,6 +328,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       'tag-info': INFO_TAGS.includes(value),
       'tag-danger': DANGER_TAGS.includes(value),
       'tag-warning': PROCESS_TAGS.includes(value),
+      'tag-help': HELP_TAGS.includes(value),
     };
   }
 
@@ -345,6 +347,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe({
         next: (res: any) => {
           this.filterOptions = { ...this.filterOptions, search: res };
+          // console.log('this.filterOptions',this.filterOptions)
           this.getData();
           // this.dt.filterGlobal(res, 'contains')
         },

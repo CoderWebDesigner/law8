@@ -1,26 +1,19 @@
 <shared-card [title]="'menu.users.title' | translate" [borderRadius]="20">
   <div headerActions class="d-flex">
-    <shared-search-input ></shared-search-input>
+    <shared-search-input></shared-search-input>
     <div class="filter position-relative">
-      <app-users-timesheet-setting *ngIf="showFilter" (onFilter)="onFilter($event)" (onClose)="onClose($event)"></app-users-timesheet-setting>
-      <p-button [label]="'users.timesheetDateSetting'|translate"  (onClick)="toggleFilter()" styleClass="py-2 px-4 mx-2"></p-button>
+      <app-users-timesheet-setting *ngIf="showFilter" (onFilter)="onFilter($event)"
+        (onClose)="onClose($event)"></app-users-timesheet-setting>
+      <p-button [requiredPermission]="'Update_TimeSheetDate_User'" [label]="'users.timesheetDateSetting'|translate"
+        (onClick)="toggleFilter()" styleClass="py-2 px-4 mx-2"></p-button>
     </div>
   </div>
-  <shared-table
-    body
-    [apiUrls]="apiUrls"
-    [columnsLocalized]="columnsLocalized"
+  <shared-table body [apiUrls]="apiUrls" [columnsLocalized]="columnsLocalized"
     [additionalTableConfig]="additionalTableConfig">
     <ng-template #actions let-rowData>
-      <p-button
-        class="mx-2 p-0"
-        styleClass="p-button-text"
-        [icon]="'pi pi-key  fs-4'"
-        tooltipPosition="top"
-        [requiredPermission]="'Change_password_Users'"
-        [pTooltip]="'users.changePassword'| translate"
-        (onClick)="openChangePasswordModal(rowData.id)"
-      ></p-button>
+      <p-button class="mx-2 p-0" styleClass="p-button-text" [icon]="'pi pi-key  fs-4'" tooltipPosition="top"
+        [requiredPermission]="'Change_password_Users'" [pTooltip]="'users.changePassword'| translate"
+        (onClick)="openChangePasswordModal(rowData.id)"></p-button>
     </ng-template>
   </shared-table>
 </shared-card>

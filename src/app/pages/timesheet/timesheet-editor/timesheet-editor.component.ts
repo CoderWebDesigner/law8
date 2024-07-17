@@ -58,6 +58,7 @@ export class TimesheetEditorComponent implements OnInit {
   });
   ngOnInit(): void {
     this.getDraftTimesheet();
+    this.getTableStatistics();
     this.getSelectedRows();
     this.timesheetDate=new Date((JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'])
     // let date=(JSON.parse(this._authService.getDecodedToken()['UserInfo']))['TimeSheetDate'];
@@ -68,7 +69,8 @@ export class TimesheetEditorComponent implements OnInit {
 
   getLookupsData() {
     forkJoin([
-      this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
+      // this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
+      this._apiService.get(API_Config.general.getUsersInitialSaparateForTimeShet),
       this._apiService.get(API_Config.general.getTaskCode),
       this._apiService.get(API_Config.general.getRecentMatters),
     ])
@@ -76,8 +78,9 @@ export class TimesheetEditorComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes[]) => {
           this.laywers = res[0].result.map((obj) => ({
-            label: obj.name,
+            label: obj.initial,
             value: obj.id,
+            initial:obj.name
           }));
           this.tasks = res[1].result.map((obj) => ({
             label: obj.name,
@@ -228,6 +231,30 @@ export class TimesheetEditorComponent implements OnInit {
   //     }
   //   });
   // }
+
+  calcStatistics(data:any[]){
+    this.billableHoursCount = data
+    .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
+    .reduce(
+      (accumulator, currentControl) =>
+        accumulator + currentControl.hours,
+      0
+    );
+  this.nonBillableHoursCount = data
+    .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
+    .reduce(
+      (accumulator, currentControl) =>
+        accumulator + currentControl.hours,
+      0
+    );
+  this.noChargeHoursCount = data
+    .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
+    .reduce(
+      (accumulator, currentControl) =>
+        accumulator + currentControl.hours,
+      0
+    );
+  }
   getDraftTimesheet() {
     this._apiService
       .get(`${API_Config.timesheet.getDraftTimeSheet}?orderByDirection=ASC`)
@@ -244,36 +271,49 @@ export class TimesheetEditorComponent implements OnInit {
               );
               item.amount = this.calcAmount(item.hours, item.rate).toFixed(2);
               this.addRow(item);
+              
             });
 
             this.addRow();
+            this.calcStatistics(res['result'])
           } else {
             this.addRow();
           }
           this.getLookupsData();
-          this.getTableStatistics();
+          
+          
         },
       });
   }
 
   selectMatter(e, rowIndex) {
     if (e.value == 'All Matters') {
-      this._dialogService.open(SharedMatterTableComponent, {
+      let dialogRef=this._dialogService.open(SharedMatterTableComponent, {
         width: '70%',
         data: {
           selectRow: true,
-          apiUrls: API_Config.matters,
+          apiUrls: API_Config.matters
         },
         dismissableMask: true,
       });
+      // dialogRef.onClose.pipe(
+      //   this._sharedService.takeUntilDistroy()
+      // ).subscribe({
+      //   next:(res:any)=>{
+      //     console.log('selectMatter',res)
+      //     this.getRateFromLawyerIdAndMatterId(rowIndex,res.id);
+      //   }
+      // })
     } else {
-      let matterId = this.matters.find((obj) => obj.label == e.value).value;
+      let matterId = this.matters.find((obj) => obj.label == e.value)?.value;
       this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId);
       this.getRateFromLawyerIdAndMatterId(rowIndex);
-      this.getClientNameByMatterId(matterId, rowIndex);
+      if(matterId)this.getClientNameByMatterId(matterId, rowIndex);
+      
       this.addRow()
     }
 
+    
     this.getSelectedMatter(rowIndex);
   }
   getClientNameByMatterId(matterId: number, rowIndex: number) {
@@ -296,13 +336,14 @@ export class TimesheetEditorComponent implements OnInit {
         next: (res: any) => {
           console.log('getSelectedMatter', res);
           console.log('rowIndex', rowIndex);
+          this.getRateFromLawyerIdAndMatterId(rowIndex,res.id);
           this.getFormArray.controls[rowIndex].patchValue({
             clientName: res.law_Client,
             matterId: res.id,
             mtrNo: res.mtrNo,
             // law_LawerId: res.law_LawerId,
-            // law_TaskCodeId: res.law_TaskCodeId,
-            // rate: res.rate,
+            law_TaskCodeId: res.law_TaskCodeId,
+            //  rate: res.rateAmount,
           });
         },
       });
@@ -335,11 +376,12 @@ export class TimesheetEditorComponent implements OnInit {
       formGroup.get('selected').setValue(this.selectAllRows);
     });
   }
-  getRateFromLawyerIdAndMatterId(rowIndex: number) {
+  getRateFromLawyerIdAndMatterId(rowIndex: number,mattId?:number) {
     let row = this.getFormArray.value[rowIndex];
     let lawyerId = row?.law_LawerId;
-    let matterId = row?.matterId;
-    console.log('');
+    let matterId = row?.matterId??mattId;
+    console.log('lawyerId',lawyerId);
+    console.log('matterId',matterId);
     if (lawyerId && matterId) {
       this._apiService
         .get(
@@ -348,6 +390,10 @@ export class TimesheetEditorComponent implements OnInit {
         .pipe(this._sharedService.takeUntilDistroy())
         .subscribe({
           next: (res: ApiRes) => {
+            this._dialogService.dialogComponentRefMap.forEach(dialog => {
+        // this._dynamicDialogRef.close(e.data)
+        dialog.destroy();
+      });
             console.log(+res['result'].amount);
             let hours =
               this.getFormArray.controls[rowIndex]?.get('hours').value;
@@ -364,33 +410,40 @@ export class TimesheetEditorComponent implements OnInit {
     console.log('laywerId', lawyerId);
     console.log('matterId', matterId);
   }
+
+  
   getTableStatistics() {
     this.requestForm
       .get('data')
-      .valueChanges.pipe()
+      .valueChanges.pipe(
+        this._sharedService.takeUntilDistroy()
+      )
       .subscribe({
         next: (res: any[]) => {
-          this.billableHoursCount = res
-            .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
-            .reduce(
-              (accumulator, currentControl) =>
-                accumulator + currentControl.hours,
-              0
-            );
-          this.nonBillableHoursCount = res
-            .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
-            .reduce(
-              (accumulator, currentControl) =>
-                accumulator + currentControl.hours,
-              0
-            );
-          this.noChargeHoursCount = res
-            .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
-            .reduce(
-              (accumulator, currentControl) =>
-                accumulator + currentControl.hours,
-              0
-            );
+          console.log('getTableStatistics x',res)
+          this.calcStatistics(res)
+          // this.billableHoursCount = res
+          //   .filter((obj) => obj.law_TaskCodeId == this.task.Billable)
+          //   .reduce(
+          //     (accumulator, currentControl) =>
+          //       accumulator + currentControl.hours,
+          //     0
+          //   );
+          // this.nonBillableHoursCount = res
+          //   .filter((obj) => obj.law_TaskCodeId == this.task.NonBillable)
+          //   .reduce(
+          //     (accumulator, currentControl) =>
+          //       accumulator + currentControl.hours,
+          //     0
+          //   );
+          // this.noChargeHoursCount = res
+          //   .filter((obj) => obj.law_TaskCodeId == this.task.NoCharge)
+          //   .reduce(
+          //     (accumulator, currentControl) =>
+          //       accumulator + currentControl.hours,
+          //     0
+          //   );
+            console.log('this.billableHoursCount',this.billableHoursCount)
         },
       });
 
@@ -431,6 +484,13 @@ export class TimesheetEditorComponent implements OnInit {
 
   //   console.log(this.selectedRows);
   // }
+  onValueChange(rowIndex:number){
+    let hours = this.getFormArray.controls[rowIndex]?.get('hours').value
+    let rate = this.getFormArray.controls[rowIndex]?.get('rate').value
+    this.getFormArray.controls[rowIndex].patchValue({
+      amount:hours*rate
+    })
+  }
   saveDraft(btn) {
     btn.isLoading = true;
     let validValue = this.getFormArray.value.filter(

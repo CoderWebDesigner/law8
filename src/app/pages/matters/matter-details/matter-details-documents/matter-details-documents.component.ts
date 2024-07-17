@@ -52,7 +52,7 @@ export class MatterDetailsDocumentsComponent extends FileActions implements OnIn
           icon:'pencil',
           isDynamic:this.requestId != undefined,
           width:'70%',
-          permission:'Update_Matter_Documents'
+          permission:this.previewOnly?'':'Update_Matter_Documents'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
         {
@@ -60,7 +60,7 @@ export class MatterDetailsDocumentsComponent extends FileActions implements OnIn
           title: this._languageService.getTransValue('btn.delete'),
           icon: 'trash',
 
-          permission:'Delete_Matter_Documents'
+          permission:this.previewOnly?'':'Delete_Matter_Documents'
         },
       ],
     }

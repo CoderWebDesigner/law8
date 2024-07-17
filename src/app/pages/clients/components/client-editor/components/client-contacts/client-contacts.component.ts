@@ -50,7 +50,7 @@ export class ClientContactsComponent implements OnInit, OnDestroy {
           title: this._languageService.getTransValue('btn.update'),
           target: ClientContactEditorComponent,
           icon:'pencil',
-          isDynamic:this.requestId != undefined,
+          isDynamic:this.requestId != 0,
           permission:'Update_ClientContact'
           // isReadOnly:(this.requestId)?this.previewOnly:true
         },
