@@ -10,6 +10,8 @@ export const Activity_Columns_EN = [
   {
     header: 'Description',
     field: 'description',
+    isLargeText:true
+
   },
   {
     header: 'User',
@@ -40,6 +42,8 @@ export const Activity_Columns_FR = [
   {
     header: 'Description',
     field: 'description',
+    isLargeText:true
+
   },
   {
     header: 'User',
@@ -71,6 +75,8 @@ export const Activity_Columns_AR = [
   {
     header: 'Description',
     field: 'description',
+    isLargeText:true
+
   },
   {
     header: 'User',

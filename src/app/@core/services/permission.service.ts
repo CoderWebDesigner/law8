@@ -13,6 +13,8 @@ export class PermissionService {
       if(this._authService?.user?.permissions||this._authService.getDecodedToken()['role']){
   
         this.userPermissions=this._authService?.user?.permissions??this._authService.getDecodedToken()['role']
+        
+        this.userPermissions.push('dashboard')
         console.log('userPermissions',this.userPermissions)
       }
     }

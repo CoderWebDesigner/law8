@@ -22,6 +22,7 @@ export class TaskManagementEditorComponent
   apiUrls = API_Config.matterActivity;
   requestId: number;
   minDate = new Date();
+  data:any
   _datePipe=inject(DatePipe)
   ngOnInit(): void {
     this.getLookupsData();
@@ -43,7 +44,8 @@ export class TaskManagementEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           console.log(res);
-          this.formlyModel = { ...res['result'] };
+          this.data=res['result']
+          this.formlyModel = { ...this.data };
          
           this.formlyModel.startDate = this._datePipe.transform(
             this.formlyModel?.startDate,
@@ -413,8 +415,8 @@ export class TaskManagementEditorComponent
             fieldGroupClassName: 'form-section row mb-3',
             key: 'newSession',
             expressions: {
-              hide: () => {
-                return !this.formly.get('law_AdjournmentReasonsId')?.value;
+               hide: () => {
+                return !this.formly.get('law_AdjournmentReasonsId')?.value || this.data?.law_AdjournmentReasonsId;
               },
             },
             fieldGroup: [

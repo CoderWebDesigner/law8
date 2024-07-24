@@ -6,7 +6,11 @@
   i {
     fill: $white !important
   }
-
+  p {
+    &:first-of-type {
+      color: $white
+    }
+  }
   p {
     color: $white
   }
@@ -39,7 +43,7 @@
 
     p {
       &:first-of-type {
-        color: rgb(207, 208, 212)
+        color: $primaryColor
       }
     }
 

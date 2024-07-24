@@ -31,6 +31,7 @@ import { Task_Management_Calender_API } from './task-managment-calender';
 import { Users_Rate_API } from './user-rate';
 import { Profile_API } from './profile';
 import { InActive_Matters_API } from './inactive-matters';
+import { Report_API } from './report';
 
 export const API_Config = {
   ...General_API,
@@ -65,5 +66,6 @@ export const API_Config = {
   ...Task_Management_Calender_API,
   ...Users_Rate_API,
   ...Profile_API,
-  ...Matters_Time_Sheet_API
+  ...Matters_Time_Sheet_API,
+  ...Report_API
 };

@@ -4,6 +4,7 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { StorageService } from '@core/services';
 import { PermissionService } from '@core/services/permission.service';
+import { jwtDecode } from 'jwt-decode';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -70,8 +71,13 @@ export class OtpComponent extends FormBaseClass implements OnInit {
                   'messages.signInSuccessfully'
                 )
               );
+              // this._authService.user.permissions=jwtDecode(res.result)['role']
               this._permissionService.userPermissions=this._authService.getDecodedToken()['role']
               this._router.navigate(['/dashboard']);
+              setTimeout(() => {
+                window.location.reload()
+              }, 300);
+
             } else {
               this._toastrNotifiService.displayErrorToastr(
                 this._languageService.getTransValue('messages.invalidOTP')
@@ -88,4 +94,6 @@ export class OtpComponent extends FormBaseClass implements OnInit {
       return;
     }
   }
+
+
 }

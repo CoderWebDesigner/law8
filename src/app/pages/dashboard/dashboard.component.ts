@@ -7,6 +7,7 @@ import { Clients_Columns_AR, Clients_Columns_EN, Clients_Columns_FR } from './cl
 import { Matters_Columns_AR, Matters_Columns_EN, Matters_Columns_FR } from './matters-columns.config';
 import { Activity_Columns_AR, Activity_Columns_EN, Activity_Columns_FR } from './activity-columns.config';
 import { finalize } from 'rxjs';
+import { ApiRes } from '@core/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,68 +26,69 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selectedCard: any;
   cardTitle: string;
   columnsLocalized = {};
+
   items = [
     {
       id: 1,
       icon: './assets/images/icons/dashboard/client.svg',
       label: this._languageService.getTransValue('dashboard.clients'),
-      key: 'TotalClients',
+      key: 'clients',
       data: ''
     },
     {
       id: 2,
       icon: './assets/images/icons/dashboard/add-group.svg',
       label: this._languageService.getTransValue('dashboard.newClients'),
-      key: 'NewClients',
+      key: 'newClients',
       data: ''
     },
     {
       id: 3,
       icon: './assets/images/icons/dashboard/active-matter.svg',
       label: this._languageService.getTransValue('dashboard.activeMatter'),
-      key: 'OpenMatters',
+      key: 'activeMatter',
       data: ''
     },
     {
       id: 4,
       icon: './assets/images/icons/dashboard/new-matter.svg',
       label: this._languageService.getTransValue('dashboard.newMatter'),
-      key: 'NewMatters',
+      key: 'newMatter',
       data: ''
     },
     {
       id: 5,
       icon: './assets/images/icons/dashboard/closed-matter.svg',
       label: this._languageService.getTransValue('dashboard.closedMatter'),
-      key: 'ClosedMattes',
-      data: ''
+      key: 'closedMatter',
+      data:''
     },
     {
       id: 6,
       icon: './assets/images/icons/dashboard/important-matter.svg',
       label: this._languageService.getTransValue('dashboard.importantMatter'),
       key: 'importantMatter',
-      data: '',
+      data: ''
     },
     {
       id: 7,
       icon: './assets/images/icons/dashboard/activity.svg',
       label: this._languageService.getTransValue('dashboard.activities'),
-      key: 'Activities',
+      key: 'activities',
       data: ''
     },
     {
       id: 8,
       icon: './assets/images/icons/dashboard/past.svg',
       label: this._languageService.getTransValue('dashboard.pastHearingSessions'),
-      key: 'PastHS',
+      key: 'pastHearingSessions',
       data: ''
     },
     {
       id: 9,
       icon: './assets/images/icons/dashboard/past.svg',
       label: this._languageService.getTransValue('dashboard.upcomingHearingSessions'),
-      key: 'UpcomingHSCEmpty',
+      key: 'upcomingHearingSessions',
       data: ''
     },
   ]
@@ -96,20 +98,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getStatistics()
   }
   getStatistics() {
-    // this._apiService.get(this.apiUrls.getStatistics + this._authService.user.UserId).pipe(
-    //   this._sharedService.takeUntilDistroy()
-    // ).subscribe({
-    //   next: res => {
-    //     this.items.forEach(element => {
-    //       element.data = res[element.key]
-    //     });
-    //   }
-    // })
+    this._apiService.get(this.apiUrls.get).pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next: (res:ApiRes) => {
+        this.items.forEach(element => {
+          element.data = res.result[element.key]
+        });
+      }
+    })
   }
   setActiveCard(item) {
     this.selectedCard = item;
     switch (this.selectedCard?.key) {
-      case 'TotalClients':
+      case 'clients':
         this.cardTitle = 'dashboard.clients'
         this.columnsLocalized = {
           en: Clients_Columns_EN,
