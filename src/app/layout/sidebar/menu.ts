@@ -54,7 +54,7 @@ export const MENU: MenuItem[] = [
       {
         id: 2,
         label: 'menu.matters.matterList',
-        link: '/matters',
+        link: '/matters/list',
         parentId: 3,
         role: 'View_Matter',
       },
@@ -93,7 +93,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.taskManagement.calender',
         link: '/task-management/calender',
         parentId: 4,
-        role: 'View_TaskManagement',
+        role: 'dashboard',
       },
     ],
   },

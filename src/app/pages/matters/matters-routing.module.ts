@@ -6,13 +6,17 @@ import { MatterDetailsComponent } from './matter-details/matter-details.componen
 import { MattersInactiveComponent } from './matters-inactive/matters-inactive.component';
 
 const routes: Routes = [
-  { path: '', component: MattersComponent },
+  { path: 'list', component: MattersComponent },
   { path: 'inactive', component: MattersInactiveComponent },
   { path: 'add', component: MatterEditorComponent },
   // { path: 'update/:id', component: MatterEditorComponent },
   { path: 'update/:id', component: MatterDetailsComponent },
   {
-    path: 'view/:id',
+    path: 'list/view/:id',
+    component: MatterDetailsComponent,
+  },
+  {
+    path: 'inactive/view/:id',
     component: MatterDetailsComponent,
   },
 ];

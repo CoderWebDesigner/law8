@@ -39,7 +39,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
     //   }
     // }
     // this.findKeyProperty(this.formlyFields);
-
+//
   //   this.formlyModel = {
   //     // id:this.data?.id,
   //     ...this.data,
@@ -311,32 +311,92 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
 
   //   // this.onFormSubmit.emit(this.formlyModel);
   // }
+  // override onSubmit(): void {
+  //   this.formStatus.emit(this.formly.valid);
+  //   console.log('this.formly.invalid', this.formly);
+  //   if (this.formly.invalid) {
+  //     this.formly.markAllAsTouched();
+  //     return;
+  //   }
+  
+  //   if (this.formly.valid) {
+  //     this.isSubmit = true;
+  //     if (this.formlyModel?.rateAmount)
+  //       this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
+  
+  //     console.log('onSubmit this.data', this.data);
+  
+  //     // null
+  //     if (this.formlyModel.law_AssignedLaywerList) {
+  //       this.formlyModel.law_AssignedLaywerList = this.formlyModel.law_AssignedLaywerList.filter(obj => obj !== null);
+  //     }
+  //     if (this.formlyModel.law_OtherStaffList) {
+  //       this.formlyModel.law_OtherStaffList = this.formlyModel.law_OtherStaffList.filter(obj => obj !== null);
+  //     }
+  
+  //     if (this.data) {
+  //       this._apiService
+  //         .post(API_Config.matters.updateGeneral, this.formlyModel)
+  //         .pipe(
+  //           this._sharedService.takeUntilDistroy(),
+  //           finalize(() => (this.isSubmit = false))
+  //         )
+  //         .subscribe({
+  //           next: (res: ApiRes) => {
+  //             if (res.result && res.isSuccess) {
+  //               const text = this._languageService.getTransValue(
+  //                 'messages.updateSuccessfully'
+  //               );
+  //               this._toastrNotifiService.displaySuccessMessage(text);
+  //               this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+  //                 this._dynamicDialogRef.close(dialog);
+  //               });
+  //             } else {
+  //               this._toastrNotifiService.displayErrorToastr(res?.message);
+  //             }
+  //           },
+  //         });
+  //     } else {
+  //       console.log(this.formlyModel);
+  //       this.onFormSubmit.emit(this.formlyModel);
+  //     }
+  //   }
+  // }
   override onSubmit(): void {
+    this.isSubmit = true;
     this.formStatus.emit(this.formly.valid);
     console.log('this.formly.invalid', this.formly);
     if (this.formly.invalid) {
+      this.isSubmit = false;
       this.formly.markAllAsTouched();
       return;
     }
-  
+
     if (this.formly.valid) {
-      this.isSubmit = true;
-      if (this.formlyModel?.rateAmount)
+      this.isSubmit = false;
+      if (this.formlyModel?.rateAmount) {
         this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-  
-      console.log('onSubmit this.data', this.data);
-  
-      // null
-      if (this.formlyModel.law_AssignedLaywerList) {
-        this.formlyModel.law_AssignedLaywerList = this.formlyModel.law_AssignedLaywerList.filter(obj => obj !== null);
       }
-      if (this.formlyModel.law_OtherStaffList) {
-        this.formlyModel.law_OtherStaffList = this.formlyModel.law_OtherStaffList.filter(obj => obj !== null);
-      }
-  
+
+      const payload = {
+        law_TaskCodeId: this.formlyModel.law_TaskCodeId,
+        defaultTaskTypeId: this.formlyModel.defaultTaskTypeId,
+        defaultRate: this.formlyModel.defaultRate,
+        rateAmount: this.formlyModel.rateAmount,
+        law_ReferralTypeId: this.formlyModel.law_ReferralTypeId,
+        law_ClientIntroducingId: this.formlyModel.law_ClientIntroducingId,
+        law_MatterIntroducingLawyerId: this.formlyModel.law_MatterIntroducingLawyerId,
+        law_ResponsibleLaywerId: this.formlyModel.law_ResponsibleLaywerId,
+        law_AssignedLaywerList: this.formlyModel.law_AssignedLaywerList.filter(obj => obj !== null),
+        law_OtherStaffList: this.formlyModel.law_OtherStaffList.filter(obj => obj !== null),
+        id: this.formlyModel.id
+        };
+
+      console.log('onSubmit payload', payload);
+
       if (this.data) {
         this._apiService
-          .post(API_Config.matters.updateGeneral, this.formlyModel)
+          .post(API_Config.matters.updateGeneral, payload)
           .pipe(
             this._sharedService.takeUntilDistroy(),
             finalize(() => (this.isSubmit = false))
@@ -357,10 +417,10 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             },
           });
       } else {
-        console.log(this.formlyModel);
-        this.onFormSubmit.emit(this.formlyModel);
+        console.log(payload);
+        this.onFormSubmit.emit(payload);
       }
     }
   }
-  
+
 }

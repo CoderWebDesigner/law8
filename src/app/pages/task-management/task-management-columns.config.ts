@@ -23,6 +23,7 @@ export const Task_Management_Columns_EN = [
     header: 'Description',
     field: 'description',
     isSort: true,
+    isLargeText:true
   },
   {
     header: 'User',

@@ -25,7 +25,7 @@ export class MattersComponent {
       {
         title: this._languageService.getTransValue('matters.matterDetails'),
         targetType: 'path',
-        target: '/matters/view/',
+        target: '/matters/list/view/',
         icon: 'eye',
         permission:'View_Matter'
       },

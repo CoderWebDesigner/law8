@@ -27,6 +27,7 @@ export class TaskManagementEditorComponent
   ngOnInit(): void {
     this.getLookupsData();
     this.getParms()
+
   }
   getParms(){
     this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
@@ -382,6 +383,8 @@ export class TaskManagementEditorComponent
                     this._languageService.getTransValue('matters.startDate'),
                   //required: true,
                   showTime: true,
+                  minDate: this.minDate,
+
                 },
               },
 

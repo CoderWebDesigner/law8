@@ -267,12 +267,13 @@ export class MatterDetailsMainInfoComponent
             },
           },
           {
-            type: 'input',
+            type: 'textarea',
             key: 'descr',
-            className: 'col-lg-3 col-md-4',
+            className: 'col-12',
             props: {
               label: this._languageService.getTransValue('common.description'),
               disabled: this.previewOnly,
+              rows: 3,
             },
           },
           {

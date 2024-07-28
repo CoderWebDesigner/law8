@@ -1,43 +1,55 @@
 export const Clients_Columns_EN = [
   {
-    header: 'Card Code',
-    field: 'CardCode',
+    header: 'Client Code',
+    field: 'clntNo',
+    isSort:true,
   },
   {
-    header: 'Card Name',
-    field: 'CardName',
+    header: 'Client Name',
+    field: 'name',
+    isSort:true,
   },
   {
-    header: 'Balance',
-    field: 'CustBalance',
-  }
-];
-export const Clients_Columns_FR = [
-  {
-    header: 'Code de carte',
-    field: 'CardCode',
-  },
-  {
-    header: 'Nom de la carte',
-    field: 'CardName',
-  },
-  {
-    header: 'Provision',
-    field: 'CustBalance',
+    header: 'Status',
+    field: 'activeText',
+    isStatus:true,
+    isSort:true,
   }
 ];
 
+export const Clients_Columns_FR = [
+  {
+    header: 'Code de carte',
+    field: 'clntNo',
+    isSort:true,
+  },
+  {
+    header: 'Nom de la carte',
+    field: 'name',
+    isSort:true,
+  },
+  {
+    header: 'Status',
+    field: 'activeText',
+    isStatus:true,
+    isSort:true,
+  }
+];
 export const Clients_Columns_AR = [
   {
     header: 'الكود',
-    field: 'CardCode',
+    field: 'clntNo',
+    isSort:true,
   },
   {
     header: 'الاسم',
-    field: 'CardName',
+    field: 'name',
+    isSort:true,
   },
   {
-    header: 'الميزانية',
-    field: 'CustBalance',
+    header: 'الحالة',
+    field: 'activeText',
+    isStatus:true,
+    isSort:true,
   },
 ];

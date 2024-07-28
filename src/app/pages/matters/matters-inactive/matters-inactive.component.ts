@@ -19,7 +19,7 @@ export class MattersInactiveComponent {
       {
         title: this._languageService.getTransValue('matters.matterDetails'),
         targetType: 'path',
-        target: '/matters/view/',
+        target: '/matters/inactive/view/',
         icon: 'eye',
         permission:'View_Matter'
       },

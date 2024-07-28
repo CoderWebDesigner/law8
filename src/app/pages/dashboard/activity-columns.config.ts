@@ -1,113 +1,216 @@
+// export const Activity_Columns_EN = [
+//   {
+//     header: "Activity Number",
+//     field: 'ActivityId',
+//   },
+//   {
+//     header: "Matter",
+//     field: 'MatterCode',
+//   },
+//   {
+//     header: "Action",
+//     field: 'Action',
+//   },
+//   {
+//     header: "Description",
+//     field: 'Note',
+//     isLargeText:true
+//   },
+//   {
+//     isDate:true,
+//     header: "Date",
+//     field: 'StartDate',
+//   },
+//   {
+//     header: "Start Time",
+//     field: 'StartTime',
+//   },
+//   {
+//     header: "Court File Number",
+//     field: 'CaseNo',
+//   },
+//   {
+//     header: "Priority",
+//     field: 'Priority',
+//     isStatus:true
+//   }
+// ];
+
+// export const Activity_Columns_FR = [
+//   {
+//     header: "Numéro d'activité",
+//     field: 'ActivityId',
+//   },
+//   {
+//     header: "Matière",
+//     field: 'MatterCode',
+//   },
+//   {
+//     header: "Action",
+//     field: 'Action',
+//   },
+//   {
+//     header: "Description",
+//     field: 'Note',
+//     isLargeText:true
+//   },
+//   {
+//     isDate:true,
+//     header: "Date",
+//     field: 'StartDate',
+//   },
+//   {
+//     header: "Heure de début",
+//     field: 'StartTime',
+//   },
+//   {
+//     header: "Numéro de dossier judiciaire",
+//     field: 'CaseNo',
+//   },
+//   {
+//     header: "Priorité",
+//     field: 'Priority',
+//     isStatus:true
+//   },
+// ];
+
+// export const Activity_Columns_AR = [
+//   {
+//     header: "رقم النشاط",
+//     field: 'ActivityId',
+//   },
+//   {
+//     header: "موضوع",
+//     field: 'MatterCode',
+//   },
+//   {
+//     header: "فعل",
+//     field: 'Action',
+//   },
+//   {
+//     header: "وصف",
+//     field: 'Note',
+//     isLargeText:true
+//   },
+//   {
+//     isDate:true,
+//     header: "تاريخ",
+//     field: 'StartDate',
+//   },
+//   {
+//     header: "وقت البدء",
+//     field: 'StartTime',
+//   },
+//   {
+//     header: "رقم ملف المحكمة",
+//     field: 'CaseNo',
+//   },
+//   {
+//     header: "أولوية",
+//     field: 'Priority',
+//     isStatus:true
+//   }
+// ];
 export const Activity_Columns_EN = [
   {
-    header: "Activity Number",
-    field: 'ActivityId',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: "Matter",
-    field: 'MatterCode',
+    header: 'Activity Type',
+    field: 'law_ActivityType',
   },
   {
-    header: "Action",
-    field: 'Action',
-  },
-  {
-    header: "Description",
-    field: 'Note',
+    header: 'Description',
+    field: 'description',
     isLargeText:true
-  },
-  {
-    isDate:true,
-    header: "Date",
-    field: 'StartDate',
-  },
-  {
-    header: "Start Time",
-    field: 'StartTime',
-  },
-  {
-    header: "Court File Number",
-    field: 'CaseNo',
-  },
-  {
-    header: "Priority",
-    field: 'Priority',
-    isStatus:true
-  }
-];
 
+  },
+  {
+    header: 'User',
+    field: 'user',
+  },
+
+  {
+    header: 'Date',
+    field: 'startDate',
+    isDate: true,
+    isSort: true,
+  },
+
+  {
+    header: 'Status',
+    field: 'law_ActivityStatus',
+    isStatus: true,
+
+  },
+];
 export const Activity_Columns_FR = [
   {
-    header: "Numéro d'activité",
-    field: 'ActivityId',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: "Matière",
-    field: 'MatterCode',
+    header: 'Activity Type',
+    field: 'law_ActivityType',
   },
   {
-    header: "Action",
-    field: 'Action',
-  },
-  {
-    header: "Description",
-    field: 'Note',
+    header: 'Description',
+    field: 'description',
     isLargeText:true
+
   },
   {
-    isDate:true,
-    header: "Date",
-    field: 'StartDate',
+    header: 'User',
+    field: 'user',
   },
+
   {
-    header: "Heure de début",
-    field: 'StartTime',
+    header: 'Date',
+    field: 'startDate',
+    isDate: true,
+    isSort: true,
   },
+
   {
-    header: "Numéro de dossier judiciaire",
-    field: 'CaseNo',
-  },
-  {
-    header: "Priorité",
-    field: 'Priority',
-    isStatus:true
+    header: 'Status',
+    field: 'law_ActivityStatus',
+    isStatus: true,
+
   },
 ];
 
 export const Activity_Columns_AR = [
   {
-    header: "رقم النشاط",
-    field: 'ActivityId',
+    header: 'Matter Number',
+    field: 'mtrNo',
   },
   {
-    header: "موضوع",
-    field: 'MatterCode',
+    header: 'Activity Type',
+    field: 'law_ActivityType',
   },
   {
-    header: "فعل",
-    field: 'Action',
-  },
-  {
-    header: "وصف",
-    field: 'Note',
+    header: 'Description',
+    field: 'description',
     isLargeText:true
+
   },
   {
-    isDate:true,
-    header: "تاريخ",
-    field: 'StartDate',
+    header: 'User',
+    field: 'user',
   },
+
   {
-    header: "وقت البدء",
-    field: 'StartTime',
+    header: 'Date',
+    field: 'startDate',
+    isDate: true,
+    isSort: true,
   },
+
   {
-    header: "رقم ملف المحكمة",
-    field: 'CaseNo',
+    header: 'Status',
+    field: 'law_ActivityStatus',
+    isStatus: true,
+
   },
-  {
-    header: "أولوية",
-    field: 'Priority',
-    isStatus:true
-  }
 ];

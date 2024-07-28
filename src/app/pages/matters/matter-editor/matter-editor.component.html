@@ -5,7 +5,7 @@
       <p-tabView>
         <ng-container *ngFor="let item of items;let i =index">
           <p-tabPanel [header]="item.label" *ngIf="item.show">
-            <app-matter-general [previewOnly]="previewOnly" *ngIf="i==0"  (onFormSubmit)="getFormData($event)" (formStatus)="getFormStatus($event)"></app-matter-general>
+            <app-matter-general [previewOnly]="previewOnly" *ngIf="i==0" (onFormSubmit)="getFormData($event)" (formStatus)="getFormStatus($event)"></app-matter-general>
 
             <app-matter-address *ngIf="i==2"></app-matter-address>
             <ng-container *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(formlyModel?.practsAreaId)">
