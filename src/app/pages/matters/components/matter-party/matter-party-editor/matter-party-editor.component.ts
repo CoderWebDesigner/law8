@@ -73,10 +73,11 @@ export class MatterPartyEditorComponent
             props: {
               label: this._languageService.getTransValue('matters.partyType'),
               // required: true,
-              options: this.lookupsData[1]?.result?.map((obj) => ({
-                label: obj.name,
-                value: +obj.id,
-              })),
+              // options: this.lookupsData[1]?.result?.map((obj) => ({
+              //   label: obj.name,
+              //   value: +obj.id,
+              // })),
+              options:[{label:'Test 1',value:1},{label:'Test 2',value:2}],
               onChange: (e) => {
                 this.formly
                   .get('partyType')

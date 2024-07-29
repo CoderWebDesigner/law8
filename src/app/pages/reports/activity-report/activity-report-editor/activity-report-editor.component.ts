@@ -45,7 +45,7 @@ export class ActivityReportEditorComponent
           },
           {
             className: 'col-md-3',
-            key: 'matter',
+            key: 'matterIds',
             type: 'select',
             props: {
               label: this._languageService.getTransValue('matters.title'),
@@ -57,7 +57,7 @@ export class ActivityReportEditorComponent
           },
           {
             className: 'col-md-3',
-            key: 'activityType',
+            key: 'activityTypeIds',
             type: 'multi-select',
             props: {
               label: this._languageService.getTransValue('matters.activityType'),
@@ -69,7 +69,7 @@ export class ActivityReportEditorComponent
           },
           {
             type: 'multi-select',
-            key: 'jurisdictionId',
+            key: 'juriductionsIds',
             className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue('matters.jurisdicion'),
@@ -82,7 +82,7 @@ export class ActivityReportEditorComponent
           },
           {
             type: 'multi-select',
-            key: 'statusId',
+            key: 'matterStatusIds',
             className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue(
@@ -98,7 +98,7 @@ export class ActivityReportEditorComponent
           },
           {
             type: 'multi-select',
-            key: 'stageId',
+            key: 'stagesIds',
             className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue('matters.stage'),
@@ -126,7 +126,7 @@ export class ActivityReportEditorComponent
           // },
           {
             type: 'multi-select',
-            key: 'matterType',
+            key: 'matterTypeIds',
             className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue('matters.matterType'),
@@ -140,7 +140,7 @@ export class ActivityReportEditorComponent
           },
           {
             type: 'multi-select',
-            key: 'laywer',
+            key: 'lawyerIds',
             className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue('report.lawyer'),
@@ -152,7 +152,7 @@ export class ActivityReportEditorComponent
           },
           {
             type: 'multi-select',
-            key: 'client',
+            key: 'clientIds',
             className: 'col-md-3',
             props: {
               label: this._languageService.getTransValue('report.client'),

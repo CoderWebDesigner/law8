@@ -85,12 +85,12 @@
             <img [src]="'./assets/images/' + rowData[col.field] + '.png'" alt="" />
           </ng-container>
           <ng-container *ngIf="col?.isLargeText">
-            <ng-container *ngIf="rowData[col['field']] && rowData[col['field']].length > 20">
-              {{ rowData[col.field] | slice : 0 : 20 }}
+            <ng-container *ngIf="rowData[col['field']] && rowData[col['field']].length > 50">
+              {{ rowData[col.field] | slice : 0 : 50 }}
               <p-button icon="pi pi-ellipsis-h" styleClass="p-button-icon-only p-button-info p-0 p-button-text"
                 (onClick)="showMore(col?.field, rowData[col['field']])"></p-button>
             </ng-container>
-            <ng-container *ngIf="rowData[col['field']]?.length < 20">
+            <ng-container *ngIf="rowData[col['field']]?.length < 50">
               {{ rowData[col.field] }}
             </ng-container>
           </ng-container>

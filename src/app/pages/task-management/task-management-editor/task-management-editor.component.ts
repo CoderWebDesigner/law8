@@ -22,10 +22,12 @@ export class TaskManagementEditorComponent
   apiUrls = API_Config.matterActivity;
   requestId: number;
   minDate = new Date();
+  data:any
   _datePipe=inject(DatePipe)
   ngOnInit(): void {
     this.getLookupsData();
     this.getParms()
+
   }
   getParms(){
     this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
@@ -43,7 +45,8 @@ export class TaskManagementEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           console.log(res);
-          this.formlyModel = { ...res['result'] };
+          this.data=res['result']
+          this.formlyModel = { ...this.data };
          
           this.formlyModel.startDate = this._datePipe.transform(
             this.formlyModel?.startDate,
@@ -380,6 +383,8 @@ export class TaskManagementEditorComponent
                     this._languageService.getTransValue('matters.startDate'),
                   //required: true,
                   showTime: true,
+                  minDate: this.minDate,
+
                 },
               },
 
@@ -412,9 +417,24 @@ export class TaskManagementEditorComponent
           {
             fieldGroupClassName: 'form-section row mb-3',
             key: 'newSession',
+            // expressions: {
+            //    hide: () => {
+            //     return !this.formly.get('law_AdjournmentReasonsId')?.value || this.data?.law_AdjournmentReasonsId;
+            //   },
+            // },
             expressions: {
               hide: () => {
-                return !this.formly.get('law_AdjournmentReasonsId')?.value;
+                return !this.formly.get('law_AdjournmentReasonsId')?.value || !!this.data?.law_AdjournmentReasonsId;
+              },
+              onInit: (field) => {
+                const startDateControl = field.formControl.get('startDate');
+                if (startDateControl && !startDateControl.value) {
+                  startDateControl.setValue(new Date());
+                }
+                const statusControl = field.formControl.get('law_ActivityStatusId');
+                if (statusControl && !statusControl.value) {
+                  statusControl.setValue(1);
+                }
               },
             },
             fieldGroup: [

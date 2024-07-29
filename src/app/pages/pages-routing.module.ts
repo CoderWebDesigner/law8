@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
     // canActivate: [permissionGuard],
-    // data: { permission: 'Add_Client' },
+    //  data: { permission: 'dashboard' },
   },
   {
     path: 'clients',
@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./timesheet/timesheet.module').then((m) => m.TimesheetModule),
     canActivate: [permissionGuard],
-    data: { permission: 'Add_Client' },
+    data: { permission: 'View_Timesheet' },
   },
   {
     path: 'matters',
@@ -38,7 +38,7 @@ const routes: Routes = [
         (m) => m.TaskManagementModule
       ),
     canActivate: [permissionGuard],
-    data: { permission: 'Add_Client' },
+    data: { permission: 'View_TaskManagement' },
   },
   {
     path: 'users',
@@ -52,21 +52,21 @@ const routes: Routes = [
     loadChildren: () =>
       import('./lookups/lookups.module').then((m) => m.LookupsModule),
     canActivate: [permissionGuard],
-    data: { permission: 'Add_Client' },
+    data: { permission: 'View_Loockup' },
   },
   {
     path: 'security',
     loadChildren: () =>
       import('./security/security.module').then((m) => m.SecurityModule),
     canActivate: [permissionGuard],
-    data: { permission: 'Add_Client' },
+    data: { permission: 'View_Security' },
   },
   {
     path: 'reports',
     loadChildren: () =>
       import('./reports/reports.module').then((m) => m.ReportsModule),
     canActivate: [permissionGuard],
-    data: { permission: 'Add_Client' },
+    data: { permission: 'View_Report' },
   },
   {
     path: 'profile',

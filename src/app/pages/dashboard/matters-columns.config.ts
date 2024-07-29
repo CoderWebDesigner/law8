@@ -1,131 +1,144 @@
 export const Matters_Columns_EN = [
   {
     header: 'Code',
-    field: 'MatterCode',
-  },
-  {
-    header: 'Description',
-    field: 'MatterName',
+    field: 'mtrNo',
+    isSort:true
   },
   {
     header: 'Opened',
-    field: 'Opened',
-    isDate:true
+    field: 'openDate',
+    isDate:true,
+    isSort:true
   },
   {
-    header: 'Mtr Type',
-    field: 'MtrType',
+    header: 'Matter Type',
+    field: 'mtrType',
+    isSort:true
   },
   {
-    header: "Mtr Category",
-    field: 'MtrCategory',
+    header: 'Matter Category',
+    field: 'law_MtrCat',
+    isSort:true
   },
   {
-    header: "Practice Area",
-    field: 'PractArea',
+    header: 'Practice Area',
+    field: 'law_PractsArea',
+    isSort:true
   },
   {
-    header: "Client",
-    field: 'ClientName',
+    header: 'Client',
+    field: 'law_Client',
+    isSort:true
   },
   {
-    header: "Court Case No",
-    field: 'CourtNumber',
+    header: 'Court Case No',
+    field: 'courtNumber',
+    isSort:true
   },
-  {
-    header: "Parent Mtr",
-    field: 'ParentMtrCode',
-  },
-  {
-    header: "Status",
-    field: 'Status',
-  },
+  // {
+  //   header: 'Parent Matter',
+  //   field: 'ParentMatter',
+  // },
+  // {
+  //   header: 'Status',
+  //   field: 'law_AppStatus',
+  // }
 ];
+
 
 export const Matters_Columns_FR = [
   {
-    header: 'code',
-    field: 'MatterCode',
+    header: 'Code',
+    field: 'id',
+    isSort:true
   },
   {
-    header: 'description',
-    field: 'MatterName',
+    header: 'Opened',
+    field: 'cDate',
+    isDate:true,
+    isSort:true
   },
   {
-    header: 'Ouverte',
-    field: 'Opened',
-    isDate:true
+    header: 'Matter Type',
+    field: 'mtrType',
+    isSort:true
   },
   {
-    header: 'Type MTR',
-    field: 'MtrType',
+    header: 'Matter Category',
+    field: 'law_MtrCat',
+    isSort:true
   },
   {
-    header: "Catégorie MTR",
-    field: 'MtrCategory',
+    header: 'Practice Area',
+    field: 'law_PractsArea',
+    isSort:true
   },
   {
-    header: "Domaine de pratique",
-    field: 'PractArea',
+    header: 'Client',
+    field: 'law_Client',
+    isSort:true
   },
   {
-    header: "Cliente",
-    field: 'ClientName',
+    header: 'Court Case No',
+    field: 'courtNumber',
+    isSort:true
   },
+  // {
+  //   header: 'Parent Matter',
+  //   field: 'ParentMatter',
+  // },
   {
-    header: "Affaire du tribunal no",
-    field: 'CourtNumber',
-  },
-  {
-    header: "Parent MTR",
-    field: 'ParentMtrCode',
-  },
-  {
-    header: "Statut",
-    field: 'Status',
-  },
+    header: 'Status',
+    field: 'law_AppStatus',
+    isSort:true
+  }
 ];
+
 
 export const Matters_Columns_AR = [
   {
-    header: 'شفرة',
-    field: 'MatterCode',
+    header: 'Code',
+    field: 'id',
+    isSort:true
   },
   {
-    header: 'وصف',
-    field: 'MatterName',
-  },
-  {
+    header: 'Opened',
+    field: 'cDate',
     isDate:true,
-    header: 'افتتح',
-    field: 'Opened',
+    isSort:true
   },
   {
-    header: 'نوع MTR',
-    field: 'MtrType',
+    header: 'Matter Type',
+    field: 'mtrType',
+    isSort:true
   },
   {
-    header: "فئة MTR",
-    field: 'MtrCategory',
+    header: 'Matter Category',
+    field: 'law_MtrCat',
+    isSort:true
   },
   {
-    header: "منطقة الممارسة",
-    field: 'PractArea',
+    header: 'Practice Area',
+    field: 'law_PractsArea',
+    isSort:true
   },
   {
-    header: "عميل",
-    field: 'ClientName',
+    header: 'Client',
+    field: 'law_Client',
+    isSort:true
   },
   {
-    header: "قضية المحكمة رقم",
-    field: 'CourtNumber',
+    header: 'Court Case No',
+    field: 'courtNumber',
+    isSort:true
   },
+  // {
+  //   header: 'Parent Matter',
+  //   field: 'ParentMatter',
+  // },
   {
-    header: "الوالد MTR",
-    field: 'ParentMtrCode',
-  },
-  {
-    header: "حالة",
-    field: 'Status',
-  },
+    header: 'Status',
+    field: 'law_AppStatus',
+    isSort:true
+  }
 ];

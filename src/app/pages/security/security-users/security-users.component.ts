@@ -103,4 +103,17 @@ export class SecurityUsersComponent {
         },
       });
   }
+
+  // resetSelections() {
+  //   this.selectedRow = null;
+  //   this.userGroups = [];
+  //   this.selectedGroups = [];
+  // }
+
+  // onSearch(searchKey: string) {
+  //   this.resetSelections();
+  // }
+
+
+
 }

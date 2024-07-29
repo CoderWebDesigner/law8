@@ -6,7 +6,7 @@ export const MENU: MenuItem[] = [
     label: 'menu.dashboard',
     icon: 'dashboard.svg',
     link: '/dashboard',
-    role: 'Add_Client',
+    role: 'dashboard',
   },
   {
     id: 2,
@@ -54,7 +54,7 @@ export const MENU: MenuItem[] = [
       {
         id: 2,
         label: 'menu.matters.matterList',
-        link: '/matters',
+        link: '/matters/list',
         parentId: 3,
         role: 'View_Matter',
       },
@@ -93,7 +93,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.taskManagement.calender',
         link: '/task-management/calender',
         parentId: 4,
-        role: 'View_TaskManagement',
+        role: 'dashboard',
       },
     ],
   },
@@ -147,7 +147,7 @@ export const MENU: MenuItem[] = [
     id: 7,
     label: 'menu.lookups.title',
     icon: 'lookups.svg',
-    role: 'lookups',
+    role: 'View_Loockup',
     subItems: [
       {
         id: 1,
@@ -194,14 +194,14 @@ export const MENU: MenuItem[] = [
     label: 'menu.security.title',
     icon: 'security.svg',
     link: '/security',
-    role: 'View_Role',
+    role: 'View_Security',
   },
   {
     id: 9,
     label: 'menu.reports.title',
     icon: 'report.svg',
-    link: '/security',
-    role: 'View_Role',
+    link: '/reports',
+    role: 'View_Report',
     subItems: [
       
       {
@@ -209,7 +209,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.reports.activityreport',
         link: '/reports',
         parentId: 6,
-        role: 'Add_Users',
+        role: 'View_Report',
       },
     ]
   },

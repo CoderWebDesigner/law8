@@ -1,5 +1,5 @@
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 
 @Component({
@@ -14,6 +14,8 @@ export class SharedSearchInputComponent
   implements OnInit
 {
   @Input() searchKey: string;
+  @Output() searchEvent? = new EventEmitter<string>();
+
 
 
   ngOnInit(): void {
@@ -39,5 +41,8 @@ export class SharedSearchInputComponent
 
   override onSubmit(): void {
     this._sharedTableService.search$.next(this.formlyModel.search)
+
   }
+
+
 }
