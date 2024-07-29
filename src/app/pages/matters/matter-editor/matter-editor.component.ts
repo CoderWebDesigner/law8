@@ -726,7 +726,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     this.isSubmit = true;
     console.log(this.formlyModel?.photo);
-    if (this.formly.invalid || !this.formValid) return;
+    if (this.formly.invalid || !this.formValid){
+      this.isSubmit = false;
+      return;
+    } 
     this._apiService
       .post(API_Config.matters.create, this.formlyModel)
       .pipe(
