@@ -3,7 +3,6 @@ import { LanguageService } from '@core/services';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LookupsMainItemEditorComponent } from '../components/lookups-main-item-editor/lookups-main-item-editor.component';
-import { LookupsSubItemEditorComponent } from '../components/lookups-sub-item-editor/lookups-sub-item-editor.component';
 import { Rate_Children_Columns_AR, Rate_Children_Columns_EN, Rate_Children_Columns_FR, Rate_Columns_AR, Rate_Columns_EN, Rate_Columns_FR } from './rate-table-columns.config';
 import { API_Config } from '@core/api/api-config/api.config';
 import { swapFirstTwoIndexes } from '@core/utilities/defines/functions/swap-first-two-indexes';
@@ -70,6 +69,7 @@ export class LookupsRateTableComponent implements OnInit {
       },
     ]
   }
+
   ngOnInit(): void {
     this.columnsLocalized = swapFirstTwoIndexes(
       this.columnsLocalized,this._languageService.getSelectedLanguage()
@@ -78,6 +78,7 @@ export class LookupsRateTableComponent implements OnInit {
       this.columnsLocalizedChildren=null
     }
   }
+  
   openItemEditor(formType:string,categorytype:string){
     const ref = this._dialogService.open(LookupsMainItemEditorComponent,{
       width:'30%',
@@ -91,6 +92,7 @@ export class LookupsRateTableComponent implements OnInit {
       console.log('hello')
       this._sharedTableService.refreshData.next(true);
     });
+    
   }
 
   private setDialogHeader(formType:string,categorytype:string){

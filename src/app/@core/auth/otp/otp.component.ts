@@ -76,7 +76,7 @@ export class OtpComponent extends FormBaseClass implements OnInit {
               this._router.navigate(['/dashboard']);
               setTimeout(() => {
                 window.location.reload()
-              }, 0);
+              }, 300);
 
             } else {
               this._toastrNotifiService.displayErrorToastr(
