@@ -14,7 +14,7 @@ export class SharedSearchInputComponent
   implements OnInit
 {
   @Input() searchKey: string;
-  @Output() searchEvent? = new EventEmitter<string>();
+  @Output() onSearch = new EventEmitter<string>();
 
 
 
@@ -32,6 +32,7 @@ export class SharedSearchInputComponent
           icon: 'pi pi-search',
           class: 'p-inputtext-sm',
           keyup:(e)=>{
+            this.onSearch.emit(this.formlyModel.search)
             this._sharedTableService.search$.next(this.formlyModel.search)
           }
         },
@@ -40,6 +41,7 @@ export class SharedSearchInputComponent
   }
 
   override onSubmit(): void {
+    this.onSearch.emit(this.formlyModel.search)
     this._sharedTableService.search$.next(this.formlyModel.search)
 
   }

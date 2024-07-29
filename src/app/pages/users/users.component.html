@@ -1,6 +1,6 @@
 <shared-card [title]="'menu.users.title' | translate" [borderRadius]="20">
   <div headerActions class="d-flex">
-    <shared-search-input></shared-search-input>
+    <!-- <shared-search-input></shared-search-input> -->
     <div class="filter position-relative">
       <app-users-timesheet-setting *ngIf="showFilter" (onFilter)="onFilter($event)"
         (onClose)="onClose($event)"></app-users-timesheet-setting>

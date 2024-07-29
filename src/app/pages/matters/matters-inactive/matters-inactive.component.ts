@@ -15,6 +15,7 @@ export class MattersInactiveComponent {
   _languageService = inject(LanguageService);
   additionalTableConfig: TableConfig = {
     id: 'id',
+    isSearch:true,
     actions: [
       {
         title: this._languageService.getTransValue('matters.matterDetails'),

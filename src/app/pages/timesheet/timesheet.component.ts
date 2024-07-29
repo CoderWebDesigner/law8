@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { AuthService, LanguageService } from '@core/services';
 import { Timesheet_Columns_AR, Timesheet_Columns_EN, Timesheet_Columns_FR } from './timesheet-columns.config';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
   selector: 'app-timesheet',
@@ -21,5 +22,7 @@ export class TimesheetComponent {
     fr: Timesheet_Columns_FR,
     ar:  Timesheet_Columns_AR,
   };
-
+  additionalTableConfig: TableConfig = {
+    isSearch:true,
+  }
 }

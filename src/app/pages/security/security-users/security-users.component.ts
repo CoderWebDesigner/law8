@@ -19,6 +19,8 @@ import { ApiService } from '@core/api/api.service';
 import { SharedService } from '@shared/services/shared.service';
 import { ApiRes } from '@core/models';
 import { LanguageService, ToasterService } from '@core/services';
+import { SecurityUsersGroupsComponent } from './security-users-groups/security-users-groups.component';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
   selector: 'app-security-users',
@@ -31,6 +33,7 @@ import { LanguageService, ToasterService } from '@core/services';
     SharedCardComponent,
     SharedSearchInputComponent,
     SharedModule,
+    SecurityUsersGroupsComponent
   ],
 })
 export class SecurityUsersComponent {
@@ -55,9 +58,12 @@ export class SecurityUsersComponent {
     ar: Users_Columns_AR,
     fr: Users_Columns_FR,
   };
+  additionalTableConfig:TableConfig={
+    isSearch:true
+  }
   onRowSelect(e: any) {
     this.selectedRow = e['data'];
-    this.getGroupsByUserId()
+    // this.getGroupsByUserId()
   }
   onSelectGroupRow(e: any) {
     this.selectedGroups.push(e?.data);

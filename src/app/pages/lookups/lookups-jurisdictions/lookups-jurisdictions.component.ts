@@ -43,6 +43,7 @@ export class LookupsJurisdictionsComponent implements OnInit{
   }
   additionalTableConfig: TableConfig = {
     id:'id',
+    isSearch:true,
     actions:[
       {
         type:'update',

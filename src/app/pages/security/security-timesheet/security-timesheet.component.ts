@@ -13,6 +13,7 @@ import { finalize } from 'rxjs';
 import { DropdownModule } from 'primeng/dropdown';
 import { PAGESIZE } from '@core/utilities/defines';
 import { LanguageService, ToasterService } from '@core/services';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
   selector: 'app-security-timesheet',
@@ -34,6 +35,9 @@ export class SecurityTimesheetComponent implements OnInit{
   updatedRows: any[] = [];
   users: any[] = [];
   data: any[] = [];
+  additionalTableConfig: TableConfig = {
+    isSearch:true,
+  }
   columnsLocalized ={
     en:Security_Timesheet_Columns_EN,
     ar:Security_Timesheet_Columns_AR,

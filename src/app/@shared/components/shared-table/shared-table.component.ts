@@ -43,6 +43,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CheckboxModule } from 'primeng/checkbox';
 import { PermissionService } from '@core/services/permission.service';
+import { SharedSearchInputComponent } from '../shared-search-input/shared-search-input.component';
 @Component({
   selector: 'shared-table',
   templateUrl: './shared-table.component.html',
@@ -61,6 +62,7 @@ import { PermissionService } from '@core/services/permission.service';
     SkeletonModule,
     ProgressSpinnerModule,
     CheckboxModule,
+    SharedSearchInputComponent
   ],
   providers: [DialogService],
 })
@@ -158,7 +160,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
     this.columnChildren = this.getColumns(this.columnsLocalizedChildren);
-    this.onSearch();
+    // this.onExtraSearch();
     this.getData();
   }
   getData() {
@@ -340,8 +342,8 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     //   console.log(this.filterSubOptions)
     // }
   }
-
-  onSearch() {
+  onExtraSearch(){
+    
     this._sharedTableService.search$
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
@@ -352,6 +354,10 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
           // this.dt.filterGlobal(res, 'contains')
         },
       });
+  }
+  onSearch(value:string) {
+    this.filterOptions = { ...this.filterOptions, search: value };
+    this.getData()
   }
   showMore(title: string, value: string) {
     this._dialogService.open(MoreInfoComponent, {

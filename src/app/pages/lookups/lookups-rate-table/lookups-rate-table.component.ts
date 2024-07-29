@@ -40,6 +40,7 @@ export class LookupsRateTableComponent implements OnInit {
   }
   additionalTableConfig: TableConfig = {
     id:'id',
+    isSearch:true,
     actions:[
       {
         type:'update',
@@ -59,6 +60,7 @@ export class LookupsRateTableComponent implements OnInit {
   }
   additionalTableConfigChildren: TableConfig = {
     id:'id',
+    isSearch:true,
     actions:[
       {
         type:'update',

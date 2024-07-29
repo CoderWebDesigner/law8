@@ -275,6 +275,7 @@ export class LookupsMainListComponent implements OnInit {
     };
     this.additionalTableConfigChildren = {
       id: 'id',
+      isSearch:true,
       actions: [
         {
           type: 'update',

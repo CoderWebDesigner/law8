@@ -62,6 +62,7 @@ export class SecurityGroupsComponent {
 
   additionalTableConfig: TableConfig = {
     id: 'id',
+    isSearch:true,
     actions: [
       {
         type: 'update',
