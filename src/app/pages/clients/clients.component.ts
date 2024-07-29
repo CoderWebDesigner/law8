@@ -25,6 +25,7 @@ export class ClientsComponent {
 
   additionalTableConfig: TableConfig = {
     id: 'id',
+    isSearch:true,
     actions: [
       {
         title: this._languageService.getTransValue('client.updateClient'),

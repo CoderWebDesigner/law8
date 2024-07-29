@@ -2,9 +2,9 @@
     <div headerActions class="d-flex">
         <p-dropdown [showClear]="true" (onChange)="selectUser($event)" [options]="users" optionLabel="name" optionValue="id"
             [filter]="true" filterBy="name" placeholder="Select a users" styleClass="list"></p-dropdown>
-        <shared-search-input class="ms-2"></shared-search-input>
+        <!-- <shared-search-input class="ms-2"></shared-search-input> -->
     </div>
-    <shared-table body [data]="data" [filterOptions]="filterOptions" [columnsLocalized]="columnsLocalized"
+    <shared-table body [data]="data" [filterOptions]="filterOptions" [additionalTableConfig]="additionalTableConfig" [columnsLocalized]="columnsLocalized"
         (onRowSelect)="onRowSelect($event)"></shared-table>
 </shared-card>
 <div class="d-flex justify-content-end my-3">

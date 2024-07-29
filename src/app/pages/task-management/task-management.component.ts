@@ -23,6 +23,7 @@ export class TaskManagementComponent {
 
   additionalTableConfig: TableConfig = {
     id:'id',
+    isSearch:true,
     actions: [
       {
         title: this._languageService.getTransValue('taskManagement.updateTask'),

@@ -41,6 +41,7 @@ export class LookupsMatterCaterogyComponent implements OnInit{
   searchValue:string;
   additionalTableConfig: TableConfig = {
     id:'id',
+    isSearch:true,
     actions:[
       {
         type:'update',
@@ -60,6 +61,7 @@ export class LookupsMatterCaterogyComponent implements OnInit{
   }
   additionalTableConfigChildren: TableConfig = {
     id:'id',
+    isSearch:true,
     actions:[
       {
         type:'update',

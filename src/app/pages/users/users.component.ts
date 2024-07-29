@@ -25,6 +25,7 @@ export class UsersComponent {
 
   additionalTableConfig: TableConfig = {
     id: 'id',
+    isSearch:true,
     actions: [
       {
         title: this._languageService.getTransValue('users.updateUser'),

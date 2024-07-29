@@ -17,6 +17,7 @@ import { ApiRes } from '@core/models';
 import { DropdownModule } from 'primeng/dropdown';
 import { PAGESIZE } from '@core/utilities/defines';
 import { LanguageService, ToasterService } from '@core/services';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
   selector: 'app-security-calender',
@@ -39,6 +40,9 @@ export class SecurityCalenderComponent implements OnInit {
   _toastrNotifiService = inject(ToasterService);
   isSubmit: boolean;
   users: any[] = [];
+  additionalTableConfig: TableConfig = {
+    isSearch:true,
+  }
   apiUrls = API_Config.calendarSecurity;
   filterOptions;
   updatedRows: any[] = [];
