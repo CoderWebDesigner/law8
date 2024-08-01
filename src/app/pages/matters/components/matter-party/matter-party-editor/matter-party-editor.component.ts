@@ -72,17 +72,14 @@ export class MatterPartyEditorComponent
             type: 'select',
             props: {
               label: this._languageService.getTransValue('matters.partyType'),
-              // required: true,
-              // options: this.lookupsData[1]?.result?.map((obj) => ({
-              //   label: obj.name,
-              //   value: +obj.id,
-              // })),
-              options:[{label:'Test 1',value:1},{label:'Test 2',value:2}],
-              onChange: (e) => {
-                this.formly
-                  .get('partyType')
-                  .setValue(e?.originalEvent.target.innerText);
-              },
+              required: true,
+              options: this.lookupsData[1]?.result?.map((obj) => ({
+                label: obj.name,
+                value: +obj.id,
+              })),
+              onChange:(e)=>{
+                this.formly.get('partyType').setValue(e?.originalEvent.target.innerText)
+              }    
             },
           },
           {
@@ -175,6 +172,7 @@ export class MatterPartyEditorComponent
                           label: obj.name,
                           value: obj.id,
                         }));
+                        this.formlyOption.build();
                       },
                     });
                 }
@@ -240,6 +238,7 @@ export class MatterPartyEditorComponent
         }
         return obj;
       });
+      console.log(this.data)
       this._matterService.partyList$.next(this.data);
       this._DialogService.dialogComponentRefMap.forEach((dialog) => {
         dialog.destroy();

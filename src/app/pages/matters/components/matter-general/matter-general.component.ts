@@ -379,17 +379,17 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
       }
 
       const payload = {
-        law_TaskCodeId: this.formlyModel.law_TaskCodeId,
-        defaultTaskTypeId: this.formlyModel.defaultTaskTypeId,
-        defaultRate: this.formlyModel.defaultRate,
-        rateAmount: this.formlyModel.rateAmount,
-        law_ReferralTypeId: this.formlyModel.law_ReferralTypeId,
-        law_ClientIntroducingId: this.formlyModel.law_ClientIntroducingId,
-        law_MatterIntroducingLawyerId: this.formlyModel.law_MatterIntroducingLawyerId,
-        law_ResponsibleLaywerId: this.formlyModel.law_ResponsibleLaywerId,
-        law_AssignedLaywerList: this.formlyModel.law_AssignedLaywerList.filter(obj => obj !== null),
-        law_OtherStaffList: this.formlyModel.law_OtherStaffList.filter(obj => obj !== null),
-        id: this.formlyModel.id
+        law_TaskCodeId: this.formlyModel?.law_TaskCodeId,
+        defaultTaskTypeId: this.formlyModel?.defaultTaskTypeId,
+        defaultRate: this.formlyModel?.defaultRate,
+        rateAmount: this.formlyModel?.rateAmount,
+        law_ReferralTypeId: this.formlyModel?.law_ReferralTypeId,
+        law_ClientIntroducingId: this.formlyModel?.law_ClientIntroducingId,
+        law_MatterIntroducingLawyerId: this.formlyModel?.law_MatterIntroducingLawyerId,
+        law_ResponsibleLaywerId: this.formlyModel?.law_ResponsibleLaywerId,
+        law_AssignedLaywerList: this.formlyModel?.law_AssignedLaywerList?.filter(obj => obj !== null),
+        law_OtherStaffList: this.formlyModel?.law_OtherStaffList?.filter(obj => obj !== null),
+        id: this.formlyModel?.id
         };
 
       console.log('onSubmit payload', payload);
@@ -417,8 +417,8 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
             },
           });
       } else {
-        console.log(payload);
-        this.onFormSubmit.emit(payload);
+        console.log(this.formlyModel);
+        this.onFormSubmit.emit(this.formlyModel);
       }
     }
   }

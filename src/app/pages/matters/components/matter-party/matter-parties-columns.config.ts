@@ -1,8 +1,8 @@
 export const Matter_Parties_Columns_EN = [
-  {
-    header: 'ID',
-    field: 'id',
-  },
+  // {
+  //   header: 'ID',
+  //   field: 'id',
+  // },
   {
     header: 'Name',
     field: 'name',
@@ -21,10 +21,10 @@ export const Matter_Parties_Columns_EN = [
   },
 ];
 export const Matter_Parties_Columns_FR = [
-  {
-    header: 'ID',
-    field: 'id',
-  },
+  // {
+  //   header: 'ID',
+  //   field: 'id',
+  // },
   {
     header: 'Name',
     field: 'name',
@@ -44,10 +44,10 @@ export const Matter_Parties_Columns_FR = [
 ];
 
 export const Matter_Parties_Columns_AR = [
-  {
-    header: 'ID',
-    field: 'id',
-  },
+  // {
+  //   header: 'ID',
+  //   field: 'id',
+  // },
   {
     header: 'Name',
     field: 'name',

@@ -58,7 +58,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
   _cdRef = inject(ChangeDetectorRef);
-
+  generalData:any;
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) {
@@ -730,8 +730,13 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       this.isSubmit = false;
       return;
     } 
+    const payload ={
+      ...this.formlyModel,
+      ...this.generalData
+    }
+    console.log('on Create model',payload)
     this._apiService
-      .post(API_Config.matters.create, this.formlyModel)
+      .post(API_Config.matters.create, payload)
       .pipe(
         this._sharedService.takeUntilDistroy(),
         finalize(() => (this.isSubmit = false))
@@ -774,7 +779,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 'messages.createdSuccessfully'
               );
               this._toastrNotifiService.displaySuccessMessage(text);
-              this._router.navigate(['/matters']);
+              this._router.navigate(['/matters/list']);
             }
           } else {
             this._toastrNotifiService.displayErrorToastr(res?.message);
@@ -805,11 +810,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       });
   }
   getFormData(event) {
-    this.formlyModel = {
-      ...event,
-      ...this.formlyModel,
-    };
-    console.log('event', event);
+    this.generalData={
+      ...event
+    }
+    // this.formlyModel = {
+    //   ...event,
+    //   // ...this.formlyModel,
+    // };
+    console.log('getFormData from general tab', this.generalData);
   }
   getFormStatus(event) {
     this.formValid = event;

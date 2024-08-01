@@ -74,9 +74,9 @@ export class OtpComponent extends FormBaseClass implements OnInit {
               // this._authService.user.permissions=jwtDecode(res.result)['role']
               this._permissionService.userPermissions=this._authService.getDecodedToken()['role']
               this._router.navigate(['/dashboard']);
-              setTimeout(() => {
-                window.location.reload()
-              }, 300);
+              // setTimeout(() => {
+              //   window.location.reload()
+              // }, 500);
 
             } else {
               this._toastrNotifiService.displayErrorToastr(

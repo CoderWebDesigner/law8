@@ -6,13 +6,14 @@ import { ApiService } from '@core/api/api.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ActivityReportTableComponent } from './activity-report-table/activity-report-table.component';
 
 @Component({
   selector: 'app-activity-report',
   templateUrl: './activity-report.component.html',
   styleUrls: ['./activity-report.component.scss'],
   standalone:true,
-  imports:[ActivityReportEditorComponent,SharedCardComponent,SharedModule,CommonModule]
+  imports:[ActivityReportEditorComponent,SharedCardComponent,SharedModule,CommonModule,ActivityReportTableComponent]
 })
 export class ActivityReportComponent {
   _apiService=inject(ApiService);

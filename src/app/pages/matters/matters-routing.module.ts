@@ -6,6 +6,7 @@ import { MatterDetailsComponent } from './matter-details/matter-details.componen
 import { MattersInactiveComponent } from './matters-inactive/matters-inactive.component';
 
 const routes: Routes = [
+  {path:'',redirectTo:'list',pathMatch:'full'},
   { path: 'list', component: MattersComponent },
   { path: 'inactive', component: MattersInactiveComponent },
   { path: 'add', component: MatterEditorComponent },

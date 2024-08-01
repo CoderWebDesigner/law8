@@ -7,6 +7,7 @@ import { MenuItem } from './menu.model';
 import MetisMenu from 'metismenujs';
 import { AuthService } from '@core/services';
 import { PermissionService } from '@core/services/permission.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +23,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   @ViewChild('sideMenu') sideMenu: ElementRef | undefined;
 
   @Input() isCondensed = false;
+
+  isProduction=environment.production
   menu: any;
   data: any;
   menuItems:MenuItem[] = [];
