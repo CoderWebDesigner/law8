@@ -31,6 +31,7 @@ export class ActivityReportEditorComponent
             className: 'col-md-3',
             key: 'dateFrom',
             type: 'date',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue('report.dateFrom'),
             },
@@ -39,6 +40,7 @@ export class ActivityReportEditorComponent
             className: 'col-md-3',
             key: 'dateTo',
             type: 'date',
+            defaultValue:new Date(),
             props: {
               label: this._languageService.getTransValue('report.dateTo'),
             },

@@ -7,13 +7,14 @@
 <div class="row" *ngIf="selectedCard">
   <div class="col-12">
     <shared-card [title]="selectedCard.label | translate" [borderRadius]="20">
-      <shared-search-input headerActions></shared-search-input>
+      <!-- <shared-search-input headerActions></shared-search-input> -->
       <shared-table
       *ngIf="selectedCard"
         body
         [apiUrls]="selectedCard.apiUrl"
         [columnsLocalized]="selectedCard.localize"
         [mapData]="mapData"
+        [additionalTableConfig]="selectedCard.additionalTableConfig"
       >
     </shared-table>
     </shared-card>

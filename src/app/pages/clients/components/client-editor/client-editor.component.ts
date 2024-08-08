@@ -6,6 +6,7 @@ import {
   SimpleChanges,
   inject,
 } from '@angular/core';
+import { Params } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
@@ -32,20 +33,23 @@ export class ClientEditorComponent
   apiUrls = API_Config.client;
   _clientService = inject(ClientService);
   cdRef = inject(ChangeDetectorRef);
-  _permissionService=inject(PermissionService)
+  _permissionService = inject(PermissionService);
   filterOptions?: any = { orderByDirection: 'ASC' };
   disableInputs: boolean;
   items: any[] = [
     // { label: this._languageService.getTransValue('common.general') },
     // { label: this._languageService.getTransValue('client.companyAddress') },
     // { label: this._languageService.getTransValue('client.billingAddress') },
-    
-    { label: this._languageService.getTransValue('common.contacts') ,permission:this._permissionService.hasPermission('View_ClientContact')},
+
+    {
+      label: this._languageService.getTransValue('common.contacts'),
+      permission: this._permissionService.hasPermission('View_ClientContact'),
+    },
   ];
   companyAddress: any;
   billingAddress: any;
   contact: any;
-  showLanguageField: boolean =true;
+  showLanguageField: boolean = true;
   requestId: number;
   ngOnInit(): void {
     this._clientService.companyAddress$.subscribe({
@@ -59,9 +63,15 @@ export class ClientEditorComponent
       },
     });
     this.getContasts();
-    this.requestId = +this._route.snapshot.paramMap.get('id');
-    console.log('requestId',this.requestId)
-    this.getData();
+    this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
+      next: (res: Params) => {
+        this.requestId = res['id'];
+      },
+    });
+    // this.requestId = +this._route.snapshot.paramMap.get('id');
+    console.log('requestId', this.requestId);
+    this.getLookupsData();
+    if (this.requestId) this.getData();
   }
   getContasts() {
     this._clientService.contacts$.subscribe({
@@ -80,12 +90,11 @@ export class ClientEditorComponent
             className: 'col-md-4',
             key: 'clientCode',
             type: 'input',
-            
+
             props: {
               label: this._languageService.getTransValue('common.clientCode'),
               disabled: true,
               required: true,
-
             },
           },
           {
@@ -130,14 +139,21 @@ export class ClientEditorComponent
               //     },
               //   },
               // },
-               {
+              {
                 type: 'button',
-                
+
                 props: {
-                  class:'p-button-label p-button-outlined',
-                  imgPath:this._languageService.getSelectedLanguage()=='ar'?'assets/images/icons/us.jpg':'assets/images/icons/ar.png',
-                  imgStyle:{width:'30px'},
-                  style: { marginTop: '22px', padding: '10px 20px', border: 'none' },
+                  class: 'p-button-label p-button-outlined',
+                  imgPath:
+                    this._languageService.getSelectedLanguage() == 'ar'
+                      ? 'assets/images/icons/us.jpg'
+                      : 'assets/images/icons/ar.png',
+                  imgStyle: { width: '30px' },
+                  style: {
+                    marginTop: '22px',
+                    padding: '10px 20px',
+                    border: 'none',
+                  },
                   onClick: () => {
                     // console.log('before', this.showLanguageField)
                     this.showLanguageField = !this.showLanguageField;
@@ -173,71 +189,72 @@ export class ClientEditorComponent
           {
             fieldGroupClassName: 'row',
             fieldGroup: [
-            {
-              className: 'col-md-4',
-              key: 'clientGroupId',
-              type: 'select',
-              props: {
-                label: this._languageService.getTransValue('common.clientGroup'),
-                placeholder: this._languageService.getTransValue(
-                  'client.clientGroupPlaceholder'
-                ),
-                options: this.lookupsData[0].result.map((ele) => ({
-                  label: ele.name,
-                  value: ele.id,
-                })),
-                //required: true,
-                disabled: this.disableInputs,
+              {
+                className: 'col-md-4',
+                key: 'clientGroupId',
+                type: 'select',
+                props: {
+                  label:
+                    this._languageService.getTransValue('common.clientGroup'),
+                  placeholder: this._languageService.getTransValue(
+                    'client.clientGroupPlaceholder'
+                  ),
+                  options: this.lookupsData[0].result.map((ele) => ({
+                    label: ele.name,
+                    value: ele.id,
+                  })),
+                  //required: true,
+                  disabled: this.disableInputs,
+                },
               },
-            },
-            // {
-            //   className: 'col-md-4',
-            //   key: 'foreignName',
-            //   type: 'input',
-            //   props: {
-            //     label: this._languageService.getTransValue('client.foreignName'),
-            //     //required: true,
-            //     disabled: this.disableInputs,
-            //   },
-            // },
-            {
-              type: 'select',
-              key: 'introducingLawyer',
-              className: 'col-md-4',
-              props: {
-                label: this._languageService.getTransValue(
-                  'client.clientIntroducing'
-                ),
-                disabled: this.disableInputs,
-                options: this.lookupsData[4].result.map((obj) => ({
-                  label: obj.name,
-                  value: obj.id,
-                })),
+              // {
+              //   className: 'col-md-4',
+              //   key: 'foreignName',
+              //   type: 'input',
+              //   props: {
+              //     label: this._languageService.getTransValue('client.foreignName'),
+              //     //required: true,
+              //     disabled: this.disableInputs,
+              //   },
+              // },
+              {
+                type: 'select',
+                key: 'introducingLawyer',
+                className: 'col-md-4',
+                props: {
+                  label: this._languageService.getTransValue(
+                    'client.clientIntroducing'
+                  ),
+                  disabled: this.disableInputs,
+                  options: this.lookupsData[3].result.map((obj) => ({
+                    label: obj.name,
+                    value: obj.id,
+                  })),
+                },
               },
-            },
-            // {
-            //   className: 'col-md-4',
-            //   key: 'clientIntro',
-            //   type: 'select',
-            //   props: {
-            //     label: this._languageService.getTransValue('client.clientIntro'),
-            //     //required: true,
-            //     disabled: this.disableInputs,
-            //   },
-            // },
-            {
-              className: 'col-12',
-              key: 'notes',
-              type: 'textarea',
-              props: {
-                label: this._languageService.getTransValue('client.notes'),
-                //required: true,
-                disabled: this.disableInputs,
+              // {
+              //   className: 'col-md-4',
+              //   key: 'clientIntro',
+              //   type: 'select',
+              //   props: {
+              //     label: this._languageService.getTransValue('client.clientIntro'),
+              //     //required: true,
+              //     disabled: this.disableInputs,
+              //   },
+              // },
+              {
+                className: 'col-12',
+                key: 'notes',
+                type: 'textarea',
+                props: {
+                  label: this._languageService.getTransValue('client.notes'),
+                  //required: true,
+                  disabled: this.disableInputs,
+                },
               },
-            },
-          ],
+            ],
           },
-     
+
           {
             className: 'card p-2 my-3 mb-3',
             fieldGroupClassName: 'row',
@@ -251,7 +268,7 @@ export class ClientEditorComponent
                   placeholder: this._languageService.getTransValue(
                     'client.addressPlaceholder'
                   ),
-                  //required: true,
+                  required: !!this.requestId,
                   disabled: this.disableInputs,
                 },
               },
@@ -413,11 +430,11 @@ export class ClientEditorComponent
         phone1: this.formlyModel?.phone1?.internationalNumber,
         phone2: this.formlyModel?.phone2?.internationalNumber,
         mobile1: this.formlyModel?.mobile1?.internationalNumber
-        ? this.formlyModel?.mobile1?.internationalNumber
-        : this.formlyModel.mobile1,
+          ? this.formlyModel?.mobile1?.internationalNumber
+          : this.formlyModel.mobile1,
         mobile2: this.formlyModel?.mobile2?.internationalNumber
-        ? this.formlyModel?.mobile2?.internationalNumber
-        : this.formlyModel.mobile2,
+          ? this.formlyModel?.mobile2?.internationalNumber
+          : this.formlyModel.mobile2,
       };
       // console.log(this.formlyModel);
       // const requestPayload = this.requestId
@@ -466,20 +483,19 @@ export class ClientEditorComponent
             this._DialogService.dialogComponentRefMap.forEach((dialog) => {
               dialog.destroy();
             });
-          }
+          },
         });
     }
   }
-
-  override getData(): void {
+  override getLookupsData(): void {
     forkJoin([
       this._apiService.get(
         this.generalApiUrls.getClientGroups,
         this.filterOptions
       ),
       this._apiService.get(this.generalApiUrls.getCountryLookup),
-      this._apiService.get(`${this.apiUrls.getById}${this.requestId}`),
-      this._apiService.post(this.apiUrls.getOrNewClientCode,null),
+      // this._apiService.get(`${this.apiUrls.getById}${this.requestId}`),
+      this._apiService.post(this.apiUrls.getOrNewClientCode, null),
       this._apiService.get(API_Config.general.getLawyerShort),
       // this._apiService.get(this.generalApiUrls.getParties),
     ])
@@ -491,15 +507,58 @@ export class ClientEditorComponent
         next: (res: ApiRes) => {
           // console.log(res);
           this.lookupsData = res;
-          this.formlyModel={
-            clientCode:res[3].result
-          }
-          if (this.requestId) {
-            this.formlyModel = res[2].result;
-            this.disableInputs = !this._permissionService.hasPermission("Update_Client");
-          }
+          this.formlyModel = {
+            clientCode: res[2].result,
+          };
+          // if (this.requestId) {
+          //   this.formlyModel = res[2].result;
+          //   this.disableInputs =
+          //     !this._permissionService.hasPermission('Update_Client');
+          // }
           this.initForm();
         },
       });
+  }
+  override getData(): void {
+    this._apiService
+      .get(`${this.apiUrls.getById}${this.requestId}`)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          this.formlyModel = res.result;
+          this.disableInputs =
+            !this._permissionService.hasPermission('Update_Client');
+        },
+      });
+    // forkJoin([
+    //   this._apiService.get(
+    //     this.generalApiUrls.getClientGroups,
+    //     this.filterOptions
+    //   ),
+    //   this._apiService.get(this.generalApiUrls.getCountryLookup),
+
+    //   this._apiService.post(this.apiUrls.getOrNewClientCode, null),
+    //   this._apiService.get(API_Config.general.getLawyerShort),
+    //   // this._apiService.get(this.generalApiUrls.getParties),
+    // ])
+    //   .pipe(
+    //     finalize(() => (this.isSubmit = false)),
+    //     this.takeUntilDestroy()
+    //   )
+    //   .subscribe({
+    //     next: (res: ApiRes) => {
+    //       // console.log(res);
+    //       this.lookupsData = res;
+    //       this.formlyModel = {
+    //         clientCode: res[3].result,
+    //       };
+    //       if (this.requestId) {
+    //         this.formlyModel = res[2].result;
+    //         this.disableInputs =
+    //           !this._permissionService.hasPermission('Update_Client');
+    //       }
+    //       this.initForm();
+    //     },
+    //   });
   }
 }

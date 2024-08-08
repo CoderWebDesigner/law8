@@ -44,4 +44,8 @@ export class MattersComponent {
     orderBy:'mtrNo',
     lang:'en'
   };
+
+  toggleFavourite(rowId:number,btnTemplate:any){
+    btnTemplate.isFavourie=!btnTemplate.isFavourie;
+  }
 }

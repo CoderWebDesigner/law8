@@ -119,7 +119,8 @@
     "addClass":"Add Class",
     "uploadLogo":"Upload Logo",
     "isPrivate":"isPrivate",
-    "location":"location"
+    "location":"location",
+    "importantMatter":"Important Matter"
 
   }
 }

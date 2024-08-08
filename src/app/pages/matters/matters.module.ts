@@ -31,6 +31,7 @@ import { MatterContactComponent } from './components/matter-contact/matter-conta
 import { MatterGeneralComponent } from './components/matter-general/matter-general.component';
 import { MatterDocumentPreviewComponent } from './matter-details/matter-details-documents/matter-document-preview/matter-document-preview.component';
 import { MattersInactiveComponent } from './matters-inactive/matters-inactive.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { MattersInactiveComponent } from './matters-inactive/matters-inactive.co
     SharedSearchInputComponent,
     FormlyConfigModule,
     TabViewModule,
+    TooltipModule
   ]
 })
 export class MattersModule { }
