@@ -9,7 +9,8 @@ const routes: Routes = [
     path:'',component:TaskManagementComponent
   } ,
   {
-    path:'add',component:TaskManagementEditorComponent
+    path:'add',component:TaskManagementEditorComponent,
+    data:{breadcrumb: 'menu.taskManagement.taskManagementAdd'}
   } ,
   {
     path:'update/:id',component:TaskManagementEditorComponent

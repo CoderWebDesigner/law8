@@ -21,9 +21,21 @@
     [apiUrls]="apiUrls"
   >
   <ng-template #actions let-rowData>
-    <p-button class="mx-2 " #btn styleClass="p-button-text p-0 bg-white p-button-warning " [outlined]="false" [icon]="btn.isFavourie?'pi pi-star-fill fs-4':'pi pi-star fs-4'" tooltipPosition="top"
-       [pTooltip]="'matters.importantMatter'| translate" 
-      (onClick)="toggleFavourite(rowData.id,btn)"></p-button>
+    <p-button 
+      class="mx-2" 
+      styleClass="p-button-text p-0 bg-white p-button-warning" 
+      [outlined]="false" 
+      [icon]="rowData.isImportent ? 'pi pi-star-fill fs-4' : 'pi pi-star fs-4'" 
+      tooltipPosition="top"
+      [pTooltip]="'matters.importantMatter' | translate" 
+      (onClick)="toggleFavourite(rowData)">
+    </p-button>
   </ng-template>
+  
+  <!-- <ng-template #actions let-rowData>
+    <p-button class="mx-2 " #btn styleClass="p-button-text p-0 bg-white p-button-warning " [outlined]="false" [icon]="rowData.isImportent?'pi pi-star-fill fs-4':'pi pi-star fs-4'" tooltipPosition="top"
+       [pTooltip]="'matters.importantMatter'| translate" 
+      (onClick)="toggleFavourite(rowData.id,btn,rowData.isImportent)"></p-button>
+  </ng-template> -->
 </shared-table>
 </shared-card>

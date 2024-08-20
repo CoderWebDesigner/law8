@@ -268,7 +268,7 @@ export class ClientEditorComponent
                   placeholder: this._languageService.getTransValue(
                     'client.addressPlaceholder'
                   ),
-                  required: !!this.requestId,
+                  // required: !!this.requestId,
                   disabled: this.disableInputs,
                 },
               },

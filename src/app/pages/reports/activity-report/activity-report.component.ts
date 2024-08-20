@@ -3,7 +3,6 @@ import { ActivityReportEditorComponent } from './activity-report-editor/activity
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedModule } from '@shared/shared.module';
 import { ApiService } from '@core/api/api.service';
-import { API_Config } from '@core/api/api-config/api.config';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ActivityReportTableComponent } from './activity-report-table/activity-report-table.component';
@@ -20,16 +19,7 @@ export class ActivityReportComponent {
   sanitizer=inject(DomSanitizer);
   _sanitizer=inject(DomSanitizer)
   urlSafe: SafeResourceUrl;
-  onFilter(e:any){
-    this._apiService.post(API_Config.report.create,e).subscribe({
-      next:(res:any)=>{
-      const base64File = `data:application/pdf;base64,${res.result}`;
-      this.urlSafe =this._sanitizer.bypassSecurityTrustResourceUrl(base64File);
-      },
-      error:(err:any)=>{
-        console.log(err)
-      }
-    })
-    console.log(e)
+  onFilter(base64File:any){
+    this.urlSafe =this._sanitizer.bypassSecurityTrustResourceUrl(base64File);
   }
 }

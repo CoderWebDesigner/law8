@@ -16,13 +16,22 @@ export const Dashboard_API = {
   newMattersDashboard:{
     get:'Dashboard/GetNewMatterList'
   },
+  activeMatterDashboard:{
+    get:'Dashboard/GetActiveMatterList'
+  },
   closedMattersDashboard:{
     get:'Dashboard/GetClosedMatterList'
+  },
+  activitiesDashboard:{
+    get:'Dashboard/GetActivityList'
   },
   pasthiringSessionList:{
     get:'Dashboard/GetPastHiringSessionList'
   },
   upcomingHearingSessions:{
     get:'Dashboard/GetUpcomingHearingSessionsList'
+  },
+  importantMatterDashboard:{
+    get:'Dashboard/GetImportentMatterList'
   }
 };
