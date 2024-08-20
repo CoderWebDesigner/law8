@@ -63,15 +63,16 @@ export class ClientEditorComponent
       },
     });
     this.getContasts();
+    // this.requestId = +this._route.snapshot.paramMap.get('id');
     this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
       next: (res: Params) => {
+        this.getLookupsData();
         this.requestId = res['id'];
+        if (this.requestId) this.getData();
       },
     });
-    // this.requestId = +this._route.snapshot.paramMap.get('id');
-    console.log('requestId', this.requestId);
-    this.getLookupsData();
-    if (this.requestId) this.getData();
+   
+    
   }
   getContasts() {
     this._clientService.contacts$.subscribe({
@@ -525,6 +526,7 @@ export class ClientEditorComponent
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
+          console.log('get by id ',res.result)
           this.formlyModel = res.result;
           this.disableInputs =
             !this._permissionService.hasPermission('Update_Client');

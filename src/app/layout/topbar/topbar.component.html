@@ -25,17 +25,24 @@
         <div class="d-flex align-items-center ms-1">
           <app-app-language></app-app-language>
         </div>
-        <div class="d-none d-lg-inline-block ms-1">
+        <!-- <div class="d-none d-lg-inline-block ms-1">
           <button type="button" class=" header-item noti-icon" data-toggle="fullscreen" (click)="fullscreen()">
             <i [inlineSVG]="'/assets/images/icons/full.svg'"></i>
           </button>
-        </div>
+        </div> -->
 
-        <!-- <div class="d-none d-lg-inline-block ms-1">
-          <button type="button" class=" header-item" data-toggle="search">
+        <div class="d-none d-lg-inline-block ms-1">
+          <button type="button" class=" header-item" data-toggle="search" (click)="openSearchModel()">
             <i [inlineSVG]="'/assets/images/icons/search.svg'"></i>
           </button>
-        </div> -->
+        </div>
+ 
+        <div class="d-none d-lg-inline-block ms-1">
+          <button type="button" class=" header-item" data-toggle="search" [routerLink]="['/search']">
+            <!-- Advanced Search -->
+            <i [inlineSVG]="'/assets/images/icons/advanced-search.svg'"></i>
+          </button>
+        </div>
  
       
         

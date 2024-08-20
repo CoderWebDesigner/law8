@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AppSearchComponent } from './app-search/app-search.component';
 
 @Component({
   selector: 'app-topbar',
@@ -13,6 +15,7 @@ import { DOCUMENT } from '@angular/common';
 export class TopbarComponent implements OnInit {
 
   element:any;
+  _dialogService = inject(DialogService)
  
   constructor(
     @Inject(DOCUMENT) private document: any
@@ -77,5 +80,11 @@ export class TopbarComponent implements OnInit {
         this.document.msExitFullscreen();
       }
     }
+  }
+
+  openSearchModel(){
+    this._dialogService.open(AppSearchComponent,{
+      width:'40vw',
+    })
   }
 }

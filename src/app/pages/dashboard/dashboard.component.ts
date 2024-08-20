@@ -19,25 +19,11 @@ import {
   Matters_Columns_EN,
   Matters_Columns_FR,
 } from './matters-columns.config';
-import {
-  Activity_Columns_AR,
-  Activity_Columns_EN,
-  Activity_Columns_FR,
-} from './activity-columns.config';
-import { finalize } from 'rxjs';
-import { ApiRes } from '@core/models';
+import { Activity_Columns_AR, Activity_Columns_EN } from './activity-columns.config';
+import { ApiRes, CardItem } from '@core/models';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
-import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
-interface CardItem {
-  id: number;
-  icon: string;
-  label: string;
-  key: string;
-  apiUrl?: any;
-  localize?: any;
-  additionalTableConfig?: TableConfig;
-  data: any;
-}
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
