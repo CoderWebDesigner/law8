@@ -1,0 +1,14 @@
+@import "/src/assets/scss/helpers/variables";
+.table{
+    font-size: 12px;
+}
+.row-primary{
+    background-color: $primaryColor;
+    color:$white
+}
+
+
+.link{
+    background-color: unset;
+    color: blue;
+}

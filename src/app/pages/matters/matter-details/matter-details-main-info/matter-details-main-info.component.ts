@@ -42,7 +42,8 @@ export class MatterDetailsMainInfoComponent
     this.getLookupsData();
     this.formly.valueChanges.subscribe({
       next: (res) => {
-        this.onUpdate.emit(res.practsAreaId);
+        // this.onUpdate.emit(res.practsAreaId);
+        this.onUpdate.emit(res)
       },
     });
   
@@ -353,6 +354,7 @@ export class MatterDetailsMainInfoComponent
                           },
                         });
                     }
+                    
                   },
                 },
               },
@@ -578,13 +580,17 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [
-                        this.practiceArea.Corporate,
-                        this.practiceArea.Litigation,
-                        this.practiceArea.Arbitration,
-                      ].includes(field.model?.practsAreaId) ||
-                      !field.model?.practsAreaId
-                    );
+                      !field.model?.law_MtrCatId ||
+                      field.model?.law_MtrCatId != 8
+                    ); //trademark
+                    // return (
+                    //   [
+                    //     this.practiceArea.Corporate,
+                    //     this.practiceArea.Litigation,
+                    //     this.practiceArea.Arbitration,
+                    //   ].includes(field.model?.practsAreaId) ||
+                    //   !field.model?.practsAreaId
+                    // );
                   },
                 },
               },
@@ -606,13 +612,17 @@ export class MatterDetailsMainInfoComponent
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [
-                        this.practiceArea.Corporate,
-                        this.practiceArea.Litigation,
-                        this.practiceArea.Arbitration,
-                      ].includes(field.model?.practsAreaId) ||
-                      !field.model?.practsAreaId
-                    );
+                      !field.model?.law_MtrCatId ||
+                      field.model?.law_MtrCatId != 8
+                    ); //trademark
+                    // return (
+                    //   [
+                    //     this.practiceArea.Corporate,
+                    //     this.practiceArea.Litigation,
+                    //     this.practiceArea.Arbitration,
+                    //   ].includes(field.model?.practsAreaId) ||
+                    //   !field.model?.practsAreaId
+                    // );
                   },
                 },
               },

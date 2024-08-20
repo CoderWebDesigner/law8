@@ -27,7 +27,17 @@ import {
 import { finalize } from 'rxjs';
 import { ApiRes } from '@core/models';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
-
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
+interface CardItem {
+  id: number;
+  icon: string;
+  label: string;
+  key: string;
+  apiUrl?: any;
+  localize?: any;
+  additionalTableConfig?: TableConfig;
+  data: any;
+}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -47,7 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   cardTitle: string;
   columnsLocalized = {};
 
-  items = [
+  items: CardItem[] = [
     {
       id: 1,
       icon: './assets/images/icons/dashboard/client.svg',
@@ -58,6 +68,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
         en: Clients_Columns_EN,
         ar: Clients_Columns_AR,
         fr: Clients_Columns_FR,
+      },
+      additionalTableConfig: {
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('client.updateClient'),
+            targetType: 'path',
+            target: '/clients/view/',
+            icon:'eye',
+            type:'update',
+            permission:'View_Client' //detail
+          },
+        ],
       },
       data: '',
     },
@@ -72,6 +96,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ar: Clients_Columns_AR,
         fr: Clients_Columns_FR,
       },
+      additionalTableConfig: {
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('client.updateClient'),
+            targetType: 'path',
+            target: '/clients/view/',
+            icon:'eye',
+            type:'update',
+            permission:'View_Client' //detail
+          },
+        ],
+      },
       data: '',
     },
     {
@@ -79,11 +117,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
       icon: './assets/images/icons/dashboard/active-matter.svg',
       label: this._languageService.getTransValue('dashboard.activeMatter'),
       key: 'activeMatter',
-      apiUrl: API_Config.newClientDashboard,
+      apiUrl: API_Config.activeMatterDashboard,
       localize: {
         en: Matters_Columns_EN,
         ar: Matters_Columns_AR,
         fr: Matters_Columns_FR,
+      },
+      additionalTableConfig: {
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('matters.matterDetails'),
+            targetType: 'path',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission:'View_Matter'
+          },
+        ],
       },
       data: '',
     },
@@ -98,6 +149,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ar: Matters_Columns_AR,
         fr: Matters_Columns_FR,
       },
+      additionalTableConfig: {
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('matters.matterDetails'),
+            targetType: 'path',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission:'View_Matter'
+          },
+        ],
+      },
       data: '',
     },
     {
@@ -111,6 +175,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ar: Matters_Columns_AR,
         fr: Matters_Columns_FR,
       },
+      additionalTableConfig: {
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('matters.matterDetails'),
+            targetType: 'path',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission:'View_Matter'
+          },
+        ],
+      },
       data: '',
     },
     {
@@ -118,13 +195,63 @@ export class DashboardComponent implements OnInit, OnDestroy {
       icon: './assets/images/icons/dashboard/important-matter.svg',
       label: this._languageService.getTransValue('dashboard.importantMatter'),
       key: 'importantMatter',
+      apiUrl: API_Config.importantMatterDashboard,
+      localize: {
+        en: Matters_Columns_EN,
+        ar: Matters_Columns_AR,
+        fr: Matters_Columns_FR,
+      },
+      additionalTableConfig: {
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('matters.matterDetails'),
+            targetType: 'path',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission:'View_Matter'
+          },
+        ],
+      },
       data: '',
     },
     {
+      // id: 7,
+      // icon: './assets/images/icons/dashboard/activity.svg',
+      // label: this._languageService.getTransValue('dashboard.activities'),
+      // key: 'activities',
+      // data: '',
       id: 7,
-      icon: './assets/images/icons/dashboard/activity.svg',
-      label: this._languageService.getTransValue('dashboard.activities'),
+     icon: './assets/images/icons/dashboard/activity.svg',
+     label: this._languageService.getTransValue('dashboard.activities'),
       key: 'activities',
+      apiUrl: API_Config.activitiesDashboard,
+      localize: {
+        en: Activity_Columns_EN,
+        ar: Activity_Columns_AR,
+        fr: Activity_Columns_AR,
+      },
+      additionalTableConfig:{
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('taskManagement.updateTask'),
+            type:'update',
+            targetType: 'path',
+            target: '/task-management/update/',
+            icon:'pencil',
+            permission:'Update_TaskManagement'
+          },
+          {
+            type: 'delete',
+            title: this._languageService.getTransValue('btn.delete'),
+            icon: 'trash',
+            permission:'Delete_TaskManagement'
+          },
+        ],
+      },
       data: '',
     },
     {
@@ -140,8 +267,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ar: Activity_Columns_AR,
         fr: Activity_Columns_AR,
       },
+      additionalTableConfig:{
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('taskManagement.updateTask'),
+            type:'update',
+            targetType: 'path',
+            target: '/task-management/update/',
+            icon:'pencil',
+            permission:'Update_TaskManagement'
+          },
+          {
+            type: 'delete',
+            title: this._languageService.getTransValue('btn.delete'),
+            icon: 'trash',
+            permission:'Delete_TaskManagement'
+          },
+        ],
+      },
       data: '',
-    
     },
     {
       id: 9,
@@ -155,6 +301,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
         en: Activity_Columns_EN,
         ar: Activity_Columns_AR,
         fr: Activity_Columns_AR,
+      },
+      additionalTableConfig:{
+        id:'id',
+        isSearch:true,
+        actions: [
+          {
+            title: this._languageService.getTransValue('taskManagement.updateTask'),
+            type:'update',
+            targetType: 'path',
+            target: '/task-management/update/',
+            icon:'pencil',
+            permission:'Update_TaskManagement'
+          },
+          {
+            type: 'delete',
+            title: this._languageService.getTransValue('btn.delete'),
+            icon: 'trash',
+            permission:'Delete_TaskManagement'
+          },
+        ],
       },
       data: '',
     },
@@ -346,13 +512,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
     //   }
     // })
   }
-  mapData(data:any[]){
-    return data.map(obj=>{
+  mapData(data: any[]) {
+    return data.map((obj) => {
       return {
         ...obj,
-        activeText:(obj.isActive)?'Active':'Inactive'
+        activeText: obj.isActive ? 'Active' : 'Inactive',
+      };
+    });
+  }
+  toggleFavourite(rowData: any) {
+    let payload = {
+      matterId: rowData.id
+    };
+  
+    this._apiService.post(API_Config.matters.importentMatter, null, payload).pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next: (res: ApiRes) => {
+        if (res && res.isSuccess) {
+          rowData.isImportent = !rowData.isImportent;
+        }
+        this.getStatistics()
+        // if (res && res.isSuccess) {
+        //   setTimeout(() => {
+        //     rowData.isImportent = !rowData.isImportent;
+        //     window.location.reload(); // 
+        //   }, 500); 
+        // }
+      
       }
-    })
+    });
   }
   ngOnDestroy(): void {
     this._sharedService.destroy();

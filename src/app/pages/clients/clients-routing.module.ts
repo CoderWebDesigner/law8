@@ -22,6 +22,7 @@ const routes: Routes = [
   },
   {
     path:"add",component:ClientEditorComponent,
+    data: { breadcrumb: 'menu.clients.clientAdd' },
   },
   {
     path:"intake",component:ClientIntakeComponent,

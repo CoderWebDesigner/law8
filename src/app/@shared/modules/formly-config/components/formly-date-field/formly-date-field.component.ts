@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
@@ -7,6 +7,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
   styleUrls: ['./formly-date-field.component.scss']
 })
 export class FormlyDateFieldComponent extends FieldType<FieldTypeConfig>{
+
   onSelect(e){
     // if(this.props['showTime']) this.formControl.setValue(this.getDate(e))
   }

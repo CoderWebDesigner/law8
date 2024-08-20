@@ -6,9 +6,10 @@ import { MatterDetailsComponent } from './matter-details/matter-details.componen
 import { MattersInactiveComponent } from './matters-inactive/matters-inactive.component';
 
 const routes: Routes = [
-  { path: 'list', component: MattersComponent },
-  { path: 'inactive', component: MattersInactiveComponent },
-  { path: 'add', component: MatterEditorComponent },
+  {path:'',redirectTo:'list',pathMatch:'full'},
+  { path: 'list', component: MattersComponent,data:{breadcrumb: 'menu.matters.matterList'} },
+  { path: 'inactive', component: MattersInactiveComponent,data:{breadcrumb: 'menu.matters.inactiveMatters'} },
+  { path: 'add', component: MatterEditorComponent ,data:{breadcrumb: 'menu.matters.matterAdd'}},
   // { path: 'update/:id', component: MatterEditorComponent },
   { path: 'update/:id', component: MatterDetailsComponent },
   {

@@ -58,7 +58,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   practiceArea = PracticeArea;
   _matterService = inject(MatterService);
   _cdRef = inject(ChangeDetectorRef);
-
+  generalData: any;
   ngOnInit(): void {
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) {
@@ -259,7 +259,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               },
             },
           },
-          
+
           {
             type: 'select',
             key: 'practsAreaId',
@@ -285,7 +285,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                       [this.practiceArea.IntelecturualProperty].includes(res)
                     ) {
                       this.items.forEach((obj) => {
-                        [1, 3, 4, 5, 7].includes(obj.id)
+                        [1, 3, 4, 7].includes(obj.id)
                           ? (obj.show = true)
                           : (obj.show = false);
                       });
@@ -365,13 +365,28 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                                   label: obj.name,
                                   value: obj.id,
                                 }));
-                              }
+                              },
                             });
                         } else {
                           // this.formlyModel?.law_MtrCatId=null
                           field.props.options = [];
                           this.formly.get('law_MtrCatId').setValue(null);
                         }
+                      },
+                    });
+                    field.form.get('law_MtrCatId').valueChanges.subscribe({
+                      next: (res) => {
+                        console.log('res law_MtrCatId', res);
+                        if (res) {
+                          if (this.formlyModel?.law_MtrCatId == 8) {
+                            this.items.find((item) => item.id === 5).show =
+                              true;
+                          } else {
+                            this.items.find((item) => item.id === 5).show =
+                              false;
+                          }
+                        }
+                    
                       },
                     });
                   },
@@ -430,13 +445,17 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [
-                        this.practiceArea.Corporate,
-                        this.practiceArea.Litigation,
-                        this.practiceArea.Arbitration,
-                      ].includes(field.model?.practsAreaId) ||
-                      !field.model?.practsAreaId
-                    );
+                      !field.model?.law_MtrCatId ||
+                      field.model?.law_MtrCatId != 8
+                    ); //trademark
+                    // return (
+                    //   [
+                    //     this.practiceArea.Corporate,
+                    //     this.practiceArea.Litigation,
+                    //     this.practiceArea.Arbitration,
+                    //   ].includes(field.model?.practsAreaId) ||
+                    //   !field.model?.practsAreaId
+                    // );
                   },
                 },
               },
@@ -458,13 +477,17 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 expressions: {
                   hide: (field: FormlyFieldConfig) => {
                     return (
-                      [
-                        this.practiceArea.Corporate,
-                        this.practiceArea.Litigation,
-                        this.practiceArea.Arbitration,
-                      ].includes(field.model?.practsAreaId) ||
-                      !field.model?.practsAreaId
-                    );
+                      !field.model?.law_MtrCatId ||
+                      field.model?.law_MtrCatId != 8
+                    ); //trademark
+                    // return (
+                    //   [
+                    //     this.practiceArea.Corporate,
+                    //     this.practiceArea.Litigation,
+                    //     this.practiceArea.Arbitration,
+                    //   ].includes(field.model?.practsAreaId) ||
+                    //   !field.model?.practsAreaId
+                    // );
                   },
                 },
               },
@@ -641,6 +664,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 type: 'select',
                 key: 'stageId',
                 className: 'col-md-4',
+                defaultValue: 2,
                 props: {
                   label: this._languageService.getTransValue('matters.stage'),
                   disabled: this.previewOnly,
@@ -726,9 +750,17 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   override onSubmit(): void {
     this.isSubmit = true;
     console.log(this.formlyModel?.photo);
-    if (this.formly.invalid || !this.formValid) return;
+    if (this.formly.invalid || !this.formValid) {
+      this.isSubmit = false;
+      return;
+    }
+    const payload = {
+      ...this.formlyModel,
+      ...this.generalData,
+    };
+    console.log('on Create model', payload);
     this._apiService
-      .post(API_Config.matters.create, this.formlyModel)
+      .post(API_Config.matters.create, payload)
       .pipe(
         this._sharedService.takeUntilDistroy(),
         finalize(() => (this.isSubmit = false))
@@ -771,7 +803,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 'messages.createdSuccessfully'
               );
               this._toastrNotifiService.displaySuccessMessage(text);
-              this._router.navigate(['/matters']);
+              this._router.navigate(['/matters/list']);
             }
           } else {
             this._toastrNotifiService.displayErrorToastr(res?.message);
@@ -802,11 +834,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       });
   }
   getFormData(event) {
-    this.formlyModel = {
+    this.generalData = {
       ...event,
-      ...this.formlyModel,
     };
-    console.log('event', event);
+    // this.formlyModel = {
+    //   ...event,
+    //   // ...this.formlyModel,
+    // };
+    console.log('getFormData from general tab', this.generalData);
   }
   getFormStatus(event) {
     this.formValid = event;

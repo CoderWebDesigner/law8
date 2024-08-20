@@ -10,6 +10,7 @@ export const Matters_API = {
     getMatterCodeByMatterId:"AppLookup/GetMatterCodeById",
     updateGeneral:"Law_Matter/UpdateGeneral",
     getCLientNameAndMattCodeByClientAndParent:"Law_Matter/GetCLientNameAndMattCodeByClientAndParent",
-    deactiveMatter:"Law_Matter/Law_MatterActiveAndDeactive"
+    deactiveMatter:"Law_Matter/Law_MatterActiveAndDeactive",
+    importentMatter:"Law_Matter/SetUserImportent"
   },
 };

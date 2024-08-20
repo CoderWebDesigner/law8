@@ -30,10 +30,11 @@
                     <app-matter-details-billing-settings [requestId]="requestId"
                       *ngIf="i == 11"></app-matter-details-billing-settings>
                   </ng-container>
-                  <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(this.data.practsAreaId)">
+                  <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(data.practsAreaId)">
                     <app-matter-applicants [data]="data?.law_MatterApplicantss" [previewOnly]="previewOnly" [requestId]="requestId"
                       *ngIf="i==4"></app-matter-applicants>
-                    <app-matter-class [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i==5"></app-matter-class>
+                      
+                    <app-matter-class [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i==5 && data?.law_MtrCatId==8"></app-matter-class>
                     <app-matter-details-activity [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i == 6"></app-matter-details-activity>
                     <app-matter-details-invoice [previewOnly]="previewOnly" *ngIf="i == 7"></app-matter-details-invoice>
                     <app-matter-details-timesheet [requestId]="requestId" *ngIf="i == 8"></app-matter-details-timesheet>

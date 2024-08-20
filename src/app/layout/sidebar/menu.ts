@@ -93,7 +93,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.taskManagement.calender',
         link: '/task-management/calender',
         parentId: 4,
-        role: 'dashboard',
+        role: 'Calender',
       },
     ],
   },
@@ -147,7 +147,7 @@ export const MENU: MenuItem[] = [
     id: 7,
     label: 'menu.lookups.title',
     icon: 'lookups.svg',
-    role: 'View_Loockup',
+    role: 'lookups',
     subItems: [
       {
         id: 1,

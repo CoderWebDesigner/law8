@@ -140,7 +140,9 @@ export class MatterDetailsActivityEditorComponent
               label: this._languageService.getTransValue('matters.startDate'),
               required: true,
               showTime: true,
+
             },
+            
             expressions: {
               hide: (field: FormlyFieldConfig) => {
                 return ![2, 3, 5, 6, 8, 4, 7].includes(
@@ -396,6 +398,8 @@ export class MatterDetailsActivityEditorComponent
                     this._languageService.getTransValue('matters.startDate'),
                   required: true,
                   showTime: true,
+                  minDate: this.minDate,
+
                 },
               },
 
@@ -431,9 +435,24 @@ export class MatterDetailsActivityEditorComponent
           {
             fieldGroupClassName: 'form-section row mb-3',
             key: 'newSession',
+            // expressions: {
+            //   hide: () => {
+            //     return !this.formly.get('law_AdjournmentReasonsId')?.value || this.data?.law_AdjournmentReasonsId;
+            //   },
+            // },
             expressions: {
               hide: () => {
-                return !this.formly.get('law_AdjournmentReasonsId')?.value || this.data?.law_AdjournmentReasonsId;
+                return !this.formly.get('law_AdjournmentReasonsId')?.value || !!this.data?.law_AdjournmentReasonsId;
+              },
+              onInit: (field) => {
+                const startDateControl = field.formControl.get('startDate');
+                if (startDateControl && !startDateControl.value) {
+                  startDateControl.setValue(new Date());
+                }
+                const statusControl = field.formControl.get('law_ActivityStatusId');
+                if (statusControl && !statusControl.value) {
+                  statusControl.setValue(1);
+                }
               },
             },
             fieldGroup: [

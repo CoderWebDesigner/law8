@@ -132,10 +132,19 @@ export class MatterDetailsComponent implements OnInit {
       });
   }
   updatePracticeArea(e?: any) {
-    console.log('practsAreaId',e)
+    console.log('data',e)
     // console.log(e.practsAreaId ?? this.data.practsAreaId);
     // this.practiceAreaId=e
-    this.data.practsAreaId=e??this.data.practsAreaId
+    this.data.practsAreaId=e?.practsAreaId??this.data.practsAreaId
+    this.data.law_MtrCatId=e?.law_MtrCatId??this.data.law_MtrCatId
+    console.log('this.data.practsAreaId',this.data.practsAreaId)
+    if (this.data?.law_MtrCatId == 8) {
+      this.items.find((item) => item.id === 6).show =
+        true;
+    } else {
+      this.items.find((item) => item.id === 6).show =
+        false;
+    }
     if (
       [this.practiceArea.IntelecturualProperty].includes(
         e ?? this.data?.practsAreaId
@@ -143,7 +152,7 @@ export class MatterDetailsComponent implements OnInit {
     ) {
       this.items.forEach((obj) => {
         obj.show =
-          [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+          [1, 3, 5,  7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
         this._cdRef.detectChanges();
         // [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id)
         //   ? (obj.show = true)
