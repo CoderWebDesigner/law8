@@ -86,7 +86,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               options: [
                 { label: 'New Matter', value: 1 },
                 { label: 'Sub Matter', value: 2 },
-                { label: 'Linked Matter', value: 3 },
+                // { label: 'Linked Matter', value: 3 },
               ],
             },
             hooks: {
@@ -172,36 +172,61 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
           {
             type: 'select',
             key: 'parentMatterId',
-            className: 'col-md-3',
+            className: 'col-md-4',
             props: {
               label: this._languageService.getTransValue(
                 'matters.parentMatterCode'
               ),
               disabled: this.previewOnly,
+              // onChange: (e) => {
+              //   this._apiService
+              //     .get(
+              //       `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
+              //     )
+              //     .pipe(this._sharedService.takeUntilDistroy())
+              //     .subscribe({
+              //       next: (res: ApiRes) => {
+              //         if (res.isSuccess) {
+              //           console.log(
+              //             'getCLientNameAndMattCodeByClientAndParent',
+              //             res
+              //           );
+              //           this.formly.patchValue({
+              //             clientName: res.result['name'],
+              //             mtrNo: res.result['mattCode'],
+              //           });
+              //           this.formlyOption.build();
+              //           console.log(this.formly.value);
+              //           if (this.formlyModel?.requestTypeId == 2) {
+              //           }
+              //         }
+              //       },
+              //     });
+              // },
               onChange: (e) => {
-                this._apiService
-                  .get(
-                    `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
-                  )
-                  .pipe(this._sharedService.takeUntilDistroy())
-                  .subscribe({
-                    next: (res: ApiRes) => {
-                      if (res.isSuccess) {
-                        console.log(
-                          'getCLientNameAndMattCodeByClientAndParent',
-                          res
-                        );
-                        this.formly.patchValue({
-                          clientName: res.result['name'],
-                          mtrNo: res.result['mattCode'],
-                        });
-                        this.formlyOption.build();
-                        console.log(this.formly.value);
-                        if (this.formlyModel?.requestTypeId == 2) {
+                if (this.formlyModel?.requestTypeId == 2) {
+                  this._apiService
+                    .get(
+                      `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
+                    )
+                    .pipe(this._sharedService.takeUntilDistroy())
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        if (res.isSuccess) {
+                          console.log(
+                            'getCLientNameAndMattCodeByClientAndParent',
+                            res
+                          );
+                          this.formly.patchValue({
+                            clientName: res.result['name'],
+                            mtrNo: res.result['mattCode'],
+                          });
+                          this.formlyOption.build();
+                          console.log(this.formly.value);
                         }
-                      }
-                    },
-                  });
+                      },
+                    });
+                }
               },
             },
 
@@ -253,11 +278,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 }
               },
             },
-            expressions: {
-              hide: (field: FormlyFieldConfig) => {
-                return this.formlyModel?.requestTypeId == 1;
-              },
-            },
+            // expressions: {
+            //   hide: (field: FormlyFieldConfig) => {
+            //     return this.formlyModel?.requestTypeId == 1;
+            //   },
+            // },
           },
 
           {
@@ -386,7 +411,6 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                               false;
                           }
                         }
-                    
                       },
                     });
                   },

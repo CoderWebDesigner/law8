@@ -19,6 +19,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { ApiRes } from '@core/models';
 import { ApiService } from '@core/api/api.service';
 import { SharedService } from '@shared/services/shared.service';
+import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 
 @Component({
   selector: 'app-shared-matter-table',
@@ -42,7 +43,7 @@ export class SharedMatterTableComponent implements OnInit {
   _sharedService = inject(SharedService);
   @Input() selectMode: string = 'single';
   @Input() mattersColumnsLocalized: any;
-  @Input() additionalTableConfig: any;
+  // @Input() additionalTableConfig: any;
   @Input() apiUrls: any;
   columnsLocalized = {
     en: Matters_Columns_EN,
@@ -57,6 +58,10 @@ export class SharedMatterTableComponent implements OnInit {
     this.apiUrls = this.apiUrls
       ? this.apiUrls
       : this._dialogConfig.data.apiUrls;
+  }
+
+  additionalTableConfig: TableConfig = {
+    isSearch:true,
   }
   onRowSelected(e: any) {
     if (this._dialogConfig.data['selectRow']) {

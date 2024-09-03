@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   OnChanges,
@@ -23,8 +24,29 @@ import Swal from 'sweetalert2';
 })
 export class ClientEditorComponent
   extends FormBaseClass
-  implements OnInit, OnChanges
+  implements OnInit, OnChanges,AfterViewInit
 {
+  ngAfterViewInit(): void {
+    this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
+      next: (res: Params) => {
+        this.getLookupsData();
+        this.requestId = res['id'];
+        if (this.requestId){
+          console.log('this.requestId',this.requestId)
+          setTimeout(() => {
+            
+            this.getData();
+          }, 200);
+          // show related matter tab if request id exist
+          this.items=this.items.map(obj=>{
+            obj.show=true
+            return obj
+          })
+        } 
+      },
+    });
+    console.log('ngAfterViewInit')
+  }
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
     // this._clientService.contacts$.next()
@@ -42,8 +64,16 @@ export class ClientEditorComponent
     // { label: this._languageService.getTransValue('client.billingAddress') },
 
     {
+      id:1,
       label: this._languageService.getTransValue('common.contacts'),
       permission: this._permissionService.hasPermission('View_ClientContact'),
+      show:true
+    },
+    {
+      id:2,
+      label: this._languageService.getTransValue('common.relatedMatters'),
+      permission: this._permissionService.hasPermission('View_Related_Matters'),
+      show:false
     },
   ];
   companyAddress: any;
@@ -63,15 +93,27 @@ export class ClientEditorComponent
       },
     });
     this.getContasts();
-    this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
-      next: (res: Params) => {
-        this.requestId = res['id'];
-      },
-    });
     // this.requestId = +this._route.snapshot.paramMap.get('id');
-    console.log('requestId', this.requestId);
-    this.getLookupsData();
-    if (this.requestId) this.getData();
+    // this._route.params.pipe(this._sharedService.takeUntilDistroy()).subscribe({
+    //   next: (res: Params) => {
+    //     this.getLookupsData();
+    //     this.requestId = res['id'];
+    //     if (this.requestId){
+    //       console.log('this.requestId',this.requestId)
+    //       // setTimeout(() => {
+            
+    //         this.getData();
+    //       // }, 200);
+    //       // show related matter tab if request id exist
+    //       this.items=this.items.map(obj=>{
+    //         obj.show=true
+    //         return obj
+    //       })
+    //     } 
+    //   },
+    // });
+   
+    
   }
   getContasts() {
     this._clientService.contacts$.subscribe({
@@ -525,6 +567,7 @@ export class ClientEditorComponent
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
+          console.log('get by id ',res.result)
           this.formlyModel = res.result;
           this.disableInputs =
             !this._permissionService.hasPermission('Update_Client');

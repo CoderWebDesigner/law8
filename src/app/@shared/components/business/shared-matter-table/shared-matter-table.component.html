@@ -1,5 +1,4 @@
 <shared-card [title]="'matters.title' | translate" [borderRadius]="20">
-  <shared-search-input headerActions></shared-search-input>
   <shared-table body [columnsLocalized]="columnsLocalized" [apiUrls]="apiUrls"
     [additionalTableConfig]="additionalTableConfig" [selectMode]="selectMode"
     (onRowSelect)="onRowSelected($event)"></shared-table>

@@ -1,36 +1,33 @@
 <!-- First row -->
 <div class="row mb-4">
+  <div class="col-12 text-end">
+    <p-button styleClass="p-button-label p-button-outlined border-0" (click)="actAsManager()">
+      <img alt="logo" src="../../../assets/images/manager.png" style="width: 1.5rem" />
+      <span class="ms-2 font-bold">Dashboard Manager</span>
+    </p-button>
+  </div>
+</div>
+<div class="row mb-4">
   <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let item of items">
-    <app-metric-card [config]="item" [styleClass]="selectedCard===item?'active':''" (click)="setActiveCard(item)"></app-metric-card>
+    <app-metric-card [config]="item" [styleClass]="selectedCard===item?'active':''"
+      (click)="setActiveCard(item)"></app-metric-card>
   </div>
 </div>
 <div class="row" *ngIf="selectedCard">
   <div class="col-12">
     <shared-card [title]="selectedCard.label | translate" [borderRadius]="20">
       <!-- <shared-search-input headerActions></shared-search-input> -->
-      <shared-table
-      *ngIf="selectedCard"
-        body
-        [apiUrls]="selectedCard.apiUrl"
-        [columnsLocalized]="selectedCard.localize"
-        [mapData]="mapData"
-        [additionalTableConfig]="selectedCard.additionalTableConfig"
-      >
-      <ng-template #actions let-rowData>
+      <shared-table *ngIf="selectedCard" body [apiUrls]="selectedCard.apiUrl" [columnsLocalized]="selectedCard.localize"
+        [mapData]="mapData" [additionalTableConfig]="selectedCard.additionalTableConfig" [filterOptions]="filterOption">
+        <ng-template #actions let-rowData>
 
-        <p-button 
-        *ngIf="selectedCard.id === 6"
-          class="mx-2" 
-          styleClass="p-button-text p-0 bg-white p-button-warning" 
-          [outlined]="false" 
-          [icon]="rowData.isImportent ? 'pi pi-star-fill fs-4' : 'pi pi-star fs-4'" 
-          tooltipPosition="top"
-          [pTooltip]="'matters.importantMatter' | translate" 
-          (onClick)="toggleFavourite(rowData)">
-        </p-button>
-      </ng-template>
-    </shared-table>
+          <p-button *ngIf="selectedCard.id === 6" class="mx-2" styleClass="p-button-text p-0 bg-white p-button-warning"
+            [outlined]="false" [icon]="rowData.isImportent ? 'pi pi-star-fill fs-4' : 'pi pi-star fs-4'"
+            tooltipPosition="top" [pTooltip]="'matters.importantMatter' | translate"
+            (onClick)="toggleFavourite(rowData)">
+          </p-button>
+        </ng-template>
+      </shared-table>
     </shared-card>
   </div>
 </div>
-

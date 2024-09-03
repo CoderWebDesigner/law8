@@ -8,6 +8,12 @@
     "activeMatter":"القضايا / المواضيع",
     "newMatter":"القضايا / المواضيع الجديدة",
     "closedMatter":"القضايا / المواضيع المغلقة",
-    "importantMatter":"القضايا / المواضيع المهمة"
+    "importantMatter":"القضايا / المواضيع المهمة",
+    "MatterContacts":"Matter Contacts",
+    "ClientContacts":"Client Contacts",
+    "TimeSheet":"TimeSheet",
+    "Hearingsessions":"Hearing Sessions",
+    "matter":"Matter",
+    "Parties":"Parties"
   }
 }

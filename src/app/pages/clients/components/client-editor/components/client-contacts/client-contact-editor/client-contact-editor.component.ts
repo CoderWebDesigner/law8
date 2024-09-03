@@ -172,13 +172,13 @@ export class ClientContactEditorComponent
     const requestPayload = this._dynamicDialogConfig?.data?.rowData
       ? {
           ...this.formlyModel,
-          phone: this.formlyModel?.phone?.internationalNumber,
+          // phone: this.formlyModel?.phone?.internationalNumber,
           id: this._dynamicDialogConfig?.data?.rowData?.id,
         }
       : {
           ...this.formlyModel,
-          phone: this.formlyModel?.phone?.internationalNumber,
-          law_MatterId: this._dynamicDialogConfig?.data?.law_MatterId,
+          // phone: this.formlyModel?.phone?.internationalNumber,
+          clientId: this._dynamicDialogConfig?.data?.clientId,
         };
     const path = this._dynamicDialogConfig?.data?.rowData
       ? this.apiUrls.update

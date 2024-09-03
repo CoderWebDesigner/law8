@@ -29,6 +29,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/lookups/',
     './assets/i18n/pages/security/',
     './assets/i18n/pages/report/',
+    './assets/i18n/pages/search/',
   ]);
 }
 @NgModule({
@@ -56,7 +57,6 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
-
     },
     {
       provide: HTTP_INTERCEPTORS,
