@@ -4,7 +4,7 @@ export interface CardItem {
   id: number;
   icon?: string;
   label: string;
-  key: string;
+  key?: string;
   apiUrl?: any;
   localize?: any;
   additionalTableConfig?: TableConfig;

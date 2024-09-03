@@ -12,6 +12,7 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { SharedModule } from '@shared/shared.module';
 import { ButtonModule } from 'primeng/button';
+import { ChipModule } from 'primeng/chip';
 const routes: Routes = [
   {
     path: '',
@@ -34,6 +35,7 @@ const routes: Routes = [
     SharedCardComponent,
     SharedSearchInputComponent,
     SharedModule,
+    // ChipModule
     ButtonModule
   ]
 })

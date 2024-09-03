@@ -70,7 +70,7 @@ export class MatterApplicantsEditorComponent
               placeholder: this._languageService.getTransValue(
                 'client.firstNamePlaceholder'
               ),
-              // required: true
+              required: true
             },
           },
           {

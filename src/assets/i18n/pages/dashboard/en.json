@@ -8,6 +8,12 @@
     "activeMatter":"Active Matter",
     "newMatter":"New Matter",
     "closedMatter":"Closed Matter",
-    "importantMatter":"Important Matter"
+    "importantMatter":"Important Matter",
+    "MatterContacts":"Matter Contacts",
+    "ClientContacts":"Client Contacts",
+    "TimeSheet":"TimeSheet",
+    "Hearingsessions":"Hearing Sessions",
+    "matter":"Matter",
+    "Parties":"Parties"
   }
 }

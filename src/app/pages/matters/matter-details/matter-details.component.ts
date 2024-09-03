@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
@@ -112,6 +112,15 @@ export class MatterDetailsComponent implements OnInit {
     // { label: this._languageService.getTransValue('matters.status') },
   ];
   ngOnInit(): void {
+    this._route.params.pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:Params)=>{
+        this.requestId=res['id']
+        console.log('this.requestId',this.requestId)
+        if(this.requestId)this.getById();
+      }
+    })
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) this.getById();
     // this.previewOnly=this._router.url.includes('view')

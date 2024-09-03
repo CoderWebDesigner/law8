@@ -16,7 +16,9 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 import { AppUserComponent } from './topbar/app-user/app-user.component';
 import { AppSettingsComponent } from './topbar/app-settings/app-settings.component';
 import { AppSearchComponent } from './topbar/app-search/app-search.component';
-
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ListboxModule } from 'primeng/listbox';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 const components = [
   LayoutComponent,
 ];
@@ -42,6 +44,9 @@ const components = [
     BreadcrumbModule,
     AppUserComponent,
     AppSettingsComponent,
+    ListboxModule,
+    OverlayPanelModule,
+    ScrollPanelModule
   ],
   exports:[
     ...components

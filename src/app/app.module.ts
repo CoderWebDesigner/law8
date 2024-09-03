@@ -57,7 +57,6 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
-
     },
     {
       provide: HTTP_INTERCEPTORS,

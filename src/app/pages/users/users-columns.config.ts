@@ -2,22 +2,31 @@ export const Users_Columns_EN = [
   {
     header: 'Code',
     field: 'empNo',
+    isSort:true
+
   },
   {
     header: 'Initial',
-    field: 'initial'
+    field: 'initial',
+    isSort:true
+
   },
   {
     header: 'Name',
     field: 'name',
+    isSort:true
+
   },
   {
     header: 'Title',
     field: 'title',
+    isSort:true
+
   },
   {
     header: 'Department',
     field: 'depart',
+    isSort:true
   },
 
   {
@@ -31,6 +40,7 @@ export const Users_Columns_EN = [
   {
     header: 'Email',
     field: 'email',
+    isSort:true
   },
   {
     header: 'Locked',
@@ -43,6 +53,7 @@ export const Users_Columns_EN = [
     header: 'Timesheet Date',
     field: 'timeSheetDate',
     isDate:true,
+    isSort:true
   },
   {
     header: 'Activation',
@@ -56,23 +67,32 @@ export const Users_Columns_EN = [
 export const Users_Columns_FR = [
   {
     header: 'Code',
-    field: 'id',
+    field: 'empNo',
+    isSort:true
+
   },
   {
     header: 'Initial',
-    field: 'initial'
+    field: 'initial',
+    isSort:true
+
   },
   {
     header: 'Name',
     field: 'name',
+    isSort:true
+
   },
   {
     header: 'Title',
-    field: 'titleId',
+    field: 'title',
+    isSort:true
+
   },
   {
     header: 'Department',
     field: 'depart',
+    isSort:true
   },
 
   {
@@ -86,44 +106,58 @@ export const Users_Columns_FR = [
   {
     header: 'Email',
     field: 'email',
+    isSort:true
   },
   {
     header: 'Locked',
     field: 'locked',
-    isSwitch:true
+    class:'switch-bg',
+    isSwitch:true,
+    permission:'Unlock_Users'
   },
   {
     header: 'Timesheet Date',
     field: 'timeSheetDate',
     isDate:true,
+    isSort:true
   },
   {
     header: 'Activation',
     field: 'active',
-    isSwitch:true
+    isSwitch:true,
+    permission:'Deactivate_Users'
   }
 ];
 
 export const Users_Columns_AR = [
   {
     header: 'Code',
-    field: 'id',
+    field: 'empNo',
+    isSort:true
+
   },
   {
     header: 'Initial',
-    field: 'initial'
+    field: 'initial',
+    isSort:true
+
   },
   {
     header: 'Name',
     field: 'name',
+    isSort:true
+
   },
   {
     header: 'Title',
-    field: 'titleId',
+    field: 'title',
+    isSort:true
+
   },
   {
     header: 'Department',
     field: 'depart',
+    isSort:true
   },
 
   {
@@ -137,20 +171,25 @@ export const Users_Columns_AR = [
   {
     header: 'Email',
     field: 'email',
+    isSort:true
   },
   {
     header: 'Locked',
     field: 'locked',
-    isSwitch:true
+    class:'switch-bg',
+    isSwitch:true,
+    permission:'Unlock_Users'
   },
   {
     header: 'Timesheet Date',
     field: 'timeSheetDate',
     isDate:true,
+    isSort:true
   },
   {
     header: 'Activation',
     field: 'active',
-    isSwitch:true
+    isSwitch:true,
+    permission:'Deactivate_Users'
   }
 ];

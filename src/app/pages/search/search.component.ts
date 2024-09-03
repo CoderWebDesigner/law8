@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
-import { CardItem } from '@core/models';
+import { ApiRes, CardItem } from '@core/models';
 import { LanguageService } from '@core/services';
 import { count } from 'rxjs';
 import {
@@ -42,6 +42,10 @@ import {
   Matter_Contacts_Columns_EN,
   Matter_Contacts_Columns_AR,
 } from './columns-config/matter-contacts-columns.config';
+import { ApiService } from '@core/api/api.service';
+import { SharedService } from '@shared/services/shared.service';
+import { GlobalSearch } from './enum/global-search.enum';
+import { PAGESIZE } from '@core/utilities/defines';
 
 @Component({
   selector: 'app-search',
@@ -50,13 +54,19 @@ import {
 })
 export class SearchComponent implements OnInit {
   _languageService = inject(LanguageService);
+  _apiService = inject(ApiService);
+  _sharedService=inject(SharedService)
+  globelSearch=GlobalSearch
   selectedRow: any;
+  filterOptions:any;
+  searchValue:string;
+  selectedIndex:number;
   items: CardItem[] = [
     {
       id: 1,
       label: this._languageService.getTransValue('dashboard.clients'),
-      key: 'Client',
-      apiUrl: API_Config.clientDashboard,
+      key: this.globelSearch.Clients,
+      apiUrl: API_Config.search,
       localize: {
         en: Clients_Columns_EN,
         ar: Clients_Columns_AR,
@@ -64,7 +74,7 @@ export class SearchComponent implements OnInit {
       },
       additionalTableConfig: {
         id: 'id',
-        isSearch: true,
+        //isSearch: true,
         actions: [
           {
             title: this._languageService.getTransValue('client.updateClient'),
@@ -80,8 +90,8 @@ export class SearchComponent implements OnInit {
     {
       id: 2,
       label: this._languageService.getTransValue('dashboard.matter'),
-      key: 'Matter',
-      apiUrl: API_Config.newMattersDashboard,
+      key: this.globelSearch.Matters,
+      apiUrl: API_Config.search,
       localize: {
         en: Matters_Columns_EN,
         ar: Matters_Columns_AR,
@@ -89,7 +99,7 @@ export class SearchComponent implements OnInit {
       },
       additionalTableConfig: {
         id: 'id',
-        isSearch: true,
+        //isSearch: true,
         actions: [
           {
             title: this._languageService.getTransValue('matters.matterDetails'),
@@ -104,16 +114,16 @@ export class SearchComponent implements OnInit {
     {
       id: 3,
       label: this._languageService.getTransValue('dashboard.parties'),
-      key: 'Parties',
-      apiUrl: API_Config.closedMattersDashboard,
+      key: this.globelSearch.Parties,
+      apiUrl: API_Config.search,
       localize: {
         en: Matter_Parties_Columns_EN,
         ar: Matter_Parties_Columns_AR,
         fr: Matter_Parties_Columns_FR,
       },
       additionalTableConfig: {
-        id: 'id',
-        isSearch: true,
+        id: 'law_MatterId',
+        //isSearch: true,
         actions: [
           {
             title: this._languageService.getTransValue('matters.matterDetails'),
@@ -121,6 +131,7 @@ export class SearchComponent implements OnInit {
             target: '/matters/list/view/',
             icon: 'eye',
             permission: 'View_Matter',
+            // queryParams: { tabId: 2 },
           },
         ],
       },
@@ -128,16 +139,16 @@ export class SearchComponent implements OnInit {
     {
       id: 4,
       label: this._languageService.getTransValue('dashboard.applicants'),
-      key: 'Applicants',
-      apiUrl: API_Config.importantMatterDashboard,
+      key: this.globelSearch.Applicants,
+      apiUrl: API_Config.search,
       localize: {
         en: Applicant_Columns_EN,
         ar: Applicant_Columns_AR,
         fr: Applicant_Columns_FR,
       },
       additionalTableConfig: {
-        id: 'id',
-        isSearch: true,
+        id: 'law_MatterId',
+        //isSearch: true,
         actions: [
           {
             title: this._languageService.getTransValue('matters.matterDetails'),
@@ -151,33 +162,46 @@ export class SearchComponent implements OnInit {
     },
     {
       id: 5,
-      label: this._languageService.getTransValue('dashboard.Hearing sessions'),
-      key: 'Hearing sessions',
-      apiUrl: API_Config.activitiesDashboard,
+      label: this._languageService.getTransValue('dashboard.Hearingsessions'),
+      key: this.globelSearch.Hearing_Sessions,
+      apiUrl: API_Config.search,
       localize: {
         en: Task_Management_Columns_EN,
         ar: Task_Management_Columns_AR,
         fr: Task_Management_Columns_FR,
       },
+      // additionalTableConfig: {
+      //   id: 'id',
+      //   //isSearch: true,
+      //   actions: [
+      //     {
+      //       title: this._languageService.getTransValue(
+      //         'taskManagement.updateTask'
+      //       ),
+      //       type: 'update',
+      //       targetType: 'path',
+      //       target: '/task-management/update/',
+      //       icon: 'pencil',
+      //       permission: 'Update_TaskManagement',
+      //     },
+      //     {
+      //       type: 'delete',
+      //       title: this._languageService.getTransValue('btn.delete'),
+      //       icon: 'trash',
+      //       permission: 'Delete_TaskManagement',
+      //     },
+      //   ],
+      // },
       additionalTableConfig: {
-        id: 'id',
-        isSearch: true,
+        id: 'law_MatterId',
+        //isSearch: true,
         actions: [
           {
-            title: this._languageService.getTransValue(
-              'taskManagement.updateTask'
-            ),
-            type: 'update',
+            title: this._languageService.getTransValue('matters.matterDetails'),
             targetType: 'path',
-            target: '/task-management/update/',
-            icon: 'pencil',
-            permission: 'Update_TaskManagement',
-          },
-          {
-            type: 'delete',
-            title: this._languageService.getTransValue('btn.delete'),
-            icon: 'trash',
-            permission: 'Delete_TaskManagement',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission: 'View_Matter',
           },
         ],
       },
@@ -185,98 +209,138 @@ export class SearchComponent implements OnInit {
     {
       id: 6,
       label: this._languageService.getTransValue('dashboard.TimeSheet'),
-      key: 'TimeSheet',
-      apiUrl: API_Config.pasthiringSessionList,
+      key: this.globelSearch.TimeSheet,
+      apiUrl: API_Config.search,
       localize: {
         en: Timesheet_Columns_EN,
         ar: Timesheet_Columns_AR,
         fr: Timesheet_Columns_FR,
       },
+      // additionalTableConfig: {
+      //   id: 'law_MatterId',
+      //   //isSearch: true,
+      //   actions: [
+      //     {
+      //       title: this._languageService.getTransValue(
+      //         'taskManagement.updateTask'
+      //       ),
+      //       type: 'update',
+      //       targetType: 'path',
+      //       target: '/task-management/update/',
+      //       icon: 'pencil',
+      //       permission: 'Update_TaskManagement',
+      //     },
+      //     {
+      //       type: 'delete',
+      //       title: this._languageService.getTransValue('btn.delete'),
+      //       icon: 'trash',
+      //       permission: 'Delete_TaskManagement',
+      //     },
+      //   ],
+      // },
       additionalTableConfig: {
-        id: 'id',
-        isSearch: true,
+        id: 'law_MatterId',
+        //isSearch: true,
         actions: [
           {
-            title: this._languageService.getTransValue(
-              'taskManagement.updateTask'
-            ),
-            type: 'update',
+            title: this._languageService.getTransValue('matters.matterDetails'),
             targetType: 'path',
-            target: '/task-management/update/',
-            icon: 'pencil',
-            permission: 'Update_TaskManagement',
-          },
-          {
-            type: 'delete',
-            title: this._languageService.getTransValue('btn.delete'),
-            icon: 'trash',
-            permission: 'Delete_TaskManagement',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission: 'View_Matter',
           },
         ],
       },
     },
     {
       id: 7,
-      label: this._languageService.getTransValue('dashboard.Client Contacts'),
-      key: 'Client Contacts',
-      apiUrl: API_Config.upcomingHearingSessions,
+      label: this._languageService.getTransValue('dashboard.ClientContacts'),
+      key: this.globelSearch.Client_Contacts,
+      apiUrl: API_Config.search,
       localize: {
         en: Client_Contacts_Columns_EN,
         ar: Client_Contacts_Columns_AR,
         fr: Client_Contacts_Columns_FR,
       },
+      // additionalTableConfig: {
+      //   id: 'id',
+      //   //isSearch: true,
+      //   actions: [
+      //     {
+      //       title: this._languageService.getTransValue(
+      //         'taskManagement.updateTask'
+      //       ),
+      //       type: 'update',
+      //       targetType: 'path',
+      //       target: '/task-management/update/',
+      //       icon: 'pencil',
+      //       permission: 'Update_TaskManagement',
+      //     },
+      //     {
+      //       type: 'delete',
+      //       title: this._languageService.getTransValue('btn.delete'),
+      //       icon: 'trash',
+      //       permission: 'Delete_TaskManagement',
+      //     },
+      //   ],
+      // },
       additionalTableConfig: {
-        id: 'id',
-        isSearch: true,
+        id: 'clientId',
+        //isSearch: true,
         actions: [
           {
-            title: this._languageService.getTransValue(
-              'taskManagement.updateTask'
-            ),
-            type: 'update',
+            title: this._languageService.getTransValue('client.updateClient'),
             targetType: 'path',
-            target: '/task-management/update/',
-            icon: 'pencil',
-            permission: 'Update_TaskManagement',
-          },
-          {
-            type: 'delete',
-            title: this._languageService.getTransValue('btn.delete'),
-            icon: 'trash',
-            permission: 'Delete_TaskManagement',
+            target: '/clients/view/',
+            icon: 'eye',
+            type: 'update',
+            permission: 'View_Client', //detail
           },
         ],
       },
     },
     {
       id: 8,
-      label: this._languageService.getTransValue('dashboard.Matter Contacts'),
-      key: 'Matter Contacts',
-      apiUrl: API_Config.upcomingHearingSessions,
+      label: this._languageService.getTransValue('dashboard.MatterContacts'),
+      key: this.globelSearch.Matter_Contacts,
+      apiUrl: API_Config.search,
       localize: {
         en: Matter_Contacts_Columns_EN,
         ar: Matter_Contacts_Columns_AR,
         fr: Matter_Contacts_Columns_AR,
       },
+      // additionalTableConfig: {
+      //   id: 'law_MatterId',
+      //   //isSearch: true,
+      //   actions: [
+      //     {
+      //       title: this._languageService.getTransValue(
+      //         'taskManagement.updateTask'
+      //       ),
+      //       type: 'update',
+      //       targetType: 'path',
+      //       target: '/task-management/update/',
+      //       icon: 'pencil',
+      //       permission: 'Update_TaskManagement',
+      //     },
+      //     {
+      //       type: 'delete',
+      //       title: this._languageService.getTransValue('btn.delete'),
+      //       icon: 'trash',
+      //       permission: 'Delete_TaskManagement',
+      //     },
+      //   ],
+      // },
       additionalTableConfig: {
-        id: 'id',
-        isSearch: true,
+        id: 'law_MatterId',
+        //isSearch: true,
         actions: [
           {
-            title: this._languageService.getTransValue(
-              'taskManagement.updateTask'
-            ),
-            type: 'update',
+            title: this._languageService.getTransValue('matters.matterDetails'),
             targetType: 'path',
-            target: '/task-management/update/',
-            icon: 'pencil',
-            permission: 'Update_TaskManagement',
-          },
-          {
-            type: 'delete',
-            title: this._languageService.getTransValue('btn.delete'),
-            icon: 'trash',
-            permission: 'Delete_TaskManagement',
+            target: '/matters/list/view/',
+            icon: 'eye',
+            permission: 'View_Matter',
           },
         ],
       },
@@ -286,55 +350,41 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {}
 
   onSearch(event: any) {
-    console.log('on search', event);
-    this.data = [
-      {
-        key: 'Client',
-        label: 'Client',
-        count: 1,
-      },
-      {
-        key: 'Matter',
-        label: 'Matter',
-        count: 2,
-      },
-      {
-        key: 'Matter Contacts',
-        label: 'Matter Contacts',
-        count: 3,
-      },
-      {
-        key: 'Client Contacts',
-        label: 'Client Contacts',
-        count: 4,
-      },
-      {
-        key: 'Parties',
-        label: 'Parties',
-        count: 5,
-      },
-      {
-        key: 'Applicants',
-        label: 'Applicants',
-        count: 6,
-      },
-      {
-        key: 'Hearing sessions',
-        label: 'Hearing sessions',
-        count: 7,
-      },
-      {
-        key: 'TimeSheet',
-        label: 'TimeSheet',
-        count: 8,
-      },
-    ];
+    if(event?.trim()!=''){
+      this.searchValue=event?.trim()
+      let body={
+        search:this.searchValue
+      }
+      this._apiService.get(API_Config.search.globalSearch,body).pipe(
+        this._sharedService.takeUntilDistroy()
+      ).subscribe({
+        next:(res:ApiRes)=>{
+          if(res&&res.isSuccess){
+            this.data=res.result
+          }
+        }
+      })
+    }else{
+      this.data=[];
+      this.selectedRow = null;
+    }
   }
-  setSelectedRow(row: any) {
+  setSelectedRow(row: any,index:number) {
+    this.selectedIndex=index
     this.selectedRow = null;
     setTimeout(() => {
-      this.selectedRow = this.items.find((obj) => obj.key == row.key);
+      this.selectedRow = this.items.find((obj) => obj.key == row.module);
+      this.filterOptions={
+        pageNum: 1,
+        pagSize: PAGESIZE,
+        orderByDirection: 'ASC',
+        module:row?.module,
+        search:this.searchValue
+      }
       console.log('selectedrow', this.selectedRow);
     }, 0);
   }
+
+
+  
 }

@@ -1,13 +1,21 @@
 // scroll
 
 .simplebar-scrollbar:before {
-    position: absolute;
-    content: '';
-    background: #a2adb7 !important;
-    border-radius: 7px;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    width: 4px;
-    transition: opacity 0.2s linear;
-  }
+  position: absolute;
+  content: '';
+  background: #a2adb7 !important;
+  border-radius: 7px;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  width: 4px;
+  transition: opacity 0.2s linear;
+}
+.p-overlaypanel{
+  transform-origin: center top;
+    top: 47px;
+    left: 582.417px;
+}
+.p-scrollpanel-bar {
+  background: #ddd !important;
+}

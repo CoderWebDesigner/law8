@@ -1,7 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, Inject, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Inject,
+  inject,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { DialogService } from 'primeng/dynamicdialog';
 import { AppSearchComponent } from './app-search/app-search.component';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-topbar',
@@ -13,14 +21,11 @@ import { AppSearchComponent } from './app-search/app-search.component';
  * Topbar component
  */
 export class TopbarComponent implements OnInit {
+  element: any;
+  _dialogService = inject(DialogService);
+  items: any[] | undefined;
 
-  element:any;
-  _dialogService = inject(DialogService)
- 
-  constructor(
-    @Inject(DOCUMENT) private document: any
-    ) {
-  }
+  constructor(@Inject(DOCUMENT) private document: any) {}
   showInput = false;
 
   toggleInput() {
@@ -36,9 +41,6 @@ export class TopbarComponent implements OnInit {
     this.element = document.documentElement;
   }
 
-
- 
-
   /**
    * Toggle the menu bar when having mobile screen
    */
@@ -52,8 +54,10 @@ export class TopbarComponent implements OnInit {
   fullscreen() {
     document.body.classList.toggle('fullscreen-enable');
     if (
-      !document.fullscreenElement && !this.element.mozFullScreenElement &&
-      !this.element.webkitFullscreenElement) {
+      !document.fullscreenElement &&
+      !this.element.mozFullScreenElement &&
+      !this.element.webkitFullscreenElement
+    ) {
       if (this.element.requestFullscreen) {
         this.element.requestFullscreen();
       } else if (this.element.mozRequestFullScreen) {
@@ -81,10 +85,16 @@ export class TopbarComponent implements OnInit {
       }
     }
   }
-
-  openSearchModel(){
-    this._dialogService.open(AppSearchComponent,{
-      width:'40vw',
-    })
+  onSearch(event){
+    // let searchText = 
+    console.log(event)
   }
+  getData() {
+    this.items = [];
+  }
+  // openSearchModel(){
+  //   this._dialogService.open(AppSearchComponent,{
+  //     width:'40vw',
+  //   })
+  // }
 }

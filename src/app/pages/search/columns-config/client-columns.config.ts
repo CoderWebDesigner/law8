@@ -10,9 +10,10 @@ export const Clients_Columns_EN = [
       isSort:true,
     },
     {
-      header: 'Balance',
-      field: 'balance',
+      header: 'Notes',
+      field: 'notes',
       isSort:true,
+      isLargeText:true
     }
   ];
   
@@ -28,9 +29,10 @@ export const Clients_Columns_EN = [
       isSort:true,
     },
     {
-      header: 'Provision',
-      field: 'balance',
+      header: 'Notes',
+      field: 'notes',
       isSort:true,
+      isLargeText:true
     }
   ];
   export const Clients_Columns_AR = [
@@ -45,9 +47,10 @@ export const Clients_Columns_EN = [
       isSort:true,
     },
     {
-      header: 'الميزانية',
-      field: 'balance',
+      header: 'Notes',
+      field: 'notes',
       isSort:true,
+      isLargeText:true
     },
   ];
   

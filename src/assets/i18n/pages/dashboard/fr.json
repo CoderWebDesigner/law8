@@ -8,6 +8,12 @@
     "activeMatter":"Dossiers / Affaires",
     "newMatter":"Nouveaux dossiers",
     "closedMatter":"Dossiers clos",
-    "importantMatter":"Dossiers importants"
+    "importantMatter":"Dossiers importants",
+    "MatterContacts":"Matter Contacts",
+    "ClientContacts":"Client Contacts",
+    "TimeSheet":"TimeSheet",
+    "Hearingsessions":"Hearing Sessions",
+    "matter":"Matter",
+    "parties":"Parties"
   }
 }

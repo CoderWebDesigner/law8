@@ -11,25 +11,26 @@
 
 <div class="row">
     <div class="col-md-4">
-        <ul class="list-group">
+        <!-- <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center py-3 border border-secondary-subtle cursor-pointer"
                 *ngFor="let item of data;let last=last" [ngClass]="{'border-bottom-0':!last}"
                 (click)="setSelectedRow(item)">
-                {{item.label}}
+                {{item.lable}}
                 <span class="badge text-bg-primary rounded-pill">{{item.count}}</span>
             </li>
 
-        </ul>
-        <!-- <ul class="list-group">
+        </ul> -->
+        <ul class="list-group">
             <li
-              class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 cursor-pointer list-item-enhanced"
-              *ngFor="let item of data; let last = last"
-              (click)="setSelectedRow(item)"
+            [ngClass]="{'active':selectedIndex==index}"
+              class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 cursor-pointer list-item-enhanced" 
+              *ngFor="let item of data;let index =index"
+              (click)="setSelectedRow(item,index)"
             >
-              <span class="label-text">{{ item.label }}</span>
+              <span class="label-text">{{ item.lable }}</span>
               <span class="badge badge-enhanced">{{ item.count }}</span>
             </li>
-          </ul> -->
+          </ul>
           
           
     </div>
@@ -38,7 +39,9 @@
 
             <shared-table  body [apiUrls]="selectedRow.apiUrl"
                 [columnsLocalized]="selectedRow.localize"
-                [additionalTableConfig]="selectedRow.additionalTableConfig">
+                [additionalTableConfig]="selectedRow.additionalTableConfig"
+                [filterOptions]="filterOptions"
+                >
                 <ng-template #actions let-rowData>
 
                     <!-- <p-button 
