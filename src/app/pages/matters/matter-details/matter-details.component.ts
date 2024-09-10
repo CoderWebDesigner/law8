@@ -22,11 +22,12 @@ export class MatterDetailsComponent implements OnInit {
   _router = inject(Router);
   _cdRef = inject(ChangeDetectorRef);
   requestId: number;
+  activeIndex: number=0;
   previewOnly: boolean;
   isSubmit: boolean;
   data: any;
   practiceArea = PracticeArea;
-  practiceAreaId:number;
+  practiceAreaId: number;
   items: any[] = [
     {
       id: 1,
@@ -112,19 +113,31 @@ export class MatterDetailsComponent implements OnInit {
     // { label: this._languageService.getTransValue('matters.status') },
   ];
   ngOnInit(): void {
-    this._route.params.pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next:(res:Params)=>{
-        this.requestId=res['id']
-        console.log('this.requestId',this.requestId)
-        if(this.requestId)this.getById();
-      }
-    })
+    this._route.params.subscribe({
+      next: (res: Params) => {
+        this.requestId = res['id'];
+        console.log('this.requestId', this.requestId);
+        if (this.requestId) this.getById();
+      },
+    });
+    
     this.requestId = +this._route.snapshot.paramMap.get('id');
     if (this.requestId) this.getById();
     // this.previewOnly=this._router.url.includes('view')
     // this.previewOnly = !this._permissionService.hasPermission('Update_Matter');
+  }
+
+  setActiveTab() {
+    this._route.queryParams.subscribe({
+      next: (res: any) => {
+        if (res){
+          this.activeIndex = this.items.findIndex((obj) => obj.id == res['tab']);
+          console.log('activeIndex',this.activeIndex)
+        }
+          
+
+      },
+    });
   }
 
   getById() {
@@ -134,25 +147,25 @@ export class MatterDetailsComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           this.data = { ...res['result'] };
-          this.previewOnly = !this._permissionService.hasPermission('Update_Matter')|| !res['result']?.isActive;
+          this.previewOnly =
+            !this._permissionService.hasPermission('Update_Matter') ||
+            !res['result']?.isActive;
           // this.previewOnly = !res['result'].isActive;
           this.updatePracticeArea();
         },
       });
   }
   updatePracticeArea(e?: any) {
-    console.log('data',e)
+    console.log('data', e);
     // console.log(e.practsAreaId ?? this.data.practsAreaId);
     // this.practiceAreaId=e
-    this.data.practsAreaId=e?.practsAreaId??this.data.practsAreaId
-    this.data.law_MtrCatId=e?.law_MtrCatId??this.data.law_MtrCatId
-    console.log('this.data.practsAreaId',this.data.practsAreaId)
+    this.data.practsAreaId = e?.practsAreaId ?? this.data.practsAreaId;
+    this.data.law_MtrCatId = e?.law_MtrCatId ?? this.data.law_MtrCatId;
+    console.log('this.data.practsAreaId', this.data.practsAreaId);
     if (this.data?.law_MtrCatId == 8) {
-      this.items.find((item) => item.id === 6).show =
-        true;
+      this.items.find((item) => item.id === 6).show = true;
     } else {
-      this.items.find((item) => item.id === 6).show =
-        false;
+      this.items.find((item) => item.id === 6).show = false;
     }
     if (
       [this.practiceArea.IntelecturualProperty].includes(
@@ -161,7 +174,7 @@ export class MatterDetailsComponent implements OnInit {
     ) {
       this.items.forEach((obj) => {
         obj.show =
-          [1, 3, 5,  7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+          [1, 3, 5, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
         this._cdRef.detectChanges();
         // [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id)
         //   ? (obj.show = true)
@@ -183,8 +196,7 @@ export class MatterDetailsComponent implements OnInit {
         //   : (obj.show = false);
       });
     }
-    
-
+    this.setActiveTab()
     // ** /
     // console.log('updatePracticeArea',e)
     // this.data = {

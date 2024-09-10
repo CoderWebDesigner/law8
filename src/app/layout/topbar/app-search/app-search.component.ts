@@ -23,8 +23,8 @@ export class AppSearchComponent {
 
   filteredItems: any[];
   items = [];
-  onSearch(event: any) {
-    const input = (event.target as HTMLInputElement)?.value?.trim()??event?.trim();
+  onSearch(event: any,targetEl?:any) {
+    const input = (event.target as HTMLInputElement)?.value?.trim()
     console.log('input value',input)
     if(input.length>3){
       let body={
@@ -36,10 +36,12 @@ export class AppSearchComponent {
         next:(res:ApiRes)=>{
           if(res&&res.isSuccess){
             this.items=res.result
-            this.overlay.show(event);
+            this.overlay.show(event,targetEl);
           }
         }
       })
+    }else{
+      this.items=[]
     }
     // const input = (event.target as HTMLInputElement).value;
     // this.filteredItems = this.items.filter(item => item.name.toLowerCase().includes(input.toLowerCase()));
@@ -48,6 +50,11 @@ export class AppSearchComponent {
     // } else {
     //   this.overlay.hide();
     // }
+  }
+  increaseWidth(event:any,targetEl:any) {
+    this.searchInput.nativeElement.classList.add('focused');
+    this.overlayWidth = '800px';
+    this.onSearch(event,targetEl)
   }
   selectItem(item) {
     console.log('Selected item:', item);
@@ -58,12 +65,7 @@ export class AppSearchComponent {
     }
     this.overlay.hide();
   }
-  increaseWidth() {
-    this.searchInput.nativeElement.classList.add('focused');
-    this.overlayWidth = '800px';
-    console.log('increaseWidth',this.searchInput.nativeElement.value)
-    this.onSearch(this.searchInput.nativeElement.value)
-  }
+  
 
   resetWidth() {
     this.searchInput.nativeElement.classList.remove('focused');

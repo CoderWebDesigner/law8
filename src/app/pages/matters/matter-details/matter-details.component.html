@@ -9,7 +9,7 @@
       </div>
       <div class="col-12">
         <shared-card [borderRadius]="20">
-          <p-tabView body [scrollable]="true">
+          <p-tabView body [scrollable]="true" [(activeIndex)]="activeIndex">
 
             <ng-container *ngFor="let item of items; let i = index">
               <p-tabPanel [header]="item.label" *ngIf="item.show">

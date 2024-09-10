@@ -27,6 +27,7 @@
     "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@justin-s/ngx-intl-tel-input": "^16.0.4",
+    "@microsoft/signalr": "^8.0.7",
     "@ngx-formly/core": "^6.2.2",
     "@ngx-formly/primeng": "^6.2.2",
     "@ngx-translate/core": "^15.0.0",

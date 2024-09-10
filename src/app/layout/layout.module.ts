@@ -19,6 +19,8 @@ import { AppSearchComponent } from './topbar/app-search/app-search.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ListboxModule } from 'primeng/listbox';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { AppNotificationComponent } from './topbar/app-notification/app-notification.component';
+import { ButtonModule } from 'primeng/button';
 const components = [
   LayoutComponent,
 ];
@@ -31,6 +33,7 @@ const components = [
     AppLanguageComponent,
     BreadcrumbComponent,
     AppSearchComponent,
+    AppNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ const components = [
     AppSettingsComponent,
     ListboxModule,
     OverlayPanelModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    ButtonModule
   ],
   exports:[
     ...components
