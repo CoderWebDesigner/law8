@@ -20,6 +20,7 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { PAGESIZE } from '@core/utilities/defines';
 import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
+import { SecurityGroupsUsersComponent } from './security-groups-users/security-groups-users.component';
 @Component({
   selector: 'app-security-groups',
   templateUrl: './security-groups.component.html',
@@ -45,7 +46,7 @@ export class SecurityGroupsComponent {
   };
   source: any[] = [];
   target: any[] = [];
-  permissions:any[]=[]
+  permissions: any[] = [];
   selectedRow: any;
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
@@ -62,21 +63,28 @@ export class SecurityGroupsComponent {
 
   additionalTableConfig: TableConfig = {
     id: 'id',
-    isSearch:true,
-    actions: [
+    isSearch: true,
+    actions: [ 
       {
         type: 'update',
         title: this._languageService.getTransValue('btn.update'),
         target: SecurityGroupsEditorComponent,
         icon: 'pencil',
         width: '30%',
-        permission:'Update_Security_Groups'
+        permission: 'Update_Security_Groups',
       },
       {
         type: 'delete',
         title: this._languageService.getTransValue('btn.delete'),
         icon: 'trash',
-        permission:'Delete_Security_Groups'
+        permission: 'Delete_Security_Groups',
+      },
+      {
+        title: 'details',
+        target: SecurityGroupsUsersComponent,
+        icon: 'pi pi-eye',
+        width: '50%',
+        permission: 'Update_Security_Groups',
       },
     ],
   };
@@ -92,7 +100,7 @@ export class SecurityGroupsComponent {
       });
   }
   onRowSelect(e: any) {
-    console.log(e)
+    console.log(e);
     this.selectedRow = e.data;
     this.getAllPermissions();
   }
@@ -118,7 +126,7 @@ export class SecurityGroupsComponent {
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({
         next: (res: ApiRes) => {
-          this.permissions=res['result']?.permissions;
+          this.permissions = res['result']?.permissions;
           this.target = [...this.permissions];
           this.source = this.source.filter(
             (sourceItem) =>
