@@ -33,6 +33,7 @@ import { Profile_API } from './profile';
 import { InActive_Matters_API } from './inactive-matters';
 import { Report_API } from './report';
 import { Search_API } from './search';
+import { Notification_API } from './notification';
 
 export const API_Config = {
   ...General_API,
@@ -69,5 +70,6 @@ export const API_Config = {
   ...Profile_API,
   ...Matters_Time_Sheet_API,
   ...Report_API,
-  ...Search_API
+  ...Search_API,
+  ...Notification_API
 };

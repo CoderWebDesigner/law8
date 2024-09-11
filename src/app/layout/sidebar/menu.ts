@@ -63,7 +63,7 @@ export const MENU: MenuItem[] = [
         label: 'menu.matters.inactiveMatters',
         link: '/matters/inactive',
         parentId: 3,
-        role: 'Add_Matter',
+        role: 'Inactivate_MatterList_View',
       },
     ],
   },

@@ -1,9 +1,9 @@
 <!-- First row -->
 <div class="row mb-4">
-  <div class="col-12 text-end">
-    <p-button styleClass="p-button-label p-button-outlined border-0" (click)="actAsManager()">
+  <div class="col-12">
+    <p-button styleClass="p-button-label p-button-outlined border-0" (click)="actAsManager()" [requiredPermission]="'Dashboard_Manager_View'">
       <img alt="logo" src="../../../assets/images/manager.png" style="width: 1.5rem" />
-      <span class="ms-2 font-bold">Dashboard Manager</span>
+      <span class="ms-2 font-bold">{{isManager?'Manager':'User'}}</span>
     </p-button>
   </div>
 </div>

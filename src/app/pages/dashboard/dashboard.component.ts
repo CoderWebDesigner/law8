@@ -358,8 +358,14 @@ export class DashboardComponent implements OnInit {
       });
   }
   actAsManager(){
+    if(this.isManager){
+      this._router.navigate(['/dashboard']);
+
+    }else{
+      this._router.navigate(['/dashboard'], { queryParams: { role: 'manager' } });
+
+    }
     this.selectedCard = null;
-    this._router.navigate(['/dashboard'], { queryParams: { role: 'manager' } });
   }
   getStatistics() {
     let filterOption ={
