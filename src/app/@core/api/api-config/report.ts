@@ -3,5 +3,11 @@ export const Report_API = {
       get:'Report/TestReportArr',
       create:'Law_MatterActivity/GetMatterActivityReport'
     },
+    matterReport:{
+      create:'Reports/GetMattersReport'
+    },
+    timesheetReport:{
+      create:'Reports/GetTimeSheetReport'
+    }
   };
   

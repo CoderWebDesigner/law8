@@ -208,7 +208,21 @@ export const MENU: MenuItem[] = [
         id: 1,
         label: 'menu.reports.activityreport',
         link: '/reports',
-        parentId: 6,
+        parentId: 9,
+        role: 'View_Report',
+      },
+      {
+        id:2,
+        label: 'menu.reports.matterReport',
+        link: '/reports/matter-report',
+        parentId: 9,
+        role: 'View_Report',
+      },
+      {
+        id:3,
+        label: 'menu.reports.timeSheetReport',
+        link: '/reports/timesheet-report',
+        parentId: 9,
         role: 'View_Report',
       },
     ]

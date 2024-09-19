@@ -39,7 +39,10 @@
       "title":"Security"
     },
     "reports":{
-      "title":"Reports"
+      "title":"Reports",
+       "activityreport":"activity Report",
+          "matterReport":"Matter Report",
+          "timeSheetReport":"TimeSheet Report"
     }
   }
 }
