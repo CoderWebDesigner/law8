@@ -1,9 +1,12 @@
 {
-    "report":{
-        "activityReport":"Activity Report",
-        "dateFrom":"Date From",
-        "dateTo":"Date To",
-        "lawyer":"Lawyer",
-        "client":"Client"
-    }
+  "report": {
+    "activityReport": "Activity Report",
+    "dateFrom": "Date From",
+    "dateTo": "Date To",
+    "lawyer": "Lawyer",
+    "client": "Client",
+    "openDateFrom": "Open Date From",
+    "openDateTo": "Open Date To",
+    "feeEarner":"Fee Earner"
+  }
 }

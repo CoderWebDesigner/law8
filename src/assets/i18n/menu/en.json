@@ -40,7 +40,9 @@
         },
         "reports":{
           "title":"Reports",
-          "activityreport":"activity Report"
+          "activityreport":"activity Report",
+          "matterReport":"Matter Report",
+          "timeSheetReport":"TimeSheet Report"
 
         }
     }

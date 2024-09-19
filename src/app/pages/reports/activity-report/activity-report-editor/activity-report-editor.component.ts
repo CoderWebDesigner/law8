@@ -206,15 +206,4 @@ export class ActivityReportEditorComponent
     
   }
 
-  // override onSubmit(): void {
-  //   if (!this.isSubmit) { 
-  //     this.isSubmit = true; 
-  //     setTimeout(() => {
-  //       this.isSubmit = false; 
-  //       this.onFilter.emit(this.formlyModel);
-  //     }, 1000); 
-  //   } else {
-  //     this.onFilter.emit(this.formlyModel); 
-  //   }
-  // }
 }

@@ -21,6 +21,8 @@ import { ListboxModule } from 'primeng/listbox';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { AppNotificationComponent } from './topbar/app-notification/app-notification.component';
 import { ButtonModule } from 'primeng/button';
+import { BadgeModule } from 'primeng/badge';
+
 const components = [
   LayoutComponent,
 ];
@@ -50,7 +52,8 @@ const components = [
     ListboxModule,
     OverlayPanelModule,
     ScrollPanelModule,
-    ButtonModule
+    ButtonModule,
+    BadgeModule
   ],
   exports:[
     ...components

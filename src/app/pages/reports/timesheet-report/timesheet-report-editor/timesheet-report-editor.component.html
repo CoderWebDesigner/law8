@@ -1,0 +1,16 @@
+<form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+    <formly-form
+      [form]="formly"
+      [fields]="formlyFields"
+      [model]="formlyModel"
+    ></formly-form>
+    <div class="mt-4 text-end">
+      <p-button
+        [loading]="isLoading"
+        styleClass="p-button-primary d-block py-3"
+        type="submit"
+        label="{{ 'menu.reports.timeSheetReport' | translate }}"
+      ></p-button>
+    </div>
+  </form>
+  

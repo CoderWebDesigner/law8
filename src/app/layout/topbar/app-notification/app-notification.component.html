@@ -1,8 +1,11 @@
-<!-- 
-<button pButton badge="2" type="button" class="header-item noti-icon" id="page-header-notifications-dropdown" #btn (click)="getNotifications($event,btn)" >
-    <i [inlineSVG]="'/assets/images/icons/bell.svg'"></i>
-  </button> -->
-  <p-button styleClass="header-item noti-icon"  #btn [badge]="notificationCount" (click)="getNotifications($event,btn)"> <i [inlineSVG]="'/assets/images/icons/bell.svg'"></i></p-button>
+
+<button type="button" class="header-item noti-icon" id="page-header-notifications-dropdown" #btn (click)="getNotifications($event,btn)" >
+  <i class="pi pi-bell text-3xl" *ngIf="notificationCount > 0" pBadge [value]="notificationCount" style="font-size: 25px;" severity="danger"></i>
+  <i class="pi pi-bell text-3xl" *ngIf="notificationCount == 0" style="font-size: 25px;"></i>
+  </button>
+  <!-- <i class="pi pi-bell text-3xl" pBadge value="2"></i> -->
+  <!-- <i [inlineSVG]="'/assets/images/icons/bell.svg'" pBadge value="2"></i> -->
+  <!-- <p-button styleClass="header-item noti-icon"  #btn [badge]="notificationCount" (click)="getNotifications($event,btn)"> <i [inlineSVG]="'/assets/images/icons/bell.svg'"></i></p-button> -->
 
   <p-overlayPanel #overlay [dismissable]="true" [style]="{
     'width': '360px',
