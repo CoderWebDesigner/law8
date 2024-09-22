@@ -44,6 +44,9 @@
           "matterReport":"Matter Report",
           "timeSheetReport":"TimeSheet Report"
 
+        },
+        "setting":{
+          "title":"Setting"
         }
     }
 }

@@ -1,0 +1,8 @@
+{
+    "setting":{
+        "accountSystemIntegration":"Account System Integration",
+        "sapAccountingSystem":"SAP Accounting System",
+        "serverName":"Server Name",
+        "databaseName":"Database Name"
+    }
+}

@@ -227,4 +227,11 @@ export const MENU: MenuItem[] = [
       },
     ]
   },
+  {
+    id: 9,
+    label: 'menu.setting.title',
+    icon: 'settings.svg',
+    link: '/setting',
+    role: 'View_Report',
+  }
 ];

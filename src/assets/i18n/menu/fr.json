@@ -9,11 +9,11 @@
     },
     "timesheet": {
       "title": "Compteur horaire",
-      "timesheetAdd":"New TimeSheet"
+      "timesheetAdd": "New TimeSheet"
     },
     "matters": {
       "title": "Dossiers",
-      "inactiveMatters":"Inactive Matters",
+      "inactiveMatters": "Inactive Matters",
       "matterList": "Liste De Dossiers",
       "matterAdd": "Nouveau Dossier"
     },
@@ -28,21 +28,24 @@
       "usersList": "Users List",
       "userAdd": "New User"
     },
-    "lookups":{
-      "title":"Lookups",
-      "matterCategory":"Matter Category",
-      "mainList":"Master List",
-      "jurisdictions":"Jurisdictions",
-      "rateTable":"Rate Table"
+    "lookups": {
+      "title": "Lookups",
+      "matterCategory": "Matter Category",
+      "mainList": "Master List",
+      "jurisdictions": "Jurisdictions",
+      "rateTable": "Rate Table"
     },
-    "security":{
-      "title":"Security"
+    "security": {
+      "title": "Security"
     },
-    "reports":{
-      "title":"Reports",
-       "activityreport":"activity Report",
-          "matterReport":"Matter Report",
-          "timeSheetReport":"TimeSheet Report"
+    "reports": {
+      "title": "Reports",
+      "activityreport": "activity Report",
+      "matterReport": "Matter Report",
+      "timeSheetReport": "TimeSheet Report"
+    },
+    "setting": {
+      "title": "Setting"
     }
   }
 }
