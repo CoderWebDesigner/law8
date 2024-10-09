@@ -100,6 +100,13 @@ export const Lookups_API={
     "update":"Law_Rate/Update",
     "delete":"Law_Rate/Delete"
     
-  }
+  },
+  "branch":{
+    "get":"Law_Branch/GetList",
+    "create":"Law_Branch/Create",
+    "update":"Law_Branch/Update",
+    "delete":"Law_Branch/Delete"
+    
+  },
 
 }

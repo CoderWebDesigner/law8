@@ -1,6 +1,8 @@
 {
     "search":{
-        "title":"Search",
-        "placeholder":"Search ..."
+        "title":"Advanced Search",
+        "placeholder":"Search ...",
+        "filter":"Search",
+        "noDataFound":"No Data Found"
     }
 }

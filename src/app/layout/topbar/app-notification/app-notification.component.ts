@@ -67,13 +67,13 @@ export class AppNotificationComponent implements OnInit, OnDestroy {
   }
 
   startConnection() {
+    const token = this._storageService.getStorage('token');
     const options: IHttpConnectionOptions = {
       headers: {
-        "token":this._storageService.getStorage('token')
+        "token":token
       },
     };
-    const token = this._storageService.getStorage('token');
-    console.log('Token:', token);
+    
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('http://192.168.2.87:8021/signalhub', options)

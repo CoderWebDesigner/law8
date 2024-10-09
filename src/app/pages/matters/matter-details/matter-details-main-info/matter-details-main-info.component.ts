@@ -259,6 +259,20 @@ export class MatterDetailsMainInfoComponent
             },
           },
           {
+            type: 'select',
+            key: 'law_BranchId',
+            className: 'col-lg-3 col-md-4',
+            props: {
+              label: this._languageService.getTransValue('common.branch'),
+              options: this.lookupsData[5]?.result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+              disabled: this.previewOnly,
+              required: true,
+            },
+          },
+          {
             type: 'input',
             key: 'openInvoice',
             className: 'col-lg-3 col-md-4',
@@ -793,6 +807,7 @@ export class MatterDetailsMainInfoComponent
       this._apiService.get(API_Config.general.getStages),
       this._apiService.get(API_Config.general.getPractsAreaLookup),
       this._apiService.get(API_Config.general.getClients),
+      this._apiService.get(API_Config.general.getAllBranches),
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({

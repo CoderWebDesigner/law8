@@ -45,6 +45,9 @@ export class LookupsMainListComponent implements OnInit {
   subTitle: string;
   apiUrls: any;
   selectedRow: any;
+  filterOptions={
+    pageSize:15
+  }
   data: any[] = [
     {
       id: 1,
@@ -107,11 +110,12 @@ export class LookupsMainListComponent implements OnInit {
       nameAR: 'المجال الوظيفي',
       permission:'View_Industry'
     },
-    // {
-    //   id: 11,
-    //   nameEN: 'MattStatus',
-    //   nameAR: 'حالة القضية',
-    // },
+    {
+      id: 11,
+      nameEN: 'Branches',
+      nameAR: 'الفروع',
+      permission:'View_Branch'
+    },
   ];
   apiData = {
     '1': {
@@ -193,6 +197,14 @@ export class LookupsMainListComponent implements OnInit {
       updatePermission: 'Update_Industry',
       deletePermission: 'Delete_Industry',
       values:['Lawyer']
+    },
+    '11': {
+      api: API_Config.branch,
+      title: this._languageService.getTransValue('common.branch'),
+      addPermission: 'Add_Branch',
+      updatePermission: 'Update_Branch',
+      deletePermission: 'Delete_Branch',
+      values:[]
     },
   };
   columnsLocalized: any = {

@@ -7,6 +7,7 @@ import { catchError, combineLatest, finalize, forkJoin, take } from 'rxjs';
 import { MatterService } from '../service/matter.service';
 import { PracticeArea } from '../enums/practice-area';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-matter-editor',
@@ -203,6 +204,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               //       },
               //     });
               // },
+             
               onChange: (e) => {
                 if (this.formlyModel?.requestTypeId == 2) {
                   this._apiService
@@ -227,6 +229,21 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                       },
                     });
                 }
+                Swal.fire({
+                  showDenyButton: true,
+                  text: this._languageService.getTransValue(
+                    'messages.confirmApplyParties'
+                  ),
+                  confirmButtonText:
+                    this._languageService.getTransValue('btn.yes'),
+                  denyButtonText: this._languageService.getTransValue('btn.no'),
+                  icon: 'question',
+                }).then((result) => {
+                  console.log(result);
+                  if (result.isConfirmed) {
+                    this.getParentMatterParties()
+                  } 
+                });
               },
             },
 
@@ -333,6 +350,20 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
             defaultValue: new Date(),
             props: {
               label: this._languageService.getTransValue('matters.opened'),
+              disabled: this.previewOnly,
+              required: true,
+            },
+          },
+          {
+            type: 'select',
+            key: 'law_BranchId',
+            className: 'col-md-4',
+            props: {
+              label: this._languageService.getTransValue('common.branch'),
+              options: this.lookupsData[5].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
               disabled: this.previewOnly,
               required: true,
             },
@@ -749,6 +780,17 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     ];
   }
 
+  getParentMatterParties(){
+    this._apiService.get(API_Config.matters.getPartiesByMatterId).pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res.isSuccess){
+          this._matterService.partyList$.next(res.result?.dataList)
+        }
+      }
+    })
+  }
   getTabsValues() {
     // console.log('getTabsValues');
 
@@ -847,6 +889,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
       this._apiService.get(API_Config.general.getStages),
       this._apiService.get(API_Config.general.getPractsAreaLookup),
       this._apiService.get(API_Config.general.getClients),
+      this._apiService.get(API_Config.general.getAllBranches),
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({

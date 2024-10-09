@@ -1,11 +1,12 @@
 <shared-card [title]="'search.title' | translate" [borderRadius]="20" class="mb-4">
     <ng-container body>
         <div class="row mb-4">
-            <div class="col-md-6 mx-auto">
-                <shared-search-input (onSearch)="onSearch($event)"></shared-search-input>
+            <div class="col-md-6 mx-auto d-flex">
+                <shared-search-input (onSearch)="onSearch($event)" class="flex-fill"></shared-search-input>
+                <p-button styleClass="p-button-label border-0 ms-2" (click)="search()" [loading]="isLoading" [label]="'search.filter'|translate"></p-button>
             </div>
         </div>
-       
+
     </ng-container>
 </shared-card>
 
@@ -20,28 +21,24 @@
             </li>
 
         </ul> -->
-        <ul class="list-group">
-            <li
-            [ngClass]="{'active':selectedIndex==index}"
-              class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 cursor-pointer list-item-enhanced" 
-              *ngFor="let item of data;let index =index"
-              (click)="setSelectedRow(item,index)"
-            >
-              <span class="label-text">{{ item.lable }}</span>
-              <span class="badge badge-enhanced">{{ item.count }}</span>
+        <ul class="list-group" *ngIf="data.length>0">
+            <li [ngClass]="{'active':selectedIndex==index}"
+                class="list-group-item d-flex justify-content-between align-items-center py-3 border-0 cursor-pointer list-item-enhanced"
+                *ngFor="let item of data;let index =index" (click)="setSelectedRow(item,index)">
+                <span class="label-text">{{ item.lable }}</span>
+                <span class="badge badge-enhanced">{{ item.count }}</span>
             </li>
-          </ul>
-          
-          
+        </ul>
+
+
+
+
     </div>
     <div class="col-md-8">
         <shared-card [title]="selectedRow.label | translate" [borderRadius]="20" *ngIf="selectedRow">
 
-            <shared-table  body [apiUrls]="selectedRow.apiUrl"
-                [columnsLocalized]="selectedRow.localize"
-                [additionalTableConfig]="selectedRow.additionalTableConfig"
-                [filterOptions]="filterOptions"
-                >
+            <shared-table body [apiUrls]="selectedRow.apiUrl" [columnsLocalized]="selectedRow.localize"
+                [additionalTableConfig]="selectedRow.additionalTableConfig" [filterOptions]="filterOptions">
                 <ng-template #actions let-rowData>
 
                     <!-- <p-button 
@@ -58,5 +55,10 @@
             </shared-table>
         </shared-card>
 
+    </div>
+    <div class="col-12 text-center">
+        <shared-card [borderRadius]="20" *ngIf="data.length==0 && isSearched">
+            <p body class='mb-0'>{{'search.noDataFound'|translate}}</p>
+        </shared-card>
     </div>
 </div>

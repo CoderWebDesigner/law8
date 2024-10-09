@@ -232,6 +232,6 @@ export const MENU: MenuItem[] = [
     label: 'menu.setting.title',
     icon: 'settings.svg',
     link: '/setting',
-    role: 'View_Report',
+    role: 'App_Settings',
   }
 ];

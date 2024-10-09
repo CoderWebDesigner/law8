@@ -12,6 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from '@core/interceptors';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { HandleErrorService } from '@core/services/handle-error-service';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 export function HttpLoaderFactory(httpBackend: HttpBackend) {
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ProgressSpinnerModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
