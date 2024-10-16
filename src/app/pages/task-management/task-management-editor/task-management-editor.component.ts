@@ -329,8 +329,8 @@ export class TaskManagementEditorComponent
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
-                  // type: 'number',
-                  pKeyFilter: 'int',
+                 type: 'text',
+                  // pKeyFilter: 'int',
                   //required: true,
                 },
               },

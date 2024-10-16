@@ -229,21 +229,27 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                       },
                     });
                 }
-                Swal.fire({
-                  showDenyButton: true,
-                  text: this._languageService.getTransValue(
-                    'messages.confirmApplyParties'
-                  ),
-                  confirmButtonText:
-                    this._languageService.getTransValue('btn.yes'),
-                  denyButtonText: this._languageService.getTransValue('btn.no'),
-                  icon: 'question',
-                }).then((result) => {
-                  console.log(result);
-                  if (result.isConfirmed) {
-                    this.getParentMatterParties()
-                  } 
-                });
+                console.log('onChange',e)
+                if(this.formlyModel?.parentMatterId){
+
+                  Swal.fire({
+                    showDenyButton: true,
+                    text: this._languageService.getTransValue(
+                      'messages.confirmApplyParties'
+                    ),
+                    confirmButtonText:
+                      this._languageService.getTransValue('btn.yes'),
+                    denyButtonText: this._languageService.getTransValue('btn.no'),
+                    icon: 'question',
+                  }).then((result) => {
+                    console.log(result);
+                    if (result.isConfirmed) {
+                      this.getParentMatterParties()
+                    } 
+                  });
+                }else{
+                  this._matterService.partyList$.next([])
+                }
               },
             },
 
@@ -781,7 +787,10 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
   }
 
   getParentMatterParties(){
-    this._apiService.get(API_Config.matters.getPartiesByMatterId).pipe(
+    const payload = {
+      matterId:this.formlyModel?.parentMatterId
+    }
+    this._apiService.get(API_Config.matters.getPartiesByMatterId,payload).pipe(
       this._sharedService.takeUntilDistroy()
     ).subscribe({
       next:(res:ApiRes)=>{

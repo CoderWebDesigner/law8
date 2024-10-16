@@ -344,8 +344,7 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
-                  // type: 'number',
-                  pKeyFilter: 'int',
+                  // pKeyFilter: 'int',
                   //required: true,
                 },
               },
@@ -500,7 +499,7 @@ export class MatterDetailsActivityEditorComponent
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
                   // type: 'number',
-                  pKeyFilter: 'int',
+                  // pKeyFilter: 'int',
                   //required: true,
                 },
               },

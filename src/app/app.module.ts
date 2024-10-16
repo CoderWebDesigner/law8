@@ -13,6 +13,7 @@ import { AppHttpInterceptor } from '@core/interceptors';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { HandleErrorService } from '@core/services/handle-error-service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { LanguageService } from '@core/services';
 
 
 export function HttpLoaderFactory(httpBackend: HttpBackend) {
@@ -67,8 +68,17 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
       multi: true,
       deps: [HandleErrorService]
 
-    }
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appConfigFactory,
+      deps: [LanguageService],
+      multi: true,
+  },
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function appConfigFactory(_languageService: LanguageService) {
+  return () => _languageService.initLang();
+}
