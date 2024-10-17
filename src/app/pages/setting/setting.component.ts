@@ -18,6 +18,10 @@ export class SettingComponent extends FormBaseClass implements OnInit {
     this.formlyFields = [
       {
         fieldGroupClassName: 'row',
+        className: 'card p-4 mb-2' ,
+        props: {
+          ngStyle: {
+            'border': 'none',}},
         fieldGroup: [
           {
             className: 'col-12',
@@ -82,6 +86,12 @@ export class SettingComponent extends FormBaseClass implements OnInit {
               'props.disabled': '!model.isSapIntegration',
             },
           },
+        ],
+      },
+      {
+        fieldGroupClassName: 'row',
+        className: 'card p-4 mb-2',
+        fieldGroup: [
           {
             className: 'col-12',
             template: `<h5 class="my-4 line-title overflow-hidden"> <span class="me-3">${this._languageService.getTransValue(
@@ -92,22 +102,28 @@ export class SettingComponent extends FormBaseClass implements OnInit {
             type: 'input',
             className: 'col-md-6',
             key: 'fees',
-            defaultValue:'0',
+            defaultValue: '0',
             props: {
               label: this._languageService.getTransValue('setting.fees'),
-              pKeyFilter:'int'
+              pKeyFilter: 'int'
             },
           },
           {
             type: 'input',
             className: 'col-md-6',
             key: 'disbursements',
-            defaultValue:'0',
+            defaultValue: '0',
             props: {
               label: this._languageService.getTransValue('setting.disbursements'),
-              pKeyFilter:'int'
+              pKeyFilter: 'int'
             },
           },
+        ],
+      },
+      {
+        fieldGroupClassName: 'row',
+        className: 'card p-4 mb-2',
+        fieldGroup: [
           {
             className: 'col-12',
             template: `<h5 class="my-4 line-title overflow-hidden"> <span class="me-3">${this._languageService.getTransValue(
@@ -128,17 +144,18 @@ export class SettingComponent extends FormBaseClass implements OnInit {
           },
         ],
       },
+ 
     ];
   }
   override getLookupsData(): void {
-      forkJoin([this._apiService.get(API_Config.general.getAllCurrencies)]).pipe(
-        this._sharedService.takeUntilDistroy()
-      ).subscribe({
-        next:(res:any)=>{
-          this.lookupsData=res
-          this.getData()
-        }
-      })
+    forkJoin([this._apiService.get(API_Config.general.getAllCurrencies)]).pipe(
+      this._sharedService.takeUntilDistroy()
+    ).subscribe({
+      next: (res: any) => {
+        this.lookupsData = res
+        this.getData()
+      }
+    })
   }
   override getData(): void {
     this._apiService

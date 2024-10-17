@@ -1,0 +1,12 @@
+:host ::ng-deep {
+    .line-title:after {
+        display: inline-block;
+        height: 1px;
+        content: " ";
+        background-color: #000;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+}

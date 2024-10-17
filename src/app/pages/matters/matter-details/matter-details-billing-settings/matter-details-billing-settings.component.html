@@ -9,9 +9,16 @@
     <p-button
     *ngIf="!this.previewOnly"
       [loading]="isSubmit"
+      styleClass="p-button-primary d-block py-3 mx-4"
+      type="submit"
+      label="{{ 'Taxes' | translate }}"
+    ></p-button>
+    <p-button
+    *ngIf="!this.previewOnly"
+      [loading]="isSubmit"
       styleClass="p-button-primary d-block py-3"
       type="submit"
-      label="{{ 'btn.submit' | translate }}"
+      label="{{ 'Rate Exeptions' | translate }}"
     ></p-button>
   </div>
 </form>
