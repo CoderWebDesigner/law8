@@ -4,7 +4,9 @@
     [fields]="formlyFields"
     [model]="formlyModel"
   ></formly-form>
-  <app-matter-details-invoice-sales-items [invoiceType]="formlyModel.invoiceType" *ngIf="formlyModel.invoiceType"></app-matter-details-invoice-sales-items>
+  @if (formlyModel.invoiceType) {
+    <app-matter-details-invoice-sales-items [invoiceType]="formlyModel.invoiceType"></app-matter-details-invoice-sales-items>
+  }
   <div class="mt-4 text-end">
     <p-button
       [loading]="isSubmit"

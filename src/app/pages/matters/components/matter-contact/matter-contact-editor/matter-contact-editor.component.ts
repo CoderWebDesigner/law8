@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
 import { MatterService } from '@components/matters/service/matter.service';
@@ -10,7 +10,7 @@ import { ApiRes } from '@core/models';
 @Component({
   selector: 'app-matter-contact-editor',
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, SharedModule],
+  imports: [FormlyConfigModule, SharedModule],
   templateUrl: './matter-contact-editor.component.html',
   styleUrls: ['./matter-contact-editor.component.scss'],
 })

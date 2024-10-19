@@ -17,10 +17,12 @@
     <small class="text-secondary">{{ "common.from" | translate }}</small>
     <p class="fw-bold">{{data?.startDate | date:'shortTime'}}</p>
   </div>
-  <div class="col-md-3" *ngIf="data?.endDate && data.law_ActivityTypeId ==4">
-    <small class="text-secondary">{{ "common.to" | translate }}</small>
-    <p class="fw-bold">{{data?.endDate  | date:'shortTime'}}</p>
-  </div>
+  @if (data?.endDate && data.law_ActivityTypeId ==4) {
+    <div class="col-md-3">
+      <small class="text-secondary">{{ "common.to" | translate }}</small>
+      <p class="fw-bold">{{data?.endDate  | date:'shortTime'}}</p>
+    </div>
+  }
   <div class="col-12">
     <small class="text-secondary">{{ "common.description" | translate }}</small>
     <p class="fw-bold">{{data?.description }}</p>

@@ -12,17 +12,25 @@
   (onChange)="change($event)"
   (onClick)="onClick()"
   appendTo="body"
->
-<ng-template let-selected pTemplate="selectedItem" >
-  <div class="flex align-items-center gap-2" >
-    <img height="26" *ngIf="selected?.img" [src]="'./assets/images/'+ selected.value+ '.png'" [alt]="selected.value">
-    <span *ngIf="selected?.label">{{selected?.label}}</span>
-  </div>
-</ng-template>
+  >
+  <ng-template let-selected pTemplate="selectedItem" >
+    <div class="flex align-items-center gap-2" >
+      @if (selected?.img) {
+        <img height="26" [src]="'./assets/images/'+ selected.value+ '.png'" [alt]="selected.value">
+      }
+      @if (selected?.label) {
+        <span>{{selected?.label}}</span>
+      }
+    </div>
+  </ng-template>
   <ng-template let-option pTemplate="item">
     <div class="d-flex align-items-center gap-2">
-      <i *ngIf="option['icon']" [class]="option['icon']"></i>
-      <img height="26" *ngIf="option['img']" [src]="'./assets/images/'+option['img']+ '.png'" [alt]="option['img']">
+      @if (option['icon']) {
+        <i [class]="option['icon']"></i>
+      }
+      @if (option['img']) {
+        <img height="26" [src]="'./assets/images/'+option['img']+ '.png'" [alt]="option['img']">
+      }
       <div>{{ option.label }}</div>
     </div>
   </ng-template>

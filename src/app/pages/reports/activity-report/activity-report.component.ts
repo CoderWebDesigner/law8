@@ -4,7 +4,7 @@ import { SharedCardComponent } from '@shared/components/shared-card/shared-card.
 import { SharedModule } from '@shared/shared.module';
 import { ApiService } from '@core/api/api.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+
 import { ActivityReportTableComponent } from './activity-report-table/activity-report-table.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { ActivityReportTableComponent } from './activity-report-table/activity-r
   templateUrl: './activity-report.component.html',
   styleUrls: ['./activity-report.component.scss'],
   standalone:true,
-  imports:[ActivityReportEditorComponent,SharedCardComponent,SharedModule,CommonModule,ActivityReportTableComponent]
+  imports: [ActivityReportEditorComponent, SharedCardComponent, SharedModule, ActivityReportTableComponent]
 })
 export class ActivityReportComponent {
   _apiService=inject(ApiService);

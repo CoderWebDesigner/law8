@@ -6,11 +6,12 @@
     {{ _dynamicDialogConfig.data?.message }}
   </h4>
 
-  <p-button
-    styleClass="p-button-primary px-5 mt-3"
-    *ngIf="_dynamicDialogConfig.data?.buttonTxt"
-    (click)="_dynamicDialogConfig.data?.onClick()"
-    [label]="_dynamicDialogConfig.data?.buttonTxt"
-  >
-  </p-button>
+  @if (_dynamicDialogConfig.data?.buttonTxt) {
+    <p-button
+      styleClass="p-button-primary px-5 mt-3"
+      (click)="_dynamicDialogConfig.data?.onClick()"
+      [label]="_dynamicDialogConfig.data?.buttonTxt"
+      >
+    </p-button>
+  }
 </div>

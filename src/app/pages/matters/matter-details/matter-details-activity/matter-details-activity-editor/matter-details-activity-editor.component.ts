@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -16,7 +16,7 @@ import { finalize, forkJoin } from 'rxjs';
   styleUrls: ['./matter-details-activity-editor.component.scss'],
   standalone: true,
   providers: [DatePipe],
-  imports: [CommonModule, FormlyConfigModule, SharedModule],
+  imports: [FormlyConfigModule, SharedModule],
 })
 export class MatterDetailsActivityEditorComponent
   extends FormBaseClass

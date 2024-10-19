@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -14,7 +14,7 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-lookups-sub-rate',
   standalone: true,
-  imports: [CommonModule, SharedModule, ButtonModule, FormlyConfigModule],
+  imports: [SharedModule, ButtonModule, FormlyConfigModule],
   templateUrl: './lookups-sub-rate.component.html',
   styleUrls: ['./lookups-sub-rate.component.scss'],
 })

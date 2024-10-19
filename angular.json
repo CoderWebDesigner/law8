@@ -90,10 +90,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "law8:build:production"
+              "buildTarget": "law8:build:production"
             },
             "development": {
-              "browserTarget": "law8:build:development"
+              "buildTarget": "law8:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "law8:build"
+            "buildTarget": "law8:build"
           }
         },
         "test": {

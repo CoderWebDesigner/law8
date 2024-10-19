@@ -1,30 +1,30 @@
 <!-- <app-shared-no-data
-  *ngIf="data?.length == 0"
+*ngIf="data?.length == 0"
 >
-  <p-button
+<p-button
   *ngIf="!previewOnly"
-    styleClass="btn btn-success"
-    type="button"
-    (onClick)="openDialog()"
-    [icon]="'pi pi-plus'"
-    [label]="'matters.addActivity' | translate"
-    button
+  styleClass="btn btn-success"
+  type="button"
+  (onClick)="openDialog()"
+  [icon]="'pi pi-plus'"
+  [label]="'matters.addActivity' | translate"
+  button
   >
-  </p-button>
+</p-button>
 </app-shared-no-data>
 
 <ng-container *ngIf="data?.length > 0">
   <div class="text-end mb-4">
     <p-button
-    *ngIf="!previewOnly"
-    styleClass="btn btn-success"
-    type="button"
-    (onClick)="openDialog()"
-    [icon]="'pi pi-plus'"
-    [label]="'matters.addActivity' | translate"
-    button
-  >
-  </p-button>
+      *ngIf="!previewOnly"
+      styleClass="btn btn-success"
+      type="button"
+      (onClick)="openDialog()"
+      [icon]="'pi pi-plus'"
+      [label]="'matters.addActivity' | translate"
+      button
+      >
+    </p-button>
   </div>
   <shared-table
     [data]="data"
@@ -33,17 +33,19 @@
 </ng-container> -->
 
 <!-- <app-shared-no-data *ngIf="data?.length == 0">
-  <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-      [icon]="'pi pi-plus'" [label]="'matters.addActivity' | translate" button>
-  </p-button>
+<p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+  [icon]="'pi pi-plus'" [label]="'matters.addActivity' | translate" button>
+</p-button>
 </app-shared-no-data> -->
 
 <!-- <ng-container *ngIf="data?.length > 0"> -->
-  <div class="text-end mb-4">
-      <p-button *ngIf="!previewOnly" [requiredPermission]="'Add_Matter_Activities'" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-          [icon]="'pi pi-plus'" [label]="'matters.addActivity' | translate" button>
-      </p-button>
-  </div>
-  <shared-table [additionalTableConfig]="additionalTableConfig"  [filterOptions]="filterOptions" [columnsLocalized]="columnsLocalized"
-      [apiUrls]="apiUrls"></shared-table>
+<div class="text-end mb-4">
+  @if (!previewOnly) {
+    <p-button [requiredPermission]="'Add_Matter_Activities'" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+      [icon]="'pi pi-plus'" [label]="'matters.addActivity' | translate" button>
+    </p-button>
+  }
+</div>
+<shared-table [additionalTableConfig]="additionalTableConfig"  [filterOptions]="filterOptions" [columnsLocalized]="columnsLocalized"
+[apiUrls]="apiUrls"></shared-table>
 <!-- </ng-container> -->

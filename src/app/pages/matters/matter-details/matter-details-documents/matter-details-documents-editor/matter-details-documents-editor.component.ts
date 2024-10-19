@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -13,7 +13,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
   templateUrl: './matter-details-documents-editor.component.html',
   styleUrls: ['./matter-details-documents-editor.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, SharedModule],
+  imports: [FormlyConfigModule, SharedModule],
   providers: [DatePipe],
 })
 export class MatterDetailsDocumentsEditorComponent

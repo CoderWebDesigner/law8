@@ -3,24 +3,28 @@
   <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
     <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel"></formly-form>
     <p-tabView body>
-      <ng-container *ngFor="let item of items;let i =index">
-
-        <p-tabPanel [header]="item.label" *ngIf="item.permission && item.show">
-          <ng-template pTemplate="content">
-             <!-- <app-client-add-company-address *ngIf="i==0"></app-client-add-company-address>
+      @for (item of items; track item; let i = $index) {
+        @if (item.permission && item.show) {
+          <p-tabPanel [header]="item.label">
+            <ng-template pTemplate="content">
+              <!-- <app-client-add-company-address *ngIf="i==0"></app-client-add-company-address>
               <app-client-add-billing-address *ngIf="i==1"></app-client-add-billing-address> -->
-              <app-client-contacts *ngIf="i==0" [requestId]="requestId"></app-client-contacts>
-              
-              <app-client-related-matter *ngIf="i==1" [requestId]="requestId"></app-client-related-matter>
-          </ng-template>
-
-
-        </p-tabPanel>
-      </ng-container>
+              @if (i==0) {
+                <app-client-contacts [requestId]="requestId"></app-client-contacts>
+              }
+              @if (i==1) {
+                <app-client-related-matter [requestId]="requestId"></app-client-related-matter>
+              }
+            </ng-template>
+          </p-tabPanel>
+        }
+      }
     </p-tabView>
-    <div class="mt-4 text-end" *ngIf="!disableInputs">
-      <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
+    @if (!disableInputs) {
+      <div class="mt-4 text-end">
+        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
         label="{{ 'btn.submit' | translate }}"></p-button>
-    </div>
+      </div>
+    }
   </form>
 </shared-card>

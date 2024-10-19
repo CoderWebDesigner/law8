@@ -1,7 +1,7 @@
 <!-- <app-shared-no-data *ngIf="data?.length == 0 ||data==null">
-  <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-    [icon]="'pi pi-plus'" [label]="'common.addContacts' | translate" button>
-  </p-button>
+<p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+  [icon]="'pi pi-plus'" [label]="'common.addContacts' | translate" button>
+</p-button>
 </app-shared-no-data>
 
 <ng-container *ngIf="data?.length > 0 ">
@@ -15,9 +15,11 @@
 </ng-container> -->
 
 <div class="text-end mb-4">
-  <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+  @if (!previewOnly) {
+    <p-button styleClass="btn btn-success" type="button" (onClick)="openDialog()"
       [icon]="'pi pi-plus'" [label]="'common.addContacts' | translate"  [requiredPermission]="'Add_ClientContact'">
-  </p-button>
+    </p-button>
+  }
 </div>
 <shared-table [additionalTableConfig]="additionalTableConfig" [data]="data" [columnsLocalized]="columnsLocalized"
 [apiUrls]="apiUrls" [filterOptions]="filterOptions" (onDeleteRow)="onDeleteRow($event)"></shared-table>

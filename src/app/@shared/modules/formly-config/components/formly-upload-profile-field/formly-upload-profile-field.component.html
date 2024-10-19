@@ -1,41 +1,47 @@
 <div class="mb-3 d-flex justify-content-md-start justify-content-center">
   <ngx-dropzone
-  (change)="onSelect($event)"
-  [compress]="true"
-  accept=".jpeg,.jpg,.png"
-  [maxFileSize]="500000"
-  [multiple]="false"
->
-  <ngx-dropzone-label>
-    <div class="d-flex align-items-center justify-content-center position-relative">
-      <img
-        class="logo-lg"
-        width="200px"
-        height="200px"
-        [ngClass]="{'img-thumbnail': fileAsBase64 || formControl?.value} "
-        [src]="fileAsBase64 || props['defaultIcon']|| formControl?.value ||'assets/images/photo.png' "
-      />
-      <div class="iconPosition" (click)="onRemove($event)" *ngIf="fileAsBase64 ||formControl?.value">
-        <i class="pi pi-times text-danger"></i>
-      </div>
-    </div>
-
-    <div class="title my-2" *ngIf="props['title']">
-      {{ props["title"] | translate }}
-    </div>
-    <div class="subTitle mb-3" *ngIf="props['subTitle']">
-      {{ props["subTitle"] | translate }}
-    </div>
-
-    <p-button styleClass="p-button-outlined p-button-outlined-primary bg-transparent">
-      <i class="fs-4 fat-upload"></i>
-      <span class="font-bold ms-2">{{
-        props["btnLabel"] | translate
-      }}</span></p-button
+    (change)="onSelect($event)"
+    [compress]="true"
+    accept=".jpeg,.jpg,.png"
+    [maxFileSize]="500000"
+    [multiple]="false"
     >
-  </ngx-dropzone-label>
-</ngx-dropzone>
+    <ngx-dropzone-label>
+      <div class="d-flex align-items-center justify-content-center position-relative">
+        <img
+          class="logo-lg"
+          width="200px"
+          height="200px"
+          [ngClass]="{'img-thumbnail': fileAsBase64 || formControl?.value} "
+          [src]="fileAsBase64 || props['defaultIcon']|| formControl?.value ||'assets/images/photo.png' "
+          />
+          @if (fileAsBase64 ||formControl?.value) {
+            <div class="iconPosition" (click)="onRemove($event)">
+              <i class="pi pi-times text-danger"></i>
+            </div>
+          }
+        </div>
 
-</div>
+        @if (props['title']) {
+          <div class="title my-2">
+            {{ props["title"] | translate }}
+          </div>
+        }
+        @if (props['subTitle']) {
+          <div class="subTitle mb-3">
+            {{ props["subTitle"] | translate }}
+          </div>
+        }
+
+        <p-button styleClass="p-button-outlined p-button-outlined-primary bg-transparent">
+          <i class="fs-4 fat-upload"></i>
+          <span class="font-bold ms-2">{{
+            props["btnLabel"] | translate
+          }}</span></p-button
+          >
+        </ngx-dropzone-label>
+      </ngx-dropzone>
+
+    </div>
 
 

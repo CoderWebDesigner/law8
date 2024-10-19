@@ -1,139 +1,141 @@
 <div class="row">
-    <div class="col-12 text-center">
-        <h3 class="fw-semibold" style="color: rgb(6,112,189);">www.alsuwaidi.ae</h3>
-        <img src="../../../../../assets/images/report-logo.jpeg" alt="" class="img-fluid" width="500" height="100">
-    </div>
-    <div class="col-12">
-        <h3>Activity Report With Parties</h3>
-    </div>
+  <div class="col-12 text-center">
+    <h3 class="fw-semibold" style="color: rgb(6,112,189);">www.alsuwaidi.ae</h3>
+    <img src="../../../../../assets/images/report-logo.jpeg" alt="" class="img-fluid" width="500" height="100">
+  </div>
+  <div class="col-12">
+    <h3>Activity Report With Parties</h3>
+  </div>
 </div>
 <table class="table table-bordered">
-    <thead class="table-light border-secondary-subtle" style="text-align: center;">
+  <thead class="table-light border-secondary-subtle" style="text-align: center;">
+    <tr>
+      <th>Lawyer</th>
+      <th style="width:20%;">Hearing Session</th>
+      <th style="width:13%;">Previous Hearing Session</th>
+      <th>Case Parties</th>
+      <th>Case Info</th>
+    </tr>
+  </thead>
+  <tbody class="table table-bordered border-secondary-subtle">
+    @for (entry of data; track entry) {
       <tr>
-        <th>Lawyer</th>
-        <th style="width:20%;">Hearing Session</th>
-        <th style="width:13%;">Previous Hearing Session</th>
-        <th>Case Parties</th>
-        <th>Case Info</th>
+        <td colspan="5" class="fw-semibold row-primary">{{ entry.date }}</td>
       </tr>
-    </thead>
-    <tbody class="table table-bordered border-secondary-subtle">
-      <ng-container *ngFor="let entry of data">
+      @for (jurisdiction of entry.jurisdictions; track jurisdiction) {
         <tr>
-          <td colspan="5" class="fw-semibold row-primary">{{ entry.date }}</td>
+          <td colspan="5" class="fw-semibold bg-primary-subtle">{{ jurisdiction.name }}</td>
         </tr>
-        <ng-container *ngFor="let jurisdiction of entry.jurisdictions">
+        @for (stage of jurisdiction.stages; track stage) {
           <tr>
-            <td colspan="5" class="fw-semibold bg-primary-subtle">{{ jurisdiction.name }}</td>
+            <td colspan="5" class="fw-semibold bg-secondary-subtle">{{ stage.name }}</td>
           </tr>
-          <ng-container *ngFor="let stage of jurisdiction.stages">
+          @for (case of stage.cases; track case) {
             <tr>
-              <td colspan="5" class="fw-semibold bg-secondary-subtle">{{ stage.name }}</td>
-            </tr>
-            <ng-container *ngFor="let case of stage.cases">
-              <tr>
-                <td>
-                  <p class="fw-semibold">Hearing Session</p>
-                  <p class="fw-semibold">{{ case.lawyer }}</p>
-                </td>
-                <td>
-                  <p class="fw-semibold">{{ case.hearingSession }}</p>
-                  <p class="bg-light text-end p-1">{{ case.hearingDetails }}</p>
-                </td>
-                <td class="m-4">
-                  <p class="fw-semibold">{{ case.previousHearingSession }}</p>
-                  <p class="fw-semibold">{{ case.previousHearingSessionInfo }}</p>
-                </td>
-                <td>
-                  <ul class="list-unstyled">
-                    <li *ngFor="let party of case.caseParties" class="fw-semibold">{{ party }}</li>
-                  </ul>
-                </td>
-                <td>
-                  <p class="fw-semibold">{{ case.caseInfo.caseNumber }}</p>
-                  <p class="fw-semibold">{{ case.caseInfo.caseType }}</p>
-                  <p class="fw-semibold">{{ case.caseInfo.instance }}</p>
-                  <p class="fw-semibold">{{ case.caseInfo.location }}</p>
-                  <a class="fw-semibold link" href="">{{ case.caseInfo.link }}</a>
-                </td>
-              </tr>
-            </ng-container>
-          </ng-container>
-        </ng-container>
-      </ng-container>
-    </tbody>
-  </table>
-  
-<!-- <table class="table table-bordered border-black">
-    <thead class="table-light  border-black">
-        <tr>
-            <th>
-                Lawyer
-            </th>
-            <th style="width:20%;">
-                Hearing Session
-            </th>
-            <th style="width:13%;">
-                Previous Hearing Session
-            </th>
-
-            <th>
-                Case Parties
-            </th>
-
-            <th>
-                Case Info
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td colspan="5" class="fw-semibold row-primary">29-7-2024</td>
-        </tr>
-        <tr>
-            <td colspan="5" class="fw-semibold bg-primary-subtle">Abu Dhabi   أبوظبي</td>
-        </tr>
-        <tr>
-            <td colspan="5" class="fw-semibold bg-secondary-subtle">First Instance   إبتدائي</td>
-        </tr>
-        <tr>
-            <td>
+              <td>
                 <p class="fw-semibold">Hearing Session</p>
-                <p class="fw-semibold">Mohamed Lemine</p>
-                <p class="fw-semibold">Ibrahim Jarjoura</p>
-            </td>
-            <td>
-                <p class="fw-semibold">28-07-2024 | 09:00</p>
-                <p class="bg-light text-end p-1">إخطار النيابة العامة لوجود قصر، مخاطبة دائرة التنمية الاقتصادية للتحري عن الرخصة المسجلة باسم المتوفى مخاطبة دائرة ترخيص المركبات بعجمان للتحري عن المركبات المسجلة باسم المتوفى مخاطبة دائرة ترخيص المركبات بعجمان للتحري عن المركبات المسجلة باسم المتوفى، لورود الافادات التأجيل لجلسة اجتماع يوم الاثنين الموافق 29/07/2024 الساعة 9:00 صباحاً (إدارة الدعوى)
-                </p>
-            </td>
-            <td>
-                <p class="fw-semibold">08-07-2024</p>
-                <p class="fw-semibold">For expert report - لورود التقرير</p>
-            </td>
-            <td>
+                <p class="fw-semibold">{{ case.lawyer }}</p>
+              </td>
+              <td>
+                <p class="fw-semibold">{{ case.hearingSession }}</p>
+                <p class="bg-light text-end p-1">{{ case.hearingDetails }}</p>
+              </td>
+              <td class="m-4">
+                <p class="fw-semibold">{{ case.previousHearingSession }}</p>
+                <p class="fw-semibold">{{ case.previousHearingSessionInfo }}</p>
+              </td>
+              <td>
                 <ul class="list-unstyled">
-                    <li class="fw-semibold">(الخصم) | Appellant - المستأنف || المستشفى الإيرانى ? دبى</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || اكسا للتأمين )الخليج ) ش . م . ب (م) فرع دبي</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || الشركة الأمريكية للتأمين على الحياة</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || بينتا كير سيرفيس</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || دار التكافل (ش.م.ع )</li>
-                    <li class="fw-semibold">(الموكل) | Res - Appeal - المستأنف ضده || شركة الاتحاد للتأمين</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || شركة أبو ظبى الوطنية للتأمين</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || شركة تكافل الإمارات للتأمين ش. م. ع</li>
-                    <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || شركة نور للتكافل العائلى</li>
-                  </ul>
-                  
-            </td>
-            <td>
-                <p class="fw-semibold">188/2024 تركات عجمان</p>
-                <p class="fw-semibold">Family Estates - أسرة تركات</p>
-                <p class="fw-semibold">First Instance - إبتدائي</p>
-                <p class="fw-semibold">Ajman - عجمان</p>
-                <a class="fw-semibold" href="">01625-001</a>
-            </td>
-        </tr>
- 
-        
-    </tbody>
+                  @for (party of case.caseParties; track party) {
+                    <li class="fw-semibold">{{ party }}</li>
+                  }
+                </ul>
+              </td>
+              <td>
+                <p class="fw-semibold">{{ case.caseInfo.caseNumber }}</p>
+                <p class="fw-semibold">{{ case.caseInfo.caseType }}</p>
+                <p class="fw-semibold">{{ case.caseInfo.instance }}</p>
+                <p class="fw-semibold">{{ case.caseInfo.location }}</p>
+                <a class="fw-semibold link" href="">{{ case.caseInfo.link }}</a>
+              </td>
+            </tr>
+          }
+        }
+      }
+    }
+  </tbody>
+</table>
+
+<!-- <table class="table table-bordered border-black">
+<thead class="table-light  border-black">
+  <tr>
+    <th>
+      Lawyer
+    </th>
+    <th style="width:20%;">
+      Hearing Session
+    </th>
+    <th style="width:13%;">
+      Previous Hearing Session
+    </th>
+
+    <th>
+      Case Parties
+    </th>
+
+    <th>
+      Case Info
+    </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td colspan="5" class="fw-semibold row-primary">29-7-2024</td>
+  </tr>
+  <tr>
+    <td colspan="5" class="fw-semibold bg-primary-subtle">Abu Dhabi   أبوظبي</td>
+  </tr>
+  <tr>
+    <td colspan="5" class="fw-semibold bg-secondary-subtle">First Instance   إبتدائي</td>
+  </tr>
+  <tr>
+    <td>
+      <p class="fw-semibold">Hearing Session</p>
+      <p class="fw-semibold">Mohamed Lemine</p>
+      <p class="fw-semibold">Ibrahim Jarjoura</p>
+    </td>
+    <td>
+      <p class="fw-semibold">28-07-2024 | 09:00</p>
+      <p class="bg-light text-end p-1">إخطار النيابة العامة لوجود قصر، مخاطبة دائرة التنمية الاقتصادية للتحري عن الرخصة المسجلة باسم المتوفى مخاطبة دائرة ترخيص المركبات بعجمان للتحري عن المركبات المسجلة باسم المتوفى مخاطبة دائرة ترخيص المركبات بعجمان للتحري عن المركبات المسجلة باسم المتوفى، لورود الافادات التأجيل لجلسة اجتماع يوم الاثنين الموافق 29/07/2024 الساعة 9:00 صباحاً (إدارة الدعوى)
+      </p>
+    </td>
+    <td>
+      <p class="fw-semibold">08-07-2024</p>
+      <p class="fw-semibold">For expert report - لورود التقرير</p>
+    </td>
+    <td>
+      <ul class="list-unstyled">
+        <li class="fw-semibold">(الخصم) | Appellant - المستأنف || المستشفى الإيرانى ? دبى</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || اكسا للتأمين )الخليج ) ش . م . ب (م) فرع دبي</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || الشركة الأمريكية للتأمين على الحياة</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || بينتا كير سيرفيس</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || دار التكافل (ش.م.ع )</li>
+        <li class="fw-semibold">(الموكل) | Res - Appeal - المستأنف ضده || شركة الاتحاد للتأمين</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || شركة أبو ظبى الوطنية للتأمين</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || شركة تكافل الإمارات للتأمين ش. م. ع</li>
+        <li class="fw-semibold">(-) | Res - Appeal - المستأنف ضده || شركة نور للتكافل العائلى</li>
+      </ul>
+
+    </td>
+    <td>
+      <p class="fw-semibold">188/2024 تركات عجمان</p>
+      <p class="fw-semibold">Family Estates - أسرة تركات</p>
+      <p class="fw-semibold">First Instance - إبتدائي</p>
+      <p class="fw-semibold">Ajman - عجمان</p>
+      <a class="fw-semibold" href="">01625-001</a>
+    </td>
+  </tr>
+
+
+</tbody>
 </table> -->

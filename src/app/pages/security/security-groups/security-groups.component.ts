@@ -15,7 +15,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { SharedService } from '@shared/services/shared.service';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 import { PickListModule } from 'primeng/picklist';
-import { CommonModule } from '@angular/common';
+
 import { API_Config } from '@core/api/api-config/api.config';
 import { PAGESIZE } from '@core/utilities/defines';
 import { ApiService } from '@core/api/api.service';
@@ -27,13 +27,12 @@ import { SecurityGroupsUsersComponent } from './security-groups-users/security-g
   styleUrls: ['./security-groups.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedTableComponent,
     SharedSearchInputComponent,
     SharedCardComponent,
     SharedModule,
-    PickListModule,
-  ],
+    PickListModule
+],
 })
 export class SecurityGroupsComponent {
   isSubmit: boolean;

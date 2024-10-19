@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
@@ -23,7 +23,6 @@ import { finalize } from 'rxjs';
   selector: 'app-security-access-exclude',
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     DropdownModule,
@@ -33,8 +32,8 @@ import { finalize } from 'rxjs';
     SecurityMatterAccessClientsComponent,
     SecurityMatterAccessResponsableLawyersComponent,
     SecurityMatterAccessJurisdictionComponent,
-    AccordionModule,
-  ],  templateUrl: './security-access-exclude.component.html',
+    AccordionModule
+],  templateUrl: './security-access-exclude.component.html',
   styleUrls: ['./security-access-exclude.component.scss']
 })
 export class SecurityAccessExcludeComponent implements OnChanges {

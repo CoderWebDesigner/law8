@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -11,7 +11,7 @@ import { forkJoin, finalize } from 'rxjs';
 @Component({
   selector: 'app-timesheet-report-editor',
   standalone: true,
-  imports: [CommonModule,FormlyConfigModule, SharedModule],
+  imports: [FormlyConfigModule, SharedModule],
   templateUrl: './timesheet-report-editor.component.html',
   styleUrls: ['./timesheet-report-editor.component.scss']
 })

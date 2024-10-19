@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SharedModule } from '@shared/shared.module';
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
@@ -23,13 +23,12 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
   selector: 'app-security-calender',
   standalone: true,
   imports: [
-    CommonModule,
     SharedModule,
     SharedCardComponent,
     SharedSearchInputComponent,
     SharedTableComponent,
-    DropdownModule,
-  ],
+    DropdownModule
+],
   templateUrl: './security-calender.component.html',
   styleUrls: ['./security-calender.component.scss'],
 })

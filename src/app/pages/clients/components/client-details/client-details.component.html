@@ -129,26 +129,29 @@
       <div class="col-12">
         <shared-card [borderRadius]="20">
           <p-tabView body>
-            <p-tabPanel
-              [header]="item.label"
-              *ngFor="let item of items; let i = index"
-            >
-              <!-- <app-client-details-address
+            @for (item of items; track item; let i = $index) {
+              <p-tabPanel
+                [header]="item.label"
+                >
+                <!-- <app-client-details-address
                 [data]="client?.lstAddress"
                 *ngIf="i == 0"
               ></app-client-details-address> -->
-              <app-client-details-contacts
-                [data]="client?.clientContacts"
-                *ngIf="i == 0"
-              ></app-client-details-contacts>
-              <app-client-details-related-matters
-                [data]="client?.lstMatter"
-                *ngIf="i == 1"
-              ></app-client-details-related-matters>
+              @if (i == 0) {
+                <app-client-details-contacts
+                  [data]="client?.clientContacts"
+                ></app-client-details-contacts>
+              }
+              @if (i == 1) {
+                <app-client-details-related-matters
+                  [data]="client?.lstMatter"
+                ></app-client-details-related-matters>
+              }
             </p-tabPanel>
-          </p-tabView>
-        </shared-card>
-      </div>
+          }
+        </p-tabView>
+      </shared-card>
     </div>
   </div>
+</div>
 </section>

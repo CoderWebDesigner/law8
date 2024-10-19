@@ -1,24 +1,26 @@
 <!-- <app-shared-no-data
-  *ngIf="data?.length == 0"
+*ngIf="data?.length == 0"
 >
-  <p-button
+<p-button
   *ngIf="!previewOnly"
-    styleClass="btn btn-success"
-    type="button"
-    (onClick)="openDialog()"
-    [icon]="'pi pi-plus'"
-    [label]="'matters.addDocument' | translate"
-    button
+  styleClass="btn btn-success"
+  type="button"
+  (onClick)="openDialog()"
+  [icon]="'pi pi-plus'"
+  [label]="'matters.addDocument' | translate"
+  button
   >
-  </p-button>
+</p-button>
 </app-shared-no-data> -->
 
 <!-- *ngIf="data?.length > 0" -->
 <ng-container>
   <div class="text-end mb-4">
-    <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-      [icon]="'pi pi-plus'" [label]="'matters.addDocument' | translate" [requiredPermission]="'Add_Matter_Documents'">
-    </p-button>
+    @if (!previewOnly) {
+      <p-button styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+        [icon]="'pi pi-plus'" [label]="'matters.addDocument' | translate" [requiredPermission]="'Add_Matter_Documents'">
+      </p-button>
+    }
   </div>
   <shared-table [additionalTableConfig]="additionalTableConfig" [filterOptions]="filterOptions"
     [columnsLocalized]="columnsLocalized" [apiUrls]="apiUrls">

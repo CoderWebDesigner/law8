@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
 import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
@@ -18,7 +18,7 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
 @Component({
   selector: 'app-security-timesheet',
   standalone: true,
-  imports: [CommonModule,SharedModule,SharedCardComponent,SharedSearchInputComponent,SharedTableComponent,DropdownModule],
+  imports: [SharedModule, SharedCardComponent, SharedSearchInputComponent, SharedTableComponent, DropdownModule],
   templateUrl: './security-timesheet.component.html',
   styleUrls: ['./security-timesheet.component.scss']
 })

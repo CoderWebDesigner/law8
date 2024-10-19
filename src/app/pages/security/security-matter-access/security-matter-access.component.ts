@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
 import { DropdownModule } from 'primeng/dropdown';
@@ -22,7 +22,6 @@ import { SecurityAccessExcludeComponent } from './security-access-exclude/securi
   selector: 'app-security-matter-access',
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     DropdownModule,
@@ -34,9 +33,8 @@ import { SecurityAccessExcludeComponent } from './security-access-exclude/securi
     SecurityMatterAccessJurisdictionComponent,
     SecurityMatterIncludeComponent,
     AccordionModule,
-    SecurityAccessExcludeComponent,
-
-  ],
+    SecurityAccessExcludeComponent
+],
   templateUrl: './security-matter-access.component.html',
   styleUrls: ['./security-matter-access.component.scss'],
 })

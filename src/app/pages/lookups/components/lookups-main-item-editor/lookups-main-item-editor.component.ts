@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
@@ -13,10 +13,9 @@ import { finalize } from 'rxjs';
   styleUrls: ['./lookups-main-item-editor.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedModule,
     FormlyConfigModule
-  ],
+],
 })
 export class LookupsMainItemEditorComponent extends FormBaseClass implements OnInit {
   title: string;

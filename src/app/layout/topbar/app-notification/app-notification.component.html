@@ -1,11 +1,15 @@
 
 <button type="button" class="header-item noti-icon" id="page-header-notifications-dropdown" #btn (click)="getNotifications($event,btn)" >
-  <i class="pi pi-bell text-3xl" *ngIf="notificationCount > 0" pBadge [value]="notificationCount" style="font-size: 25px;" severity="danger"></i>
-  <i class="pi pi-bell text-3xl" *ngIf="notificationCount == 0" style="font-size: 25px;"></i>
-  </button>
-  <!-- <i class="pi pi-bell text-3xl" pBadge value="2"></i> -->
-  <!-- <i [inlineSVG]="'/assets/images/icons/bell.svg'" pBadge value="2"></i> -->
-  <!-- <p-button styleClass="header-item noti-icon"  #btn [badge]="notificationCount" (click)="getNotifications($event,btn)"> <i [inlineSVG]="'/assets/images/icons/bell.svg'"></i></p-button> -->
+  @if (notificationCount > 0) {
+    <i class="pi pi-bell text-3xl" pBadge [value]="notificationCount" style="font-size: 25px;" severity="danger"></i>
+  }
+  @if (notificationCount == 0) {
+    <i class="pi pi-bell text-3xl" style="font-size: 25px;"></i>
+  }
+</button>
+<!-- <i class="pi pi-bell text-3xl" pBadge value="2"></i> -->
+<!-- <i [inlineSVG]="'/assets/images/icons/bell.svg'" pBadge value="2"></i> -->
+<!-- <p-button styleClass="header-item noti-icon"  #btn [badge]="notificationCount" (click)="getNotifications($event,btn)"> <i [inlineSVG]="'/assets/images/icons/bell.svg'"></i></p-button> -->
 
   <p-overlayPanel #overlay [dismissable]="true" [style]="{
     'width': '360px',
@@ -13,13 +17,14 @@
     'border-radius': '12px',
     'border': '1px solid #e0e0e0'
   }">
-    <ul class="list-group" *ngIf="items?.length; else noResults">
+  @if (items?.length) {
+    <ul class="list-group">
       <p-scrollPanel [style]="{ width: '100%', height: '350px' }" styleClass="scroll-panel">
-        <li class="list-group-item py-3 cursor-pointer"
-            *ngFor="let item of items; let last=last"
+        @for (item of items; track item; let last = $last) {
+          <li class="list-group-item py-3 cursor-pointer"
             [ngClass]="{'border-bottom-0': !last}"
             (click)="selectItem(item)"
-            (mouseover)="hoverItem = item" 
+            (mouseover)="hoverItem = item"
             (mouseout)="hoverItem = null"
             [style]="{
               'position': 'relative',
@@ -31,8 +36,7 @@
               'box-shadow': hoverItem === item ? '0px 6px 12px rgba(0, 0, 0, 0.1)' : 'none',
               'transform': hoverItem === item ? 'translateY(-2px)' : 'none'
             }">
-          
-          <!-- شريط جانبي ملون يشير إلى نوع الإشعار -->
+            <!-- شريط جانبي ملون يشير إلى نوع الإشعار -->
           <div [style]="{
             'position': 'absolute',
             'top': '0',
@@ -43,29 +47,27 @@
             'border-top-left-radius': '8px',
             'border-bottom-left-radius': '8px'
           }"></div>
-  
-          <!-- محتوى الإشعار -->
-          <div class="d-flex justify-content-between align-items-center" [style]="{'padding-left': '10px'}">
-            <span class="badge rounded-pill text-white" 
-                  style="font-size: 0.85rem; padding: 0.6rem 1.2rem; background-color: #17367d;">
-              <i class="pi pi-bell" style="margin-right: 5px;"></i> {{ item.lable }}
-            </span>
-            <small class="text-muted" style="font-size: 0.75rem;">{{ item.time }}</small>
-          </div>
-          
-          <p class="mb-0 text-break" 
-             style="font-size: 0.95rem; color: #333; padding-left: 10px; margin-top: 8px;">
-            {{ item.message }}
-          </p>
-        </li>
+            <!-- محتوى الإشعار -->
+            <div class="d-flex justify-content-between align-items-center" [style]="{'padding-left': '10px'}">
+              <span class="badge rounded-pill text-white"
+                style="font-size: 0.85rem; padding: 0.6rem 1.2rem; background-color: #17367d;">
+                <i class="pi pi-bell" style="margin-right: 5px;"></i> {{ item.lable }}
+              </span>
+              <small class="text-muted" style="font-size: 0.75rem;">{{ item.time }}</small>
+            </div>
+            <p class="mb-0 text-break"
+              style="font-size: 0.95rem; color: #333; padding-left: 10px; margin-top: 8px;">
+              {{ item.message }}
+            </p>
+          </li>
+        }
       </p-scrollPanel>
     </ul>
-  
-    <!-- رسالة "لا توجد نتائج" -->
-    <ng-template #noResults>
-      <p class="text-center text-muted" 
-         style="font-size: 1rem; padding: 1.5rem;">No notifications found</p>
-    </ng-template>
-  </p-overlayPanel>
-  
-  
+  } @else {
+    <p class="text-center text-muted"
+    style="font-size: 1rem; padding: 1.5rem;">No notifications found</p>
+  }
+
+  <!-- رسالة "لا توجد نتائج" -->
+</p-overlayPanel>
+

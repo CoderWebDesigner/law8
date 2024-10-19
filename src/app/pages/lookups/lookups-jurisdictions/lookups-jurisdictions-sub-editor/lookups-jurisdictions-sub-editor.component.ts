@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Main_List_Types } from '@components/lookups/const/main-list-types';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -14,7 +14,7 @@ import { SharedService } from '@shared/services/shared.service';
 @Component({
   selector: 'app-lookups-jurisdictions-sub-editor',
   standalone: true,
-  imports: [CommonModule, SharedModule, ButtonModule, FormlyConfigModule],
+  imports: [SharedModule, ButtonModule, FormlyConfigModule],
   templateUrl: './lookups-jurisdictions-sub-editor.component.html',
   styleUrls: ['./lookups-jurisdictions-sub-editor.component.scss'],
 })

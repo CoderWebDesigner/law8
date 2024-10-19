@@ -1,5 +1,5 @@
 import { MenuItem } from 'primeng/api';
-import { CommonModule } from '@angular/common';
+
 import { SharedModule } from '@shared/shared.module';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { Component, Input } from '@angular/core';
@@ -10,10 +10,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./shared-tabs.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedModule,
-    TabMenuModule,
-  ],
+    TabMenuModule
+],
 })
 export class SharedTabsComponent {
   @Input() tabs: MenuItem[] = [];

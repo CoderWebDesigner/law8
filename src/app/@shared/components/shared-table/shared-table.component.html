@@ -1,115 +1,131 @@
 <div class="d-flex justify-content-end mb-3 flex-md-row flex-column-reverse">
   <div class="d-sm-flex">
-    <shared-search-input (onSearch)="onSearch($event)" *ngIf="additionalTableConfig?.isSearch"></shared-search-input>
+    @if (additionalTableConfig?.isSearch) {
+      <shared-search-input (onSearch)="onSearch($event)"></shared-search-input>
+    }
   </div>
 </div>
 
 <div class="position-relative">
   <p-table #dt [columns]="columns" [value]="data" [lazy]="true" [resizableColumns]="isColumnResize"
-    [tableStyle]="{ 'min-width': '100%' }" [(selection)]="selected || defaultSelected" [dataKey]="dataKey"
+    [tableStyle]="{ 'min-width': '100%' }" [selection]="selected || defaultSelected" (selectionChange)="selected || (defaultSelected = $event)" [dataKey]="dataKey"
     [paginator]="paginationClient" [rows]="filterOptions?.pageSize" [showCurrentPageReport]="true"
     [currentPageReportTemplate]="currentPageReportTemplate" [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)" (onRowUnselect)="onRowUnselect($event)" [selectionMode]="selectMode"
     (onSort)="getSort($event)">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngIf="columnsLocalizedChildren || withCheckbox || withRadioButton" style="width: 5rem">
-          <!-- <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox> -->
-        </th>
-        <ng-container *ngFor="let col of columns">
+        @if (columnsLocalizedChildren || withCheckbox || withRadioButton) {
+          <th style="width: 5rem">
+            <!-- <p-tableHeaderCheckbox *ngIf="withCheckbox"></p-tableHeaderCheckbox> -->
+          </th>
+        }
+        @for (col of columns; track col) {
           <!-- <ng-container *ngIf="col.isSwitch">
-            <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand" [requiredPermission]="col?.permission">
-              {{ col.header }}
-              <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
-            </th>
-          </ng-container> -->
-
-          <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }">
+          <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }" *ngIf="!col.isExpand" [requiredPermission]="col?.permission">
             {{ col.header }}
             <p-sortIcon [field]="col.field" *ngIf="col.isSort"></p-sortIcon>
           </th>
-        </ng-container>
+        </ng-container> -->
+        <th [pSortableColumn]="col.field" [style]="col?.style??{'min-width': '200px' }">
+          {{ col.header }}
+          @if (col.isSort) {
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          }
+        </th>
+      }
 
-        <!-- ANCHOR Actions Column -->
-        <th *ngIf="tableConfig.actions?.length || actionsTemplateRef">
+      <!-- ANCHOR Actions Column -->
+      @if (tableConfig.actions?.length || actionsTemplateRef) {
+        <th>
           {{ "common.actions" | translate }}
         </th>
+      }
 
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
-      <tr [pSelectableRow]="rowData" *ngIf="!isLoading">
-        <td *ngIf="withRadioButton">
-          <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
-        </td>
-        <td *ngIf="withCheckbox">
-          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-        </td>
-        <td *ngIf="columnsLocalizedChildren">
-          <button type="button" pButton pRipple [pRowToggler]="rowData"
-            class="p-button-text p-button-rounded p-button-plain"
-            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+    @if (!isLoading) {
+      <tr [pSelectableRow]="rowData">
+        @if (withRadioButton) {
+          <td>
+            <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+          </td>
+        }
+        @if (withCheckbox) {
+          <td>
+            <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+          </td>
+        }
+        @if (columnsLocalizedChildren) {
+          <td>
+            <button type="button" pButton pRipple [pRowToggler]="rowData"
+              class="p-button-text p-button-rounded p-button-plain"
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
             (click)="onSelectionChange(rowData?.id,expanded)"></button>
-        </td>
-        <td *ngFor="let col of columns">
-          <ng-container *ngIf="
+          </td>
+        }
+        @for (col of columns; track col) {
+          <td>
+            @if (
               !col?.isSwitch &&
               !col?.isStatus &&
               !col.isDate &&
               !col?.isAction &&
               !col?.withIcon &&
-              !col?.isLargeText && 
-              !col?.isCheck && 
+              !col?.isLargeText &&
+              !col?.isCheck &&
               !col?.isFloat
-            ">
-            {{ rowData[col.field] }}
-          </ng-container>
-
-          <ng-container *ngIf="col?.isStatus">
-            <div class="tag" [ngClass]="getTagClass(rowData[col.field])">
-              <!-- {{ "tags." + rowData[col.field] | translate }} -->
-              {{rowData[col.field]}}
-            </div>
-          </ng-container>
-          <ng-container *ngIf="col?.isDate">
-            {{ rowData[col.field] | date : "dd-MM-yyyy" }}
-          </ng-container>
-          <ng-container *ngIf="col?.isSwitch">
-            <p-inputSwitch [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
-              [requiredPermission]="col?.permission" (onChange)="onSwitch($event)"></p-inputSwitch>
-          </ng-container>
-          <ng-container *ngIf="col?.isCheck">
-            <p-checkbox [binary]="true" inputId="binary" [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
-              (onChange)="onSelectionChange(rowData)"></p-checkbox>
-          </ng-container>
-          <ng-container *ngIf="col?.isFloat">
-            <span> {{rowData[col.field] | number : '1.2-2'}}</span>
-          </ng-container>
-
-
-          <ng-container *ngIf="col?.withIcon">
-            <img [src]="'./assets/images/' + rowData[col.field] + '.png'" alt="" />
-          </ng-container>
-          <ng-container *ngIf="col?.isLargeText">
-            <ng-container *ngIf="rowData[col['field']] && rowData[col['field']].length > 50">
-              {{ rowData[col.field] | slice : 0 : 50 }}
-              <p-button icon="pi pi-ellipsis-h" styleClass="p-button-icon-only p-button-info p-0 p-button-text"
-                (onClick)="showMore(col?.field, rowData[col['field']])"></p-button>
-            </ng-container>
-            <ng-container *ngIf="rowData[col['field']]?.length < 50">
+              ) {
               {{ rowData[col.field] }}
-            </ng-container>
-          </ng-container>
-        </td>
-
-        <td *ngIf="tableConfig?.actions?.length || actionsTemplateRef" style="white-space: nowrap">
-          <div class="d-flex align-items-center">
-            <ng-container *ngIf="actionsTemplateRef" [ngTemplateOutlet]="actionsTemplateRef"
-              [ngTemplateOutletContext]="{ $implicit: rowData }">
-            </ng-container>
-            <!-- *ngIf="_permissionService.hasPermission(action.permission)" -->
-            <ng-container *ngFor="let action of tableConfig?.actions">
-              <p-button *ngIf="_permissionService.hasPermission(action.permission)" [styleClass]="
+            }
+            @if (col?.isStatus) {
+              <div class="tag" [ngClass]="getTagClass(rowData[col.field])">
+                <!-- {{ "tags." + rowData[col.field] | translate }} -->
+                {{rowData[col.field]}}
+              </div>
+            }
+            @if (col?.isDate) {
+              {{ rowData[col.field] | date : "dd-MM-yyyy" }}
+            }
+            @if (col?.isSwitch) {
+              <p-inputSwitch [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
+              [requiredPermission]="col?.permission" (onChange)="onSwitch($event)"></p-inputSwitch>
+            }
+            @if (col?.isCheck) {
+              <p-checkbox [binary]="true" inputId="binary" [styleClass]="col?.class" [(ngModel)]="rowData[col.field]"
+              (onChange)="onSelectionChange(rowData)"></p-checkbox>
+            }
+            @if (col?.isFloat) {
+              <span> {{rowData[col.field] | number : '1.2-2'}}</span>
+            }
+            @if (col?.withIcon) {
+              <img [src]="'./assets/images/' + rowData[col.field] + '.png'" alt="" />
+            }
+            @if (col?.isLargeText) {
+              @if (rowData[col['field']] && rowData[col['field']].length > 50) {
+                {{ rowData[col.field] | slice : 0 : 50 }}
+                <p-button icon="pi pi-ellipsis-h" styleClass="p-button-icon-only p-button-info p-0 p-button-text"
+                (onClick)="showMore(col?.field, rowData[col['field']])"></p-button>
+              }
+              @if (rowData[col['field']]?.length < 50) {
+                {{ rowData[col.field] }}
+              }
+            }
+          </td>
+        }
+        @if (tableConfig?.actions?.length || actionsTemplateRef) {
+          <td style="white-space: nowrap">
+            <div class="d-flex align-items-center">
+              @if (actionsTemplateRef) {
+                <ng-container [ngTemplateOutlet]="actionsTemplateRef"
+                  [ngTemplateOutletContext]="{ $implicit: rowData }">
+                </ng-container>
+              }
+              <!-- *ngIf="_permissionService.hasPermission(action.permission)" -->
+              @for (action of tableConfig?.actions; track action) {
+                @if (_permissionService.hasPermission(action.permission)) {
+<p-button [styleClass]="
                   'p-button-text p-0 me-3 d-flex' +
                   (action.type === 'delete' ? ' p-button-danger' : '')
                 " type="button" (onClick)="onTableAction(action, rowData)" [pTooltip]="
@@ -117,19 +133,25 @@
                   action.title ||
                   ('btn.' + action.type | translate)
                 " tooltipPosition="top" [styeClass]="action.type === 'delete' ? 'p-button-danger' : ''">
-                <i class="fs-4" [ngClass]="['pi pi-' + action?.icon]"></i>
-              </p-button>
-            </ng-container>
-
-
-          </div>
-        </td>
+                    <i class="fs-4" [ngClass]="['pi pi-' + action?.icon]"></i>
+                  </p-button>
+                }
+              }
+            </div>
+          </td>
+        }
       </tr>
-      <tr *ngIf="isLoading">
-        <td *ngFor="let column of columns"><p-skeleton></p-skeleton></td>
+    }
+    @if (isLoading) {
+      <tr>
+        @for (column of columns; track column) {
+          <td><p-skeleton></p-skeleton></td>
+        }
       </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-rowData *ngIf="columnsLocalizedChildren">
+    }
+  </ng-template>
+  @if (columnsLocalizedChildren; as rowData) {
+    <ng-template pTemplate="rowexpansion" let-rowData>
       <tr>
         <td colspan="7" class="pe-0 ps-5">
           <shared-table [columnsLocalized]="columnsLocalizedChildren"
@@ -139,25 +161,28 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
-      <tr>
-        <td [attr.colspan]="columns.length">No records found</td>
-      </tr>
-    </ng-template>
-  </p-table>
-  <div dir="ltr">
+  }
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length">No records found</td>
+    </tr>
+  </ng-template>
+</p-table>
+<div dir="ltr">
 
-    <p-paginator *ngIf="withPagination" (onPageChange)="pageChanged($event)" [rows]="filterOptions?.pagSize"
+  @if (withPagination) {
+    <p-paginator (onPageChange)="pageChanged($event)" [rows]="filterOptions?.pagSize"
       [totalRecords]="!paginationClient ? totalRecords : data?.length" [rowsPerPageOptions]="PAGE_SIZE_OPTION"
       [showCurrentPageReport]="true" [currentPageReportTemplate]="currentPageReportTemplate" dropdownAppendTo="body"
-      [pageLinkSize]="5"></p-paginator>
-  </div>
+    [pageLinkSize]="5"></p-paginator>
+  }
+</div>
 </div>
 
 <!-- <ng-template #loadingSkeleton>
-  <p-skeleton
-    height="4rem"
-    *ngFor="let item of [].constructor(4)"
-    styleClass="mb-3"
-  ></p-skeleton>
+<p-skeleton
+  height="4rem"
+  *ngFor="let item of [].constructor(4)"
+  styleClass="mb-3"
+></p-skeleton>
 </ng-template> -->

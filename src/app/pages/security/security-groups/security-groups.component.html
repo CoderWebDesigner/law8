@@ -3,17 +3,16 @@
     <shared-card [title]="'security.groups' | translate" [borderRadius]="20" class="mb-4">
       <div headerActions class="d-flex flex-sm-column text-end">
         <p-button [label]="'security.addGroup' | translate" (onClick)="openItemEditor()"
-          styleClass="py-2 px-4 mx-2 mb-2" [requiredPermission]="'Add_Security_Groups'"></p-button>
+        styleClass="py-2 px-4 mx-2 mb-2" [requiredPermission]="'Add_Security_Groups'"></p-button>
         <!-- <shared-search-input></shared-search-input> -->
       </div>
 
       <shared-table body [apiUrls]="apiUrls" [columnsLocalized]="columnsLocalized"
         [additionalTableConfig]="additionalTableConfig" [filterOptions]="filterOptions" [selectMode]="'single'"
-        (onRowSelect)="onRowSelect($event)" ></shared-table>
+      (onRowSelect)="onRowSelect($event)" ></shared-table>
     </shared-card>
   </div>
-  <ng-container *ngIf="selectedRow">
-
+  @if (selectedRow) {
     <div class="col-md-7" >
       <shared-card [borderRadius]="20" [title]="'security.permissions' | translate">
         <ng-container body>
@@ -28,21 +27,22 @@
                 <span>
                   {{ item?.id }} -
                   <span>{{ item?.name }}</span></span>
-              </div>
-            </ng-template>
-          </p-pickList>
-  
-        </ng-container>
-        
-        
-      </shared-card>
-      <div class="d-flex justify-content-end mt-3">
-        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="permissions.length==0" [disabled]="target.length==0"
-          label="{{ 'btn.submit' | translate }}" (onClick)="submit('add')"></p-button>
-        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" *ngIf="permissions.length!=0" [disabled]="target.length==0"
-          label="{{ 'btn.update' | translate }}" (onClick)="submit('update')"></p-button>
+                </div>
+              </ng-template>
+            </p-pickList>
+          </ng-container>
+        </shared-card>
+        <div class="d-flex justify-content-end mt-3">
+          @if (permissions.length==0) {
+            <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" [disabled]="target.length==0"
+            label="{{ 'btn.submit' | translate }}" (onClick)="submit('add')"></p-button>
+          }
+          @if (permissions.length!=0) {
+            <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" [disabled]="target.length==0"
+            label="{{ 'btn.update' | translate }}" (onClick)="submit('update')"></p-button>
+          }
+        </div>
       </div>
-    </div>
-  </ng-container>
-  
-</div>
+    }
+
+  </div>

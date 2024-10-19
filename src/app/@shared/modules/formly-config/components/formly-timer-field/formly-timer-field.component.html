@@ -1,7 +1,11 @@
 <div class="timer bg-white px-3 py-2 rounded d-flex">
   <div class="timer-btns">
-    <p-button icon="pi pi-play" *ngIf="!start" (onClick)="play()" styleClass="p-button-primary text-white"></p-button>
-    <p-button icon="pi pi-stop" *ngIf="start" (onClick)="stop()" styleClass="p-button-danger text-white"></p-button>
+    @if (!start) {
+      <p-button icon="pi pi-play" (onClick)="play()" styleClass="p-button-primary text-white"></p-button>
+    }
+    @if (start) {
+      <p-button icon="pi pi-stop" (onClick)="stop()" styleClass="p-button-danger text-white"></p-button>
+    }
   </div>
   <p class="mb-0 fw-bold fs-5" [ngClass]="{'text-warning':!start&&seconds==0,'text-success':start,'text-danger':!start&&time!=0}">
     <span class="bg-white rounded ms-2 p-2 d-inline-block text-center">

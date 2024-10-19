@@ -1,15 +1,17 @@
 <!-- <app-shared-no-data *ngIf="data?.length == 0">
-    <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-        [icon]="'pi pi-plus'" [label]="'matters.addParties' | translate" button>
-    </p-button>
+<p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+  [icon]="'pi pi-plus'" [label]="'matters.addParties' | translate" button>
+</p-button>
 </app-shared-no-data>
 
 <ng-container *ngIf="data?.length > 0"> -->
-    <div class="text-end mb-4">
-        <p-button *ngIf="!previewOnly" styleClass="btn btn-success" type="button" (onClick)="openDialog()"
-            [icon]="'pi pi-plus'" [label]="'matters.addParties' | translate" [requiredPermission]="'Add_Parties_Matter'">
-        </p-button>
-    </div>
-    <shared-table [additionalTableConfig]="additionalTableConfig" [data]="data" [columnsLocalized]="columnsLocalized"
-    [apiUrls]="apiUrls" [filterOptions]="filterOptions" (onDeleteRow)="onDeleteRow($event)"></shared-table>
+  <div class="text-end mb-4">
+    @if (!previewOnly) {
+      <p-button styleClass="btn btn-success" type="button" (onClick)="openDialog()"
+        [icon]="'pi pi-plus'" [label]="'matters.addParties' | translate" [requiredPermission]="'Add_Parties_Matter'">
+      </p-button>
+    }
+  </div>
+  <shared-table [additionalTableConfig]="additionalTableConfig" [data]="data" [columnsLocalized]="columnsLocalized"
+  [apiUrls]="apiUrls" [filterOptions]="filterOptions" (onDeleteRow)="onDeleteRow($event)"></shared-table>
 <!-- </ng-container> -->

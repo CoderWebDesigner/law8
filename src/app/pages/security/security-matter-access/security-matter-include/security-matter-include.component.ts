@@ -6,7 +6,7 @@ import {
   SimpleChanges,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
 import { ApiRes } from '@core/models';
@@ -29,7 +29,6 @@ import { finalize } from 'rxjs';
   selector: 'app-security-matter-include',
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     DropdownModule,
@@ -39,8 +38,8 @@ import { finalize } from 'rxjs';
     SecurityMatterAccessClientsComponent,
     SecurityMatterAccessResponsableLawyersComponent,
     SecurityMatterAccessJurisdictionComponent,
-    AccordionModule,
-  ],
+    AccordionModule
+],
   templateUrl: './security-matter-include.component.html',
   styleUrls: ['./security-matter-include.component.scss'],
 })

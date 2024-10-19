@@ -1,7 +1,11 @@
-  <p-button [styleClass]="props['class']" (click)="onClick()" [style]="props['style']">
-    <i class="me-2" [class]="props['icon'] " *ngIf="props['icon']"></i>
-    <img [src]="props['imgPath']" alt="" [style]="props['imgStyle']" *ngIf="props['imgPath']">
-    <span class="ml-2 font-bold">
-      {{ props["label"] }}
-    </span>
-  </p-button>
+<p-button [styleClass]="props['class']" (click)="onClick()" [style]="props['style']">
+  @if (props['icon']) {
+    <i class="me-2" [class]="props['icon'] "></i>
+  }
+  @if (props['imgPath']) {
+    <img [src]="props['imgPath']" alt="" [style]="props['imgStyle']">
+  }
+  <span class="ml-2 font-bold">
+    {{ props["label"] }}
+  </span>
+</p-button>

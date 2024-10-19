@@ -1,9 +1,9 @@
 <shared-card [title]="'report.activityReport' | translate" [borderRadius]="20">
-    <ng-container body>
-        <app-activity-report-editor (onFilter)="onFilter($event)"></app-activity-report-editor>
-        <!-- <app-activity-report-table></app-activity-report-table> -->
-        <ng-container *ngIf="urlSafe">
-            <iframe [src]="urlSafe" frameborder="0" width="100%" height="800" ></iframe>
-        </ng-container>
-    </ng-container>
+  <ng-container body>
+    <app-activity-report-editor (onFilter)="onFilter($event)"></app-activity-report-editor>
+    <!-- <app-activity-report-table></app-activity-report-table> -->
+    @if (urlSafe) {
+      <iframe [src]="urlSafe" frameborder="0" width="100%" height="800" ></iframe>
+    }
+  </ng-container>
 </shared-card>

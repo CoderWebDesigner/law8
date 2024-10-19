@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { SharedModule } from '@shared/shared.module';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
@@ -12,7 +12,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'app-lookups-jurisdictions-main-editor',
   standalone: true,
-  imports: [CommonModule,SharedModule,ButtonModule,FormlyConfigModule],
+  imports: [SharedModule, ButtonModule, FormlyConfigModule],
   templateUrl: './lookups-jurisdictions-main-editor.component.html',
   styleUrls: ['./lookups-jurisdictions-main-editor.component.scss']
 })

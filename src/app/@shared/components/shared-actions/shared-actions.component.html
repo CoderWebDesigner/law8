@@ -1,29 +1,32 @@
 <div class="p-dialog-footer" [ngClass]="{'fixed-footer': _dynamicDialogConfig.header}">
-  <div *ngIf="isCancel">
-    <p-button
-      styleClass="p-button-outlined-primary px-5"
-      type="button"
-      (click)="_dynamicDialogConfig.header?_dynamicDialogRef.close():onCancel()"
-      [label]="cancelText | translate"
-    ></p-button>
-  </div>
+  @if (isCancel) {
+    <div>
+      <p-button
+        styleClass="p-button-outlined-primary px-5"
+        type="button"
+        (click)="_dynamicDialogConfig.header?_dynamicDialogRef.close():onCancel()"
+        [label]="cancelText | translate"
+      ></p-button>
+    </div>
+  }
   <div></div>
 
   <div>
-    <p-button
-    styleClass="p-button-primary px-5"
-    *ngIf="!isView"
-    [label]="submitText | translate"
-    [loading]="isSubmitted"
-    [type]="buttonType"
-    (click)="ClickedChanged()"
-  >
-    <span
-      *ngIf="icon"
-      class="me-1"
-
-    ></span>
-  </p-button>
+    @if (!isView) {
+      <p-button
+        styleClass="p-button-primary px-5"
+        [label]="submitText | translate"
+        [loading]="isSubmitted"
+        [type]="buttonType"
+        (click)="ClickedChanged()"
+        >
+        @if (icon) {
+          <span
+            class="me-1"
+          ></span>
+        }
+      </p-button>
+    }
 
     <ng-content></ng-content>
   </div>

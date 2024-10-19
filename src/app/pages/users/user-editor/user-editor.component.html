@@ -13,12 +13,16 @@
         label="{{ 'btn.submit' | translate }}"
       ></p-button>
     </div>
-    <p-tabView *ngIf="userId">
-      <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
-          <app-user-editor-default-rate [requestId]="userId"></app-user-editor-default-rate>
-      </p-tabPanel>
-    </p-tabView>
+    @if (userId) {
+      <p-tabView>
+        @for (item of items; track item; let i = $index) {
+          <p-tabPanel [header]="item.label">
+            <app-user-editor-default-rate [requestId]="userId"></app-user-editor-default-rate>
+          </p-tabPanel>
+        }
+      </p-tabView>
+    }
 
-   
+
   </form>
 </shared-card>

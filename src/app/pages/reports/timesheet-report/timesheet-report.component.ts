@@ -1,6 +1,6 @@
 
 
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '@core/api/api.service';
@@ -12,9 +12,7 @@ import { TimesheetReportEditorComponent } from './timesheet-report-editor/timesh
 @Component({
   selector: 'app-timesheet-report',
   standalone: true,
-imports:[ CommonModule,
-  SharedModule,
-  SharedCardComponent, TimesheetReportEditorComponent],
+imports: [SharedModule, SharedCardComponent, TimesheetReportEditorComponent],
   templateUrl: './timesheet-report.component.html',
   styleUrls: ['./timesheet-report.component.scss']
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -25,14 +25,13 @@ import { finalize } from 'rxjs';
   styleUrls: ['./security-matter-access-responsable-lawyers.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     DropdownModule,
     SharedModule,
     SharedSearchInputComponent,
-    PickListModule,
-  ],
+    PickListModule
+],
 })
 export class SecurityMatterAccessResponsableLawyersComponent
   implements OnChanges

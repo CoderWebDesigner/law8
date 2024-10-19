@@ -5,7 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { AuthService, LanguageService } from '@core/services';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { ApiService } from '@core/api/api.service';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiRes } from '@core/models';
@@ -14,7 +14,7 @@ import { ApiRes } from '@core/models';
   templateUrl: './app-user.component.html',
   styleUrls: ['./app-user.component.scss'],
   standalone: true,
-  imports: [CommonModule,MenuModule, SharedModule,InlineSVGModule],
+  imports: [MenuModule, SharedModule, InlineSVGModule],
 })
 export class AppUserComponent implements OnInit{
   _apiService=inject(ApiService)

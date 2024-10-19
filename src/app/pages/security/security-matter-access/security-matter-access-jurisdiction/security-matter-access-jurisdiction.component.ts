@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   Input,
@@ -30,7 +30,6 @@ import { finalize } from 'rxjs';
   styleUrls: ['./security-matter-access-jurisdiction.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     DropdownModule,
@@ -39,8 +38,8 @@ import { finalize } from 'rxjs';
     PickListModule,
     SecurityMatterAccessClientsComponent,
     SecurityMatterAccessResponsableLawyersComponent,
-    AccordionModule,
-  ],
+    AccordionModule
+],
 })
 export class SecurityMatterAccessJurisdictionComponent implements OnChanges {
   @Input() userId: string;

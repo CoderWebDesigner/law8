@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './activity-report-table.component.html',
   styleUrls: ['./activity-report-table.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
 })
 export class ActivityReportTableComponent {
   // data: any[] = [

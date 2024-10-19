@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
@@ -11,7 +11,7 @@ import { MatterService } from '@components/matters/service/matter.service';
 @Component({
   selector: 'app-matter-address-editor',
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, SharedModule],
+  imports: [FormlyConfigModule, SharedModule],
   templateUrl: './matter-address-editor.component.html',
   styleUrls: ['./matter-address-editor.component.scss'],
 })

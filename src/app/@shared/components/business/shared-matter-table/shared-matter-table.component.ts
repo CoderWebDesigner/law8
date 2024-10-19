@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
 import { SharedSearchInputComponent } from '@shared/components/shared-search-input/shared-search-input.component';
@@ -27,12 +27,11 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
   styleUrls: ['./shared-matter-table.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     SharedSearchInputComponent,
-    SharedModule,
-  ],
+    SharedModule
+],
 })
 export class SharedMatterTableComponent implements OnInit {
   _dialogConfig = inject(DynamicDialogConfig);

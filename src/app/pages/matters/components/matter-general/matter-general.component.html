@@ -4,8 +4,12 @@
     [fields]="formlyFields"
     [model]="formlyModel"
   ></formly-form>
-  <div class="mt-4 text-end" *ngIf="data">
-    <p-button *ngIf="!previewOnly" [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
-      label="{{ 'btn.submit' | translate }}"></p-button>
-  </div>
+  @if (data) {
+    <div class="mt-4 text-end">
+      @if (!previewOnly) {
+        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
+        label="{{ 'btn.submit' | translate }}"></p-button>
+      }
+    </div>
+  }
 </form>

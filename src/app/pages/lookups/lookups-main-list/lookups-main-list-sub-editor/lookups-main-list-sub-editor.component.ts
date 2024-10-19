@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -14,7 +14,7 @@ import { finalize } from 'rxjs';
   templateUrl: './lookups-main-list-sub-editor.component.html',
   styleUrls: ['./lookups-main-list-sub-editor.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, ButtonModule, SharedModule],
+  imports: [FormlyConfigModule, ButtonModule, SharedModule],
 })
 export class LookupsMainListSubEditorComponent
   extends FormBaseClass

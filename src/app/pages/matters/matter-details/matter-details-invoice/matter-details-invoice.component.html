@@ -1,29 +1,30 @@
 <!-- <app-shared-no-data
-  *ngIf="data?.length == 0"
+*ngIf="data?.length == 0"
 >
-  <p-button
+<p-button
   *ngIf="!previewOnly"
-    styleClass="btn btn-success"
-    type="button"
-    (onClick)="openDialog()"
-    [icon]="'pi pi-plus'"
-    [label]="'matters.addInvoice' | translate"
-    button >
-  </p-button>
+  styleClass="btn btn-success"
+  type="button"
+  (onClick)="openDialog()"
+  [icon]="'pi pi-plus'"
+  [label]="'matters.addInvoice' | translate"
+  button >
+</p-button>
 </app-shared-no-data> -->
 <!-- *ngIf="data?.length > 0" -->
 <ng-container >
   <div class="text-end mb-4">
-    <p-button
-    *ngIf="!previewOnly"
-    styleClass="btn btn-success"
-    type="button"
-    (onClick)="openDialog()"
-    [icon]="'pi pi-plus'"
-    [label]="'matters.addInvoice' | translate"
-    button
-  >
-  </p-button>
+    @if (!previewOnly) {
+      <p-button
+        styleClass="btn btn-success"
+        type="button"
+        (onClick)="openDialog()"
+        [icon]="'pi pi-plus'"
+        [label]="'matters.addInvoice' | translate"
+        button
+        >
+      </p-button>
+    }
   </div>
   <shared-table
     [data]="data"

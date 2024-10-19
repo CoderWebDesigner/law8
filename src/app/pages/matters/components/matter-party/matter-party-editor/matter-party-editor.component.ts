@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
 import { API_Config } from '@core/api/api-config/api.config';
@@ -14,7 +14,7 @@ import { Params } from '@angular/router';
 @Component({
   selector: 'app-matter-party-editor',
   standalone: true,
-  imports: [CommonModule, FormlyConfigModule, SharedModule],
+  imports: [FormlyConfigModule, SharedModule],
   templateUrl: './matter-party-editor.component.html',
   styleUrls: ['./matter-party-editor.component.scss'],
 })

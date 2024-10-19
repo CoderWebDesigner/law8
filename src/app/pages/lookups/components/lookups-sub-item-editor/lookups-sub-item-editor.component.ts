@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { SharedModule } from '@shared/shared.module';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
@@ -12,7 +12,7 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-lookups-sub-item-editor',
   standalone: true,
-  imports: [CommonModule, SharedModule, FormlyConfigModule],
+  imports: [SharedModule, FormlyConfigModule],
   templateUrl: './lookups-sub-item-editor.component.html',
   styleUrls: ['./lookups-sub-item-editor.component.scss'],
 })

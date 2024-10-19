@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectorRef, Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {
   Security_Groups_Columns_AR,
@@ -23,12 +23,11 @@ import { finalize } from 'rxjs';
   styleUrls: ['./security-users-groups.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedTableComponent,
     SharedCardComponent,
     SharedSearchInputComponent,
-    SharedModule,
-  ],
+    SharedModule
+],
 })
 export class SecurityUsersGroupsComponent implements OnChanges {
   

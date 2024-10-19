@@ -6,21 +6,22 @@
           width="40px"
           height="44px"
           [src]="'assets/images/icons/upload.svg'"
-        />
-      </div>
-      <span class="d-block">{{ "messages.uploadFile" | translate }}</span>
-      <!-- <small class="d-block">{{ "messages.multipleFile" | translate }}</small> -->
+          />
+        </div>
+        <span class="d-block">{{ "messages.uploadFile" | translate }}</span>
+        <!-- <small class="d-block">{{ "messages.multipleFile" | translate }}</small> -->
 
-      <p-button class="d-block h-50 mt-2">{{
-        "btn.upload" | translate
-      }}</p-button>
-    </ngx-dropzone-label>
-    <ngx-dropzone-preview
-      *ngFor="let f of files"
-      [removable]="true"
-      (removed)="onRemove(f)"
-    >
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-    </ngx-dropzone-preview>
-  </ngx-dropzone>
-</div>
+        <p-button class="d-block h-50 mt-2">{{
+          "btn.upload" | translate
+        }}</p-button>
+      </ngx-dropzone-label>
+      @for (f of files; track f) {
+        <ngx-dropzone-preview
+          [removable]="true"
+          (removed)="onRemove(f)"
+          >
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      }
+    </ngx-dropzone>
+  </div>

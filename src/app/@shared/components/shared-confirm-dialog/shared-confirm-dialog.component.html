@@ -1,26 +1,27 @@
 <div
   class="confirm d-flex flex-column align-items-center justify-content-center"
   [ngClass]="{ 'confirm-delete': _dynamicDialogConfig?.data?.isDelete }"
->
-  <div class="icon mb-3" *ngIf="_dynamicDialogConfig?.data?.isDelete">
-    <i class="pi pi-trash"></i>
-  </div>
+  >
+  @if (_dynamicDialogConfig?.data?.isDelete) {
+    <div class="icon mb-3">
+      <i class="pi pi-trash"></i>
+    </div>
+  }
 
-    <h5 class="fw-bolder mb-0">{{_dynamicDialogConfig?.data?.title}}</h5>
+  <h5 class="fw-bolder mb-0">{{_dynamicDialogConfig?.data?.title}}</h5>
   <div class="message my-3">
-    <ng-container *ngIf="_dynamicDialogConfig?.data?.isDelete; else elseTemplateDelete">
+    @if (_dynamicDialogConfig?.data?.isDelete) {
       {{_dynamicDialogConfig?.data?.message? _dynamicDialogConfig?.data?.message:("messages.sureDelete" | translate)}}
-    </ng-container>
-    <ng-template #elseTemplateDelete>
+    } @else {
       {{_dynamicDialogConfig?.data?.message}}
-    </ng-template>
+    }
 
   </div>
 
   <div
     class="p-dialog-footer bg-transparent p-0"
     [ngClass]="{ 'border-0': _dynamicDialogConfig?.data?.isDelete }"
-  >
+    >
     <button
       class="me-4 px-4 py-2"
       type="button"

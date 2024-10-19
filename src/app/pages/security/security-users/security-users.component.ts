@@ -13,7 +13,7 @@ import {
   Users_Columns_AR,
   Users_Columns_FR,
 } from './users-columns-config';
-import { CommonModule } from '@angular/common';
+
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
 import { SharedService } from '@shared/services/shared.service';
@@ -28,13 +28,12 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
   styleUrls: ['./security-users.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedTableComponent,
     SharedCardComponent,
     SharedSearchInputComponent,
     SharedModule,
     SecurityUsersGroupsComponent
-  ],
+],
 })
 export class SecurityUsersComponent {
   usersApiUrls = API_Config.users;

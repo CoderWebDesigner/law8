@@ -1,16 +1,18 @@
 <div class="app-lang">
-    <p-dropdown styleClass="dropdown-0" [options]="listLang" [ngModel]="activeLang"  optionLabel="text" (onChange)="setActiveLang($event)" >
-        <ng-template pTemplate="selectedItem">
-            <div class="d-flex align-items-center gap-2" *ngIf="activeLang">
-                <img [src]="activeLang?.flag" [class]="'flag flag-' + activeLang.code.toLowerCase()" style="width: 18px"/>
-                <div>{{ activeLang.text }}</div>
-            </div>
-        </ng-template>
-        <ng-template let-lang pTemplate="item">
-            <div class="d-flex align-items-center gap-2">
-                <img [src]="lang?.flag" style="width: 18px"/>
-                <div>{{ lang.text }}</div>
-            </div>
-        </ng-template>
-    </p-dropdown>
+  <p-dropdown styleClass="dropdown-0" [options]="listLang" [ngModel]="activeLang"  optionLabel="text" (onChange)="setActiveLang($event)" >
+    <ng-template pTemplate="selectedItem">
+      @if (activeLang) {
+        <div class="d-flex align-items-center gap-2">
+          <img [src]="activeLang?.flag" [class]="'flag flag-' + activeLang.code.toLowerCase()" style="width: 18px"/>
+          <div>{{ activeLang.text }}</div>
+        </div>
+      }
+    </ng-template>
+    <ng-template let-lang pTemplate="item">
+      <div class="d-flex align-items-center gap-2">
+        <img [src]="lang?.flag" style="width: 18px"/>
+        <div>{{ lang.text }}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
 </div>

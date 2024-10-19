@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
@@ -20,14 +20,13 @@ import { finalize } from 'rxjs';
   styleUrls: ['./security-matter-access-clients.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     SharedCardComponent,
     SharedTableComponent,
     DropdownModule,
     SharedModule,
     SharedSearchInputComponent,
-    PickListModule,
-  ],
+    PickListModule
+],
 })
 export class SecurityMatterAccessClientsComponent implements OnChanges{
  

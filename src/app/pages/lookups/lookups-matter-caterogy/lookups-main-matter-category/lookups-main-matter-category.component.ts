@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -13,7 +13,7 @@ import { finalize, forkJoin } from 'rxjs';
   templateUrl: './lookups-main-matter-category.component.html',
   styleUrls: ['./lookups-main-matter-category.component.scss'],
   standalone: true,
-  imports: [CommonModule, SharedModule, FormlyConfigModule],
+  imports: [SharedModule, FormlyConfigModule],
 })
 export class LookupsMainMatterCategoryComponent
   extends FormBaseClass
