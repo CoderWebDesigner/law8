@@ -42,7 +42,7 @@
     "ngx-toastr": "^17.0.2",
     "ngx-translate-multi-http-loader": "^16.0.2",
     "primeicons": "^6.0.1",
-    "primeng": "^16.4.2",
+    "primeng": "^16.9.1",
     "rxjs": "~7.8.0",
     "simplebar-angular": "^3.2.4",
     "sweetalert2": "^11.10.1",
