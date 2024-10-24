@@ -32,9 +32,10 @@ export class SettingComponent extends FormBaseClass implements OnInit {
           {
             type: 'checkbox',
             key: 'isSapIntegration',
-            className: 'col-12',
+            className: 'col-12  d-flex align-items-center',
             props: {
-              label: this._languageService.getTransValue(
+              label:null,
+              value: this._languageService.getTransValue(
                 'setting.sapAccountingSystem'
               ),
             },

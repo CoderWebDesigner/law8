@@ -519,11 +519,12 @@ export class TaskManagementEditorComponent
             fieldGroupClassName: 'row form-section py-3',
             fieldGroup: [
               {
-                className: 'col-md-4',
+                className: 'col-md-4 d-flex align-items-center',
                 key: 'finalJudgement',
                 type: 'checkbox',
                 props: {
-                  label: this._languageService.getTransValue(
+                  label:null,
+                  value: this._languageService.getTransValue(
                     'matters.finalJudgement'
                   ),
                   //required: true,

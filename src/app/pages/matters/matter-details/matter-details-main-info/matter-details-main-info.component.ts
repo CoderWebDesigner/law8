@@ -667,9 +667,10 @@ export class MatterDetailsMainInfoComponent
               {
                 type: 'checkbox',
                 key: 'isCaseSensitive',
-                className: 'col-lg-3 col-md-4',
+                className: 'col-lg-3 col-md-4 d-flex align-items-center',
                 props: {
-                  label: this._languageService.getTransValue(
+                  label:null,
+                  value: this._languageService.getTransValue(
                     'matters.caseSensitive'
                   ),
                   disabled: this.previewOnly,

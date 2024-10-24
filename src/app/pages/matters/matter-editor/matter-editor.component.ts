@@ -179,32 +179,7 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 'matters.parentMatterCode'
               ),
               disabled: this.previewOnly,
-              // onChange: (e) => {
-              //   this._apiService
-              //     .get(
-              //       `${API_Config.matters.getCLientNameAndMattCodeByClientAndParent}?clientId=${this.formlyModel?.clientId}&parentId=${this.formlyModel?.parentMatterId}`
-              //     )
-              //     .pipe(this._sharedService.takeUntilDistroy())
-              //     .subscribe({
-              //       next: (res: ApiRes) => {
-              //         if (res.isSuccess) {
-              //           console.log(
-              //             'getCLientNameAndMattCodeByClientAndParent',
-              //             res
-              //           );
-              //           this.formly.patchValue({
-              //             clientName: res.result['name'],
-              //             mtrNo: res.result['mattCode'],
-              //           });
-              //           this.formlyOption.build();
-              //           console.log(this.formly.value);
-              //           if (this.formlyModel?.requestTypeId == 2) {
-              //           }
-              //         }
-              //       },
-              //     });
-              // },
-             
+
               onChange: (e) => {
                 if (this.formlyModel?.requestTypeId == 2) {
                   this._apiService
@@ -229,26 +204,26 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                       },
                     });
                 }
-                console.log('onChange',e)
-                if(this.formlyModel?.parentMatterId){
-
-                  Swal.fire({
-                    showDenyButton: true,
-                    text: this._languageService.getTransValue(
-                      'messages.confirmApplyParties'
-                    ),
-                    confirmButtonText:
-                      this._languageService.getTransValue('btn.yes'),
-                    denyButtonText: this._languageService.getTransValue('btn.no'),
-                    icon: 'question',
-                  }).then((result) => {
-                    console.log(result);
-                    if (result.isConfirmed) {
-                      this.getParentMatterParties()
-                    } 
-                  });
-                }else{
-                  this._matterService.partyList$.next([])
+                console.log('onChange', e);
+                if (this.formlyModel?.parentMatterId) {
+                  this.getParentMatterParties();
+                  // Swal.fire({
+                  //   showDenyButton: true,
+                  //   text: this._languageService.getTransValue(
+                  //     'messages.confirmApplyParties'
+                  //   ),
+                  //   confirmButtonText:
+                  //     this._languageService.getTransValue('btn.yes'),
+                  //   denyButtonText: this._languageService.getTransValue('btn.no'),
+                  //   icon: 'question',
+                  // }).then((result) => {
+                  //   console.log(result);
+                  //   if (result.isConfirmed) {
+                  //     this.getParentMatterParties()
+                  //   }
+                  // });
+                } else {
+                  this._matterService.partyList$.next([]);
                 }
               },
             },
@@ -576,12 +551,14 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                   },
                 },
               },
+
               {
                 type: 'checkbox',
                 key: 'isCaseSensitive',
-                className: 'col-md-4',
+                className: 'col-md-4  d-flex align-items-center',
                 props: {
-                  label: this._languageService.getTransValue(
+                  label: null,
+                  value: this._languageService.getTransValue(
                     'matters.caseSensitive'
                   ),
                   disabled: this.previewOnly,
@@ -786,19 +763,34 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
     ];
   }
 
-  getParentMatterParties(){
+  getParentMatterParties() {
     const payload = {
-      matterId:this.formlyModel?.parentMatterId
-    }
-    this._apiService.get(API_Config.matters.getPartiesByMatterId,payload).pipe(
-      this._sharedService.takeUntilDistroy()
-    ).subscribe({
-      next:(res:ApiRes)=>{
-        if(res.isSuccess){
-          this._matterService.partyList$.next(res.result?.dataList)
-        }
-      }
-    })
+      matterId: this.formlyModel?.parentMatterId,
+    };
+    this._apiService
+      .get(API_Config.matters.getPartiesByMatterId, payload)
+      .pipe(this._sharedService.takeUntilDistroy())
+      .subscribe({
+        next: (res: ApiRes) => {
+          if (res.isSuccess && res['result'].dataList.length>0) {
+
+            Swal.fire({
+              showDenyButton: true,
+              text: this._languageService.getTransValue(
+                'messages.confirmApplyParties'
+              ),
+              confirmButtonText: this._languageService.getTransValue('btn.yes'),
+              denyButtonText: this._languageService.getTransValue('btn.no'),
+              icon: 'question',
+            }).then((result) => {
+              console.log(result);
+              if (result.isConfirmed) {
+                this._matterService.partyList$.next(res.result?.dataList);
+              }
+            });
+          }
+        },
+      });
   }
   getTabsValues() {
     // console.log('getTabsValues');
@@ -824,8 +816,18 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
 
   override onSubmit(): void {
     this.isSubmit = true;
-    console.log(this.formlyModel?.photo);
     if (this.formly.invalid || !this.formValid) {
+      const payload = {
+        ...this.formlyModel,
+        ...this.generalData,
+      };
+      console.log('payload',payload)
+      console.log('formly',this.formly)
+      console.log('formValid',this.formValid)
+      const text = this._languageService.getTransValue(
+        'messages.pleaseFillRequiredData'
+      );
+      this._toastrNotifiService.displayErrorToastr(text);
       this.isSubmit = false;
       return;
     }

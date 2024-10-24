@@ -1,4 +1,4 @@
-<form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
+<!-- <form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
   <formly-form
     [form]="formly"
     [fields]="formlyFields"
@@ -10,15 +10,53 @@
     *ngIf="!this.previewOnly"
       [loading]="isSubmit"
       styleClass="p-button-primary d-block py-3 mx-4"
-      type="submit"
-      label="{{ 'Taxes' | translate }}"
+      type="button"
+      label="{{ 'matters.taxes' | translate }}"
+      (onClick)="openTaxesEditor()"
     ></p-button>
     <p-button
     *ngIf="!this.previewOnly"
       [loading]="isSubmit"
       styleClass="p-button-primary d-block py-3"
-      type="submit"
-      label="{{ 'Rate Exeptions' | translate }}"
+      type="button"
+      label="{{ 'matters.rateExceptions' | translate }}"
+      (onClick)="openRateExceptionsEditor()"
     ></p-button>
+  </div>
+</form> -->
+<form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
+  <formly-form
+    [form]="formly"
+    [fields]="formlyFields"
+    [model]="formlyModel"
+    [options]="formlyOption"
+  ></formly-form>
+  <div class="mt-4 d-flex justify-content-between">
+
+    <div class="text-end">
+      <p-button
+        *ngIf="!this.previewOnly"
+        [loading]="isSubmit"
+        styleClass="p-button-primary d-block py-3 mx-4"
+        type="button"
+        label="{{ 'matters.taxes' | translate }}"
+        (onClick)="openTaxesEditor()"
+      ></p-button>
+      <p-button
+        *ngIf="!this.previewOnly"
+        [loading]="isSubmit"
+        styleClass="p-button-primary d-block py-3"
+        type="button"
+        label="{{ 'matters.rateExceptions' | translate }}"
+        (onClick)="openRateExceptionsEditor()"
+      ></p-button>
+    </div>
+    <p-button
+      [loading]="isSubmit"
+      styleClass="p-button-primary d-block py-3"
+      type="submit"
+      label="{{ 'btn.save' | translate }}"
+    ></p-button>
+
   </div>
 </form>

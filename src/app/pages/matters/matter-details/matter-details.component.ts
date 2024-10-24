@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiService } from '@core/api/api.service';
@@ -7,13 +7,14 @@ import { LanguageService } from '@core/services';
 import { SharedService } from '@shared/services/shared.service';
 import { PracticeArea } from '../enums/practice-area';
 import { PermissionService } from '@core/services/permission.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-matter-details',
   templateUrl: './matter-details.component.html',
   styleUrls: ['./matter-details.component.scss'],
 })
-export class MatterDetailsComponent implements OnInit {
+export class MatterDetailsComponent implements OnInit  {
   _route = inject(ActivatedRoute);
   _languageService = inject(LanguageService);
   _apiService = inject(ApiService);
@@ -174,7 +175,10 @@ export class MatterDetailsComponent implements OnInit {
     ) {
       this.items.forEach((obj) => {
         obj.show =
-          [1, 3, 5, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+          [1, 3, 5, 7, 8, 9, 10, 11,12].includes(obj.id) && obj.permission;
+           // if(!environment.production){
+        //   obj.show=[12].includes(obj.id) && obj.permission;
+        // }
         this._cdRef.detectChanges();
         // [1, 3, 5, 6, 7, 8, 9, 10, 11, 12].includes(obj.id)
         //   ? (obj.show = true)
@@ -189,7 +193,10 @@ export class MatterDetailsComponent implements OnInit {
     ) {
       this.items.forEach((obj) => {
         obj.show =
-          [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id) && obj.permission;
+          [1, 2, 3, 4, 7, 8, 9, 10, 11,12].includes(obj.id) && obj.permission;
+        // if(!environment.production){
+        //   obj.show=[12].includes(obj.id) && obj.permission;
+        // }
         this._cdRef.detectChanges();
         // [1, 2, 3, 4, 7, 8, 9, 10, 11, 12].includes(obj.id)
         //   ? (obj.show = true)

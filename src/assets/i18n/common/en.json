@@ -57,7 +57,8 @@
     "upload":"Upload",
     "saveDraft":"Save Draft",
     "deactive":"Deactivate",
-    "active":"Activate"
+    "active":"Activate",
+    "add":"Add"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
@@ -80,7 +81,8 @@
     "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
     "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?",
     "checkDataValidation":"Please Check Data Validation !",
-    "confirmApplyParties":"Would you like to add parent's matter parties?"
+    "confirmApplyParties":"Would you like to add parent's matter parties?",
+    "pleaseFillRequiredData":"Please Fill The Required Data !"
   },
   "validation": {
     "required": "This field is required!",

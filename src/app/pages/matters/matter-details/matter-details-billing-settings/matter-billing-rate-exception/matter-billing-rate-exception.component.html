@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between align-items-center mt-4">
+    <h3 class="mb-0">{{ 'Rate Exception' | translate }}</h3>
+    <p-button styleClass="p-button-primary py-3" type="button"
+        label="{{ 'btn.add' | translate }}" (onClick)="addTerm()"></p-button>    
+</div>
+
+<form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
+    <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel" [options]="formlyOption"></formly-form>
+    <div class="mt-4 text-end">
+        <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3 " type="submit"
+            label="{{ 'btn.save' | translate }}"></p-button>
+
+    </div>
+</form>

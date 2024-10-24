@@ -18,7 +18,7 @@ import { PAGESIZE, PAGE_SIZE_OPTION } from '@core/utilities/defines';
 import { Table, TableModule } from 'primeng/table';
 import { TableAction, TableConfig } from './models/table-config.model';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
@@ -173,7 +173,8 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
       ) //, this.filterOptions
         .pipe(
           finalize(() => (this.isLoading = false)),
-          this._sharedService.takeUntilDistroy()
+          take(1)
+          // this._sharedService.takeUntilDistroy()
         )
         .subscribe((res: ApiRes) => {
           this.data = res.result['dataList'];

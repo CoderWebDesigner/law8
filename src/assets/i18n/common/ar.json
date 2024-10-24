@@ -55,7 +55,8 @@
     "upload":"Upload",
     "saveDraft":"Save Draft",
     "deactive":"تعطيل",
-    "active":"تنشيط"
+    "active":"تنشيط",
+    "add":"اضافة"
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -78,7 +79,8 @@
     "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
     "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?",
     "checkDataValidation":"يرجى التاكد من صحة البيانات",
-    "confirmApplyParties":"Would you like to add parent's matter parties?"
+    "confirmApplyParties":"Would you like to add parent's matter parties?",
+    "pleaseFillRequiredData":"Please Fill The Required Data !"
   },
   "validation": {
     "required": "هذا الحقل مطلوب!",
