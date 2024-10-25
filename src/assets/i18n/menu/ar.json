@@ -1,51 +1,59 @@
 {
-    "menu":{
-        "dashboard":"الرئيسية",
-        "clients":{
-          "title":"العملاء",
-          "clientIntack":"تناول العميل",
-          "clientAdd":"اضافة عميل",
-          "clientList":"قائمة العملاء"
-        },
-        "timesheet":{
-          "title":"سجل الوقت",
-          "timesheetAdd":"اضافة سجل الوقت"
-        },
-        "matters":{
-          "title":"القضايا / المواضيع",
-          "inactiveMatters":"Inactive Matters",
-          "matterList":"قائمة القضايا / المواضيع",
-          "matterAdd":"قضيه / موضوع جديد"
-        },
-        "taskManagement":{
-          "title":"المهام",
-          "taskManagementList":"قائمة المهام",
-          "taskManagementAdd":"مهمة جديدة",
-          "calender":"تقويم"
-        },
-        "users":{
-          "title":"المستخدمين",
-          "usersList":"قائمة المستخدمين",
-          "userAdd":"مستخدم جديد"
-        },
-        "lookups":{
-          "title":"القوائم الرئيسية",
-          "matterCategory":" تصنيفات القضايا",
-          "mainList":"البيانات الأساسية",
-          "jurisdictions":"المناطق",
-          "rateTable":"جدول الاسعار"
-        },
-        "security":{
-          "title":"الصلاحيات"
-        },
-        "reports":{
-          "title":"التقارير",
-          "activityreport":"activity Report",
-          "matterReport":"Matter Report",
-          "timeSheetReport":"TimeSheet Report"
-        },
-        "setting":{
-          "title":"Setting"
-        }
+  "menu": {
+    "dashboard": "الرئيسية",
+    "clients": {
+      "title": "العملاء",
+      "clientIntack": "تناول العميل",
+      "clientAdd": "اضافة عميل",
+      "clientList": "قائمة العملاء"
+    },
+    "timesheet": {
+      "title": "سجل الوقت",
+      "timesheetAdd": "اضافة سجل الوقت"
+    },
+    "matters": {
+      "title": "القضايا / المواضيع",
+      "inactiveMatters": "Inactive Matters",
+      "matterList": "قائمة القضايا / المواضيع",
+      "matterAdd": "قضيه / موضوع جديد"
+    },
+    "taskManagement": {
+      "title": "المهام",
+      "taskManagementList": "قائمة المهام",
+      "taskManagementAdd": "مهمة جديدة",
+      "calender": "تقويم"
+    },
+    "users": {
+      "title": "المستخدمين",
+      "usersList": "قائمة المستخدمين",
+      "userAdd": "مستخدم جديد"
+    },
+    "lookups": {
+      "title": "القوائم الرئيسية",
+      "matterCategory": " تصنيفات القضايا",
+      "mainList": "البيانات الأساسية",
+      "jurisdictions": "المناطق",
+      "rateTable": "جدول الاسعار"
+    },
+    "security": {
+      "title": "الصلاحيات"
+    },
+    "reports": {
+      "title": "التقارير",
+      "activityreport": "activity Report",
+      "matterReport": "Matter Report",
+      "timeSheetReport": "TimeSheet Report"
+    },
+    "setting": {
+      "title": "Setting"
+    },
+    "billing": {
+      "title": "الفواتير",
+      "expenses": "المصاريف",
+      "preBill": "الفاتورة الأولية",
+      "quickBill": "الفاتورة السريعة",
+      "bill": "الفاتورة",
+      "payments": "المدفوعات"
     }
+  }
 }

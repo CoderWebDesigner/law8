@@ -290,7 +290,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
         law_ClientIntroducingId: this.formlyModel?.law_ClientIntroducingId,
         law_MatterIntroducingLawyerId: this.formlyModel?.law_MatterIntroducingLawyerId,
         law_ResponsibleLaywerId: this.formlyModel?.law_ResponsibleLaywerId,
-        law_AssignedLaywerList: this.formlyModel?.law_AssignedLaywerList?.filter(obj => obj !== null),
+        law_AssignedLaywerList: this.formlyModel?.law_AssignedLaywerList?.filter(obj => obj !== null)??[],
         law_OtherStaffList: this.formlyModel?.law_OtherStaffList?.filter(obj => obj !== null),
         id: this.formlyModel?.id
         };

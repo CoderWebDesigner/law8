@@ -47,6 +47,14 @@
         },
         "setting":{
           "title":"Setting"
+        },
+        "billing": {
+          "title": "Billing",
+          "expenses": "Expenses",
+          "preBill": "Pre-Bill",
+          "quickBill": "Quick Bill",
+          "bill": "Bill",
+          "payments": "Payments"
         }
     }
 }
