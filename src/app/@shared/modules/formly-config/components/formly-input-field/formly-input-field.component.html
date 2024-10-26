@@ -1,7 +1,9 @@
+<!--  'p-input-icon-left':lang!='ar'?props['icon']:'',
+    'p-input-icon-right': lang=='ar'?props['icon']:'', -->
 <div class="w-100"
   [ngClass]="{
-    'p-input-icon-left':lang!='ar'?props['icon']:'',
-    'p-input-icon-right': lang=='ar'?props['icon']:'',
+    'p-input-icon-left':(props['icon'] && lang!='ar') ||(!props['icon'] && lang=='ar'),
+    'p-input-icon-right':(props['icon'] && lang=='ar')||(!props['icon'] &&lang!='ar' )
      }">
 
   <ng-container>

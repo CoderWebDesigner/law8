@@ -122,6 +122,50 @@ export const MENU: MenuItem[] = [
   },
   {
     id: 6,
+    label: 'menu.billing.title',
+    icon: 'dashboard.svg',
+    role: 'timesheet',
+    subItems: [
+     
+      {
+        id: 1,
+        label: 'menu.billing.expenses',
+        link: '',
+        parentId: 5,
+        role: 'View_Timesheet',
+      },
+      {
+        id: 2,
+        label: 'menu.billing.preBill',
+        link: '',
+        parentId: 6,
+        role: 'View_Timesheet',
+      },
+      {
+        id: 3,
+        label: 'menu.billing.quickBill',
+        link: '',
+        parentId: 6,
+        role: 'View_Timesheet',
+      },
+      {
+        id: 4,
+        label: 'menu.billing.bill',
+        link: '',
+        parentId: 6,
+        role: 'View_Timesheet',
+      },
+      {
+        id: 5,
+        label: 'menu.billing.payments',
+        link: '',
+        parentId: 6,
+        role: 'View_Timesheet',
+      },
+    ],
+  },
+  {
+    id: 7,
     label: 'menu.users.title',
     icon: 'client.svg',
     role: 'users',
@@ -144,7 +188,7 @@ export const MENU: MenuItem[] = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     label: 'menu.lookups.title',
     icon: 'lookups.svg',
     role: 'lookups',
@@ -190,14 +234,14 @@ export const MENU: MenuItem[] = [
     ],
   },
   {
-    id: 8,
+    id: 9,
     label: 'menu.security.title',
     icon: 'security.svg',
     link: '/security',
     role: 'View_Security',
   },
   {
-    id: 9,
+    id: 10,
     label: 'menu.reports.title',
     icon: 'report.svg',
     link: '/reports',
@@ -227,4 +271,11 @@ export const MENU: MenuItem[] = [
       },
     ]
   },
+  {
+    id: 11,
+    label: 'menu.setting.title',
+    icon: 'settings.svg',
+    link: '/setting',
+    role: 'App_Settings',
+  }
 ];

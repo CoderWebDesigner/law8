@@ -39,7 +39,8 @@
     "timesheet": "Timesheet",
     "initial":"Initial",
     "taskCode":"TaskCode",
-    "description":"Description"
+    "description":"Description",
+    "branch":"Branch"
 
   },
   "btn": {
@@ -56,7 +57,8 @@
     "upload":"Upload",
     "saveDraft":"Save Draft",
     "deactive":"Deactivate",
-    "active":"Activate"
+    "active":"Activate",
+    "add":"Add"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",
@@ -78,7 +80,9 @@
     "youDontHavePermission":"You Don't Have Permission",
     "confirmDeactiveMatter":"Would you like to deactive matter # {{matterNo}} ?",
     "confirmActiveMatter":"Would you like to active matter # {{matterNo}} ?",
-    "checkDataValidation":"Please Check Data Validation !"
+    "checkDataValidation":"Please Check Data Validation !",
+    "confirmApplyParties":"Would you like to add parent's matter parties?",
+    "pleaseFillRequiredData":"Please Fill The Required Data !"
   },
   "validation": {
     "required": "This field is required!",

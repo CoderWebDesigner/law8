@@ -7,6 +7,7 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 export class SharedService {
   private unSubscribeAll:Subject<boolean>;
   timerWorking$= new BehaviorSubject<boolean>(false);
+  systemReady$=new BehaviorSubject<boolean>(false)
   constructor() { }
   takeUntilDistroy(){
     if(!this.unSubscribeAll) this.unSubscribeAll = new Subject<boolean>();

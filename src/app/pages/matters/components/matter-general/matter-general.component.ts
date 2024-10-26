@@ -83,7 +83,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   detectFormChange() {
     console.log('detectFormChange');
     this.formly.valueChanges
-      .pipe(this._sharedService.takeUntilDistroy())
+      
       .subscribe({
         next: (res) => {
           this.onSubmit();
@@ -264,106 +264,9 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
     }
     return arr;
   }
-  // override onSubmit(): void {
-  //   this.formStatus.emit(this.formly.valid);
-  //   console.log('this.formly.invalid',this.formly)
-  //   if (this.formly.invalid){
-  //     this.formly.markAllAsTouched()
-  //     return
-  //   } ;
-  //   if(this.formly.valid){
-
-  //     this.isSubmit = true;
-  //     if (this.formlyModel?.rateAmount)
-  //       this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-  //     console.log('onSubmit this.data',this.data)
-  //     if (this.data) {
-  //       this._apiService
-  //         .post(API_Config.matters.updateGeneral, this.formlyModel)
-  //         .pipe(
-  //           this._sharedService.takeUntilDistroy(),
-  //           finalize(() => (this.isSubmit = false))
-  //         )
-  //         .subscribe({
-  //           next: (res: ApiRes) => {
-  //             if (res.result && res.isSuccess) {
-  //               const text = this._languageService.getTransValue(
-  //                 'messages.updateSuccessfully'
-  //               );
-  //               this._toastrNotifiService.displaySuccessMessage(text);
-  //               this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-  //                 this._dynamicDialogRef.close(dialog);
-  //               });
-  //             } else {
-  //               this._toastrNotifiService.displayErrorToastr(res?.message);
-  //             }
-  //           },
-  //         });
-  //     } else {
-  //       console.log(this.formlyModel)
-  
-  //       this.onFormSubmit.emit(this.formlyModel);
-        
-  //     }
-  //   }
-    
-  //   //
-
-  //   // this.onFormSubmit.emit(this.formlyModel);
-  // }
-  // override onSubmit(): void {
-  //   this.formStatus.emit(this.formly.valid);
-  //   console.log('this.formly.invalid', this.formly);
-  //   if (this.formly.invalid) {
-  //     this.formly.markAllAsTouched();
-  //     return;
-  //   }
-  
-  //   if (this.formly.valid) {
-  //     this.isSubmit = true;
-  //     if (this.formlyModel?.rateAmount)
-  //       this.formlyModel.rateAmount = +this.formlyModel?.rateAmount;
-  
-  //     console.log('onSubmit this.data', this.data);
-  
-  //     // null
-  //     if (this.formlyModel.law_AssignedLaywerList) {
-  //       this.formlyModel.law_AssignedLaywerList = this.formlyModel.law_AssignedLaywerList.filter(obj => obj !== null);
-  //     }
-  //     if (this.formlyModel.law_OtherStaffList) {
-  //       this.formlyModel.law_OtherStaffList = this.formlyModel.law_OtherStaffList.filter(obj => obj !== null);
-  //     }
-  
-  //     if (this.data) {
-  //       this._apiService
-  //         .post(API_Config.matters.updateGeneral, this.formlyModel)
-  //         .pipe(
-  //           this._sharedService.takeUntilDistroy(),
-  //           finalize(() => (this.isSubmit = false))
-  //         )
-  //         .subscribe({
-  //           next: (res: ApiRes) => {
-  //             if (res.result && res.isSuccess) {
-  //               const text = this._languageService.getTransValue(
-  //                 'messages.updateSuccessfully'
-  //               );
-  //               this._toastrNotifiService.displaySuccessMessage(text);
-  //               this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-  //                 this._dynamicDialogRef.close(dialog);
-  //               });
-  //             } else {
-  //               this._toastrNotifiService.displayErrorToastr(res?.message);
-  //             }
-  //           },
-  //         });
-  //     } else {
-  //       console.log(this.formlyModel);
-  //       this.onFormSubmit.emit(this.formlyModel);
-  //     }
-  //   }
-  // }
   override onSubmit(): void {
     this.isSubmit = true;
+    console.log('general',this.formly)
     this.formStatus.emit(this.formly.valid);
     console.log('this.formly.invalid', this.formly);
     if (this.formly.invalid) {
@@ -387,7 +290,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
         law_ClientIntroducingId: this.formlyModel?.law_ClientIntroducingId,
         law_MatterIntroducingLawyerId: this.formlyModel?.law_MatterIntroducingLawyerId,
         law_ResponsibleLaywerId: this.formlyModel?.law_ResponsibleLaywerId,
-        law_AssignedLaywerList: this.formlyModel?.law_AssignedLaywerList?.filter(obj => obj !== null),
+        law_AssignedLaywerList: this.formlyModel?.law_AssignedLaywerList?.filter(obj => obj !== null)??[],
         law_OtherStaffList: this.formlyModel?.law_OtherStaffList?.filter(obj => obj !== null),
         id: this.formlyModel?.id
         };

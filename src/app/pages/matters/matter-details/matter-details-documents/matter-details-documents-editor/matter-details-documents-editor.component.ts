@@ -35,13 +35,31 @@ export class MatterDetailsDocumentsEditorComponent
       .subscribe({
         next: (res: ApiRes) => {
           console.log(res);
-          this.formlyModel = { 
+          this.formlyModel = {
             ...res['result'],
             // receivedDate:this._datePipe.transform(res['result'].receivedDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
             // documentDate:this._datePipe.transform(res['result'].documentDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
             // expirationDate:this._datePipe.transform(res['result'].expirationDate,GLOBAL_DATE_TIME_Without_Seconds_FORMATE),
-            attachment: res['result'].applicationType + res['result'].logoFile
-           };
+            receivedDate: res['result'].receivedDate
+              ? this._datePipe.transform(
+                  res['result'].receivedDate,
+                  GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+                )
+              : null,
+            documentDate: res['result'].documentDate
+              ? this._datePipe.transform(
+                  res['result'].documentDate,
+                  GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+                )
+              : null,
+            expirationDate: res['result'].expirationDate
+              ? this._datePipe.transform(
+                  res['result'].expirationDate,
+                  GLOBAL_DATE_TIME_Without_Seconds_FORMATE
+                )
+              : null,
+            attachment: res['result'].applicationType + res['result'].logoFile,
+          };
 
           // this.formlyModel.startDate = this._datePipe.transform(
           //   this.formlyModel?.startDate,
@@ -81,7 +99,7 @@ export class MatterDetailsDocumentsEditorComponent
             className: 'col-md-6',
             key: 'receivedDate',
             type: 'date',
-            defaultValue:new Date(),
+            defaultValue: new Date(),
             props: {
               label: this._languageService.getTransValue(
                 'matters.receivedDate'
@@ -132,11 +150,11 @@ export class MatterDetailsDocumentsEditorComponent
     // );
     if (this.formlyModel.expirationDate) {
       const expirationDate = this._datePipe.transform(
-          this.formlyModel.expirationDate,
-          'yyyy-MM-ddTHH:mm:ss.SSSZ'
+        this.formlyModel.expirationDate,
+        'yyyy-MM-ddTHH:mm:ss.SSSZ'
       );
       this.formlyModel.expirationDate = expirationDate;
-  }
+    }
     const ReceivedDate = this._datePipe.transform(
       this.formlyModel.receivedDate,
       'yyyy-MM-ddTHH:mm:ss.SSSZ'
@@ -161,6 +179,7 @@ export class MatterDetailsDocumentsEditorComponent
     let formData = new FormData();
     for (const [key, value] of Object.entries(requestPayload)) {
       formData.append(key, `${value}`);
+      console.log(key, value);
     }
     formData.append('attachment', this.formlyModel.attachment[0]);
     const path = this._dynamicDialogConfig?.data?.rowData

@@ -128,6 +128,10 @@
 
     "isPrivate":"isPrivate",
     "location":"location",
-    "importantMatter":"Important Matter"
+    "importantMatter":"Important Matter",
+    "salesTaxOnDisbursements":"Sales Tax On Disbursements",
+    "salesTaxOnFees":"Sales Tax On Fees",
+    "taxes":"Taxes",
+    "rateExceptions":"Rate Exceptions"
   }
 }

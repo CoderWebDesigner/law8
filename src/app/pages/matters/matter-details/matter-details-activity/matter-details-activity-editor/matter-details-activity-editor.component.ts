@@ -344,8 +344,7 @@ export class MatterDetailsActivityEditorComponent
                 props: {
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
-                  // type: 'number',
-                  pKeyFilter: 'int',
+                  // pKeyFilter: 'int',
                   //required: true,
                 },
               },
@@ -500,7 +499,7 @@ export class MatterDetailsActivityEditorComponent
                   label:
                     this._languageService.getTransValue('matters.rollNumber'),
                   // type: 'number',
-                  pKeyFilter: 'int',
+                  // pKeyFilter: 'int',
                   //required: true,
                 },
               },
@@ -538,16 +537,26 @@ export class MatterDetailsActivityEditorComponent
           {
             fieldGroupClassName: 'row form-section py-3',
             fieldGroup: [
+              // {
+              //   className: 'col-md-4',
+              //   key: 'finalJudgement',
+              //   type: 'checkbox',
+              //   props: {
+              //     label: this._languageService.getTransValue(
+              //       'matters.finalJudgement'
+              //     ),
+              //     //required: true,
+              //   },
+              // },
               {
-                className: 'col-md-4',
-                key: 'finalJudgement',
                 type: 'checkbox',
-                props: {
-                  label: this._languageService.getTransValue(
-                    'matters.finalJudgement'
-                  ),
-                  //required: true,
+                key: 'finalJudgement',
+                className: 'col-md-4 d-flex align-items-center',
+                props:{
+                  label:null,
+                  value:this._languageService.getTransValue('matters.finalJudgement'),
                 },
+
               },
               {
                 className: 'col-md-4',

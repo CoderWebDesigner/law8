@@ -29,6 +29,20 @@ override initForm(): void {
       fieldGroupClassName: 'row',
       fieldGroup: [
         {
+          type: 'radio',
+            key: 'typeId',
+            defaultValue: 1,
+            className: 'col-12',
+            props: {
+              label: this._languageService.getTransValue('report.dateType'),
+              placeholder: '',
+              options: [
+                { label: 'Open Date', value: 1 },
+                { label: 'Creation Date', value: 2 },
+              ],
+            },
+        },
+        {
           className: 'col-md-3',
           key: 'dateFrom',
           type: 'date',
@@ -189,7 +203,18 @@ override initForm(): void {
             })),
           },
         },
-       
+        {
+          type: 'select',
+          key: 'branchId',
+          className: 'col-lg-3 col-md-4',
+          props: {
+            label: this._languageService.getTransValue('common.branch'),
+            options: this.lookupsData[8]?.result.map((obj) => ({
+              label: obj.name,
+              value: obj.id,
+            })),
+          },
+        },
       ],
     },
   ];
@@ -204,7 +229,8 @@ override getLookupsData(): void {
     this._apiService.get(API_Config.general.getLawyerShort),
     this._apiService.get(API_Config.matterClientSecurity.get),
     this._apiService.get(API_Config.general.getMatterCategoriesLookup),
-    this._apiService.get(API_Config.general.getReferralType)
+    this._apiService.get(API_Config.general.getReferralType),
+    this._apiService.get(API_Config.general.getAllBranches),
     // this._apiService.get(API_Config.general.getJudicatureByJurisdictionId),
     
   ])

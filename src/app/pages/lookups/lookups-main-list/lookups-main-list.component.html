@@ -6,7 +6,7 @@
         <!-- <shared-search-input ></shared-search-input> -->
       </div>
       <shared-table body [data]="data" [columnsLocalized]="columnsLocalized" [selectMode]="'single'"
-        (onRowSelect)="onRowSelected($event)" [withPagination]="false">
+        (onRowSelect)="onRowSelected($event)" [withPagination]="false" [filterOptions]="filterOptions">
       </shared-table>
     </shared-card>
   </div>

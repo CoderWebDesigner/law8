@@ -12,6 +12,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from '@core/interceptors';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { HandleErrorService } from '@core/services/handle-error-service';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { LanguageService } from '@core/services';
 
 
 export function HttpLoaderFactory(httpBackend: HttpBackend) {
@@ -30,6 +32,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/security/',
     './assets/i18n/pages/report/',
     './assets/i18n/pages/search/',
+    './assets/i18n/pages/setting/',
   ]);
 }
 @NgModule({
@@ -41,6 +44,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ProgressSpinnerModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -64,8 +68,17 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
       multi: true,
       deps: [HandleErrorService]
 
-    }
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appConfigFactory,
+      deps: [LanguageService],
+      multi: true,
+  },
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function appConfigFactory(_languageService: LanguageService) {
+  return () => _languageService.initLang();
+}
