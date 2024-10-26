@@ -204,7 +204,7 @@ export class LookupsMainListComponent implements OnInit {
   additionalTableConfigChildren: TableConfig;
   ngOnInit(): void {
     this.data=this.data.filter(obj=>this._permissionService.hasPermission(obj.permission))
-    
+
     // console.log(this._languageService.getSelectedLanguage());
     // this.columnsLocalized = swapFirstTwoIndexes(
     //   this.columnsLocalized,
@@ -213,19 +213,19 @@ export class LookupsMainListComponent implements OnInit {
 
     // console.log(this.columnsLocalized);
   }
-  openItemEditor(categoryType: string) {
+  openItemEditor(categoryType: any) {
+    const component:any =  categoryType == 'main'
+    ? LookupsMainItemEditorComponent
+    : LookupsMainListSubEditorComponent
     const ref = this._dialogService.open(
-      categoryType == 'main'
-        ? LookupsMainItemEditorComponent
-        : LookupsMainListSubEditorComponent,
-      {
+      component ,{
         width: '30%',
         header: this.setDialogHeader(categoryType),
         data: {
           categoryType: categoryType, //main , sub
           apiUrls: this.apiUrls,
           mainListId: this.selectedRow?.id,
-          
+
         },
       }
     );
@@ -293,7 +293,7 @@ export class LookupsMainListComponent implements OnInit {
         },
       ],
     };
-    
+
     this.apiUrls = this.apiData[this.selectedRow?.id]?.api;
     this.subTitle = this.apiData[this.selectedRow?.id]?.title;
     if (this.selectedRow?.id == 3) {

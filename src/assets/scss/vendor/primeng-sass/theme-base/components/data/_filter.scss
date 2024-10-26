@@ -32,7 +32,7 @@
         color: $highlightTextColor;
     }
 
-    &:focus {
+    &:focus-visible {
         @include focused();
     }
 
@@ -53,7 +53,7 @@
         background: $actionIconHoverBg;
     }
 
-    &:focus {
+    &:focus-visible {
         @include focused();
     }
 }
@@ -78,6 +78,10 @@
             transition: $listItemTransition;
             border-radius: $inputListItemBorderRadius;
 
+            &:first-child {
+                margin-top: 0;
+            }
+
             &.p-highlight {
                 color: $highlightTextColor;
                 background: $highlightBg;
@@ -88,7 +92,7 @@
                 background: $inputListItemHoverBg;
             }
 
-            &:focus {
+            &:focus-visible {
                 @include focused-listitem();
             }
         }

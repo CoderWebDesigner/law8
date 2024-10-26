@@ -1,18 +1,8 @@
-@import "./node_modules/bootstrap/scss/functions";
-@import "./node_modules/bootstrap/scss/variables";
-@import "./node_modules/bootstrap/scss/mixins.scss";
 .p-dialog {
     border-radius: $borderRadius;
     box-shadow: $overlayContainerShadow;
     border: $overlayContentBorder;
-    @include media-breakpoint-down(lg) {
-        width: 85%!important;
 
-    }
-    @include media-breakpoint-down(md) {
-        width: 95%!important;
-
-    }
     .p-dialog-header {
         border-bottom: $dialogHeaderBorder;
         background: $dialogHeaderBg;

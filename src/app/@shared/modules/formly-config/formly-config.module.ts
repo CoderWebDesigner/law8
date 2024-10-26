@@ -22,7 +22,7 @@ import { FormlySelectButtonFieldComponent } from './components/formly-select-but
 import { FormlyPhoneFieldComponent } from './components/formly-phone-field/formly-phone-field.component';
 import { FormlyOtpFieldComponent } from './components/formly-otp-field/formly-otp-field.component';
 
-import { NgOtpInputModule } from 'ng-otp-input';
+// import { NgOtpInputModule } from 'ng-otp-input';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormlyPasswordFieldComponent } from './components/formly-password-field/formly-password-field.component';
 import { PasswordModule } from 'primeng/password';
@@ -39,7 +39,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone-compressing';
 import { FormlySwitchFieldComponent } from './components/formly-switch-field/formly-switch-field.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { KeyFilterModule } from 'primeng/keyfilter';
-
+import { InputOtpModule } from 'primeng/inputotp';
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
@@ -102,14 +102,16 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     CalendarModule,
     NgxDropzoneModule,
     NgxIntlTelInputModule,
-    NgOtpInputModule,
+    // NgOtpInputModule,
     SelectButtonModule,
     PasswordModule,
     TableModule,
     MultiSelectModule,
     CheckboxModule,
     InputSwitchModule,
-    KeyFilterModule
+    KeyFilterModule,
+    InputOtpModule
+
   ],
   exports: [
     ReactiveFormsModule,

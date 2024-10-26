@@ -5,7 +5,7 @@
 @import "./node_modules/bootstrap/scss/mixins.scss";
 
 :host ::ng-deep {
-  .otp-input.custom-otp-input {
+ .p-inputotp input{
     width: 3rem;
     height: 3rem;
     color: $primaryColor;

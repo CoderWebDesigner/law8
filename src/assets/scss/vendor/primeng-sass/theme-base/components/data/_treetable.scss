@@ -9,7 +9,7 @@
         border-radius: 0;
     }
 
-   .p-treetable-header {
+    .p-treetable-header {
         background: $tableHeaderBg;
         color: $tableHeaderTextColor;
         border: $tableHeaderBorder;
@@ -28,6 +28,7 @@
     }
 
     .p-treetable-thead > tr > th {
+        text-align: $tableCellContentAlignment;
         padding: $tableHeaderCellPadding;
         border: $tableHeaderCellBorder;
         border-width: $tableHeaderCellBorderWidth;
@@ -38,6 +39,7 @@
     }
 
     .p-treetable-tfoot > tr > td {
+        text-align: $tableCellContentAlignment;
         padding: $tableFooterCellPadding;
         border: $tableFooterCellBorder;
         border-width: $tableFooterCellBorderWidth;
@@ -90,6 +92,7 @@
             transition: $listItemTransition;
 
             > td {
+                text-align: $tableCellContentAlignment;
                 border: $tableBodyCellBorder;
                 border-width: $tableBodyCellBorderWidth;
                 padding: $tableBodyCellPadding;
@@ -112,10 +115,32 @@
                             color: $textColor;
                         }
                     }
+
+                    &.p-variant-filled {
+                        .p-checkbox-box {
+                            background-color: $inputFilledBg;
+                
+                            &.p-highlight {
+                                background: $checkboxActiveBg;
+                            }
+                        }
+                
+                        &:not(.p-disabled) {
+                            .p-checkbox-box {
+                                &:hover {
+                                    background-color: $inputFilledHoverBg;
+                                }
+                
+                                &.p-highlight:hover {
+                                    background: $checkboxActiveHoverBg;
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
-            &:focus {
+            &:focus-visible {
                 outline: 0.15rem solid $focusOutlineColor;
                 outline-offset: -0.15rem;
             }

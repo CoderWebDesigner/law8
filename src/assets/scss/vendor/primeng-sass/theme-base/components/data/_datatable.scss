@@ -28,6 +28,7 @@
     }
 
     .p-datatable-thead > tr > th {
+        text-align: $tableCellContentAlignment;
         padding: $tableHeaderCellPadding;
         border: $tableHeaderCellBorder;
         border-width: $tableHeaderCellBorderWidth;
@@ -38,6 +39,7 @@
     }
 
     .p-datatable-tfoot > tr > td {
+        text-align: $tableCellContentAlignment;
         padding: $tableFooterCellPadding;
         border: $tableFooterCellBorder;
         border-width: $tableFooterCellBorderWidth;
@@ -89,7 +91,7 @@
             }
         }
 
-        &:focus {
+        &:focus-visible {
             box-shadow: $inputListItemFocusShadow;
             outline: 0 none;
         }
@@ -102,6 +104,7 @@
             transition: $listItemTransition;
 
             > td {
+                text-align: $tableCellContentAlignment;
                 border: $tableBodyCellBorder;
                 border-width: $tableBodyCellBorderWidth;
                 padding: $tableBodyCellPadding;
@@ -118,9 +121,9 @@
                 }
             }
 
-            &:focus {
+            &:focus-visible {
                 outline: 0.15rem solid $focusOutlineColor;
-                outline-offset: 0.15rem;
+                outline-offset: -0.15rem;
             }
 
             &.p-highlight {
