@@ -34,6 +34,7 @@
     "google-libphonenumber": "^3.2.38",
     "intl-tel-input": "^24.6.0",
     "jwt-decode": "^4.0.0",
+    "libphonenumber-js": "^1.11.12",
     "metismenujs": "^1.4.0",
     "ng-inline-svg-2": "^15.0.1",
     "ngx-dropzone-compressing": "^1.9.0",

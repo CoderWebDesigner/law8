@@ -1,5 +1,4 @@
-<!-- <div dir="ltr"> -->
-<!-- <ng-container *ngIf="props['readonly'] ==false"> -->
+<!-- 
 <ngx-intl-tel-input
   [preferredCountries]="[CountryISO.UnitedArabEmirates]"
   [enableAutoCountrySelect]="false"
@@ -21,10 +20,18 @@
     >
     {{ "validation.phone" | translate }}
   </small>
-}
-<!-- </ng-container> -->
-<!-- <p *ngIf="props['readonly']" class="text-start">{{formControl.value}} </p> -->
+} -->
 
+<p-inputGroup>
+  <p-inputGroupAddon>+20</p-inputGroupAddon>
+  <input
+    (change)="onKeyUp($event)"
+    pInputText
+    [formControl]="formControl"
+    [formlyAttributes]="field"
+    type="tel"
+    appTrimWhitespace
+    autocomplete="new-password"
+  />
+</p-inputGroup>
 
-
-<!-- </div> -->

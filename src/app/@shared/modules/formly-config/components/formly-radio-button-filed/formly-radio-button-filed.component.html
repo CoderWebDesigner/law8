@@ -1,5 +1,5 @@
-<!-- <div class="d-flex w-100" [ngClass]="{'flex-column': props['vertical']}">
-  @for (option of props['options']; track option; let i = $index) {
+<div class="d-flex w-100" [ngClass]="{'flex-column': props['vertical']}">
+  @for (option of props['options']||[]; track option; let i = $index) {
     <div class="radio-filed" [ngClass]="{'radio-checked': i == selectedIndex}">
       <p-radioButton class="me-3" [formControl]="formControl" [formlyAttributes]="field" [value]="option.value" [name]="field.name" (onClick)="selectedIndex = i;onClick()">
       </p-radioButton>
@@ -11,9 +11,5 @@
       }
     </div>
   }
-</div> -->
+</div>
 
-
-
-
- {{props['options']|json}}

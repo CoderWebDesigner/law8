@@ -40,6 +40,8 @@ import { FormlySwitchFieldComponent } from './components/formly-switch-field/for
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputOtpModule } from 'primeng/inputotp';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
@@ -110,7 +112,9 @@ import { InputOtpModule } from 'primeng/inputotp';
     CheckboxModule,
     InputSwitchModule,
     KeyFilterModule,
-    InputOtpModule
+    InputOtpModule,
+    InputGroupModule,
+InputGroupAddonModule
 
   ],
   exports: [
