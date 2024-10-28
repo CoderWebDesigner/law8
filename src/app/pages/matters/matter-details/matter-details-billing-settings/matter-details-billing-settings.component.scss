@@ -1,0 +1,19 @@
+:host ::ng-deep {
+    .line-title:after {
+        display: inline-block;
+        height: 1px;
+        content: " ";
+        background-color: #000;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+    .p-checkbox-label{
+        margin-top: 25px;
+    }
+
+    .p-checkbox .p-checkbox-box{
+        margin-top: 8px;
+    }
+}

@@ -1,14 +1,5 @@
 import { DatePipe } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  inject,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject} from '@angular/core';
 import { PracticeArea } from '@components/matters/enums/practice-area';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
@@ -125,6 +116,7 @@ export class MatterDetailsMainInfoComponent
           //     },
           //   },
           // },
+          
           {
             type: 'select',
             key: 'parentMatterId',
@@ -259,6 +251,20 @@ export class MatterDetailsMainInfoComponent
             },
           },
           {
+            type: 'select',
+            key: 'law_BranchId',
+            className: 'col-lg-3 col-md-4',
+            props: {
+              label: this._languageService.getTransValue('common.branch'),
+              options: this.lookupsData[5]?.result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+              disabled: this.previewOnly,
+              required: true,
+            },
+          },
+          {
             type: 'input',
             key: 'openInvoice',
             className: 'col-lg-3 col-md-4',
@@ -300,6 +306,70 @@ export class MatterDetailsMainInfoComponent
             className: 'card p-2 mx-3 mb-3',
             fieldGroupClassName: 'row',
             fieldGroup: [
+              // {
+              //   type: 'select',
+              //   key: 'law_MtrCatId',
+              //   className: 'col-lg-3 col-md-4',
+              //   props: {
+              //     label: this._languageService.getTransValue('common.matterCategory'),
+              //     disabled: this.previewOnly,
+              //   },
+              //   hooks: {
+              //     onInit: (field: FormlyFieldConfig) => {
+              //       this.formly.get('practsAreaId').valueChanges.subscribe({
+              //         next: (res) => {
+              //           if (res) {
+              //             console.log('valueChanges', res);
+              //             this._apiService
+              //               .get(`${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${res}`)
+              //               .pipe(this._sharedService.takeUntilDistroy())
+              //               .subscribe({
+              //                 next: (res: ApiRes) => {
+              //                   field.props.options = res.result.map((obj) => ({
+              //                     label: obj.name,
+              //                     value: obj.id,
+              //                   }));
+              //                   // تحديث law_MtrCatId هنا
+              //                   if (res.result.length > 0) {
+              //                     this.formly.get('law_MtrCatId').setValue(res.result[0].id); // أو القيمة المناسبة
+              //                   } else {
+              //                     this.formly.get('law_MtrCatId').setValue(null);
+              //                   }
+              //                   this.formlyOption.build();
+              //                 },
+              //               });
+              //           } else {
+              //             field.props.options = [];
+              //             this.formly.get('law_MtrCatId').setValue(null);
+              //           }
+              //         },
+              //       });
+              
+              //       console.log('', this.formlyModel.practsAreaId);
+              //       if (this.formlyModel.practsAreaId) {
+              //         this._apiService
+              //           .get(`${API_Config.general.getMatterCategoriesLookup}?PractsAreaId=${this.formlyModel.practsAreaId}`)
+              //           .pipe(this._sharedService.takeUntilDistroy())
+              //           .subscribe({
+              //             next: (res: ApiRes) => {
+              //               field.props.options = res.result.map((obj) => ({
+              //                 label: obj.name,
+              //                 value: obj.id,
+              //               }));
+              //               // تحديث law_MtrCatId هنا أيضًا
+              //               if (res.result.length > 0) {
+              //                 this.formly.get('law_MtrCatId').setValue(res.result[0].id); // أو القيمة المناسبة
+              //               } else {
+              //                 this.formly.get('law_MtrCatId').setValue(null);
+              //               }
+              //               this.formlyOption.build();
+              //             },
+              //           });
+              //       }
+              //     },
+              //   },
+              // },
+
               {
                 type: 'select',
                 key: 'law_MtrCatId',
@@ -357,7 +427,7 @@ export class MatterDetailsMainInfoComponent
                     
                   },
                 },
-              },
+               },
               {
                 type: 'select',
                 key: 'mtrTypeId',
@@ -653,9 +723,10 @@ export class MatterDetailsMainInfoComponent
               {
                 type: 'checkbox',
                 key: 'isCaseSensitive',
-                className: 'col-lg-3 col-md-4',
+                className: 'col-lg-3 col-md-4 d-flex align-items-center',
                 props: {
-                  label: this._languageService.getTransValue(
+                  label:null,
+                  value: this._languageService.getTransValue(
                     'matters.caseSensitive'
                   ),
                   disabled: this.previewOnly,
@@ -793,6 +864,7 @@ export class MatterDetailsMainInfoComponent
       this._apiService.get(API_Config.general.getStages),
       this._apiService.get(API_Config.general.getPractsAreaLookup),
       this._apiService.get(API_Config.general.getClients),
+      this._apiService.get(API_Config.general.getAllBranches),
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({

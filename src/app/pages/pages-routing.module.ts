@@ -81,6 +81,12 @@ const routes: Routes = [
       import('./search/search.module').then((m) => m.SearchModule),
     
   },
+  {
+    path: 'setting',
+    loadChildren: () =>
+      import('./setting/setting.module').then((m) => m.SettingModule),
+    
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

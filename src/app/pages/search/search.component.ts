@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { ApiRes, CardItem } from '@core/models';
 import { LanguageService } from '@core/services';
-import { count } from 'rxjs';
+import { count, finalize } from 'rxjs';
 import {
   Clients_Columns_AR,
   Clients_Columns_EN,
@@ -347,27 +347,36 @@ export class SearchComponent implements OnInit {
     },
   ];
   data: any[] = [];
+  isSearched:boolean;
+  isLoading:boolean
   ngOnInit(): void {}
 
   onSearch(event: any) {
     if(event?.trim()!=''){
       this.searchValue=event?.trim()
-      let body={
-        search:this.searchValue
-      }
-      this._apiService.get(API_Config.search.globalSearch,body).pipe(
-        this._sharedService.takeUntilDistroy()
-      ).subscribe({
-        next:(res:ApiRes)=>{
-          if(res&&res.isSuccess){
-            this.data=res.result
-          }
-        }
-      })
+      
     }else{
       this.data=[];
       this.selectedRow = null;
+      this.isSearched=false
     }
+  }
+  search(){
+    this.isLoading=true
+    let body={
+      search:this.searchValue
+    }
+    this._apiService.get(API_Config.search.globalSearch,body).pipe(
+      this._sharedService.takeUntilDistroy(),
+      finalize(()=> this.isLoading=false)
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res&&res.isSuccess){
+          this.isSearched=true
+          this.data=res.result
+        }
+      }
+    })
   }
   setSelectedRow(row: any,index:number) {
     this.selectedIndex=index

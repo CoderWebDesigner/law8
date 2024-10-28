@@ -234,6 +234,18 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
               label: this._languageService.getTransValue('users.goal'),
             },
           },
+          {
+            type: 'select',
+            key: 'law_BranchId',
+            className: 'col-md-4',
+            props: {
+              label: this._languageService.getTransValue('common.branch'),
+              options: this.lookupsData[4].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+            },
+          },
         ],
       },
     ];
@@ -264,6 +276,8 @@ export class UserEditorComponent extends FormBaseClass implements OnInit {
       this._apiService.get(API_Config.general.getRateTypeLookup),
       this._apiService.get(API_Config.general.getDepartmentLookup),
       this._apiService.get(API_Config.general.getAssignedUsersTimeSheet),
+      this._apiService.get(API_Config.general.getAllBranches),
+
     ])
       .pipe(this._sharedService.takeUntilDistroy())
       .subscribe({

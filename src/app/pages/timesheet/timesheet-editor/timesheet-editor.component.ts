@@ -90,7 +90,7 @@ export class TimesheetEditorComponent implements OnInit {
             label: obj.name,
             value: obj.id,
           }));
-          this.matters.push({ label: 'All Matters', value: 'All Matters' });
+          // this.matters.push({ label: 'All Matters', value: 'All Matters' });
         },
       });
   }
@@ -285,17 +285,28 @@ export class TimesheetEditorComponent implements OnInit {
         },
       });
   }
+  openAllMatters(rowIndex:number){
+    let dialogRef=this._dialogService.open(SharedMatterTableComponent, {
+      width: '70%',
+      data: {
+        selectRow: true,
+        apiUrls: API_Config.matters
+      },
+      dismissableMask: true,
+    });
+    this.getSelectedMatter(rowIndex);
+  }
 
   selectMatter(e, rowIndex) {
-    if (e.value == 'All Matters') {
-      let dialogRef=this._dialogService.open(SharedMatterTableComponent, {
-        width: '70%',
-        data: {
-          selectRow: true,
-          apiUrls: API_Config.matters
-        },
-        dismissableMask: true,
-      });
+    // if (e.value == 'All Matters') {
+    //   let dialogRef=this._dialogService.open(SharedMatterTableComponent, {
+    //     width: '70%',
+    //     data: {
+    //       selectRow: true,
+    //       apiUrls: API_Config.matters
+    //     },
+    //     dismissableMask: true,
+    //   });
       // dialogRef.onClose.pipe(
       //   this._sharedService.takeUntilDistroy()
       // ).subscribe({
@@ -304,17 +315,17 @@ export class TimesheetEditorComponent implements OnInit {
       //     this.getRateFromLawyerIdAndMatterId(rowIndex,res.id);
       //   }
       // })
-    } else {
+    // } else {
       let matterId = this.matters.find((obj) => obj.label == e.value)?.value;
       this.getFormArray.controls[rowIndex]?.get('matterId').setValue(matterId);
       this.getRateFromLawyerIdAndMatterId(rowIndex);
       if(matterId)this.getClientNameByMatterId(matterId, rowIndex);
       
       this.addRow()
-    }
+    // }
 
     
-    this.getSelectedMatter(rowIndex);
+    // this.getSelectedMatter(rowIndex);
   }
   getClientNameByMatterId(matterId: number, rowIndex: number) {
     this._apiService

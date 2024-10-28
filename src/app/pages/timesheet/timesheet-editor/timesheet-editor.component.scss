@@ -41,3 +41,25 @@ p {
   height: 40px;
 }
 
+.item{
+  margin: 0;
+    padding: 0.75rem 1.25rem;
+    border: 0 none;
+    color: #495057;
+    background: transparent;
+    transition: box-shadow 0.2s;
+    border-radius: 0;
+    width: 100%;
+    text-align: start;
+    &:hover{
+
+      color: #495057;
+      background: #e9ecef;
+    }
+}
+
+ ::ng-deep {
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-empty-message{
+    padding: 0 !important;
+  }
+}

@@ -14,11 +14,11 @@
             <ng-container *ngFor="let item of items; let i = index">
               <p-tabPanel [header]="item.label" *ngIf="item.show">
                 <app-matter-general [previewOnly]="previewOnly"  [data]="data"
-                  *ngIf="i == 0"></app-matter-general>
+                  *ngIf="i == 0 && data"></app-matter-general>
                 <ng-template pTemplate="content">
                   <app-matter-address [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i==2"></app-matter-address>
                   <ng-container
-                    *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(this.data.practsAreaId)">
+                    *ngIf="[practiceArea.Corporate, practiceArea.Litigation,practiceArea.Arbitration].includes(this.data?.practsAreaId)">
                     <app-matter-party *ngIf="i==1" [requestId]="requestId" [previewOnly]="previewOnly"></app-matter-party>
                     <app-matter-contact [requestId]="requestId" *ngIf="i==3" [previewOnly]="previewOnly"></app-matter-contact>
                     <app-matter-details-activity [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i == 6"></app-matter-details-activity>
@@ -30,7 +30,7 @@
                     <app-matter-details-billing-settings [requestId]="requestId"
                       *ngIf="i == 11"></app-matter-details-billing-settings>
                   </ng-container>
-                  <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(data.practsAreaId)">
+                  <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(data?.practsAreaId)">
                     <app-matter-applicants [data]="data?.law_MatterApplicantss" [previewOnly]="previewOnly" [requestId]="requestId"
                       *ngIf="i==4"></app-matter-applicants>
                       
