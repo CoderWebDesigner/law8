@@ -123,7 +123,7 @@ export const MENU: MenuItem[] = [
   {
     id: 6,
     label: 'menu.billing.title',
-    icon: 'dashboard.svg',
+    icon: 'pay.svg',
     role: 'timesheet',
     subItems: [
      
