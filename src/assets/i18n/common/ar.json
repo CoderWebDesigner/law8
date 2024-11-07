@@ -56,7 +56,9 @@
     "saveDraft":"Save Draft",
     "deactive":"تعطيل",
     "active":"تنشيط",
-    "add":"اضافة"
+    "add":"اضافة",
+    "saveNew":"حفظ && جديد"
+
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",

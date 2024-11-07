@@ -302,8 +302,11 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 setTimeout(() => {
                   field.formControl.setValue(1);
                 }, 0);
+                
+                // this.formly.get('law_MtrCatId').reset()
                 field.form.get('practsAreaId').valueChanges.subscribe({
                   next: (res) => {
+                    this.formly.get('law_MtrCatId').reset()
                     if (
                       [this.practiceArea.IntelecturualProperty].includes(res)
                     ) {

@@ -58,7 +58,8 @@
     "saveDraft":"Save Draft",
     "deactive":"Deactivate",
     "active":"Activate",
-    "add":"Add"
+    "add":"Add",
+    "saveNew":"Save & New"
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",

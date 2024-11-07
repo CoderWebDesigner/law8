@@ -33,6 +33,7 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/report/',
     './assets/i18n/pages/search/',
     './assets/i18n/pages/setting/',
+    './assets/i18n/pages/billing/',
   ]);
 }
 @NgModule({

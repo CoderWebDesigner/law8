@@ -130,7 +130,7 @@ export const MENU: MenuItem[] = [
       {
         id: 1,
         label: 'menu.billing.expenses',
-        link: '',
+        link: '/billing/expenses',
         parentId: 5,
         role: 'View_Timesheet',
       },

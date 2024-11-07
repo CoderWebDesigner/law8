@@ -27,8 +27,8 @@
                     <app-matter-details-related-matters [requestId]="requestId"
                       *ngIf="i ==9"></app-matter-details-related-matters>
                     <app-matter-details-documents [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i ==10"></app-matter-details-documents>
-                    <app-matter-details-billing-settings [requestId]="requestId"
-                      *ngIf="i == 11"></app-matter-details-billing-settings>
+                    <!-- <app-matter-billing [requestId]="requestId"
+                      *ngIf="i == 11"></app-matter-billing> -->
                   </ng-container>
                   <ng-container *ngIf="[practiceArea.IntelecturualProperty].includes(data?.practsAreaId)">
                     <app-matter-applicants [data]="data?.law_MatterApplicantss" [previewOnly]="previewOnly" [requestId]="requestId"
@@ -40,12 +40,11 @@
                     <app-matter-details-timesheet [requestId]="requestId" *ngIf="i == 8"></app-matter-details-timesheet>
                     <app-matter-details-related-matters [requestId]="requestId" *ngIf="i ==9"></app-matter-details-related-matters>
                     <app-matter-details-documents [requestId]="requestId" [previewOnly]="previewOnly" *ngIf="i == 10"></app-matter-details-documents>
-                    <app-matter-details-billing-settings *ngIf="i ==11"></app-matter-details-billing-settings>
+                    <!-- <app-matter-billing *ngIf="i ==11"></app-matter-billing> -->
                   </ng-container>
+                  <app-matter-billing *ngIf="i==11" [requestId]="requestId"></app-matter-billing>
                 </ng-template>
-
-
-
+                
               </p-tabPanel>
             </ng-container>
           </p-tabView>

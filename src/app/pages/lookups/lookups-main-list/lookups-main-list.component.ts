@@ -116,6 +116,12 @@ export class LookupsMainListComponent implements OnInit {
       nameAR: 'الفروع',
       permission:'View_Branch'
     },
+    {
+      id: 11,
+      nameEN: 'Recovery Type',
+      nameAR: 'Recovery Type',
+      permission:'View_Branch'
+    },
   ];
   apiData = {
     '1': {

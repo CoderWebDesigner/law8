@@ -56,7 +56,9 @@
     "saveDraft":"Save Draft",
     "deactive":"Deactivate",
     "active":"Activate",
-    "add":"Add"
+    "add":"Add",
+    "saveNew":"Save & New"
+
 
   },
   "messages": {

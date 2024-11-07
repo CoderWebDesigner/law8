@@ -10,14 +10,12 @@ import { SharedSearchInputComponent } from '@shared/components/shared-search-inp
 import { MatterEditorComponent } from './matter-editor/matter-editor.component';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { TabViewModule } from 'primeng/tabview';
-import { MatterEditorPaymentTermsComponent } from './matter-editor/matter-editor-payment-terms/matter-editor-payment-terms.component';
 import { MatterDetailsComponent } from './matter-details/matter-details.component';
 import { MatterDetailsMainInfoComponent } from './matter-details/matter-details-main-info/matter-details-main-info.component';
 import { MatterDetailsTimesheetComponent } from './matter-details/matter-details-timesheet/matter-details-timesheet.component';
 import { MatterDetailsRelatedMattersComponent } from './matter-details/matter-details-related-matters/matter-details-related-matters.component';
 import { MatterDetailsDocumentsComponent } from './matter-details/matter-details-documents/matter-details-documents.component';
 import { MatterDetailsActivityComponent } from './matter-details/matter-details-activity/matter-details-activity.component';
-import { MatterDetailsBillingSettingsComponent } from './matter-details/matter-details-billing-settings/matter-details-billing-settings.component';
 import { MatterDetailsInvoiceComponent } from './matter-details/matter-details-invoice/matter-details-invoice.component';
 import { MatterDetailsInvoiceEditorComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-editor.component';
 import { MatterDetailsInvoiceSalesItemsComponent } from './matter-details/matter-details-invoice/matter-details-invoice-editor/matter-details-invoice-sales-items/matter-details-invoice-sales-items.component';
@@ -32,6 +30,7 @@ import { MatterGeneralComponent } from './components/matter-general/matter-gener
 import { MatterDocumentPreviewComponent } from './matter-details/matter-details-documents/matter-document-preview/matter-document-preview.component';
 import { MattersInactiveComponent } from './matters-inactive/matters-inactive.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { MatterBillingComponent } from './components/matter-billing/matter-billing.component';
 
 
 @NgModule({
@@ -40,14 +39,12 @@ import { TooltipModule } from 'primeng/tooltip';
     MatterAddressComponent,
     MattersComponent,
     MatterEditorComponent,
-    MatterEditorPaymentTermsComponent,
     MatterDetailsComponent,
     MatterDetailsMainInfoComponent,
     MatterDetailsTimesheetComponent,
     MatterDetailsRelatedMattersComponent,
     MatterDetailsDocumentsComponent,
     MatterDetailsActivityComponent,
-    MatterDetailsBillingSettingsComponent,
     MatterDetailsInvoiceComponent,
     MatterDetailsInvoiceEditorComponent,
     MatterDetailsInvoiceSalesItemsComponent,
@@ -58,7 +55,8 @@ import { TooltipModule } from 'primeng/tooltip';
     MatterPartyComponent,
     MatterContactComponent,
     MatterDocumentPreviewComponent,
-    MattersInactiveComponent
+    MattersInactiveComponent,
+    MatterBillingComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +67,8 @@ import { TooltipModule } from 'primeng/tooltip';
     SharedSearchInputComponent,
     FormlyConfigModule,
     TabViewModule,
-    TooltipModule
+    TooltipModule,
+
   ]
 })
 export class MattersModule { }
