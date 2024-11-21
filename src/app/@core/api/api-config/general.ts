@@ -38,7 +38,9 @@ export const General_API = {
       "getAllMatterTypes":"AppLookup/GetLaw_MtrTyppLookup",
       "getAllMatter":"AppLookup/GetLawMattertLookup",
       "getAllBranches":"AppLookup/GetBranchesLookup",
-      "getAllCurrencies":"AppLookup/GetCurrencyLookup"
+      "getAllCurrencies":"AppLookup/GetCurrencyLookup",
+      "getAllBillingHold":"AppLookup/GetBillingExpenseHoldLookup",
+      "getAllBillingType":"AppLookup/GetBillingExpenseTypeLookup",
   }
 
 }

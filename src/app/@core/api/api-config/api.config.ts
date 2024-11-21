@@ -35,6 +35,7 @@ import { Report_API } from './report';
 import { Search_API } from './search';
 import { Notification_API } from './notification';
 import { setting_API } from './setting';
+import { Billing_API } from './billing';
 
 export const API_Config = {
   ...General_API,
@@ -73,5 +74,6 @@ export const API_Config = {
   ...Report_API,
   ...Search_API,
   ...Notification_API,
-  ...setting_API
+  ...setting_API,
+  ...Billing_API,
 };

@@ -93,6 +93,12 @@ const routes: Routes = [
       import('./billing/billing.module').then((m) => m.BillingModule),
     
   },
+  {
+    path: 'accounts',
+    loadChildren: () =>
+      import('./accounts/accounts.module').then((m) => m.AccountsModule),
+    
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

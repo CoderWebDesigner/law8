@@ -2,6 +2,8 @@
     <div class="d-flex" headerActions>
         <p-button [requiredPermission]="'Add_MatterCategory'" [label]="'Add Expenses'|translate"
             (onClick)="openBillingExpensesEditor()" styleClass="py-2 px-4 mx-2"></p-button>
+        <p-button [requiredPermission]="'Add_MatterCategory'" [label]="'Save Expenses'|translate"
+            (onClick)="save()" styleClass="py-2 px-4"></p-button>
     </div>
     <shared-table body [columnsLocalized]="columnsLocalized" [additionalTableConfig]="additionalTableConfig" [data]="data">
     </shared-table>
