@@ -137,24 +137,25 @@ export const MENU: MenuItem[] = [
       {
         id: 2,
         label: 'menu.billing.preBill',
-        link: '',
+        link: '/billing/pre-bill',
         parentId: 6,
         role: 'View_Timesheet',
       },
       {
         id: 3,
-        label: 'menu.billing.quickBill',
-        link: '',
+        label: 'menu.billing.bill',
+        link: '/billing/bill',
         parentId: 6,
         role: 'View_Timesheet',
       },
       {
         id: 4,
-        label: 'menu.billing.bill',
+        label: 'menu.billing.quickBill',
         link: '',
         parentId: 6,
         role: 'View_Timesheet',
       },
+     
       {
         id: 5,
         label: 'menu.billing.payments',
@@ -244,6 +245,13 @@ export const MENU: MenuItem[] = [
         id: 1,
         label: 'Bank Account',
         link: '/accounts/bank-account',
+        parentId: 10,
+        role: 'View_MatterCategory',
+      },
+      {
+        id: 2,
+        label: 'G/L Accounts',
+        link: '',
         parentId: 10,
         role: 'View_MatterCategory',
       },

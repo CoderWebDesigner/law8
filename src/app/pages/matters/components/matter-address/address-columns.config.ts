@@ -61,31 +61,31 @@ export const Address_Columns_FR = [
 
 export const Address_Columns_AR = [
   {
-    header: 'Line 1',
+    header: 'العنوان 1',
     field: 'line1',
   },
   {
-    header: 'Line 2',
+    header: 'العنوان 2',
     field: 'line2',
   },
   {
-    header: 'Street Number',
+    header: 'رقم الشارع',
     field: 'streetNumber',
   },
   {
-    header: 'City',
+    header: 'المدينة',
     field: 'city',
   },
   {
-    header: 'Country',
+    header: 'الدولة',
     field: 'country',
   },
   {
-    header: 'State',
+    header: 'الولاية',
     field: 'state',
   },
   {
-    header: 'Zip Code',
+    header: 'الرمز البريدى',
     field: 'zipCode',
   },
 ];

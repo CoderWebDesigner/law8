@@ -85,8 +85,8 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
               placeholder: '',
               disabled: this.previewOnly,
               options: [
-                { label: 'New Matter', value: 1 },
-                { label: 'Sub Matter', value: 2 },
+                { label: this.translate.instant('matters.newMatter'), value: 1 },
+                { label: this.translate.instant('matters.supMatter'), value: 2 },
                 // { label: 'Linked Matter', value: 3 },
               ],
             },

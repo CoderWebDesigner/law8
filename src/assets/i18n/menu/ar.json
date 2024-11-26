@@ -40,9 +40,9 @@
     },
     "reports": {
       "title": "التقارير",
-      "activityreport": "activity Report",
-      "matterReport": "Matter Report",
-      "timeSheetReport": "TimeSheet Report"
+      "activityreport": "تقرير الجلسات المتداولة",
+      "matterReport": "تقرير القضايا",
+      "timeSheetReport": "تقرير السجلات الزمنية"
     },
     "setting": {
       "title": "Setting"

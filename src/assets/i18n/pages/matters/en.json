@@ -1,5 +1,7 @@
 {
   "matters":{
+   "newMatter": "New Matter",
+    "supMatter": "Sub Matter",
     "title":"Matters",
     "addMatter":"Add Matter",
     "matterType":"Matter Type",

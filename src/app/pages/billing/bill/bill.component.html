@@ -1,0 +1,16 @@
+<shared-card [title]="'Bill'|translate">
+    <ng-container body>
+        <form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+            <app-bill-info [form]="formly" [fields]="getFields('info')" [model]="formlyModel"></app-bill-info>
+            <app-bill-time-fees [form]="formly" [fields]="getFields('time')" [model]="formlyModel"></app-bill-time-fees>
+            <app-bill-expenses [form]="formly" [fields]="getFields('expenses')" [model]="formlyModel"></app-bill-expenses>
+            <app-bill-summary [form]="formly" [fields]="getFields('summary')" [model]="formlyModel"></app-bill-summary>
+  
+            <div class="mt-4 text-end">
+                <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" type="submit"
+                    label="{{ 'btn.submit' | translate }}"></p-button>
+            </div>
+        </form>
+    </ng-container>
+    
+</shared-card>

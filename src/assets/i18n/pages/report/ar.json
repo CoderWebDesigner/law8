@@ -1,10 +1,10 @@
 {
   "report": {
-      "activityReport": "Activity Report",
-      "dateFrom": "Date From",
-      "dateTo": "Date To",
-      "lawyer": "Lawyer",
-      "client": "Client",
+      "activityReport": "تقرير السجلات المتداولة",
+      "dateFrom": "تاريخ البدء",
+      "dateTo": "تاريخ الانتهاء",
+      "lawyer": "المحامى",
+      "client": "العميل",
       "openDateFrom": "Date From",
       "openDateTo": "Date To",
       "feeEarner": "Fee Earner",

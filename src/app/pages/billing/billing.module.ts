@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { BillingRoutingModule } from './billing-routing.module';
 
 
+
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     BillingRoutingModule
