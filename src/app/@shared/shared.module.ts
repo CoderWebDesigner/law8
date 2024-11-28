@@ -17,6 +17,7 @@ import { MoreInfoComponent } from './components/shared-table/components/more-inf
 import { EventsFilterPipe } from './pipes/events-filter.pipe';
 import { SecondsToTimePipe } from './pipes/secondsToTime/seconds-to-time.pipe';
 import { PermissionDirective } from '@core/directives/permission.directive';
+import { SharedLoaderComponent } from './components/shared-loader/shared-loader.component';
 
 const components: any = [
   SharedActionsComponent,
@@ -26,7 +27,8 @@ const components: any = [
   MoreInfoComponent,
   EventsFilterPipe,
   SecondsToTimePipe,
-  PermissionDirective
+  PermissionDirective,
+  SharedLoaderComponent
 ];
 
 // const components: any = [];

@@ -8,6 +8,9 @@ import {
   Bank_Account_Columns_EN,
   Bank_Account_Columns_FR,
 } from './bank-account-columns.config';
+import { API_Config } from '@core/api/api-config/api.config';
+import { SharedService } from '@shared/services/shared.service';
+import { SharedTableService } from '@shared/components/shared-table/services/table.service';
 
 @Component({
   selector: 'app-bank-account',
@@ -17,6 +20,9 @@ import {
 export class BankAccountComponent {
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
+  _sharedService=inject(SharedService);
+  _sharedTableService=inject(SharedTableService)
+  apiUrls = API_Config.bankAccount;
   additionalTableConfig: TableConfig = {
     id: 'id',
     isSearch: true,
@@ -27,6 +33,12 @@ export class BankAccountComponent {
         icon: 'pencil',
         permission: 'Update_Users',
       },
+      {
+        type: 'delete',
+        title: this._languageService.getTransValue('btn.delete'),
+        icon: 'trash',
+        permission:'Delete_ClientContact'
+      },
     ],
   };
 
@@ -35,45 +47,18 @@ export class BankAccountComponent {
     fr: Bank_Account_Columns_FR,
     ar: Bank_Account_Columns_AR,
   };
-  data: any[] = [
-    {
-      accountId: "12345",
-      bankType: "Checking",
-      bankName: "Bank of America",
-      glAccount: "GL-1001"
-    },
-    {
-      accountId: "67890",
-      bankType: "Savings",
-      bankName: "Chase",
-      glAccount: "GL-1002"
-    },
-    {
-      accountId: "11223",
-      bankType: "Business",
-      bankName: "Wells Fargo",
-      glAccount: "GL-1003"
-    },
-    {
-      accountId: "44556",
-      bankType: "Credit",
-      bankName: "Citibank",
-      glAccount: "GL-1004"
-    },
-    {
-      accountId: "77889",
-      bankType: "Investment",
-      bankName: "Goldman Sachs",
-      glAccount: "GL-1005"
-    }
-  ];
 
   openBankAccountEditor(rowData?:any) {
-    this._dialogService.open(BankAccountEditorComponent, {
+    const bankAccountEditor=this._dialogService.open(BankAccountEditorComponent, {
       header:rowData?'Update Bank Account':'Add Bank Account',
-      width: '50vw',
+      width: '55vw',
       data:rowData
     });
+    bankAccountEditor.onClose.pipe(this._sharedService.takeUntilDistroy()).subscribe({
+      next:(res)=>{
+        if(res) this._sharedTableService.refreshData.next(true)
+      }
+    })
   }
 }
 

@@ -55,6 +55,10 @@
           "quickBill": "Quick Bill",
           "bill": "Bill",
           "payments": "Payments"
+        },
+
+        "accounting": {
+          "title": "Accounts"
         }
     }
 }

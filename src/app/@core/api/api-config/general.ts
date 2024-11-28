@@ -41,6 +41,9 @@ export const General_API = {
       "getAllCurrencies":"AppLookup/GetCurrencyLookup",
       "getAllBillingHold":"AppLookup/GetBillingExpenseHoldLookup",
       "getAllBillingType":"AppLookup/GetBillingExpenseTypeLookup",
+      "getGlAccountsTypeLookup":"AppLookup/GetGlAccountsTypeLookup",
+      "getBankAccountsTypeLookup":"AppLookup/GetBankAccountsTypeLookup",
+      "getGlAccountsLookup":"AppLookup/GetGlAccountsLookup"
   }
 
 }

@@ -3,7 +3,6 @@
         <p-button [requiredPermission]="'Add_MatterCategory'" [label]="'Add Bank Account'|translate"
             (onClick)="openBankAccountEditor()" styleClass="py-2 px-4 mx-2"></p-button>
     </div>
-    <shared-table body [columnsLocalized]="columnsLocalized" [additionalTableConfig]="additionalTableConfig"
-        [data]="data">
+    <shared-table body [apiUrls]="apiUrls" [columnsLocalized]="columnsLocalized" [additionalTableConfig]="additionalTableConfig">
     </shared-table>
 </shared-card>

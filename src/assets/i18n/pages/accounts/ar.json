@@ -1,0 +1,14 @@
+{
+    "bankAccount":{
+        "bankTypeId": "نوع البنك",
+        "accountName": "اسم الحساب",
+        "accountNo": "رقم الحساب",
+        "address": "العنوان",
+        "swiftCode": "رمز السويفت",
+        "iban": "رقم الآيبان",
+        "branchName": "اسم الفرع",
+        "accountHolder": "صاحب الحساب",
+        "glAccountId": "رقم الحساب العام"
+    }
+  }
+  

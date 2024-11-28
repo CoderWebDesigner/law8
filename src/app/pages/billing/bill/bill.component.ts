@@ -87,9 +87,9 @@ export class BillComponent extends FormBaseClass implements OnInit {
           }
         },
         {
-          type:'select',
+          type:'checkbox',
           key:'neverBillEntries',
-          className:'col-md-3',
+          className:'col-md-3 d-flex align-items-center',
           props:{
             label:'Never Bill Entries',
             options:[
@@ -131,14 +131,11 @@ export class BillComponent extends FormBaseClass implements OnInit {
           }
         },
         {
-          type:'select',
+          type:'checkbox',
           key:'neverBillEntries',
-          className:'col-md-3',
+          className:'col-md-3 d-flex align-items-center',
           props:{
             label:'Never Bill Entries',
-            options:[
-              {label:'exclude',value:'exclude'}
-            ]
           }
         },
         {

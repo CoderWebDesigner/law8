@@ -45,7 +45,10 @@
       "timeSheetReport": "TimeSheet Report"
     },
     "setting": {
-      "title": "Setting"
+      "title": "Settings"
+    },
+    "accounting": {
+      "title": "Accounts"
     }
   }
 }

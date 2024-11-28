@@ -45,7 +45,7 @@
       "timeSheetReport": "تقرير السجلات الزمنية"
     },
     "setting": {
-      "title": "Setting"
+      "title": "الإعدادات"
     },
     "billing": {
       "title": "الفواتير",
@@ -54,6 +54,10 @@
       "quickBill": "الفاتورة السريعة",
       "bill": "الفاتورة",
       "payments": "المدفوعات"
+    },
+    
+    "accounting": {
+      "title": "الحسابات"
     }
   }
 }

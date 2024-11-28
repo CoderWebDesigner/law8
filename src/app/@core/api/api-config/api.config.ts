@@ -36,6 +36,8 @@ import { Search_API } from './search';
 import { Notification_API } from './notification';
 import { setting_API } from './setting';
 import { Billing_API } from './billing';
+import { BankAccount_API } from './bankAccounts';
+import { GlAccount_API } from './glAccounts';
 
 export const API_Config = {
   ...General_API,
@@ -76,4 +78,6 @@ export const API_Config = {
   ...Notification_API,
   ...setting_API,
   ...Billing_API,
+  ...BankAccount_API,
+  ...GlAccount_API
 };

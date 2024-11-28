@@ -236,14 +236,14 @@ export const MENU: MenuItem[] = [
   },
   {
     id: 10,
-    label: 'Accounts',
+    label: 'menu.accounting.title',
     icon: 'accounts.svg',
     link: '/accounts',
     role: 'View_Security',
     subItems: [
       {
         id: 1,
-        label: 'Bank Account',
+        label: 'Bank  Account',
         link: '/accounts/bank-account',
         parentId: 10,
         role: 'View_MatterCategory',
@@ -251,7 +251,7 @@ export const MENU: MenuItem[] = [
       {
         id: 2,
         label: 'G/L Accounts',
-        link: '',
+        link: '/accounts/gl-account',
         parentId: 10,
         role: 'View_MatterCategory',
       },

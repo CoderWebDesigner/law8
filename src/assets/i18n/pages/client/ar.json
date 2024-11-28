@@ -27,7 +27,7 @@
     "emailBodyPlaceholder":"الرجاء إدخال الموضوع",
     "clientNamePlaceholder":"الرجاء إدخال اسم العميل",
     "goClientList":"الذهاب قائمة العملاء",
-    "addClient":"أضف العميل",
+    "addClient":"إضافة عميل",
 
     "clientGroupPlaceholder":"الرجاء تحديد مجموعة العميل",
     "companyAddress":"عنوان الشركة",
@@ -50,7 +50,7 @@
     "zipCode":"الرمز البريدي",
     "zipCodePlaceholder":"الرجاء إدخال الرمز البريدي",
     "partiesPlaceholder":"الرجاء تحديد الأطراف",
-    "position":"موضع",
+    "position":"الوظيفة",
     "positionPlaceholder":"الرجاء إدخال المنصب",
     "phonePlaceholder":"الرجاء إدخال الهاتف",
     "mobilePlaceholder":"الرجاء إدخال الهاتف المحمول",
@@ -75,7 +75,7 @@
     "line1":"line1",
     "line2":"line2",
     "linePlaceholder":"Please Enter line",
-    "clientIntroducing": "المحامى الذى قدم القضية"
+    "clientIntroducing": "المحامى المسئول"
 
   }
 }

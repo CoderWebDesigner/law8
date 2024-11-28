@@ -1,22 +1,22 @@
 export const Bank_Account_Columns_EN = [
   {
     header: 'Account ID',
-    field: 'accountId',
+    field: 'accountNo',
     isSort: true,
   },
   {
     header: 'Bank Type',
-    field: 'bankType',
+    field: 'bankTypeName',
     isSort: true,
   },
   {
     header: 'Bank Name',
-    field: 'bankName',
+    field: 'branchName',
     isSort: true,
   },
   {
     header: 'GL Account',
-    field: 'glAccount',
+    field: 'glAccountName',
     isSort: true,
   },
 ];

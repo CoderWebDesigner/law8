@@ -9,6 +9,13 @@ const routes: Routes = [
         (mod) => mod.BankAccountModule
       ),
   },
+  {
+    path: 'gl-account',
+    loadChildren: () =>
+      import('./gl-account/gl-account.module').then(
+        (mod) => mod.GlAccountModule
+      ),
+  },
 ];
 
 @NgModule({
