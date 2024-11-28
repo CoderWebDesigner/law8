@@ -1,5 +1,7 @@
 {
   "matters":{
+   "newMatter": "New Matter",
+    "supMatter": "Sub Matter",
     "title":"Matters",
     "addMatter":"Add Matter",
     "matterType":"Matter Type",
@@ -26,8 +28,8 @@
     "frequancy":"Frequancy",
     "billingTemplate":"Billing Template",
     "emailTemplate":"Email Template",
-    "disbursment":"Disbursment",
-    "automaticallyCreateDisability":"Automatically Create Disability",
+    "disbursment":"Disbursements",
+    "automaticallyCreateDisability":"Automatically Create Disbursements",
     "disability":"Disability",
     "amountAndPrecentage":"Amount / Percentage",
     "fees":"Fees",

@@ -40,12 +40,12 @@
     },
     "reports": {
       "title": "التقارير",
-      "activityreport": "activity Report",
-      "matterReport": "Matter Report",
-      "timeSheetReport": "TimeSheet Report"
+      "activityreport": "تقرير الجلسات المتداولة",
+      "matterReport": "تقرير القضايا",
+      "timeSheetReport": "تقرير السجلات الزمنية"
     },
     "setting": {
-      "title": "Setting"
+      "title": "الإعدادات"
     },
     "billing": {
       "title": "الفواتير",
@@ -54,6 +54,10 @@
       "quickBill": "الفاتورة السريعة",
       "bill": "الفاتورة",
       "payments": "المدفوعات"
+    },
+    
+    "accounting": {
+      "title": "الحسابات"
     }
   }
 }

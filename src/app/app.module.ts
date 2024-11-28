@@ -12,8 +12,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppHttpInterceptor } from '@core/interceptors';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { HandleErrorService } from '@core/services/handle-error-service';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LanguageService } from '@core/services';
+import { SharedModule } from '@shared/shared.module';
+
 
 
 export function HttpLoaderFactory(httpBackend: HttpBackend) {
@@ -33,6 +34,8 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     './assets/i18n/pages/report/',
     './assets/i18n/pages/search/',
     './assets/i18n/pages/setting/',
+    './assets/i18n/pages/billing/',
+    './assets/i18n/pages/accounts/',
   ]);
 }
 @NgModule({
@@ -44,7 +47,6 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ProgressSpinnerModule,
     ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -54,7 +56,8 @@ export function HttpLoaderFactory(httpBackend: HttpBackend) {
       },
     }),
 
-    LayoutModule
+    LayoutModule,
+    SharedModule
   ],
   providers: [
     {

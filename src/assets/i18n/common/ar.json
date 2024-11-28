@@ -14,17 +14,17 @@
     "contacts": "جهات الاتصال",
     "addContacts":"اضف جهات اتصال",
     "general": "عام",
-    "parties": "Parties",
+    "parties": "الاطراف",
     "relatedMatters": "قضايا ذات صلة",
     "dragAndDrop": "قوم بسحب والإفلات او قوم بضغط على",
     "matterCode": "رقم القضية",
     "priority": "أولوية",
     "from":"من",
     "to":"الي",
-    "total":"Total",
+    "total":"المجموع",
     "username": "اسم المستخدم",
     "mobileNumber":"رقم الهاتف المحمول",
-    "email":"البريد الإكتروني",
+    "email":"البريد الالكترونى",
     "password": "كلمة المرور",
     "clientGroup":"مجموعة العميل",
     "practiceArea": "مجال التخصص",
@@ -40,10 +40,12 @@
     "initial":"الاسم المختصر",
     "taskCode":"TaskCode",
     "description": "الوصف",
-    "branch":"Branch"
+    "branch":"الفرع",
+    "Norecordsfound":"لا يوجد بيانات مسجلة"
+
   },
   "btn": {
-    "submit": "تاكيد",
+    "submit": "حفظ",
     "send": "ارسال",
     "close": "يغلق",
     "yes": "نعم",
@@ -56,7 +58,9 @@
     "saveDraft":"Save Draft",
     "deactive":"تعطيل",
     "active":"تنشيط",
-    "add":"اضافة"
+    "add":"اضافة",
+    "saveNew":"حفظ && جديد"
+
   },
   "messages": {
     "signInSuccessfully": "تم تسجيل الدخول بنجاح",
@@ -68,7 +72,7 @@
     "badRequestError":"Bad Request Error!",
     "userIdOrEmailWrong": " معرف المستخدم أو البريد الإلكتروني خطأ يرجى المحاولة مرة أخرى!",
     "invalidOTP": "OTP غير صالح",
-    "dataMessage": "المجموع الكلى",
+    "dataMessage": "عدد السجلات",
     "error": "خطأ!",
     "success": "نجاح!",
     "sureDelete": "هل أنت متأكد أنك تريد حذف؟",

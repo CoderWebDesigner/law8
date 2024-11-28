@@ -1,0 +1,13 @@
+{
+    "bankAccount":{
+    "bankTypeId": "Bank Type",
+    "accountName": "Account Name",
+    "accountNo": "Account Number",
+    "address": "Address",
+    "swiftCode": "SWIFT Code",
+    "iban": "IBAN",
+    "branchName": "Branch Name",
+    "accountHolder": "Account Holder",
+    "glAccountId": "GL Account ID"
+  }
+}

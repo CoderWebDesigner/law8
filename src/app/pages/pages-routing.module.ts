@@ -87,6 +87,18 @@ const routes: Routes = [
       import('./setting/setting.module').then((m) => m.SettingModule),
     
   },
+  {
+    path: 'billing',
+    loadChildren: () =>
+      import('./billing/billing.module').then((m) => m.BillingModule),
+    
+  },
+  {
+    path: 'accounts',
+    loadChildren: () =>
+      import('./accounts/accounts.module').then((m) => m.AccountsModule),
+    
+  },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];

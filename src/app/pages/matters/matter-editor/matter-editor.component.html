@@ -17,7 +17,7 @@
               <app-matter-applicants  [previewOnly]="previewOnly" *ngIf="i==3"></app-matter-applicants>
               <app-matter-class  [previewOnly]="previewOnly" *ngIf="i==4 && formlyModel?.law_MtrCatId==8" ></app-matter-class>
             </ng-container>
-            <app-matter-editor-payment-terms *ngIf="i==6"></app-matter-editor-payment-terms>
+            <app-matter-billing *ngIf="i==6"></app-matter-billing>
           </p-tabPanel>
         </ng-container>
       </p-tabView>

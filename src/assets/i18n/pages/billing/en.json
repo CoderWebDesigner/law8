@@ -1,0 +1,17 @@
+  {
+    "billing": {
+    "matter": "Matter",
+    "amount": "Amount",
+    "check": "Check/Receipt",
+    "type": "Type",
+    "quantity": "Quantity",
+    "price": "Price",
+    "date": "Date",
+    "paidTo": "Paid to / Received from",
+    "lawyer": "Lawyer",
+    "explanation": "Explanation",
+    "hold": "Hold",
+    "noHold": "No Hold",
+    "dollar": "$"
+  }
+  }

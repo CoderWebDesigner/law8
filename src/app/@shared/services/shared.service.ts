@@ -15,7 +15,9 @@ export class SharedService {
   }
 
   destroy(){
-    this.unSubscribeAll.next(true)
-    this.unSubscribeAll.complete()
+    if(this.unSubscribeAll){
+      this.unSubscribeAll.next(true)
+      this.unSubscribeAll.complete()
+    }
   }
 }

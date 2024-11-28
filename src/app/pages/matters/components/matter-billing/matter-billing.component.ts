@@ -4,18 +4,18 @@ import { MatterBillingRateExceptionComponent } from './matter-billing-rate-excep
 import { MatterBillingTaxesComponent } from './matter-billing-taxes/matter-billing-taxes.component';
 
 @Component({
-  selector: 'app-matter-details-billing-settings',
-  templateUrl: './matter-details-billing-settings.component.html',
-  styleUrls: ['./matter-details-billing-settings.component.scss'],
+  selector: 'app-matter-billing',
+  templateUrl: './matter-billing.component.html',
+  styleUrls: ['./matter-billing.component.scss'],
 })
-export class MatterDetailsBillingSettingsComponent
+export class MatterBillingComponent
   extends FormBaseClass
   implements OnInit
 {
   @Input() data: any[] = [];
 
   @Input() previewOnly: boolean;
-
+  @Input() requestId:number;
   ngOnInit(): void {
     this.initForm();
   }

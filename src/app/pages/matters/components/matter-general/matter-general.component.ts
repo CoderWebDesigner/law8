@@ -39,26 +39,28 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
     //   }
     // }
     // this.findKeyProperty(this.formlyFields);
-//
-  //   this.formlyModel = {
-  //     // id:this.data?.id,
-  //     ...this.data,
-  //     law_AssignedLaywerList: this.data?.law_AssignedLaywerList?.map(
-  //       (obj) => obj?.id
-  //     ),
-  //     law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
-  //   };
-  //   console.log('getData formlyModel', this.formlyModel);
-  // }
-  this.formlyModel = {
-    ...this.data,
-    law_AssignedLaywerList: this.data?.law_AssignedLaywerList?.filter(obj => obj !== null).map(
-      (obj) => obj?.id
-    ),
-    law_OtherStaffList: this.data?.law_OtherStaffList?.filter(obj => obj !== null).map((obj) => obj?.id),
-  };
-  console.log('getData formlyModel', this.formlyModel);
-  }  
+    //
+    //   this.formlyModel = {
+    //     // id:this.data?.id,
+    //     ...this.data,
+    //     law_AssignedLaywerList: this.data?.law_AssignedLaywerList?.map(
+    //       (obj) => obj?.id
+    //     ),
+    //     law_OtherStaffList: this.data?.law_OtherStaffList?.map((obj) => obj?.id),
+    //   };
+    //   console.log('getData formlyModel', this.formlyModel);
+    // }
+    this.formlyModel = {
+      ...this.data,
+      law_AssignedLaywerList: this.data?.law_AssignedLaywerList
+        ?.filter((obj) => obj !== null)
+        .map((obj) => obj?.id),
+      law_OtherStaffList: this.data?.law_OtherStaffList
+        ?.filter((obj) => obj !== null)
+        .map((obj) => obj?.id),
+    };
+    console.log('getData formlyModel', this.formlyModel);
+  }
   override getLookupsData(): void {
     this.isLoading = true;
     forkJoin([
@@ -75,20 +77,19 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
         next: (res: any) => {
           this.lookupsData = res;
           console.log('this.data', this.data);
-          if (this.data) addOption(this.lookupsData[0].result, this.data, 'law_TaskCode');
+          if (this.data)
+            addOption(this.lookupsData[0].result, this.data, 'law_TaskCode');
           this.initForm();
         },
       });
   }
   detectFormChange() {
     console.log('detectFormChange');
-    this.formly.valueChanges
-      
-      .subscribe({
-        next: (res) => {
-          this.onSubmit();
-        },
-      });
+    this.formly.valueChanges.subscribe({
+      next: (res) => {
+        this.onSubmit();
+      },
+    });
   }
   override initForm(): void {
     this.formlyFields = [
@@ -119,8 +120,11 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
               label: this._languageService.getTransValue('matters.defaultTask'),
               disabled: this.previewOnly,
               options: [
-                { label: 'Default Rate', value: 1 },
-                { label: 'Amount', value: 2 },
+                {
+                  label: this.translate.instant('matters.defaultRate'),
+                  value: 1,
+                },
+                { label: this.translate.instant('matters.amount'), value: 2 },
               ],
             },
           },
@@ -266,7 +270,7 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
   }
   override onSubmit(): void {
     this.isSubmit = true;
-    console.log('general',this.formly)
+    console.log('general', this.formly);
     this.formStatus.emit(this.formly.valid);
     console.log('this.formly.invalid', this.formly);
     if (this.formly.invalid) {
@@ -288,12 +292,18 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
         rateAmount: this.formlyModel?.rateAmount,
         law_ReferralTypeId: this.formlyModel?.law_ReferralTypeId,
         law_ClientIntroducingId: this.formlyModel?.law_ClientIntroducingId,
-        law_MatterIntroducingLawyerId: this.formlyModel?.law_MatterIntroducingLawyerId,
+        law_MatterIntroducingLawyerId:
+          this.formlyModel?.law_MatterIntroducingLawyerId,
         law_ResponsibleLaywerId: this.formlyModel?.law_ResponsibleLaywerId,
-        law_AssignedLaywerList: this.formlyModel?.law_AssignedLaywerList?.filter(obj => obj !== null)??[],
-        law_OtherStaffList: this.formlyModel?.law_OtherStaffList?.filter(obj => obj !== null),
-        id: this.formlyModel?.id
-        };
+        law_AssignedLaywerList:
+          this.formlyModel?.law_AssignedLaywerList?.filter(
+            (obj) => obj !== null
+          ) ?? [],
+        law_OtherStaffList: this.formlyModel?.law_OtherStaffList?.filter(
+          (obj) => obj !== null
+        ),
+        id: this.formlyModel?.id,
+      };
 
       console.log('onSubmit payload', payload);
 
@@ -325,5 +335,4 @@ export class MatterGeneralComponent extends FormBaseClass implements OnInit {
       }
     }
   }
-
 }

@@ -183,7 +183,7 @@ export class MatterPartyEditorComponent
       },
     ];
   }
-  save() {
+  save(closeModal:boolean=false) {
     const successMsgKey = this._dynamicDialogConfig?.data?.rowData
       ? 'messages.updateSuccessfully'
       : 'messages.createdSuccessfully';
@@ -207,9 +207,15 @@ export class MatterPartyEditorComponent
           if (res && res.isSuccess) {
             const text = this._languageService.getTransValue(successMsgKey);
             this._toastrNotifiService.displaySuccessMessage(text);
-            this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-              this._dynamicDialogRef.close(dialog);
-            });
+            this.formlyModel={}
+            if(closeModal){
+              this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+                this._dynamicDialogRef.close(dialog);
+              });
+            }
+            // this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+            //   this._dynamicDialogRef.close(dialog);
+            // });
           } else {
             this._toastrNotifiService.displayErrorToastr(res?.message);
           }
@@ -219,7 +225,7 @@ export class MatterPartyEditorComponent
         },
       });
   }
-  override onSubmit(): void {
+  override onSubmit(closeModal:boolean=false): void {
     if (this.formly.invalid) return;
     if (this._dynamicDialogConfig?.data?.isDynamic) {
       this.save();
@@ -240,9 +246,12 @@ export class MatterPartyEditorComponent
       });
       console.log(this.data)
       this._matterService.partyList$.next(this.data);
-      this._DialogService.dialogComponentRefMap.forEach((dialog) => {
-        dialog.destroy();
-      });
+      this.formlyModel={}
+      if(closeModal){
+        this._DialogService.dialogComponentRefMap.forEach((dialog) => {
+          dialog.destroy();
+        });
+      }
     }
   }
 }

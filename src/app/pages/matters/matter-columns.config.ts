@@ -98,38 +98,38 @@ export const Matters_Columns_FR = [
 
 export const Matters_Columns_AR = [
   {
-    header: 'Code',
-    field: 'id',
+    header: 'الكود',
+    field: 'mtrNo',
     isSort:true
   },
   {
-    header: 'Opened',
-    field: 'cDate',
+    header: 'تاريخ فتح القضية',
+    field: 'openDate',
     isDate:true,
     isSort:true
   },
   {
-    header: 'Matter Type',
+    header: 'النوع',
     field: 'mtrType',
     isSort:true
   },
   {
-    header: 'Matter Category',
+    header: 'التصنيف',
     field: 'law_MtrCat',
     isSort:true
   },
   {
-    header: 'Practice Area',
+    header: 'المجال',
     field: 'law_PractsArea',
     isSort:true
   },
   {
-    header: 'Client',
+    header: 'العميل',
     field: 'law_Client',
     isSort:true
   },
   {
-    header: 'Court Case No',
+    header: 'رقم القضية',
     field: 'courtNumber',
     isSort:true
   },
@@ -138,7 +138,7 @@ export const Matters_Columns_AR = [
   //   field: 'ParentMatter',
   // },
   {
-    header: 'Status',
+    header: 'الحالة',
     field: 'law_AppStatus',
     isSort:true
   }

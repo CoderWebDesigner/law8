@@ -40,7 +40,9 @@
     "initial":"Initial",
     "taskCode":"TaskCode",
     "description":"Description",
-    "branch":"Branch"
+    "branch":"Branch",
+    "Norecordsfound":"No Records Found"
+
 
   },
   "btn": {
@@ -58,7 +60,9 @@
     "saveDraft":"Save Draft",
     "deactive":"Deactivate",
     "active":"Activate",
-    "add":"Add"
+    "add":"Add",
+    "saveNew":"Save & New"
+
   },
   "messages": {
     "signInSuccessfully": "Sign In Successfully",

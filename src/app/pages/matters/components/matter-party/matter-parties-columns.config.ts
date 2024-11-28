@@ -49,19 +49,19 @@ export const Matter_Parties_Columns_AR = [
   //   field: 'id',
   // },
   {
-    header: 'Name',
+    header: 'الاسم',
     field: 'name',
   },
   {
-    header: 'Party',
+    header: 'الطرف',
     field: 'law_PartiesDescription',
   },
   {
-    header: 'Position',
+    header: 'وضع الطرف',
     field: 'position',
   },
   {
-    header: 'Party Type',
+    header: 'نوع الطرف',
     field: 'partyType',
   },
 ];

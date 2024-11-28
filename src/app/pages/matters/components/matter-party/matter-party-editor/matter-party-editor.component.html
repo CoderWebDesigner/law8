@@ -1,4 +1,4 @@
-<form class="mt-2 p-lg-2" [formGroup]="formly" body (ngSubmit)="onSubmit()">
+<form class="mt-2 p-lg-2" [formGroup]="formly"  >
     <formly-form
       [form]="formly"
       [fields]="formlyFields"
@@ -7,10 +7,19 @@
     ></formly-form>
     <div class="mt-4 text-end">
       <p-button
+      *ngIf="!_dynamicDialogConfig?.data?.rowData"
+      (onClick)="onSubmit()"
+        [loading]="isSubmit"
+        styleClass="p-button-outlined d-block py-3 me-3 p-button p-component"
+        type="button"
+        label="{{ 'btn.saveNew' | translate }}"
+      ></p-button>
+      <p-button
+      (onClick)="onSubmit(true)"
         [loading]="isSubmit"
         styleClass="p-button-primary d-block py-3"
-        type="submit"
-        label="{{ 'btn.submit' | translate }}"
+        type="button"
+        label="{{ 'btn.save' | translate }}"
       ></p-button>
     </div>
   </form>

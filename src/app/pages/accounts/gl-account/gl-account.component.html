@@ -1,0 +1,8 @@
+<shared-card [title]="'Gl Account' | translate" [borderRadius]="20">
+    <div class="d-flex" headerActions>
+        <p-button [requiredPermission]="'Add_MatterCategory'" [label]="'Add Gl Account'|translate"
+            (onClick)="openGlAccountEditor()" styleClass="py-2 px-4 mx-2"></p-button>
+    </div>
+    <shared-table body [apiUrls]="apiUrls" [columnsLocalized]="columnsLocalized" [additionalTableConfig]="additionalTableConfig">
+    </shared-table>
+</shared-card>
