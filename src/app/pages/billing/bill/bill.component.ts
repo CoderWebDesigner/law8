@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBaseClass } from '@core/classes/form-base.class';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 
 @Component({
@@ -75,8 +76,19 @@ export class BillComponent extends FormBaseClass implements OnInit {
           key:'billFrom',
           className:'col-md-3',
           props:{
-            label:'Bill From'
-          }
+            label:'Bill From',
+          },
+          hooks: {
+            onInit: () => {
+              this.formly.get('time.billFrom').valueChanges.pipe(
+                this._sharedService.takeUntilDistroy()
+              ).subscribe({
+                next:(res:any)=>{
+                  this.formly.get('expenses.startDate').setValue(new Date(res))
+                }
+              })
+            },
+          },
         },
         {
           type:'date',
@@ -118,9 +130,11 @@ export class BillComponent extends FormBaseClass implements OnInit {
           type:'date',
           key:'startDate',
           className:'col-md-3',
+          defaultValue:this.formlyModel?.time?.billFrom,
           props:{
             label:'Start Date'
-          }
+          },
+          
         },
         {
           type:'date',

@@ -30,7 +30,7 @@ export class BankAccountEditorComponent
   override getLookupsData(): void {
       combineLatest({
         bankType:this._apiService.get(API_Config.general.getBankAccountsTypeLookup),
-        glAccount:this._apiService.get(API_Config.general.getGlAccountsLookup),
+        glAccount:this._apiService.get(API_Config.general.getGlAccountsTypeLookup),
       }).pipe(this._sharedService.takeUntilDistroy()).subscribe({
         next:(res:any)=>{
           console.log('getLookupsData',res)

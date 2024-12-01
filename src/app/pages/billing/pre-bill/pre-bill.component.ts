@@ -66,7 +66,18 @@ export class PreBillComponent extends FormBaseClass implements OnInit {
           className:'col-md-3',
           props:{
             label:'Bill From'
-          }
+          },
+          hooks: {
+            onInit: () => {
+              this.formly.get('time.billFrom').valueChanges.pipe(
+                this._sharedService.takeUntilDistroy()
+              ).subscribe({
+                next:(res:any)=>{
+                  this.formly.get('expenses.startDate').setValue(new Date(res))
+                }
+              })
+            },
+          },
         },
         {
           type:'date',
