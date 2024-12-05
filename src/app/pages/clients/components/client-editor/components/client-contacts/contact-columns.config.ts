@@ -71,7 +71,7 @@ export const Contact_Columns_FR = [
 ];
 export const Contact_Columns_AR = [
   {
-    header: 'الاسم بالكامل',
+    header: 'الاسم',
     field: 'fullName',
   },
   // {

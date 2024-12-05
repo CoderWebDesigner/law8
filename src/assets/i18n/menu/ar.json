@@ -42,7 +42,9 @@
       "title": "التقارير",
       "activityreport": "تقرير الجلسات المتداولة",
       "matterReport": "تقرير القضايا",
-      "timeSheetReport": "تقرير السجلات الزمنية"
+      "timeSheetReport": "تقرير السجلات الزمنية",
+      "documentExpiryTracker":"Document Expiry Tracker",
+      "productivityReport":"Productivity Report"
     },
     "setting": {
       "title": "الإعدادات"

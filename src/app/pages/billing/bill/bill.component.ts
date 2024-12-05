@@ -96,7 +96,18 @@ export class BillComponent extends FormBaseClass implements OnInit {
           className:'col-md-3',
           props:{
             label:'Bill To'
-          }
+          },
+          hooks: {
+            onInit: () => {
+              this.formly.get('time.billTo').valueChanges.pipe(
+                this._sharedService.takeUntilDistroy()
+              ).subscribe({
+                next:(res:any)=>{
+                  this.formly.get('expenses.endDate').setValue(new Date(res))
+                }
+              })
+            },
+          },
         },
         {
           type:'checkbox',

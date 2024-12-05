@@ -8,6 +8,7 @@
         "openDateFrom": "Date From",
         "openDateTo": "Date To",
         "feeEarner": "Fee Earner",
-        "dateType": "Date Type"
+        "dateType": "Date Type",
+        "matter":"Matter"
     }
 }

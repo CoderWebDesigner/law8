@@ -1,24 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
+import { SharedModule } from '@shared/shared.module';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '@core/api/api.service';
-import { MatterReportEditorComponent } from './matter-report-editor/matter-report-editor.component';
-import { SharedModule } from '@shared/shared.module';
+import { ProductivityReportEditorComponent } from './productivity-report-editor/productivity-report-editor.component';
+
 
 @Component({
-  selector: 'app-matter-report',
+  selector: 'app-productivity-report',
   standalone: true,
   imports: [
     CommonModule,
     SharedModule,
     SharedCardComponent,
-    MatterReportEditorComponent
+    ProductivityReportEditorComponent
   ],
-  templateUrl: './matter-report.component.html',
-  styleUrls: ['./matter-report.component.scss']
+  templateUrl: './productivity-report.component.html',
+  styleUrls: ['./productivity-report.component.scss']
 })
-export class MatterReportComponent {
+export class ProductivityReportComponent {
   _apiService=inject(ApiService);
   _sanitizer=inject(DomSanitizer)
   urlSafe: SafeResourceUrl;

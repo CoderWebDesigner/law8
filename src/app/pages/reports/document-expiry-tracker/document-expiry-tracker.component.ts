@@ -1,24 +1,25 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
+import { SharedModule } from '@shared/shared.module';
+import { DocumentExpiryTrackerEditorComponent } from './document-expiry-tracker-editor/document-expiry-tracker-editor.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ApiService } from '@core/api/api.service';
-import { MatterReportEditorComponent } from './matter-report-editor/matter-report-editor.component';
-import { SharedModule } from '@shared/shared.module';
+
 
 @Component({
-  selector: 'app-matter-report',
+  selector: 'app-document-expiry-tracker',
   standalone: true,
   imports: [
     CommonModule,
     SharedModule,
     SharedCardComponent,
-    MatterReportEditorComponent
+    DocumentExpiryTrackerEditorComponent
   ],
-  templateUrl: './matter-report.component.html',
-  styleUrls: ['./matter-report.component.scss']
+  templateUrl: './document-expiry-tracker.component.html',
+  styleUrls: ['./document-expiry-tracker.component.scss']
 })
-export class MatterReportComponent {
+export class DocumentExpiryTrackerComponent {
   _apiService=inject(ApiService);
   _sanitizer=inject(DomSanitizer)
   urlSafe: SafeResourceUrl;

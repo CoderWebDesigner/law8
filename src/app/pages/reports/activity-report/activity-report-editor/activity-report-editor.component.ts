@@ -162,6 +162,18 @@ export class ActivityReportEditorComponent
               })),
             },
           },
+          {
+            type: 'select',
+            key: 'law_BranchId',
+            className: 'col-md-4',
+            props: {
+              label: this._languageService.getTransValue('common.branch'),
+              options: this.lookupsData[8].result.map((obj) => ({
+                label: obj.name,
+                value: obj.id,
+              })),
+            },
+          },
         ],
       },
     ];
@@ -176,6 +188,8 @@ export class ActivityReportEditorComponent
       this._apiService.get(API_Config.general.getLawyerShort),
       this._apiService.get(API_Config.matterClientSecurity.get),
       this._apiService.get(API_Config.general.getAllMatter),
+      this._apiService.get(API_Config.general.getAllBranches),
+
     ])
       .pipe(
         finalize(() => (this.isSubmit = false)),

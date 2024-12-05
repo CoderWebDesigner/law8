@@ -293,6 +293,20 @@ export const MENU: MenuItem[] = [
         parentId: 10,
         role: 'View_Report',
       },
+      {
+        id:4,
+        label: 'menu.reports.documentExpiryTracker',
+        link: '/reports/document-expiry-tracker',
+        parentId: 10,
+        role: 'View_Report',
+      },
+      {
+        id:5,
+        label: 'menu.reports.productivityReport',
+        link: '/reports/productivity-report',
+        parentId: 10,
+        role: 'View_Report',
+      },
     ]
   },
   {

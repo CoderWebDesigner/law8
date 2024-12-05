@@ -42,7 +42,9 @@
           "title":"Reports",
           "activityreport":"activity Report",
           "matterReport":"Matter Report",
-          "timeSheetReport":"TimeSheet Report"
+          "timeSheetReport":"TimeSheet Report",
+          "documentExpiryTracker":"Document Expiry Tracker",
+          "productivityReport":"Productivity Report"
 
         },
         "setting":{

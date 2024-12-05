@@ -281,6 +281,32 @@ export class MatterBillingComponent
               disabled: this.previewOnly,
             },
           },
+          {
+            className: 'col-12',
+            template: `<h5 class="my-4 line-title overflow-hidden"> <span class="me-3">${this._languageService.getTransValue(
+              'Taxes'
+            )}</span></h5>`,
+          },
+          {
+            className:'col-md-6',
+            key:'salesTaxOnDisbursements',
+            type:'input',
+            defaultValue:0,
+            props:{
+              label:this._languageService.getTransValue('matters.salesTaxOnDisbursements'),
+              pKeyFilter:'int'
+            }
+          },
+          {
+            className:'col-md-6',
+            key:'salesTaxOnFees',
+            type:'input',
+            defaultValue:0,
+            props:{
+              label:this._languageService.getTransValue('matters.salesTaxOnFees'),
+              pKeyFilter:'int'
+            }
+          },
         ],
       },
     ];

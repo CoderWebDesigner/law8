@@ -19,7 +19,7 @@ appendTo="body"
     <div class="d-flex align-items-center gap-2">
       <i *ngIf="option['icon']" [class]="option['icon']"></i>
       <img height="26" *ngIf="option['img']" [src]="'./assets/images/'+option['img']+ '.png'" [alt]="option['img']">
-      <div>{{ option.label }}</div>
+      <div  [pTooltip]="option?.label.length>30?option?.label:''"  tooltipPosition="top">{{ option.label  | slice : 0 : 30 }} {{option?.label.length>30?' ...':''}}</div>
     </div>
   </ng-template>
 </p-multiSelect>

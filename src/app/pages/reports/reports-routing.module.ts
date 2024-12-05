@@ -8,6 +8,8 @@ const routes: Routes = [
   {path:'',loadComponent:()=>import('./activity-report/activity-report.component').then(comp=>ActivityReportComponent)},
   {path:'matter-report',loadComponent:()=>import('./matter-report/matter-report.component').then(comp=>MatterReportComponent)},
   {path:'timesheet-report',loadComponent:()=>import('./timesheet-report/timesheet-report.component').then(comp=>TimesheetReportComponent)},
+  {path:'document-expiry-tracker',loadComponent:()=>import('./document-expiry-tracker/document-expiry-tracker.component').then(comp=>comp.DocumentExpiryTrackerComponent)},
+  {path:'productivity-report',loadComponent:()=>import('./productivity-report/productivity-report.component').then(comp=>comp.ProductivityReportComponent)},
 ];
 
 @NgModule({
