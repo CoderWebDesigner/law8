@@ -1,0 +1,16 @@
+<p-pickList dir="ltr" [source]="source" [target]="target" [sourceHeader]="'security.available'|translate"
+    [targetHeader]="'security.selected'|translate" filterBy="name"
+    [sourceFilterPlaceholder]="'security.searchByName'|translate"
+    [targetFilterPlaceholder]="'security.searchByName'|translate" [dragdrop]="true" [responsive]="true"
+    [showSourceControls]="false" [showTargetControls]="false" [sourceStyle]="{ height: '20rem' }"
+    [targetStyle]="{ height: '20rem' }" breakpoint="1400px">
+    <ng-template let-item let-rowIndex pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+            <span>{{ item?.name }}</span>
+        </div>
+    </ng-template>
+</p-pickList>
+<div class="d-flex justify-content-end my-3">
+    <p-button [loading]="isSubmit" styleClass="p-button-primary d-block py-3" [disabled]="!userId"
+        label="{{ 'btn.submit' | translate }}" (onClick)="submit()" [requiredPermission]="'Update_Security_MatterAccess'"></p-button>
+</div>

@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: '**', redirectTo: '' },
+  // { path: '**', redirectTo: '' },
 ];
 
 const config: ExtraOptions = {

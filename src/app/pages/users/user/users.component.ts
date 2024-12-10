@@ -4,14 +4,21 @@ import { AuthService, LanguageService } from '@core/services';
 import { Users_Columns_AR, Users_Columns_EN, Users_Columns_FR } from './users-columns.config';
 import { TableConfig } from '@shared/components/shared-table/models/table-config.model';
 import { DialogService } from 'primeng/dynamicdialog';
-import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
+import { UserChangePasswordComponent } from '../components/user-change-password/user-change-password.component';
 import { API_Config } from '@core/api/api-config/api.config';
 import { SharedTableService } from '@shared/components/shared-table/services/table.service';
+import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
+import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
+import { SharedModule } from '@shared/shared.module';
+import { UsersTimesheetSettingComponent } from './users-timesheet-setting/users-timesheet-setting.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
+  standalone:true,
+  imports:[SharedCardComponent,SharedTableComponent,SharedModule,UsersTimesheetSettingComponent,CommonModule]
 })
 export class UsersComponent {
   _languageService = inject(LanguageService);

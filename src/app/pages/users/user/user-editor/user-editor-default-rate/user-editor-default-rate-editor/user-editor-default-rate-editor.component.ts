@@ -4,7 +4,6 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
 import { SharedModule } from '@shared/shared.module';
-import { ButtonModule } from 'primeng/button';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -12,7 +11,7 @@ import { finalize } from 'rxjs';
   templateUrl: './user-editor-default-rate-editor.component.html',
   styleUrls: ['./user-editor-default-rate-editor.component.scss'],
   standalone: true,
-  imports: [ SharedModule, ButtonModule, FormlyConfigModule],
+  imports: [ SharedModule, FormlyConfigModule],
 })
 export class UserEditorDefaultRateEditorComponent extends FormBaseClass implements OnInit {
   ngOnInit(): void {

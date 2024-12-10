@@ -26,7 +26,8 @@
     "users": {
       "title": "المستخدمين",
       "usersList": "قائمة المستخدمين",
-      "userAdd": "مستخدم جديد"
+      "userAdd": "مستخدم جديد",
+      "clientPortal":"client Portal"
     },
     "lookups": {
       "title": "القوائم الرئيسية",

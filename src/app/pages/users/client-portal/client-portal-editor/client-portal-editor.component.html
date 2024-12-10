@@ -1,0 +1,26 @@
+<shared-card [borderRadius]="20" [title]="(clientId?'Update Client Portal':'Add Client Portal') | translate">
+    <form class="mt-2 p-lg-2 " [formGroup]="formly" body (ngSubmit)="onSubmit()">
+      <formly-form
+        [form]="formly"
+        [fields]="formlyFields"
+        [model]="formlyModel"
+      ></formly-form>
+      <div class="mt-4 text-end mb-5">
+        <p-button
+          [loading]="isSubmit"
+          styleClass="p-button-primary d-block py-3"
+          type="submit"
+          label="{{ 'btn.submit' | translate }}"
+        ></p-button>
+      </div>
+      
+      <p-tabView *ngIf="clientId">
+        <p-tabPanel [header]="item.label" *ngFor="let item of items;let i =index">
+            <app-client-portal-editor-clients [requestId]="clientId"></app-client-portal-editor-clients>
+        </p-tabPanel>
+      </p-tabView>
+  
+     
+    </form>
+  </shared-card>
+  

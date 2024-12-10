@@ -151,7 +151,7 @@ export const MENU: MenuItem[] = [
       {
         id: 4,
         label: 'menu.billing.quickBill',
-        link: '',
+        link: '/billing/quick-bill',
         parentId: 6,
         role: 'View_Timesheet',
       },
@@ -159,7 +159,7 @@ export const MENU: MenuItem[] = [
       {
         id: 5,
         label: 'menu.billing.payments',
-        link: '',
+        link: '/billing/payments',
         parentId: 6,
         role: 'View_Timesheet',
       },
@@ -183,6 +183,13 @@ export const MENU: MenuItem[] = [
         id: 2,
         label: 'menu.users.usersList',
         link: '/users',
+        parentId: 7,
+        role: 'View_Users',
+      },
+      {
+        id: 3,
+        label: 'menu.users.clientPortal',
+        link: '/users/client-portal',
         parentId: 7,
         role: 'View_Users',
       },

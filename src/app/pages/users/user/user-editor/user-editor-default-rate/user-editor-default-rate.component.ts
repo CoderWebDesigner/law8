@@ -9,11 +9,14 @@ import { LanguageService } from '@core/services';
 import { UserEditorDefaultRateEditorComponent } from './user-editor-default-rate-editor/user-editor-default-rate-editor.component';
 import { API_Config } from '@core/api/api-config/api.config';
 import { PAGESIZE } from '@core/utilities/defines';
+import { SharedTableComponent } from '@shared/components/shared-table/shared-table.component';
 
 @Component({
   selector: 'app-user-editor-default-rate',
   templateUrl: './user-editor-default-rate.component.html',
   styleUrls: ['./user-editor-default-rate.component.scss'],
+  standalone:true,
+  imports:[SharedTableComponent]
 })
 export class UserEditorDefaultRateComponent implements OnInit {
   @Input() requestId: string;

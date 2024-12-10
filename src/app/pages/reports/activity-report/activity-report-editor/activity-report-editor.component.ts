@@ -209,8 +209,8 @@ export class ActivityReportEditorComponent
       finalize(()=>this.isLoading=false)
     ).subscribe({
       next:(res:any)=>{
-        const base64File = `data:application/pdf;base64,${res.result}`;
-        this.onFilter.emit(base64File)
+        // const base64File = `data:application/pdf;base64,${res.result}`;
+        this.onFilter.emit(res.result)
       // this.urlSafe =this._sanitizer.bypassSecurityTrustResourceUrl(base64File);
       },
       error:(err:any)=>{

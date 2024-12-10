@@ -26,7 +26,9 @@
         "users":{
           "title":"Users",
           "usersList":"Users List",
-          "userAdd":"New User"
+          "userAdd":"New User",
+          "clientPortal":"client Portal"
+
         },
         "lookups":{
           "title":"Lookups",

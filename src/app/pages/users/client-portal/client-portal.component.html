@@ -1,0 +1,16 @@
+<shared-card [title]="'menu.users.title' | translate" [borderRadius]="20">
+    <div headerActions class="d-flex">
+      <div class="filter position-relative">
+        <p-button [requiredPermission]="'Update_TimeSheetDate_User'" [label]="'Add Client Portal'|translate"
+           styleClass="py-2 px-4 mx-2" [routerLink]="['/users/client-portal/add']"></p-button>
+      </div>
+    </div>
+    <shared-table body [columnsLocalized]="columnsLocalized"
+      [additionalTableConfig]="additionalTableConfig" [data]="data">
+      <ng-template #actions let-rowData>
+        <p-button class="mx-2 p-0" styleClass="p-button-text" [icon]="'pi pi-key  fs-4'" tooltipPosition="top"
+          [requiredPermission]="'Change_password_Users'" [pTooltip]="'users.changePassword'| translate"
+          (onClick)="openChangePasswordModal(rowData.id)"></p-button>
+      </ng-template>
+    </shared-table>
+  </shared-card>

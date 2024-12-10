@@ -3,11 +3,16 @@ import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
+import { SharedModule } from '@shared/shared.module';
 
 @Component({
   selector: 'app-users-timesheet-setting',
   templateUrl: './users-timesheet-setting.component.html',
   styleUrls: ['./users-timesheet-setting.component.scss'],
+  standalone:true,
+  imports:[SharedCardComponent,FormlyConfigModule,SharedModule],
   providers:[DatePipe]
 })
 export class UsersTimesheetSettingComponent extends FormBaseClass implements OnInit {

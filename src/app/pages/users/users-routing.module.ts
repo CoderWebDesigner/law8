@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsersComponent } from './users.component';
-import { UserEditorComponent } from './user-editor/user-editor.component';
+
 
 const routes: Routes = [
-  { path: '', component: UsersComponent },
-  { path: 'add', component: UserEditorComponent },
-  { path: 'update/:id', component: UserEditorComponent }
+
+  { path: '', loadChildren:()=>import('./user/users.route').then(mod=>mod.USERS_ROUTES) },
+  { path: 'client-portal', loadChildren:()=>import('./client-portal/client-portal.route').then(mod=>mod.CLIENT_PORTAL_ROUTES) }
 ];
 
 @NgModule({

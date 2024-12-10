@@ -3,12 +3,19 @@ import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
 import { finalize, forkJoin } from 'rxjs';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
+import { SharedCardComponent } from '@shared/components/shared-card/shared-card.component';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
+import { SharedModule } from '@shared/shared.module';
+import { TabViewModule } from 'primeng/tabview';
+import { UserEditorDefaultRateComponent } from './user-editor-default-rate/user-editor-default-rate.component';
 @Component({
   selector: 'app-user-editor',
   templateUrl: './user-editor.component.html',
   styleUrls: ['./user-editor.component.scss'],
+  standalone:true,
+  imports:[SharedCardComponent,FormlyConfigModule,SharedModule,TabViewModule,UserEditorDefaultRateComponent,CommonModule],
   providers: [DatePipe],
 })
 export class UserEditorComponent extends FormBaseClass implements OnInit {

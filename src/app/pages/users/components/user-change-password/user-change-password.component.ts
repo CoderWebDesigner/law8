@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes } from '@core/models';
+import { FormlyConfigModule } from '@shared/modules/formly-config/formly-config.module';
+import { SharedModule } from '@shared/shared.module';
 
 @Component({
   selector: 'app-user-change-password',
   templateUrl: './user-change-password.component.html',
-  styleUrls: ['./user-change-password.component.scss']
+  styleUrls: ['./user-change-password.component.scss'],
+  standalone:true,
+  imports:[FormlyConfigModule,SharedModule]
 })
 export class UserChangePasswordComponent extends FormBaseClass implements OnInit{
   ngOnInit(): void {
