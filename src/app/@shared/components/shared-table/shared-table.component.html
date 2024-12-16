@@ -5,9 +5,9 @@
 </div>
 
 <div class="position-relative">
-  <p-table #dt [columns]="columns" [value]="data" [lazy]="true" [resizableColumns]="isColumnResize"
+  <p-table #dt [columns]="columns" [value]="data"  [resizableColumns]="isColumnResize"
     [tableStyle]="{ 'min-width': '100%' }" [(selection)]="selected || defaultSelected" [dataKey]="dataKey"
-    [paginator]="paginationClient" [rows]="filterOptions?.pageSize" [showCurrentPageReport]="true"
+    [paginator]="paginationClient" [rows]="filterOptions?.pagSize" [showCurrentPageReport]="true"
     [currentPageReportTemplate]="currentPageReportTemplate" [rowsPerPageOptions]="PAGE_SIZE_OPTION"
     (onRowSelect)="onSelectionChange($event)" (onRowUnselect)="onRowUnselect($event)" [selectionMode]="selectMode"
     (onSort)="getSort($event)">
@@ -38,6 +38,7 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+
       <tr [pSelectableRow]="rowData" *ngIf="!isLoading">
         <td *ngIf="withRadioButton">
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
@@ -67,7 +68,6 @@
 
           <ng-container *ngIf="col?.isStatus">
             <div class="tag" [ngClass]="getTagClass(rowData[col.field])">
-              <!-- {{ "tags." + rowData[col.field] | translate }} -->
               {{rowData[col.field]}}
             </div>
           </ng-container>
@@ -107,7 +107,6 @@
             <ng-container *ngIf="actionsTemplateRef" [ngTemplateOutlet]="actionsTemplateRef"
               [ngTemplateOutletContext]="{ $implicit: rowData }">
             </ng-container>
-            <!-- *ngIf="_permissionService.hasPermission(action.permission)" -->
             <ng-container *ngFor="let action of tableConfig?.actions">
               <p-button *ngIf="_permissionService.hasPermission(action.permission)" [styleClass]="
                   'p-button-text p-0 me-3 d-flex' +

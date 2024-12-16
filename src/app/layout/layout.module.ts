@@ -32,7 +32,6 @@ const components = [
     ...components,
     SidebarComponent,
     TopbarComponent,
-    AppLanguageComponent,
     BreadcrumbComponent,
     AppSearchComponent,
     AppNotificationComponent,
@@ -53,7 +52,8 @@ const components = [
     OverlayPanelModule,
     ScrollPanelModule,
     ButtonModule,
-    BadgeModule
+    BadgeModule,
+    AppLanguageComponent
   ],
   exports:[
     ...components

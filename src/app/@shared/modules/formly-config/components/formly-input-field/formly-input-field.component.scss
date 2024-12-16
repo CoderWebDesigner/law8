@@ -6,4 +6,12 @@
   input {
     height: 40px;
   }
+  .p-input-icon-right{
+    i{
+      &:first-of-type{
+        #{$right}: 0.75rem;
+        #{$left}:auto
+      }
+    }
+  }
 }

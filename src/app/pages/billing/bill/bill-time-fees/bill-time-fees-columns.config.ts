@@ -1,8 +1,9 @@
 export const Bill_Time_Fees_Columns_AR=[
     {
-        field:'date',
+        field:'tmDate',
         header:'Date',
-        isSort:true
+        isSort:true,
+        isDate:true
     },
     {
         field:'initial',
@@ -10,7 +11,7 @@ export const Bill_Time_Fees_Columns_AR=[
         isSort:true
     },
     {
-        field:'task',
+        field:'taskCodeName',
         header:'Task',
         isSort:true
     },
@@ -40,9 +41,10 @@ export const Bill_Time_Fees_Columns_AR=[
 ]
 export const Bill_Time_Fees_Columns_EN=[
     {
-        field:'date',
+        field:'tmDate',
         header:'Date',
-        isSort:true
+        isSort:true,
+        isDate:true
     },
     {
         field:'initial',
@@ -50,7 +52,7 @@ export const Bill_Time_Fees_Columns_EN=[
         isSort:true
     },
     {
-        field:'task',
+        field:'taskCodeName',
         header:'Task',
         isSort:true
     },
@@ -80,9 +82,10 @@ export const Bill_Time_Fees_Columns_EN=[
 ]
 export const Bill_Time_Fees_Columns_FR=[
     {
-        field:'date',
+        field:'tmDate',
         header:'Date',
-        isSort:true
+        isSort:true,
+        isDate:true
     },
     {
         field:'initial',
@@ -90,7 +93,7 @@ export const Bill_Time_Fees_Columns_FR=[
         isSort:true
     },
     {
-        field:'task',
+        field:'taskCodeName',
         header:'Task',
         isSort:true
     },

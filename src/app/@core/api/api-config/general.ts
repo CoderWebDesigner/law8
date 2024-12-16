@@ -43,7 +43,8 @@ export const General_API = {
       "getAllBillingType":"AppLookup/GetBillingExpenseTypeLookup",
       "getGlAccountsTypeLookup":"AppLookup/GetGlAccountsTypeLookup",
       "getBankAccountsTypeLookup":"AppLookup/GetBankAccountsTypeLookup",
-      "getGlAccountsLookup":"AppLookup/GetGlAccountsLookup"
+      "getGlAccountsLookup":"AppLookup/GetGlAccountsLookup",
+      "getBillingTempletsList":"Billing/GetBillingTempletsList"
   }
 
 }

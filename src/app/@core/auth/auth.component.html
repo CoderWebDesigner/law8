@@ -22,7 +22,15 @@
 
     <!-- Part Two: Form -->
     <div class="col-lg-6 col-sm-12">
-      <div class="row h-100 justify-content-center align-items-center">
+      <div class="row pt-4">
+        <div class="col-md-9 mx-auto">
+          <div class="d-flex justify-content-between">
+            <img src="assets/images/logo.webp" class="img-fluid w-25" alt="logo"/>
+            <app-language></app-language>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center align-items-center" style="height:calc(100% - 65px)">
         <div class="col-md-9 mx-auto">
           <router-outlet></router-outlet>
         </div>

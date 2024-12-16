@@ -1,17 +1,16 @@
-<!--  'p-input-icon-left':lang!='ar'?props['icon']:'',
-    'p-input-icon-right': lang=='ar'?props['icon']:'', -->
+
+    <!--     'p-input-icon-left':(props['icon'] && lang!='ar') ||(!props['icon'] && lang=='ar'),
+    'p-input-icon-right':(props['icon'] && lang=='ar')||(!props['icon'] &&lang!='ar' ) -->
+    <!-- [class]="props['iconClassStyle']" -->
 <div class="w-100"
-  [ngClass]="{
-    'p-input-icon-left':(props['icon'] && lang!='ar') ||(!props['icon'] && lang=='ar'),
-    'p-input-icon-right':(props['icon'] && lang=='ar')||(!props['icon'] &&lang!='ar' )
-     }">
+  [ngClass]="{'p-input-icon-left':(props['icon'] && lang!='ar') ||(!props['icon'] && lang=='ar'),
+    'p-input-icon-right':(props['icon'] && lang=='ar')||(!props['icon'] &&lang!='ar' )}">
    
   <ng-container>
     <i *ngIf="props['icon']" [class]="props['icon']"></i>
     <input [formControl]="formControl" [formlyAttributes]="field" pInputText [class]="props['class']"
       [readOnly]="props['readOnly']" [type]="inputType" [disabled]="props['disabled']" [max]="props['max']"
       [min]="props['min']" [pKeyFilter]="props['pKeyFilter']" (keyup)="onKeyUp($event)" />
-
   </ng-container>
   
   <i class="pi show-password" *ngIf="props['type']=='password'" (click)="togglePassword()" [ngClass]="{'pi-eye':!showPassword,'pi-eye-slash':showPassword}"></i>

@@ -10,4 +10,5 @@ export class BillSummaryComponent {
   @Input() form: FormGroup;
   @Input() fields: any;
   @Input() model: any;
+  @Input() option:any;
 }

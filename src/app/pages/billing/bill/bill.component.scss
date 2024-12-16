@@ -10,4 +10,9 @@
     .p-checkbox {
         margin: 12px 10px;
     }
+    .hide-input{
+        app-formly-input-field{
+            display: none;
+        }
+    }
 }

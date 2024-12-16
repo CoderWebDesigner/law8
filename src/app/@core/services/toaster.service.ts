@@ -40,4 +40,7 @@ export class ToasterService {
       });
     }
   }
+
+  // toastrMessage(message:string,)
+
 }

@@ -7,7 +7,7 @@
   <div class="text-center">
     <span class="d-inline-block border p-3 fs-4 border border-secondary rounded"> {{counterInSeconds | secondsToTime}}</span>
   </div>
-  <form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()">
+  <form class="mt-2 p-lg-2" [formGroup]="formly" (ngSubmit)="onSubmit()" dir="ltr">
     <formly-form [form]="formly" [fields]="formlyFields" [model]="formlyModel"></formly-form>
     <div class="mt-4">
       <p-button [loading]="isSubmit" class="w-100" styleClass="p-button-primary d-block w-100 py-3" type="submit"

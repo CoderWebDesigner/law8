@@ -1,11 +1,16 @@
 import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { Language } from './language.model';
 import { LanguageService } from '@core/services';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-app-language',
+  selector: 'app-language',
   templateUrl: './app-language.component.html',
   styleUrls: ['./app-language.component.scss'],
+  standalone:true,
+  imports:[CommonModule,DropdownModule,FormsModule],
   encapsulation: ViewEncapsulation.None
 })
 export class AppLanguageComponent implements OnInit {

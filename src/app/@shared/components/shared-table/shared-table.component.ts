@@ -142,6 +142,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
     this.currentPageReportTemplate = `${this._languageService.getTransValue(
       'messages.dataMessage'
     )} ${pageCount ? pageCount : 0}`;
+    console.log('currentPageReportTemplate',this.currentPageReportTemplate)
   }
 
   private getColumns(columnsLocalized) {
@@ -157,9 +158,9 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
 
   initTable() {
     this.tableConfig = { ...this.tableConfig, ...this.additionalTableConfig };
-    this.getCurrentPageReportTemplate();
     this.columns = this.getColumns(this.columnsLocalized);
     this.columnChildren = this.getColumns(this.columnsLocalizedChildren);
+    // this.getCurrentPageReportTemplate();
     // this.onExtraSearch();
     this.getData();
   }
@@ -336,6 +337,7 @@ export class SharedTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.getCurrentPageReportTemplate();
     // if(changes['filterOptions'].currentValue ||changes['filterSubOptions'].currentValue){
     //   this.filterOptions = {...this.filterOptions,...changes['filterOptions'].currentValue}
     //   this.filterSubOptions = {...this.filterSubOptions,...changes['filterSubOptions'].currentValue}

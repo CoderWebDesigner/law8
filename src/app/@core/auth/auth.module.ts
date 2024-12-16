@@ -13,6 +13,7 @@ import { UserIdStepOneComponent } from './forgetpassword/user-id-step-one/user-i
 import { VerfiyStepTwoComponent } from './forgetpassword/verfiy-step-two/verfiy-step-two.component';
 import { NewPasswordStepThreeComponent } from './forgetpassword/new-password-step-three/new-password-step-three.component';
 import { SecondsToTimePipe } from '@shared/pipes/secondsToTime/seconds-to-time.pipe';
+import { AppLanguageComponent } from 'src/app/layout/topbar/app-language/app-language.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SharedModule,
     FormlyConfigModule,
-    StepsModule
+    StepsModule,
+    AppLanguageComponent
   ],
   providers:[SecondsToTimePipe]
 })

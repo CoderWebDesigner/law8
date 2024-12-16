@@ -21,7 +21,6 @@ export class FormlyInputFieldComponent extends FieldType<FieldTypeConfig> implem
     this.inputType=this.showPassword?'text':'password'
   }
   onKeyUp(e){
-    console.log(e.target.value)
-    if(this.props['onKeyUp']) this.props['onKeyUp']()
+    if(this.props['onKeyUp']) this.props['onKeyUp'](e.target.value)
   }
 }
