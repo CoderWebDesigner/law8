@@ -39,6 +39,7 @@
     "ng-inline-svg-2": "^15.0.1",
     "ng-otp-input": "^1.9.3",
     "ngx-dropzone-compressing": "^1.9.0",
+    "ngx-image-cropper": "^8.1.0",
     "ngx-toastr": "^17.0.2",
     "ngx-translate-multi-http-loader": "^16.0.2",
     "primeicons": "^6.0.1",

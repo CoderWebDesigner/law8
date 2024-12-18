@@ -1,17 +1,17 @@
 <p-accordion>
     <p-accordionTab header="Time / Fees">
         <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-        <shared-table [data]="data" [columnsLocalized]="columnsLocalized" [withPagination]="true" [withCheckbox]="true"
-            [defaultSelected]="defaultSelected" (onRowSelect)="onRowSelect($event)" (onRowUnSelect)="onRowUnSelect($event)"></shared-table>
+        <shared-table [data]="data" [columnsLocalized]="columnsLocalized" [paginationClient]="true" [withPagination]="false" [withCheckbox]="true"
+            [defaultSelected]="defaultSelected" (onRowSelect)="onRowSelect($event)" (onRowUnSelect)="onRowUnSelect($event)" ></shared-table>
         <div class="d-flex mt-4 justify-content-between">
             <div>
-                <span class="fw-bold">{{'total hours'|translate}} : </span>
-                <span>{{totalHours}}</span>
-                <span class="fw-bold px-3">{{'total amount'|translate}} : </span>
-                <span>{{totalAmount}}</span>
+                <span class="fw-bold">{{'Total Hours'|translate}} : </span>
+                <span>{{totalHours|number:'1.0-2'}}</span>
+                <span class="fw-bold px-3">{{'Total Amount'|translate}} : </span>
+                <span>{{totalAmount|number:'1.0-2'}}</span>
             </div>
             <button class="px-4 py-2 p-button-outlined-primary" type="button" pButton [label]="'Load Data' | translate"
-                (click)="loadData()"></button>
+                (click)="loadData()" [loading]="isloading"></button>
         </div>
     </p-accordionTab>
 </p-accordion>

@@ -45,15 +45,15 @@ export class ClientPortalEditorComponent extends FormBaseClass implements OnInit
               label:this._languageService.getTransValue('Client Name'),
             }
           },
-          {
-            key:'clientGroup',
-            type:'select',
-            className:'col-md-4',
-            props:{
-              label:this._languageService.getTransValue('Client Group'),
-              options:[]
-            }
-          },
+          // {
+          //   key:'clientGroup',
+          //   type:'select',
+          //   className:'col-md-4',
+          //   props:{
+          //     label:this._languageService.getTransValue('Client Group'),
+          //     options:[]
+          //   }
+          // },
           {
             key:'userName',
             type:'input',

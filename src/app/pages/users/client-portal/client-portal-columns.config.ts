@@ -13,12 +13,7 @@ export const Client_Portal_Columns_EN = [
     isSort:true
 
   },
-  {
-    header: 'Client Group',
-    field: 'clientGroup',
-    isSort:true
-
-  },
+ 
 
   {
     header: 'Telephone',
@@ -56,12 +51,7 @@ export const Client_Portal_Columns_FR = [
     isSort:true
 
   },
-  {
-    header: 'Client Group',
-    field: 'clientGroup',
-    isSort:true
-
-  },
+ 
 
   {
     header: 'Telephone',
@@ -98,13 +88,7 @@ export const Client_Portal_Columns_AR = [
     isSort:true
 
   },
-  {
-    header: 'Client Group',
-    field: 'clientGroup',
-    isSort:true
-
-  },
-
+ 
   {
     header: 'Telephone',
     field: 'telNo',

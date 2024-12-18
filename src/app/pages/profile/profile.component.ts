@@ -58,13 +58,11 @@ export class ProfileComponent {
     return count;
   }
   getProfile() {
-    console.log('getProfile');
     this._apiService.get(API_Config.profile.get).subscribe({
       next: (res: ApiRes) => {
         if (res && res.isSuccess) {
           this._authService.user = res['result'];
-          this._authService.user.Photo = `data:image/jpg;base64,${res['result'].logoFile}`;
-          // this.cdRef.changeD
+          this._authService.user.Photo = res['result'].logoFile?`data:image/jpg;base64,${res['result'].logoFile}`:null;
           this.calcEmptyKeyValue();
         }
       },

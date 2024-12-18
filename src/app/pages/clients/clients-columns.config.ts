@@ -45,7 +45,7 @@ export const Clients_Columns_AR = [
     isSort:true,
   },
   {
-    header: 'الميزانية',
+    header: 'الرصيد',
     field: 'balance',
     isSort:true,
   },

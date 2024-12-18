@@ -1,0 +1,18 @@
+:host ::ng-deep {
+    .p-checkbox-label {
+        margin-top: 25px;
+    }
+
+    .p-checkbox .p-checkbox-box {
+        margin-top: 8px;
+    }
+
+    .p-checkbox {
+        margin: 12px 10px;
+    }
+    .hide-input{
+        app-formly-input-field{
+            display: none;
+        }
+    }
+}

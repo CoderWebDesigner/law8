@@ -12,6 +12,7 @@ import { FormBaseClass } from '@core/classes/form-base.class';
 import { ApiRes, User } from '@core/models';
 import { StorageService } from '@core/services';
 import { finalize } from 'rxjs';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,6 +23,7 @@ export class EditProfileComponent extends FormBaseClass implements OnChanges {
   @Input({ required: true }) userInfo: User;
   @Output() changeActiveIndex = new EventEmitter<number>();
   @Output() onEdit = new EventEmitter<boolean>();
+
   _storageService = inject(StorageService);
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -73,7 +75,7 @@ export class EditProfileComponent extends FormBaseClass implements OnChanges {
                 key: 'mobileNo',
                 type: 'input',
                 props: {
-                  label: this._languageService.getTransValue('profile.phone'),
+                  label: this._languageService.getTransValue('client.phone'),
                   // required: true,
                 },
               },
@@ -97,11 +99,13 @@ export class EditProfileComponent extends FormBaseClass implements OnChanges {
               {
                 key: 'Attachment',
                 type: 'attachment',
+                // type:'upload-crop',
                 className: 'mx-auto',
                 props: {
                   btnLabel: 'profile.uploadProfilePic',
                   title: 'profile.uploadProfilePic',
                   subTitle: 'common.dragAndDrop',
+                  withCrop:true
                 },
               },
             ],
@@ -153,6 +157,11 @@ export class EditProfileComponent extends FormBaseClass implements OnChanges {
       });
   }
   onChangeActiveIndex() {
-    this.changeActiveIndex.emit(2);
+    this._DialogService.open(ResetPasswordComponent,{
+      width:'40vw',
+      header:this._languageService.getTransValue('profile.resetPassword'),
+      data:this.userInfo.id
+    })
+    // this.changeActiveIndex.emit(2);
   }
 }

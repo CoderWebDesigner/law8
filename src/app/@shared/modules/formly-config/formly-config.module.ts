@@ -40,6 +40,8 @@ import { FormlySwitchFieldComponent } from './components/formly-switch-field/for
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { TooltipModule } from 'primeng/tooltip';
+import { ImageCropperComponent } from 'ngx-image-cropper';
+
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
@@ -58,7 +60,7 @@ import { TooltipModule } from 'primeng/tooltip';
     FormlyTimerFieldComponent,
     FormlyMultiSelectFieldComponent,
     FormlyCheckboxFieldComponent,
-    FormlySwitchFieldComponent
+    FormlySwitchFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -110,7 +112,8 @@ import { TooltipModule } from 'primeng/tooltip';
     MultiSelectModule,
     CheckboxModule,
     InputSwitchModule,
-    KeyFilterModule
+    KeyFilterModule,
+    ImageCropperComponent
   ],
   exports: [
     ReactiveFormsModule,

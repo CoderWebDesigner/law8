@@ -12,19 +12,17 @@ import { catchError, combineLatest, finalize, forkJoin, map, of } from 'rxjs';
   styleUrls: ['./bill.component.scss'],
 })
 export class BillComponent extends FormBaseClass implements OnInit {
-   _cdRef=inject(ChangeDetectorRef)
+  
   ngOnInit(): void {
     this.initForm();
     this.getLookupsData();
   }
   override initForm(): void {
     this.formlyFields = [
-
       {
         fieldGroupClassName: 'row',
         key: 'info',
         fieldGroup: [
-
           {
             className: 'col-md-4',
             key: 'law_MatterId',
@@ -44,8 +42,6 @@ export class BillComponent extends FormBaseClass implements OnInit {
                   .pipe(this._sharedService.takeUntilDistroy())
                   .subscribe({
                     next: (res: ApiRes) => {
-
-  
                       this.formly.get('info').patchValue(res.result);
                       this.formly.get('summary').patchValue(res.result);
                     },
@@ -59,7 +55,7 @@ export class BillComponent extends FormBaseClass implements OnInit {
             type: 'input',
             props: {
               label: 'Client Name',
-              disabled:true
+              disabled: true,
             },
           },
           // {
@@ -96,26 +92,31 @@ export class BillComponent extends FormBaseClass implements OnInit {
             props: {
               label: 'Invoice Number',
               pKeyFilter: 'int',
-              iconClassStyle:'p-input-icon-right',
+              iconClassStyle: 'p-input-icon-right',
               // icon:'pi pi-spin pi-spinner',
-              onKeyUp:(e)=>{
-                if(e){
+              onKeyUp: (e) => {
+                if (e) {
                   // this.loading=true
                   let params = {
-                    InvoiceNumber:e
-                  }
-                  this._apiService.get(API_Config.billInvoiceNumberCheck.get,params).pipe(
-                    this._sharedService.takeUntilDistroy(),
-                    // finalize(()=>this.loading=false)
-                  ).subscribe({
-                    next:(res:ApiRes)=>{
-                      if(!res.result.isValid){
-                        this._toastrNotifiService.displayErrorToastr(res.result.message)
-                      }
-                    }
-                  })
+                    InvoiceNumber: e,
+                  };
+                  this._apiService
+                    .get(API_Config.billInvoiceNumberCheck.get, params)
+                    .pipe(
+                      this._sharedService.takeUntilDistroy()
+                      // finalize(()=>this.loading=false)
+                    )
+                    .subscribe({
+                      next: (res: ApiRes) => {
+                        if (!res.result.isValid) {
+                          this._toastrNotifiService.displayErrorToastr(
+                            res.result.message
+                          );
+                        }
+                      },
+                    });
                 }
-              }
+              },
             },
           },
           {
@@ -287,10 +288,8 @@ export class BillComponent extends FormBaseClass implements OnInit {
                       if (res.length > 0) {
                         const taxesFees =
                           this.formly.get('summary.totalFees')?.value *
-                          (this.formly.get('summary.taxesFees')?.value/100);
-                        this.formly
-                          .get('summary.taxes')
-                          .setValue(taxesFees);
+                          (this.formly.get('summary.taxesFees')?.value / 100);
+                        this.formly.get('summary.taxes').setValue(taxesFees);
                       }
                     },
                   });
@@ -313,9 +312,9 @@ export class BillComponent extends FormBaseClass implements OnInit {
             },
           },
           {
-            className:"col-md-3",
-            fieldGroupClassName:'d-flex',
-            fieldGroup:[
+            className: 'col-md-3',
+            fieldGroupClassName: 'd-flex',
+            fieldGroup: [
               {
                 template: `<span class="fw-bold">${this._languageService.getTransValue(
                   'Taxes'
@@ -323,20 +322,20 @@ export class BillComponent extends FormBaseClass implements OnInit {
                  </span>`,
               },
               {
-                key:'taxesFees',
-                type:'input',
-                defaultValue:0,
-                className:'hide-input mx-2',
+                key: 'taxesFees',
+                type: 'input',
+                defaultValue: 0,
+                className: 'hide-input mx-2',
                 props: {
-                  readonly:true,
+                  readonly: true,
                 },
                 expressions: {
                   'props.label': `'( '+ model.taxesFees + '%' +' )' `,
                 },
-              }
-            ]
+              },
+            ],
           },
-          
+
           {
             key: 'taxes',
             className: 'col-md-3',
@@ -367,7 +366,7 @@ export class BillComponent extends FormBaseClass implements OnInit {
               'Total Expenses'
             )}</span>`,
           },
-        {
+          {
             key: 'totalExpenses',
             className: 'col-md-3',
             defaultValue: 0,
@@ -385,10 +384,9 @@ export class BillComponent extends FormBaseClass implements OnInit {
                       if (res.length > 0) {
                         const expensesFees =
                           this.formly.get('summary.totalExpenses')?.value *
-                          (this.formly.get('summary.taxesExpenses')?.value/100);
-                        this.formly
-                          .get('summary.taxe')
-                          .setValue(expensesFees);
+                          (this.formly.get('summary.taxesExpenses')?.value /
+                            100);
+                        this.formly.get('summary.taxe').setValue(expensesFees);
                       }
                     },
                   });
@@ -406,9 +404,9 @@ export class BillComponent extends FormBaseClass implements OnInit {
               // },
               // {key:'taxesExpenses'},
               {
-                className:"col-md-3",
-                fieldGroupClassName:'d-flex',
-                fieldGroup:[
+                className: 'col-md-3',
+                fieldGroupClassName: 'd-flex',
+                fieldGroup: [
                   {
                     template: `<span class="fw-bold">${this._languageService.getTransValue(
                       'Taxes Expenses'
@@ -416,18 +414,18 @@ export class BillComponent extends FormBaseClass implements OnInit {
                      </span>`,
                   },
                   {
-                    key:'taxesExpenses',
-                    type:'input',
-                    defaultValue:0,
-                    className:'hide-input mx-2',
+                    key: 'taxesExpenses',
+                    type: 'input',
+                    defaultValue: 0,
+                    className: 'hide-input mx-2',
                     props: {
-                      readonly:true,
+                      readonly: true,
                     },
                     expressions: {
                       'props.label': `'( '+ model.taxesExpenses + '%' +' )' `,
                     },
-                  }
-                ]
+                  },
+                ],
               },
               {
                 key: 'taxe',
@@ -436,7 +434,6 @@ export class BillComponent extends FormBaseClass implements OnInit {
                 type: 'input',
                 props: {
                   readonly: true,
-               
                 },
               },
               {
@@ -460,24 +457,34 @@ export class BillComponent extends FormBaseClass implements OnInit {
                     hooks: {
                       onInit: () => {
                         combineLatest({
-                          expenses:this.formly.get('expenses.expensesData').valueChanges,
-                          fees:this.formly.get('time.feesData').valueChanges,
-                        }).pipe(
-                          this._sharedService.takeUntilDistroy()
-                        ).subscribe({
-                          next:(res:any)=>{
-                            console.log('grandTotal',res)
-                            const totalExpensesFees = +this.formly.get('summary.taxe')?.value || 0;
-                            const totalFees = +this.formly.get('summary.totalFees')?.value || 0;
-                            const totalTaxesFees = +this.formly.get('summary.taxes')?.value || 0;
-                            const totalExpenses = +this.formly.get('summary.totalExpenses')?.value || 0;
-                            const grandTotal =totalExpensesFees+
-                            totalFees+
-                            totalTaxesFees+
-                            totalExpenses
-                            this.formly.get('summary.grandTotal').setValue(grandTotal)
-                          }
+                          expenses: this.formly.get('expenses.expensesData')
+                            .valueChanges,
+                          fees: this.formly.get('time.feesData').valueChanges,
                         })
+                          .pipe(this._sharedService.takeUntilDistroy())
+                          .subscribe({
+                            next: (res: any) => {
+                              console.log('grandTotal', res);
+                              const totalExpensesFees =
+                                +this.formly.get('summary.taxe')?.value || 0;
+                              const totalFees =
+                                +this.formly.get('summary.totalFees')?.value ||
+                                0;
+                              const totalTaxesFees =
+                                +this.formly.get('summary.taxes')?.value || 0;
+                              const totalExpenses =
+                                +this.formly.get('summary.totalExpenses')
+                                  ?.value || 0;
+                              const grandTotal =
+                                totalExpensesFees +
+                                totalFees +
+                                totalTaxesFees +
+                                totalExpenses;
+                              this.formly
+                                .get('summary.grandTotal')
+                                .setValue(grandTotal);
+                            },
+                          });
                       },
                     },
                   },
@@ -488,8 +495,6 @@ export class BillComponent extends FormBaseClass implements OnInit {
         ],
       },
     ];
-
-
   }
 
   override getLookupsData(): void {
@@ -513,30 +518,34 @@ export class BillComponent extends FormBaseClass implements OnInit {
     return this.formlyFields.filter((fields) => fields.key == keyName);
   }
   override onSubmit(): void {
-  
-    console.log(this.formlyModel)
-    if(this.formly.invalid) return 
+    console.log(this.formlyModel);
+    if (this.formly.invalid) return;
     const model = {
-      "law_MatterId":this.formlyModel.info.law_MatterId?.toString(),
-      "invoiceNumber": this.formlyModel.info.invoiceNumber,
-      "templetId": this.formlyModel.info.templetId,
-      "date": this.formlyModel.info.date,
-      "totalFees": this.formlyModel.summary.totalFees,
-      "taxes": this.formlyModel.summary.taxes,
-      "totalExpenses": this.formlyModel.summary.totalExpenses,
-      "taxe":  this.formlyModel.summary.taxe,
-      "grandTotal":  this.formlyModel.summary.grandTotal,
-      "billingExpenses":this.formlyModel.expenses.expensesData.map(obj=>({id:obj.id})),
-      "billingTimeFees": this.formlyModel.time.feesData.map(obj=>({id:obj.id})),
-    }
-    this.isLoading=true
-    this._apiService.post(API_Config.bill.create,model).pipe(
-      this._sharedService.takeUntilDistroy(),
-      finalize(()=>this.isLoading=false)
-    ).subscribe({
-      next:(res:ApiRes)=>{
-
-      }
-    })
+      law_MatterId: this.formlyModel.info.law_MatterId?.toString(),
+      invoiceNumber: this.formlyModel.info.invoiceNumber,
+      templetId: this.formlyModel.info.templetId,
+      date: this.formlyModel.info.date,
+      totalFees: this.formlyModel.summary.totalFees,
+      taxes: this.formlyModel.summary.taxes,
+      totalExpenses: this.formlyModel.summary.totalExpenses,
+      taxe: this.formlyModel.summary.taxe,
+      grandTotal: this.formlyModel.summary.grandTotal,
+      billingExpenses: this.formlyModel.expenses.expensesData.map((obj) => ({
+        id: obj.id,
+      })),
+      billingTimeFees: this.formlyModel.time.feesData.map((obj) => ({
+        id: obj.id,
+      })),
+    };
+    this.isLoading = true;
+    this._apiService
+      .post(API_Config.bill.create, model)
+      .pipe(
+        this._sharedService.takeUntilDistroy(),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe({
+        next: (res: ApiRes) => {},
+      });
   }
 }

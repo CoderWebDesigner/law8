@@ -2,7 +2,8 @@ export const Pre_Bill_Expenses_Columns_AR=[
     {
         field:'date',
         header:'Date',
-        isSort:true
+        isSort:true,
+        isDate:true
     },
     {
         field:'initial',
@@ -27,14 +28,14 @@ export const Pre_Bill_Expenses_Columns_EN=[
     {
         field:'date',
         header:'Date',
-        isSort:true
+        isSort:true,
+        isDate:true
     },
     {
         field:'initial',
         header:'Initial',
         isSort:true
     },
-
     {
         field:'amount',
         header:'Amount',
@@ -53,7 +54,8 @@ export const Pre_Bill_Expenses_Columns_FR=[
     {
         field:'date',
         header:'Date',
-        isSort:true
+        isSort:true,
+        isDate:true
     },
     {
         field:'initial',

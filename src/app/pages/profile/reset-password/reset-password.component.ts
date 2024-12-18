@@ -1,20 +1,22 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { API_Config } from '@core/api/api-config/api.config';
 import { FormBaseClass } from '@core/classes/form-base.class';
-import { ApiRes, User } from '@core/models';
+import { ApiRes } from '@core/models';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent extends FormBaseClass implements OnChanges {
-  @Output() onEdit = new EventEmitter<boolean>()
-  @Input({required:true}) userInfo:User;
-  ngOnChanges(changes: SimpleChanges): void {
-    this.formlyModel =  {...changes['userInfo'].currentValue}
+export class ResetPasswordComponent extends FormBaseClass implements OnInit {
+  
+  ngOnInit(): void {
     this.initForm()
   }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   this.formlyModel =  {...changes['userInfo'].currentValue}
+  //   this.initForm()
+  // }
   // override initForm(): void {
   //   this.formlyFields = [
   //     // {
@@ -126,6 +128,7 @@ export class ResetPasswordComponent extends FormBaseClass implements OnChanges {
         },
       },
     ]
+    this.formlyModel.userId=this._dynamicDialogConfig.data
   }
   override onSubmit(): void {
     delete this.formlyModel.confirmPassword
@@ -134,8 +137,9 @@ export class ResetPasswordComponent extends FormBaseClass implements OnChanges {
     ).subscribe({
       next:(res:ApiRes)=>{
         if(res.isSuccess){
+          this._dynamicDialogRef.close()
           this._toastrNotifiService.displaySuccessMessage(res.message);
-          this.onEdit.emit(true)
+          // this.onEdit.emit(true)
         }else{
           this._toastrNotifiService.displaySuccessMessage(res.message);
         }

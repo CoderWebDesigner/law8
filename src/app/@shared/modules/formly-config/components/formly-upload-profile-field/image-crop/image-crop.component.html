@@ -1,0 +1,18 @@
+
+<image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [maintainAspectRatio]="false"
+    format="png"
+    [output]="'base64'"
+    (imageCropped)="imageCropped($event)"
+></image-cropper>
+
+<div class="text-end">
+    <p-button
+    styleClass="p-button-primary d-block py-3"
+    type="submit"
+    label="{{ 'btn.submit' | translate }}"
+    (onClick)="dynamicDialogRef.close(croppedBase64)"
+  ></p-button>
+</div>
