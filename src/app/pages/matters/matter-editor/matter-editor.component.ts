@@ -126,6 +126,9 @@ export class MatterEditorComponent extends FormBaseClass implements OnInit {
                 label: obj.name,
                 value: obj.id,
               })),
+              labelSpliter:"|",
+              labelSpliterIndex:0,
+
               onChange: (e) => {
                 if ((this.formlyModel?.requestTypeId == 1, 3)) {
                   this._apiService

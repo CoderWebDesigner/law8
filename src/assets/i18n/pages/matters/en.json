@@ -30,7 +30,7 @@
     "emailTemplate":"Email Template",
     "disbursment":"Disbursements",
     "automaticallyCreateDisability":"Automatically Create Disbursements",
-    "disability":"Disability",
+    "disability":"Disbursements",
     "amountAndPrecentage":"Amount / Percentage",
     "fees":"Fees",
     "useTaskBasedBilling":"Use Task Based Billing",

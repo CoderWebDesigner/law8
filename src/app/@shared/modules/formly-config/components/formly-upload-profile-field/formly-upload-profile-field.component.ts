@@ -21,9 +21,10 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
     console.log('onselect event', event);
     this.file = event.rejectedFiles[event.rejectedFiles.length - 1];
     this.readFileAsBase64(this.file);
-    this.formControl.setValue(this.file);
     if (this.props['withCrop']) {
       this.onCropEditor();
+    }else{
+      this.formControl.setValue(this.file);
     }
   }
   onCropEditor() {
@@ -36,6 +37,9 @@ export class FormlyUploadProfileFieldComponent extends FieldType<FieldTypeConfig
         if (res) {
           this.fileAsBase64=res
           this.formControl.setValue(this.base64ToFile(res));
+          this.cdRef.detectChanges();
+        }else{
+          this.formControl.setValue(this.formControl?.value);
           this.cdRef.detectChanges();
         }
       },

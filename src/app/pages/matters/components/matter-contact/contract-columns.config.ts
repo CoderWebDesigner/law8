@@ -43,16 +43,8 @@ export const Contact_Columns_EN = [
 ];
 export const Contact_Columns_FR = [
   {
-    header: 'Prénom',
-    field: 'firstName',
-  },
-  {
-    header: 'Deuxième prénom',
-    field: 'middleName',
-  },
-  {
-    header: 'Nom de famille',
-    field: 'lastName',
+    header: 'Full Name',
+    field: 'fullName',
   },
   {
     header: 'position',
@@ -83,31 +75,23 @@ export const Contact_Columns_FR = [
 ];
 export const Contact_Columns_AR = [
   {
-    header: 'الاسم الأول',
-    field: 'firstName',
+    header: 'الاسم',
+    field: 'fullName',
   },
   {
-    header: 'الاسم الأوسط',
-    field: 'middleName',
-  },
-  {
-    header: 'اسم العائلة',
-    field: 'lastName',
-  },
-  {
-    header: 'موضع',
+    header: 'الموضع',
     field: 'position',
   },
   {
-    header: 'بريد إلكتروني',
+    header: 'البريد الإلكتروني',
     field: 'email',
   },
   {
-    header: 'هاتف',
+    header: 'الهاتف',
     field: 'phone',
   },
   {
-    header: 'جوال',
+    header: 'الهاتف المتحرك',
     field: 'mobileNumber',
   },
   {
@@ -115,7 +99,7 @@ export const Contact_Columns_AR = [
     field: 'fax',
   },
   {
-    header: 'ملاحظات',
+    header: 'الملاحظات',
     field: 'remarks',
     isLargeText:true
   },

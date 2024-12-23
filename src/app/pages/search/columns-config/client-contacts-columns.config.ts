@@ -83,19 +83,19 @@ export const Client_Contacts_Columns_EN = [
       field: 'lastName',
     },
     {
-      header: 'موضع',
+      header: 'الموضع',
       field: 'position',
     },
     {
-      header: 'بريد إلكتروني',
+      header: 'البريد الإلكتروني',
       field: 'email',
     },
     {
-      header: 'هاتف',
+      header: 'الهاتف',
       field: 'phone',
     },
     {
-      header: 'جوال',
+      header: 'الهاتف المتحرك',
       field: 'mobile',
     },
     {

@@ -17,6 +17,9 @@
   <div class="flex align-items-center gap-2" >
     <img height="26" *ngIf="selected?.img" [src]="'./assets/images/'+ selected.value+ '.png'" [alt]="selected.value">
     <span *ngIf="selected?.label">{{selected?.label}}</span>
+    <!-- <span *ngIf="selected?.label">
+      {{props['labelSpliter']?
+        selected?.label.split([props['labelSpliter']])[props['labelSpliterIndex']]:selected?.label}}</span> -->
   </div>
 </ng-template>
   <ng-template let-option pTemplate="item">

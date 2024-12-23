@@ -99,7 +99,7 @@ export const Contact_Columns_AR = [
     field: 'lastName',
   },
   {
-    header: 'موضع',
+    header: 'الموضع',
     field: 'position',
   },
   {
@@ -107,7 +107,7 @@ export const Contact_Columns_AR = [
     field: 'address',
   },
   {
-    header: 'هاتف',
+    header: 'الهاتف',
     field: 'phone',
   },
   {
@@ -115,7 +115,7 @@ export const Contact_Columns_AR = [
     field: 'mobile',
   },
   {
-    header: 'بريد إلكتروني',
+    header: 'البريد الإلكتروني',
     field: 'email',
   },
   {

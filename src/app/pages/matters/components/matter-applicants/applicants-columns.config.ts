@@ -79,19 +79,19 @@ export const Applicant_Columns_AR = [
     field: 'fullName',
   },
   {
-    header: 'موضع',
+    header: 'الموضع',
     field: 'position',
   },
   {
-    header: 'بريد إلكتروني',
+    header: 'البريد الإلكتروني',
     field: 'email',
   },
   {
-    header: 'هاتف',
+    header: 'الهاتف',
     field: 'phone',
   },
   {
-    header: 'جوال',
+    header: 'الهاتف المتحرك',
     field: 'mobileNumber',
   },
   {
@@ -99,7 +99,7 @@ export const Applicant_Columns_AR = [
     field: 'fax',
   },
   {
-    header: 'ملاحظات',
+    header: 'الملاحظات',
     field: 'remarks',
     isLargeText:true
   },
