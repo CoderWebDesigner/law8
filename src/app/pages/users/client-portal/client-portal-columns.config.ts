@@ -2,14 +2,14 @@
 export const Client_Portal_Columns_EN = [
   {
     header: 'Code',
-    field: 'code',
+    field: 'clientCode',
     isSort:true
     
   },
 
   {
     header: 'Name',
-    field: 'name',
+    field: 'clientName',
     isSort:true
 
   },
@@ -17,11 +17,11 @@ export const Client_Portal_Columns_EN = [
 
   {
     header: 'Telephone',
-    field: 'telNo',
+    field: 'telephone',
   },
   {
     header: 'Mobile',
-    field: 'mobileNo',
+    field: 'mobileNumber',
   },
   {
     header: 'Email',
@@ -30,7 +30,7 @@ export const Client_Portal_Columns_EN = [
   },
   {
     header: 'Activation',
-    field: 'active',
+    field: 'isActive',
     isSwitch:true,
     permission:'Deactivate_Users'
   }
@@ -40,14 +40,14 @@ export const Client_Portal_Columns_EN = [
 export const Client_Portal_Columns_FR = [
   {
     header: 'Code',
-    field: 'empNo',
+    field: 'clientId',
     isSort:true
     
   },
 
   {
     header: 'Name',
-    field: 'name',
+    field: 'userName',
     isSort:true
 
   },
@@ -55,11 +55,11 @@ export const Client_Portal_Columns_FR = [
 
   {
     header: 'Telephone',
-    field: 'telNo',
+    field: 'telephone',
   },
   {
     header: 'Mobile',
-    field: 'mobileNo',
+    field: 'mobileNumber',
   },
   {
     header: 'Email',
@@ -77,25 +77,25 @@ export const Client_Portal_Columns_FR = [
 export const Client_Portal_Columns_AR = [
   {
     header: 'Code',
-    field: 'empNo',
+    field: 'clientId',
     isSort:true
     
   },
 
   {
     header: 'Name',
-    field: 'name',
+    field: 'userName',
     isSort:true
 
   },
  
   {
     header: 'Telephone',
-    field: 'telNo',
+    field: 'telephone',
   },
   {
     header: 'Mobile',
-    field: 'mobileNo',
+    field: 'mobileNumber',
   },
   {
     header: 'Email',

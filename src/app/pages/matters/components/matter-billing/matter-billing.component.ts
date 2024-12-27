@@ -100,7 +100,7 @@ export class MatterBillingComponent
                 className: 'col-lg-4 col-md-4 mb-2',
                 props: {
                   disabled: this.previewOnly,
-                  label: this._languageService.getTransValue('Task Group'),
+                  label: this._languageService.getTransValue('TaskGroup'),
                   options: [
                     { label: 'Option 1', value: 'Option 1' },
                     { label: 'Option 2', value: 'Option 2' },
@@ -172,10 +172,10 @@ export class MatterBillingComponent
           },
           {
             type: 'select',
-            key: 'branch',
+            key: 'everyBill',
             className: 'col-lg-6 col-md-4',
             props: {
-              label: this._languageService.getTransValue('Every Bill'),
+              label: this._languageService.getTransValue('matters.everyBill'),
               disabled: this.previewOnly,
               options: [
                 { label: 'Option 1', value: 'Option 1' },
@@ -190,7 +190,7 @@ export class MatterBillingComponent
             key: 'nobill',
             className: 'col-lg-6 col-md-4',
             props: {
-              label: this._languageService.getTransValue('no of bill'),
+              label: this._languageService.getTransValue('matters.noofbill'),
               type: 'number',
               min: 0,
               disabled: this.previewOnly,
@@ -212,7 +212,7 @@ export class MatterBillingComponent
             key: 'maximumFee',
             className: 'col-lg-6 col-md-4',
             props: {
-              label: this._languageService.getTransValue('Bills of So far'),
+              label: this._languageService.getTransValue('matters.BillsofSofar'),
               type: 'number',
               min: 0,
               disabled: this.previewOnly,
@@ -277,7 +277,7 @@ export class MatterBillingComponent
             key: 'notes',
             className: 'col-lg-12 col-md-4',
             props: {
-              label: this._languageService.getTransValue('Explanations'),
+              label: this._languageService.getTransValue('matters.Explanations'),
               disabled: this.previewOnly,
             },
           },

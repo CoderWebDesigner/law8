@@ -11,7 +11,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    // ClientPortalChangePasswordComponent
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,

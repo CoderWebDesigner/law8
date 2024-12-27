@@ -8,8 +8,7 @@ import { TableConfig } from '@shared/components/shared-table/models/table-config
 import { Client_Portal_Columns_EN, Client_Portal_Columns_FR, Client_Portal_Columns_AR } from './client-portal-columns.config';
 import { LanguageService } from '@core/services';
 import { DialogService } from 'primeng/dynamicdialog';
-import { data } from './client-portal-data';
-import { ClientPortalEditorComponent } from './client-portal-editor/client-portal-editor.component';
+import { API_Config } from '@core/api/api-config/api.config';
 
 @Component({
   selector: 'app-client-portal',
@@ -21,9 +20,12 @@ import { ClientPortalEditorComponent } from './client-portal-editor/client-porta
 export class ClientPortalComponent {
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
-  data:any=data
+  apiUrls=API_Config.clientPortal;
+  filterOptions={
+    lang:'en'
+  }
   additionalTableConfig: TableConfig = {
-    id: 'code',
+    id: 'id',
     isSearch:true,
     actions: [
       {
@@ -40,13 +42,13 @@ export class ClientPortalComponent {
     fr: Client_Portal_Columns_FR,
     ar:  Client_Portal_Columns_AR,
   };
-  openChangePasswordModal(userId:string){
+  openChangePasswordModal(id:string){
     this._dialogService.open(UserChangePasswordComponent,{
       width:'30%',
       dismissableMask: true,
       header:this._languageService.getTransValue('users.changePassword'),
       data:{
-        userId:userId
+        id:id
       }
     })
   }

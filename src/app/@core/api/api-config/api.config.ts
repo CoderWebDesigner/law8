@@ -39,6 +39,7 @@ import { Billing_API } from './billing';
 import { BankAccount_API } from './bankAccounts';
 import { GlAccount_API } from './glAccounts';
 import { Bill_API } from './bill';
+import { Client_Portal_API } from './client-portal';
 
 export const API_Config = {
   ...General_API,
@@ -81,5 +82,6 @@ export const API_Config = {
   ...Billing_API,
   ...BankAccount_API,
   ...GlAccount_API,
-  ...Bill_API
+  ...Bill_API,
+  ...Client_Portal_API
 };

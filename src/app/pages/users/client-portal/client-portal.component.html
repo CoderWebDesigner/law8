@@ -5,8 +5,9 @@
            styleClass="py-2 px-4 mx-2" [routerLink]="['/users/client-portal/add']"></p-button>
       </div>
     </div>
+    <!-- [filterOptions]="filterOptions" -->
     <shared-table body [columnsLocalized]="columnsLocalized"
-      [additionalTableConfig]="additionalTableConfig" [data]="data">
+      [additionalTableConfig]="additionalTableConfig" [apiUrls]="apiUrls">
       <ng-template #actions let-rowData>
         <p-button class="mx-2 p-0" styleClass="p-button-text" [icon]="'pi pi-key  fs-4'" tooltipPosition="top"
           [requiredPermission]="'Change_password_Users'" [pTooltip]="'users.changePassword'| translate"
